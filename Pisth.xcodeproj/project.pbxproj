@@ -8,21 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9041FF140FE0061677B /* AppDelegate.swift */; };
-		3AFDD9071FF140FE0061677B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9061FF140FE0061677B /* ViewController.swift */; };
-		3AFDD90A1FF140FE0061677B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9081FF140FE0061677B /* Main.storyboard */; };
-		3AFDD90C1FF140FE0061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90B1FF140FE0061677B /* Assets.xcassets */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
+		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3AFDD9011FF140FE0061677B /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDD9041FF140FE0061677B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3AFDD9061FF140FE0061677B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3AFDD9091FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3AFDD90B1FF140FE0061677B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AFDD9101FF140FE0061677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AFDD9161FF147860061677B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,11 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD9041FF140FE0061677B /* AppDelegate.swift */,
-				3AFDD9061FF140FE0061677B /* ViewController.swift */,
-				3AFDD9081FF140FE0061677B /* Main.storyboard */,
-				3AFDD90B1FF140FE0061677B /* Assets.xcassets */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
 				3AFDD9101FF140FE0061677B /* Info.plist */,
+				3AFDD9161FF147860061677B /* Assets.xcassets */,
 			);
 			path = Pisth;
 			sourceTree = "<group>";
@@ -150,9 +144,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
-				3AFDD90C1FF140FE0061677B /* Assets.xcassets in Resources */,
-				3AFDD90A1FF140FE0061677B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +204,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AFDD9071FF140FE0061677B /* ViewController.swift in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3AFDD9081FF140FE0061677B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3AFDD9091FF140FE0061677B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
