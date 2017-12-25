@@ -4,9 +4,11 @@
         <attribute name="host" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Connection" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Connection" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

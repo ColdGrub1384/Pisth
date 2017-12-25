@@ -13,10 +13,189 @@ class BookmarksTableViewController: UITableViewController {
     
     // MARK: - BookmarksTableViewController
     
-    let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
-    
     @objc func addConnection() { // Add connection
+        showInfoAlert()
+    }
+    
+    func showInfoAlert(editInfoAt index: Int? = nil) {
         
+        var title: String {
+            if index == nil {
+                return "Add new connection"
+            } else {
+                return "Edit connection"
+            }
+
+        }
+        
+        var message: String {
+            if index == nil {
+                return "Fill fields to add a connection to bookmarks"
+            } else {
+                return "Fill fields to edit bookmark"
+            }
+            
+        }
+        
+        let addNewAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+        request.returnsObjectsAsFaults = false
+        
+        // Host
+        addNewAlertController.addTextField { (host) in // Requierd
+            host.placeholder = "Hostname / IP address"
+        }
+        
+        // Port
+        addNewAlertController.addTextField { (port) in
+            port.placeholder = "Port (22)"
+            port.keyboardType = .numberPad
+        }
+        
+        // Username
+        addNewAlertController.addTextField { (username) in // Requierd
+            username.placeholder = "Username"
+        }
+        
+        // Password
+        addNewAlertController.addTextField { (password) in
+            password.placeholder = "Password"
+            password.isSecureTextEntry = true
+        }
+        
+        // Path
+        addNewAlertController.addTextField { (path) in
+            path.placeholder = "Path (~)"
+        }
+        
+        if let index = index { // Fill info with given index
+            let connection = DataManager.shared.connections[index]
+            
+            addNewAlertController.textFields![0].text = connection.host
+            addNewAlertController.textFields![1].text = "\(connection.port)"
+            addNewAlertController.textFields![2].text = connection.username
+            addNewAlertController.textFields![3].text = connection.password
+            addNewAlertController.textFields![4].text = connection.path
+        }
+        
+        let addAction = UIAlertAction(title: "Save", style: .default) { (action) in // Create connection
+            let host = addNewAlertController.textFields![0].text!
+            var port = addNewAlertController.textFields![1].text!
+            let username = addNewAlertController.textFields![2].text!
+            let password = addNewAlertController.textFields![3].text!
+            var path = addNewAlertController.textFields![4].text!
+            
+            // Check for requierd fields
+            if host == "" || username == "" {
+                self.present(addNewAlertController, animated: true, completion: {
+                    if host == "" {
+                        addNewAlertController.textFields![0].backgroundColor = .red
+                    } else {
+                        addNewAlertController.textFields![0].backgroundColor = .white
+                    }
+                    
+                    if username == "" {
+                        addNewAlertController.textFields![2].backgroundColor = .red
+                    } else {
+                        addNewAlertController.textFields![2].backgroundColor = .white
+                    }
+                })
+            } else {
+                if port == "" { // Port is 22 by default
+                    port = "22"
+                }
+                
+                if path == "" { // Path is ~ by default
+                    path = "~"
+                }
+                
+                if let port = UInt64(port) {
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: username, path: path, port: port))
+                    
+                    self.tableView.reloadData()
+                    let indexPath = IndexPath(row: DataManager.shared.connections.count-1, section: 0)
+                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+                    self.tableView(self.tableView, didSelectRowAt: indexPath)
+                } else {
+                    self.present(addNewAlertController, animated: true, completion: {
+                        addNewAlertController.textFields![1].backgroundColor = .red
+                    })
+                }
+            }
+            
+        }
+        
+        let editAction = UIAlertAction(title: "Save", style: .default) { (action) in // Edit selected connection
+            let host = addNewAlertController.textFields![0].text!
+            var port = addNewAlertController.textFields![1].text!
+            let username = addNewAlertController.textFields![2].text!
+            let password = addNewAlertController.textFields![3].text!
+            var path = addNewAlertController.textFields![4].text!
+            
+            // Check for requierd fields
+            if host == "" || username == "" {
+                self.present(addNewAlertController, animated: true, completion: {
+                    if host == "" {
+                        addNewAlertController.textFields![0].backgroundColor = .red
+                    } else {
+                        addNewAlertController.textFields![0].backgroundColor = .white
+                    }
+                    
+                    if username == "" {
+                        addNewAlertController.textFields![2].backgroundColor = .red
+                    } else {
+                        addNewAlertController.textFields![2].backgroundColor = .white
+                    }
+                })
+            } else {
+                if port == "" { // Port is 22 by default
+                    port = "22"
+                }
+                
+                if path == "" { // Path is ~ by default
+                    path = "~"
+                }
+                
+                if let port = UInt64(port) {
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+                    request.returnsObjectsAsFaults = false
+                    
+                    do {
+                        let result = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index!]
+                        result.setValue(host, forKey: "host")
+                        result.setValue(port, forKey: "port")
+                        result.setValue(username, forKey: "username")
+                        result.setValue(password, forKey: "password")
+                        result.setValue(path, forKey: "path")
+                        
+                        try? AppDelegate.shared.coreDataContext.save()
+                    } catch let error {
+                        print("Error retrieving connections: \(error.localizedDescription)")
+                    }
+                    
+                    self.tableView.reloadData()
+                    let indexPath = IndexPath(row: DataManager.shared.connections.count-1, section: 0)
+                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+                    self.tableView(self.tableView, didSelectRowAt: indexPath)
+                } else {
+                    self.present(addNewAlertController, animated: true, completion: {
+                        addNewAlertController.textFields![1].backgroundColor = .red
+                    })
+                }
+            }
+            
+        }
+        
+        if index != nil { // Edit connection
+            addNewAlertController.addAction(editAction)
+        } else { // Add connection
+            addNewAlertController.addAction(addAction)
+        }
+        
+        addNewAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(addNewAlertController, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -27,7 +206,7 @@ class BookmarksTableViewController: UITableViewController {
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem = addButton
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
@@ -38,18 +217,21 @@ class BookmarksTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return connections.count
+        return DataManager.shared.connections.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
         cell.backgroundColor = .clear
+        cell.accessoryType = .detailButton
+        
+        let connection = DataManager.shared.connections[indexPath.row]
         
         // Configure the cell...
         
-        cell.textLabel?.text = connections[indexPath.row].name
-        cell.detailTextLabel?.text = "\(connections[indexPath.row].username)@\(connections[indexPath.row].host)"
+        cell.textLabel?.text = DataManager.shared.connections[indexPath.row].name
+        cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
         
         // If the connection has no name, set the title as username@host
         if cell.textLabel?.text == "" {
@@ -69,23 +251,23 @@ class BookmarksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            removeConnection(at: indexPath.row)
+            DataManager.shared.removeConnection(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        var connections = self.connections
+        var connections = DataManager.shared.connections
         
         let connectionToMove = connections[fromIndexPath.row]
         connections.remove(at: fromIndexPath.row)
         connections.insert(connectionToMove, at: to.row)
         
-        removeAll()
+        DataManager.shared.removeAll()
         
         for connection in connections {
-            addNew(connection: connection)
+            DataManager.shared.addNew(connection: connection)
         }
     }
     
@@ -93,73 +275,16 @@ class BookmarksTableViewController: UITableViewController {
         return true
     }
     
-    // Mark: Core Data
+    // MARK: - Table view delegate
     
-    func addNew(connection: RemoteConnection) { // Create and save connection
-        
-        let newConnection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: AppDelegate.shared.coreDataContext)
-        newConnection.setValue(connection.host, forKey: "host")
-        newConnection.setValue(connection.username, forKey: "username")
-        newConnection.setValue(connection.password, forKey: "password")
-        newConnection.setValue(connection.name, forKey: "name")
-        do {
-            try AppDelegate.shared.coreDataContext.save()
-        } catch let error {
-            print("Error saving context: \(error.localizedDescription)")
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            tableView.deselectRow(at: indexPath, animated: true)
+        })
     }
     
-    func removeConnection(at index: Int) { // Remove connection at given index
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let results = try AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject]
-            AppDelegate.shared.coreDataContext.delete(results[index])
-            AppDelegate.shared.saveContext()
-        } catch let error {
-            print("Error retrieving connections: \(error.localizedDescription)")
-        }
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        showInfoAlert(editInfoAt: indexPath.row)
     }
-    
-    func removeAll() { // Remove all connections
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        do {
-            try AppDelegate.shared.coreDataContext.execute(deleteRequest)
-            AppDelegate.shared.saveContext()
-        } catch let error {
-            print("Error removing all: \(error.localizedDescription)")
-        }
-    }
-    
-    var connections: [RemoteConnection] { // Return connections saved to disk
-        
-        var fetchedConnections = [RemoteConnection]()
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let results = try AppDelegate.shared.coreDataContext.fetch(request)
-            
-            for result in results as! [NSManagedObject] {
-                
-                guard let host = result.value(forKey: "host") as? String else { return fetchedConnections }
-                guard let username = result.value(forKey: "username") as? String else { return fetchedConnections }
-                guard let password = result.value(forKey: "password") as? String else { return fetchedConnections }
-                guard let name = result.value(forKey: "name") as? String else { return fetchedConnections }
-                
-                fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, name: name))
-            }
-        } catch let error {
-            print("Error retrieving connections: \(error.localizedDescription)")
-            return fetchedConnections
-        }
-        
-        return fetchedConnections
-    }
-    
 }

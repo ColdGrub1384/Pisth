@@ -13,5 +13,7 @@ struct RemoteConnection {
     var username: String
     var password: String
     var name: String
+    var path: String
+    var port: UInt64
 }
 
