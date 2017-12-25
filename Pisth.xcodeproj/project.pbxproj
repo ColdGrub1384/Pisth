@@ -12,6 +12,7 @@
 		3AFDD90A1FF140FE0061677B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9081FF140FE0061677B /* Main.storyboard */; };
 		3AFDD90C1FF140FE0061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90B1FF140FE0061677B /* Assets.xcassets */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
+		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		3AFDD90B1FF140FE0061677B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AFDD9101FF140FE0061677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
+		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A2C0BF266D722E068E3424D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */,
+				D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
 				3AFDD9031FF140FE0061677B /* Pisth */,
 				3AFDD9021FF140FE0061677B /* Products */,
+				2A2C0BF266D722E068E3424D /* Pods */,
+				56249940C7FBF904B64CFA50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = Pisth;
 			sourceTree = "<group>";
 		};
+		56249940C7FBF904B64CFA50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AFDD9131FF140FE0061677B /* Build configuration list for PBXNativeTarget "Pisth" */;
 			buildPhases = (
+				4608AF53B420636B3889091F /* [CP] Check Pods Manifest.lock */,
 				3AFDD8FD1FF140FE0061677B /* Sources */,
 				3AFDD8FE1FF140FE0061677B /* Frameworks */,
 				3AFDD8FF1FF140FE0061677B /* Resources */,
+				F21CA456D2169C5D27312609 /* [CP] Embed Pods Frameworks */,
+				C359C90E836AEDA0878550B8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4608AF53B420636B3889091F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C359C90E836AEDA0878550B8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth/Pods-Pisth-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F21CA456D2169C5D27312609 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth/Pods-Pisth-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3AFDD8FD1FF140FE0061677B /* Sources */ = {
@@ -272,6 +347,7 @@
 		};
 		3AFDD9141FF140FE0061677B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +363,7 @@
 		};
 		3AFDD9151FF140FE0061677B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
