@@ -64,14 +64,6 @@ class DirectoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let session = ConnectionManager.shared.session {
-            if !session.isConnected || !session.isAuthorized {
-                navigationController?.popToRootViewController(animated: true)
-            }
-        } else {
-            navigationController?.popToRootViewController(animated: true)
-        }
-        
         title = directory.components(separatedBy: "/").last
         
         navigationItem.largeTitleDisplayMode = .never
@@ -80,6 +72,19 @@ class DirectoryTableViewController: UITableViewController {
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Go back if there is an error connecting to session
+        if let session = ConnectionManager.shared.session {
+            if !session.isConnected || !session.isAuthorized {
+                navigationController?.popToRootViewController(animated: true)
+            }
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     // MARK: - Table view data source

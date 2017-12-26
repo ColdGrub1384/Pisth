@@ -34,7 +34,9 @@ class ConnectionManager {
             session?.authenticate(byPassword: remote.password)
         }
         
-        session?.sftp.connect()
+        if session!.isConnected && session!.isAuthorized {
+            session?.sftp.connect()
+        }
         
         return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected)
     }
