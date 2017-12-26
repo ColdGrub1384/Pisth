@@ -278,8 +278,14 @@ class BookmarksTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            tableView.deselectRow(at: indexPath, animated: true)
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            tableView.deselectRow(at: indexPath, animated: true)            
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                self.navigationController?.pushViewController(DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row]), animated: true)
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            })
         })
     }
     
