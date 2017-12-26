@@ -41,19 +41,13 @@ class DirectoryTableViewController: UITableViewController {
             
             files = ConnectionManager.shared.files(inDirectory: self.directory)
             
-            // Check if path is directory for each file
-            if let files = files {
-                for file in files {
-                    if let isDir = ConnectionManager.shared.isDirectory(path: file) {
-                        self.isDir.append(isDir)
-                    }
-                }
-                
-                if self.directory != "/" { // Add '..' if dir is not '/'
-                    self.files?.append((self.directory as NSString).deletingLastPathComponent)
-                    self.isDir.append(true)
-                }
+            // Check if path is directory or not
+            for file in files! {
+                isDir.append(file.hasSuffix("/"))
             }
+            
+            files?.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+            isDir.append(true)
         }
         
         super.init(style: .plain)
@@ -111,7 +105,12 @@ class DirectoryTableViewController: UITableViewController {
         
         if let files = files {
             if files[indexPath.row] != (directory as NSString).deletingLastPathComponent {
-                cell.filename.text = files[indexPath.row].components(separatedBy: "/").last
+                if isDir[indexPath.row] {
+                    let components = files[indexPath.row].components(separatedBy: "/")
+                    cell.filename.text = components[components.count-2]
+                } else {
+                    cell.filename.text = files[indexPath.row].components(separatedBy: "/").last
+                }
             } else {
                 cell.filename.text = ".."
             }

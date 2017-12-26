@@ -18,38 +18,13 @@ class ConnectionManager {
         guard let session = session else { return nil }
         
         do {
-            let ls = try session.channel.execute("ls -1 -d '\(directory)'/*")
+            let ls = try session.channel.execute("for file in \"\(directory)\"/*; do if [[ -d $file ]]; then printf \"$file/\n\"; else printf \"$file\n\"; fi; done")
             var result = ls.components(separatedBy: "\n")
             result.removeLast()
             return result
         } catch {}
         
         return nil
-    }
-    
-    func isDirectory(path: String) -> Bool? {
-        
-        guard let session = session else { return nil }
-        
-        var absolutePath: String {
-            if path != "~" {
-                return path
-            } else {
-                do {
-                    return try session.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "")
-                } catch {
-                    return path
-                }
-            }
-        }
-        
-        do {
-            let isDir = try session.channel.execute("if [[ -d '\(absolutePath)' ]]; then echo \"dir\"; else echo \"file\"; fi").replacingOccurrences(of: "\n", with: "")
-            return (isDir == "dir")
-        } catch {}
-        
-        return nil
-        
     }
     
     func connect(to remote: RemoteConnection) -> Bool {
@@ -59,6 +34,8 @@ class ConnectionManager {
             session?.authenticate(byPassword: remote.password)
         }
         
-        return (session!.isConnected && session!.isAuthorized)
+        session?.sftp.connect()
+        
+        return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected)
     }
 }
