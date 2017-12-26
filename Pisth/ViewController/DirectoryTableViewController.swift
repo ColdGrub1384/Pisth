@@ -144,14 +144,15 @@ class DirectoryTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        let activityVC = ActivityViewController(message: "Loading")
         
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                
+        self.present(activityVC, animated: true) {
             if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
-                self.navigationController?.pushViewController(DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row]), animated: true)
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                tableView.deselectRow(at: indexPath, animated: true)
+                let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
+                activityVC.dismiss(animated: true, completion: {
+                    self.navigationController?.pushViewController(dirVC, animated: true)
+                    tableView.deselectRow(at: indexPath, animated: true)
+                })
             } else { // Download file
                 let directory = FileManager.default.documents.appendingPathComponent("\(self.connection.username)@\(self.connection.host):\(self.connection.port)").appendingPathComponent(self.directory)
                 
@@ -159,22 +160,22 @@ class DirectoryTableViewController: UITableViewController {
                     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
                     
                     guard let session = ConnectionManager.shared.session else {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         tableView.deselectRow(at: indexPath, animated: true)
+                        activityVC.dismiss(animated: true, completion: nil)
                         return
                     }
                     
                     if session.channel.downloadFile(self.files![indexPath.row], to: directory.appendingPathComponent(cell.filename.text!).path) {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        activityVC.dismiss(animated: true, completion: {
+                            self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: directory), animated: true)
+                        })
                         
-                        self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: directory), animated: true)
                     }
-                    
-                    tableView.deselectRow(at: indexPath, animated: true)
                 } catch _ {}
             }
+        }
                 
-        })
     }
     
 }

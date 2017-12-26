@@ -284,13 +284,17 @@ class BookmarksTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            self.navigationController?.pushViewController(DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row]), animated: true)
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            tableView.deselectRow(at: indexPath, animated: true)
-        })
+        let activityVC = ActivityViewController(message: "Connecting")
+        
+        self.present(activityVC, animated: true) {
+            let dirVC = DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row])
+            
+            activityVC.dismiss(animated: true, completion: {
+                tableView.deselectRow(at: indexPath, animated: true)
+                self.navigationController?.pushViewController(dirVC, animated: true)
+            })
+        }
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {

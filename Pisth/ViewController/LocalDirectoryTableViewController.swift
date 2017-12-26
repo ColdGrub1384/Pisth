@@ -46,9 +46,13 @@ class LocalDirectoryTableViewController: UITableViewController {
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if let error = error {
-            let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
+            let errorAlert = UIAlertController(title: "Error opening directory!", message: error.localizedDescription, preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
                 self.navigationController?.popViewController(animated: true)
             }))
@@ -125,15 +129,17 @@ class LocalDirectoryTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
-                    self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: self.files[indexPath.row]), animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
+            self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: self.files[indexPath.row]), animated: true)
+        } else {
+            if let _ = try? String.init(contentsOfFile: self.files[indexPath.row].path) { // Is text
+                if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
+                    editTextViewController.file = self.files[indexPath.row]
+                    self.navigationController?.pushViewController(editTextViewController, animated: true)
                 }
-            })
-        })
+            }
+        }
     }
     
 }
