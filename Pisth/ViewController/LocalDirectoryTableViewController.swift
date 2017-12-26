@@ -113,16 +113,8 @@ class LocalDirectoryTableViewController: UITableViewController {
             do {
                 try FileManager.default.removeItem(at: files[indexPath.row])
                 
-                do {
-                    self.files = []
-                    let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
-                    for file in files {
-                        self.files.append(directory.appendingPathComponent(file))
-                    }
-                    
-                    tableView.reloadData()
-                } catch _ {}
-                
+                files.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

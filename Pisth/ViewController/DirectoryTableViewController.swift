@@ -41,6 +41,10 @@ class DirectoryTableViewController: UITableViewController {
             
             files = ConnectionManager.shared.files(inDirectory: self.directory)
             
+            if files! == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
+                files = []
+            }
+            
             // Check if path is directory or not
             for file in files! {
                 isDir.append(file.hasSuffix("/"))
@@ -133,7 +137,23 @@ class DirectoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            // Remove file
+            do {
+                let result = try ConnectionManager.shared.session?.channel.execute("rm -rf '\(files![indexPath.row])' 2>&1")
+                
+                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
+                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                } else {
+                    files!.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
         }
     }
     
