@@ -3,7 +3,6 @@
 //  Pisth
 //
 //  Created by Adrian on 25.12.17.
-//  Copyright © 2017 ADA. All rights reserved.
 //
 
 import NMSSH

@@ -9,7 +9,7 @@ import UIKit
 
 class DirectoryTableViewController: UITableViewController {
     
-    // MARK: - BookmarksTableViewController
+    // MARK: - DirectoryTableViewController
     
     var directory: String
     var connection: RemoteConnection

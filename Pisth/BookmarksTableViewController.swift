@@ -3,7 +3,6 @@
 //  Pisth
 //
 //  Created by Adrian on 25.12.17.
-//  Copyright © 2017 ADA. All rights reserved.
 //
 
 import UIKit
@@ -198,15 +197,22 @@ class BookmarksTableViewController: UITableViewController {
         present(addNewAlertController, animated: true, completion: nil)
     }
     
+    @objc func openDocuments() { // Open local documents
+        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0]), animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Bookmarks"
         
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
+        let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
+        
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
+        navigationItem.setLeftBarButtonItems([addButton, viewDocumentsButton], animated: true)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
