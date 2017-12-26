@@ -186,14 +186,25 @@ class DirectoryTableViewController: UITableViewController {
                     
                     let newFile = directory.appendingPathComponent(cell.filename.text!)
                     
-                    if session.channel.downloadFile(self.files![indexPath.row], to: newFile.path) {
-                        tableView.deselectRow(at: indexPath, animated: true)
-                        activityVC.dismiss(animated: true, completion: {
-                            let dirVC = LocalDirectoryTableViewController(directory: directory)
-                            dirVC.openFile = newFile
-                            self.navigationController?.pushViewController(dirVC, animated: true)
-                        })
+                    
+                    if let data = session.sftp.contents(atPath: self.files![indexPath.row]) {
+                        do {
+                            try data.write(to: newFile)
+                            
+                            activityVC.dismiss(animated: true, completion: {
+                                let dirVC = LocalDirectoryTableViewController(directory: directory)
+                                dirVC.openFile = newFile
+                                self.navigationController?.pushViewController(dirVC, animated: true)
+                            })
+                        } catch let error {
+                            activityVC.dismiss(animated: true, completion: {
+                                let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                self.present(errorAlert, animated: true, completion: nil)
+                            })
+                        }
                         
+                        tableView.deselectRow(at: indexPath, animated: true)
                     }
                 } catch _ {}
             }
