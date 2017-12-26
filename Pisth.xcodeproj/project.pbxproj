@@ -12,6 +12,7 @@
 		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
 		3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
+		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
 		3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9041FF140FE0061677B /* AppDelegate.swift */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
+		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
 		3AFDD9011FF140FE0061677B /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDD9041FF140FE0061677B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +65,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3AAF00EC1FF2D50D00ECCA6F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */,
+				3AFF2EF31FF199AC004D2D9D /* DataManager.swift */,
+				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
+				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3AAF00ED1FF2D52300ECCA6F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
+				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
+				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
@@ -85,12 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD9041FF140FE0061677B /* AppDelegate.swift */,
-				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
-				3AFF2EF31FF199AC004D2D9D /* DataManager.swift */,
-				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
-				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
-				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
-				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
+				3AAF00EC1FF2D50D00ECCA6F /* Helpers */,
+				3AAF00ED1FF2D52300ECCA6F /* ViewController */,
 				3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */,
 				3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
@@ -238,6 +257,7 @@
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */,
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
+				3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */,
 				3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */,
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,

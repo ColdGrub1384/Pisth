@@ -198,7 +198,7 @@ class BookmarksTableViewController: UITableViewController {
     }
     
     @objc func openDocuments() { // Open local documents
-        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0]), animated: true)
+        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), animated: true)
     }
     
     override func viewDidLoad() {
@@ -285,13 +285,11 @@ class BookmarksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            tableView.deselectRow(at: indexPath, animated: true)            
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                self.navigationController?.pushViewController(DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row]), animated: true)
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            })
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            self.navigationController?.pushViewController(DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row]), animated: true)
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            tableView.deselectRow(at: indexPath, animated: true)
         })
     }
     

@@ -99,11 +99,22 @@ class LocalDirectoryTableViewController: UITableViewController {
         if editingStyle == .delete {
             do {
                 try FileManager.default.removeItem(at: files[indexPath.row])
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                do {
+                    self.files = []
+                    let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
+                    for file in files {
+                        self.files.append(directory.appendingPathComponent(file))
+                    }
+                    
+                    tableView.reloadData()
+                } catch _ {}
+                
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(errorAlert, animated: true, completion: nil)
+                tableView.reloadData()
             }
         }
     }
@@ -114,14 +125,12 @@ class LocalDirectoryTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             tableView.deselectRow(at: indexPath, animated: true)
             
             _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                 if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
                     self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: self.files[indexPath.row]), animated: true)
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
             })
         })
