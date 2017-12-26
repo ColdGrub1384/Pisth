@@ -14,6 +14,7 @@ class LocalDirectoryTableViewController: UITableViewController {
     var directory: URL
     var files = [URL]()
     var error: Error?
+    var openFile: URL?
     
     init(directory: URL) {
         
@@ -57,6 +58,14 @@ class LocalDirectoryTableViewController: UITableViewController {
                 self.navigationController?.popViewController(animated: true)
             }))
             self.present(errorAlert, animated: true, completion: nil)
+        }
+        
+        if let openFile = openFile {
+            guard let index = files.index(of: openFile) else { return }
+            let indexPath = IndexPath(row: index, section: 0)
+            
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+            tableView(tableView, didSelectRowAt: indexPath)
         }
     }
     

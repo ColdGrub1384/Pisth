@@ -164,10 +164,14 @@ class DirectoryTableViewController: UITableViewController {
                         return
                     }
                     
-                    if session.channel.downloadFile(self.files![indexPath.row], to: directory.appendingPathComponent(cell.filename.text!).path) {
+                    let newFile = directory.appendingPathComponent(cell.filename.text!)
+                    
+                    if session.channel.downloadFile(self.files![indexPath.row], to: newFile.path) {
                         tableView.deselectRow(at: indexPath, animated: true)
                         activityVC.dismiss(animated: true, completion: {
-                            self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: directory), animated: true)
+                            let dirVC = LocalDirectoryTableViewController(directory: directory)
+                            dirVC.openFile = newFile
+                            self.navigationController?.pushViewController(dirVC, animated: true)
                         })
                         
                     }
