@@ -8,5 +8,6 @@ target 'Pisth' do
   # Pods for Pisth
 
   pod 'NMSSH'
+  pod 'Highlightr'
 
 end

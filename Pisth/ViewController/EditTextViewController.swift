@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Highlightr
 
-class EditTextViewController: UIViewController {
+class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - EditTextViewController
     
@@ -15,6 +16,14 @@ class EditTextViewController: UIViewController {
     var dismissKeyboard: UIBarButtonItem!
     
     var file: URL!
+    
+    // Syntax coloring variables
+    var highlightr = Highlightr()
+    var timer: Timer?
+    var range: NSRange?
+    var cursorPos: UITextRange?
+    var pauseColoring = false
+    var language: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +34,7 @@ class EditTextViewController: UIViewController {
         title = file.lastPathComponent
         
         textView.keyboardAppearance = .dark
+        textView.delegate = self
         
         // Open file
         do {
@@ -40,6 +50,21 @@ class EditTextViewController: UIViewController {
         // Resize textView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Syntax coloring
+        
+        highlight()
+        
+        highlightr?.setTheme(to: "paraiso-dark")
+        
+        DispatchQueue.main.async {
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+                self.timer = timer
+                if self.textView.isFirstResponder {
+                    self.highlight()
+                }
+            })
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,6 +72,19 @@ class EditTextViewController: UIViewController {
         
         if ConnectionManager.shared.saveFile != nil {
             ConnectionManager.shared.saveFile = nil
+        }
+    }
+    
+    func highlight() {
+        if !self.pauseColoring {
+            self.range = self.textView.selectedRange
+            self.cursorPos = self.textView.selectedTextRange
+            
+            self.textView.attributedText = self.highlightr?.highlight(self.textView.text, fastRender: true)
+            self.textView.selectedTextRange = self.cursorPos
+            self.textView.scrollRangeToVisible(self.range!)
+        } else {
+            self.pauseColoring = false
         }
     }
     
@@ -78,9 +116,8 @@ class EditTextViewController: UIViewController {
         }
     }
     
-    // -------------------------------------------------------------------------
+    
     // MARK: Keyboard
-    // -------------------------------------------------------------------------
     
     @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
         textView.resignFirstResponder()
@@ -108,4 +145,10 @@ class EditTextViewController: UIViewController {
         dismissKeyboard.isEnabled = false
     }
     
+    
+    // MARK: UITextViewDelegate
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.pauseColoring = true
+    }
 }
