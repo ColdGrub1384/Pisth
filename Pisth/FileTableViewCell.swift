@@ -11,6 +11,4 @@ class FileTableViewCell: UITableViewCell {
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var filename: UILabel!
-    
-    
 }

@@ -66,7 +66,17 @@ class LocalDirectoryTableViewController: UITableViewController {
             
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
             tableView(tableView, didSelectRowAt: indexPath)
+            
+            self.openFile = nil
         }
+    }
+    
+    @objc func shareFile(_ sender: UIButton) { // Share file
+        
+        guard let file = URL(string: sender.title(for: .disabled)!) else { return }
+        
+        let shareVC = UIDocumentInteractionController(url: file)
+        shareVC.presentOpenInMenu(from: sender.frame, in: view, animated: true)
     }
     
     // MARK: - Table view data source
@@ -87,6 +97,7 @@ class LocalDirectoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
+        cell.contentView.superview?.backgroundColor = .black
         
         // Configure the cell...
         
@@ -100,6 +111,13 @@ class LocalDirectoryTableViewController: UITableViewController {
                 cell.iconView.image = #imageLiteral(resourceName: "file")
             }
         }
+        
+        let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
+        shareButton.setTitle(files[indexPath.row].absoluteString, for: .disabled)
+        shareButton.addTarget(self, action: #selector(shareFile(_:)), for: .touchUpInside)
+        shareButton.backgroundColor = .black
+        cell.accessoryView = shareButton
         
         return cell
     }
@@ -136,9 +154,12 @@ class LocalDirectoryTableViewController: UITableViewController {
         } else {
             if let _ = try? String.init(contentsOfFile: self.files[indexPath.row].path) { // Is text
                 if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
-                    editTextViewController.file = self.files[indexPath.row]
+                    editTextViewController.file = files[indexPath.row]
                     self.navigationController?.pushViewController(editTextViewController, animated: true)
                 }
+            } else { // Share
+                let shareVC = UIDocumentInteractionController(url: files[indexPath.row])
+                shareVC.presentOpenInMenu(from: cell.frame, in: view, animated: true)
             }
         }
     }

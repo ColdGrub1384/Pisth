@@ -28,6 +28,8 @@ class DirectoryTableViewController: UITableViewController {
         
         if ConnectionManager.shared.session == nil {
             continue_ = ConnectionManager.shared.connect(to: connection)
+        } else if !ConnectionManager.shared.session!.isConnected || !ConnectionManager.shared.session!.isAuthorized {
+            continue_ = ConnectionManager.shared.connect(to: connection)
         } else {
             continue_ = ConnectionManager.shared.session!.isConnected && ConnectionManager.shared.session!.isAuthorized
         }
@@ -39,19 +41,21 @@ class DirectoryTableViewController: UITableViewController {
                 }
             }
             
-            files = ConnectionManager.shared.files(inDirectory: self.directory)
-            
-            if files! == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
-                files = []
+            if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
+                self.files = files
+                
+                if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
+                    self.files = []
+                }
+                
+                // Check if path is directory or not
+                for file in files {
+                    isDir.append(file.hasSuffix("/"))
+                }
+                
+                self.files!.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+                isDir.append(true)
             }
-            
-            // Check if path is directory or not
-            for file in files! {
-                isDir.append(file.hasSuffix("/"))
-            }
-            
-            files?.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
-            isDir.append(true)
         }
         
         super.init(style: .plain)
@@ -78,11 +82,14 @@ class DirectoryTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         // Go back if there is an error connecting to session
-        if let session = ConnectionManager.shared.session {
+        if let session = ConnectionManager.shared.session{
             if !session.isConnected || !session.isAuthorized {
                 navigationController?.popToRootViewController(animated: true)
             }
         } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
+        if files == nil {
             navigationController?.popToRootViewController(animated: true)
         }
     }
@@ -168,13 +175,29 @@ class DirectoryTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
+        // Don't continue if session is innactive
+        guard let session = ConnectionManager.shared.session else {
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+        if !session.isConnected || !session.isAuthorized {
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+        
         let activityVC = ActivityViewController(message: "Loading")
         
         self.present(activityVC, animated: true) {
             if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
                 let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
                 activityVC.dismiss(animated: true, completion: {
-                    self.navigationController?.pushViewController(dirVC, animated: true)
+                    
+                    if dirVC.files != nil {
+                        self.navigationController?.pushViewController(dirVC, animated: true)
+                    } else {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    
                     tableView.deselectRow(at: indexPath, animated: true)
                 })
             } else { // Download file
@@ -190,7 +213,6 @@ class DirectoryTableViewController: UITableViewController {
                     }
                     
                     let newFile = directory.appendingPathComponent(cell.filename.text!)
-                    
                     
                     if let data = session.sftp.contents(atPath: self.files![indexPath.row]) {
                         do {
@@ -210,6 +232,10 @@ class DirectoryTableViewController: UITableViewController {
                         }
                         
                         tableView.deselectRow(at: indexPath, animated: true)
+                    } else {
+                        activityVC.dismiss(animated: true, completion: {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        })
                     }
                 } catch _ {}
             }
