@@ -118,7 +118,7 @@ class LocalDirectoryTableViewController: UITableViewController {
         shareButton.addTarget(self, action: #selector(shareFile(_:)), for: .touchUpInside)
         shareButton.backgroundColor = .black
         cell.accessoryView = shareButton
-        
+                
         return cell
     }
     

@@ -65,6 +65,11 @@ class DirectoryTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    @objc func uploadFile(_ sender: UIBarButtonItem) { // Upload file
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,6 +81,9 @@ class DirectoryTableViewController: UITableViewController {
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
+        navigationItem.setRightBarButtonItems([uploadFile], animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -201,43 +209,37 @@ class DirectoryTableViewController: UITableViewController {
                     tableView.deselectRow(at: indexPath, animated: true)
                 })
             } else { // Download file
-                let directory = FileManager.default.documents.appendingPathComponent("\(self.connection.username)@\(self.connection.host):\(self.connection.port)").appendingPathComponent(self.directory)
+                guard let session = ConnectionManager.shared.session else {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    activityVC.dismiss(animated: true, completion: nil)
+                    return
+                }
                 
-                do {
-                    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-                    
-                    guard let session = ConnectionManager.shared.session else {
-                        tableView.deselectRow(at: indexPath, animated: true)
-                        activityVC.dismiss(animated: true, completion: nil)
-                        return
-                    }
-                    
-                    let newFile = directory.appendingPathComponent(cell.filename.text!)
-                    
-                    if let data = session.sftp.contents(atPath: self.files![indexPath.row]) {
-                        do {
-                            try data.write(to: newFile)
-                            
-                            activityVC.dismiss(animated: true, completion: {
-                                let dirVC = LocalDirectoryTableViewController(directory: directory)
-                                dirVC.openFile = newFile
-                                self.navigationController?.pushViewController(dirVC, animated: true)
-                            })
-                        } catch let error {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                self.present(errorAlert, animated: true, completion: nil)
-                            })
-                        }
+                let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
+                
+                if let data = session.sftp.contents(atPath: self.files![indexPath.row]) {
+                    do {
+                        try data.write(to: newFile)
                         
-                        tableView.deselectRow(at: indexPath, animated: true)
-                    } else {
                         activityVC.dismiss(animated: true, completion: {
-                            self.navigationController?.popToRootViewController(animated: true)
+                            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+                            dirVC.openFile = newFile
+                            self.navigationController?.pushViewController(dirVC, animated: true)
+                        })
+                    } catch let error {
+                        activityVC.dismiss(animated: true, completion: {
+                            let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                            self.present(errorAlert, animated: true, completion: nil)
                         })
                     }
-                } catch _ {}
+                    
+                    tableView.deselectRow(at: indexPath, animated: true)
+                } else {
+                    activityVC.dismiss(animated: true, completion: {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                }
             }
         }
                 
