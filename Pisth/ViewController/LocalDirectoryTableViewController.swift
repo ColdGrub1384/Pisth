@@ -15,6 +15,7 @@ class LocalDirectoryTableViewController: UITableViewController {
     var files = [URL]()
     var error: Error?
     var openFile: URL?
+    var delegate: LocalDirectoryTableViewControllerDelegate?
     
     init(directory: URL) {
         
@@ -150,16 +151,22 @@ class LocalDirectoryTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
-            self.navigationController?.pushViewController(LocalDirectoryTableViewController(directory: self.files[indexPath.row]), animated: true)
+            let dirVC = LocalDirectoryTableViewController(directory: self.files[indexPath.row])
+            dirVC.delegate = delegate
+            self.navigationController?.pushViewController(dirVC, animated: true)
         } else {
-            if let _ = try? String.init(contentsOfFile: self.files[indexPath.row].path) { // Is text
-                if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
-                    editTextViewController.file = files[indexPath.row]
-                    self.navigationController?.pushViewController(editTextViewController, animated: true)
+            if let delegate = delegate { // Handle the file with delegate
+                delegate.localDirectoryTableViewController(self, didOpenFile: self.files[indexPath.row])
+            } else { // Default handler
+                if let _ = try? String.init(contentsOfFile: self.files[indexPath.row].path) { // Is text
+                    if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
+                        editTextViewController.file = files[indexPath.row]
+                        self.navigationController?.pushViewController(editTextViewController, animated: true)
+                    }
+                } else { // Share
+                    let shareVC = UIDocumentInteractionController(url: files[indexPath.row])
+                    shareVC.presentOpenInMenu(from: cell.frame, in: view, animated: true)
                 }
-            } else { // Share
-                let shareVC = UIDocumentInteractionController(url: files[indexPath.row])
-                shareVC.presentOpenInMenu(from: cell.frame, in: view, animated: true)
             }
         }
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DirectoryTableViewController: UITableViewController {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate {
     
     // MARK: - DirectoryTableViewController
     
@@ -65,9 +65,37 @@ class DirectoryTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func reload() {
+        files = nil
+        isDir = []
+        
+        if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
+            self.files = files
+            
+            if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
+                self.files = []
+            }
+            
+            // Check if path is directory or not
+            for file in files {
+                isDir.append(file.hasSuffix("/"))
+            }
+            
+            self.files!.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+            isDir.append(true)
+        } else {
+            self.files = nil
+        }
+        
+        tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
     
     @objc func uploadFile(_ sender: UIBarButtonItem) { // Upload file
+        let localDirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+        localDirVC.delegate = self
         
+        navigationController?.pushViewController(localDirVC, animated: true)
     }
     
     override func viewDidLoad() {
@@ -77,11 +105,18 @@ class DirectoryTableViewController: UITableViewController {
         
         navigationItem.largeTitleDisplayMode = .never
         
+        // TableView cells
         tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
+        // Initialize the refresh control.
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.white
+        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+        
+        // Bar buttons
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
         navigationItem.setRightBarButtonItems([uploadFile], animated: true)
     }
@@ -167,6 +202,7 @@ class DirectoryTableViewController: UITableViewController {
                     self.present(errorAlert, animated: true, completion: nil)
                 } else {
                     files!.remove(at: indexPath.row)
+                    isDir.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                 }
             } catch let error {
@@ -245,5 +281,40 @@ class DirectoryTableViewController: UITableViewController {
                 
     }
     
+    // MARK: - LocalDirectoryTableViewControllerDelegate
+    
+    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) { // Send file
+        
+        // Upload file
+        func sendFile() {
+            
+            do {
+                let dataToSend = try Data(contentsOf: file)
+                
+                ConnectionManager.shared.session?.sftp.writeContents(dataToSend, toFileAtPath: (directory as NSString).appendingPathComponent(file.lastPathComponent))
+                
+                reload()
+                
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+        }
+        
+        // Ask user to send file
+        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \((directory as NSString).lastPathComponent)?", preferredStyle: .alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            sendFile()
+        }))
+        
+        // Go back here
+        navigationController?.popToViewController(self, animated: true, completion: {
+            self.present(confirmAlert, animated: true, completion: nil)
+        })
+    }
 }
 

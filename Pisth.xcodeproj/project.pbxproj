@@ -10,6 +10,8 @@
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
+		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
+		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
@@ -31,6 +33,8 @@
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
+		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
 				3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */,
+				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
+				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -274,9 +280,11 @@
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */,
 				3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */,
+				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */,
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
+				3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
