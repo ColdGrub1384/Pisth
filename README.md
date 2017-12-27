@@ -11,7 +11,7 @@ Pisth is under development and is in a very unstable version.
 - [x] Download remote files
 - [x] Browse downloaded files
 - [x] Edit text files
-- [ ] Upload files
+- [x] Upload files
 - [ ] Browse remote files as root with sudo (Implement a kind of "Pisth is asking for permssion to download xxx, enter sudo password.")
 - [ ] Colored syntax for files
 - [ ] SSH Shell
