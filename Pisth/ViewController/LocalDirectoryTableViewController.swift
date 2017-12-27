@@ -146,7 +146,7 @@ class LocalDirectoryTableViewController: UITableViewController {
             if isDir.boolValue { // Is directory
                 cell.iconView.image = #imageLiteral(resourceName: "folder")
             } else { // Is file
-                cell.iconView.image = #imageLiteral(resourceName: "file")
+                cell.iconView.image = fileIcon(forExtension: files[indexPath.row].pathExtension)
             }
         }
         
