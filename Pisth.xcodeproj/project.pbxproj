@@ -13,6 +13,7 @@
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
+		3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F61FF4281E007BB84A /* fileIcon.swift */; };
 		3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
@@ -37,6 +38,7 @@
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
+		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
 		3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
+				3AA117F61FF4281E007BB84A /* fileIcon.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
+				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,

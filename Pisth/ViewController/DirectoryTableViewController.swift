@@ -179,7 +179,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             if isDir[indexPath.row] {
                 cell.iconView.image = #imageLiteral(resourceName: "folder")
             } else {
-                cell.iconView.image = #imageLiteral(resourceName: "file")
+                cell.iconView.image = fileIcon(forExtension: (files![indexPath.row] as NSString).pathExtension)
             }
         }
         
