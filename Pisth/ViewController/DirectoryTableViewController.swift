@@ -258,9 +258,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         try data.write(to: newFile)
                         
                         activityVC.dismiss(animated: true, completion: {
-                            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
-                            dirVC.openFile = newFile
-                            self.navigationController?.pushViewController(dirVC, animated: true)
+                            LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                         })
                     } catch let error {
                         activityVC.dismiss(animated: true, completion: {

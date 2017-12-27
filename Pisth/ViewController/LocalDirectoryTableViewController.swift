@@ -17,6 +17,43 @@ class LocalDirectoryTableViewController: UITableViewController {
     var openFile: URL?
     var delegate: LocalDirectoryTableViewControllerDelegate?
     
+    static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
+        
+        func openFile() {
+            if let _ = try? String.init(contentsOfFile: file.path) { // Is text
+                if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
+                    editTextViewController.file = file
+                    
+                    if viewController == nil {
+                        navigationController?.pushViewController(editTextViewController, animated: true)
+                    } else {
+                        viewController?.dismiss(animated: true, completion: {
+                            navigationController?.pushViewController(editTextViewController, animated: true)
+                        })
+                    }
+                }
+            } else { // Share
+                let shareVC = UIDocumentInteractionController(url: file)
+                if viewController == nil {
+                    shareVC.presentOpenInMenu(from: frame, in: view, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        shareVC.presentOpenInMenu(from: frame, in: view, animated: true)
+                    })
+                }
+            }
+        }
+        
+        let activityVC = ActivityViewController(message: "Loading...")
+        if let viewController = viewController {
+            viewController.present(activityVC, animated: true, completion: {
+                openFile()
+            })
+        } else {
+            openFile()
+        }
+    }
+    
     init(directory: URL) {
         
         self.directory = directory
@@ -158,15 +195,7 @@ class LocalDirectoryTableViewController: UITableViewController {
             if let delegate = delegate { // Handle the file with delegate
                 delegate.localDirectoryTableViewController(self, didOpenFile: self.files[indexPath.row])
             } else { // Default handler
-                if let _ = try? String.init(contentsOfFile: self.files[indexPath.row].path) { // Is text
-                    if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
-                        editTextViewController.file = files[indexPath.row]
-                        self.navigationController?.pushViewController(editTextViewController, animated: true)
-                    }
-                } else { // Share
-                    let shareVC = UIDocumentInteractionController(url: files[indexPath.row])
-                    shareVC.presentOpenInMenu(from: cell.frame, in: view, animated: true)
-                }
+                LocalDirectoryTableViewController.openFile(files[indexPath.row], from: cell.frame, in: view, navigationController: navigationController, showActivityViewControllerInside: self)
             }
         }
     }
