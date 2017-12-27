@@ -258,6 +258,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         try data.write(to: newFile)
                         
                         activityVC.dismiss(animated: true, completion: {
+                            ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: self.files![indexPath.row])
                             LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                         })
                     } catch let error {
@@ -286,17 +287,22 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         // Upload file
         func sendFile() {
             
-            do {
-                let dataToSend = try Data(contentsOf: file)
-                
-                ConnectionManager.shared.session?.sftp.writeContents(dataToSend, toFileAtPath: (directory as NSString).appendingPathComponent(file.lastPathComponent))
-                
-                reload()
-                
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(errorAlert, animated: true, completion: nil)
+            let activityVC = ActivityViewController(message: "Uploading")
+            self.present(activityVC, animated: true) {
+                do {
+                    let dataToSend = try Data(contentsOf: file)
+                    
+                    ConnectionManager.shared.session?.sftp.writeContents(dataToSend, toFileAtPath: (self.directory as NSString).appendingPathComponent(file.lastPathComponent))
+                    
+                    activityVC.dismiss(animated: true, completion: {
+                        self.reload()
+                    })
+                    
+                } catch let error {
+                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
             }
         }
         

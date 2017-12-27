@@ -42,10 +42,32 @@ class EditTextViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if ConnectionManager.shared.saveFile != nil {
+            ConnectionManager.shared.saveFile = nil
+        }
+    }
+    
     @IBAction func save(_ sender: Any) { // Save file
         if let data = textView.text.data(using: .utf8) {
             do {
                 try data.write(to: file)
+                
+                // Upload file
+                if let saveFile = ConnectionManager.shared.saveFile {
+                    
+                    if saveFile.localFile == file.path {
+                        let activityVC = ActivityViewController(message: "Uploading")
+                        self.present(activityVC, animated: true, completion: {
+                            ConnectionManager.shared.session?.sftp.writeContents(data, toFileAtPath: saveFile.remoteFile)
+                            activityVC.dismiss(animated: true, completion: nil)
+                        })
+                    }
+                    
+                }
+                
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error saving file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in

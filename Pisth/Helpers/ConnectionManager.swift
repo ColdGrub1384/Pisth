@@ -14,6 +14,8 @@ class ConnectionManager {
     
     var session: NMSSHSession?
     
+    var saveFile: SaveFile?
+    
     func files(inDirectory directory: String) -> [String]? {
         guard let session = session else { return nil }
         
