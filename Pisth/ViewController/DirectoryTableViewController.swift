@@ -65,7 +65,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func reload() {
+    @objc func reload() { // Reload current directory content
         files = nil
         isDir = []
         
@@ -91,11 +91,78 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         refreshControl?.endRefreshing()
     }
     
-    @objc func uploadFile(_ sender: UIBarButtonItem) { // Upload file
-        let localDirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
-        localDirVC.delegate = self
+    @objc func uploadFile(_ sender: UIBarButtonItem) { // Add file
         
-        navigationController?.pushViewController(localDirVC, animated: true)
+        let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file
+            let localDirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            localDirVC.delegate = self
+            
+            self.navigationController?.pushViewController(localDirVC, animated: true)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Create blank file", style: .default, handler: { (_) in // Create file
+            
+            let chooseName = UIAlertController(title: "Create blank file", message: "Choose new file name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New file name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                do {
+                    let result = try ConnectionManager.shared.session?.channel.execute("touch '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
+                    
+                    if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
+                        let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    } else {
+                        self.reload()
+                    }
+                } catch let error {
+                    let errorAlert = UIAlertController(title: "Error creating file!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+            
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Create folder", style: .default, handler: { (_) in // Create folder
+            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New folder name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                do {
+                    let result = try ConnectionManager.shared.session?.channel.execute("mkdir '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
+                    
+                    if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
+                        let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    } else {
+                        self.reload()
+                    }
+                } catch let error {
+                    let errorAlert = UIAlertController(title: "Error creating folder!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        chooseAlert.popoverPresentationController?.barButtonItem = sender
+        
+        self.present(chooseAlert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
