@@ -27,6 +27,7 @@
 		3AF9AEA81FF5461300840E8A /* SettingsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA71FF5461300840E8A /* SettingsTableViewController.storyboard */; };
 		3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */; };
 		3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */; };
+		3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */; };
 		3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9041FF140FE0061677B /* AppDelegate.swift */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		3AF9AEA71FF5461300840E8A /* SettingsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTableViewController.storyboard; sourceTree = "<group>"; };
 		3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
+		3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isFilePDF.swift; sourceTree = "<group>"; };
 		3AFDD9011FF140FE0061677B /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDD9041FF140FE0061677B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3AA117F61FF4281E007BB84A /* fileIcon.swift */,
+				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
+				3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */,
 				3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */,
 				3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */,
 				3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */,

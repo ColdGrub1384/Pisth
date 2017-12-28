@@ -43,6 +43,17 @@ class LocalDirectoryTableViewController: UITableViewController {
                         navigationController?.pushViewController(imageVC, animated: true)
                     })
                 }
+            } else if isFilePDF(file) { // Is PDF
+                let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
+                webVC.file = file
+                
+                if viewController == nil {
+                    navigationController?.pushViewController(webVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(webVC, animated: true)
+                    })
+                }
             } else { // Share
                 let shareVC = UIDocumentInteractionController(url: file)
                 if viewController == nil {
