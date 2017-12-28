@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="fn7-1e-mZK" customClass="WebViewController" customModule="Pisth" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="3Xa-s9-4OL">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-90-2NZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                    </wkWebView>
+                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="hSt-J3-Rx5">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <items>
+                            <barButtonItem enabled="NO" image="back" id="B1d-QW-Qmm">
+                                <connections>
+                                    <action selector="goBack:" destination="fn7-1e-mZK" id="EUe-5q-41q"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="flexibleSpace" id="YDK-Og-cxU"/>
+                            <barButtonItem enabled="NO" image="forward" id="ShT-me-1aS">
+                                <connections>
+                                    <action selector="goForward:" destination="fn7-1e-mZK" id="cZG-Xh-Gte"/>
+                                </connections>
+                            </barButtonItem>
+                        </items>
+                    </toolbar>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="ut2-90-2NZ" firstAttribute="top" secondItem="3Xa-s9-4OL" secondAttribute="top" id="0Qf-LP-6Cc"/>
+                    <constraint firstItem="ut2-90-2NZ" firstAttribute="trailing" secondItem="hSt-J3-Rx5" secondAttribute="trailing" id="51d-kk-BZY"/>
+                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="top" secondItem="ut2-90-2NZ" secondAttribute="bottom" id="IC0-uo-Ik5"/>
+                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="bottom" secondItem="YV8-Br-wnD" secondAttribute="bottom" id="NCW-p6-hGz"/>
+                    <constraint firstItem="ut2-90-2NZ" firstAttribute="leading" secondItem="hSt-J3-Rx5" secondAttribute="leading" id="U5e-ar-uis"/>
+                    <constraint firstAttribute="trailing" secondItem="ut2-90-2NZ" secondAttribute="trailing" id="pSb-Wh-gSK"/>
+                    <constraint firstItem="ut2-90-2NZ" firstAttribute="leading" secondItem="3Xa-s9-4OL" secondAttribute="leading" id="uOC-L3-pPI"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="YV8-Br-wnD"/>
+            </view>
+            <connections>
+                <outlet property="goBackButton" destination="B1d-QW-Qmm" id="8NB-jd-LlO"/>
+                <outlet property="goForwardButton" destination="ShT-me-1aS" id="D0v-7q-WPU"/>
+                <outlet property="webView" destination="ut2-90-2NZ" id="n3N-6x-8Si"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="5.5"/>
+        </viewController>
+    </objects>
+    <resources>
+        <image name="back" width="22" height="22"/>
+        <image name="forward" width="22" height="22"/>
+    </resources>
+</document>

@@ -32,6 +32,10 @@ class LocalDirectoryTableViewController: UITableViewController {
                         })
                     }
                 }
+            } else if let image = UIImage(contentsOfFile: file.path) { // Is image
+                let imageVC = Bundle.main.loadNibNamed("ImageViewController", owner: nil, options: nil)!.first! as! ImageViewController
+                imageVC.image = image
+                navigationController?.pushViewController(imageVC, animated: true)
             } else { // Share
                 let shareVC = UIDocumentInteractionController(url: file)
                 if viewController == nil {
