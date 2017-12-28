@@ -13,7 +13,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     // MARK: - EditTextViewController
     
     @IBOutlet weak var textView: UITextView!
-    var dismissKeyboard: UIBarButtonItem!
     
     var file: URL!
     
@@ -25,8 +24,30 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     var pauseColoring = false
     var language: String?
     
+    
+    // Setup textView
+    func setupTextView() {
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        toolbar.barStyle = .black
+        
+        let dismissKeyboard = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard(_:)))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let tab = UIBarButtonItem(title: "↹", style: .plain, target: self, action: #selector(insertTab))
+        
+        let items = [tab, flexSpace, dismissKeyboard] as [UIBarButtonItem]
+        toolbar.items = items
+        toolbar.sizeToFit()
+        
+        textView.inputAccessoryView = toolbar
+        textView.keyboardAppearance = .dark
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupTextView()
         
         // Theme
         highlightr?.setTheme(to: "paraiso-dark")
@@ -36,12 +57,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dismissKeyboard = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard(_:)))
-        navigationItem.rightBarButtonItem = dismissKeyboard
-        
         title = file.lastPathComponent
         
-        textView.keyboardAppearance = .dark
         textView.delegate = self
         
         // Open file
@@ -124,14 +141,15 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    @objc func insertTab() { // Insert tab into textView
+        textView.replace(textView.selectedTextRange!, withText: "\t")
+    }
     
     // MARK: Keyboard
     
     @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
         textView.resignFirstResponder()
-        sender.isEnabled = false
     }
-    
     
     // Resize textView
     
@@ -142,15 +160,11 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         r = textView.convert(r, from:nil)
         textView.contentInset.bottom = r.size.height
         textView.scrollIndicatorInsets.bottom = r.size.height
-        
-        dismissKeyboard.isEnabled = true
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero
-        
-        dismissKeyboard.isEnabled = false
     }
     
     
