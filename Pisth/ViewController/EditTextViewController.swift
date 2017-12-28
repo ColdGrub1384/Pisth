@@ -25,6 +25,14 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     var pauseColoring = false
     var language: String?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Theme
+        highlightr?.setTheme(to: "paraiso-dark")
+        textView.backgroundColor = highlightr?.theme.themeBackgroundColor
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -54,8 +62,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         // Syntax coloring
         
         highlight()
-        
-        highlightr?.setTheme(to: "paraiso-dark")
         
         DispatchQueue.main.async {
             Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in

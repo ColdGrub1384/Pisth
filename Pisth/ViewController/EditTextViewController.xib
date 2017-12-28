@@ -19,7 +19,6 @@
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-Os-Oxa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <color key="backgroundColor" red="0.13794794678688049" green="0.10093984752893448" blue="0.14219182729721069" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
