@@ -64,7 +64,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         highlight()
         
         DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
                 self.timer = timer
                 if self.textView.isFirstResponder {
                     self.highlight()
@@ -79,6 +79,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         if ConnectionManager.shared.saveFile != nil {
             ConnectionManager.shared.saveFile = nil
         }
+        
+        timer?.invalidate()
     }
     
     func highlight() {
@@ -154,7 +156,17 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: UITextViewDelegate
     
+    // Pause coloring when write or change selection to prevent the editor from lagging
+    
     func textViewDidChange(_ textView: UITextView) {
-        self.pauseColoring = true
+        if textView.isFirstResponder {
+            self.pauseColoring = true
+        }
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if textView.isFirstResponder {
+            self.pauseColoring = true
+        }
     }
 }
