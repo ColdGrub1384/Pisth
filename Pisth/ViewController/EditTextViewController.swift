@@ -24,7 +24,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     var pauseColoring = false
     var language: String?
     
-    
     // Setup textView
     func setupTextView() {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -101,6 +100,18 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     func highlight() {
+        
+        if let file = file { // If the file is plain text, stop highlighting it
+            if file.pathExtension == "txt" || file.pathExtension == "" {
+                timer?.invalidate()
+                
+                textView.backgroundColor = .clear
+                textView.textColor = .white
+                
+                return
+            }
+        }
+        
         if !self.pauseColoring {
             self.range = self.textView.selectedRange
             self.cursorPos = self.textView.selectedTextRange
