@@ -12,6 +12,10 @@ class BookmarksTableViewController: UITableViewController {
     
     // MARK: - BookmarksTableViewController
     
+    @objc func openSettings() { // Open Settings
+        navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
+    }
+    
     @objc func addConnection() { // Add connection
         showInfoAlert()
     }
@@ -208,11 +212,12 @@ class BookmarksTableViewController: UITableViewController {
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
+        let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
         
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
-        navigationItem.setLeftBarButtonItems([addButton, viewDocumentsButton], animated: true)
+        navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
