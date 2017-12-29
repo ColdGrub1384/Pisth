@@ -40,6 +40,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             textView.autocapitalizationType = .none
             textView.delegate = self
             textView.tintColor = .white
+            textView.isEditable = false
             
             webView.navigationDelegate = self
             
@@ -54,18 +55,26 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 session.channel.requestPty = true
                 session.channel.ptyTerminalType = .ansi
                 try session.channel.startShell()
-                textView.becomeFirstResponder()
                 if let pwd = pwd {
                     try session.channel.write("cd '\(pwd)'\n")
                 }
                 try session.channel.write("alias clear='echo Cl\\EaRtHeScReEnNoW'\n")
                 try session.channel.write("clear\n")
+                
+                textView.isEditable = true
+                textView.becomeFirstResponder()
             } catch let error {
                 textView.text = error.localizedDescription
             }
         }
         
         logout = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        ConnectionManager.shared.session?.channel.closeShell()
     }
     
     // MARK: Keyboard
@@ -118,6 +127,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 self.logout = true
                 AppDelegate.shared.navigationController.pushViewController(self, animated: true)
             })
+            
+            self.textView.isEditable = false
         }
     }
     
@@ -147,6 +158,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         
         return false
     }
+    
+    
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html, error) in
