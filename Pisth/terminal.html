@@ -1,0 +1,23 @@
+<body id="console"></body>
+
+
+<script src="ansi_up.js" type="text/javascript"></script>
+<script type="text/javascript">
+    
+    var ansi_up = new AnsiUp;
+    
+    var cdiv = document.getElementById("console");
+    
+    var html = ansi_up.ansi_to_html($_ANSIOUTPUT_);
+        
+    cdiv.innerHTML = html.replace(/\n/g, '<br />');
+    
+</script>
+
+<Style>
+    * {
+        font-family: menlo;
+        font-size: 14px;
+        color: white;
+    }
+</Style>

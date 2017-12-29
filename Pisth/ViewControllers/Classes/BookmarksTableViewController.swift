@@ -299,6 +299,12 @@ class BookmarksTableViewController: UITableViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
                 self.navigationController?.pushViewController(dirVC, animated: true)
             })
+            
+            let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+            activityVC.dismiss(animated: true, completion: {
+                tableView.deselectRow(at: indexPath, animated: true)
+                self.navigationController?.pushViewController(terminalVC, animated: true)
+            })
         }
     }
     

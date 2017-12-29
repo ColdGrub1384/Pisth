@@ -165,6 +165,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         self.present(chooseAlert, animated: true, completion: nil)
     }
     
+    @objc func openShell() { // Open shell in current directory
+        let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+        terminalVC.pwd = directory
+        navigationController?.pushViewController(terminalVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -185,7 +191,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         // Bar buttons
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
-        navigationItem.setRightBarButtonItems([uploadFile], animated: true)
+        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
+        navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
