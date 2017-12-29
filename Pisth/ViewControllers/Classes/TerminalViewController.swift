@@ -17,6 +17,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     var pwd: String?
     var console = ""
     var consoleANSI = ""
+    var logout = false
     
     var webView = WKWebView()
     
@@ -25,42 +26,46 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let session = ConnectionManager.shared.session else {
-            navigationController?.popViewController(animated: true)
-            return
-        }
-        
-        navigationItem.largeTitleDisplayMode = .never
-        
-        textView.text = "\n\n\n"
-        textView.keyboardAppearance = .dark
-        textView.autocorrectionType = .no
-        textView.autocapitalizationType = .none
-        textView.delegate = self
-        textView.tintColor = .white
-        
-        webView.navigationDelegate = self
-        
-        // Resize textView
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // Session
-        session.channel.delegate = self
-        do {
-            session.channel.requestSizeWidth(UInt(self.view.frame.size.width), height: UInt(self.view.frame.size.height))
-            session.channel.requestPty = true
-            session.channel.ptyTerminalType = .ansi
-            try session.channel.startShell()
-            textView.becomeFirstResponder()
-            if let pwd = pwd {
-                try session.channel.write("cd '\(pwd)'\n")
+        if !logout {
+            guard let session = ConnectionManager.shared.session else {
+                navigationController?.popViewController(animated: true)
+                return
             }
-            try session.channel.write("alias clear='echo Cl\\EaRtHeScReEnNoW'\n")
-            try session.channel.write("clear\n")
-        } catch let error {
-            textView.text = error.localizedDescription
+            
+            navigationItem.largeTitleDisplayMode = .never
+            
+            textView.text = "\n\n\n"
+            textView.keyboardAppearance = .dark
+            textView.autocorrectionType = .no
+            textView.autocapitalizationType = .none
+            textView.delegate = self
+            textView.tintColor = .white
+            
+            webView.navigationDelegate = self
+            
+            // Resize textView
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            
+            // Session
+            session.channel.delegate = self
+            do {
+                session.channel.requestSizeWidth(UInt(self.view.frame.size.width), height: UInt(self.view.frame.size.height))
+                session.channel.requestPty = true
+                session.channel.ptyTerminalType = .ansi
+                try session.channel.startShell()
+                textView.becomeFirstResponder()
+                if let pwd = pwd {
+                    try session.channel.write("cd '\(pwd)'\n")
+                }
+                try session.channel.write("alias clear='echo Cl\\EaRtHeScReEnNoW'\n")
+                try session.channel.write("clear\n")
+            } catch let error {
+                textView.text = error.localizedDescription
+            }
         }
+        
+        logout = false
     }
     
     // MARK: Keyboard
@@ -106,6 +111,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
             self.textView.resignFirstResponder()
+            
+            DirectoryTableViewController.disconnected = true
+            
+            self.navigationController?.popToRootViewController(animated: true, completion: {
+                self.logout = true
+                AppDelegate.shared.navigationController.pushViewController(self, animated: true)
+            })
         }
     }
     

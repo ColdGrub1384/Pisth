@@ -221,6 +221,21 @@ class BookmarksTableViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Close session when coming back here
+        if !DirectoryTableViewController.disconnected {
+            if let session = ConnectionManager.shared.session {
+                if session.isConnected {
+                    session.disconnect()
+                }
+            }
+            ConnectionManager.shared.session = nil
+            DirectoryTableViewController.disconnected = false
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

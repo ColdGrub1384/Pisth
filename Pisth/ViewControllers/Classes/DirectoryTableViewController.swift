@@ -16,6 +16,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     var files: [String]?
     var isDir = [Bool]()
     
+    static var disconnected = false
+    
     init(connection: RemoteConnection, directory: String? = nil) {
         self.connection = connection
         if directory == nil {
@@ -26,7 +28,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         var continue_ = false
         
-        if ConnectionManager.shared.session == nil {
+        if !Reachability.isConnectedToNetwork() {
+            continue_ = false
+        } else if ConnectionManager.shared.session == nil {
             continue_ = ConnectionManager.shared.connect(to: connection)
         } else if !ConnectionManager.shared.session!.isConnected || !ConnectionManager.shared.session!.isAuthorized {
             continue_ = ConnectionManager.shared.connect(to: connection)
@@ -195,22 +199,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Go back if there is an error connecting to session
-        if let session = ConnectionManager.shared.session{
-            if !session.isConnected || !session.isAuthorized {
-                navigationController?.popToRootViewController(animated: true)
-            }
-        } else {
-            navigationController?.popToRootViewController(animated: true)
-        }
-        if files == nil {
-            navigationController?.popToRootViewController(animated: true)
-        }
-    }
-    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -293,16 +281,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
-        // Don't continue if session is innactive
-        guard let session = ConnectionManager.shared.session else {
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
-        if !session.isConnected || !session.isAuthorized {
-            navigationController?.popToRootViewController(animated: true)
-            return
-        }
-        
         let activityVC = ActivityViewController(message: "Loading")
         
         self.present(activityVC, animated: true) {
@@ -310,18 +288,33 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
                 activityVC.dismiss(animated: true, completion: {
                     
-                    if dirVC.files != nil {
-                        self.navigationController?.pushViewController(dirVC, animated: true)
-                    } else {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
+                    self.navigationController?.pushViewController(dirVC, animated: true)
                     
                     tableView.deselectRow(at: indexPath, animated: true)
                 })
             } else { // Download file
+                
                 guard let session = ConnectionManager.shared.session else {
                     tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: nil)
+                    DirectoryTableViewController.disconnected = true
+                    self.navigationController?.popToRootViewController(animated: true)
+                    return
+                }
+                
+                if !Reachability.isConnectedToNetwork() {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    activityVC.dismiss(animated: true, completion: nil)
+                    DirectoryTableViewController.disconnected = true
+                    self.navigationController?.popToRootViewController(animated: true)
+                    return
+                }
+                
+                if !session.isConnected || !session.isAuthorized {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    activityVC.dismiss(animated: true, completion: nil)
+                    DirectoryTableViewController.disconnected = true
+                    self.navigationController?.popToRootViewController(animated: true)
                     return
                 }
                 

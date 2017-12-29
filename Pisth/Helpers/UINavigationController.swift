@@ -44,4 +44,16 @@ extension UINavigationController {
             completion()
         }
     }
+    
+    func popToRootViewController(animated: Bool, completion: @escaping () -> Void) {
+        popToRootViewController(animated: animated)
+        
+        if animated, let coordinator = transitionCoordinator {
+            coordinator.animate(alongsideTransition: nil) { _ in
+                completion()
+            }
+        } else {
+            completion()
+        }
+    }
 }
