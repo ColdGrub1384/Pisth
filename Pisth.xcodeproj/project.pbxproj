@@ -14,6 +14,7 @@
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A38FC561FF574AE00690382 /* TerminalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC551FF574AE00690382 /* TerminalTextView.swift */; };
 		3A38FC5A1FF57FAB00690382 /* Data+html2AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC591FF57FAB00690382 /* Data+html2AttributedString.swift */; };
+		3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
@@ -54,6 +55,7 @@
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3A38FC551FF574AE00690382 /* TerminalTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalTextView.swift; sourceTree = "<group>"; };
 		3A38FC591FF57FAB00690382 /* Data+html2AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+html2AttributedString.swift"; sourceTree = "<group>"; };
+		3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				3A38FC591FF57FAB00690382 /* Data+html2AttributedString.swift */,
 				3A288B571FF6810E008C523A /* String.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
+				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */,
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
+				3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */,
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
 				3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */,

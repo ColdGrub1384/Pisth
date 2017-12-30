@@ -18,6 +18,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     var console = ""
     var consoleANSI = ""
     var logout = false
+    var ctrlKey: UIBarButtonItem!
+    var ctrl = false
     
     var webView = WKWebView()
     
@@ -33,7 +35,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             }
             
             navigationItem.largeTitleDisplayMode = .never
+           
+            // textView's toolbar
+            let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+            toolbar.barStyle = .black
+                
+            ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
+            ctrlKey.tag = 1
             
+            let items = [ctrlKey] as [UIBarButtonItem]
+            toolbar.items = items
+            toolbar.sizeToFit()
+            
+            // textView
+            textView.inputAccessoryView = toolbar
             textView.text = "\n\n\n"
             textView.keyboardAppearance = .dark
             textView.autocorrectionType = .no
@@ -83,6 +98,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         textView.resignFirstResponder()
     }
     
+    // Insert special key
+    @objc func insertKey(_ sender: UIBarButtonItem) {
+        if sender.tag == 1 { // ctrl
+            ctrl = true
+            sender.isEnabled = false
+        }
+    }
+    
+    @objc func writeText(_ text: String) {
+        do {
+            try ConnectionManager.shared.session?.channel.write(text)
+        } catch {
+            textView.text = error.localizedDescription
+        }
+        
+    }
+    
     // Resize textView
     
     @objc func keyboardWillShow(_ notification:Notification) {
@@ -106,7 +138,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             
             self.console = self.textView.text+message
             self.consoleANSI = self.consoleANSI+message
+            
             print("ANSI OUTPUT: \n"+self.consoleANSI)
+            print("PLAIN OUTPUT: \n"+self.console)
             
             if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
                 self.consoleANSI = self.consoleANSI.components(separatedBy: TerminalViewController.clear)[1]
@@ -135,6 +169,18 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     // MARK: UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if ctrl { // CTRL key
+            
+            ctrlKey.isEnabled = true
+            
+            print("CTRL KEY: "+text)
+            
+            writeText(Keys.ctrlKey(from: text))
+            
+            ctrl = false
+            return ctrl
+        }
         
         if (textView.text as NSString).replacingCharacters(in: range, with: text).count >= console.count {
             if text.contains("\n") {
@@ -169,6 +215,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 self.textView.attributedText = html.html2AttributedString
                 self.console = self.textView.text
                 self.textView.scrollToBotom()
+                print("HTML OUTPUT: \n"+html)
             }
         }
     }
