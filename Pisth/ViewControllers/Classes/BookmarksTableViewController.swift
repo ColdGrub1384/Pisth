@@ -235,7 +235,6 @@ class BookmarksTableViewController: UITableViewController {
                     session.disconnect()
                 }
             }
-            ConnectionManager.shared.session = nil
             DirectoryTableViewController.disconnected = false
         }
     }
