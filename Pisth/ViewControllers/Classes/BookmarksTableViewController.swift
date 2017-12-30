@@ -9,9 +9,7 @@ import UIKit
 import CoreData
 
 class BookmarksTableViewController: UITableViewController {
-    
-    // MARK: - BookmarksTableViewController
-    
+        
     @objc func openSettings() { // Open Settings
         navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
     }

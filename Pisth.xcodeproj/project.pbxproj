@@ -26,6 +26,7 @@
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
+		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
 		3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE835A01FF2DE350073D06E /* WebViewController.xib */; };
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
@@ -67,6 +68,7 @@
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
+		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		3AE835A01FF2DE350073D06E /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */,
 				3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */,
 				3A38FC531FF5719200690382 /* TerminalViewController.swift */,
+				3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
+				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3A288B581FF6810E008C523A /* String.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,

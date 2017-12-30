@@ -8,9 +8,7 @@
 import UIKit
 
 class LocalDirectoryTableViewController: UITableViewController {
-    
-    // MARK: - LocalDirectoryTableViewController
-    
+        
     var directory: URL
     var files = [URL]()
     var error: Error?

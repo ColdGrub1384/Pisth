@@ -8,9 +8,7 @@
 import UIKit
 
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate {
-    
-    // MARK: - DirectoryTableViewController
-    
+        
     var directory: String
     var connection: RemoteConnection
     var files: [String]?

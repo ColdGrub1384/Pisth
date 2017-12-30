@@ -9,9 +9,7 @@ import UIKit
 import Highlightr
 
 class EditTextViewController: UIViewController, UITextViewDelegate {
-    
-    // MARK: - EditTextViewController
-    
+        
     @IBOutlet weak var textView: UITextView!
     
     var file: URL!
