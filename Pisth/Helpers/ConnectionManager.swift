@@ -13,8 +13,9 @@ class ConnectionManager {
     private init() {}
     
     var session: NMSSHSession?
-    
+    var helpSession: NMSSHSession?
     var saveFile: SaveFile?
+    var connection: RemoteConnection?
     
     func files(inDirectory directory: String) -> [String]? {
         guard let session = session else { return nil }
@@ -29,15 +30,28 @@ class ConnectionManager {
         return nil
     }
     
-    func connect(to remote: RemoteConnection) -> Bool {
-        session = NMSSHSession(host: remote.host, port: Int(remote.port), andUsername: remote.username)
+    func connect() -> Bool {
+        
+        guard let connection = connection else { return false }
+        
+        session = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
         session?.connect()
         if session!.isConnected {
-            session?.authenticate(byPassword: remote.password)
+            session?.authenticate(byPassword: connection.password)
         }
         
         if session!.isConnected && session!.isAuthorized {
             session?.sftp.connect()
+        }
+        
+        helpSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
+        helpSession?.connect()
+        if helpSession!.isConnected {
+            helpSession?.authenticate(byPassword: connection.password)
+        }
+        
+        if helpSession!.isConnected && helpSession!.isAuthorized {
+            helpSession?.sftp.connect()
         }
         
         return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected)

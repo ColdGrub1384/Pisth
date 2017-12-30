@@ -34,6 +34,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 return
             }
             
+            // Show commands history
+            let history = UIBarButtonItem(image: #imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
+            navigationItem.rightBarButtonItem = history
+            
             navigationItem.largeTitleDisplayMode = .never
            
             // textView's toolbar
@@ -73,7 +77,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 if let pwd = pwd {
                     try session.channel.write("cd '\(pwd)'\n")
                 }
-                try session.channel.write("alias clear='echo Cl\\EaRtHeScReEnNoW'\n")
+                
+                for command in ShellStartup.commands {
+                    try session.channel.write("\(command)\n")
+                }
+                
                 try session.channel.write("clear\n")
                 
                 textView.isEditable = true
@@ -92,6 +100,38 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         ConnectionManager.shared.session?.channel.closeShell()
     }
     
+    @objc func writeText(_ text: String) { // Write command without writing it in the textView
+        do {
+            try ConnectionManager.shared.session?.channel.write(text)
+        } catch {
+            textView.text = error.localizedDescription
+        }
+    }
+    
+    @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
+        
+        do {
+            guard let session = ConnectionManager.shared.helpSession else { return }
+            let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
+                
+            let commandsVC = CommandsTableViewController()
+            commandsVC.title = "History"
+            commandsVC.commands = history
+            commandsVC.modalPresentationStyle = .popover
+                
+            if let popover = commandsVC.popoverPresentationController {
+                popover.barButtonItem = sender
+                popover.delegate = commandsVC
+                    
+                self.present(commandsVC, animated: true, completion: {
+                    commandsVC.tableView.scrollToRow(at: IndexPath(row: history.count-1, section: 0), at: .bottom, animated: true)
+                })
+            }
+        } catch {
+            print("Error sending command: \(error.localizedDescription)")
+        }
+    }
+    
     // MARK: Keyboard
     
     @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
@@ -104,15 +144,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             ctrl = true
             sender.isEnabled = false
         }
-    }
-    
-    @objc func writeText(_ text: String) {
-        do {
-            try ConnectionManager.shared.session?.channel.write(text)
-        } catch {
-            textView.text = error.localizedDescription
-        }
-        
     }
     
     // Resize textView
@@ -205,7 +236,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         return false
     }
     
-    
+    // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html, error) in

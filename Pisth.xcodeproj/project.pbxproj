@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A050CCE1FF81E2400364306 /* ShellStartup.swift */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A288B581FF6810E008C523A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A288B571FF6810E008C523A /* String.swift */; };
 		3A38FC501FF56AA800690382 /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A38FC4F1FF56AA800690382 /* terminal.html */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A050CCE1FF81E2400364306 /* ShellStartup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellStartup.swift; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A288B571FF6810E008C523A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3A38FC4F1FF56AA800690382 /* terminal.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = terminal.html; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				3A288B571FF6810E008C523A /* String.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
 				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
+				3A050CCE1FF81E2400364306 /* ShellStartup.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
+				3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,

@@ -18,6 +18,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     init(connection: RemoteConnection, directory: String? = nil) {
         self.connection = connection
+        ConnectionManager.shared.connection = connection
+        
         if directory == nil {
             self.directory = connection.path
         } else {
@@ -29,9 +31,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if !Reachability.isConnectedToNetwork() {
             continue_ = false
         } else if ConnectionManager.shared.session == nil {
-            continue_ = ConnectionManager.shared.connect(to: connection)
+            continue_ = ConnectionManager.shared.connect()
         } else if !ConnectionManager.shared.session!.isConnected || !ConnectionManager.shared.session!.isAuthorized {
-            continue_ = ConnectionManager.shared.connect(to: connection)
+            continue_ = ConnectionManager.shared.connect()
         } else {
             continue_ = ConnectionManager.shared.session!.isConnected && ConnectionManager.shared.session!.isAuthorized
         }
