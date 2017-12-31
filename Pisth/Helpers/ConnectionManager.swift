@@ -21,7 +21,7 @@ class ConnectionManager {
         guard let session = session else { return nil }
         
         do {
-            let ls = try session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.session.channel.execute("for file in \"\(directory)\"/*; do if [[ -d $file ]]; then printf \"$file/\n\"; else printf \"$file\n\"; fi; done")
+            let ls = try session.channel.execute("for file in \"\(directory)\"/*; do if [[ -d $file ]]; then printf \"$file/\n\"; else printf \"$file\n\"; fi; done")
             var result = ls.components(separatedBy: "\n")
             result.removeLast()
             return result
