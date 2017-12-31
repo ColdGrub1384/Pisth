@@ -230,7 +230,7 @@ class BookmarksTableViewController: UITableViewController {
                 }
             }
             
-            if let session = ConnectionManager.shared.helpSession {
+            if let session = ConnectionManager.shared.filesSession {
                 if session.isConnected {
                     session.disconnect()
                 }

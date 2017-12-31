@@ -12,13 +12,15 @@ class ConnectionManager {
     static let shared = ConnectionManager()
     private init() {}
     
-    var session: NMSSHSession?
-    var helpSession: NMSSHSession?
+    // NMSSH cannot download files and write to an SSH Shell at same time, so two sessions are used
+    var session: NMSSHSession? // Used for SSH Shell
+    var filesSession: NMSSHSession? // Used for read and write files
+    
     var saveFile: SaveFile?
     var connection: RemoteConnection?
     
     func files(inDirectory directory: String) -> [String]? {
-        guard let session = session else { return nil }
+        guard let session = filesSession else { return nil }
         
         do {
             let ls = try session.channel.execute("for file in \"\(directory)\"/*; do if [[ -d $file ]]; then printf \"$file/\n\"; elif [[ -x $file ]]; then  printf \"./$file\n\"; else printf \"$file\n\"; fi; done")
@@ -44,16 +46,16 @@ class ConnectionManager {
             session?.sftp.connect()
         }
         
-        helpSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
-        helpSession?.connect()
-        if helpSession!.isConnected {
-            helpSession?.authenticate(byPassword: connection.password)
+        filesSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
+        filesSession?.connect()
+        if filesSession!.isConnected {
+            filesSession?.authenticate(byPassword: connection.password)
         }
         
-        if helpSession!.isConnected && helpSession!.isAuthorized {
-            helpSession?.sftp.connect()
+        if filesSession!.isConnected && filesSession!.isAuthorized {
+            filesSession?.sftp.connect()
         }
         
-        return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected)
+        return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected && filesSession!.isConnected && filesSession!.isAuthorized && filesSession!.sftp.isConnected)
     }
 }

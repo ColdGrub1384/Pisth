@@ -133,7 +133,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                     if saveFile.localFile == file.path {
                         let activityVC = ActivityViewController(message: "Uploading")
                         self.present(activityVC, animated: true, completion: {
-                            ConnectionManager.shared.session?.sftp.writeContents(data, toFileAtPath: saveFile.remoteFile)
+                            ConnectionManager.shared.filesSession?.sftp.writeContents(data, toFileAtPath: saveFile.remoteFile)
                             activityVC.dismiss(animated: true, completion: nil)
                         })
                     }

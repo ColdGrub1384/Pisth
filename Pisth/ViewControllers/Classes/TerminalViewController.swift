@@ -126,7 +126,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
         
         do {
-            guard let session = ConnectionManager.shared.helpSession else { return }
+            guard let session = ConnectionManager.shared.filesSession else { return }
             let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
                 
             let commandsVC = CommandsTableViewController()

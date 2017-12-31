@@ -30,17 +30,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         if !Reachability.isConnectedToNetwork() {
             continue_ = false
-        } else if ConnectionManager.shared.session == nil {
+        } else if ConnectionManager.shared.filesSession == nil {
             continue_ = ConnectionManager.shared.connect()
-        } else if !ConnectionManager.shared.session!.isConnected || !ConnectionManager.shared.session!.isAuthorized {
+        } else if !ConnectionManager.shared.filesSession!.isConnected || !ConnectionManager.shared.filesSession!.isAuthorized {
             continue_ = ConnectionManager.shared.connect()
         } else {
-            continue_ = ConnectionManager.shared.session!.isConnected && ConnectionManager.shared.session!.isAuthorized
+            continue_ = ConnectionManager.shared.filesSession!.isConnected && ConnectionManager.shared.filesSession!.isAuthorized
         }
         
         if continue_ {
             if self.directory == "~" { // Get absolute path from ~
-                if let path = try? ConnectionManager.shared.session?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
+                if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
                     self.directory = path!
                 }
             }
@@ -115,7 +115,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
                 do {
-                    let result = try ConnectionManager.shared.session?.channel.execute("touch '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
+                    let result = try ConnectionManager.shared.filesSession?.channel.execute("touch '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
                     
                     if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                         let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
@@ -143,7 +143,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
                 do {
-                    let result = try ConnectionManager.shared.session?.channel.execute("mkdir '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
+                    let result = try ConnectionManager.shared.filesSession?.channel.execute("mkdir '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
                     
                     if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                         let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
@@ -258,7 +258,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if editingStyle == .delete {
             // Remove file
             do {
-                let result = try ConnectionManager.shared.session?.channel.execute("rm -rf '\(files![indexPath.row])' 2>&1")
+                let result = try ConnectionManager.shared.filesSession?.channel.execute("rm -rf '\(files![indexPath.row])' 2>&1")
                 
                 if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                     let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
@@ -305,7 +305,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 
             } else { // Download file
                 
-                guard let session = ConnectionManager.shared.session else {
+                guard let session = ConnectionManager.shared.filesSession else {
                     tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: nil)
                     DirectoryTableViewController.disconnected = true
@@ -370,7 +370,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 do {
                     let dataToSend = try Data(contentsOf: file)
                     
-                    ConnectionManager.shared.session?.sftp.writeContents(dataToSend, toFileAtPath: (self.directory as NSString).appendingPathComponent(file.lastPathComponent))
+                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: (self.directory as NSString).appendingPathComponent(file.lastPathComponent))
                     
                     activityVC.dismiss(animated: true, completion: {
                         self.reload()
