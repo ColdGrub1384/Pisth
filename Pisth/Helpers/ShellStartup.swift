@@ -21,7 +21,7 @@ class ShellStartup {
                            "export HISTCONTROL=ignoredups:erasedups; history -d $(history 1)",
                            
                            // When the shell exits, append to the history file instead of overwriting it
-                           "shopt -s histappend",
+                           "shopt -s histappend; history -d $(history 1)",
                            
                            // After each command, append to the history file and reread it
                            "export PROMPT_COMMAND=\"${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r\"; history -d $(history 1)",
