@@ -81,7 +81,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             // Session
             session.channel.delegate = self
             do {
-                session.channel.requestSizeWidth(UInt(self.view.frame.size.width), height: UInt(self.view.frame.size.height))
                 session.channel.requestPty = true
                 session.channel.ptyTerminalType = .ansi
                 try session.channel.startShell()
