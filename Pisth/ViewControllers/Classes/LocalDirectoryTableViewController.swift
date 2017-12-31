@@ -19,14 +19,42 @@ class LocalDirectoryTableViewController: UITableViewController {
         
         func openFile() {
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
-                if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
-                    editTextViewController.file = file
+                var editTextVC: EditTextViewController? {
+                    if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
+                        editTextViewController.file = file
+                        
+                        return editTextViewController
+                    } else {
+                        return nil
+                    }
+                }
+                
+                if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
+                    let alert = UIAlertController(title: "Open file", message: "View HTML page or edit?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "View HTML", style: .default, handler: { (_) in // View HTML
+                        guard let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)?.first as? WebViewController else { return }
+                        webVC.file = file
+
+                        navigationController?.pushViewController(webVC, animated: true)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
+                        navigationController?.pushViewController(editTextVC!, animated: true)
+                    }))
                     
                     if viewController == nil {
-                        navigationController?.pushViewController(editTextViewController, animated: true)
+                        navigationController?.present(alert, animated: true, completion: nil)
                     } else {
                         viewController?.dismiss(animated: true, completion: {
-                            navigationController?.pushViewController(editTextViewController, animated: true)
+                            navigationController?.present(alert, animated: true, completion: nil)
+                        })
+                    }
+                } else {
+                    if viewController == nil {
+                        navigationController?.pushViewController(editTextVC!, animated: true)
+                    } else {
+                        viewController?.dismiss(animated: true, completion: {
+                            navigationController?.pushViewController(editTextVC!, animated: true)
                         })
                     }
                 }
