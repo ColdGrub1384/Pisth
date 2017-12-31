@@ -240,6 +240,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if isDir.indices.contains(indexPath.row) {
             if isDir[indexPath.row] {
                 cell.iconView.image = #imageLiteral(resourceName: "folder")
+            } else if files![indexPath.row].hasPrefix("./") {
+                cell.iconView.image = #imageLiteral(resourceName: "bin")
             } else {
                 cell.iconView.image = fileIcon(forExtension: (files![indexPath.row] as NSString).pathExtension)
             }
@@ -292,6 +294,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     
                     tableView.deselectRow(at: indexPath, animated: true)
                 })
+            } else if cell.iconView.image == #imageLiteral(resourceName: "bin") { // Execute file
+                let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+                terminalVC.command = "'\(String(self.files![indexPath.row].dropFirst()))'"
+                terminalVC.pwd = self.directory
+                
+                activityVC.dismiss(animated: true, completion: {
+                    self.navigationController?.pushViewController(terminalVC, animated: true)
+                })
+                
             } else { // Download file
                 
                 guard let session = ConnectionManager.shared.session else {

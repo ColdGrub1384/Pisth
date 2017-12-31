@@ -16,12 +16,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     @IBOutlet weak var textView: TerminalTextView!
     var pwd: String?
     var console = ""
+    var command: String?
     var consoleANSI = ""
     var consoleHTML = ""
     var logout = false
     var ctrlKey: UIBarButtonItem!
     var ctrl = false
-    
     var webView = WKWebView()
     
     func htmlTerminal(withOutput output: String) -> String {
@@ -88,11 +88,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                     try session.channel.write("cd '\(pwd)'\n")
                 }
                 
+                
                 for command in ShellStartup.commands {
                     try session.channel.write("\(command)\n")
                 }
                 
                 try session.channel.write("clear\n")
+                
+                if let command = command {
+                    try session.channel.write("\(command)\n")
+                }
                 
                 textView.isEditable = true
                 textView.becomeFirstResponder()
