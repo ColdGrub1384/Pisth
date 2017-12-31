@@ -17,6 +17,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     var pwd: String?
     var console = ""
     var consoleANSI = ""
+    var consoleHTML = ""
     var logout = false
     var ctrlKey: UIBarButtonItem!
     var ctrl = false
@@ -47,7 +48,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
             ctrlKey.tag = 1
             
-            let items = [ctrlKey] as [UIBarButtonItem]
+            // ⬅︎⬆︎⬇︎➡︎
+            /*let leftArrow = UIBarButtonItem(title: "⬅︎", style: .done, target: self, action: #selector(insertKey(_:)))
+            leftArrow.tag = 2
+            let upArrow = UIBarButtonItem(title: "⬆︎", style: .done, target: self, action: #selector(insertKey(_:)))
+            upArrow.tag = 3
+            let downArrow = UIBarButtonItem(title: "⬇︎", style: .done, target: self, action: #selector(insertKey(_:)))
+            downArrow.tag = 4
+            let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
+            rightArrow.tag = 5*/
+            
+            let items = [ctrlKey, /*leftArrow, upArrow, downArrow, rightArrow*/] as [UIBarButtonItem]
             toolbar.items = items
             toolbar.sizeToFit()
             
@@ -143,6 +154,18 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         if sender.tag == 1 { // ctrl
             ctrl = true
             sender.isEnabled = false
+        } else if sender.tag == 2 { // Left arrow
+            textView.text = consoleHTML
+            writeText(Keys.arrowLeft)
+        } else if sender.tag == 3 { // Up arrow
+            textView.text = consoleHTML
+            writeText(Keys.arrowUp)
+        } else if sender.tag == 4 { // Down arrow
+            textView.text = consoleHTML
+            writeText(Keys.arrowDown)
+        } else if sender.tag == 5 { // Right arrow
+            textView.text = consoleHTML
+            writeText(Keys.arrowRight)
         }
     }
     
@@ -169,7 +192,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             
             self.console = self.textView.text+message
             self.consoleANSI = self.consoleANSI+message
-            
+                        
             print("ANSI OUTPUT: \n"+self.consoleANSI)
             print("PLAIN OUTPUT: \n"+self.console)
             
@@ -245,6 +268,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 self.textView.text = html.html2String
                 self.textView.attributedText = html.html2AttributedString
                 self.console = self.textView.text
+                self.consoleHTML = html.html2String
                 self.textView.scrollToBotom()
                 print("HTML OUTPUT: \n"+html)
             }

@@ -27,6 +27,11 @@ class ShellStartup {
                            "export PROMPT_COMMAND=\"${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r\"",
                            
                            // Create .pisth_history symlink of history file
-                           "ln -s $HISTFILE .pisth_history"
+                           "ln -s $HISTFILE .pisth_history",
+                           
+                           // Disable nano, vim and emacs
+                           "alias nano='nano is not supported by Pisth, edit files from file browser'",
+                           "alias vim='vim is not supported by Pisth, edit files from file browser'",
+                           "alias emacs='emacs is not supported by Pisth, edit files from file browser'"
     ]
 }
