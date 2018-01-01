@@ -9,7 +9,9 @@ import UIKit
 import CoreData
 
 class BookmarksTableViewController: UITableViewController {
-        
+    
+    var delegate: BookmarksTableViewControllerDelegate?
+    
     @objc func openSettings() { // Open Settings
         navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
     }
@@ -315,13 +317,12 @@ class BookmarksTableViewController: UITableViewController {
             
             activityVC.dismiss(animated: true, completion: {
                 tableView.deselectRow(at: indexPath, animated: true)
-                self.navigationController?.pushViewController(dirVC, animated: true)
-            })
-            
-            let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
-            activityVC.dismiss(animated: true, completion: {
-                tableView.deselectRow(at: indexPath, animated: true)
-                self.navigationController?.pushViewController(terminalVC, animated: true)
+                
+                if let delegate = self.delegate {
+                    delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)
+                } else {
+                    self.navigationController?.pushViewController(dirVC, animated: true)
+                }
             })
         }
     }

@@ -155,6 +155,7 @@ class LocalDirectoryTableViewController: UITableViewController {
             
             self.openFile = nil
         }
+        
     }
     
     @objc func shareFile(_ sender: UIButton) { // Share file

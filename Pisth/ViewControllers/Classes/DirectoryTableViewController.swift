@@ -13,6 +13,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     var connection: RemoteConnection
     var files: [String]?
     var isDir = [Bool]()
+    var delegate: DirectoryTableViewControllerDelegate?
+    var closeAfterSending = false
     
     static var disconnected = false
     
@@ -288,12 +290,21 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         self.present(activityVC, animated: true) {
             if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
                 let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
-                activityVC.dismiss(animated: true, completion: {
-                    
-                    self.navigationController?.pushViewController(dirVC, animated: true)
-                    
-                    tableView.deselectRow(at: indexPath, animated: true)
-                })
+                if let delegate = self.delegate {
+                    activityVC.dismiss(animated: true, completion: {
+                        
+                        delegate.directoryTableViewController(dirVC, didOpenDirectory: self.files![indexPath.row])
+                        
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    })
+                } else {
+                    activityVC.dismiss(animated: true, completion: {
+                        
+                        self.navigationController?.pushViewController(dirVC, animated: true)
+                        
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    })
+                }
             } else if cell.iconView.image == #imageLiteral(resourceName: "bin") { // Execute file
                 let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
                 terminalVC.command = "'\(String(self.files![indexPath.row].dropFirst()))'"
@@ -372,9 +383,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     
                     ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: (self.directory as NSString).appendingPathComponent(file.lastPathComponent))
                     
-                    activityVC.dismiss(animated: true, completion: {
-                        self.reload()
-                    })
+                    if self.closeAfterSending {
+                        activityVC.dismiss(animated: true, completion: {
+                            AppDelegate.shared.close()
+                        })
+                    } else {
+                        activityVC.dismiss(animated: true, completion: {
+                            self.reload()
+                        })
+                    }
                     
                 } catch let error {
                     let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)

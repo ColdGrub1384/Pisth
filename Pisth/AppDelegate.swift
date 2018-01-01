@@ -9,13 +9,14 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
 
     static var shared: AppDelegate!
 
     var window: UIWindow?
     var navigationController = UINavigationController()
-
+    var directoryTableViewController: DirectoryTableViewController?
+    var openedFile: URL?
     var coreDataContext: NSManagedObjectContext {
         return AppDelegate.shared.persistentContainer.viewContext
     }
@@ -26,7 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.shared = self
         
         // Setup Navigation Controller
-        navigationController = UINavigationController(rootViewController: BookmarksTableViewController())
+        let bookmarksVC = BookmarksTableViewController()
+        navigationController = UINavigationController(rootViewController: bookmarksVC)
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isTranslucent = true
         navigationController.navigationBar.prefersLargeTitles = true
@@ -61,7 +63,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if url.absoluteString.hasPrefix("file://") { // Upload file
+            self.openedFile = url
+            let bookmarksVC = BookmarksTableViewController()
+            let navVC = UINavigationController(rootViewController: bookmarksVC)
+            navVC.navigationBar.barStyle = .black
+            navVC.navigationBar.isTranslucent = true
+            navVC.navigationBar.prefersLargeTitles = true
+            
+            navigationController.present(navVC, animated: true, completion: {
+                bookmarksVC.delegate = self
+                bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
+                bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
+                bookmarksVC.navigationItem.prompt = "Select connection where upload file"
+            })
+        }
+        
+        return false
+    }
+    
+    @objc func uploadFile() {
+        if let directoryTableViewController = directoryTableViewController {
+            if let file = openedFile {
+                directoryTableViewController.localDirectoryTableViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), didOpenFile: file)
+            }
+        }
+    }
+    
+    @objc func close() {
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            rootVC.dismiss(animated: true, completion: {
+                self.openedFile = nil
+                self.directoryTableViewController = nil
+            })
+        }
+    }
+    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -105,6 +145,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    // MARK: - DirectoryTableViewControllerDelegate
+    func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
+        directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+        directoryTableViewController.delegate = self
+        directoryTableViewController.closeAfterSending = true
+        self.directoryTableViewController = directoryTableViewController
+        UIApplication.shared.keyWindow?.rootViewController?.navigationController?.pushViewController(directoryTableViewController, animated: true) {
+            directoryTableViewController.navigationItem.rightBarButtonItems?.remove(at: 1)
+        }
+    }
+    
+    // MARK: - BookmarksTableViewControllerDelegate
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
+        
+        directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+        directoryTableViewController.delegate = self
+        directoryTableViewController.closeAfterSending = true
+        self.directoryTableViewController = directoryTableViewController
+        bookmarksTableViewController.navigationController?.pushViewController(directoryTableViewController, animated: true) {
+            directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+        }
+    }
 }
 
