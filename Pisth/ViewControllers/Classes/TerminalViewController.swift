@@ -11,7 +11,7 @@ import WebKit
 
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextViewDelegate, WKNavigationDelegate {
     
-    static let clear = "ClEaRtHeScReEnNoW" // Echo this to clear the screen
+    static let clear = "[J" // Echo this to clear the screen
     
     @IBOutlet weak var textView: TerminalTextView!
     var pwd: String?

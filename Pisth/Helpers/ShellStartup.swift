@@ -11,10 +11,6 @@ class ShellStartup {
     
     // Commands to run when open SSH shell
     static let commands = [
-                           // Print ClEaRtHeScReEnNoW instead of clear shell
-                           "alias clear='echo Cl\\EaRtHeScReEnNoW'; history -d $(history 1)",
-                           
-                           
                            // Sync history
                            
                            // Avoid duplicates
