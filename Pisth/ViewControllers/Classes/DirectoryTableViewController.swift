@@ -285,7 +285,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
-        let activityVC = ActivityViewController(message: "Loading")
+        var continueDownload = true
+        
+        let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
+        activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            continueDownload = false
+        }))
         
         self.present(activityVC, animated: true) {
             if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
@@ -342,27 +347,43 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 
                 let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
                 
-                if let data = session.sftp.contents(atPath: self.files![indexPath.row]) {
-                    do {
-                        try data.write(to: newFile)
+                DispatchQueue.global(qos: .background).async {
+                    if let data = session.sftp.contents(atPath: self.files![indexPath.row], progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                         
-                        activityVC.dismiss(animated: true, completion: {
-                            ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: self.files![indexPath.row])
-                            LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
-                        })
-                    } catch let error {
-                        activityVC.dismiss(animated: true, completion: {
-                            let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
-                            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                            self.present(errorAlert, animated: true, completion: nil)
-                        })
+                        let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
+                        let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
+                        
+                        DispatchQueue.main.async {
+                            activityVC.message = "\(received) / \(toBeReceived)"
+                        }
+                        
+                        return continueDownload
+                    }) {
+                        DispatchQueue.main.async {
+                            do {
+                                try data.write(to: newFile)
+                                
+                                activityVC.dismiss(animated: true, completion: {
+                                    ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: self.files![indexPath.row])
+                                    LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
+                                })
+                            } catch let error {
+                                activityVC.dismiss(animated: true, completion: {
+                                    let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
+                                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                    self.present(errorAlert, animated: true, completion: nil)
+                                })
+                            }
+                            
+                            tableView.deselectRow(at: indexPath, animated: true)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            activityVC.dismiss(animated: true, completion: {
+                                self.navigationController?.popToRootViewController(animated: true)
+                            })
+                        }
                     }
-                    
-                    tableView.deselectRow(at: indexPath, animated: true)
-                } else {
-                    activityVC.dismiss(animated: true, completion: {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    })
                 }
             }
         }
