@@ -45,6 +45,11 @@ class BookmarksTableViewController: UITableViewController {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         request.returnsObjectsAsFaults = false
         
+        // Name
+        addNewAlertController.addTextField { (name) in // Optional
+            name.placeholder = "Nickname (Optional)"
+        }
+        
         // Host
         addNewAlertController.addTextField { (host) in // Requierd
             host.placeholder = "Hostname / IP address"
@@ -75,19 +80,21 @@ class BookmarksTableViewController: UITableViewController {
         if let index = index { // Fill info with given index
             let connection = DataManager.shared.connections[index]
             
-            addNewAlertController.textFields![0].text = connection.host
-            addNewAlertController.textFields![1].text = "\(connection.port)"
-            addNewAlertController.textFields![2].text = connection.username
-            addNewAlertController.textFields![3].text = connection.password
-            addNewAlertController.textFields![4].text = connection.path
+            addNewAlertController.textFields![0].text = connection.name
+            addNewAlertController.textFields![1].text = connection.host
+            addNewAlertController.textFields![2].text = "\(connection.port)"
+            addNewAlertController.textFields![3].text = connection.username
+            addNewAlertController.textFields![4].text = connection.password
+            addNewAlertController.textFields![5].text = connection.path
         }
         
         let addAction = UIAlertAction(title: "Save", style: .default) { (action) in // Create connection
-            let host = addNewAlertController.textFields![0].text!
-            var port = addNewAlertController.textFields![1].text!
-            let username = addNewAlertController.textFields![2].text!
-            let password = addNewAlertController.textFields![3].text!
-            var path = addNewAlertController.textFields![4].text!
+            let name = addNewAlertController.textFields![0].text!
+            let host = addNewAlertController.textFields![1].text!
+            var port = addNewAlertController.textFields![2].text!
+            let username = addNewAlertController.textFields![3].text!
+            let password = addNewAlertController.textFields![4].text!
+            var path = addNewAlertController.textFields![5].text!
             
             // Check for requierd fields
             if host == "" || username == "" {
@@ -114,7 +121,7 @@ class BookmarksTableViewController: UITableViewController {
                 }
                 
                 if let port = UInt64(port) {
-                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: username, path: path, port: port))
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port))
                     
                     self.tableView.reloadData()
                     let indexPath = IndexPath(row: DataManager.shared.connections.count-1, section: 0)
@@ -130,11 +137,12 @@ class BookmarksTableViewController: UITableViewController {
         }
         
         let editAction = UIAlertAction(title: "Save", style: .default) { (action) in // Edit selected connection
-            let host = addNewAlertController.textFields![0].text!
-            var port = addNewAlertController.textFields![1].text!
-            let username = addNewAlertController.textFields![2].text!
-            let password = addNewAlertController.textFields![3].text!
-            var path = addNewAlertController.textFields![4].text!
+            let name = addNewAlertController.textFields![0].text!
+            let host = addNewAlertController.textFields![1].text!
+            var port = addNewAlertController.textFields![2].text!
+            let username = addNewAlertController.textFields![3].text!
+            let password = addNewAlertController.textFields![4].text!
+            var path = addNewAlertController.textFields![5].text!
             
             // Check for requierd fields
             if host == "" || username == "" {
@@ -166,6 +174,7 @@ class BookmarksTableViewController: UITableViewController {
                     
                     do {
                         let result = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index!]
+                        result.setValue(name, forKey: "name")
                         result.setValue(host, forKey: "host")
                         result.setValue(port, forKey: "port")
                         result.setValue(username, forKey: "username")
