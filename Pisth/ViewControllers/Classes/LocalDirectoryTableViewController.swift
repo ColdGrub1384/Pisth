@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Zip
 
 class LocalDirectoryTableViewController: UITableViewController {
         
@@ -57,6 +58,15 @@ class LocalDirectoryTableViewController: UITableViewController {
                             navigationController?.pushViewController(editTextVC!, animated: true)
                         })
                     }
+                }
+            } else if let unziped = try? Zip.quickUnzipFile(file) {
+                let newFolderVC = LocalDirectoryTableViewController(directory: unziped)
+                if viewController == nil {
+                    navigationController?.pushViewController(newFolderVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(newFolderVC, animated: true)
+                    })
                 }
             } else if let image = UIImage(contentsOfFile: file.path) { // Is image
                 let imageVC = Bundle.main.loadNibNamed("ImageViewController", owner: nil, options: nil)!.first! as! ImageViewController

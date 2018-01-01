@@ -9,5 +9,6 @@ target 'Pisth' do
 
   pod 'NMSSH'
   pod 'Highlightr'
+  pod 'Zip'
 
 end
