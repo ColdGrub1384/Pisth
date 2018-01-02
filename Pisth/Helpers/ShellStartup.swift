@@ -23,7 +23,7 @@ class ShellStartup {
                            "export PROMPT_COMMAND=\"${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r\"; history -d $(history 1)",
                            
                            // Create .pisth_history symlink of history file
-                           "ln -s $HISTFILE .pisth_history > /dev/null; history -d $(history 1)",
+                           "ln -s $HISTFILE .pisth_history > /dev/null 2>&1; history -d $(history 1)",
                            
                            ""
     ]
