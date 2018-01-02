@@ -221,7 +221,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                     let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
                 
                 if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
@@ -232,7 +232,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(errorAlert, animated: true, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
             }
         })
     }
@@ -246,7 +246,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                     let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
                 
                 if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
@@ -257,7 +257,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(errorAlert, animated: true, completion: nil)
+                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
             }
         })
     }
