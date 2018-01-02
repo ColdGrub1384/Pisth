@@ -23,4 +23,8 @@ extension String {
     var html2String: String {
         return html2AttributedString?.string ?? ""
     }
+    
+    var nsString: NSString {
+        return self as NSString
+    }
 }

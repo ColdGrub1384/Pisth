@@ -4,6 +4,7 @@
 // Licensed under Apache License v2.0
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
+
 import UIKit
 
 class TerminalTextView: UITextView {
@@ -17,7 +18,7 @@ class TerminalTextView: UITextView {
     
         
     func scrollToBotom() {
-        let range = NSMakeRange((text as NSString).length - 1, 1)
+        let range = NSMakeRange(text.nsString.length - 1, 1)
         scrollRangeToVisible(range)
     }
     

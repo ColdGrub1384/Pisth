@@ -61,7 +61,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     isDir[isDir.count-1] = true
                 }
                 
-                self.files!.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+                self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
                 
                 isDir.append(true)
             }
@@ -124,7 +124,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 isDir.append(file.hasSuffix("/"))
             }
             
-            self.files!.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+            self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
             isDir.append(true)
         } else {
             self.files = nil
@@ -243,7 +243,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             do {
-                let result = try ConnectionManager.shared.filesSession?.channel.execute("mv '\(Pasteboard.local.filePath!)' '\(self.directory)/\((Pasteboard.local.filePath! as NSString).lastPathComponent)' 2>&1")
+                let result = try ConnectionManager.shared.filesSession?.channel.execute("mv '\(Pasteboard.local.filePath!)' '\(self.directory)/\(Pasteboard.local.filePath!.nsString.lastPathComponent)' 2>&1")
                 
                 if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
                     let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
@@ -290,7 +290,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         // Configure the cell...
         
         if let files = files {
-            if files[indexPath.row] != (directory as NSString).deletingLastPathComponent {
+            if files[indexPath.row] != directory.nsString.deletingLastPathComponent {
                 if isDir[indexPath.row] {
                     let components = files[indexPath.row].components(separatedBy: "/")
                     cell.filename.text = components[components.count-2]
@@ -308,7 +308,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             } else if files![indexPath.row].hasPrefix("./") {
                 cell.iconView.image = #imageLiteral(resourceName: "bin")
             } else {
-                cell.iconView.image = fileIcon(forExtension: (files![indexPath.row] as NSString).pathExtension)
+                cell.iconView.image = fileIcon(forExtension: files![indexPath.row].nsString.pathExtension)
             }
         }
         
@@ -503,7 +503,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 do {
                     let dataToSend = try Data(contentsOf: file)
                     
-                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: (self.directory as NSString).appendingPathComponent(file.lastPathComponent))
+                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
                     
                     if self.closeAfterSending {
                         activityVC.dismiss(animated: true, completion: {
@@ -524,7 +524,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         // Ask user to send file
-        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \((directory as NSString).lastPathComponent)?", preferredStyle: .alert)
+        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
         
         confirmAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         

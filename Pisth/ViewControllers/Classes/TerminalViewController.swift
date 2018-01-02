@@ -240,7 +240,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             return ctrl
         }
         
-        if (textView.text as NSString).replacingCharacters(in: range, with: text).count >= console.count {
+        if textView.text.nsString.replacingCharacters(in: range, with: text).count >= console.count {
             if text.contains("\n") {
                 let newConsole = textView.text+text
                 let console = self.console
