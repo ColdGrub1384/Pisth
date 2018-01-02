@@ -10,5 +10,5 @@ target 'Pisth' do
   pod 'NMSSH'
   pod 'Highlightr'
   pod 'Zip'
-
+  pod 'Google-Mobile-Ads-SDK'
 end

@@ -6,8 +6,9 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import GoogleMobileAds
 
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate {
         
     var directory: String
     var connection: RemoteConnection
@@ -15,6 +16,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     var isDir = [Bool]()
     var delegate: DirectoryTableViewControllerDelegate?
     var closeAfterSending = false
+    var bannerView: GADBannerView!
+    
     static var action = RemoteDirectoryAction.none
     
     static var disconnected = false
@@ -102,6 +105,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
         let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
+        
+        // Banner ad
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.rootViewController = self
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
     }
     
     // MARK: - Actions
@@ -564,6 +574,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 directoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryTableViewController, action: #selector(directoryTableViewController.moveFile))], animated: true)
             }
         })
+    }
+    
+    // MARK: - GADBannerViewDelegate
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        // Show ad only when it received
+        tableView.tableHeaderView = bannerView
     }
 }
 

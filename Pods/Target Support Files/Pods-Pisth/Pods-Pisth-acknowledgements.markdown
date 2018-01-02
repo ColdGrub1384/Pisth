@@ -1,6 +1,10 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## Google-Mobile-Ads-SDK
+
+Copyright 2017 Google
+
 ## Highlightr
 
 Copyright (c) 2016 Illanes, Juan Pablo <jpillaness+highlightr@gmail.com>

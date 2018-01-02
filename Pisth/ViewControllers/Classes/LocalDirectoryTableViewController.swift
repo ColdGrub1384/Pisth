@@ -7,14 +7,16 @@
 
 import UIKit
 import Zip
+import GoogleMobileAds
 
-class LocalDirectoryTableViewController: UITableViewController {
+class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate {
         
     var directory: URL
     var files = [URL]()
     var error: Error?
     var openFile: URL?
     var delegate: LocalDirectoryTableViewControllerDelegate?
+    var bannerView: GADBannerView!
     
     static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
         
@@ -143,6 +145,13 @@ class LocalDirectoryTableViewController: UITableViewController {
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        // Banner ad
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.rootViewController = self
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -259,6 +268,12 @@ class LocalDirectoryTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - GADBannerViewDelegate
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        // Show ad only when it received
+        tableView.tableHeaderView = bannerView
+    }
 }
 
 

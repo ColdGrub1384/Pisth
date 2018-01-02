@@ -7,10 +7,12 @@
 
 import UIKit
 import CoreData
+import GoogleMobileAds
 
-class BookmarksTableViewController: UITableViewController {
+class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate {
     
     var delegate: BookmarksTableViewControllerDelegate?
+    var bannerView: GADBannerView!
     
     @objc func openSettings() { // Open Settings
         navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
@@ -228,6 +230,13 @@ class BookmarksTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        // Banner ad
+        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.rootViewController = self
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -339,5 +348,11 @@ class BookmarksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         showInfoAlert(editInfoAt: indexPath.row)
     }
-        
+    
+    // MARK: - GADBannerViewDelegate
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        // Show ad only when it received
+        tableView.tableHeaderView = bannerView
+    }
 }
