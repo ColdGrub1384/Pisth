@@ -27,4 +27,13 @@ extension String {
     var nsString: NSString {
         return self as NSString
     }
+    
+    var removingUnnecessariesSlashes: String {
+        var newString = self
+        while newString.contains("//") {
+            newString = newString.replacingOccurrences(of: "//", with: "/")
+        }
+        
+        return newString
+    }
 }

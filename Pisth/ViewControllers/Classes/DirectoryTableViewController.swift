@@ -383,7 +383,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             let activityVC = ActivityViewController(message: "Loading")
             self.present(activityVC, animated: true, completion: {
-                let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
+                let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row].removingUnnecessariesSlashes)
                 if let delegate = self.delegate {
                     activityVC.dismiss(animated: true, completion: {
                         
@@ -406,7 +406,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             self.present(activityVC, animated: true, completion: {
                 let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
-                terminalVC.command = "'\(String(self.files![indexPath.row].dropFirst()))'"
+                terminalVC.command = "'\(String(self.files![indexPath.row].removingUnnecessariesSlashes.dropFirst()))'"
                 terminalVC.pwd = self.directory
                 
                 activityVC.dismiss(animated: true, completion: {
@@ -449,7 +449,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
                 
                 DispatchQueue.global(qos: .background).async {
-                    if let data = session.sftp.contents(atPath: self.files![indexPath.row], progress: { (receivedBytes, bytesToBeReceived) -> Bool in
+                    if let data = session.sftp.contents(atPath: self.files![indexPath.row].removingUnnecessariesSlashes, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                         
                         let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
                         let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
