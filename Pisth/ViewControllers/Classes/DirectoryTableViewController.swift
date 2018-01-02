@@ -61,9 +61,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     isDir[isDir.count-1] = true
                 }
                 
-                self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
-                
-                isDir.append(true)
+                if self.directory.removingUnnecessariesSlashes != "/" {
+                    self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
+                    
+                    isDir.append(true)
+                }
             }
         }
         
@@ -124,8 +126,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 isDir.append(file.hasSuffix("/"))
             }
             
-            self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
-            isDir.append(true)
+            if self.directory.removingUnnecessariesSlashes != "/" {
+                self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
+                isDir.append(true)
+            }
         } else {
             self.files = nil
         }
