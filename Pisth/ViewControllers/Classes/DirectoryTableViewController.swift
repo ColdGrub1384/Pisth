@@ -51,16 +51,18 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
                 self.files = files
                 
-                if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
-                    self.files = []
-                }
-                
                 // Check if path is directory or not
                 for file in files {
                     isDir.append(file.hasSuffix("/"))
                 }
                 
+                if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
+                    self.files = []
+                    isDir[isDir.count-1] = true
+                }
+                
                 self.files!.append((self.directory as NSString).deletingLastPathComponent) // Append parent directory
+                
                 isDir.append(true)
             }
         }
@@ -377,13 +379,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         var continueDownload = true
         
-        let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
-        activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            continueDownload = false
-        }))
-        
-        self.present(activityVC, animated: true) {
-            if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
+        if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
+            
+            let activityVC = ActivityViewController(message: "Loading")
+            self.present(activityVC, animated: true, completion: {
                 let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row])
                 if let delegate = self.delegate {
                     activityVC.dismiss(animated: true, completion: {
@@ -400,7 +399,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         tableView.deselectRow(at: indexPath, animated: true)
                     })
                 }
-            } else if cell.iconView.image == #imageLiteral(resourceName: "bin") { // Execute file
+            })
+        } else if cell.iconView.image == #imageLiteral(resourceName: "bin") { // Execute file
+            
+            let activityVC = ActivityViewController(message: "Loading")
+            
+            self.present(activityVC, animated: true, completion: {
                 let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
                 terminalVC.command = "'\(String(self.files![indexPath.row].dropFirst()))'"
                 terminalVC.pwd = self.directory
@@ -408,9 +412,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 activityVC.dismiss(animated: true, completion: {
                     self.navigationController?.pushViewController(terminalVC, animated: true)
                 })
-                
-            } else { // Download file
-                
+            })
+        } else { // Download file
+            
+            let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
+            activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                continueDownload = false
+            }))
+            
+            self.present(activityVC, animated: true, completion: {
                 guard let session = ConnectionManager.shared.filesSession else {
                     tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: nil)
@@ -475,7 +485,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         }
                     }
                 }
-            }
+            })
         }
                 
     }
