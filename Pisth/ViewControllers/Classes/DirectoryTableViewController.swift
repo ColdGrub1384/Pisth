@@ -418,6 +418,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
             activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
                 continueDownload = false
+                tableView.deselectRow(at: indexPath, animated: true)
             }))
             
             self.present(activityVC, animated: true, completion: {
