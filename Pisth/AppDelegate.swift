@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        UIMenuController.shared.menuItems = [UIMenuItem(title: "Move", action: #selector(FileTableViewCell.moveFile(_:)))]
+        UIMenuController.shared.update()
+        
         AppDelegate.shared = self
         
         // Setup Navigation Controller

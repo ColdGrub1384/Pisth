@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate {
         
     var directory: String
     var connection: RemoteConnection
@@ -15,6 +15,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     var isDir = [Bool]()
     var delegate: DirectoryTableViewControllerDelegate?
     var closeAfterSending = false
+    static var action = RemoteDirectoryAction.none
     
     static var disconnected = false
     
@@ -71,6 +72,40 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let titleComponents = directory.components(separatedBy: "/")
+        title = titleComponents.last
+        if directory.hasSuffix("/") {
+            title = titleComponents[titleComponents.count-2]
+        }
+        
+        navigationItem.largeTitleDisplayMode = .never
+        
+        // TableView cells
+        tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
+        tableView.backgroundColor = .black
+        clearsSelectionOnViewWillAppear = false
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        // Initialize the refresh control.
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.white
+        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+        
+        // Bar buttons
+        let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
+        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
+        navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @objc func close() {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func reload() { // Reload current directory content
         files = nil
         isDir = []
@@ -95,6 +130,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         tableView.reloadData()
         refreshControl?.endRefreshing()
+    }
+    
+    @objc func openShell() { // Open shell in current directory
+        let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+        terminalVC.pwd = directory
+        navigationController?.pushViewController(terminalVC, animated: true)
     }
     
     @objc func uploadFile(_ sender: UIBarButtonItem) { // Add file
@@ -171,34 +212,54 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         self.present(chooseAlert, animated: true, completion: nil)
     }
     
-    @objc func openShell() { // Open shell in current directory
-        let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
-        terminalVC.pwd = directory
-        navigationController?.pushViewController(terminalVC, animated: true)
+    @objc func copyFile() { // Copy file in current directory
+        DirectoryTableViewController.action = .none
+        navigationController?.dismiss(animated: true, completion: {
+            do {
+                let result = try ConnectionManager.shared.filesSession?.channel.execute("cp -R '\(Pasteboard.local.filePath!)' '\(self.directory)' 2>&1")
+                
+                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
+                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+                    dirVC.reload()
+                }
+                
+                Pasteboard.local.filePath = nil
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+        })
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = directory.components(separatedBy: "/").last
-        
-        navigationItem.largeTitleDisplayMode = .never
-        
-        // TableView cells
-        tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
-        tableView.backgroundColor = .black
-        clearsSelectionOnViewWillAppear = false
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        
-        // Initialize the refresh control.
-        refreshControl = UIRefreshControl()
-        refreshControl?.tintColor = UIColor.white
-        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
-        
-        // Bar buttons
-        let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
-        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
-        navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
+    @objc func moveFile() { // Move file in current directory
+        DirectoryTableViewController.action = .none
+        navigationController?.dismiss(animated: true, completion: {
+            do {
+                let result = try ConnectionManager.shared.filesSession?.channel.execute("mv '\(Pasteboard.local.filePath!)' '\(self.directory)/\((Pasteboard.local.filePath! as NSString).lastPathComponent)' 2>&1")
+                
+                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
+                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+                    dirVC.reload()
+                }
+                
+                Pasteboard.local.filePath = nil
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+        })
     }
     
     // MARK: - Table view data source
@@ -276,6 +337,35 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(errorAlert, animated: true, completion: nil)
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)) { // Copy file
+            
+            Pasteboard.local.filePath = files![indexPath.row]
+            
+            let dirVC = DirectoryTableViewController(connection: connection, directory: directory)
+            dirVC.navigationItem.prompt = "Select a directory where copy file"
+            dirVC.delegate = dirVC
+            DirectoryTableViewController.action = .copyFile
+            
+            
+            let navVC = UINavigationController(rootViewController: dirVC)
+            navVC.navigationBar.barStyle = .black
+            navVC.navigationBar.isTranslucent = true
+            present(navVC, animated: true, completion: {
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+            })
         }
     }
     
@@ -434,6 +524,30 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         // Go back here
         navigationController?.popToViewController(self, animated: true, completion: {
             self.present(confirmAlert, animated: true, completion: nil)
+        })
+    }
+    
+    // MARK: - DirectoryTableViewControllerDelegate
+    
+    func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
+        directoryTableViewController.delegate = directoryTableViewController
+        
+        if DirectoryTableViewController.action == .copyFile {
+            directoryTableViewController.navigationItem.prompt = "Select a directory where copy file"
+        }
+        
+        if DirectoryTableViewController.action == .moveFile {
+            directoryTableViewController.navigationItem.prompt = "Select a directory where move file"
+        }
+        
+        navigationController?.pushViewController(directoryTableViewController, animated: true, completion: {
+            if DirectoryTableViewController.action == .copyFile {
+                directoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: directoryTableViewController, action: #selector(directoryTableViewController.copyFile))], animated: true)
+            }
+            
+            if DirectoryTableViewController.action == .moveFile {
+                directoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryTableViewController, action: #selector(directoryTableViewController.moveFile))], animated: true)
+            }
         })
     }
 }
