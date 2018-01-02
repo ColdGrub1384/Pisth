@@ -84,19 +84,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 session.channel.requestPty = true
                 session.channel.ptyTerminalType = .ansi
                 try session.channel.startShell()
-                if let pwd = pwd {
-                    try session.channel.write("cd '\(pwd)'\n")
-                }
                 
+                let clearLastFromHistory = "history -d $(history 1)"
+                
+                if let pwd = pwd {
+                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                }
                 
                 for command in ShellStartup.commands {
-                    try session.channel.write("\(command)\n")
+                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
                 }
                 
-                try session.channel.write("clear\n")
+                try session.channel.write("clear; \(clearLastFromHistory)\n")
                 
-                if let command = command {
-                    try session.channel.write("\(command)\n")
+                if let command = self.command {
+                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
                 }
                 
                 textView.isEditable = true
@@ -193,16 +195,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
-            
-            self.console = self.textView.text+message
             self.consoleANSI = self.consoleANSI+message
-                        
+            
             print("ANSI OUTPUT: \n"+self.consoleANSI)
             print("PLAIN OUTPUT: \n"+self.console)
             
             if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
                 self.consoleANSI = self.consoleANSI.components(separatedBy: TerminalViewController.clear)[1]
-                self.console = self.console.components(separatedBy: TerminalViewController.clear)[1]
             }
             
             self.webView.loadHTMLString(self.htmlTerminal(withOutput: self.consoleANSI), baseURL: Bundle.main.bundleURL)

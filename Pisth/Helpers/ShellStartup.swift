@@ -14,17 +14,15 @@ class ShellStartup {
                            // Sync history
                            
                            // Avoid duplicates
-                           "export HISTCONTROL=ignoredups:erasedups; history -d $(history 1)",
+                           "export HISTCONTROL=ignoredups:erasedups",
                            
                            // When the shell exits, append to the history file instead of overwriting it
-                           "shopt -s histappend; history -d $(history 1)",
+                           "shopt -s histappend",
                            
                            // After each command, append to the history file and reread it
-                           "export PROMPT_COMMAND=\"${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r\"; history -d $(history 1)",
+                           "export PROMPT_COMMAND=\"${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r\"",
                            
                            // Create .pisth_history symlink of history file
-                           "ln -s $HISTFILE .pisth_history > /dev/null 2>&1; history -d $(history 1)",
-                           
-                           ""
+                           "ln -s $HISTFILE .pisth_history > /dev/null 2>&1",
     ]
 }
