@@ -1,9 +1,3 @@
-//
-//  Reachability.swift
-//  Pisth
-//
-//  Created by Adrian on 29.12.17.
-//
 
 import SystemConfiguration
 

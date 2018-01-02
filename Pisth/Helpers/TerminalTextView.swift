@@ -1,10 +1,9 @@
+// This source file is part of the https://github.com/ColdGrub1384/Pisth open source project
 //
-//  TerminalTextView.swift
-//  fastSwift
+// Copyright (c) 2017 - 2018 Adrian Labbé
+// Licensed under Apache License v2.0
 //
-//  Created by Adrian on 22.07.17.
-//
-
+// See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 import UIKit
 
 class TerminalTextView: UITextView {

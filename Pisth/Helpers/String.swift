@@ -1,9 +1,3 @@
-//
-//  String+javaScriptEscapedString.swift
-//  Pisth
-//
-//  Created by Adrian on 28.12.17.
-//
 
 import UIKit
 

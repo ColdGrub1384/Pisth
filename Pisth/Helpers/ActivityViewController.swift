@@ -1,9 +1,3 @@
-//
-//  ActivityViewController.swift
-//  Pisth
-//
-//  Created by Adrian on 26.12.17.
-//
 
 import UIKit
 
