@@ -244,6 +244,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         
         // Close session when coming back here
         if !DirectoryTableViewController.disconnected {
+            
+            ConnectionManager.shared.timer?.invalidate()
+            
             if let session = ConnectionManager.shared.session {
                 if session.isConnected {
                     session.disconnect()
@@ -335,6 +338,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             activityVC.dismiss(animated: true, completion: {
                 tableView.deselectRow(at: indexPath, animated: true)
+                
+                UIApplication.shared.beginBackgroundTask(expirationHandler: {
+                    print("Expired")
+                })
                 
                 if let delegate = self.delegate {
                     delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)

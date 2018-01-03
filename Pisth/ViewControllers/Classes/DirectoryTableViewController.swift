@@ -393,7 +393,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         var continueDownload = true
         
-        if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
+        if files![indexPath.row].hasSuffix("/") { // Open folder
             
             let activityVC = ActivityViewController(message: "Loading")
             self.present(activityVC, animated: true, completion: {
@@ -414,7 +414,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     })
                 }
             })
-        } else if cell.iconView.image == #imageLiteral(resourceName: "bin") { // Execute file
+        } else if files![indexPath.row].hasPrefix(".") { // Execute file
             
             let activityVC = ActivityViewController(message: "Loading")
             
@@ -438,25 +438,29 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.present(activityVC, animated: true, completion: {
                 guard let session = ConnectionManager.shared.filesSession else {
                     tableView.deselectRow(at: indexPath, animated: true)
-                    activityVC.dismiss(animated: true, completion: nil)
-                    DirectoryTableViewController.disconnected = true
-                    self.navigationController?.popToRootViewController(animated: true)
+                    activityVC.dismiss(animated: true, completion: {
+                        DirectoryTableViewController.disconnected = true
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                    
                     return
                 }
                 
                 if !Reachability.isConnectedToNetwork() {
                     tableView.deselectRow(at: indexPath, animated: true)
-                    activityVC.dismiss(animated: true, completion: nil)
-                    DirectoryTableViewController.disconnected = true
-                    self.navigationController?.popToRootViewController(animated: true)
+                    activityVC.dismiss(animated: true, completion: {
+                        DirectoryTableViewController.disconnected = true
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
                     return
                 }
                 
                 if !session.isConnected || !session.isAuthorized {
                     tableView.deselectRow(at: indexPath, animated: true)
-                    activityVC.dismiss(animated: true, completion: nil)
-                    DirectoryTableViewController.disconnected = true
-                    self.navigationController?.popToRootViewController(animated: true)
+                    activityVC.dismiss(animated: true, completion: {
+                        DirectoryTableViewController.disconnected = true
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
                     return
                 }
                 

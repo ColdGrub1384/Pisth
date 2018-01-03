@@ -19,6 +19,8 @@ class ConnectionManager {
     var saveFile: SaveFile?
     var connection: RemoteConnection?
     
+    var timer: Timer?
+    
     func files(inDirectory directory: String) -> [String]? {
         guard let session = filesSession else { return nil }
         
@@ -54,6 +56,25 @@ class ConnectionManager {
         
         if filesSession!.isConnected && filesSession!.isAuthorized {
             filesSession?.sftp.connect()
+        }
+        
+        session!.channel.requestPty = true
+        session!.channel.ptyTerminalType = .ansi
+        
+        do {
+            // Start the shell to not close the connection when enter in background
+            try session?.channel.startShell()
+            try filesSession?.channel.startShell()
+        } catch {
+            return false
+        }
+        
+        do {
+            for command in ShellStartup.commands {
+                try session!.channel.write("\(command); sleep 0.1; history -d $(history 1)\n")
+            }
+        } catch {
+            return false
         }
         
         return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected && filesSession!.isConnected && filesSession!.isAuthorized && filesSession!.sftp.isConnected)

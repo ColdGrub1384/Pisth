@@ -79,20 +79,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
             // Session
-            session.channel.delegate = self
             do {
-                session.channel.requestPty = true
-                session.channel.ptyTerminalType = .ansi
-                try session.channel.startShell()
+                
+                session.channel.delegate = self
                 
                 let clearLastFromHistory = "history -d $(history 1)"
                 
                 if let pwd = pwd {
                     try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
-                }
-                
-                for command in ShellStartup.commands {
-                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
                 }
                 
                 try session.channel.write("clear; \(clearLastFromHistory)\n")
@@ -110,13 +104,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         
         logout = false
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        ConnectionManager.shared.session?.channel.closeShell()
-    }
-    
+
     @objc func writeText(_ text: String) { // Write command without writing it in the textView
         do {
             try ConnectionManager.shared.session?.channel.write(text)
