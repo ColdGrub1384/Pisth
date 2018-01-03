@@ -15,6 +15,7 @@
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A38FC561FF574AE00690382 /* TerminalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC551FF574AE00690382 /* TerminalTextView.swift */; };
 		3A38FC5A1FF57FAB00690382 /* Data+html2AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC591FF57FAB00690382 /* Data+html2AttributedString.swift */; };
+		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
 		3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */; };
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
@@ -62,6 +63,7 @@
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3A38FC551FF574AE00690382 /* TerminalTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalTextView.swift; sourceTree = "<group>"; };
 		3A38FC591FF57FAB00690382 /* Data+html2AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+html2AttributedString.swift"; sourceTree = "<group>"; };
+		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				3A050CCE1FF81E2400364306 /* ShellStartup.swift */,
 				3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */,
 				3ADD28CE1FFBC27800977905 /* RemoteDirectoryAction.swift */,
+				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
+				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,

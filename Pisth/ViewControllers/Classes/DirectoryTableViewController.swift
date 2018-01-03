@@ -32,19 +32,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.directory = directory!
         }
         
-        var continue_ = false
-        
         if !Reachability.isConnectedToNetwork() {
-            continue_ = false
-        } else if ConnectionManager.shared.filesSession == nil {
-            continue_ = ConnectionManager.shared.connect()
-        } else if !ConnectionManager.shared.filesSession!.isConnected || !ConnectionManager.shared.filesSession!.isAuthorized {
-            continue_ = ConnectionManager.shared.connect()
+            ConnectionManager.shared.result = .notConnected
         } else {
-            continue_ = ConnectionManager.shared.filesSession!.isConnected && ConnectionManager.shared.filesSession!.isAuthorized
+            if ConnectionManager.shared.session == nil && ConnectionManager.shared.filesSession == nil {
+                ConnectionManager.shared.connect()
+            }
         }
         
-        if continue_ {
+        if ConnectionManager.shared.result == .connectedAndAuthorized {
             if self.directory == "~" { // Get absolute path from ~
                 if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
                     self.directory = path!
@@ -112,6 +108,41 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
         bannerView.delegate = self
         bannerView.load(GADRequest())
+    }
+    
+    func showError() {
+        navigationController?.popToRootViewController(animated: true, completion: {
+            let result = ConnectionManager.shared.result
+            
+            var alert: UIAlertController!
+            switch result {
+            case .notConnected:
+                alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
+            case .connected:
+                alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
+            default:
+                alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
+            }
+            
+            if alert != nil {
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if files == nil {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            showError()
+        } else if files! == [] {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            showError()
+        }
     }
     
     // MARK: - Actions
@@ -437,29 +468,28 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             self.present(activityVC, animated: true, completion: {
                 guard let session = ConnectionManager.shared.filesSession else {
-                    tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: {
-                        DirectoryTableViewController.disconnected = true
-                        self.navigationController?.popToRootViewController(animated: true)
+                        ConnectionManager.shared.session = nil
+                        ConnectionManager.shared.filesSession = nil
+                        self.showError()
                     })
-                    
                     return
                 }
                 
                 if !Reachability.isConnectedToNetwork() {
-                    tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: {
-                        DirectoryTableViewController.disconnected = true
-                        self.navigationController?.popToRootViewController(animated: true)
+                        ConnectionManager.shared.session = nil
+                        ConnectionManager.shared.filesSession = nil
+                        self.showError()
                     })
                     return
                 }
                 
                 if !session.isConnected || !session.isAuthorized {
-                    tableView.deselectRow(at: indexPath, animated: true)
                     activityVC.dismiss(animated: true, completion: {
-                        DirectoryTableViewController.disconnected = true
-                        self.navigationController?.popToRootViewController(animated: true)
+                        ConnectionManager.shared.session = nil
+                        ConnectionManager.shared.filesSession = nil
+                        self.showError()
                     })
                     return
                 }

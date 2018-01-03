@@ -18,6 +18,7 @@ class ConnectionManager {
     
     var saveFile: SaveFile?
     var connection: RemoteConnection?
+    var result = ConnectionResult.notConnected
     
     var timer: Timer?
     
@@ -34,49 +35,62 @@ class ConnectionManager {
         return nil
     }
     
-    func connect() -> Bool {
+    func connect() {
         
-        guard let connection = connection else { return false }
+        guard let connection = connection else {
+            result = .notConnected
+            return
+        }
         
         session = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
         session?.connect()
         if session!.isConnected {
+            result = .connected
             session?.authenticate(byPassword: connection.password)
+        } else {
+            result = .notConnected
+            return
         }
         
         if session!.isConnected && session!.isAuthorized {
             session?.sftp.connect()
+            result = .connectedAndAuthorized
         }
         
         filesSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
         filesSession?.connect()
         if filesSession!.isConnected {
+            result = .connected
             filesSession?.authenticate(byPassword: connection.password)
+        } else {
+            result = .notConnected
+            return
         }
         
         if filesSession!.isConnected && filesSession!.isAuthorized {
             filesSession?.sftp.connect()
+            result = .connectedAndAuthorized
         }
         
         session!.channel.requestPty = true
         session!.channel.ptyTerminalType = .ansi
         
-        do {
-            // Start the shell to not close the connection when enter in background
-            try session?.channel.startShell()
-            try filesSession?.channel.startShell()
-        } catch {
-            return false
-        }
-        
-        do {
-            for command in ShellStartup.commands {
-                try session!.channel.write("\(command); sleep 0.1; history -d $(history 1)\n")
+        if result == .connectedAndAuthorized {
+            do {
+                // Start the shell to not close the connection when enter in background
+                try session?.channel.startShell()
+                try filesSession?.channel.startShell()
+            } catch {
+                result = .connected
             }
-        } catch {
-            return false
+            
+            do {
+                for command in ShellStartup.commands {
+                    try session!.channel.write("\(command); sleep 0.1; history -d $(history 1)\n")
+                }
+            } catch {
+                result = .connected
+            }
         }
-        
-        return (session!.isConnected && session!.isAuthorized && session!.sftp.isConnected && filesSession!.isConnected && filesSession!.isAuthorized && filesSession!.sftp.isConnected)
     }
 }

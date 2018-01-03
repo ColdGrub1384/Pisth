@@ -258,8 +258,13 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     session.disconnect()
                 }
             }
-            DirectoryTableViewController.disconnected = false
+            
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            ConnectionManager.shared.result = .notConnected
         }
+        
+        DirectoryTableViewController.disconnected = false
     }
     
     // MARK: - Table view data source
