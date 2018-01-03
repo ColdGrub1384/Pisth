@@ -16,15 +16,15 @@ class SettingsTableViewController: UITableViewController {
     }
     
     enum Index: Int {
-        case acknowledgements = 0
+        case licenses = 0
     }
     
     // MARK: Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case Index.acknowledgements.rawValue:
-            // Open acknowledgements
+        case Index.licenses.rawValue:
+            // Open Licenses
             let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
             navigationController?.pushViewController(webVC, animated: true)
