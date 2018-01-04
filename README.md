@@ -9,3 +9,5 @@ If you need to compile the code, you will need to make some changes, so please c
 ## Joining betas
 Betas are installed via TestFlight and you can register [here](https://pisth.github.io/) in the 'Join Beta' section.
 An email will be sent in aprox. one day.
+
+Your name, lastname and email will be added to the [BETATESTERS.md](https://github.com/ColdGrub1384/Pisth/blob/master/BETATESTERS.md) file. If you don't want to appear here, [send me an email](mailto://adri_labbe@hotmail.com).
