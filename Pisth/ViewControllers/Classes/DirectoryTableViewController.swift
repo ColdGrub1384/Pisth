@@ -104,7 +104,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         // Bar buttons
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
         let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
-        navigationItem.setRightBarButtonItems([uploadFile, terminal], animated: true)
+        let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
+        var buttons: [UIBarButtonItem] {
+            guard let result = try? ConnectionManager.shared.filesSession!.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
+            let allFiles = result.components(separatedBy: "\n")
+            if allFiles.contains(".git") {
+                return [uploadFile, git, terminal]
+            } else {
+                return [uploadFile, terminal]
+            }
+        }
+        navigationItem.setRightBarButtonItems(buttons, animated: true)
         
         // Banner ad
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
@@ -153,6 +163,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     @objc func close() {
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func git() {
+        
     }
     
     @objc func reload() { // Reload current directory content
