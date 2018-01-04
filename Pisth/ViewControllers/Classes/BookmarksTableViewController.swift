@@ -126,9 +126,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port))
                     
                     self.tableView.reloadData()
-                    let indexPath = IndexPath(row: DataManager.shared.connections.count-1, section: 0)
-                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-                    self.tableView(self.tableView, didSelectRowAt: indexPath)
                 } else {
                     self.present(addNewAlertController, animated: true, completion: {
                         addNewAlertController.textFields![1].backgroundColor = .red
@@ -189,9 +186,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     }
                     
                     self.tableView.reloadData()
-                    let indexPath = IndexPath(row: DataManager.shared.connections.count-1, section: 0)
-                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-                    self.tableView(self.tableView, didSelectRowAt: indexPath)
                 } else {
                     self.present(addNewAlertController, animated: true, completion: {
                         addNewAlertController.textFields![1].backgroundColor = .red
