@@ -86,10 +86,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 let clearLastFromHistory = "history -d $(history 1)"
                 
                 if let pwd = pwd {
-                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                    try session.channel.write("cd '\(pwd)'\n")
                 }
                 
-                try session.channel.write("clear; \(clearLastFromHistory)\n")
+                try session.channel.write("clear\n")
                 
                 if let command = self.command {
                     try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")

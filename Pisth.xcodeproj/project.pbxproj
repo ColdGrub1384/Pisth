@@ -36,6 +36,7 @@
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
 		3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE835A01FF2DE350073D06E /* WebViewController.xib */; };
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
+		3AF50F131FFEE054000F7B31 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF50F121FFEE054000F7B31 /* Git.storyboard */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
@@ -84,6 +85,7 @@
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		3AE835A01FF2DE350073D06E /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		3AF50F121FFEE054000F7B31 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				3AE835A01FF2DE350073D06E /* WebViewController.xib */,
 				3AF9AEA71FF5461300840E8A /* SettingsTableViewController.storyboard */,
 				3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */,
+				3AF50F121FFEE054000F7B31 /* Git.storyboard */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
+				3AF50F131FFEE054000F7B31 /* Git.storyboard in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
 				3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */,
 				3AF9AEA81FF5461300840E8A /* SettingsTableViewController.storyboard in Resources */,
