@@ -61,8 +61,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 }
                 
                 if self.directory.removingUnnecessariesSlashes != "/" {
-                    self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
-                    
+                    // Append parent directory
+                    var parent = self.directory.nsString.deletingLastPathComponent
+                    if !parent.hasSuffix("/") {
+                        parent += "/"
+                    }
+                    self.files!.append(parent)
                     isDir.append(true)
                 }
             }
@@ -335,7 +339,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         // Configure the cell...
         
         if let files = files {
-            if files[indexPath.row] != directory.nsString.deletingLastPathComponent {
+            if files[indexPath.row] != directory.removingUnnecessariesSlashes.nsString.deletingLastPathComponent && files[indexPath.row] != directory.removingUnnecessariesSlashes.nsString.deletingLastPathComponent+"/" {
                 if isDir[indexPath.row] {
                     let components = files[indexPath.row].components(separatedBy: "/")
                     cell.filename.text = components[components.count-2]
