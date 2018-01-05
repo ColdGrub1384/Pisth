@@ -166,7 +166,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     @objc func git() {
+        guard let branchesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? GitBranchesTableViewController else { return }
+        branchesVC.repoPath = directory
         
+        let navVC = UINavigationController(rootViewController: branchesVC)
+        navVC.navigationBar.barStyle = .black
+        navVC.navigationItem.largeTitleDisplayMode = .never
+        present(navVC, animated: true, completion: nil)
     }
     
     @objc func reload() { // Reload current directory content

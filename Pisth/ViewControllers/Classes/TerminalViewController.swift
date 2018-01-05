@@ -12,6 +12,7 @@ import WebKit
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextViewDelegate, WKNavigationDelegate {
     
     static let clear = "\(Keys.esc)[H\(Keys.esc)[J" // Echo this to clear the screen
+    static var close = "\(Keys.esc)[CLOSE"
     
     @IBOutlet weak var textView: TerminalTextView!
     var pwd: String?
@@ -23,6 +24,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     var ctrlKey: UIBarButtonItem!
     var ctrl = false
     var webView = WKWebView()
+    var readOnly = false
+    var closeAfterSendingCommand = false
     
     func htmlTerminal(withOutput output: String) -> String {
         return try! String(contentsOfFile: Bundle.main.path(forResource: "terminal", ofType: "html")!).replacingOccurrences(of: "$_ANSIOUTPUT_", with: output.javaScriptEscapedString)
@@ -92,11 +95,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 try session.channel.write("clear\n")
                 
                 if let command = self.command {
-                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
+                    if !closeAfterSendingCommand {
+                        try session.channel.write("\(command); \(clearLastFromHistory)\n")
+                    } else {
+                        try session.channel.write("\(command); echo -e \"\\033[CLOSE\"; \(clearLastFromHistory)\n")
+                    }
                 }
                 
-                textView.isEditable = true
-                textView.becomeFirstResponder()
+                if !readOnly {
+                    textView.isEditable = true
+                    textView.becomeFirstResponder()
+                }
             } catch let error {
                 textView.text = error.localizedDescription
             }
@@ -190,6 +199,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             
             if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
                 self.consoleANSI = self.consoleANSI.components(separatedBy: TerminalViewController.clear)[1]
+            }
+            
+            if self.consoleANSI.contains(TerminalViewController.close) { // Close
+                self.textView.resignFirstResponder()
+                self.textView.isEditable = false
             }
             
             self.webView.loadHTMLString(self.htmlTerminal(withOutput: self.consoleANSI), baseURL: Bundle.main.bundleURL)
