@@ -182,6 +182,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         files = nil
         isDir = []
         
+        if !Reachability.isConnectedToNetwork() {
+            ConnectionManager.shared.result = .notConnected
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            showError()
+            return
+        }
+        
         if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
             self.files = files
             
@@ -199,7 +207,18 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 isDir.append(true)
             }
         } else {
-            self.files = nil
+            files = nil
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            showError()
+            return
+        }
+        
+        if files! == [] {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            showError()
+            return
         }
         
         // Ignore files listed in ~/.pisthignore
