@@ -70,6 +70,29 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     isDir.append(true)
                 }
             }
+            
+            // Ignore files listed in ~/.pisthignore
+            if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
+                for file in result.components(separatedBy: "\n") {
+                    if file != "" && !file.hasSuffix("#") {
+                        
+                        if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)) {
+                            self.files?.remove(at: indexOfFile)
+                            isDir.remove(at: indexOfFile)
+                        }
+                        
+                        if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)+"/") {
+                            self.files?.remove(at: indexOfFile)
+                            isDir.remove(at: indexOfFile)
+                        }
+                        
+                        if let indexOfFile = self.files?.index(of: "."+self.directory.nsString.appendingPathComponent(file)) {
+                            self.files?.remove(at: indexOfFile)
+                            isDir.remove(at: indexOfFile)
+                        }
+                    }
+                }
+            }
         }
         
         super.init(style: .plain)
@@ -177,6 +200,29 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         } else {
             self.files = nil
+        }
+        
+        // Ignore files listed in ~/.pisthignore
+        if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
+            for file in result.components(separatedBy: "\n") {
+                if file != "" && !file.hasSuffix("#") {
+                    
+                    if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)) {
+                        self.files?.remove(at: indexOfFile)
+                        isDir.remove(at: indexOfFile)
+                    }
+                    
+                    if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)+"/") {
+                        self.files?.remove(at: indexOfFile)
+                        isDir.remove(at: indexOfFile)
+                    }
+                    
+                    if let indexOfFile = self.files?.index(of: "."+self.directory.nsString.appendingPathComponent(file)) {
+                        self.files?.remove(at: indexOfFile)
+                        isDir.remove(at: indexOfFile)
+                    }
+                }
+            }
         }
         
         tableView.reloadData()
