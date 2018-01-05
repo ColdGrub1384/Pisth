@@ -19,6 +19,8 @@
 		3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
 		3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */; };
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
+		3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */; };
+		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
@@ -36,9 +38,7 @@
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
 		3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE835A01FF2DE350073D06E /* WebViewController.xib */; };
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
-		3AF50F131FFEE054000F7B31 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF50F121FFEE054000F7B31 /* Git.storyboard */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
-		3AF50F171FFEEE6A000F7B31 /* GitRemotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F161FFEEE6A000F7B31 /* GitRemotesTableViewController.swift */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
@@ -70,6 +70,8 @@
 		3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
+		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
@@ -87,9 +89,7 @@
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		3AE835A01FF2DE350073D06E /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
-		3AF50F121FFEE054000F7B31 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
-		3AF50F161FFEEE6A000F7B31 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				3A38FC531FF5719200690382 /* TerminalViewController.swift */,
 				3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */,
 				3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */,
-				3AF50F161FFEEE6A000F7B31 /* GitRemotesTableViewController.swift */,
+				3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 				3AE835A01FF2DE350073D06E /* WebViewController.xib */,
 				3AF9AEA71FF5461300840E8A /* SettingsTableViewController.storyboard */,
 				3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */,
-				3AF50F121FFEE054000F7B31 /* Git.storyboard */,
+				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -322,10 +322,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
-				3AF50F131FFEE054000F7B31 /* Git.storyboard in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
 				3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */,
 				3AF9AEA81FF5461300840E8A /* SettingsTableViewController.storyboard in Resources */,
+				3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */,
 				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,
 				3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
@@ -351,7 +351,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C359C90E836AEDA0878550B8 /* [CP] Copy Pods Resources */ = {
@@ -412,6 +412,7 @@
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
 				3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
+				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* RemoteDirectoryAction.swift in Sources */,
@@ -421,7 +422,6 @@
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
 				3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */,
 				3A38FC5A1FF57FAB00690382 /* Data+html2AttributedString.swift in Sources */,
-				3AF50F171FFEEE6A000F7B31 /* GitRemotesTableViewController.swift in Sources */,
 				3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */,
 				3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */,
 				3A2258911FF6A850001B9710 /* Reachability.swift in Sources */,
