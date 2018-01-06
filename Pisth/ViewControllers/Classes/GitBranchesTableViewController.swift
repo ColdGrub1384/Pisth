@@ -74,5 +74,22 @@ class GitBranchesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
     }
+    
+    
+    // MARK: - Table view delegate
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)?.first as? TerminalViewController else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+            
+        }
+        terminalVC.title = "Commits for \(branches[indexPath.row])"
+        terminalVC.readOnly = true
+        terminalVC.command = "commits '\(repoPath!)' \(branches[indexPath.row])"
+        navigationController?.pushViewController(terminalVC, animated: true, completion: {
+            terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        })
+    }
 }
