@@ -1,23 +1,19 @@
-<body id="console"></body>
+<link rel="stylesheet" href="xterm.css" />
+<script src="xterm.js"></script>
 
+<p id="console" hidden></p>
 
-<script src="ansi_up.js" type="text/javascript"></script>
-<script type="text/javascript">
-    
-    var str = $_ANSIOUTPUT_;
-    
-    var ansi_up = new AnsiUp;
-    var html = ansi_up.ansi_to_html(str);
-    
-    var cdiv = document.getElementById("console");
-    cdiv.innerHTML = html.replace(/\n/g, '<br />');
-    
-</script>
+<body>
+    <div id="terminal"></div>
+    <script type="text/javascript">
+        var term = new Terminal();
+        term.open(document.getElementById('terminal'));
+        term.write($_ANSIOUTPUT_);
+    </script>
+</body>
 
 <Style>
-    * {
-        font-family: menlo;
-        font-size: 14px;
-        color: white;
+    body {
+        background-color: black;
     }
 </Style>

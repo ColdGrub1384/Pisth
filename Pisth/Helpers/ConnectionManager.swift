@@ -73,7 +73,7 @@ class ConnectionManager {
         }
         
         session!.channel.requestPty = true
-        session!.channel.ptyTerminalType = .ansi
+        session!.channel.ptyTerminalType = .xterm
         
         if result == .connectedAndAuthorized {
             do {

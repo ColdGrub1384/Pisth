@@ -9,11 +9,12 @@ import UIKit
 import NMSSH
 import WebKit
 
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextViewDelegate, WKNavigationDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UITextInputTraits, UIKeyInput {
     
     static let clear = "\(Keys.esc)[H\(Keys.esc)[J" // Echo this to clear the screen
+    static let backspace = "\(Keys.esc)[H"
     
-    @IBOutlet weak var textView: TerminalTextView!
+    @IBOutlet weak var webView: WKWebView!
     var pwd: String?
     var console = ""
     var command: String?
@@ -22,10 +23,37 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     var logout = false
     var ctrlKey: UIBarButtonItem!
     var ctrl = false
-    var webView = WKWebView()
     
     func htmlTerminal(withOutput output: String) -> String {
         return try! String(contentsOfFile: Bundle.main.path(forResource: "terminal", ofType: "html")!).replacingOccurrences(of: "$_ANSIOUTPUT_", with: output.javaScriptEscapedString)
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override var inputAccessoryView: UIView? {
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        toolbar.barStyle = .black
+        
+        ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
+        ctrlKey.tag = 1
+        
+        // ⬅︎⬆︎⬇︎➡︎
+        let leftArrow = UIBarButtonItem(title: "⬅︎", style: .done, target: self, action: #selector(insertKey(_:)))
+        leftArrow.tag = 2
+        let upArrow = UIBarButtonItem(title: "⬆︎", style: .done, target: self, action: #selector(insertKey(_:)))
+        upArrow.tag = 3
+        let downArrow = UIBarButtonItem(title: "⬇︎", style: .done, target: self, action: #selector(insertKey(_:)))
+        downArrow.tag = 4
+        let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
+        rightArrow.tag = 5
+        
+        let items = [ctrlKey, leftArrow, upArrow, downArrow, rightArrow] as [UIBarButtonItem]
+        toolbar.items = items
+        toolbar.sizeToFit()
+        
+        return toolbar
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,43 +68,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             navigationItem.rightBarButtonItem = history
             
             navigationItem.largeTitleDisplayMode = .never
-           
-            // textView's toolbar
-            let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-            toolbar.barStyle = .black
-                
-            ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
-            ctrlKey.tag = 1
-            
-            // ⬅︎⬆︎⬇︎➡︎
-            /*let leftArrow = UIBarButtonItem(title: "⬅︎", style: .done, target: self, action: #selector(insertKey(_:)))
-            leftArrow.tag = 2
-            let upArrow = UIBarButtonItem(title: "⬆︎", style: .done, target: self, action: #selector(insertKey(_:)))
-            upArrow.tag = 3
-            let downArrow = UIBarButtonItem(title: "⬇︎", style: .done, target: self, action: #selector(insertKey(_:)))
-            downArrow.tag = 4
-            let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
-            rightArrow.tag = 5*/
-            
-            let items = [ctrlKey, /*leftArrow, upArrow, downArrow, rightArrow*/] as [UIBarButtonItem]
-            toolbar.items = items
-            toolbar.sizeToFit()
-            
-            // textView
-            textView.inputAccessoryView = toolbar
-            textView.text = "\n\n\n"
-            textView.keyboardAppearance = .dark
-            textView.autocorrectionType = .no
-            textView.autocapitalizationType = .none
-            textView.delegate = self
-            textView.tintColor = .white
-            textView.isEditable = false
             
             webView.navigationDelegate = self
-            
-            // Resize textView
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
             // Session
             do {
@@ -95,10 +88,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                     try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
                 }
                 
-                textView.isEditable = true
-                textView.becomeFirstResponder()
-            } catch let error {
-                textView.text = error.localizedDescription
+                becomeFirstResponder()
+            } catch {
             }
         }
         
@@ -109,7 +100,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         do {
             try ConnectionManager.shared.session?.channel.write(text)
         } catch {
-            textView.text = error.localizedDescription
         }
     }
     
@@ -137,46 +127,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         }
     }
     
-    // MARK: Keyboard
-    
-    @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
-        textView.resignFirstResponder()
-    }
-    
     // Insert special key
     @objc func insertKey(_ sender: UIBarButtonItem) {
         if sender.tag == 1 { // ctrl
             ctrl = true
             sender.isEnabled = false
         } else if sender.tag == 2 { // Left arrow
-            textView.text = consoleHTML
             writeText(Keys.arrowLeft)
         } else if sender.tag == 3 { // Up arrow
-            textView.text = consoleHTML
             writeText(Keys.arrowUp)
         } else if sender.tag == 4 { // Down arrow
-            textView.text = consoleHTML
             writeText(Keys.arrowDown)
         } else if sender.tag == 5 { // Right arrow
-            textView.text = consoleHTML
             writeText(Keys.arrowRight)
         }
-    }
-    
-    // Resize textView
-    
-    @objc func keyboardWillShow(_ notification:Notification) {
-        let d = notification.userInfo!
-        var r = d[UIKeyboardFrameEndUserInfoKey] as! CGRect
-        
-        r = textView.convert(r, from:nil)
-        textView.contentInset.bottom = r.size.height
-        textView.scrollIndicatorInsets.bottom = r.size.height
-    }
-    
-    @objc func keyboardWillHide(_ notification:Notification) {
-        textView.contentInset = .zero
-        textView.scrollIndicatorInsets = .zero
     }
     
     // MARK: NMSSHChannelDelegate
@@ -188,9 +152,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             print("ANSI OUTPUT: \n"+self.consoleANSI)
             print("PLAIN OUTPUT: \n"+self.console)
             
-            if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
+            /*if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
                 self.consoleANSI = self.consoleANSI.components(separatedBy: TerminalViewController.clear)[1]
             }
+            
+            if self.consoleANSI.contains(TerminalViewController.backspace) {
+                print("BACKSPACE DETECTED!")
+            }*/
             
             self.webView.loadHTMLString(self.htmlTerminal(withOutput: self.consoleANSI), baseURL: Bundle.main.bundleURL)
         }
@@ -198,56 +166,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
     
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
-            self.textView.resignFirstResponder()
-            
             DirectoryTableViewController.disconnected = true
             
             self.navigationController?.popToRootViewController(animated: true, completion: {
                 self.logout = true
                 AppDelegate.shared.navigationController.pushViewController(self, animated: true)
             })
-            
-            self.textView.isEditable = false
         }
-    }
-    
-    // MARK: UITextViewDelegate
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        if ctrl { // CTRL key
-            
-            ctrlKey.isEnabled = true
-            
-            print("CTRL KEY: "+text)
-            
-            writeText(Keys.ctrlKey(from: text))
-            
-            ctrl = false
-            return ctrl
-        }
-        
-        if textView.text.nsString.replacingCharacters(in: range, with: text).count >= console.count {
-            if text.contains("\n") {
-                let newConsole = textView.text+text
-                let console = self.console
-                print("newConsole: \(newConsole)")
-                let cmd = newConsole.replacingOccurrences(of: console, with: "")
-                print("Command: { \(cmd) }")
-                do {
-                    let range = newConsole.range(of: cmd)
-                    textView.text = newConsole.replacingCharacters(in: range!, with: "")
-                    
-                    try ConnectionManager.shared.session?.channel.write(cmd)
-                    return false
-                } catch {}
-            }
-            
-            
-            return true
-        }
-        
-        return false
     }
     
     // MARK: WKNavigationDelegate
@@ -256,13 +181,32 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html, error) in
             if let html = html as? String {
                 print(html)
-                self.textView.text = html.html2String
-                self.textView.attributedText = html.html2AttributedString
-                self.console = self.textView.text
+                self.console = html.html2AttributedString?.string ?? self.console
                 self.consoleHTML = html.html2String
-                self.textView.scrollToBotom()
-                print("HTML OUTPUT: \n"+html)
             }
         }
+    }
+    
+    // MARK: - UIKeyInput
+    
+    var hasText: Bool {
+        return (consoleANSI.isEmpty == false)
+    }
+    
+    func insertText(_ text: String) {
+        do {
+            if !ctrl {
+                try ConnectionManager.shared.session?.channel.write(text)
+            } else { // Insert control key
+                ctrlKey.isEnabled = true
+                try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
+            }
+        } catch {}
+    }
+    
+    func deleteBackward() {
+        do {
+            try ConnectionManager.shared.session?.channel.write(Keys.ctrlH)
+        } catch {}
     }
 }
