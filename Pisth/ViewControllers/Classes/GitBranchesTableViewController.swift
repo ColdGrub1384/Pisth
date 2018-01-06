@@ -35,6 +35,19 @@ class GitBranchesTableViewController: UITableViewController {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    func launch(command: String, withTitle title: String) {
+        guard let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)?.first as? TerminalViewController else {
+            return
+        }
+        
+        terminalVC.title = title
+        terminalVC.readOnly = true
+        terminalVC.command = command
+        navigationController?.pushViewController(terminalVC, animated: true, completion: {
+            terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
+        })
+    }
+    
     // MARK: - Git Actions
     
     @IBAction func fetch(_ sender: Any) {
@@ -44,6 +57,7 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     @IBAction func commit(_ sender: Any) {
+        
     }
     
     @IBAction func push(_ sender: Any) {
@@ -79,17 +93,7 @@ class GitBranchesTableViewController: UITableViewController {
     // MARK: - Table view delegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)?.first as? TerminalViewController else {
-            tableView.deselectRow(at: indexPath, animated: true)
-            return
-            
-        }
-        terminalVC.title = "Commits for \(branches[indexPath.row])"
-        terminalVC.readOnly = true
-        terminalVC.command = "commits '\(repoPath!)' \(branches[indexPath.row])"
-        navigationController?.pushViewController(terminalVC, animated: true, completion: {
-            terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
-        })
+        launch(command: "commits '\(repoPath!)' \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
