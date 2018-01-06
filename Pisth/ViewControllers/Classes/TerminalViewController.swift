@@ -85,9 +85,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
             do {
                 
                 session.channel.delegate = self
-                
-                let clearLastFromHistory = "history -d $(history 1)"
-                
+                                
                 if let pwd = pwd {
                     try session.channel.write("cd '\(pwd)'\n")
                 }
@@ -96,9 +94,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 
                 if let command = self.command {
                     if !closeAfterSendingCommand {
-                        try session.channel.write("\(command); \(clearLastFromHistory)\n")
+                        try session.channel.write("\(command)\n")
                     } else {
-                        try session.channel.write("\(command); echo -e \"\\033[CLOSE\"; \(clearLastFromHistory)\n")
+                        try session.channel.write("\(command); echo -e \"\\033[CLOSE\"\n")
                     }
                 }
                 
@@ -274,7 +272,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UITextView
                 self.textView.attributedText = html.html2AttributedString
                 self.console = self.textView.text
                 self.consoleHTML = html.html2String
-                self.textView.scrollToBotom()
+                if !self.readOnly {
+                    self.textView.scrollToBotom()
+                }
                 print("HTML OUTPUT: \n"+html)
             }
         }
