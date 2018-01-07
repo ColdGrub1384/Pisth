@@ -25,6 +25,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>TZKeyboardPop.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Zip.xcscheme</key>
 		<dict>
 			<key>isShown</key>

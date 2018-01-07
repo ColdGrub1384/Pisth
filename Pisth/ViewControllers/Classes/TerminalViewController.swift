@@ -9,10 +9,11 @@ import UIKit
 import NMSSH
 import WebKit
 
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UITextInputTraits, UIKeyInput {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput, UITextInputTraits {
     
-    static let clear = "\(Keys.esc)[H\(Keys.esc)[J" // Echo this to clear the screen
-    static let backspace = "\(Keys.esc)[H"
+    static var htmlTerminal: String {
+        return try! String(contentsOfFile: Bundle.main.path(forResource: "terminal", ofType: "html")!)
+    }
     
     @IBOutlet weak var webView: WKWebView!
     var pwd: String?
@@ -20,16 +21,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var command: String?
     var consoleANSI = ""
     var consoleHTML = ""
-    var logout = false
     var ctrlKey: UIBarButtonItem!
     var ctrl = false
     
-    func htmlTerminal(withOutput output: String) -> String {
-        return try! String(contentsOfFile: Bundle.main.path(forResource: "terminal", ofType: "html")!).replacingOccurrences(of: "$_ANSIOUTPUT_", with: output.javaScriptEscapedString)
-    }
-    
     override var canBecomeFirstResponder: Bool {
         return true
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        return false
     }
     
     override var inputAccessoryView: UIView? {
@@ -57,9 +57,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !logout {
+        if webView.backgroundColor != .black {
             guard let session = ConnectionManager.shared.session else {
                 navigationController?.popViewController(animated: true)
+                
                 return
             }
             
@@ -69,7 +70,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             navigationItem.largeTitleDisplayMode = .never
             
-            webView.navigationDelegate = self
+            webView.backgroundColor = .black
+            webView.loadHTMLString(TerminalViewController.htmlTerminal, baseURL: Bundle.main.bundleURL)
             
             // Session
             do {
@@ -84,16 +86,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 try session.channel.write("clear; \(clearLastFromHistory)\n")
                 
+                becomeFirstResponder()
+                
                 if let command = self.command {
                     try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
                 }
-                
-                becomeFirstResponder()
             } catch {
             }
         }
-        
-        logout = false
     }
 
     @objc func writeText(_ text: String) { // Write command without writing it in the textView
@@ -149,18 +149,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         DispatchQueue.main.async {
             self.consoleANSI = self.consoleANSI+message
             
-            print("ANSI OUTPUT: \n"+self.consoleANSI)
-            print("PLAIN OUTPUT: \n"+self.console)
-            
-            /*if self.consoleANSI.contains(TerminalViewController.clear) { // Clear shell
-                self.consoleANSI = self.consoleANSI.components(separatedBy: TerminalViewController.clear)[1]
-            }
-            
-            if self.consoleANSI.contains(TerminalViewController.backspace) {
-                print("BACKSPACE DETECTED!")
-            }*/
-            
-            self.webView.loadHTMLString(self.htmlTerminal(withOutput: self.consoleANSI), baseURL: Bundle.main.bundleURL)
+            self.webView.loadHTMLString(TerminalViewController.htmlTerminal.replacingOccurrences(of: "$_ANSIOUTPUT_", with: self.consoleANSI.javaScriptEscapedString), baseURL: Bundle.main.bundleURL)
         }
     }
     
@@ -169,37 +158,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             DirectoryTableViewController.disconnected = true
             
             self.navigationController?.popToRootViewController(animated: true, completion: {
-                self.logout = true
                 AppDelegate.shared.navigationController.pushViewController(self, animated: true)
             })
         }
     }
     
-    // MARK: WKNavigationDelegate
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html, error) in
-            if let html = html as? String {
-                print(html)
-                self.console = html.html2AttributedString?.string ?? self.console
-                self.consoleHTML = html.html2String
-            }
-        }
-    }
-    
-    // MARK: - UIKeyInput
-    
-    var hasText: Bool {
-        return (consoleANSI.isEmpty == false)
-    }
+    // MARK: UIKeyInput
     
     func insertText(_ text: String) {
         do {
             if !ctrl {
                 try ConnectionManager.shared.session?.channel.write(text)
-            } else { // Insert control key
-                ctrlKey.isEnabled = true
+            } else {
                 try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
+                ctrl = false
+                ctrlKey.isEnabled = true
             }
         } catch {}
     }
@@ -209,4 +182,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             try ConnectionManager.shared.session?.channel.write(Keys.ctrlH)
         } catch {}
     }
+    
+    var hasText: Bool {
+        return true
+    }
+    
+    // MARK: UITextInputTraits
+    
+    var keyboardAppearance: UIKeyboardAppearance = .dark
+    var autocorrectionType: UITextAutocorrectionType = .no
 }
