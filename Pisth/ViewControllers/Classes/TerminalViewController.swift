@@ -153,15 +153,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         DispatchQueue.main.async {
             self.consoleANSI = self.consoleANSI+message
             
-            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (result, error) in
-                if let result = result {
-                    print(result)
-                }
-                
-                if let error = error {
-                    print(error)
-                }
-            })
+            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: nil)
         }
     }
     
