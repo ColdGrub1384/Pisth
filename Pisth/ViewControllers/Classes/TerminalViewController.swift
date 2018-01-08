@@ -82,13 +82,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         }
     }
-
-    @objc func writeText(_ text: String) { // Write command without writing it in the textView
-        do {
-            try ConnectionManager.shared.session?.channel.write(text)
-        } catch {
-        }
-    }
     
     @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
         
@@ -133,17 +126,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // Insert special key
     @objc func insertKey(_ sender: UIBarButtonItem) {
+        
+        guard let channel = ConnectionManager.shared.session?.channel else { return }
+        
         if sender.tag == 1 { // ctrl
             ctrl = true
             sender.isEnabled = false
         } else if sender.tag == 2 { // Left arrow
-            writeText(Keys.arrowLeft)
+            try? channel.write(Keys.arrowLeft)
         } else if sender.tag == 3 { // Up arrow
-            writeText(Keys.arrowUp)
+            try? channel.write(Keys.arrowUp)
         } else if sender.tag == 4 { // Down arrow
-            writeText(Keys.arrowDown)
+            try? channel.write(Keys.arrowDown)
         } else if sender.tag == 5 { // Right arrow
-            writeText(Keys.arrowRight)
+            try? channel.write(Keys.arrowRight)
         }
     }
     
