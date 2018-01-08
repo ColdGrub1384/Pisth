@@ -1,5 +1,4 @@
-<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="xterm.css" />
 <script src="xterm.js"></script>
 
@@ -13,7 +12,6 @@
         var term = new Terminal();
                                 
         term.open(document.getElementById('terminal'));
-        term.write($_ANSIOUTPUT_);
         
         // Fit terminal
         function proposeGeometry(term) {
@@ -55,6 +53,10 @@
         }
     
         fit(term);
+        
+        function writeText(text) {
+            term.write(text);
+        }
         
     </script>
 </body>

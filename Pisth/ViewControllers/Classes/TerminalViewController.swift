@@ -9,7 +9,7 @@ import UIKit
 import NMSSH
 import WebKit
 
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput, UITextInputTraits {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
     
     static var htmlTerminal: String {
         return try! String(contentsOfFile: Bundle.main.path(forResource: "terminal", ofType: "html")!)
@@ -63,11 +63,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
     
     override func viewWillAppear(_ animated: Bool) {
         if webView.tag == 0 {
-            guard let session = ConnectionManager.shared.session else {
-                navigationController?.popViewController(animated: true)
-                
-                return
-            }
             
             // Show commands history
             let history = UIBarButtonItem(image: #imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
@@ -77,6 +72,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
             
             webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             webView.backgroundColor = .black
+            webView.navigationDelegate = self
             webView.loadHTMLString(TerminalViewController.htmlTerminal, baseURL: Bundle.main.bundleURL)
             webView.scrollView.isScrollEnabled = false
             webView.tag = 10
@@ -84,27 +80,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
             // Resize webView
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-            
-            // Session
-            do {
-                
-                session.channel.delegate = self
-                
-                let clearLastFromHistory = "history -d $(history 1)"
-                
-                if let pwd = pwd {
-                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
-                }
-                
-                try session.channel.write("clear; \(clearLastFromHistory)\n")
-                
-                becomeFirstResponder()
-                
-                if let command = self.command {
-                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
-                }
-            } catch {
-            }
         }
     }
 
@@ -178,7 +153,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
         DispatchQueue.main.async {
             self.consoleANSI = self.consoleANSI+message
             
-            self.webView.loadHTMLString(TerminalViewController.htmlTerminal.replacingOccurrences(of: "$_ANSIOUTPUT_", with: self.consoleANSI.javaScriptEscapedString), baseURL: Bundle.main.bundleURL)
+            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (result, error) in
+                if let result = result {
+                    print(result)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            })
         }
     }
     
@@ -220,4 +203,35 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
     
     var keyboardAppearance: UIKeyboardAppearance = .dark
     var autocorrectionType: UITextAutocorrectionType = .no
+    
+    // MARK: WKNavigationDelegate
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if consoleANSI.isEmpty {
+            // Session
+            guard let session = ConnectionManager.shared.session else {
+                navigationController?.popViewController(animated: true)
+                return
+            }
+            do {
+                
+                session.channel.delegate = self
+                
+                let clearLastFromHistory = "history -d $(history 1)"
+                
+                if let pwd = pwd {
+                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                }
+                
+                try session.channel.write("clear; \(clearLastFromHistory)\n")
+                
+                becomeFirstResponder()
+                
+                if let command = self.command {
+                    try session.channel.write("\(command); sleep 0.1; \(clearLastFromHistory)\n")
+                }
+            } catch {
+            }
+        }
+    }
 }
