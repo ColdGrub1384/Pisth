@@ -73,6 +73,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return false
     }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        if let navVC = window?.rootViewController as? UINavigationController {
+            if navVC.topViewController is TerminalViewController {
+                return .portrait
+            }
+        }
+        
+        return .all
+    }
+    
     @objc func uploadFile() {
         if let directoryTableViewController = directoryTableViewController {
             if let file = openedFile {

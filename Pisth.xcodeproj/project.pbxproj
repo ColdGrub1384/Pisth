@@ -45,6 +45,7 @@
 		3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */; };
 		3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */; };
 		3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */; };
+		3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFC34992003E19400E32F17 /* Bool+inverted.swift */; };
 		3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9041FF140FE0061677B /* AppDelegate.swift */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
@@ -94,6 +95,7 @@
 		3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
 		3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isFilePDF.swift; sourceTree = "<group>"; };
+		3AFC34992003E19400E32F17 /* Bool+inverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+inverted.swift"; sourceTree = "<group>"; };
 		3AFDD9011FF140FE0061677B /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDD9041FF140FE0061677B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */,
 				3ADD28CE1FFBC27800977905 /* RemoteDirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
+				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
+				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
 				3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,

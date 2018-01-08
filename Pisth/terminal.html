@@ -38,7 +38,7 @@
             if (geometry) {
                 if (term.rows !== geometry.rows || term.cols !== geometry.cols) {
                     term.renderer.clear();
-                    term.resize(geometry.cols, geometry.rows);
+                    term.resize(geometry.cols, geometry.rows-4);
                 }
             }
         }
@@ -53,7 +53,8 @@
         }
     
         fit(term);
-        
+        term.focus();
+                
         function writeText(text) {
             term.write(text);
         }

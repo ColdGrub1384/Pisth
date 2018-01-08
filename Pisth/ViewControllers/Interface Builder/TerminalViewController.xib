@@ -18,8 +18,8 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <wkWebView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9JR-8z-yzl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <wkWebViewConfiguration key="configuration">
                             <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                             <wkPreferences key="preferences"/>
@@ -28,10 +28,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="9JR-8z-yzl" firstAttribute="leading" secondItem="kyM-5c-xlc" secondAttribute="leading" id="3Oi-fO-0Dn"/>
-                    <constraint firstItem="9JR-8z-yzl" firstAttribute="top" secondItem="kyM-5c-xlc" secondAttribute="top" id="8O8-b9-rSL"/>
-                    <constraint firstItem="9JR-8z-yzl" firstAttribute="bottom" secondItem="eLh-px-eBc" secondAttribute="bottom" id="a8X-ml-sCM"/>
-                    <constraint firstAttribute="trailing" secondItem="9JR-8z-yzl" secondAttribute="trailing" id="eHf-dS-a7w"/>
+                    <constraint firstItem="9JR-8z-yzl" firstAttribute="leading" secondItem="kyM-5c-xlc" secondAttribute="leading" id="7AP-7F-AkQ"/>
+                    <constraint firstItem="9JR-8z-yzl" firstAttribute="top" secondItem="eLh-px-eBc" secondAttribute="top" id="9ua-yd-0NM"/>
+                    <constraint firstAttribute="trailing" secondItem="9JR-8z-yzl" secondAttribute="trailing" id="Z2R-zF-Z8W"/>
+                    <constraint firstItem="9JR-8z-yzl" firstAttribute="bottom" secondItem="eLh-px-eBc" secondAttribute="bottom" id="iwy-7D-jHo"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="eLh-px-eBc"/>
             </view>

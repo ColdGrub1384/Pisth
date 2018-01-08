@@ -22,8 +22,8 @@ class Keys {
     // Arrows
     static let arrowUp = esc+"[A"
     static let arrowDown = esc+"[B"
-    static let arrowLeft = esc+"[C"
-    static let arrowRight = esc+"[D"
+    static let arrowRight = esc+"[C"
+    static let arrowLeft = esc+"[D"
     
     // Control keys
     static let ctrlAt = key(dec: 0)
