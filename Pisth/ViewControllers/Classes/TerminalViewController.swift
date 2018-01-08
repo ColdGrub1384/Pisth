@@ -56,8 +56,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
         return toolbar
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        webView.loadHTMLString(TerminalViewController.htmlTerminal.replacingOccurrences(of: "$_ANSIOUTPUT_", with: consoleANSI.javaScriptEscapedString), baseURL: Bundle.main.bundleURL)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        if webView.backgroundColor != .black {
+        if webView.tag == 0 {
             guard let session = ConnectionManager.shared.session else {
                 navigationController?.popViewController(animated: true)
                 
@@ -70,8 +75,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
             
             navigationItem.largeTitleDisplayMode = .never
             
+            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             webView.backgroundColor = .black
             webView.loadHTMLString(TerminalViewController.htmlTerminal, baseURL: Bundle.main.bundleURL)
+            webView.scrollView.isScrollEnabled = false
+            webView.tag = 10
+            
+            // Resize webView
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
             
             // Session
             do {
@@ -125,6 +137,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, UIKeyInput
         } catch {
             print("Error sending command: \(error.localizedDescription)")
         }
+    }
+    
+    @objc func keyboardWillShow(_ notification:Notification) {
+        if let userInfo = notification.userInfo {
+            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
+            let contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height-50,  0.0);
+            webView.scrollView.contentInset = contentInset
+            webView.scrollView.scrollIndicatorInsets = contentInset
+            webView.scrollView.contentOffset = CGPoint(x: webView.scrollView.contentOffset.x, y: keyboardSize.height-50)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification:Notification) {
+        let contentInset = UIEdgeInsets.zero;
+        webView.scrollView.contentInset = contentInset
+        webView.scrollView.scrollIndicatorInsets = contentInset
+        webView.scrollView.contentOffset = CGPoint(x: webView.scrollView.contentOffset.x, y: webView.scrollView.contentOffset.y)
     }
     
     // Insert special key
