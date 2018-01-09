@@ -53,6 +53,7 @@
     
         fit(term);
         term.focus();
+        document.getElementsByTagName('textarea')[0].readOnly = true;
                 
         function writeText(text) {
             term.write(text);

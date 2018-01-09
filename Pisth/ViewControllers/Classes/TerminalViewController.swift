@@ -27,7 +27,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override var canResignFirstResponder: Bool {
-        return true
+        return false
     }
     
     override var inputAccessoryView: UIView? {
