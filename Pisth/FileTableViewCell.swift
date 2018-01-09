@@ -23,6 +23,10 @@ class FileTableViewCell: UITableViewCell {
     @objc func renameFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
+            directoryTableViewController.checkForConnectionError {
+                directoryTableViewController.showError()
+            }
+            
             let fileToRename = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
             
             let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.nsString.lastPathComponent).", preferredStyle: .alert)
@@ -54,6 +58,11 @@ class FileTableViewCell: UITableViewCell {
     
     @objc func moveFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+            
+            directoryTableViewController.checkForConnectionError {
+                directoryTableViewController.showError()
+            }
+            
             Pasteboard.local.filePath = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
             
             let dirVC = DirectoryTableViewController(connection: directoryTableViewController.connection, directory: directoryTableViewController.directory)

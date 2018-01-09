@@ -137,8 +137,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         bannerView.load(GADRequest())
     }
     
-    func showError() {
-        navigationController?.popToRootViewController(animated: true, completion: {
+    func showError() { // Go back and show error
+        guard let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
+        navVC.popToRootViewController(animated: true, completion: {
             let result = ConnectionManager.shared.result
             
             var alert: UIAlertController!
@@ -158,9 +159,32 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
+    func checkForConnectionError(errorHandler: @escaping () -> Void) { // Check for connection errors and run handler if there is an error
+        guard let session = ConnectionManager.shared.filesSession else {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            errorHandler()
+            return
+        }
+        
+        if !Reachability.isConnectedToNetwork() {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            errorHandler()
+        }
+        
+        if !session.isConnected || !session.isAuthorized {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            errorHandler()
+        }
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Connection errors
         if files == nil {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
@@ -206,7 +230,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
                 isDir.append(true)
             }
-        } else {
+        } else { // Connection errors
             files = nil
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
@@ -249,12 +273,21 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     @objc func openShell() { // Open shell in current directory
+        
+        checkForConnectionError {
+            self.showError()
+        }
+        
         let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
         terminalVC.pwd = directory
         navigationController?.pushViewController(terminalVC, animated: true)
     }
     
     @objc func uploadFile(_ sender: UIBarButtonItem) { // Add file
+        
+        checkForConnectionError {
+            self.showError()
+        }
         
         let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -331,6 +364,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     @objc func copyFile() { // Copy file in current directory
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
+            
+            self.checkForConnectionError {
+                self.showError()
+            }
+            
             do {
                 let result = try ConnectionManager.shared.filesSession?.channel.execute("cp -R '\(Pasteboard.local.filePath!)' '\(self.directory)' 2>&1")
                 
@@ -354,8 +392,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     @objc func moveFile() { // Move file in current directory
+        
+        checkForConnectionError {
+            self.showError()
+        }
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
+            
+            self.checkForConnectionError {
+                self.showError()
+            }
+            
             do {
                 let result = try ConnectionManager.shared.filesSession?.channel.execute("mv '\(Pasteboard.local.filePath!)' '\(self.directory)/\(Pasteboard.local.filePath!.nsString.lastPathComponent)' 2>&1")
                 
@@ -536,34 +583,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }))
             
             self.present(activityVC, animated: true, completion: {
-                guard let session = ConnectionManager.shared.filesSession else {
-                    activityVC.dismiss(animated: true, completion: {
-                        ConnectionManager.shared.session = nil
-                        ConnectionManager.shared.filesSession = nil
-                        self.showError()
-                    })
-                    return
-                }
                 
-                if !Reachability.isConnectedToNetwork() {
+                self.checkForConnectionError {
                     activityVC.dismiss(animated: true, completion: {
-                        ConnectionManager.shared.session = nil
-                        ConnectionManager.shared.filesSession = nil
                         self.showError()
                     })
-                    return
-                }
-                
-                if !session.isConnected || !session.isAuthorized {
-                    activityVC.dismiss(animated: true, completion: {
-                        ConnectionManager.shared.session = nil
-                        ConnectionManager.shared.filesSession = nil
-                        self.showError()
-                    })
-                    return
                 }
                 
                 let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
+                
+                guard let session = ConnectionManager.shared.session else { return }
                 
                 DispatchQueue.global(qos: .background).async {
                     if let data = session.sftp.contents(atPath: self.files![indexPath.row].removingUnnecessariesSlashes, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
