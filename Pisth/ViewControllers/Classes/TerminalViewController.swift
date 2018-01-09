@@ -12,6 +12,8 @@ import WebKit
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
     
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
+    
     var pwd: String?
     var console = ""
     var command: String?
@@ -26,14 +28,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override var canResignFirstResponder: Bool {
         return true
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
     }
     
     override var inputAccessoryView: UIView? {
@@ -60,6 +54,31 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return toolbar
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        let wasFirstResponder = isFirstResponder
+        if isFirstResponder {
+            resignFirstResponder()
+        }
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            if wasFirstResponder {
+                self.becomeFirstResponder()
+            }
+            
+            self.reloadTerminal = true
+            self.webView.reload()
+        })
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Resize webView
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         if !isShellStarted {
@@ -69,8 +88,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             // Show commands history
             let history = UIBarButtonItem(image: #imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
-            let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(resignFirstResponder))
-            navigationItem.setRightBarButtonItems([done, history], animated: true)
+            navigationItem.setRightBarButtonItems([history], animated: true)
             
             navigationItem.largeTitleDisplayMode = .never
             
@@ -78,10 +96,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView.navigationDelegate = self
             webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
             webView.scrollView.isScrollEnabled = false
-            
-            // Resize webView
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         }
     }
     
@@ -112,24 +126,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @objc func keyboardWillShow(_ notification:Notification) {
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
-            let contentInset = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height,  0.0);
-            webView.scrollView.contentInset = contentInset
-            webView.scrollView.scrollIndicatorInsets = contentInset
-            webView.scrollView.contentOffset = CGPoint(x: webView.scrollView.contentOffset.x, y: keyboardSize.height)
             
+            webViewHeightConstraint.constant -= keyboardSize.height
             reloadTerminal = true
             webView.reload()
         }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
-        let contentInset = UIEdgeInsets.zero;
-        webView.scrollView.contentInset = contentInset
-        webView.scrollView.scrollIndicatorInsets = contentInset
-        webView.scrollView.contentOffset = CGPoint(x: webView.scrollView.contentOffset.x, y: webView.scrollView.contentOffset.y)
-        
-        reloadTerminal = true
-        webView.reload()
+        if let userInfo = notification.userInfo {
+            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
+            
+            webViewHeightConstraint.constant += keyboardSize.height
+            reloadTerminal = true
+            webView.reload()
+        }
     }
     
     func changeSize(completion: (() -> Void)?) { // Change terminal size to page size
@@ -265,8 +276,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         } else if reloadTerminal {
             reloadTerminal = false
-            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
-            changeSize(completion: nil)
+            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: { (_, _) in
+                self.changeSize(completion: nil)
+            })
         }
     }
 }

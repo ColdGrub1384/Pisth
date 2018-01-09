@@ -19,12 +19,11 @@
                 return null;
             }
             var parentElementStyle = window.getComputedStyle(term.element.parentElement);
-            var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
             var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')) - 17);
             var elementStyle = window.getComputedStyle(term.element);
             var elementPaddingVer = parseInt(elementStyle.getPropertyValue('padding-top')) + parseInt(elementStyle.getPropertyValue('padding-bottom'));
             var elementPaddingHor = parseInt(elementStyle.getPropertyValue('padding-right')) + parseInt(elementStyle.getPropertyValue('padding-left'));
-            var availableHeight = parentElementHeight - elementPaddingVer;
+            var availableHeight = window.innerHeight;
             var availableWidth = parentElementWidth - elementPaddingHor;
             var geometry = {
                 cols: Math.floor(availableWidth / term.renderer.dimensions.actualCellWidth),
@@ -38,7 +37,7 @@
             if (geometry) {
                 if (term.rows !== geometry.rows || term.cols !== geometry.cols) {
                     term.renderer.clear();
-                    term.resize(geometry.cols, geometry.rows-4);
+                    term.resize(geometry.cols, geometry.rows);
                 }
             }
         }
@@ -58,12 +57,15 @@
         function writeText(text) {
             term.write(text);
         }
-        
     </script>
 </body>
 
 <Style>
     body {
+        background-color: black;
+    }
+
+    div {
         background-color: black;
     }
 </Style>
