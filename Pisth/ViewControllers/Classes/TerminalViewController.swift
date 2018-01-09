@@ -18,9 +18,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var console = ""
     var command: String?
     var ctrlKey: UIBarButtonItem!
-    var ctrl = false
     var isShellStarted = false
     var reloadTerminal = false
+    private var ctrl_ = false
+    var ctrl: Bool {
+        set {
+            ctrl_ = newValue
+            if ctrl_ {
+                ctrlKey.tintColor = .white
+            } else {
+                ctrlKey.tintColor = view.tintColor
+            }
+        }
+        
+        get {
+            return ctrl_
+        }
+    }
     
     override var canBecomeFirstResponder: Bool {
         return isShellStarted
@@ -190,8 +204,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         guard let channel = ConnectionManager.shared.session?.channel else { return }
         
         if sender.tag == 1 { // ctrl
-            ctrl = true
-            sender.isEnabled = false
+            ctrl = ctrl.inverted
         } else if sender.tag == 6 { // Esc
             try? channel.write(Keys.esc)
         } else if sender.tag == 2 { // Left arrow
@@ -231,7 +244,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             } else {
                 try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
                 ctrl = false
-                ctrlKey.isEnabled = true
             }
         } catch {}
     }
