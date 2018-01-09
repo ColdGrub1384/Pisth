@@ -53,8 +53,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
         rightArrow.tag = 5
         
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [ctrlKey, escKey, leftArrow, upArrow, downArrow, rightArrow] as [UIBarButtonItem]
+        
+        let items = [ctrlKey, escKey, leftArrow, space, upArrow, downArrow, space, rightArrow] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
