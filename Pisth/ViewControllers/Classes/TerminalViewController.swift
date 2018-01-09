@@ -30,12 +30,18 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return false
     }
     
-    override var inputAccessoryView: UIView? {
+    override var inputAccessoryView: UIView? { // Keyboard's toolbar
         let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolbar.barStyle = .black
         
+        // Buttons
+        
         ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
+        
+        let escKey = UIBarButtonItem(title: "⎋", style: .done, target: self, action: #selector(insertKey(_:)))
+        escKey.setTitleTextAttributes([NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)], for: .normal)
+        escKey.tag = 6
         
         // ⬅︎⬆︎⬇︎➡︎
         let leftArrow = UIBarButtonItem(title: "⬅︎", style: .done, target: self, action: #selector(insertKey(_:)))
@@ -47,7 +53,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
         rightArrow.tag = 5
         
-        let items = [ctrlKey, leftArrow, upArrow, downArrow, rightArrow] as [UIBarButtonItem]
+        
+        let items = [ctrlKey, escKey, leftArrow, upArrow, downArrow, rightArrow] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
@@ -183,6 +190,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if sender.tag == 1 { // ctrl
             ctrl = true
             sender.isEnabled = false
+        } else if sender.tag == 6 { // Esc
+            try? channel.write(Keys.esc)
         } else if sender.tag == 2 { // Left arrow
             try? channel.write(Keys.arrowLeft)
         } else if sender.tag == 3 { // Up arrow
