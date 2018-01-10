@@ -594,7 +594,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 
                 let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
                 
-                guard let session = ConnectionManager.shared.session else { return }
+                guard let session = ConnectionManager.shared.filesSession else { return }
                 
                 DispatchQueue.global(qos: .background).async {
                     if let data = session.sftp.contents(atPath: self.files![indexPath.row].removingUnnecessariesSlashes, progress: { (receivedBytes, bytesToBeReceived) -> Bool in

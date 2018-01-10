@@ -292,7 +292,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 try session.channel.write("clear; \(clearLastFromHistory)\n")
                     
                 if let command = self.command {
-                    try session.channel.write("\(command); \(clearLastFromHistory)\n")
+                    try session.channel.write("\(command);\n")
                 }
                 
                 changeSize(completion: nil)
