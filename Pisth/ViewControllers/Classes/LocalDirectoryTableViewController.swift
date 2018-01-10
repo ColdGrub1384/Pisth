@@ -139,7 +139,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         title = directory.lastPathComponent
         
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
         tableView.backgroundColor = .black

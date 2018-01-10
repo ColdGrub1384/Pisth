@@ -17,13 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-90-2NZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <wkWebViewConfiguration key="configuration">
-                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                            <wkPreferences key="preferences"/>
-                        </wkWebViewConfiguration>
-                    </wkWebView>
                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="hSt-J3-Rx5">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <items>
@@ -43,20 +36,15 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="ut2-90-2NZ" firstAttribute="top" secondItem="3Xa-s9-4OL" secondAttribute="top" id="0Qf-LP-6Cc"/>
-                    <constraint firstItem="ut2-90-2NZ" firstAttribute="trailing" secondItem="hSt-J3-Rx5" secondAttribute="trailing" id="51d-kk-BZY"/>
-                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="top" secondItem="ut2-90-2NZ" secondAttribute="bottom" id="IC0-uo-Ik5"/>
-                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="bottom" secondItem="YV8-Br-wnD" secondAttribute="bottom" id="NCW-p6-hGz"/>
-                    <constraint firstItem="ut2-90-2NZ" firstAttribute="leading" secondItem="hSt-J3-Rx5" secondAttribute="leading" id="U5e-ar-uis"/>
-                    <constraint firstAttribute="trailing" secondItem="ut2-90-2NZ" secondAttribute="trailing" id="pSb-Wh-gSK"/>
-                    <constraint firstItem="ut2-90-2NZ" firstAttribute="leading" secondItem="3Xa-s9-4OL" secondAttribute="leading" id="uOC-L3-pPI"/>
+                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="leading" secondItem="3Xa-s9-4OL" secondAttribute="leading" id="U8K-Qc-01G"/>
+                    <constraint firstAttribute="trailing" secondItem="hSt-J3-Rx5" secondAttribute="trailing" id="ljq-1a-ti3"/>
+                    <constraint firstItem="hSt-J3-Rx5" firstAttribute="bottom" secondItem="YV8-Br-wnD" secondAttribute="bottom" id="sGk-NK-qYg"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="YV8-Br-wnD"/>
             </view>
             <connections>
                 <outlet property="goBackButton" destination="B1d-QW-Qmm" id="8NB-jd-LlO"/>
                 <outlet property="goForwardButton" destination="ShT-me-1aS" id="D0v-7q-WPU"/>
-                <outlet property="webView" destination="ut2-90-2NZ" id="n3N-6x-8Si"/>
             </connections>
             <point key="canvasLocation" x="32.5" y="5.5"/>
         </viewController>

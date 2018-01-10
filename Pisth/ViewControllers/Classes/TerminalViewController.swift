@@ -11,15 +11,12 @@ import WebKit
 
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
     
-    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
+    var webView: WKWebView!
     
     var pwd: String?
     var console = ""
     var command: String?
     var ctrlKey: UIBarButtonItem!
-    var isShellStarted = false
-    var reloadTerminal = false
     private var ctrl_ = false
     var ctrl: Bool {
         set {
@@ -36,12 +33,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    var navBarHeight: CGFloat {
+        return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
+    }
+    
     override var canBecomeFirstResponder: Bool {
-        return isShellStarted
+        return true
     }
     
     override var canResignFirstResponder: Bool {
-        return false
+        return true
     }
     
     override var inputAccessoryView: UIView? { // Keyboard's toolbar
@@ -79,19 +80,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
-        let wasFirstResponder = isFirstResponder
         if isFirstResponder {
             resignFirstResponder()
         }
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            if wasFirstResponder {
-                self.becomeFirstResponder()
-            }
-            
-            self.reloadTerminal = true
-            self.webView.reload()
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            self.becomeFirstResponder()
         })
+        
+        let newFrame = CGRect(x: 0, y: navBarHeight, width: size.width, height: size.height)
+        webView.frame = newFrame
     }
     
     override func viewDidLoad() {
@@ -100,11 +98,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Create WebView
+        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        view.addSubview(webView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if !isShellStarted {
+        if console.isEmpty {
             
             ConnectionManager.shared.session?.channel.closeShell()
             try? ConnectionManager.shared.session?.channel.startShell()
@@ -113,12 +115,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             let history = UIBarButtonItem(image: #imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
             navigationItem.setRightBarButtonItems([history], animated: true)
             
-            navigationItem.largeTitleDisplayMode = .never
+            if #available(iOS 11.0, *) {
+                navigationItem.largeTitleDisplayMode = .never
+            }
             
+            becomeFirstResponder()
             webView.backgroundColor = .black
             webView.navigationDelegate = self
-            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
             webView.scrollView.isScrollEnabled = false
+            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
     }
     
@@ -150,8 +155,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webViewHeightConstraint.constant -= keyboardSize.height
-            reloadTerminal = true
+            webView.frame.size.height -= keyboardSize.height
             webView.reload()
         }
     }
@@ -160,8 +164,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webViewHeightConstraint.constant += keyboardSize.height
-            reloadTerminal = true
+            webView.frame.size.height += keyboardSize.height
             webView.reload()
         }
     }
@@ -174,6 +177,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         func apply() {
             guard let cols = cols_ as? UInt else { return }
             guard let rows = rows_ as? UInt else { return }
+            print(cols)
+            print(rows)
             ConnectionManager.shared.session?.channel.requestSizeWidth(cols, height: rows)
         }
         
@@ -266,42 +271,36 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if !isShellStarted {
-            
+        if console.isEmpty {
+                
             // Session
             guard let session = ConnectionManager.shared.session else {
                 navigationController?.popViewController(animated: true)
                 return
             }
-            
-            changeSize {
-                do {
+                
+            do {
                     
-                    session.channel.delegate = self
+                session.channel.delegate = self
                     
-                    let clearLastFromHistory = "history -d $(history 1)"
+                let clearLastFromHistory = "history -d $(history 1)"
                     
-                    if let pwd = self.pwd {
-                        try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
-                    }
-                    
-                    try session.channel.write("clear; \(clearLastFromHistory)\n")
-                    
-                    if let command = self.command {
-                        try session.channel.write("\(command); \(clearLastFromHistory)\n")
-                    }
-                    
-                    self.isShellStarted = true
-                    self.becomeFirstResponder()
-                    
-                } catch {
+                if let pwd = self.pwd {
+                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
                 }
+                    
+                try session.channel.write("clear; \(clearLastFromHistory)\n")
+                    
+                if let command = self.command {
+                    try session.channel.write("\(command); \(clearLastFromHistory)\n")
+                }
+                
+                changeSize(completion: nil)
+            } catch {
             }
-        } else if reloadTerminal {
-            reloadTerminal = false
-            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: { (_, _) in
-                self.changeSize(completion: nil)
-            })
+        } else {
+            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
+            changeSize(completion: nil)
         }
     }
 }

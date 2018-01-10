@@ -111,7 +111,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             title = titleComponents[titleComponents.count-2]
         }
         
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         // TableView cells
         tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
@@ -278,7 +280,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.showError()
         }
         
-        let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+        let terminalVC = TerminalViewController()
         terminalVC.pwd = directory
         navigationController?.pushViewController(terminalVC, animated: true)
     }
@@ -566,7 +568,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             let activityVC = ActivityViewController(message: "Loading")
             
             self.present(activityVC, animated: true, completion: {
-                let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)!.first! as! TerminalViewController
+                let terminalVC = TerminalViewController()
                 terminalVC.command = "'\(String(self.files![indexPath.row].removingUnnecessariesSlashes.dropFirst()))'"
                 terminalVC.pwd = self.directory
                 

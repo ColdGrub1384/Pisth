@@ -10,16 +10,35 @@ import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate  {
     
-    @IBOutlet weak var webView: WKWebView!
+    var webView: WKWebView!
     @IBOutlet weak var goBackButton: UIBarButtonItem!
     @IBOutlet weak var goForwardButton: UIBarButtonItem!
     
     var file: URL?
     
+    var navBarHeight: CGFloat {
+        return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        let newFrame = CGRect(x: 0, y: navBarHeight, width: size.width, height: size.height-50-navBarHeight)
+        webView.frame = newFrame
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        webView = WKWebView(frame: CGRect(x: 0, y: navBarHeight, width: view.frame.width, height: view.frame.height-50-navBarHeight))
+        view.addSubview(webView)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         if let file = file { // Open file
             webView.loadFileURL(file, allowingReadAccessTo: file.deletingLastPathComponent())

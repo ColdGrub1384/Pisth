@@ -34,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         navigationController = UINavigationController(rootViewController: bookmarksVC)
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isTranslucent = true
-        navigationController.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
         
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -46,10 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         return true
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
@@ -59,11 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             let navVC = UINavigationController(rootViewController: bookmarksVC)
             navVC.navigationBar.barStyle = .black
             navVC.navigationBar.isTranslucent = true
-            navVC.navigationBar.prefersLargeTitles = true
+            if #available(iOS 11.0, *) {
+                navVC.navigationBar.prefersLargeTitles = true
+            }
             
             navigationController.present(navVC, animated: true, completion: {
                 bookmarksVC.delegate = self
-                bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                if #available(iOS 11.0, *) {
+                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                }
                 bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                 bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
                 bookmarksVC.navigationItem.prompt = "Select connection where upload file"
