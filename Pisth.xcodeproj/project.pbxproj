@@ -167,17 +167,25 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		3AF9AE981FF53BEA00840E8A /* Ressources */ = {
+		3ADDFEB920068E5500FA6ACD /* html */ = {
 			isa = PBXGroup;
 			children = (
 				3A36DF9E20012D500089039F /* xterm.css */,
 				3A36DF9F20012D510089039F /* xterm.js */,
 				3A38FC4F1FF56AA800690382 /* terminal.html */,
 				3AFDD9101FF140FE0061677B /* Info.plist */,
+				3AF9AE991FF53C3000840E8A /* Licenses.html */,
+			);
+			name = html;
+			sourceTree = "<group>";
+		};
+		3AF9AE981FF53BEA00840E8A /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				3ADDFEB920068E5500FA6ACD /* html */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
-				3AF9AE991FF53C3000840E8A /* Licenses.html */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";

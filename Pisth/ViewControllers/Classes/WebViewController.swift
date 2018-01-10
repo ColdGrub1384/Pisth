@@ -42,7 +42,6 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
         
         if let file = file { // Open file
             webView.loadFileURL(file, allowingReadAccessTo: file.deletingLastPathComponent())
-            title = file.lastPathComponent
         }
         
         webView.allowsBackForwardNavigationGestures = true
@@ -62,5 +61,14 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         goBackButton.isEnabled = webView.canGoBack
         goForwardButton.isEnabled = webView.canGoForward
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // Get page title
+        webView.evaluateJavaScript("document.title") { (title, _) in
+            if let title = title as? String {
+                self.title = title
+            }
+        }
     }
 }
