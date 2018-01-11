@@ -39,20 +39,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
     }
     
-    override var canBecomeFirstResponder: Bool {
-        return (webView != nil)
-    }
-    
-    override var canResignFirstResponder: Bool {
-        let canDoIt = preventKeyboardFronBeeingDismissed.inverted
-        preventKeyboardFronBeeingDismissed = true
-        return canDoIt
-    }
-    
-    override var inputAccessoryView: UIView? {
-        return toolbar
-    }
-    
     func addToolbar() { // Add keyboard's toolbar
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolbar.barStyle = .black
@@ -86,6 +72,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         self.toolbar = toolbar
     }
     
+    override var canBecomeFirstResponder: Bool {
+        return (webView != nil)
+    }
+    
+    override var canResignFirstResponder: Bool {
+        let canDoIt = preventKeyboardFronBeeingDismissed.inverted
+        preventKeyboardFronBeeingDismissed = true
+        return canDoIt
+    }
+    
+    override var inputAccessoryView: UIView? {
+        return toolbar
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if isFirstResponder {
@@ -101,6 +101,25 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             let newFrame = CGRect(x: 0, y: self.navBarHeight, width: size.width, height: size.height)
             self.webView.frame = newFrame
         })
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        // Bluetooth keyboard
+        
+        var commands =  [
+            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Up Arrow"),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Down Arrow"),
+            UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Left Arrow"),
+            UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Right Arrow"),
+            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Esc key")
+        ]
+        
+        let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
+        for ctrlKey in ctrlKeys {
+            commands.append(UIKeyCommand(input: ctrlKey, modifierFlags: .control, action: #selector(write(fromCommand:)), discoverabilityTitle: "Send ^\(ctrlKey)"))
+        }
+        
+        return commands
     }
     
     override func viewDidLoad() {
@@ -236,6 +255,29 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             try? channel.write(Keys.arrowDown)
         } else if sender.tag == 5 { // Right arrow
             try? channel.write(Keys.arrowRight)
+        }
+    }
+    
+    @objc func write(fromCommand command: UIKeyCommand) {
+        guard let channel = ConnectionManager.shared.session?.channel else { return }
+        
+        if command.modifierFlags.rawValue == 0 {
+            switch command.input {
+            case UIKeyInputUpArrow?:
+                try? channel.write(Keys.arrowUp)
+            case UIKeyInputDownArrow?:
+                try? channel.write(Keys.arrowDown)
+            case UIKeyInputLeftArrow?:
+                try? channel.write(Keys.arrowLeft)
+            case UIKeyInputRightArrow?:
+                try? channel.write(Keys.arrowRight)
+            case UIKeyInputEscape?:
+                try? channel.write(Keys.esc)
+            default:
+                break
+            }
+        } else if command.modifierFlags == .control { // Send CTRL key
+            try? channel.write(Keys.ctrlKey(from: command.input!))
         }
     }
     
