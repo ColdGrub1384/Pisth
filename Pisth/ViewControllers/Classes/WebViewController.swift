@@ -22,8 +22,10 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
-        let newFrame = CGRect(x: 0, y: navBarHeight, width: size.width, height: size.height-50-navBarHeight)
-        webView.frame = newFrame
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            let newFrame = CGRect(x: 0, y: self.navBarHeight, width: size.width, height: size.height-50-self.navBarHeight)
+            self.webView.frame = newFrame
+        })
     }
     
     override func viewDidLoad() {

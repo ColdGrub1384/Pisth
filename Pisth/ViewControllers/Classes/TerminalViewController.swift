@@ -18,11 +18,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var command: String?
     var ctrlKey: UIBarButtonItem!
     var preventKeyboardFronBeeingDismissed = true
+    var toolbar: UIToolbar!
     private var ctrl_ = false
     var ctrl: Bool {
         set {
             ctrl_ = newValue
-            if ctrl_ {
+            if self.ctrl_ {
                 ctrlKey.tintColor = .white
             } else {
                 ctrlKey.tintColor = view.tintColor
@@ -39,7 +40,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override var canBecomeFirstResponder: Bool {
-        return true
+        return (webView != nil)
     }
     
     override var canResignFirstResponder: Bool {
@@ -48,13 +49,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return canDoIt
     }
     
-    override var inputAccessoryView: UIView? { // Keyboard's toolbar
-        let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+    override var inputAccessoryView: UIView? {
+        return toolbar
+    }
+    
+    func addToolbar() { // Add keyboard's toolbar
+        let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolbar.barStyle = .black
         
         // Buttons
         
-        ctrlKey = UIBarButtonItem(title: "ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
+        ctrlKey = UIBarButtonItem(title: "⌃", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
         
         let escKey = UIBarButtonItem(title: "⎋", style: .done, target: self, action: #selector(insertKey(_:)))
@@ -71,14 +76,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
         rightArrow.tag = 5
         
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         let items = [ctrlKey, leftArrow, space, upArrow, downArrow, space, rightArrow, escKey] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
-        return toolbar
+        self.toolbar = toolbar
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -92,8 +97,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             self.becomeFirstResponder()
         })
         
-        let newFrame = CGRect(x: 0, y: navBarHeight, width: size.width, height: size.height)
-        webView.frame = newFrame
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            let newFrame = CGRect(x: 0, y: self.navBarHeight, width: size.width, height: size.height)
+            self.webView.frame = newFrame
+        })
     }
     
     override func viewDidLoad() {
@@ -102,10 +109,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // Create WebView
-        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        view.addSubview(webView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,13 +125,22 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if #available(iOS 11.0, *) {
                 navigationItem.largeTitleDisplayMode = .never
             }
-            
-            becomeFirstResponder()
-            webView.backgroundColor = .black
-            webView.navigationDelegate = self
-            webView.scrollView.isScrollEnabled = false
-            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
+        
+        addToolbar()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Create WebView
+        webView = WKWebView(frame: CGRect(x: 0, y: navBarHeight, width: view.frame.width, height: view.frame.height))
+        view.addSubview(webView)
+        webView.backgroundColor = .black
+        webView.navigationDelegate = self
+        webView.scrollView.isScrollEnabled = false
+        becomeFirstResponder()
+        webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
     }
     
     @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
@@ -159,7 +171,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webView.frame.size.height -= keyboardSize.height
+            webView.frame.size.height -= keyboardSize.height+inputAccessoryView!.frame.height
             webView.reload()
         }
     }
@@ -168,7 +180,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webView.frame.size.height += keyboardSize.height
+            webView.frame.size.height += keyboardSize.height+inputAccessoryView!.frame.height
             webView.reload()
         }
     }
