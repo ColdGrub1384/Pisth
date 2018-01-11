@@ -17,6 +17,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var console = ""
     var command: String?
     var ctrlKey: UIBarButtonItem!
+    var preventKeyboardFronBeeingDismissed = true
     private var ctrl_ = false
     var ctrl: Bool {
         set {
@@ -42,7 +43,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override var canResignFirstResponder: Bool {
-        return true
+        let canDoIt = preventKeyboardFronBeeingDismissed.inverted
+        preventKeyboardFronBeeingDismissed = true
+        return canDoIt
     }
     
     override var inputAccessoryView: UIView? { // Keyboard's toolbar
@@ -81,6 +84,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if isFirstResponder {
+            preventKeyboardFronBeeingDismissed = false
             resignFirstResponder()
         }
         

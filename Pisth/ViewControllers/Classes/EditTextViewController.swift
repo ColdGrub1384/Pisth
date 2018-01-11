@@ -54,67 +54,115 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        title = file.lastPathComponent
-        
-        textView.delegate = self
-        
-        // Open file
-        do {
-            textView.text = try String(contentsOfFile: file.path)
-        } catch let error {
-            let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                self.navigationController?.popViewController(animated: true)
-            }))
-            self.present(errorAlert, animated: true, completion: nil)
-        }
-        
-        // Resize textView
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        // Syntax coloring
-        
-        highlight()
-        
-        DispatchQueue.main.async {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-                self.timer = timer
-                if self.textView.isFirstResponder {
+        if timer == nil {
+            title = file.lastPathComponent
+            
+            textView.delegate = self
+            
+            let languages = NSDictionary(contentsOf: Bundle.main.bundleURL.appendingPathComponent("langs.plist"))! as! [String:[String]] // List of languages associated by file extensions
+            
+            // Open file
+            do {
+                textView.text = try String(contentsOfFile: file.path)
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+            
+            // Resize textView
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            
+            // Syntax coloring
+            
+            if let languagesForFile = languages[file.pathExtension.lowercased()] {
+                if languagesForFile.count == 1 {
+                    language = languagesForFile[0]
                     self.highlight()
+                } else {
+                    let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
+                    
+                    for language in languagesForFile {
+                        chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
+                            self.language = language.replacingOccurrences(of: "-", with: "")
+                            self.highlight()
+                        }))
+                    }
+                    
+                    chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: { (_) in
+                        self.highlight()
+                    }))
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+                        self.present(chooseAlert, animated: true, completion: nil)
+                    })
                 }
-            })
+            }
+            
+            DispatchQueue.main.async {
+                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+                    self.timer = timer
+                    if self.textView.isFirstResponder {
+                        self.highlight()
+                    }
+                })
+            }
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if ConnectionManager.shared.saveFile != nil {
-            ConnectionManager.shared.saveFile = nil
+        func close() {
+            if ConnectionManager.shared.saveFile != nil {
+                ConnectionManager.shared.saveFile = nil
+            }
+            
+            timer?.invalidate()
         }
         
-        timer?.invalidate()
+        // Ask for save the file
+        let alert = UIAlertController(title: "Save changes?", message: "If you select Don't Save, all your changes will be erased!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Don't Save", style: .destructive, handler: { (_) in
+            close()
+        }))
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            if let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
+                navVC.pushViewController(self, animated: true, completion: {
+                    self.save(true)
+                })
+            }
+        }))
+        
+        do {
+            // Check if file was modified
+            let fileContent = try String.init(contentsOf: file)
+            if textView.text != fileContent {
+               UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            } else {
+                close()
+            }
+        } catch _ {
+            close()
+        }
     }
     
     func highlight() {
         
-        if let file = file { // If the file is plain text, stop highlighting it
-            if file.pathExtension == "txt" || file.pathExtension == "" {
-                timer?.invalidate()
-                
-                textView.backgroundColor = .clear
-                textView.textColor = .white
-                
-                return
-            }
+        if language == nil {
+            textView.backgroundColor = .clear
+            textView.textColor = .white
+            return
         }
         
         if !self.pauseColoring {
             self.range = self.textView.selectedRange
             self.cursorPos = self.textView.selectedTextRange
             
-            self.textView.attributedText = self.highlightr?.highlight(self.textView.text, fastRender: true)
+            self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language, fastRender: true)
             self.textView.selectedTextRange = self.cursorPos
             self.textView.scrollRangeToVisible(self.range!)
         } else {
@@ -134,10 +182,28 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                         let activityVC = ActivityViewController(message: "Uploading")
                         self.present(activityVC, animated: true, completion: {
                             ConnectionManager.shared.filesSession?.sftp.writeContents(data, toFileAtPath: saveFile.remoteFile)
-                            activityVC.dismiss(animated: true, completion: nil)
+                            activityVC.dismiss(animated: true, completion: {
+                                if let close = sender as? Bool {
+                                    if close {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                }
+                            })
                         })
+                    } else {
+                        if let close = sender as? Bool {
+                            if close {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
                     }
                     
+                } else {
+                    if let close = sender as? Bool {
+                        if close {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
                 }
                 
             } catch let error {
