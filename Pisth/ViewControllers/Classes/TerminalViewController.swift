@@ -59,7 +59,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         // Buttons
         
-        ctrlKey = UIBarButtonItem(title: "⌃", style: .done, target: self, action: #selector(insertKey(_:)))
+        ctrlKey = UIBarButtonItem(title: "Ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
         
         let escKey = UIBarButtonItem(title: "⎋", style: .done, target: self, action: #selector(insertKey(_:)))
