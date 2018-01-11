@@ -20,7 +20,25 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     var range: NSRange?
     var cursorPos: UITextRange?
     var pauseColoring = false
-    var language: String?
+    private var language_: String?
+    var language: String? {
+        get {
+            
+            if language_ == nil {
+                return nil
+            }
+            
+            if highlightr!.supportedLanguages().contains(language_!) {
+                return language_
+            } else {
+                return nil
+            }
+        }
+        
+        set {
+            language_ = newValue
+        }
+    }
     
     // Setup textView
     func setupTextView() {
@@ -78,37 +96,44 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             
             // Syntax coloring
             
+            DispatchQueue.main.async {
+                self.timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
+                    if self.textView.isFirstResponder {
+                        self.highlight()
+                    }
+                })
+            }
+            
             if let languagesForFile = languages[file.pathExtension.lowercased()] {
                 if languagesForFile.count == 1 {
                     language = languagesForFile[0]
                     self.highlight()
+                } else if languagesForFile.count == 0 {
+                    textView.backgroundColor = .clear
+                    textView.textColor = .white
+                    timer?.invalidate()
                 } else {
                     let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
                     
                     for language in languagesForFile {
-                        chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
-                            self.language = language.replacingOccurrences(of: "-", with: "")
-                            self.highlight()
-                        }))
+                        if highlightr!.supportedLanguages().contains(language) {
+                            chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
+                                self.language = language.replacingOccurrences(of: "-", with: "")
+                                self.highlight()
+                            }))
+                        }
                     }
                     
                     chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: { (_) in
-                        self.highlight()
+                        self.textView.backgroundColor = .clear
+                        self.textView.textColor = .white
+                        self.timer?.invalidate()
                     }))
                     
                     _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
                         self.present(chooseAlert, animated: true, completion: nil)
                     })
                 }
-            }
-            
-            DispatchQueue.main.async {
-                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
-                    self.timer = timer
-                    if self.textView.isFirstResponder {
-                        self.highlight()
-                    }
-                })
             }
         }
     }
