@@ -208,14 +208,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         files = nil
         isDir = []
         
-        if !Reachability.isConnectedToNetwork() {
-            ConnectionManager.shared.result = .notConnected
-            ConnectionManager.shared.session = nil
-            ConnectionManager.shared.filesSession = nil
-            showError()
-            return
+        checkForConnectionError {
+            self.showError()
         }
         
+        guard ConnectionManager.shared.session != nil else { return }
         if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
             self.files = files
             
@@ -229,22 +226,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
             
             if self.directory.removingUnnecessariesSlashes != "/" {
-                self.files!.append(self.directory.nsString.deletingLastPathComponent) // Append parent directory
+                // Append parent directory
+                var parent = self.directory.nsString.deletingLastPathComponent
+                if !parent.hasSuffix("/") {
+                    parent += "/"
+                }
+                self.files!.append(parent)
                 isDir.append(true)
             }
-        } else { // Connection errors
-            files = nil
-            ConnectionManager.shared.session = nil
-            ConnectionManager.shared.filesSession = nil
-            showError()
-            return
-        }
-        
-        if files! == [] {
-            ConnectionManager.shared.session = nil
-            ConnectionManager.shared.filesSession = nil
-            showError()
-            return
         }
         
         // Ignore files listed in ~/.pisthignore
@@ -315,9 +304,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
                         errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                         self.present(errorAlert, animated: true, completion: nil)
-                    } else {
-                        self.reload()
                     }
+                    
+                    self.reload()
                 } catch let error {
                     let errorAlert = UIAlertController(title: "Error creating file!", message: error.localizedDescription, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -343,9 +332,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
                         errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                         self.present(errorAlert, animated: true, completion: nil)
-                    } else {
-                        self.reload()
                     }
+                    
+                    self.reload()
                 } catch let error {
                     let errorAlert = UIAlertController(title: "Error creating folder!", message: error.localizedDescription, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
