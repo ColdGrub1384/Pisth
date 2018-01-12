@@ -220,7 +220,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         let navVC = UINavigationController(rootViewController: branchesVC)
         navVC.navigationBar.barStyle = .black
-        navVC.navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navVC.navigationItem.largeTitleDisplayMode = .never
+        }
         present(navVC, animated: true, completion: nil)
     }
     
