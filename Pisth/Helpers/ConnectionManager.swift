@@ -81,15 +81,7 @@ class ConnectionManager {
                 try session?.channel.startShell()
                 try filesSession?.channel.startShell()
             } catch {
-                result = .connected
-            }
-            
-            do {
-                for command in ShellStartup.commands {
-                    try session!.channel.write("\(command); history -d $(history 1)\n")
-                }
-            } catch {
-                result = .connected
+                result = .notConnected
             }
         }
     }

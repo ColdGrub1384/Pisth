@@ -24,8 +24,5 @@ class ShellStartup {
                            
                            // Create .pisth_history symlink of history file
                            "ln -s $HISTFILE ~/.pisth_history > /dev/null 2>&1",
-                           
-                           // Create an alias to view commits for git branch
-                           "commits() { git -C $1 --no-pager log --graph $2 && echo -e \"\\n\\n\"; }"
     ]
 }

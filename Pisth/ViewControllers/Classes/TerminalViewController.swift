@@ -19,6 +19,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var ctrlKey: UIBarButtonItem!
     var preventKeyboardFronBeeingDismissed = true
     var toolbar: UIToolbar!
+    var dontScroll = false
     private var ctrl_ = false
     var ctrl: Bool {
         set {
@@ -40,7 +41,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     var readOnly = false
-    var closeAfterSendingCommand = false
     var webView: WKWebView!
     
     func addToolbar() { // Add keyboard's toolbar
@@ -162,7 +162,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.backgroundColor = .black
         webView.navigationDelegate = self
         webView.scrollView.isScrollEnabled = false
-        becomeFirstResponder()
+        if !readOnly {
+            becomeFirstResponder()
+        } else {
+            preventKeyboardFronBeeingDismissed = false
+        }
         webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
     }
     
@@ -290,7 +294,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
-            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: nil)
+            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
+                
+                // Scroll to top if dontScroll is true
+                if self.dontScroll {
+                    self.webView.evaluateJavaScript("term.scrollToTop()", completionHandler: { (returnValue, error) in
+                        if let returnValue = returnValue {
+                            print(returnValue)
+                        }
+                        
+                        if let error = error {
+                            print(error)
+                        }
+                    })
+                }
+            })
             
             if self.console.contains(TerminalViewController.close) { // Clear shell
                 self.preventKeyboardFronBeeingDismissed = false
@@ -354,6 +372,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 if let pwd = self.pwd {
                     try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                }
+                
+                for command in ShellStartup.commands {
+                    try session.channel.write("\(command); \(clearLastFromHistory);\n")
                 }
                 
                 try session.channel.write("clear; \(clearLastFromHistory)\n")

@@ -36,13 +36,11 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     func launch(command: String, withTitle title: String) {
-        guard let terminalVC = Bundle.main.loadNibNamed("TerminalViewController", owner: nil, options: nil)?.first as? TerminalViewController else {
-            return
-        }
+        let terminalVC = TerminalViewController()
         
         terminalVC.title = title
-        terminalVC.readOnly = true
-        terminalVC.command = command
+        terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
+        terminalVC.dontScroll = true
         navigationController?.pushViewController(terminalVC, animated: true, completion: {
             terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
         })
@@ -51,16 +49,19 @@ class GitBranchesTableViewController: UITableViewController {
     // MARK: - Git Actions
     
     @IBAction func fetch(_ sender: Any) {
+        launch(command: "git -C '\(repoPath!)' fetch", withTitle: "Fetch")
     }
     
     @IBAction func pull(_ sender: Any) {
+        launch(command: "git -C '\(repoPath!)' pull", withTitle: "Pull")
     }
     
     @IBAction func commit(_ sender: Any) {
-        
+        launch(command: "printf \"Commit message: \"; read msg; git -C '\(repoPath!)' rm -r --cached .; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m $msg", withTitle: "Commit")
     }
     
     @IBAction func push(_ sender: Any) {
+        launch(command: "git -C '\(repoPath!)' push", withTitle: "Push")
     }
     
     // MARK: - Table view data source
@@ -93,7 +94,7 @@ class GitBranchesTableViewController: UITableViewController {
     // MARK: - Table view delegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        launch(command: "commits '\(repoPath!)' \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
+        launch(command: "git -C '\(repoPath!)' --no-pager log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
