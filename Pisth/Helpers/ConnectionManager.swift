@@ -86,7 +86,7 @@ class ConnectionManager {
             
             do {
                 for command in ShellStartup.commands {
-                    try session!.channel.write("\(command); sleep 0.1; history -d $(history 1)\n")
+                    try session!.channel.write("\(command); history -d $(history 1)\n")
                 }
             } catch {
                 result = .connected

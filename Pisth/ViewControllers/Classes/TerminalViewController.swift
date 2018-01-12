@@ -11,7 +11,7 @@ import WebKit
 
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
     
-    var webView: WKWebView!
+    static var close = "\(Keys.esc)[CLOSE" // Print this to dismiss the keyboard
     
     var pwd: String?
     var console = ""
@@ -38,6 +38,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var navBarHeight: CGFloat {
         return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
     }
+    
+    var readOnly = false
+    var closeAfterSendingCommand = false
+    var webView: WKWebView!
     
     func addToolbar() { // Add keyboard's toolbar
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -75,7 +79,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override var canBecomeFirstResponder: Bool {
         return (webView != nil)
     }
-    
+
     override var canResignFirstResponder: Bool {
         let canDoIt = preventKeyboardFronBeeingDismissed.inverted
         preventKeyboardFronBeeingDismissed = true
@@ -144,9 +148,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if #available(iOS 11.0, *) {
                 navigationItem.largeTitleDisplayMode = .never
             }
+            
+            addToolbar()
         }
-        
-        addToolbar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -287,6 +291,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         DispatchQueue.main.async {
             self.console += message
             self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: nil)
+            
+            if self.console.contains(TerminalViewController.close) { // Clear shell
+                self.preventKeyboardFronBeeingDismissed = false
+                self.resignFirstResponder()
+            }
         }
     }
     
@@ -327,28 +336,28 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var autocorrectionType: UITextAutocorrectionType = .no
     
     // MARK: WKNavigationDelegate
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
         if console.isEmpty {
-                
+            
             // Session
             guard let session = ConnectionManager.shared.session else {
                 navigationController?.popViewController(animated: true)
                 return
             }
-                
+            
             do {
-                    
+                
                 session.channel.delegate = self
-                    
+                
                 let clearLastFromHistory = "history -d $(history 1)"
-                    
+                
                 if let pwd = self.pwd {
                     try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
                 }
-                    
+                
                 try session.channel.write("clear; \(clearLastFromHistory)\n")
-                    
+                
                 if let command = self.command {
                     try session.channel.write("\(command);\n")
                 }

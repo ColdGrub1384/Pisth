@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fy6-0W-N73">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13771"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Branches-->
+        <scene sceneID="wC3-8h-bS6">
+            <objects>
+                <tableViewController id="Fy6-0W-N73" customClass="GitBranchesTableViewController" customModule="Pisth" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Zm-tI-KDQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="branch" rowHeight="87" id="VVk-xI-Yso">
+                                <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VVk-xI-Yso" id="83U-nC-uMn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="master" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxi-wH-Lid">
+                                            <rect key="frame" x="16" y="11" width="228" height="65"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(current)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-HN-nlK">
+                                            <rect key="frame" x="252" y="11" width="107" height="65"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="107" id="neO-r9-45a"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Pxi-wH-Lid" firstAttribute="baseline" secondItem="3Jo-HN-nlK" secondAttribute="baseline" id="99G-Mk-zx4"/>
+                                        <constraint firstItem="3Jo-HN-nlK" firstAttribute="trailing" secondItem="83U-nC-uMn" secondAttribute="trailingMargin" id="B9J-8W-22l"/>
+                                        <constraint firstItem="Pxi-wH-Lid" firstAttribute="leading" secondItem="83U-nC-uMn" secondAttribute="leadingMargin" id="V0X-Hg-Efc"/>
+                                        <constraint firstItem="Pxi-wH-Lid" firstAttribute="bottom" secondItem="83U-nC-uMn" secondAttribute="bottomMargin" id="bSF-Zd-TSn"/>
+                                        <constraint firstItem="3Jo-HN-nlK" firstAttribute="leading" secondItem="Pxi-wH-Lid" secondAttribute="trailing" constant="8" symbolic="YES" id="pjh-kS-4pS"/>
+                                        <constraint firstItem="Pxi-wH-Lid" firstAttribute="top" secondItem="83U-nC-uMn" secondAttribute="topMargin" id="w29-Sp-zEU"/>
+                                        <constraint firstItem="Pxi-wH-Lid" firstAttribute="firstBaseline" secondItem="3Jo-HN-nlK" secondAttribute="firstBaseline" id="x9Z-ag-AWC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fy6-0W-N73" id="tL7-ed-Lqz"/>
+                            <outlet property="delegate" destination="Fy6-0W-N73" id="NWG-Xm-iPj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Branches" id="hHI-qq-Bta">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="esN-VA-ltN">
+                            <connections>
+                                <action selector="close:" destination="Fy6-0W-N73" id="Lge-Aw-zIS"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Push" id="uMp-KR-zoC">
+                                <connections>
+                                    <action selector="push:" destination="Fy6-0W-N73" id="v81-Tc-VAM"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Commit" id="OrR-8b-t6C">
+                                <connections>
+                                    <action selector="commit:" destination="Fy6-0W-N73" id="2Zu-EO-TNl"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Pull" id="5iF-LD-JFE">
+                                <connections>
+                                    <action selector="pull:" destination="Fy6-0W-N73" id="rTP-8j-scj"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Fetch" id="zmD-aJ-snR">
+                                <connections>
+                                    <action selector="fetch:" destination="Fy6-0W-N73" id="yit-XP-9dN"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dHz-7r-ud8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="440.80000000000001" y="158.77061469265368"/>
+        </scene>
+    </scenes>
+</document>
