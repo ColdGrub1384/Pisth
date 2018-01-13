@@ -294,6 +294,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
+            
+            if self.console.contains(TerminalViewController.close) { // Close shell
+                self.preventKeyboardFronBeeingDismissed = false
+                self.console = self.console.replacingOccurrences(of: TerminalViewController.close, with: "")
+                self.resignFirstResponder()
+            }
+            
             self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                 
                 // Scroll to top if dontScroll is true
@@ -309,11 +316,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     })
                 }
             })
-            
-            if self.console.contains(TerminalViewController.close) { // Clear shell
-                self.preventKeyboardFronBeeingDismissed = false
-                self.resignFirstResponder()
-            }
         }
     }
     

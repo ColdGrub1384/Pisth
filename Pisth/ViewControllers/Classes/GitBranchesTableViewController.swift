@@ -30,6 +30,13 @@ class GitBranchesTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.tintAdjustmentMode = .normal
+        navigationController?.navigationBar.tintAdjustmentMode = .automatic
+    }
 
     @IBAction func close(_ sender: Any) {
         navigationController?.dismiss(animated: true, completion: nil)
@@ -57,7 +64,7 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     @IBAction func commit(_ sender: Any) {
-        launch(command: "printf \"Commit message: \"; read msg; git -C '\(repoPath!)' rm -r --cached .; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m $msg", withTitle: "Commit")
+        launch(command: "read -ep \"Commit message: \" msg; git -C '\(repoPath!)' rm -r --cached .; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m $msg", withTitle: "Commit")
     }
     
     @IBAction func push(_ sender: Any) {
