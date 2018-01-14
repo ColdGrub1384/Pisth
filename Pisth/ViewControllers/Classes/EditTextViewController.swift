@@ -178,8 +178,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     func highlight() {
         
         if language == nil {
-            textView.backgroundColor = .clear
-            textView.textColor = .white
             return
         }
         
