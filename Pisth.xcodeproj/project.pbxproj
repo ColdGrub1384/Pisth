@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A050CCE1FF81E2400364306 /* ShellStartup.swift */; };
+		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A288B581FF6810E008C523A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A288B571FF6810E008C523A /* String.swift */; };
 		3A36DFA020012D520089039F /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9E20012D500089039F /* xterm.css */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		3A050CCE1FF81E2400364306 /* ShellStartup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellStartup.swift; sourceTree = "<group>"; };
+		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A288B571FF6810E008C523A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3A36DF9E20012D500089039F /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */,
 				3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */,
 				3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */,
+				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
+				3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,

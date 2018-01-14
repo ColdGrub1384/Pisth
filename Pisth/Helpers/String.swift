@@ -36,4 +36,13 @@ extension String {
         
         return newString
     }
+    
+    func replacingFirstOccurrence(of target: String, with replacement: String) -> String {
+        let range = self.range(of: target)
+        if let range = range {
+            return replacingCharacters(in: range, with: replacement)
+        }
+        
+        return self
+    }
 }

@@ -215,14 +215,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     @objc func git() {
-        guard let branchesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? GitBranchesTableViewController else { return }
+        guard let navVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController else { return }
+        guard let branchesVC = navVC.topViewController as? SourceControlTableViewController else { return }
+        
         branchesVC.repoPath = directory
         
-        let navVC = UINavigationController(rootViewController: branchesVC)
-        navVC.navigationBar.barStyle = .black
-        if #available(iOS 11.0, *) {
-            navVC.navigationItem.largeTitleDisplayMode = .never
-        }
         present(navVC, animated: true, completion: nil)
     }
     

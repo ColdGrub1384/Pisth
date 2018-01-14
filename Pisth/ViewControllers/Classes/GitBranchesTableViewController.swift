@@ -12,6 +12,7 @@ class GitBranchesTableViewController: UITableViewController {
     var repoPath: String!
     var branches = [String]()
     var current: String?
+    var selectionHandler: ((GitBranchesTableViewController, IndexPath) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +38,6 @@ class GitBranchesTableViewController: UITableViewController {
         navigationController?.navigationBar.tintAdjustmentMode = .normal
         navigationController?.navigationBar.tintAdjustmentMode = .automatic
     }
-
-    @IBAction func close(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
     
     func launch(command: String, withTitle title: String) {
         let terminalVC = TerminalViewController()
@@ -53,6 +50,14 @@ class GitBranchesTableViewController: UITableViewController {
         })
     }
     
+    @objc func done(_ sender: Any) {
+        if let navVC = navigationController {
+            navVC.dismiss(animated: true, completion: nil)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Git Actions
     
     @IBAction func fetch(_ sender: Any) {
@@ -60,7 +65,22 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     @IBAction func pull(_ sender: Any) {
-        launch(command: "git -C '\(repoPath!)' pull", withTitle: "Pull")
+        guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
+        remotesVC.repoPath = repoPath
+        
+        let navVC = UINavigationController(rootViewController: remotesVC)
+        navVC.navigationBar.barStyle = .black
+        navVC.navigationBar.isTranslucent = true
+        
+        present(navVC, animated: true) {
+            remotesVC.navigationItem.setLeftBarButton(UIBarButtonItem.init(barButtonSystemItem: .done, target: remotesVC, action: #selector(remotesVC.done(_:))), animated: true)
+        }
+        
+        remotesVC.selectionHandler = ({ remotesVC, indexPath in
+            remotesVC.dismiss(animated: true, completion: {
+                self.launch(command: "git -C '\(self.repoPath!)' pull \(remotesVC.branches[indexPath.row].replacingFirstOccurrence(of: "/", with: " "))", withTitle: "Pull")
+            })
+        })
     }
     
     @IBAction func commit(_ sender: Any) {
@@ -68,7 +88,22 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     @IBAction func push(_ sender: Any) {
-        launch(command: "git -C '\(repoPath!)' push", withTitle: "Push")
+        guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
+        remotesVC.repoPath = repoPath
+        
+        let navVC = UINavigationController(rootViewController: remotesVC)
+        navVC.navigationBar.barStyle = .black
+        navVC.navigationBar.isTranslucent = true
+        
+        present(navVC, animated: true) {
+            remotesVC.navigationItem.setLeftBarButton(UIBarButtonItem.init(barButtonSystemItem: .done, target: remotesVC, action: #selector(remotesVC.done(_:))), animated: true)
+        }
+        
+        remotesVC.selectionHandler = ({ remotesVC, indexPath in
+            remotesVC.dismiss(animated: true, completion: {
+                self.launch(command: "git -C '\(self.repoPath!)' push \(remotesVC.branches[indexPath.row].replacingFirstOccurrence(of: "/", with: " "))", withTitle: "Pull")
+            })
+        })
     }
     
     // MARK: - Table view data source
@@ -101,6 +136,12 @@ class GitBranchesTableViewController: UITableViewController {
     // MARK: - Table view delegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let handler = selectionHandler {
+            handler(self, indexPath)
+            return
+        }
+        
         launch(command: "git -C '\(repoPath!)' --no-pager log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
         tableView.deselectRow(at: indexPath, animated: true)
     }
