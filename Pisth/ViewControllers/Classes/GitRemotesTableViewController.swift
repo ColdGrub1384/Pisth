@@ -11,7 +11,7 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
         
     override func viewDidLoad() {
         
-        _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' fetch")
+        _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' remote update --prune")
         
         if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch -r") {
             for branch in result.components(separatedBy: "\n") {

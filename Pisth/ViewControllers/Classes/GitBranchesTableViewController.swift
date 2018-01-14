@@ -84,7 +84,7 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     @IBAction func commit(_ sender: Any) {
-        launch(command: "read -ep \"Commit message: \" msg; git -C '\(repoPath!)' rm -r --cached .; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m $msg", withTitle: "Commit")
+        launch(command: "read -ep \"Commit message: \" msg; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m \"$msg\"", withTitle: "Commit")
     }
     
     @IBAction func push(_ sender: Any) {
@@ -101,7 +101,7 @@ class GitBranchesTableViewController: UITableViewController {
         
         remotesVC.selectionHandler = ({ remotesVC, indexPath in
             remotesVC.dismiss(animated: true, completion: {
-                self.launch(command: "git -C '\(self.repoPath!)' push \(remotesVC.branches[indexPath.row].replacingFirstOccurrence(of: "/", with: " "))", withTitle: "Pull")
+                self.launch(command: "git -C '\(self.repoPath!)' push \(remotesVC.branches[indexPath.row].replacingFirstOccurrence(of: "/", with: " "))", withTitle: "Push")
             })
         })
     }
