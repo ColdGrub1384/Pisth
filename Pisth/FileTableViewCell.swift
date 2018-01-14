@@ -27,10 +27,7 @@ class FileTableViewCell: UITableViewCell {
                 directoryTableViewController.showError()
             }
             
-            var fileToRename = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
-            if fileToRename.hasPrefix(".") {
-                fileToRename = fileToRename.replacingFirstOccurrence(of: ".", with: "")
-            }
+            let fileToRename = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
             
             let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.nsString.lastPathComponent).", preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
