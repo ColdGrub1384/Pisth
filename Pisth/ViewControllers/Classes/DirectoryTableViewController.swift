@@ -41,9 +41,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         if ConnectionManager.shared.result == .connectedAndAuthorized {
-            if self.directory == "~" { // Get absolute path from ~
-                if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
-                    self.directory = path!
+            if self.directory.contains("~") { // Get absolute path from ~
+                if let path = try? ConnectionManager.shared.filesSession!.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
+                    self.directory = self.directory.replacingOccurrences(of: "~", with: path)
                 }
             }
             
