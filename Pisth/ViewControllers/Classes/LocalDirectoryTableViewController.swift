@@ -8,6 +8,8 @@
 import UIKit
 import Zip
 import GoogleMobileAds
+import AVFoundation
+import AVKit
 
 class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate {
         
@@ -79,6 +81,18 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 } else {
                     viewController?.dismiss(animated: true, completion: {
                         navigationController?.pushViewController(imageVC, animated: true)
+                    })
+                }
+            } else if AVAsset(url: file).isPlayable { // Is video or audio
+                let player = AVPlayer(url: file)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                
+                if viewController == nil {
+                    navigationController?.pushViewController(playerVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(playerVC, animated: true)
                     })
                 }
             } else if isFilePDF(file) { // Is PDF
