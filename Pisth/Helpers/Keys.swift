@@ -18,6 +18,7 @@ class Keys {
     // From https://en.wikipedia.org/wiki/C0_and_C1_control_codes
     
     static let esc = key(dec: 27)
+    static let delete = key(dec: 127)
     
     // Arrows
     static let arrowUp = esc+"[A"

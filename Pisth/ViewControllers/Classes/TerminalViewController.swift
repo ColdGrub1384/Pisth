@@ -342,7 +342,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func deleteBackward() {
         do {
-            try ConnectionManager.shared.session?.channel.write(Keys.ctrlH)
+            try ConnectionManager.shared.session?.channel.write(Keys.delete)
         } catch {}
     }
     
