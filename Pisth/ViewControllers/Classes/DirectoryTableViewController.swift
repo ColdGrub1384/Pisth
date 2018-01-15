@@ -76,19 +76,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 for file in result.components(separatedBy: "\n") {
                     if file != "" && !file.hasSuffix("#") {
                         
-                        if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)) {
-                            self.files?.remove(at: indexOfFile)
-                            isDir.remove(at: indexOfFile)
-                        }
-                        
-                        if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)+"/") {
-                            self.files?.remove(at: indexOfFile)
-                            isDir.remove(at: indexOfFile)
-                        }
-                        
-                        if let indexOfFile = self.files?.index(of: "."+self.directory.nsString.appendingPathComponent(file)) {
-                            self.files?.remove(at: indexOfFile)
-                            isDir.remove(at: indexOfFile)
+                        if let files = self.files {
+                            var i = 0
+                            for file_ in files {
+                                if file_.nsString.lastPathComponent == file {
+                                    self.files!.remove(at: i)
+                                    self.isDir.remove(at: i)
+                                }
+                                i += 1
+                            }
                         }
                     }
                 }
