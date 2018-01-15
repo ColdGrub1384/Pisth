@@ -72,7 +72,7 @@ open class Theme {
             }else
             {
                 let range = bkgColorHex.range(of: "#")
-                let str = bkgColorHex.substring(from: (range?.lowerBound)!)
+                let str = String(bkgColorHex[(range?.lowerBound)!...])
                 themeBackgroundColor = colorWithHexString(str)
             }
         }else
@@ -320,7 +320,7 @@ open class Theme {
             }
         }
         
-        if (cString.characters.count != 6 && cString.characters.count != 3 )
+        if (cString.count != 6 && cString.count != 3 )
         {
             return RPColor.gray
         }
@@ -329,7 +329,7 @@ open class Theme {
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         var divisor : CGFloat
         
-        if (cString.characters.count == 6 )
+        if (cString.count == 6 )
         {
         
             let rString = (cString as NSString).substring(to: 2)
