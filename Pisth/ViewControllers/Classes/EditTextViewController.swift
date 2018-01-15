@@ -28,7 +28,12 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 return nil
             }
             
-            if highlightr!.supportedLanguages().contains(language_!) {
+            if language_ == "html" {
+                return "htmlbars"
+            }
+            
+            let supportedLanguages = highlightr!.supportedLanguages()
+            if supportedLanguages.contains(language_!) {
                 return language_
             } else {
                 return nil
@@ -109,8 +114,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                     language = languagesForFile[0]
                     self.highlight()
                 } else if languagesForFile.count == 0 {
-                    textView.backgroundColor = .clear
-                    textView.textColor = .white
                     timer?.invalidate()
                 } else {
                     let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
@@ -177,19 +180,17 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     func highlight() {
         
-        if language == nil {
-            return
-        }
-        
-        if !self.pauseColoring {
-            self.range = self.textView.selectedRange
-            self.cursorPos = self.textView.selectedTextRange
-            
-            self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language, fastRender: true)
-            self.textView.selectedTextRange = self.cursorPos
-            self.textView.scrollRangeToVisible(self.range!)
-        } else {
-            self.pauseColoring = false
+        if language != nil {
+            if !self.pauseColoring {
+                self.range = self.textView.selectedRange
+                self.cursorPos = self.textView.selectedTextRange
+                
+                self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language, fastRender: true)
+                self.textView.selectedTextRange = self.cursorPos
+                self.textView.scrollRangeToVisible(self.range!)
+            } else {
+                self.pauseColoring = false
+            }
         }
     }
     

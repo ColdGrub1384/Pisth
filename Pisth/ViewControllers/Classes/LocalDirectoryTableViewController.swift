@@ -24,14 +24,12 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         func openFile() {
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
-                var editTextVC: EditTextViewController? {
-                    if let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)?.first as? EditTextViewController {
-                        editTextViewController.file = file
+                var editTextVC: EditTextViewController! {
+                    let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)!.first as! EditTextViewController
+                    
+                    editTextViewController.file = file
                         
-                        return editTextViewController
-                    } else {
-                        return nil
-                    }
+                    return editTextViewController
                 }
                 
                 if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
@@ -44,7 +42,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
-                        navigationController?.pushViewController(editTextVC!, animated: true)
+                        navigationController?.pushViewController(editTextVC, animated: true)
                     }))
                     
                     if viewController == nil {
@@ -59,7 +57,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         navigationController?.pushViewController(editTextVC!, animated: true)
                     } else {
                         viewController?.dismiss(animated: true, completion: {
-                            navigationController?.pushViewController(editTextVC!, animated: true)
+                            navigationController?.pushViewController(editTextVC, animated: true)
                         })
                     }
                 }
