@@ -338,10 +338,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             activityVC.dismiss(animated: true, completion: {
                 tableView.deselectRow(at: indexPath, animated: true)
                 
-                UIApplication.shared.beginBackgroundTask(expirationHandler: {
-                    print("Expired")
-                })
-                
                 if let delegate = self.delegate {
                     delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)
                 } else {
