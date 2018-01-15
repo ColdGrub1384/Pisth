@@ -1,6 +1,9 @@
-![](https://github.com/ColdGrub1384/Pisth/blob/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png?raw=true)
+<img style="border-radius: 25px;" src="https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png">
 
 # Pisth
+
+<a href="https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8"><img alt="Download on the App Store" src="https://pisth.github.io/appstorebadge.svg"/></a>
+
 Pisth is SSH and SFTP client for iOS. It uses [NMSSH](https://github.com/NMSSH/NMSSH) to browse files, upload files, download files and do SSH.
 
 Pisth is an SSH and SFTP client.
@@ -25,9 +28,3 @@ Why use Pisth:
 
 ## Creating a pull request
 If you need to compile the code, you will need to make some changes, so please create a new branch with all changes you need to do and then apply only needed changes.
-
-## Joining betas
-Betas are installed via TestFlight and you can register [here](https://pisth.github.io/) in the 'Join Beta' section.
-An email will be sent in aprox. one day.
-
-Your name, lastname and email will be added to the [BETATESTERS.md](https://github.com/ColdGrub1384/Pisth/blob/master/BETATESTERS.md) file. If you don't want to appear here, [send me an email](mailto://adri_labbe@hotmail.com).
