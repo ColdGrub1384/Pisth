@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
@@ -45,6 +46,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         // Initialize the Google Mobile Ads SDK.
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~2846344793")
+        
+        // Save passwords to keychain if they are not
+        // See how passwords are managed since 3.0 at 'Helpers/DataManager.swift'
+        if !UserDefaults.standard.bool(forKey: "savedToKeychain") {
+            // Update data to be compatible with 3.0
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                
+                for result in results {
+                    let passKey = String.random(length: 100)
+                    if let password = result.value(forKey: "password") as? String {
+                        KeychainWrapper.standard.set(password, forKey: passKey)
+                    }
+                    result.setValue(passKey, forKey: "password")
+                }
+                
+                try? coreDataContext.save()
+            } catch let error {
+                print("Error retrieving connections: \(error.localizedDescription)")
+            }
+            
+            UserDefaults.standard.set(true, forKey: "savedToKeychain")
+        }
         
         return true
     }

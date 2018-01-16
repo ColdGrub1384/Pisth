@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import SwiftKeychainWrapper
 
 class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate {
     
@@ -173,12 +174,14 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     
                     do {
                         let result = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index!]
+                        let passKey = String.random(length: 100)
                         result.setValue(name, forKey: "name")
                         result.setValue(host, forKey: "host")
                         result.setValue(port, forKey: "port")
                         result.setValue(username, forKey: "username")
-                        result.setValue(password, forKey: "password")
+                        result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
+                        KeychainWrapper.standard.set(password, forKey: passKey)
                         
                         try? AppDelegate.shared.coreDataContext.save()
                     } catch let error {
