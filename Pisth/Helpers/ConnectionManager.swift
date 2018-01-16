@@ -55,6 +55,8 @@ class ConnectionManager {
         if session!.isConnected && session!.isAuthorized {
             session?.sftp.connect()
             result = .connectedAndAuthorized
+        } else {
+            return
         }
         
         filesSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
@@ -70,6 +72,8 @@ class ConnectionManager {
         if filesSession!.isConnected && filesSession!.isAuthorized {
             filesSession?.sftp.connect()
             result = .connectedAndAuthorized
+        } else {
+            return
         }
         
         session!.channel.requestPty = true

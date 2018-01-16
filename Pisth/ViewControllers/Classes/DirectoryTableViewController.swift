@@ -127,7 +127,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
         var buttons: [UIBarButtonItem] {
-            guard let result = try? ConnectionManager.shared.filesSession!.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
+            guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
+            guard let result = try? session.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
             let allFiles = result.components(separatedBy: "\n")
             if allFiles.contains(".git") {
                 return [uploadFile, git, terminal]
