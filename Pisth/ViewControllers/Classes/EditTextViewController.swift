@@ -161,6 +161,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             if let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
                 navVC.pushViewController(self, animated: true, completion: {
                     self.save(true)
+                    if ConnectionManager.shared.saveFile?.localFile == self.file.path {
+                        try? FileManager.default.removeItem(at: self.file)
+                    }
                 })
             }
         }))
@@ -171,6 +174,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             if textView.text != fileContent {
                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             } else {
+                if ConnectionManager.shared.saveFile?.localFile == file.path {
+                    try? FileManager.default.removeItem(at: file)
+                }
                 close()
             }
         } catch _ {
