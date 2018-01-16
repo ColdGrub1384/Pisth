@@ -353,24 +353,28 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             }
         }
         
-        if UserDefaults.standard.bool(forKey: "biometricAuth") && BioMetricAuthenticator.canAuthenticate() {
+        func askForPassword() {
+            let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
+            passwordAlert.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+            })
+            passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                connection.password = passwordAlert.textFields![0].text!
+                connect()
+            }))
+            passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                tableView.deselectRow(at: indexPath, animated: true)
+            }))
+            self.present(passwordAlert, animated: true, completion: nil)
+        }
+        
+        if UserDefaults.standard.bool(forKey: "biometricAuth") {
             BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
                 connect()
             }, failure: { (error) in
-                if error == .fallback {
-                    let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
-                    passwordAlert.addTextField(configurationHandler: { (textField) in
-                        textField.placeholder = "Password"
-                        textField.isSecureTextEntry = true
-                    })
-                    passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
-                        connection.password = passwordAlert.textFields![0].text!
-                        connect()
-                    }))
-                    passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-                        tableView.deselectRow(at: indexPath, animated: true)
-                    }))
-                    self.present(passwordAlert, animated: true, completion: nil)
+                if error != .canceledByUser && error != .canceledBySystem {
+                    askForPassword()
                 } else {
                     tableView.deselectRow(at: indexPath, animated: true)
                 }
