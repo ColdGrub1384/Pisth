@@ -104,15 +104,15 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             if host == "" || username == "" {
                 self.present(addNewAlertController, animated: true, completion: {
                     if host == "" {
-                        addNewAlertController.textFields![0].backgroundColor = .red
+                        addNewAlertController.textFields![1].backgroundColor = .red
                     } else {
-                        addNewAlertController.textFields![0].backgroundColor = .white
+                        addNewAlertController.textFields![1].backgroundColor = .white
                     }
                     
                     if username == "" {
-                        addNewAlertController.textFields![2].backgroundColor = .red
+                        addNewAlertController.textFields![3].backgroundColor = .red
                     } else {
-                        addNewAlertController.textFields![2].backgroundColor = .white
+                        addNewAlertController.textFields![3].backgroundColor = .white
                     }
                 })
             } else {
@@ -130,7 +130,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     self.tableView.reloadData()
                 } else {
                     self.present(addNewAlertController, animated: true, completion: {
-                        addNewAlertController.textFields![1].backgroundColor = .red
+                        addNewAlertController.textFields![2].backgroundColor = .red
                     })
                 }
             }
