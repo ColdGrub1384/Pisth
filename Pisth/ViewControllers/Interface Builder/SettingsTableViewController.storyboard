@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,14 +21,44 @@
                         <sections>
                             <tableViewSection id="u2N-h6-2wh">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="FjO-VZ-vn8" style="IBUITableViewCellStyleDefault" id="Cyj-Hb-WVh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Cyj-Hb-WVh">
                                         <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cyj-Hb-WVh" id="X5W-wH-PMo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use biometric authentication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8CF-NU-bJ6">
+                                                    <rect key="frame" x="16" y="12" width="277" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45R-GQ-uSU">
+                                                    <rect key="frame" x="312" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleBiometricAuth:" destination="zJU-Xt-wUr" eventType="valueChanged" id="GqB-V7-Xvu"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="45R-GQ-uSU" firstAttribute="centerY" secondItem="X5W-wH-PMo" secondAttribute="centerY" id="IEn-Ic-uUt"/>
+                                                <constraint firstItem="8CF-NU-bJ6" firstAttribute="leading" secondItem="X5W-wH-PMo" secondAttribute="leadingMargin" id="TLu-Sw-kAa"/>
+                                                <constraint firstItem="45R-GQ-uSU" firstAttribute="leading" secondItem="8CF-NU-bJ6" secondAttribute="trailing" constant="19" id="YKo-KT-AuV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="45R-GQ-uSU" secondAttribute="trailing" constant="-2" id="oiD-wV-4vS"/>
+                                                <constraint firstItem="8CF-NU-bJ6" firstAttribute="bottom" secondItem="X5W-wH-PMo" secondAttribute="bottomMargin" id="qfp-nf-7Uf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="xN1-V7-hoJ" style="IBUITableViewCellStyleDefault" id="9tE-QB-ryN">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tE-QB-ryN" id="BOW-jf-BDq">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Licenses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FjO-VZ-vn8">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Licenses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xN1-V7-hoJ">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -47,6 +78,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="rWu-fD-V4I"/>
+                    <connections>
+                        <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
+                        <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIU-LF-Kqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

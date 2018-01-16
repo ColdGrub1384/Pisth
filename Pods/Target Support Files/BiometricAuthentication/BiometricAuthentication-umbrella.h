@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_PisthVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_PisthVersionString[];
+FOUNDATION_EXPORT double BiometricAuthenticationVersionNumber;
+FOUNDATION_EXPORT const unsigned char BiometricAuthenticationVersionString[];
 

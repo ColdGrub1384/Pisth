@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
+import BiometricAuthentication
 
 class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate {
     
@@ -333,20 +334,49 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let activityVC = ActivityViewController(message: "Connecting")
+        var connection = DataManager.shared.connections[indexPath.row]
         
-        self.present(activityVC, animated: true) {
-            let dirVC = DirectoryTableViewController(connection: DataManager.shared.connections[indexPath.row])
-            
-            activityVC.dismiss(animated: true, completion: {
-                tableView.deselectRow(at: indexPath, animated: true)
+        func connect() {
+            let activityVC = ActivityViewController(message: "Connecting")
+            self.present(activityVC, animated: true) {
+                let dirVC = DirectoryTableViewController(connection: connection)
                 
-                if let delegate = self.delegate {
-                    delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)
+                activityVC.dismiss(animated: true, completion: {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    
+                    if let delegate = self.delegate {
+                        delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)
+                    } else {
+                        self.navigationController?.pushViewController(dirVC, animated: true)
+                    }
+                })
+            }
+        }
+        
+        if UserDefaults.standard.bool(forKey: "biometricAuth") && BioMetricAuthenticator.canAuthenticate() {
+            BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
+                connect()
+            }, failure: { (error) in
+                if error == .fallback {
+                    let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
+                    passwordAlert.addTextField(configurationHandler: { (textField) in
+                        textField.placeholder = "Password"
+                        textField.isSecureTextEntry = true
+                    })
+                    passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                        connection.password = passwordAlert.textFields![0].text!
+                        connect()
+                    }))
+                    passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }))
+                    self.present(passwordAlert, animated: true, completion: nil)
                 } else {
-                    self.navigationController?.pushViewController(dirVC, animated: true)
+                    tableView.deselectRow(at: indexPath, animated: true)
                 }
             })
+        } else {
+            connect()
         }
     }
     

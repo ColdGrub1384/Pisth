@@ -12,4 +12,5 @@ target 'Pisth' do
   pod 'Zip'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftKeychainWrapper'
+  pod 'BiometricAuthentication'
 end

@@ -71,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             }
             
             UserDefaults.standard.set(true, forKey: "savedToKeychain")
+            UserDefaults.standard.synchronize()
         }
         
         return true

@@ -1,4 +1,5 @@
 PODS:
+  - BiometricAuthentication (1.0.3)
   - Google-Mobile-Ads-SDK (7.27.0)
   - Highlightr (1.1.0)
   - NMSSH (2.2.8)
@@ -6,6 +7,7 @@ PODS:
   - Zip (1.1.0)
 
 DEPENDENCIES:
+  - BiometricAuthentication
   - Google-Mobile-Ads-SDK
   - Highlightr
   - NMSSH
@@ -13,12 +15,13 @@ DEPENDENCIES:
   - Zip
 
 SPEC CHECKSUMS:
+  BiometricAuthentication: 8f64df242862b0497b2f8a12910ef0b999ad83c8
   Google-Mobile-Ads-SDK: 83f7f890e638ce8f1debd440ea363338c9f6be3b
   Highlightr: 519911a0a9a040d76e591f6fe58bb5177c8bdaa3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 758d7a9e9c8ba64009edf97eac5b60cc015eb78d
+PODFILE CHECKSUM: b1fbdf329f98e3093bcee59e6c483326eb768e59
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
