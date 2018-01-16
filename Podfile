@@ -11,4 +11,5 @@ target 'Pisth' do
   pod 'Highlightr'
   pod 'Zip'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'SwiftKeychainWrapper'
 end
