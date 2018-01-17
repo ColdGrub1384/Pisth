@@ -51,8 +51,38 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="xN1-V7-hoJ" style="IBUITableViewCellStyleDefault" id="9tE-QB-ryN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Q9A-ve-fMC">
                                         <rect key="frame" x="0.0" y="79" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q9A-ve-fMC" id="0Df-Vl-Gf9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show hidden files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTI-zl-3fe">
+                                                    <rect key="frame" x="16" y="12" width="277" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZz-qo-XBn">
+                                                    <rect key="frame" x="312" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleHiddenFiles:" destination="zJU-Xt-wUr" eventType="valueChanged" id="CDR-BA-x8w"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PZz-qo-XBn" secondAttribute="trailing" constant="-2" id="Cco-Dk-2I8"/>
+                                                <constraint firstItem="QTI-zl-3fe" firstAttribute="bottom" secondItem="0Df-Vl-Gf9" secondAttribute="bottomMargin" id="l1V-3k-3Ln"/>
+                                                <constraint firstItem="QTI-zl-3fe" firstAttribute="leading" secondItem="0Df-Vl-Gf9" secondAttribute="leadingMargin" id="obn-kV-ncw"/>
+                                                <constraint firstItem="PZz-qo-XBn" firstAttribute="leading" secondItem="QTI-zl-3fe" secondAttribute="trailing" constant="19" id="ohA-G9-UdM"/>
+                                                <constraint firstItem="PZz-qo-XBn" firstAttribute="centerY" secondItem="0Df-Vl-Gf9" secondAttribute="centerY" id="pm7-gK-PSf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="xN1-V7-hoJ" style="IBUITableViewCellStyleDefault" id="9tE-QB-ryN">
+                                        <rect key="frame" x="0.0" y="123" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tE-QB-ryN" id="BOW-jf-BDq">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -81,6 +111,7 @@
                     <connections>
                         <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
                         <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>
+                        <outlet property="showHiddenFilesSwitch" destination="PZz-qo-XBn" id="xnh-Ub-Kxg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIU-LF-Kqh" userLabel="First Responder" sceneMemberID="firstResponder"/>

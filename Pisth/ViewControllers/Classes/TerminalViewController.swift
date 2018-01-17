@@ -321,7 +321,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
-            DirectoryTableViewController.disconnected = true
             
             self.navigationController?.popToRootViewController(animated: true)
         }

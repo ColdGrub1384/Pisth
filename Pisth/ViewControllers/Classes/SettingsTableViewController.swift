@@ -11,8 +11,9 @@ import BiometricAuthentication
 class SettingsTableViewController: UITableViewController {
     
     enum Index: Int {
-        case biometricAuth = 0
-        case licenses = 1
+        case biometricAuth = 1
+        case showHiddenFiles = 2
+        case licenses = 3
     }
     
     override func viewDidLoad() {
@@ -23,6 +24,20 @@ class SettingsTableViewController: UITableViewController {
         }
         
         initBiometricAuthenticationSetting()
+        initShowHiddenFilesSetting()
+    }
+    
+    // MARK: - Show hidden files
+    
+    @IBOutlet weak var showHiddenFilesSwitch: UISwitch!
+    
+    @IBAction func toggleHiddenFiles(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "hidden")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func initShowHiddenFilesSetting() {
+        showHiddenFilesSwitch.isOn = UserDefaults.standard.bool(forKey: "hidden")
     }
     
     // MARK: - Biometric authentication
@@ -84,6 +99,10 @@ class SettingsTableViewController: UITableViewController {
             navigationController?.pushViewController(webVC, animated: true)
             
         case Index.biometricAuth.rawValue:
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+        case Index.showHiddenFiles.rawValue:
             
             tableView.deselectRow(at: indexPath, animated: true)
             

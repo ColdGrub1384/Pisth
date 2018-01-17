@@ -19,9 +19,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     var bannerView: GADBannerView!
     
     static var action = RemoteDirectoryAction.none
-    
-    static var disconnected = false
-    
+        
     init(connection: RemoteConnection, directory: String? = nil) {
         self.connection = connection
         ConnectionManager.shared.connection = connection
@@ -478,6 +476,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         }
         
+        if files![indexPath.row].nsString.lastPathComponent.hasPrefix(".") {
+            cell.filename.isEnabled = false
+            cell.iconView.alpha = 0.5
+        } else {
+            cell.filename.isEnabled = true
+            cell.iconView.alpha = 1
+        }
+        
         return cell
     }
     
@@ -619,7 +625,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     } else {
                         DispatchQueue.main.async {
                             activityVC.dismiss(animated: true, completion: {
-                                self.navigationController?.popToRootViewController(animated: true)
+                                let errorAlert = UIAlertController(title: "Error downloading file!", message: "Check for permissions.", preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                self.present(errorAlert, animated: true, completion: {
+                                    self.checkForConnectionError {
+                                        self.dismiss(animated: true, completion: {
+                                            self.showError()
+                                        })
+                                    }
+                                })
                             })
                         }
                     }
