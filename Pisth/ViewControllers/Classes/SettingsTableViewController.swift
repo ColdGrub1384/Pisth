@@ -11,9 +11,9 @@ import BiometricAuthentication
 class SettingsTableViewController: UITableViewController {
     
     enum Index: Int {
-        case biometricAuth = 1
-        case showHiddenFiles = 2
-        case licenses = 3
+        case biometricAuth = 0
+        case showHiddenFiles = 1
+        case licenses = 2
     }
     
     override func viewDidLoad() {
