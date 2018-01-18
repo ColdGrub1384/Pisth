@@ -247,23 +247,23 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Close session when coming back here
-                    
+        
         if let session = ConnectionManager.shared.session {
             if session.isConnected {
                 session.disconnect()
             }
         }
-            
+        
         if let session = ConnectionManager.shared.filesSession {
             if session.isConnected {
                 session.disconnect()
             }
         }
-            
+        
         ConnectionManager.shared.session = nil
         ConnectionManager.shared.filesSession = nil
         ConnectionManager.shared.result = .notConnected
