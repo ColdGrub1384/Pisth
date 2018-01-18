@@ -11,6 +11,7 @@ class FileTableViewCell: UITableViewCell {
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var filename: UILabel!
+    @IBOutlet weak var permssions: UILabel!
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {

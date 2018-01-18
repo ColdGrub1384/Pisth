@@ -466,6 +466,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             cell.filename.text = ".."
         }
         
+        cell.permssions.text = files[indexPath.row].permissions
+        cell.permssions.isHidden = false
+        
         return cell
     }
     
@@ -641,7 +644,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
     }
-    
+
     // MARK: - LocalDirectoryTableViewControllerDelegate
     
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) { // Send file

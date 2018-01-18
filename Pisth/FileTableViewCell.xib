@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +23,7 @@
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="file" translatesAutoresizingMaskIntoConstraints="NO" id="XnO-Fc-bEb">
                         <rect key="frame" x="0.0" y="-2" width="102" height="89"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="102" id="t63-I5-qzl"/>
+                            <constraint firstAttribute="width" constant="102" id="zhg-4b-4Bh"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File.txt" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjI-YR-D4X">
@@ -31,21 +32,32 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-rw-r--r--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBd-Td-f10">
+                        <rect key="frame" x="110" y="58" width="256" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="tjI-YR-D4X" firstAttribute="bottom" secondItem="S0P-yE-0Te" secondAttribute="bottomMargin" id="0ka-C0-NsM"/>
-                    <constraint firstItem="tjI-YR-D4X" firstAttribute="leading" secondItem="XnO-Fc-bEb" secondAttribute="trailing" constant="8" symbolic="YES" id="16Q-rR-mYk"/>
-                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="centerY" secondItem="S0P-yE-0Te" secondAttribute="centerY" id="G0W-Dc-Vxb"/>
-                    <constraint firstItem="tjI-YR-D4X" firstAttribute="top" secondItem="S0P-yE-0Te" secondAttribute="topMargin" id="LCG-BC-Nqk"/>
-                    <constraint firstItem="tjI-YR-D4X" firstAttribute="trailing" secondItem="S0P-yE-0Te" secondAttribute="trailingMargin" id="PF5-Ac-hMD"/>
-                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="leading" secondItem="S0P-yE-0Te" secondAttribute="leading" id="pyh-Sn-uh2"/>
-                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="top" secondItem="S0P-yE-0Te" secondAttribute="topMargin" constant="-13" id="sqC-pp-KbP"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="trailing" secondItem="S0P-yE-0Te" secondAttribute="trailingMargin" id="5gO-mG-bVq"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="trailing" secondItem="jBd-Td-f10" secondAttribute="trailing" id="EJg-5T-7aC"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="leading" secondItem="jBd-Td-f10" secondAttribute="leading" id="Kmt-Wh-Yhn"/>
+                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="leading" secondItem="S0P-yE-0Te" secondAttribute="leading" id="O4I-AG-eqf"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="bottom" secondItem="S0P-yE-0Te" secondAttribute="bottomMargin" id="Qxz-Rp-HPV"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="top" secondItem="S0P-yE-0Te" secondAttribute="topMargin" id="o8z-a7-rUI"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="baseline" secondItem="jBd-Td-f10" secondAttribute="firstBaseline" id="pU8-Ey-4mf"/>
+                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="top" secondItem="S0P-yE-0Te" secondAttribute="topMargin" constant="-13" id="rbQ-CZ-HN4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="jBd-Td-f10" secondAttribute="bottom" constant="-3" id="tLM-cp-hKo"/>
+                    <constraint firstItem="tjI-YR-D4X" firstAttribute="leading" secondItem="XnO-Fc-bEb" secondAttribute="trailing" constant="8" symbolic="YES" id="tpf-Zl-7ff"/>
+                    <constraint firstItem="XnO-Fc-bEb" firstAttribute="centerY" secondItem="S0P-yE-0Te" secondAttribute="centerY" id="vjZ-Ks-Px2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="filename" destination="tjI-YR-D4X" id="AJc-di-3mL"/>
                 <outlet property="iconView" destination="XnO-Fc-bEb" id="ERd-Ok-Ckh"/>
+                <outlet property="permssions" destination="jBd-Td-f10" id="1fI-a1-bgy"/>
             </connections>
             <point key="canvasLocation" x="-24" y="1.5"/>
         </tableViewCell>
