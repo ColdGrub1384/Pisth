@@ -11,10 +11,12 @@ import GoogleMobileAds
 import SwiftKeychainWrapper
 import BiometricAuthentication
 
-class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate {
+class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate {
     
     var delegate: BookmarksTableViewControllerDelegate?
     var bannerView: GADBannerView!
+    var searchController: UISearchController!
+    var fetched = [RemoteConnection]()
     
     @objc func openSettings() { // Open Settings
         navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
@@ -235,6 +237,14 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
         bannerView.delegate = self
         bannerView.load(GADRequest())
+        
+        // Search
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -266,6 +276,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            return fetched.count
+        }
+        
         return DataManager.shared.connections.count
     }
 
@@ -275,11 +289,15 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         cell.backgroundColor = .clear
         cell.accessoryType = .detailButton
         
-        let connection = DataManager.shared.connections[indexPath.row]
+        var connection = DataManager.shared.connections[indexPath.row]
+        
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+           connection = fetched[indexPath.row]
+        }
         
         // Configure the cell...
         
-        cell.textLabel?.text = DataManager.shared.connections[indexPath.row].name
+        cell.textLabel?.text = connection.name
         cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
         
         // If the connection has no name, set the title as username@host
@@ -339,7 +357,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     tableView.deselectRow(at: indexPath, animated: true)
                     
                     if let delegate = self.delegate {
-                        delegate.bookmarksTableViewController(self, didOpenConnection: DataManager.shared.connections[indexPath.row], inDirectoryTableViewController: dirVC)
+                        delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
                     } else {
                         self.navigationController?.pushViewController(dirVC, animated: true)
                     }
@@ -363,23 +381,43 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             self.present(passwordAlert, animated: true, completion: nil)
         }
         
-        if UserDefaults.standard.bool(forKey: "biometricAuth") {
-            BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
+        func open() {
+            if UserDefaults.standard.bool(forKey: "biometricAuth") {
+                BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
+                    connect()
+                }, failure: { (error) in
+                    if error != .canceledByUser && error != .canceledBySystem {
+                        askForPassword()
+                    } else {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                })
+            } else {
                 connect()
-            }, failure: { (error) in
-                if error != .canceledByUser && error != .canceledBySystem {
-                    askForPassword()
-                } else {
-                    tableView.deselectRow(at: indexPath, animated: true)
-                }
+            }
+        }
+        
+        if searchController.isActive {
+            if searchController.searchBar.text != "" {
+                connection = fetched[indexPath.row]
+            }
+            
+            searchController.dismiss(animated: true, completion: {
+                open()
             })
         } else {
-            connect()
+            open()
         }
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        showInfoAlert(editInfoAt: indexPath.row)
+        if searchController.isActive {
+            searchController.dismiss(animated: true, completion: {
+                self.showInfoAlert(editInfoAt: indexPath.row)
+            })
+        } else {
+            showInfoAlert(editInfoAt: indexPath.row)
+        }
     }
     
     // MARK: - GADBannerViewDelegate
@@ -387,5 +425,26 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
+    }
+    
+    // MARK: UISearchBarDelegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        fetched = []
+        
+        if !searchText.isEmpty {
+            
+            for connection in DataManager.shared.connections {
+                if connection.name.lowercased().contains(searchText.lowercased()) || connection.host.lowercased().contains(searchText.lowercased()) || connection.username.lowercased().contains(searchText.lowercased()) || connection.path.lowercased().contains(searchText.lowercased()) || "\(connection.port)".contains(searchText) {
+                    
+                    fetched.append(connection)
+                    
+                }
+                
+            }
+        }
+        
+        tableView.reloadData()
     }
 }
