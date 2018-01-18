@@ -13,7 +13,8 @@ class SettingsTableViewController: UITableViewController {
     enum Index: Int {
         case biometricAuth = 0
         case showHiddenFiles = 1
-        case licenses = 2
+        case blinkCursor = 2
+        case licenses = 3
     }
     
     override func viewDidLoad() {
@@ -25,6 +26,20 @@ class SettingsTableViewController: UITableViewController {
         
         initBiometricAuthenticationSetting()
         initShowHiddenFilesSetting()
+        initBlinkCursorSetting()
+    }
+    
+    // MARK: - Blink cursor
+    
+    @IBOutlet weak var blinkCursorSwitch: UISwitch!
+    
+    @IBAction func toggleBlinkCursor(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "blink")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func initBlinkCursorSetting() {
+        blinkCursorSwitch.isOn = UserDefaults.standard.bool(forKey: "blink")
     }
     
     // MARK: - Show hidden files
@@ -90,24 +105,16 @@ class SettingsTableViewController: UITableViewController {
     // MARK: Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case Index.licenses.rawValue:
+
+        if indexPath.row == Index.licenses.rawValue {
             
             // Open Licenses
             let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
             navigationController?.pushViewController(webVC, animated: true)
-            
-        case Index.biometricAuth.rawValue:
-            
+
+        } else {
             tableView.deselectRow(at: indexPath, animated: true)
-            
-        case Index.showHiddenFiles.rawValue:
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-        default:
-            break
         }
     }
 }

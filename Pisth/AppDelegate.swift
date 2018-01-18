@@ -74,6 +74,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Blink cursor by default
+        if UserDefaults.standard.value(forKey: "blink") == nil {
+            UserDefaults.standard.set(true, forKey: "blink")
+            UserDefaults.standard.synchronize()
+        }
+        
         return true
     }
     

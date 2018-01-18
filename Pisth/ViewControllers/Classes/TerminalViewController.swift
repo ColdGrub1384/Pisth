@@ -357,6 +357,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     // MARK: WKNavigationDelegate
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
+        
+        if UserDefaults.standard.bool(forKey: "blink") {
+            webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)
+        }
+        
         if console.isEmpty {
             
             // Session

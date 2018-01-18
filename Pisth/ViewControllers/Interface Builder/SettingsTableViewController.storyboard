@@ -81,8 +81,38 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="xN1-V7-hoJ" style="IBUITableViewCellStyleDefault" id="9tE-QB-ryN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="MJg-Gh-K6O">
                                         <rect key="frame" x="0.0" y="123" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MJg-Gh-K6O" id="Q8m-75-GXY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blink cursor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j29-cZ-54T">
+                                                    <rect key="frame" x="16" y="12" width="277" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vux-bk-6EK">
+                                                    <rect key="frame" x="312" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleBlinkCursor:" destination="zJU-Xt-wUr" eventType="valueChanged" id="RzR-rw-6Do"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vux-bk-6EK" firstAttribute="centerY" secondItem="Q8m-75-GXY" secondAttribute="centerY" id="eHZ-yF-kHr"/>
+                                                <constraint firstItem="j29-cZ-54T" firstAttribute="bottom" secondItem="Q8m-75-GXY" secondAttribute="bottomMargin" id="fO5-wh-4Ws"/>
+                                                <constraint firstItem="vux-bk-6EK" firstAttribute="leading" secondItem="j29-cZ-54T" secondAttribute="trailing" constant="19" id="nPh-Bd-G06"/>
+                                                <constraint firstItem="j29-cZ-54T" firstAttribute="leading" secondItem="Q8m-75-GXY" secondAttribute="leadingMargin" id="sOV-5I-TDD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vux-bk-6EK" secondAttribute="trailing" constant="-2" id="wum-tP-6xV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="xN1-V7-hoJ" style="IBUITableViewCellStyleDefault" id="9tE-QB-ryN">
+                                        <rect key="frame" x="0.0" y="167" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9tE-QB-ryN" id="BOW-jf-BDq">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -111,6 +141,7 @@
                     <connections>
                         <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
                         <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>
+                        <outlet property="blinkCursorSwitch" destination="vux-bk-6EK" id="gRd-dt-Lsg"/>
                         <outlet property="showHiddenFilesSwitch" destination="PZz-qo-XBn" id="xnh-Ub-Kxg"/>
                     </connections>
                 </tableViewController>
