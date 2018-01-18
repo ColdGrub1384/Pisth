@@ -156,18 +156,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Create WebView
-        webView = WKWebView(frame: CGRect(x: 0, y: navBarHeight, width: view.frame.width, height: view.frame.height))
-        view.addSubview(webView)
-        webView.backgroundColor = .black
-        webView.navigationDelegate = self
-        webView.scrollView.isScrollEnabled = false
-        if !readOnly {
-            becomeFirstResponder()
-        } else {
-            preventKeyboardFronBeeingDismissed = false
+        if console.isEmpty {
+            // Create WebView
+            webView = WKWebView(frame: CGRect(x: 0, y: navBarHeight, width: view.frame.width, height: view.frame.height))
+            view.addSubview(webView)
+            webView.backgroundColor = .black
+            webView.navigationDelegate = self
+            webView.scrollView.isScrollEnabled = false
+            if !readOnly {
+                becomeFirstResponder()
+            } else {
+                preventKeyboardFronBeeingDismissed = false
+            }
+            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
-        webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
     }
     
     @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
