@@ -19,27 +19,25 @@ class ConnectionManager {
     var saveFile: SaveFile?
     var connection: RemoteConnection?
     var result = ConnectionResult.notConnected
-    
-    var timer: Timer?
-    
-    func files(inDirectory directory: String) -> [String]? {
-        guard let session = filesSession else { return nil }
         
-        do {
-            var hiddenFiles: String {
-                if UserDefaults.standard.bool(forKey: "hidden") {
-                    return  " \"\(directory)\"/.*"
-                } else {
-                    return ""
+    func files(inDirectory directory: String) -> [NMSFTPFile]?  {
+        guard let session = filesSession else { return [] }
+        
+        guard var files = session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else {
+            return nil
+        }
+        
+        if !UserDefaults.standard.bool(forKey: "hidden") { // Remove hidden files if is necessary
+            for file in files {
+                if file.filename.hasPrefix(".") {
+                    guard let i = files.index(of: file) else { break }
+                    files.remove(at: i)
                 }
             }
-            let ls = try session.channel.execute("for file in \"\(directory)\"/*\(hiddenFiles); do if [ $file == \"\(directory)/.\" ] || [ $file == \"\(directory)/..\" ]; then printf \"\"; elif [[ -d $file ]]; then printf \"$file/\n\"; else printf \"$file\n\"; fi; done")
-            var result = ls.components(separatedBy: "\n")
-            result.removeLast()
-            return result
-        } catch {}
+        }
         
-        return nil
+        return files
+        
     }
     
     func connect() {

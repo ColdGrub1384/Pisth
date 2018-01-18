@@ -241,9 +241,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         super.viewWillAppear(animated)
         
         // Close session when coming back here
-        
-        ConnectionManager.shared.timer?.invalidate()
-            
+                    
         if let session = ConnectionManager.shared.session {
             if session.isConnected {
                 session.disconnect()

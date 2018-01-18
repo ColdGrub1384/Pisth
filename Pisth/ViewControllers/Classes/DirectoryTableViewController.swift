@@ -7,13 +7,13 @@
 
 import UIKit
 import GoogleMobileAds
+import NMSSH
 
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate {
         
     var directory: String
     var connection: RemoteConnection
-    var files: [String]?
-    var isDir = [Bool]()
+    var files: [NMSFTPFile]?
     var delegate: DirectoryTableViewControllerDelegate?
     var closeAfterSending = false
     var bannerView: GADBannerView!
@@ -45,39 +45,33 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 }
             }
             
-            if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
-                self.files = files
+            let files = ConnectionManager.shared.files(inDirectory: self.directory)
+            self.files = files
+            
+            guard self.files != nil else {
+                super.init(style: .plain)
+                return
+            }
                 
-                // Check if path is directory or not
-                for file in files {
-                    isDir.append(file.hasSuffix("/"))
+            if self.directory.removingUnnecessariesSlashes != "/" {
+                // Append parent directory
+                guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
+                    super.init(style: .plain)
+                    return
                 }
-                
-                if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
-                    self.files = []
-                    isDir[isDir.count-1] = true
-                }
-                
-                if self.directory.removingUnnecessariesSlashes != "/" {
-                    // Append parent directory
-                    var parent = self.directory.nsString.deletingLastPathComponent
-                    if !parent.hasSuffix("/") {
-                        parent += "/"
-                    }
-                    self.files!.append(parent)
-                    isDir.append(true)
-                }
+                self.files!.append(parent)
             }
             
+            // TODO: - Make it compatible with only SFTP
             // Ignore files listed in ~/.pisthignore
-            if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
+            /*if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
                 for file in result.components(separatedBy: "\n") {
                     if file != "" && !file.hasSuffix("#") {
                         
                         if let files = self.files {
                             var i = 0
                             for file_ in files {
-                                if file_.nsString.lastPathComponent == file {
+                                if file_.filename == file {
                                     self.files!.remove(at: i)
                                     self.isDir.remove(at: i)
                                 }
@@ -86,7 +80,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         }
                     }
                 }
-            }
+            }*/
         }
         
         super.init(style: .plain)
@@ -125,6 +119,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
         var buttons: [UIBarButtonItem] {
+            guard files != nil else { return [uploadFile, terminal] }
             guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
             guard let result = try? session.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
             let allFiles = result.components(separatedBy: "\n")
@@ -146,27 +141,27 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     func showError() { // Go back and show error
         guard let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
-        navVC.popToRootViewController(animated: true, completion: {
-            let result = ConnectionManager.shared.result
-            
-            var alert: UIAlertController!
-            switch result {
-            case .notConnected:
-                alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
-            case .connected:
-                alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
-            default:
-                alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
-            }
-            
-            if alert != nil {
+        let result = ConnectionManager.shared.result
+        
+        var alert: UIAlertController!
+        switch result {
+        case .notConnected:
+            alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
+        case .connected:
+            alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
+        default:
+            alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
+        }
+        
+        if alert != nil {
+            navVC.popToRootViewController(animated: true, completion: {
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-            }
-        })
+            })
+        }
     }
     
-    func checkForConnectionError(errorHandler: @escaping () -> Void) { // Check for connection errors and run handler if there is an error
+    func checkForConnectionError(errorHandler: @escaping () -> Void, successHandler: (() -> Void)? = nil) { // Check for connection errors and run handler if there is an error
         guard let session = ConnectionManager.shared.filesSession else {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
@@ -178,28 +173,35 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
             errorHandler()
+            return
         }
         
         if !session.isConnected || !session.isAuthorized {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
             errorHandler()
+            return
         }
         
+        if let handler = successHandler {
+            handler()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // Connection errors
-        if files == nil {
-            ConnectionManager.shared.session = nil
-            ConnectionManager.shared.filesSession = nil
-            showError()
-        } else if files! == [] {
-            ConnectionManager.shared.session = nil
-            ConnectionManager.shared.filesSession = nil
-            showError()
+        checkForConnectionError(errorHandler: {
+            self.showError()
+        }) {
+            if self.files == nil {
+                self.navigationController?.popViewController(animated: true, completion: {
+                    let alert = UIAlertController(title: "Error opening directory!", message: "Check for permissions.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
         }
     }
     
@@ -219,39 +221,26 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     @objc func reload() { // Reload current directory content
-        files = nil
-        isDir = []
         
-        checkForConnectionError {
+        self.files = nil
+        
+        checkForConnectionError(errorHandler: {
             self.showError()
+        })
+        
+        guard ConnectionManager.shared.filesSession != nil else { return }
+        let files = ConnectionManager.shared.files(inDirectory: self.directory)
+        self.files = files
+            
+        if self.directory.removingUnnecessariesSlashes != "/" {
+            // Append parent directory
+            guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else { return }
+            self.files!.append(parent)
         }
         
-        guard ConnectionManager.shared.session != nil else { return }
-        if let files = ConnectionManager.shared.files(inDirectory: self.directory) {
-            self.files = files
-            
-            if files == [self.directory+"/*"] { // The content of files is ["*"] when there is no file
-                self.files = []
-            }
-            
-            // Check if path is directory or not
-            for file in files {
-                isDir.append(file.hasSuffix("/"))
-            }
-            
-            if self.directory.removingUnnecessariesSlashes != "/" {
-                // Append parent directory
-                var parent = self.directory.nsString.deletingLastPathComponent
-                if !parent.hasSuffix("/") {
-                    parent += "/"
-                }
-                self.files!.append(parent)
-                isDir.append(true)
-            }
-        }
-        
+        // TODO: Make it compatible with SFTP only
         // Ignore files listed in ~/.pisthignore
-        if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
+        /*if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
             for file in result.components(separatedBy: "\n") {
                 if file != "" && !file.hasSuffix("#") {
                     
@@ -271,7 +260,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     }
                 }
             }
-        }
+        }*/
         
         tableView.reloadData()
         refreshControl?.endRefreshing()
@@ -279,9 +268,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     @objc func openShell() { // Open shell in current directory
         
-        checkForConnectionError {
+        checkForConnectionError(errorHandler: {
             self.showError()
-        }
+        })
         
         let terminalVC = TerminalViewController()
         terminalVC.pwd = directory
@@ -290,9 +279,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     @objc func uploadFile(_ sender: UIBarButtonItem) { // Add file
         
-        checkForConnectionError {
+        checkForConnectionError(errorHandler: {
             self.showError()
-        }
+        })
         
         let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -311,21 +300,18 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             })
             chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
-                do {
-                    let result = try ConnectionManager.shared.filesSession?.channel.execute("touch '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
-                    
-                    if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
-                        let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self.present(errorAlert, animated: true, completion: nil)
-                    }
-                    
-                    self.reload()
-                } catch let error {
-                    let errorAlert = UIAlertController(title: "Error creating file!", message: error.localizedDescription, preferredStyle: .alert)
+                
+                let newPath = self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)
+                
+                guard let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: Bundle.main.path(forResource: "empty", ofType: nil), toFileAtPath: newPath) else { return }
+                
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error creating file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
+                
+                self.reload()
             }))
             
             self.present(chooseName, animated: true, completion: nil)
@@ -339,21 +325,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             })
             chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
-                do {
-                    let result = try ConnectionManager.shared.filesSession?.channel.execute("mkdir '\(self.directory)/\(chooseName.textFields![0].text!)' 2>&1")
-                    
-                    if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
-                        let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        self.present(errorAlert, animated: true, completion: nil)
-                    }
-                    
-                    self.reload()
-                } catch let error {
-                    let errorAlert = UIAlertController(title: "Error creating folder!", message: error.localizedDescription, preferredStyle: .alert)
+                guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
+                
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error creating directory!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
+                
+                self.reload()
             }))
             
             self.present(chooseName, animated: true, completion: nil)
@@ -370,63 +350,72 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             
-            self.checkForConnectionError {
+            self.checkForConnectionError(errorHandler: {
                 self.showError()
-            }
+            })
             
-            do {
-                let result = try ConnectionManager.shared.filesSession?.channel.execute("cp -R '\(Pasteboard.local.filePath!)' '\(self.directory)' 2>&1")
+            let progress = UIAlertController(title: "Copying...", message: "", preferredStyle: .alert)
+            
+            self.present(progress, animated: true, completion: nil)
+            
+            guard let result = ConnectionManager.shared.filesSession?.sftp.copyContents(ofPath: Pasteboard.local.filePath!, toFileAtPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent), progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                 
-                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
-                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
+                let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
+                
+                DispatchQueue.main.async {
+                    progress.message = "\(received) / \(toBeReceived)"
+                }
+                
+                return true
+            }) else {
+                progress.dismiss(animated: true, completion: nil)
+                return
+            }
+                        
+            progress.dismiss(animated: true, completion: {
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error copying file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
-                
-                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
-                    dirVC.reload()
-                }
-                
-                Pasteboard.local.filePath = nil
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+            })
+            
+            if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+                dirVC.reload()
             }
+            
+            Pasteboard.local.filePath = nil
+            
         })
     }
     
     @objc func moveFile() { // Move file in current directory
         
-        checkForConnectionError {
+        checkForConnectionError(errorHandler: {
             self.showError()
-        }
+        })
+        
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             
-            self.checkForConnectionError {
+            self.checkForConnectionError(errorHandler: {
                 self.showError()
+            })
+            
+            guard let result =  ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
+                
+            if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+                dirVC.reload()
             }
             
-            do {
-                let result = try ConnectionManager.shared.filesSession?.channel.execute("mv '\(Pasteboard.local.filePath!)' '\(self.directory)/\(Pasteboard.local.filePath!.nsString.lastPathComponent)' 2>&1")
-                
-                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
-                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
-                }
-                
-                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
-                    dirVC.reload()
-                }
-                
-                Pasteboard.local.filePath = nil
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+            if !result {
+                let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
             }
+                
+            Pasteboard.local.filePath = nil
         })
     }
     
@@ -455,33 +444,26 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         // Configure the cell...
         
-        if let files = files {
-            if files[indexPath.row] != directory.removingUnnecessariesSlashes.nsString.deletingLastPathComponent && files[indexPath.row] != directory.removingUnnecessariesSlashes.nsString.deletingLastPathComponent+"/" {
-                if isDir[indexPath.row] {
-                    let components = files[indexPath.row].components(separatedBy: "/")
-                    cell.filename.text = components[components.count-2]
-                } else {
-                    cell.filename.text = files[indexPath.row].components(separatedBy: "/").last
-                }
-            } else {
-                cell.filename.text = ".."
-            }
+        guard let files = files else { return cell }
+        
+        cell.filename.text = files[indexPath.row].filename
+        
+        if files[indexPath.row].isDirectory {
+            cell.iconView.image = #imageLiteral(resourceName: "folder")
+        } else {
+            cell.iconView.image = fileIcon(forExtension: files[indexPath.row].filename.nsString.pathExtension)
         }
         
-        if isDir.indices.contains(indexPath.row) {
-            if isDir[indexPath.row] {
-                cell.iconView.image = #imageLiteral(resourceName: "folder")
-            } else {
-                cell.iconView.image = fileIcon(forExtension: files![indexPath.row].nsString.pathExtension)
-            }
-        }
-        
-        if files![indexPath.row].nsString.lastPathComponent.hasPrefix(".") {
+        if files[indexPath.row].filename.nsString.lastPathComponent.hasPrefix(".") {
             cell.filename.isEnabled = false
             cell.iconView.alpha = 0.5
         } else {
             cell.filename.isEnabled = true
             cell.iconView.alpha = 1
+        }
+        
+        if indexPath.row == files.count-1 && directory.removingUnnecessariesSlashes != "/" {
+            cell.filename.text = ".."
         }
         
         return cell
@@ -494,27 +476,44 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Remove file
-            do {
-                let result = try ConnectionManager.shared.filesSession?.channel.execute("rm -rf '\(files![indexPath.row])' 2>&1")
+            
+            if files![indexPath.row].isDirectory {
+                guard let result = ConnectionManager.shared.filesSession?.sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
+                    self.showError()
+                    return
+                }
                 
-                if result?.replacingOccurrences(of: "\n", with: "") != "" { // Error
-                    let errorAlert = UIAlertController(title: nil, message: result, preferredStyle: .alert)
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     self.present(errorAlert, animated: true, completion: nil)
                 } else {
-                    files!.remove(at: indexPath.row)
-                    isDir.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.reload()
                 }
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(errorAlert, animated: true, completion: nil)
+            } else {
+                guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
+                    self.showError()
+                    return
+                }
+                
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                } else {
+                    self.reload()
+                }
             }
+
         }
     }
     
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        
+        if files![indexPath.row].isDirectory {
+            return false
+        }
+        
         return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
     }
     
@@ -525,7 +524,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         if action == #selector(copy(_:)) { // Copy file
             
-            Pasteboard.local.filePath = files![indexPath.row]
+            Pasteboard.local.filePath = directory.nsString.appendingPathComponent(files![indexPath.row].filename)
             
             let dirVC = DirectoryTableViewController(connection: connection, directory: directory)
             dirVC.navigationItem.prompt = "Select a directory where copy file"
@@ -547,100 +546,100 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
+        guard let files = files else { return }
+        var path = self.directory.nsString.appendingPathComponent(files[indexPath.row].filename)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
+            if cell.filename.text == ".." {
+                path = self.directory.nsString.deletingLastPathComponent
+            }
+        }
         
         var continueDownload = true
         
-        if files![indexPath.row].hasSuffix("/") { // Open folder
-            
-            let activityVC = ActivityViewController(message: "Loading")
-            self.present(activityVC, animated: true, completion: {
-                let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.files?[indexPath.row].removingUnnecessariesSlashes)
-                if let delegate = self.delegate {
-                    activityVC.dismiss(animated: true, completion: {
-                        
-                        delegate.directoryTableViewController(dirVC, didOpenDirectory: self.files![indexPath.row])
-                        
-                        tableView.deselectRow(at: indexPath, animated: true)
-                    })
-                } else {
-                    activityVC.dismiss(animated: true, completion: {
-                        
-                        self.navigationController?.pushViewController(dirVC, animated: true)
-                        
-                        tableView.deselectRow(at: indexPath, animated: true)
-                    })
-                }
-            })
-        } else { // Download file
-            
-            let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
-            activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-                continueDownload = false
-                tableView.deselectRow(at: indexPath, animated: true)
-            }))
-            
-            self.present(activityVC, animated: true, completion: {
+        self.checkForConnectionError(errorHandler: { 
+            self.showError()
+        }) {
+            if files[indexPath.row].isDirectory { // Open folder
                 
-                self.checkForConnectionError {
-                    activityVC.dismiss(animated: true, completion: {
-                        self.showError()
-                    })
-                }
-                
-                let newFile = FileManager.default.documents.appendingPathComponent(cell.filename.text!)
-                
-                guard let session = ConnectionManager.shared.filesSession else { return }
-                
-                DispatchQueue.global(qos: .background).async {
-                    if let data = session.sftp.contents(atPath: self.files![indexPath.row].removingUnnecessariesSlashes, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
-                        
-                        let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
-                        let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
-                        
-                        DispatchQueue.main.async {
-                            activityVC.message = "\(received) / \(toBeReceived)"
-                        }
-                        
-                        return continueDownload
-                    }) {
-                        DispatchQueue.main.async {
-                            do {
-                                try data.write(to: newFile)
-                                
-                                activityVC.dismiss(animated: true, completion: {
-                                    ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: self.files![indexPath.row])
-                                    LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
-                                })
-                            } catch let error {
-                                activityVC.dismiss(animated: true, completion: {
-                                    let errorAlert = UIAlertController(title: "Error downloading file!", message: error.localizedDescription, preferredStyle: .alert)
-                                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                    self.present(errorAlert, animated: true, completion: nil)
-                                })
-                            }
+                let activityVC = ActivityViewController(message: "Loading")
+                self.present(activityVC, animated: true, completion: {
+                    let dirVC = DirectoryTableViewController(connection: self.connection, directory: path)
+                    if let delegate = self.delegate {
+                        activityVC.dismiss(animated: true, completion: {
+                            
+                            delegate.directoryTableViewController(dirVC, didOpenDirectory: path)
                             
                             tableView.deselectRow(at: indexPath, animated: true)
-                        }
+                        })
                     } else {
-                        DispatchQueue.main.async {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error downloading file!", message: "Check for permissions.", preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                                self.present(errorAlert, animated: true, completion: {
-                                    self.checkForConnectionError {
-                                        self.dismiss(animated: true, completion: {
-                                            self.showError()
-                                        })
-                                    }
+                        activityVC.dismiss(animated: true, completion: {
+                            
+                            self.navigationController?.pushViewController(dirVC, animated: true)
+                            
+                            tableView.deselectRow(at: indexPath, animated: true)
+                        })
+                    }
+                })
+            } else { // Download file
+                
+                let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
+                activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                    continueDownload = false
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }))
+                
+                self.present(activityVC, animated: true, completion: {
+                    
+                    let newFile = FileManager.default.documents.appendingPathComponent(path.nsString.lastPathComponent)
+                    
+                    guard let session = ConnectionManager.shared.filesSession else { return }
+                    
+                    DispatchQueue.global(qos: .background).async {
+                        if let data = session.sftp.contents(atPath: path, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
+                            
+                            let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
+                            let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
+                            
+                            DispatchQueue.main.async {
+                                activityVC.message = "\(received) / \(toBeReceived)"
+                            }
+                            
+                            return continueDownload
+                        }) {
+                            DispatchQueue.main.async {
+                                do {
+                                    try data.write(to: newFile)
+                                    
+                                    activityVC.dismiss(animated: true, completion: {
+                                        ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: path)
+                                        LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
+                                    })
+                                } catch let error {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        let errorAlert = UIAlertController(title: "Error saving file!", message: error.localizedDescription, preferredStyle: .alert)
+                                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                        self.present(errorAlert, animated: true, completion: nil)
+                                    })
+                                }
+                                
+                                tableView.deselectRow(at: indexPath, animated: true)
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                activityVC.dismiss(animated: true, completion: {
+                                    let alert = UIAlertController(title: "Error downloading file!", message: "Check for permissions.", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                                    tableView.deselectRow(at: indexPath, animated: true)
                                 })
-                            })
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
-                
+        
     }
     
     // MARK: - LocalDirectoryTableViewControllerDelegate

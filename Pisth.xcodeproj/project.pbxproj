@@ -41,6 +41,7 @@
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
 		3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE835A01FF2DE350073D06E /* WebViewController.xib */; };
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
+		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
@@ -95,6 +96,7 @@
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
 		3AE835A01FF2DE350073D06E /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
+				3AEF1119201115850089389E /* empty */,
 			);
 			name = Ressources;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */,
 				3A36DFA120012D520089039F /* xterm.js in Resources */,
+				3AEF111A201115850089389E /* empty in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,

@@ -13,6 +13,14 @@ class FileTableViewCell: UITableViewCell {
     @IBOutlet weak var filename: UILabel!
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+            
+            if directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)?.row ?? 0].isDirectory {
+                
+                return (action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)))
+            }
+        }
+        
         return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(moveFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(renameFile(_:)))
     }
     
@@ -23,30 +31,29 @@ class FileTableViewCell: UITableViewCell {
     @objc func renameFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
-            directoryTableViewController.checkForConnectionError {
+            directoryTableViewController.checkForConnectionError(errorHandler: {
                 directoryTableViewController.showError()
-            }
+            })
             
             let fileToRename = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
             
-            let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.nsString.lastPathComponent).", preferredStyle: .alert)
+            let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.filename!).", preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
                 textField.placeholder = "New file name"
-                textField.text = fileToRename.nsString.lastPathComponent
+                textField.text = fileToRename.filename
             })
             
             renameAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
                 guard let newFileName = renameAlert.textFields?[0].text else { return }
                 guard let session = ConnectionManager.shared.filesSession else { return }
                 
-                guard let response = try? session.channel.execute("mv '\(fileToRename)' '\(fileToRename.nsString.deletingLastPathComponent.nsString.appendingPathComponent(newFileName))'") else { return }
-                
-                if !response.replacingOccurrences(of: "\n", with: "").isEmpty {
-                    let errorAlert = UIAlertController(title: nil, message: response, preferredStyle: .alert)
+                if session.sftp.moveItem(atPath: directoryTableViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryTableViewController.directory.nsString.appendingPathComponent(newFileName)) {
+                   
+                    directoryTableViewController.reload()
+                } else {
+                    let errorAlert = UIAlertController(title: "Error renaming file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                     directoryTableViewController.present(errorAlert, animated: true, completion: nil)
-                } else {
-                    directoryTableViewController.reload()
                 }
             }))
             
@@ -59,11 +66,11 @@ class FileTableViewCell: UITableViewCell {
     @objc func moveFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
-            directoryTableViewController.checkForConnectionError {
+            directoryTableViewController.checkForConnectionError(errorHandler: {
                 directoryTableViewController.showError()
-            }
+            })
             
-            Pasteboard.local.filePath = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row]
+            Pasteboard.local.filePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
             
             let dirVC = DirectoryTableViewController(connection: directoryTableViewController.connection, directory: directoryTableViewController.directory)
             dirVC.navigationItem.prompt = "Select a directory where move file"
