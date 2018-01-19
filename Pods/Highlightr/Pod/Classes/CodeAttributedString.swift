@@ -34,13 +34,13 @@ open class CodeAttributedString : NSTextStorage
 {
     /// Internal Storage
     let stringStorage = NSMutableAttributedString(string: "")
-
+    
     /// Highlightr instace used internally for highlighting. Use this for configuring the theme.
     open let highlightr = Highlightr()!
     
     /// This object will be notified before and after the highlighting.
     open var highlightDelegate : HighlightDelegate?
-
+    
     /// Initialize the CodeAttributedString
     public override init()
     {
@@ -55,22 +55,18 @@ open class CodeAttributedString : NSTextStorage
         setupListeners()
     }
     
-    required public init(itemProviderData data: Data, typeIdentifier: String) throws {
-        fatalError("init(itemProviderData:typeIdentifier:) has not been implemented")
-    }
-    
     #if os(OSX)
     /// Initialize the CodeAttributedString
-    required public init?(pasteboardPropertyList propertyList: Any, ofType type: String)
+    required public init?(pasteboardPropertyList propertyList: Any, ofType type: NSPasteboard.PasteboardType)
     {
-        super.init(pasteboardPropertyList: propertyList, ofType: type)
-        setupListeners()
+    super.init(pasteboardPropertyList: propertyList, ofType: type)
+    setupListeners()
     }
     #endif
     
     /// Language syntax to use for highlighting. Providing nil will disable highlighting.
     open var language : String?
-    {
+        {
         didSet
         {
             highlight(NSMakeRange(0, stringStorage.length))
@@ -79,7 +75,7 @@ open class CodeAttributedString : NSTextStorage
     
     /// Returns a standard String based on the current one.
     open override var string: String
-    {
+        {
         get
         {
             return stringStorage.string
@@ -117,9 +113,9 @@ open class CodeAttributedString : NSTextStorage
      - parameter attrs: [String : AnyObject]
      - parameter range: NSRange
      */
-    open func setAttributes(_ attrs: [String : Any]?, range: NSRange)
+    open override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange)
     {
-        stringStorage.setAttributes(attrs as! [NSAttributedStringKey : Any]?, range: range)
+        stringStorage.setAttributes(attrs, range: range)
         self.edited(NSTextStorageEditActions.editedAttributes, range: range, changeInLength: 0)
     }
     
@@ -136,7 +132,7 @@ open class CodeAttributedString : NSTextStorage
             }
         }
     }
-
+    
     func highlight(_ range: NSRange)
     {
         if(language == nil)
@@ -152,39 +148,39 @@ open class CodeAttributedString : NSTextStorage
                 return;
             }
         }
-
+        
         
         let string = (self.string as NSString)
         let line = string.substring(with: range)
         DispatchQueue.global().async
-        {
-            let tmpStrg = self.highlightr.highlight(line, as: self.language!)
-            DispatchQueue.main.async(execute: {
-                //Checks to see if this highlighting is still valid.
-                if((range.location + range.length) > self.stringStorage.length)
-                {
-                    self.highlightDelegate?.didHighlight?(range, success: false)
-                    return;
-                }
-                
-                if(tmpStrg?.string != self.stringStorage.attributedSubstring(from: range).string)
-                {
-                    self.highlightDelegate?.didHighlight?(range, success: false)
-                    return;
-                }
-                
-                self.beginEditing()
-                tmpStrg?.enumerateAttributes(in: NSMakeRange(0, (tmpStrg?.length)!), options: [], using: { (attrs, locRange, stop) in
-                    var fixedRange = NSMakeRange(range.location+locRange.location, locRange.length)
-                    fixedRange.length = (fixedRange.location + fixedRange.length < string.length) ? fixedRange.length : string.length-fixedRange.location
-                    fixedRange.length = (fixedRange.length >= 0) ? fixedRange.length : 0
-                    self.stringStorage.setAttributes(attrs, range: fixedRange)
+            {
+                let tmpStrg = self.highlightr.highlight(line, as: self.language!)
+                DispatchQueue.main.async(execute: {
+                    //Checks to see if this highlighting is still valid.
+                    if((range.location + range.length) > self.stringStorage.length)
+                    {
+                        self.highlightDelegate?.didHighlight?(range, success: false)
+                        return;
+                    }
+                    
+                    if(tmpStrg?.string != self.stringStorage.attributedSubstring(from: range).string)
+                    {
+                        self.highlightDelegate?.didHighlight?(range, success: false)
+                        return;
+                    }
+                    
+                    self.beginEditing()
+                    tmpStrg?.enumerateAttributes(in: NSMakeRange(0, (tmpStrg?.length)!), options: [], using: { (attrs, locRange, stop) in
+                        var fixedRange = NSMakeRange(range.location+locRange.location, locRange.length)
+                        fixedRange.length = (fixedRange.location + fixedRange.length < string.length) ? fixedRange.length : string.length-fixedRange.location
+                        fixedRange.length = (fixedRange.length >= 0) ? fixedRange.length : 0
+                        self.stringStorage.setAttributes(attrs, range: fixedRange)
+                    })
+                    self.endEditing()
+                    self.edited(NSTextStorageEditActions.editedAttributes, range: range, changeInLength: 0)
+                    self.highlightDelegate?.didHighlight?(range, success: true)
                 })
-                self.endEditing()
-                self.edited(NSTextStorageEditActions.editedAttributes, range: range, changeInLength: 0)
-                self.highlightDelegate?.didHighlight?(range, success: true)
-            })
-            
+                
         }
         
     }
@@ -193,9 +189,10 @@ open class CodeAttributedString : NSTextStorage
     {
         highlightr.themeChanged =
             { _ in
-                    self.highlight(NSMakeRange(0, self.stringStorage.length))
-            }
+                self.highlight(NSMakeRange(0, self.stringStorage.length))
+        }
     }
     
     
 }
+

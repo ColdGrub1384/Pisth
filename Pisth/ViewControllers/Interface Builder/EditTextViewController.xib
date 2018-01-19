@@ -17,39 +17,37 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-Os-Oxa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                        <color key="textColor" red="0.50259774923324585" green="0.4743533730506897" blue="0.47819989919662476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    </textView>
-                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="a1l-Ng-9u3">
+                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="q5p-ov-Il9">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <items>
-                            <barButtonItem image="save" id="xDR-UI-cgh">
+                            <barButtonItem title="Item" image="save" id="Irf-xW-Qmg">
                                 <connections>
-                                    <action selector="save:" destination="8Xd-vQ-p0D" id="Dif-kC-fg6"/>
+                                    <action selector="save:" destination="8Xd-vQ-p0D" id="Hgl-LN-k3G"/>
                                 </connections>
                             </barButtonItem>
                         </items>
                     </toolbar>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzc-EE-asO">
+                        <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="Qzk-Os-Oxa" firstAttribute="leading" secondItem="a1l-Ng-9u3" secondAttribute="leading" id="B0J-DG-OMl"/>
-                    <constraint firstAttribute="trailing" secondItem="Qzk-Os-Oxa" secondAttribute="trailing" id="RC2-ec-7m4"/>
-                    <constraint firstItem="Qzk-Os-Oxa" firstAttribute="trailing" secondItem="a1l-Ng-9u3" secondAttribute="trailing" id="ecY-9d-C0P"/>
-                    <constraint firstItem="Qzk-Os-Oxa" firstAttribute="leading" secondItem="6rv-Kh-WG6" secondAttribute="leading" id="fVM-DB-KDz"/>
-                    <constraint firstItem="a1l-Ng-9u3" firstAttribute="bottom" secondItem="hXu-Eu-Umg" secondAttribute="bottom" id="ibe-jc-sJC"/>
-                    <constraint firstItem="a1l-Ng-9u3" firstAttribute="top" secondItem="Qzk-Os-Oxa" secondAttribute="bottom" id="jZy-b6-k3L"/>
-                    <constraint firstItem="Qzk-Os-Oxa" firstAttribute="top" secondItem="6rv-Kh-WG6" secondAttribute="top" id="tOw-yA-CzF"/>
+                    <constraint firstItem="fzc-EE-asO" firstAttribute="trailing" secondItem="q5p-ov-Il9" secondAttribute="trailing" id="Idk-Xp-JTw"/>
+                    <constraint firstAttribute="trailing" secondItem="fzc-EE-asO" secondAttribute="trailing" id="WCo-1p-grt"/>
+                    <constraint firstItem="fzc-EE-asO" firstAttribute="leading" secondItem="q5p-ov-Il9" secondAttribute="leading" id="aiO-YQ-QTr"/>
+                    <constraint firstItem="q5p-ov-Il9" firstAttribute="bottom" secondItem="hXu-Eu-Umg" secondAttribute="bottom" id="cnp-9U-5st"/>
+                    <constraint firstItem="fzc-EE-asO" firstAttribute="top" secondItem="hXu-Eu-Umg" secondAttribute="top" id="d9o-ds-EpN"/>
+                    <constraint firstItem="q5p-ov-Il9" firstAttribute="top" secondItem="fzc-EE-asO" secondAttribute="bottom" id="nSq-3q-mlL"/>
+                    <constraint firstItem="fzc-EE-asO" firstAttribute="leading" secondItem="6rv-Kh-WG6" secondAttribute="leading" id="rRP-Et-eRS"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="hXu-Eu-Umg"/>
             </view>
+            <nil key="simulatedBottomBarMetrics"/>
             <connections>
-                <outlet property="textView" destination="Qzk-Os-Oxa" id="ZS8-4A-hop"/>
+                <outlet property="placeholderView" destination="fzc-EE-asO" id="mba-FS-geY"/>
             </connections>
-            <point key="canvasLocation" x="-150" y="-4"/>
+            <point key="canvasLocation" x="-150.5" y="-4.5"/>
         </viewController>
     </objects>
     <resources>

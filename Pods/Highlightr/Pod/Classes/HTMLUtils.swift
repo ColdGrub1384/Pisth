@@ -276,7 +276,7 @@ internal class HTMLUtils {
         if entity.hasPrefix("&#x") || entity.hasPrefix("&#X"){
             return decodeNumeric(String(entity[entity.index(entity.startIndex, offsetBy: 3)...]), base: 16)
         } else if entity.hasPrefix("&#") {
-            return decodeNumeric(String(entity[entity.index(entity.startIndex, offsetBy: 2)]), base: 10)
+            return decodeNumeric(String(entity[entity.index(entity.startIndex, offsetBy: 2)...]), base: 10)
         } else {
             return characterEntities[entity]
         }
@@ -292,3 +292,4 @@ internal class HTMLUtils {
     }
     
 }
+

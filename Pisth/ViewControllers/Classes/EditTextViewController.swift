@@ -9,17 +9,15 @@ import UIKit
 import Highlightr
 
 class EditTextViewController: UIViewController, UITextViewDelegate {
-        
-    @IBOutlet weak var textView: UITextView!
+    
+    @IBOutlet weak var placeholderView: UIView!
+    var textView: UITextView!
     
     var file: URL!
     
     // Syntax coloring variables
-    var highlightr = Highlightr()
-    var timer: Timer?
-    var range: NSRange?
-    var cursorPos: UITextRange?
-    var pauseColoring = false
+    var textStorage = CodeAttributedString()
+    var highlightr: Highlightr!
     private var language_: String?
     var language: String? {
         get {
@@ -34,7 +32,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             
             let supportedLanguages = highlightr!.supportedLanguages()
             if supportedLanguages.contains(language_!) {
-                return language_
+                return language_?.replacingOccurrences(of: "-", with: "")
             } else {
                 return nil
             }
@@ -47,7 +45,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // Setup textView
     func setupTextView() {
-        let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: view.bounds.width, height: 50))
         toolbar.barStyle = .black
         
         let dismissKeyboard = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard(_:)))
@@ -58,85 +56,87 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         toolbar.items = items
         toolbar.sizeToFit()
         
-        textView.inputAccessoryView = toolbar
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        
+        let textContainer = NSTextContainer(size: view.bounds.size)
+        layoutManager.addTextContainer(textContainer)
+        
+        textView = UITextView(frame: placeholderView.bounds, textContainer: textContainer)
+        textView.isScrollEnabled = false
+        textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        textStorage.highlightr.setTheme(to: "paraiso-dark")
+        textView.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
+        textView.autocorrectionType = UITextAutocorrectionType.no
+        textView.autocapitalizationType = UITextAutocapitalizationType.none
         textView.keyboardAppearance = .dark
-        textView.autocorrectionType = .no
-        textView.autocapitalizationType = .none
+        textView.textColor = UIColor(white: 0.8, alpha: 1.0)
+        textView.inputAccessoryView = toolbar
+        placeholderView.addSubview(textView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         setupTextView()
-        
-        // Theme
-        highlightr?.setTheme(to: "paraiso-dark")
-        textView.backgroundColor = highlightr?.theme.themeBackgroundColor
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        if timer == nil {
-            title = file.lastPathComponent
-            
-            textView.delegate = self
-            
-            let languages = NSDictionary(contentsOf: Bundle.main.bundleURL.appendingPathComponent("langs.plist"))! as! [String:[String]] // List of languages associated by file extensions
-            
-            // Open file
-            do {
-                textView.text = try String(contentsOfFile: file.path)
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    self.navigationController?.popViewController(animated: true)
-                }))
-                self.present(errorAlert, animated: true, completion: nil)
-            }
-            
-            // Resize textView
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-            
-            // Syntax coloring
-            
-            DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
-                    if self.textView.isFirstResponder {
-                        self.highlight()
+        textView.setContentOffset(CGPoint.zero, animated: false)
+        
+        if highlightr != nil {
+            return
+        }
+        
+        highlightr = textStorage.highlightr
+        
+        title = file.lastPathComponent
+        
+        textView.delegate = self
+        
+        let languages = NSDictionary(contentsOf: Bundle.main.bundleURL.appendingPathComponent("langs.plist"))! as! [String:[String]] // List of languages associated by file extensions
+        
+        // Open file
+        do {
+            textView.text = try String(contentsOfFile: file.path)
+            textView.isScrollEnabled = true
+        } catch let error {
+            let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(errorAlert, animated: true, completion: nil)
+        }
+        
+        // Resize textView
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Syntax coloring
+        
+        if let languagesForFile = languages[file.pathExtension.lowercased()] {
+            if languagesForFile.count == 1 {
+                language = languagesForFile[0]
+                textStorage.language = language
+            } else if languagesForFile.count > 1 {
+                let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
+                
+                for language in languagesForFile {
+                    if highlightr!.supportedLanguages().contains(language) {
+                        chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
+                            self.language = language
+                            self.textStorage.language = self.language
+                        }))
                     }
-                })
-            }
-            
-            if let languagesForFile = languages[file.pathExtension.lowercased()] {
-                if languagesForFile.count == 1 {
-                    language = languagesForFile[0]
-                    self.highlight()
-                } else if languagesForFile.count == 0 {
-                    timer?.invalidate()
-                } else {
-                    let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
-                    
-                    for language in languagesForFile {
-                        if highlightr!.supportedLanguages().contains(language) {
-                            chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
-                                self.language = language.replacingOccurrences(of: "-", with: "")
-                                self.highlight()
-                            }))
-                        }
-                    }
-                    
-                    chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: { (_) in
-                        self.textView.backgroundColor = .clear
-                        self.textView.textColor = .white
-                        self.timer?.invalidate()
-                    }))
-                    
-                    _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-                        self.present(chooseAlert, animated: true, completion: nil)
-                    })
                 }
+                
+                chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: nil))
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+                    self.present(chooseAlert, animated: true, completion: nil)
+                })
             }
         }
     }
@@ -149,7 +149,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 ConnectionManager.shared.saveFile = nil
             }
             
-            timer?.invalidate()
         }
         
         // Ask for save the file
@@ -181,22 +180,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             }
         } catch _ {
             close()
-        }
-    }
-    
-    func highlight() {
-        
-        if language != nil {
-            if !self.pauseColoring {
-                self.range = self.textView.selectedRange
-                self.cursorPos = self.textView.selectedTextRange
-                
-                self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language)
-                self.textView.selectedTextRange = self.cursorPos
-                self.textView.scrollRangeToVisible(self.range!)
-            } else {
-                self.pauseColoring = false
-            }
         }
     }
     
@@ -275,17 +258,4 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: UITextViewDelegate
     
-    // Pause coloring when write or change selection to prevent the editor from lagging
-    
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.isFirstResponder {
-            self.pauseColoring = true
-        }
-    }
-    
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        if textView.isFirstResponder {
-            self.pauseColoring = true
-        }
-    }
 }

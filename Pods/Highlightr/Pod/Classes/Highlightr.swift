@@ -14,7 +14,7 @@ open class Highlightr
 {
     /// Returns the current Theme.
     open var theme : Theme!
-    {
+        {
         didSet
         {
             themeChanged?(theme)
@@ -24,14 +24,14 @@ open class Highlightr
     /// This block will be called every time the theme changes.
     open var themeChanged : ((Theme) -> Void)?
     
-    fileprivate let jsContext : JSContext
-    fileprivate let hljs = "window.hljs"
-    fileprivate let bundle : Bundle
-    fileprivate let htmlStart = "<"
-    fileprivate let spanStart = "span class=\""
-    fileprivate let spanStartClose = "\">"
-    fileprivate let spanEnd = "/span>"
-    fileprivate let htmlEscape = try! NSRegularExpression(pattern: "&#?[a-zA-Z0-9]+?;", options: .caseInsensitive)
+    private let jsContext : JSContext
+    private let hljs = "window.hljs"
+    private let bundle : Bundle
+    private let htmlStart = "<"
+    private let spanStart = "span class=\""
+    private let spanStartClose = "\">"
+    private let spanEnd = "/span>"
+    private let htmlEscape = try! NSRegularExpression(pattern: "&#?[a-zA-Z0-9]+?;", options: .caseInsensitive)
     
     /**
      Default init method.
@@ -78,7 +78,7 @@ open class Highlightr
         }
         let themeString = try! String.init(contentsOfFile: defTheme)
         theme =  Theme(themeString: themeString)
-
+        
         
         return true
     }
@@ -99,7 +99,7 @@ open class Highlightr
         fixedCode = fixedCode.replacingOccurrences(of: "\"", with:"\\\"");
         fixedCode = fixedCode.replacingOccurrences(of: "\n", with:"\\n");
         fixedCode = fixedCode.replacingOccurrences(of: "\r", with:"");
-
+        
         let command: String
         if let languageName = languageName
         {
@@ -116,21 +116,23 @@ open class Highlightr
             return nil
         }
         
-        let returnString : NSAttributedString
+        var returnString : NSAttributedString?
         if(fastRender)
         {
             returnString = processHTMLString(string)!
         }else
         {
-             string = "<style>"+theme.lightTheme+"</style><pre><code class=\"hljs\">"+string+"</code></pre>"
-             let opt = [
-                NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
-                NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8
-                ] as [NSAttributedString.DocumentReadingOptionKey : Any]
+            string = "<style>"+theme.lightTheme+"</style><pre><code class=\"hljs\">"+string+"</code></pre>"
+            let opt: [NSAttributedString.DocumentReadingOptionKey : Any] = [
+                .documentType: NSAttributedString.DocumentType.html,
+                .characterEncoding: String.Encoding.utf8.rawValue
+            ]
             
-             let data = string.data(using: String.Encoding.utf8)!
-             returnString = try! NSMutableAttributedString(data:data,options:opt,documentAttributes:nil)
-
+            let data = string.data(using: String.Encoding.utf8)!
+            safeMainSync
+                {
+                    returnString = try? NSMutableAttributedString(data:data, options: opt, documentAttributes:nil)
+            }
         }
         
         return returnString
@@ -164,8 +166,21 @@ open class Highlightr
         return res!.toArray() as! [String]
     }
     
-    //Private & Internal
-    fileprivate func processHTMLString(_ string: String) -> NSAttributedString?
+    /**
+     Execute the provided block in the main thread synchronously.
+     */
+    private func safeMainSync(_ block: @escaping ()->())
+    {
+        if Thread.isMainThread
+        {
+            block()
+        }else
+        {
+            DispatchQueue.main.sync { block() }
+        }
+    }
+    
+    private func processHTMLString(_ string: String) -> NSAttributedString?
     {
         let scanner = Scanner(string: string)
         scanner.charactersToBeSkipped = nil
@@ -219,8 +234,8 @@ open class Highlightr
         }
         
         let results = htmlEscape.matches(in: resultString.string,
-                                               options: [.reportCompletion],
-                                               range: NSMakeRange(0, resultString.length))
+                                         options: [.reportCompletion],
+                                         range: NSMakeRange(0, resultString.length))
         var locOffset = 0
         for result in results
         {
@@ -232,10 +247,11 @@ open class Highlightr
                 locOffset += result.range.length-1;
             }
             
-
+            
         }
-
+        
         return resultString
     }
     
 }
+
