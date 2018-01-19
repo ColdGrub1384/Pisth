@@ -17,13 +17,6 @@ extension String {
         return encodedString.substring(with: NSMakeRange(1, encodedString.length - 2))
     }
     
-    var html2AttributedString: NSAttributedString? {
-        return Data(utf8).html2AttributedString
-    }
-    var html2String: String {
-        return html2AttributedString?.string ?? ""
-    }
-    
     var nsString: NSString {
         return self as NSString
     }
