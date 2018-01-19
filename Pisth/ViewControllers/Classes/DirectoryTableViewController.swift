@@ -478,10 +478,34 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Remove file
             
+            // Remove directory
             if files![indexPath.row].isDirectory {
-                guard let result = ConnectionManager.shared.filesSession?.sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
+                
+                guard let sftp = ConnectionManager.shared.filesSession?.sftp else { return }
+                
+                func remove(directoryRecursively directory: String) -> Bool? {
+                    while true {
+                        guard let files = sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else { return nil }
+                        
+                        if files.count > 0 {
+                            for file in files {
+                                if !file.isDirectory {
+                                    sftp.removeFile(atPath: directory.nsString.appendingPathComponent(file.filename))
+                                } else if files.count > 0 {
+                                    _ = remove(directoryRecursively: directory.nsString.appendingPathComponent(file.filename))
+                                } else {
+                                    sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(file.filename))
+                                }
+                            }
+                        } else {
+                            return sftp.removeDirectory(atPath: directory)
+                        }
+                        
+                    }
+                }
+                
+                guard let result = remove(directoryRecursively: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
                     self.showError()
                     return
                 }
@@ -493,7 +517,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 } else {
                     self.reload()
                 }
-            } else {
+            } else { // Remove file
                 guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
                     self.showError()
                     return
