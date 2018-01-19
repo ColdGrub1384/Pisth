@@ -102,7 +102,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             // Syntax coloring
             
             DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (_) in
                     if self.textView.isFirstResponder {
                         self.highlight()
                     }
@@ -191,7 +191,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 self.range = self.textView.selectedRange
                 self.cursorPos = self.textView.selectedTextRange
                 
-                self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language, fastRender: true)
+                self.textView.attributedText = self.highlightr?.highlight(textView.text, as: language)
                 self.textView.selectedTextRange = self.cursorPos
                 self.textView.scrollRangeToVisible(self.range!)
             } else {

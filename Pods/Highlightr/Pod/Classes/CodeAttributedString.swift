@@ -94,9 +94,9 @@ open class CodeAttributedString : NSTextStorage
      
      - returns: Attributes
      */
-    open func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any]
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any]
     {
-        return stringStorage.attributes(at: location, effectiveRange: range) as! [String : Any]
+        return stringStorage.attributes(at: location, effectiveRange: range)
     }
     
     /**
