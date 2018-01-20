@@ -11,6 +11,7 @@ import ActionSheetPicker_3_0
 
 class EditTextViewController: UIViewController, UITextViewDelegate {
     
+    
     @IBOutlet weak var placeholderView: UIView!
     var textView: UITextView!
     
@@ -62,7 +63,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         let textContainer = NSTextContainer(size: view.bounds.size)
         layoutManager.addTextContainer(textContainer)
-        
+                
         textView = UITextView(frame: placeholderView.bounds, textContainer: textContainer)
         textView.isScrollEnabled = false
         textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -71,8 +72,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.autocapitalizationType = UITextAutocapitalizationType.none
         textView.keyboardAppearance = .dark
-        textView.textColor = UIColor(white: 0.8, alpha: 1.0)
         textView.inputAccessoryView = toolbar
+        textView.font = textStorage.highlightr.theme.codeFont
+        setTextColor()
         placeholderView.addSubview(textView)
     }
     
@@ -135,9 +137,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 
                 chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: nil))
                 
-                _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-                    self.present(chooseAlert, animated: true, completion: nil)
-                })
+                present(chooseAlert, animated: true, completion: nil)
+            } else {
+                textStorage.language = "swift"
             }
         }
     }
@@ -249,6 +251,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 UserDefaults.standard.synchronize()
             }
             
+            self.setTextColor()
+            
             if wasFirstResponder {
                 self.textView.becomeFirstResponder()
             }
@@ -260,6 +264,14 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             }
             
         }, origin: sender)
+    }
+    
+    // Set text color for theme
+    func setTextColor() {
+        let attrs = textStorage.highlightr.highlight("hello", as: "swift", fastRender: true)
+        if let color = attrs?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor {
+            textView.textColor = color
+        }
     }
     
     // MARK: Keyboard
@@ -283,8 +295,4 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero
     }
-    
-    
-    // MARK: UITextViewDelegate
-    
 }
