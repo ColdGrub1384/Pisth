@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.3.0)
   - BiometricAuthentication (1.0.3)
   - Google-Mobile-Ads-SDK (7.27.0)
   - Highlightr (1.1.0)
@@ -7,6 +8,7 @@ PODS:
   - Zip (1.1.0)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0
   - BiometricAuthentication
   - Google-Mobile-Ads-SDK
   - Highlightr
@@ -15,6 +17,7 @@ DEPENDENCIES:
   - Zip
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   BiometricAuthentication: 8f64df242862b0497b2f8a12910ef0b999ad83c8
   Google-Mobile-Ads-SDK: 83f7f890e638ce8f1debd440ea363338c9f6be3b
   Highlightr: 519911a0a9a040d76e591f6fe58bb5177c8bdaa3
@@ -22,6 +25,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: b1fbdf329f98e3093bcee59e6c483326eb768e59
+PODFILE CHECKSUM: 4ade501583f311832c3758f8e86fcb7dbf8ad504
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.1.1

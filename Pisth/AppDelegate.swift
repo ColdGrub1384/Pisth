@@ -80,6 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Use paraiso-dark by default
+        if UserDefaults.standard.value(forKey: "editorTheme") == nil {
+            UserDefaults.standard.set("paraiso-dark", forKey: "editorTheme")
+            UserDefaults.standard.synchronize()
+        }
+        
         return true
     }
     

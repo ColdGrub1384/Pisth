@@ -7,6 +7,7 @@
 
 import UIKit
 import Highlightr
+import ActionSheetPicker_3_0
 
 class EditTextViewController: UIViewController, UITextViewDelegate {
     
@@ -65,7 +66,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView = UITextView(frame: placeholderView.bounds, textContainer: textContainer)
         textView.isScrollEnabled = false
         textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        textStorage.highlightr.setTheme(to: "paraiso-dark")
+        textStorage.highlightr.setTheme(to: UserDefaults.standard.string(forKey: "editorTheme")!)
         textView.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.autocapitalizationType = UITextAutocapitalizationType.none
@@ -231,6 +232,34 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     @objc func insertTab() { // Insert tab into textView
         textView.replace(textView.selectedTextRange!, withText: "\t")
+    }
+    
+    @IBAction func changeTheme(_ sender: Any) { // Change editor's theme
+        
+        let wasFirstResponder = textView.isFirstResponder
+        
+        textView.resignFirstResponder()
+        
+        ActionSheetStringPicker.show(withTitle: "Select a theme", rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserDefaults.standard.string(forKey: "editorTheme")!) ?? 0, doneBlock: { (_, _, theme) in
+            
+            if let theme = theme as? String {
+                self.textStorage.highlightr.setTheme(to: theme)
+                self.textView.backgroundColor = self.textStorage.highlightr.theme.themeBackgroundColor
+                UserDefaults.standard.set(theme, forKey: "editorTheme")
+                UserDefaults.standard.synchronize()
+            }
+            
+            if wasFirstResponder {
+                self.textView.becomeFirstResponder()
+            }
+            
+        }, cancel: { (_) in
+            
+            if wasFirstResponder {
+                self.textView.becomeFirstResponder()
+            }
+            
+        }, origin: sender)
     }
     
     // MARK: Keyboard

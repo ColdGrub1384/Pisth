@@ -13,4 +13,5 @@ target 'Pisth' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftKeychainWrapper'
   pod 'BiometricAuthentication'
+  pod 'ActionSheetPicker-3.0'
 end
