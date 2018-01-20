@@ -192,11 +192,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     }
     
     @objc func shareFile(_ sender: UIButton) { // Share file
-        
-        guard let file = URL(string: sender.title(for: .disabled)!) else { return }
-        
-        let shareVC = UIDocumentInteractionController(url: file)
-        shareVC.presentOpenInMenu(from: sender.frame, in: view, animated: true)
+        let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
+        shareVC.popoverPresentationController?.sourceView = sender
+        present(shareVC, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -234,7 +232,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
-        shareButton.setTitle(files[indexPath.row].absoluteString, for: .disabled)
+        shareButton.tag = indexPath.row
         shareButton.addTarget(self, action: #selector(shareFile(_:)), for: .touchUpInside)
         shareButton.backgroundColor = .black
         cell.accessoryView = shareButton
