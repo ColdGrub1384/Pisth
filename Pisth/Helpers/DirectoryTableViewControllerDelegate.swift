@@ -7,7 +7,19 @@
 
 import Foundation
 
+/// Delegate used by `DirectoryTableViewController`s
 protocol DirectoryTableViewControllerDelegate {
+    
+    /// Called did open a remote directoty with `DirectoryTableViewController`.
+    ///
+    /// ## Note
+    /// This will override the default handler.
+    /// If you want to present the directory, present `directoryTableViewController`,
+    /// directoryTableViewController is not the source controller, but the controller to be opened.
+    ///
+    /// - Parameters:
+    ///     - directoryTableViewController: The DirectoryTableViewController to be opened.
+    ///     - directory: The remote path to the directory to be opened.
     func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String)
 }
 

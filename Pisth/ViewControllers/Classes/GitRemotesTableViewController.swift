@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Git branches table view controller to display Git remote branches at `repoPath`.
 class GitRemotesTableViewController: GitBranchesTableViewController {
         
     override func viewDidLoad() {

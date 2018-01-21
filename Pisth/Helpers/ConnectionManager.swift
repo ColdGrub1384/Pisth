@@ -7,19 +7,36 @@
 
 import NMSSH
 
+/// A class that manages SSH connections.
 class ConnectionManager {
     
+    /// Shared and unique instance of ConnectionManager.
     static let shared = ConnectionManager()
     private init() {}
     
-    // NMSSH cannot download files and write to an SSH Shell at same time, so two sessions are used
-    var session: NMSSHSession? // Used for SSH Shell
-    var filesSession: NMSSHSession? // Used for read and write files
     
+    // NMSSH cannot download files and write to an SSH Shell at same time, so two sessions are used.
+    
+    /// Session used for SSH Shell.
+    var session: NMSSHSession?
+    
+    /// Session used for reading and writing files.
+    var filesSession: NMSSHSession?
+    
+    
+    /// Text file to be uploaded after being edited.
     var saveFile: SaveFile?
+    
+    /// Representation of the connection to use.
     var connection: RemoteConnection?
+    
+    /// Representation of the result connecting.
     var result = ConnectionResult.notConnected
-        
+    
+    /// List files in directory.
+    /// - Parameters:
+    ///     - directory: Directory where list files.
+    /// - Returns: Files listed, nil in case of error.
     func files(inDirectory directory: String) -> [NMSFTPFile]?  {
         guard let session = filesSession else { return [] }
         
@@ -40,6 +57,7 @@ class ConnectionManager {
         
     }
     
+    /// Open SSH sessions for `connection`.
     func connect() {
         
         guard let connection = connection else {

@@ -7,10 +7,13 @@
 
 import Foundation
 
+/// Class hosting local file path.
 class Pasteboard {
     
-    static var local = Pasteboard()
+    /// Shared and unique instance of `Pasteboard`.
+    static let local = Pasteboard()
     private init() {}
     
+    /// File path saved.
     var filePath: String?
 }

@@ -7,11 +7,19 @@
 
 import UIKit
 
+/// View controller used to view an image.
 class ImageViewController: UIViewController, UIScrollViewDelegate {
     
+    /// Scroll view used to zoom image.
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    /// Image view displaying opened image.
     @IBOutlet weak var imageView: UIImageView!
+    
+    /// Image to display.
     var image: UIImage?
+    
+    // MARK: View Controller
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,7 +35,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         scrollView.zoomScale = 1.0
     }
     
-    // MARK: UIScrollViewDelegate
+    // MARK: Scroll view delegate
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView

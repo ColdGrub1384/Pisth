@@ -1,6 +1,12 @@
 
 import Foundation
 
+/// Check if file is PDF.
+///
+/// - Parameters:
+///     - file: The target file.
+///
+/// - Returns: If `file` is PDF (Not only by extension).
 func isFilePDF(_ file: URL) -> Bool {
     
     guard let assetData = try? Data(contentsOf: file) else { return false }

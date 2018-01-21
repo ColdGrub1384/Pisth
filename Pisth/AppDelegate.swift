@@ -12,16 +12,45 @@ import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
-
-    static var shared: AppDelegate!
-
+    
+    /// The window used with app.
     var window: UIWindow?
+
+    /// The shared Navigation controller used in the app.
     var navigationController = UINavigationController()
+    
+    /// An instance of DirectoryTableViewController to be used to upload files from the share menu.
     var directoryTableViewController: DirectoryTableViewController?
+    
+    /// The file opened from share menu.
     var openedFile: URL?
+    
+    /// Returns: `persistentContainer.viewContext`.
     var coreDataContext: NSManagedObjectContext {
-        return AppDelegate.shared.persistentContainer.viewContext
+        return persistentContainer.viewContext
     }
+    
+    /// Upload file at directory opened in `directoryTableViewController`.
+    @objc func uploadFile() {
+        if let directoryTableViewController = directoryTableViewController {
+            if let file = openedFile {
+                directoryTableViewController.localDirectoryTableViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), didOpenFile: file)
+            }
+        }
+    }
+    
+    /// Dismiss app's Root View Controller and cancel file upload.
+    /// Called did close the BookmarksTableViewController opened when upload a file.
+    @objc func close() {
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            rootVC.dismiss(animated: true, completion: {
+                self.openedFile = nil
+                self.directoryTableViewController = nil
+            })
+        }
+    }
+    
+    // MARK: - Application delegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -93,6 +122,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         if url.absoluteString.hasPrefix("file://") { // Upload file
             self.openedFile = url
+            
+            // Open a BookmarksTableViewController to select where upload the file
+            
             let bookmarksVC = BookmarksTableViewController()
             let navVC = UINavigationController(rootViewController: bookmarksVC)
             navVC.navigationBar.barStyle = .black
@@ -100,7 +132,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             if #available(iOS 11.0, *) {
                 navVC.navigationBar.prefersLargeTitles = true
             }
-            
             navigationController.present(navVC, animated: true, completion: {
                 bookmarksVC.delegate = self
                 if #available(iOS 11.0, *) {
@@ -113,23 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
         
         return false
-    }
-    
-    @objc func uploadFile() {
-        if let directoryTableViewController = directoryTableViewController {
-            if let file = openedFile {
-                directoryTableViewController.localDirectoryTableViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), didOpenFile: file)
-            }
-        }
-    }
-    
-    @objc func close() {
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
-            rootVC.dismiss(animated: true, completion: {
-                self.openedFile = nil
-                self.directoryTableViewController = nil
-            })
-        }
     }
     
     // MARK: - Core Data stack
@@ -162,6 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     }()
     
     // MARK: - Core Data Saving support
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -176,7 +191,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
-    // MARK: - DirectoryTableViewControllerDelegate
+    // MARK: - Directory table view controller delegate
+    
+    // Upload file at selected directory
     func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
         directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
         directoryTableViewController.delegate = self
@@ -187,8 +204,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
-    // MARK: - BookmarksTableViewControllerDelegate
-    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
+    // MARK: - Bookmarks table view controller delegate
+    
+    // Upload file at selected connection
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
         
         directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
         directoryTableViewController.delegate = self
@@ -198,5 +217,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
         }
     }
+    
+    
+    // MARK: - Static
+    
+    /// The shared instance of the app's delegate set in `application(_: , didFinishLaunchingWithOptions:)`.
+    static var shared: AppDelegate!
 }
 

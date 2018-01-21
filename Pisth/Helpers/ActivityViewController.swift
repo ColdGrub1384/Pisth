@@ -1,10 +1,17 @@
 
 import UIKit
 
+/// Alert with an indicator view at center.
 class ActivityViewController: UIViewController {
     
     let activityView = ActivityView()
     
+    /// Initialize with given message.
+    ///
+    /// - Parameters:
+    ///     - message: Message to be displayed in alert.
+    ///
+    /// - Returns: An alert with an indicator view at center and given message.
     init(message: String) {
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
@@ -18,6 +25,7 @@ class ActivityViewController: UIViewController {
     }
 }
 
+/// View used in `ActivityViewController`.
 class ActivityView: UIView {
     
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)

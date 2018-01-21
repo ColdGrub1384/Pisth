@@ -9,18 +9,28 @@ import UIKit
 import Highlightr
 import ActionSheetPicker_3_0
 
+/// View controller used to edit text files.
 class EditTextViewController: UIViewController, UITextViewDelegate {
     
-    
+    /// View created from IB managing size of `textView`.
     @IBOutlet weak var placeholderView: UIView!
+    
+    /// Text view containing opened text.
     var textView: UITextView!
     
+    /// File opened.
     var file: URL!
     
-    // Syntax coloring variables
+    /// Text storage managing syntax highlighting.
     var textStorage = CodeAttributedString()
+    
+    /// Highlightr managing syntax highlighting.
     var highlightr: Highlightr!
+    
+    /// Langauge used to highlight code.
     private var language_: String?
+    
+    /// Langauge used to highlight code but with correct format.
     var language: String? {
         get {
             
@@ -45,7 +55,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    // Setup textView
+    /// Setup textView.
     func setupTextView() {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: view.bounds.width, height: 50))
         toolbar.barStyle = .black
@@ -77,6 +87,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         setTextColor()
         placeholderView.addSubview(textView)
     }
+    
+    
+    /// MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,7 +199,12 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func save(_ sender: Any) { // Save file
+    // MARK: - Actions
+    
+    /// Save file locally and upload it if is necessary.
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func save(_ sender: Any) {
         if let data = textView.text.data(using: .utf8) {
             do {
                 try data.write(to: file)
@@ -231,12 +249,14 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-    
-    @objc func insertTab() { // Insert tab into textView
+
+    /// Insert tab into textView.
+    @objc func insertTab() {
         textView.replace(textView.selectedTextRange!, withText: "\t")
     }
     
-    @IBAction func changeTheme(_ sender: Any) { // Change editor's theme
+    /// Change editor's theme.
+    @IBAction func changeTheme(_ sender: Any) {
         
         let wasFirstResponder = textView.isFirstResponder
         
@@ -266,7 +286,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }, origin: sender)
     }
     
-    // Set text color for theme
+    /// Set text color for theme
     func setTextColor() {
         let attrs = textStorage.highlightr.highlight("hello", as: "swift", fastRender: true)
         if let color = attrs?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor {
@@ -280,8 +300,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.resignFirstResponder()
     }
     
-    // Resize textView
-    
+    /// Resize `textView` will show keyboard.
     @objc func keyboardWillShow(_ notification:Notification) {
         let d = notification.userInfo!
         var r = d[UIKeyboardFrameEndUserInfoKey] as! CGRect
@@ -291,6 +310,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.scrollIndicatorInsets.bottom = r.size.height
     }
     
+    /// Resize `textView` will hide keyboard.
     @objc func keyboardWillHide(_ notification:Notification) {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero

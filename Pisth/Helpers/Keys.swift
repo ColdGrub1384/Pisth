@@ -7,60 +7,142 @@
 
 import UIKit
 
-// Special keys as String
-
+/// Class hosting special keys as Unicode characters to be sent to SSH.
 class Keys {
     
-    static func key(dec: Int) -> String {
+    /// Returns unicode character from given `Int`.
+    ///
+    /// - Parameters:
+    ///     - dec: Decimal number from wich return unicode character.
+    static func unicode(dec: Int) -> String {
         return String(describing: UnicodeScalar(dec)!)
     }
     
     // From https://en.wikipedia.org/wiki/C0_and_C1_control_codes
     
-    static let esc = key(dec: 27)
-    static let delete = key(dec: 127)
+    // MARK: - Random keys
     
-    // Arrows
+    /// ESC Key.
+    static let esc = unicode(dec: 27)
+    
+    /// Delete Key.
+    static let delete = unicode(dec: 127)
+    
+    
+    // MARK: - Arrow keys
+    
+    /// Up Arrow Key.
     static let arrowUp = esc+"[A"
+    
+    /// Down Arrow Key.
     static let arrowDown = esc+"[B"
+    
+    /// Right Arrow Key.
     static let arrowRight = esc+"[C"
+    
+    /// Left Arrow Key.
     static let arrowLeft = esc+"[D"
     
-    // Control keys
-    static let ctrlAt = key(dec: 0)
-    static let ctrlA = key(dec: 1)
-    static let ctrlB = key(dec: 2)
-    static let ctrlC = key(dec: 3)
-    static let ctrlD = key(dec: 4)
-    static let ctrlE = key(dec: 5)
-    static let ctrlF = key(dec: 6)
-    static let ctrlG = key(dec: 7)
-    static let ctrlH = key(dec: 8)
-    static let ctrlI = key(dec: 9)
-    static let ctrlJ = key(dec: 10)
-    static let ctrlK = key(dec: 11)
-    static let ctrlL = key(dec: 12)
-    static let ctrlM = key(dec: 13)
-    static let ctrlN = key(dec: 14)
-    static let ctrlO = key(dec: 15)
-    static let ctrlP = key(dec: 16)
-    static let ctrlQ = key(dec: 17)
-    static let ctrlR = key(dec: 18)
-    static let ctrlS = key(dec: 19)
-    static let ctrlT = key(dec: 20)
-    static let ctrlU = key(dec: 21)
-    static let ctrlV = key(dec: 22)
-    static let ctrlW = key(dec: 23)
-    static let ctrlX = key(dec: 24)
-    static let ctrlY = key(dec: 25)
-    static let ctrlZ = key(dec: 26)
     
-    static let ctrlBackslash = key(dec: 28)
-    static let ctrlCloseBracket = key(dec: 29)
-    static let ctrlCtrl = key(dec: 30)
-    static let ctrl_ = key(dec: 31)
+    // MARK: - Control keys
     
-    // Ctrl key from string
+    /// ^@
+    static let ctrlAt = unicode(dec: 0)
+    
+    /// ^A
+    static let ctrlA = unicode(dec: 1)
+    
+    /// ^B
+    static let ctrlB = unicode(dec: 2)
+    
+    /// ^C
+    static let ctrlC = unicode(dec: 3)
+    
+    /// ^D
+    static let ctrlD = unicode(dec: 4)
+    
+    /// ^E
+    static let ctrlE = unicode(dec: 5)
+    
+    /// ^F
+    static let ctrlF = unicode(dec: 6)
+    
+    /// ^G
+    static let ctrlG = unicode(dec: 7)
+    
+    /// ^H
+    static let ctrlH = unicode(dec: 8)
+    
+    /// ^I
+    static let ctrlI = unicode(dec: 9)
+    
+    /// ^J
+    static let ctrlJ = unicode(dec: 10)
+    
+    /// ^K
+    static let ctrlK = unicode(dec: 11)
+    
+    /// ^L
+    static let ctrlL = unicode(dec: 12)
+    
+    /// ^M
+    static let ctrlM = unicode(dec: 13)
+    
+    /// ^N
+    static let ctrlN = unicode(dec: 14)
+    
+    /// ^O
+    static let ctrlO = unicode(dec: 15)
+    
+    /// ^P
+    static let ctrlP = unicode(dec: 16)
+    
+    /// ^Q
+    static let ctrlQ = unicode(dec: 17)
+    
+    /// ^R
+    static let ctrlR = unicode(dec: 18)
+    
+    /// ^S
+    static let ctrlS = unicode(dec: 19)
+    
+    /// ^T
+    static let ctrlT = unicode(dec: 20)
+    
+    /// ^U
+    static let ctrlU = unicode(dec: 21)
+    
+    /// ^V
+    static let ctrlV = unicode(dec: 22)
+    
+    /// ^W
+    static let ctrlW = unicode(dec: 23)
+    
+    /// ^X
+    static let ctrlX = unicode(dec: 24)
+    
+    /// ^Y
+    static let ctrlY = unicode(dec: 25)
+    
+    /// ^Z
+    static let ctrlZ = unicode(dec: 26)
+    
+    /// ^\
+    static let ctrlBackslash = unicode(dec: 28)
+    
+    /// ^]
+    static let ctrlCloseBracket = unicode(dec: 29)
+    
+    /// ^^
+    static let ctrlCtrl = unicode(dec: 30)
+    
+    /// ^_
+    static let ctrl_ = unicode(dec: 31)
+    
+    /// Returns Ctrl key from `String`.
+    ///
+    /// - Parameters:
+    ///     - str: String from wich return the Ctrl key.
     static func ctrlKey(from str: String) -> String {
         switch str.lowercased() {
         case "a":

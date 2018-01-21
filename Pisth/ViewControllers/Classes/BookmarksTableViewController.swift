@@ -11,23 +11,45 @@ import GoogleMobileAds
 import SwiftKeychainWrapper
 import BiometricAuthentication
 
+/// `TableViewController` used to list, connections.
 class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate {
     
+    /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
+    
+    /// Ad banner view displayed as header of Table view.
     var bannerView: GADBannerView!
+    
+    /// Search controller used to filter connections.
     var searchController: UISearchController!
+    
+    /// Fetched connections by `searchController` to display.
     var fetched = [RemoteConnection]()
     
-    @objc func openSettings() { // Open Settings
+    /// Open app's settings.
+    @objc func openSettings() {
         navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
     }
     
-    @objc func addConnection() { // Add connection
+    /// Open local documents.
+    @objc func openDocuments() {
+        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), animated: true)
+    }
+    
+    /// Add connection.
+    @objc func addConnection() {
         showInfoAlert()
     }
     
+    /// Edit connection or create connnection.
+    ///
+    /// If `index` is nil, a connection will be created, else, the connection at given index will be edited.
+    ///
+    /// - Parameters:
+    ///     - index: Index of connection to edit.
     func showInfoAlert(editInfoAt index: Int? = nil) {
         
+        // Title of alert
         var title: String {
             if index == nil {
                 return "Add new connection"
@@ -37,6 +59,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
 
         }
         
+        // Message of alert
         var message: String {
             if index == nil {
                 return "Fill fields to add a connection to bookmarks"
@@ -46,6 +69,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
         }
         
+        // Alert to be displayed
         let addNewAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
@@ -62,7 +86,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
         
         // Port
-        addNewAlertController.addTextField { (port) in
+        addNewAlertController.addTextField { (port) in // Optional
             port.placeholder = "Port (22)"
             port.keyboardType = .numberPad
         }
@@ -73,17 +97,18 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
         
         // Password
-        addNewAlertController.addTextField { (password) in
+        addNewAlertController.addTextField { (password) in // Optional
             password.placeholder = "Password"
             password.isSecureTextEntry = true
         }
         
         // Path
-        addNewAlertController.addTextField { (path) in
+        addNewAlertController.addTextField { (path) in // Optional
             path.placeholder = "Path (~)"
         }
         
-        if let index = index { // Fill info with given index
+        // Fill info with given index
+        if let index = index {
             let connection = DataManager.shared.connections[index]
             
             addNewAlertController.textFields![0].text = connection.name
@@ -94,7 +119,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             addNewAlertController.textFields![5].text = connection.path
         }
         
-        let addAction = UIAlertAction(title: "Save", style: .default) { (action) in // Create connection
+        // Create connection
+        let addAction = UIAlertAction(title: "Save", style: .default) { (action) in
             let name = addNewAlertController.textFields![0].text!
             let host = addNewAlertController.textFields![1].text!
             var port = addNewAlertController.textFields![2].text!
@@ -139,7 +165,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
         }
         
-        let editAction = UIAlertAction(title: "Save", style: .default) { (action) in // Edit selected connection
+        // Edit selected connection
+        let editAction = UIAlertAction(title: "Save", style: .default) { (action) in
             let name = addNewAlertController.textFields![0].text!
             let host = addNewAlertController.textFields![1].text!
             var port = addNewAlertController.textFields![2].text!
@@ -212,9 +239,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         present(addNewAlertController, animated: true, completion: nil)
     }
     
-    @objc func openDocuments() { // Open local documents
-        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), animated: true)
-    }
+    
+    // MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -269,6 +295,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         ConnectionManager.shared.result = .notConnected
     }
     
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -322,7 +349,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         var connections = DataManager.shared.connections
@@ -341,6 +367,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     
     // MARK: - Table view delegate
     
@@ -420,14 +447,15 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
-    // MARK: - GADBannerViewDelegate
+    
+    // MARK: - Banner view delegate
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
     }
     
-    // MARK: UISearchBarDelegate
+    // MARK: Search bar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         

@@ -9,18 +9,34 @@ import UIKit
 import NMSSH
 import WebKit
 
+/// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
     
-    static var close = "\(Keys.esc)[CLOSE" // Print this to dismiss the keyboard
-    
+    /// Directory to open.
     var pwd: String?
+    
+    /// Content of console.
     var console = ""
+    
+    /// Command to run at starting.
     var command: String?
+    
+    /// Ctrl key button.
     var ctrlKey: UIBarButtonItem!
-    var preventKeyboardFronBeeingDismissed = true
+    
+    /// Disallow to dismiss keyboard.
+    var preventKeyboardFromBeeingDismissed = true
+    
+    /// Toolbar used in keyboard.
     var toolbar: UIToolbar!
+    
+    /// Don't scroll when console's content changes.
     var dontScroll = false
+    
+    /// Send Ctrl key.
     private var ctrl_ = false
+    
+    /// Send Ctrl key.
     var ctrl: Bool {
         set {
             ctrl_ = newValue
@@ -36,14 +52,19 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Navigation bar height.
     var navBarHeight: CGFloat {
         return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
     }
     
+    /// Is terminal read only.
     var readOnly = false
+    
+    /// Web view used to display content.
     var webView: WKWebView!
     
-    func addToolbar() { // Add keyboard's toolbar
+    /// Add keyboard's toolbar
+    func addToolbar() {
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolbar.barStyle = .black
         
@@ -76,13 +97,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         self.toolbar = toolbar
     }
     
+    
+    // MARK: - View controller
+    
     override var canBecomeFirstResponder: Bool {
         return (webView != nil)
     }
 
     override var canResignFirstResponder: Bool {
-        let canDoIt = preventKeyboardFronBeeingDismissed.inverted
-        preventKeyboardFronBeeingDismissed = true
+        let canDoIt = preventKeyboardFromBeeingDismissed.inverted
+        preventKeyboardFromBeeingDismissed = true
         return canDoIt
     }
     
@@ -93,7 +117,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if isFirstResponder {
-            preventKeyboardFronBeeingDismissed = false
+            preventKeyboardFromBeeingDismissed = false
             resignFirstResponder()
         }
         
@@ -166,13 +190,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !readOnly {
                 becomeFirstResponder()
             } else {
-                preventKeyboardFronBeeingDismissed = false
+                preventKeyboardFromBeeingDismissed = false
             }
             webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
     }
     
-    @objc func showHistory(_ sender: UIBarButtonItem) { // Show commands history
+    /// Show commands history.
+    @objc func showHistory(_ sender: UIBarButtonItem) {
         
         do {
             guard let session = ConnectionManager.shared.filesSession else { return }
@@ -196,25 +221,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    @objc func keyboardWillShow(_ notification:Notification) {
-        if let userInfo = notification.userInfo {
-            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
-            
-            webView.frame.size.height -= keyboardSize.height+inputAccessoryView!.frame.height
-            webView.reload()
-        }
-    }
     
-    @objc func keyboardWillHide(_ notification:Notification) {
-        if let userInfo = notification.userInfo {
-            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
-            
-            webView.frame.size.height += keyboardSize.height+inputAccessoryView!.frame.height
-            webView.reload()
-        }
-    }
-    
-    func changeSize(completion: (() -> Void)?) { // Change terminal size to page size
+    /// Change terminal size to page size
+    func changeSize(completion: (() -> Void)?) {
         
         var cols_: Any?
         var rows_: Any?
@@ -248,7 +257,30 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    // Insert special key
+    // MARK: - Keyboard
+    
+    @objc func keyboardWillShow(_ notification:Notification) {
+        if let userInfo = notification.userInfo {
+            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
+            
+            webView.frame.size.height -= keyboardSize.height+inputAccessoryView!.frame.height
+            webView.reload()
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification:Notification) {
+        if let userInfo = notification.userInfo {
+            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
+            
+            webView.frame.size.height += keyboardSize.height+inputAccessoryView!.frame.height
+            webView.reload()
+        }
+    }
+    
+    /// Insert special key.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender bar button item.
     @objc func insertKey(_ sender: UIBarButtonItem) {
         
         guard let channel = ConnectionManager.shared.session?.channel else { return }
@@ -268,6 +300,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Write from wireless keyboard.
+    ///
+    /// - Parameters:
+    ///     - command: Command sent from keyboard.
     @objc func write(fromCommand command: UIKeyCommand) {
         guard let channel = ConnectionManager.shared.session?.channel else { return }
         
@@ -291,14 +327,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    // MARK: NMSSHChannelDelegate
+    // MARK: NMSSH channel delegate
     
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
             
             if self.console.contains(TerminalViewController.close) { // Close shell
-                self.preventKeyboardFronBeeingDismissed = false
+                self.preventKeyboardFromBeeingDismissed = false
                 self.console = self.console.replacingOccurrences(of: TerminalViewController.close, with: "")
                 self.resignFirstResponder()
             }
@@ -328,7 +364,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    // MARK: UIKeyInput
+    
+    // MARK: Key input
     
     func insertText(_ text: String) {
         do {
@@ -351,12 +388,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return true
     }
     
-    // MARK: UITextInputTraits
+    // MARK: Text input traits
     
     var keyboardAppearance: UIKeyboardAppearance = .dark
     var autocorrectionType: UITextAutocorrectionType = .no
     
-    // MARK: WKNavigationDelegate
+    // MARK: Web kit navigation delegate
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
         
@@ -400,4 +437,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             changeSize(completion: nil)
         }
     }
+    
+    // MARK: - Static
+    
+    /// Print this to dismiss the keyboard (from SSH).
+    static let close = "\(Keys.esc)[CLOSE"
 }

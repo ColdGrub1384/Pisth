@@ -7,12 +7,19 @@
 
 import UIKit
 
+/// Table View Cell that represents a remote or local file.
 class FileTableViewCell: UITableViewCell {
     
+    /// File's icon.
     @IBOutlet weak var iconView: UIImageView!
+    
+    /// Filename.
     @IBOutlet weak var filename: UILabel!
+    
+    /// File permissions.
     @IBOutlet weak var permssions: UILabel!
     
+    // Allow moving and renaming file if this cell represents a remote file
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
@@ -29,6 +36,7 @@ class FileTableViewCell: UITableViewCell {
         return true
     }
     
+    /// Rename the remote file represented by the cell.
     @objc func renameFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
@@ -64,6 +72,7 @@ class FileTableViewCell: UITableViewCell {
         }
     }
     
+    /// Move remote file represented by the cell.
     @objc func moveFile(_ sender: Any) {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             

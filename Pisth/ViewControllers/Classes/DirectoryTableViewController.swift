@@ -9,17 +9,34 @@ import UIKit
 import GoogleMobileAds
 import NMSSH
 
+/// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate {
-        
+    
+    /// Directory used to list files.
     var directory: String
+    
+    /// Connection to open if is not.
     var connection: RemoteConnection
+    
+    /// Fetched files.
     var files: [NMSFTPFile]?
+    
+    /// Delegate used.
     var delegate: DirectoryTableViewControllerDelegate?
+    
+    /// Close after sending file.
     var closeAfterSending = false
+    
+    /// Ad banner view displayed at top of table view.
     var bannerView: GADBannerView!
     
-    static var action = RemoteDirectoryAction.none
-        
+    /// Init with given connection and directory.
+    ///
+    /// - Parameters:
+    ///     - connection: Connection to be opened if is not.
+    ///     - directory: Directory to open, by default, is `connection`'s default path.
+    ///
+    /// - Returns: A Directory table view controller at given directory.
     init(connection: RemoteConnection, directory: String? = nil) {
         self.connection = connection
         ConnectionManager.shared.connection = connection
@@ -90,6 +107,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - View controller
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,7 +159,27 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         bannerView.load(GADRequest())
     }
     
-    func showError() { // Go back and show error
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Connection errors
+        checkForConnectionError(errorHandler: {
+            self.showError()
+        }) {
+            if self.files == nil {
+                self.navigationController?.popViewController(animated: true, completion: {
+                    let alert = UIAlertController(title: "Error opening directory!", message: "Check for permissions.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
+        }
+    }
+
+    // MARK: - Connection errors handling
+    
+    /// Go back and show error.
+    func showError() {
         guard let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
         let result = ConnectionManager.shared.result
         
@@ -161,7 +201,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
     }
     
-    func checkForConnectionError(errorHandler: @escaping () -> Void, successHandler: (() -> Void)? = nil) { // Check for connection errors and run handler if there is an error
+    /// Check for connection errors and run handler if there is an error.
+    func checkForConnectionError(errorHandler: @escaping () -> Void, successHandler: (() -> Void)? = nil) {
         guard let session = ConnectionManager.shared.filesSession else {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
@@ -188,29 +229,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Connection errors
-        checkForConnectionError(errorHandler: {
-            self.showError()
-        }) {
-            if self.files == nil {
-                self.navigationController?.popViewController(animated: true, completion: {
-                    let alert = UIAlertController(title: "Error opening directory!", message: "Check for permissions.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-                })
-            }
-        }
-    }
     
     // MARK: - Actions
     
+    /// Dismiss `navigationController`.
     @objc func close() {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    /// Open source control manager for Git repos.
     @objc func git() {
         guard let navVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController else { return }
         guard let branchesVC = navVC.topViewController as? SourceControlTableViewController else { return }
@@ -220,6 +247,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         present(navVC, animated: true, completion: nil)
     }
     
+    /// Reload content.
     @objc func reload() { // Reload current directory content
         
         self.files = nil
@@ -266,7 +294,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         refreshControl?.endRefreshing()
     }
     
-    @objc func openShell() { // Open shell in current directory
+    /// Open shell in current directory.
+    @objc func openShell() {
         
         checkForConnectionError(errorHandler: {
             self.showError()
@@ -277,7 +306,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationController?.pushViewController(terminalVC, animated: true)
     }
     
-    @objc func uploadFile(_ sender: UIBarButtonItem) { // Add file
+    /// Show an alert to choose if import a file, create blank file, or create directory.
+    ///
+    /// - Parameters:
+    ///     - sender: Send bar button item.
+    @objc func uploadFile(_ sender: UIBarButtonItem) {
         
         checkForConnectionError(errorHandler: {
             self.showError()
@@ -346,7 +379,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         self.present(chooseAlert, animated: true, completion: nil)
     }
     
-    @objc func copyFile() { // Copy file in current directory
+    /// Copy file in current directory
+    @objc func copyFile() {
         DirectoryTableViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             
@@ -390,7 +424,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
-    @objc func moveFile() { // Move file in current directory
+    /// Move file in current directory
+    @objc func moveFile() {
         
         checkForConnectionError(errorHandler: {
             self.showError()
@@ -669,7 +704,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
     }
 
-    // MARK: - LocalDirectoryTableViewControllerDelegate
+    // MARK: - Local directory table view controller delegate
     
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) { // Send file
         
@@ -716,7 +751,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
-    // MARK: - DirectoryTableViewControllerDelegate
+    // MARK: - Directory table view controller delegate
     
     func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
         directoryTableViewController.delegate = directoryTableViewController
@@ -740,11 +775,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
-    // MARK: - GADBannerViewDelegate
+    // MARK: - Banner view delegate
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
     }
+    
+    // MARK: - Static
+    
+    /// Action to do.
+    static var action = RemoteDirectoryAction.none
 }
 

@@ -7,12 +7,50 @@
 
 import UIKit
 
+/// Table view controller to display Git branches at `repoPath`.
 class GitBranchesTableViewController: UITableViewController {
 
+    /// Remote path of Git repo.
     var repoPath: String!
+    
+    /// Fetched branches.
     var branches = [String]()
+    
+    /// Current branch.
     var current: String?
+    
+    /// Handler called did select branch.
     var selectionHandler: ((GitBranchesTableViewController, IndexPath) -> Void)?
+    
+    /// Launch command in shell and open terminal.
+    ///
+    /// - Parameters:
+    ///     - command: Command to run.
+    ///     - title: Title of opened terminal.
+    func launch(command: String, withTitle title: String) {
+        let terminalVC = TerminalViewController()
+        
+        terminalVC.title = title
+        terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
+        terminalVC.dontScroll = true
+        navigationController?.pushViewController(terminalVC, animated: true, completion: {
+            terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
+        })
+    }
+    
+    /// Dismiss `self` or `navigationController`.`
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @objc func done(_ sender: Any) {
+        if let navVC = navigationController {
+            navVC.dismiss(animated: true, completion: nil)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,31 +77,21 @@ class GitBranchesTableViewController: UITableViewController {
         navigationController?.navigationBar.tintAdjustmentMode = .automatic
     }
     
-    func launch(command: String, withTitle title: String) {
-        let terminalVC = TerminalViewController()
-        
-        terminalVC.title = title
-        terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
-        terminalVC.dontScroll = true
-        navigationController?.pushViewController(terminalVC, animated: true, completion: {
-            terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
-        })
-    }
-    
-    @objc func done(_ sender: Any) {
-        if let navVC = navigationController {
-            navVC.dismiss(animated: true, completion: nil)
-        } else {
-            dismiss(animated: true, completion: nil)
-        }
-    }
     
     // MARK: - Git Actions
     
+    /// Git fetch
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func fetch(_ sender: Any) {
         launch(command: "git -C '\(repoPath!)' fetch", withTitle: "Fetch")
     }
     
+    /// Git pull
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func pull(_ sender: Any) {
         guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
         remotesVC.repoPath = repoPath
@@ -83,10 +111,18 @@ class GitBranchesTableViewController: UITableViewController {
         })
     }
     
+    /// Git commit
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func commit(_ sender: Any) {
         launch(command: "read -ep \"Commit message: \" msg; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m \"$msg\"", withTitle: "Commit")
     }
     
+    /// Git push.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func push(_ sender: Any) {
         guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
         remotesVC.repoPath = repoPath

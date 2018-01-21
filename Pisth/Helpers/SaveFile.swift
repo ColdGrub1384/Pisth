@@ -7,7 +7,16 @@
 
 import Foundation
 
+/// Representation of file to upload.
+/// This is used did edit a text file,
+///
+/// `localFile` is the local file edited,
+/// and `remoteFile` is the remote path where send file after saving.
 struct SaveFile {
+    
+    /// The local file edited.
     var localFile: String
+    
+    /// The remote path where send file after saving.
     var remoteFile: String
 }

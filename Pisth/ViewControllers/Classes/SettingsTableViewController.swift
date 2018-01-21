@@ -8,14 +8,20 @@
 import UIKit
 import BiometricAuthentication
 
+
+/// Table view controller for displaying and changing settings.
 class SettingsTableViewController: UITableViewController {
     
+    /// Indexes of each settings
     enum Index: Int {
         case biometricAuth = 0
         case showHiddenFiles = 1
         case blinkCursor = 2
         case licenses = 3
     }
+    
+    
+    /// MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,38 +35,60 @@ class SettingsTableViewController: UITableViewController {
         initBlinkCursorSetting()
     }
     
+    
     // MARK: - Blink cursor
     
+    /// Switch to toggle blinking cursor.
     @IBOutlet weak var blinkCursorSwitch: UISwitch!
     
+    /// Toogle blinking cursor.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender switch.
     @IBAction func toggleBlinkCursor(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "blink")
         UserDefaults.standard.synchronize()
     }
     
+    /// Display current blinking cursor setting
     func initBlinkCursorSetting() {
         blinkCursorSwitch.isOn = UserDefaults.standard.bool(forKey: "blink")
     }
     
+    
     // MARK: - Show hidden files
     
+    /// Switch to toggle showing hidden files.
     @IBOutlet weak var showHiddenFilesSwitch: UISwitch!
     
+    /// Toogle showing hidden files.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender switch.
     @IBAction func toggleHiddenFiles(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "hidden")
         UserDefaults.standard.synchronize()
     }
     
+    /// Display current blinking cursor setting
     func initShowHiddenFilesSetting() {
         showHiddenFilesSwitch.isOn = UserDefaults.standard.bool(forKey: "hidden")
     }
     
+    
     // MARK: - Biometric authentication
     
+    /// Switch to toggle biometric authentication.
     @IBOutlet weak var biometricAuthSwitch: UISwitch!
+    
+    /// Label for setting's title.
     @IBOutlet weak var biometricAuthLabel: UILabel!
     
-    @IBAction func toggleBiometricAuth(_ sender: UISwitch) { // Turn on or off Touch ID
+    /// Toogle biometric authentication.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender switch.
+    @IBAction func toggleBiometricAuth(_ sender: UISwitch) {
         
         guard BioMetricAuthenticator.canAuthenticate() else { return }
         
@@ -86,6 +114,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+    /// Display current biometric authentication setting.
     func initBiometricAuthenticationSetting() {
         biometricAuthSwitch.isOn = UserDefaults.standard.bool(forKey: "biometricAuth")
         

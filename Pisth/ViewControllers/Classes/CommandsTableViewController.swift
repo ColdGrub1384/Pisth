@@ -7,11 +7,14 @@
 
 import UIKit
 
-// This TableViewController displays content of commands array to run them
-
+/// Table view controller displaying content of `commands` array to run them.
 class CommandsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
+    /// Commands to display.
     var commands = [String]()
+    
+    
+    // MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()

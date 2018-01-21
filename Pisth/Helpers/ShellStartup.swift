@@ -7,9 +7,10 @@
 
 import Foundation
 
+/// Class hosting `commands` constant.
 class ShellStartup {
     
-    // Commands to run when open SSH shell
+    /// Commands to run when open SSH shell.
     static let commands = [
                            // Sync history
                            

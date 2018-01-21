@@ -8,6 +8,8 @@
 import Foundation
 
 extension Bool {
+    
+    /// Returns inverted Bool.
     var inverted: Bool {
         if self {
             return false

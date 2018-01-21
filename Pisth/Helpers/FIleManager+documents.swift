@@ -8,6 +8,8 @@
 import Foundation
 
 extension FileManager {
+    
+    /// Returns the app's documents directory.
     var documents: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0]
     }

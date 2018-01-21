@@ -8,17 +8,29 @@
 import UIKit
 import WebKit
 
+
+/// View controller displaying web content.
 class WebViewController: UIViewController, WKNavigationDelegate  {
     
+    /// Web view used to display content.
     var webView: WKWebView!
+    
+    /// Button for going back.
     @IBOutlet weak var goBackButton: UIBarButtonItem!
+    
+    /// Button for going forward.
     @IBOutlet weak var goForwardButton: UIBarButtonItem!
     
+    /// Local file to open.
     var file: URL?
     
+    /// Returns navigation bar height.
     var navBarHeight: CGFloat {
         return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
     }
+    
+    
+    // MARK: - View controller
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
@@ -50,15 +62,26 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
         webView.navigationDelegate = self
     }
     
+    
+    // MARK: - Actions
+    
+    /// Go back.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func goBack(_ sender: Any) {
         webView.goBack()
     }
     
+    /// Go forward.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func goForward(_ sender: Any) {
         webView.goForward()
     }
     
-    // Mark: WKNavigationDelegate
+    // MARK: - Web kit navigation delegate
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         goBackButton.isEnabled = webView.canGoBack

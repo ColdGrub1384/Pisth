@@ -8,12 +8,17 @@
 import CoreData
 import SwiftKeychainWrapper
 
+/// A class for managing saved connections.
 class DataManager {
     
+    /// Shared and unique instance of DataManager.
     static let shared = DataManager()
     private init() {}
     
-    func addNew(connection: RemoteConnection) { // Create and save connection
+    /// Create and save connection.
+    /// - Parameters:
+    ///     - connection: Representation of the connection to add.
+    func addNew(connection: RemoteConnection) {
         
         let newConnection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: AppDelegate.shared.coreDataContext)
         newConnection.setValue(connection.host, forKey: "host")
@@ -35,7 +40,10 @@ class DataManager {
         }
     }
     
-    func removeConnection(at index: Int) { // Remove connection at given index
+    /// Remove connection at given index.
+    /// - Parameters:
+    ///     - index: Index of connection to remove.
+    func removeConnection(at index: Int) {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         request.returnsObjectsAsFaults = false
@@ -52,7 +60,8 @@ class DataManager {
         }
     }
     
-    func removeAll() { // Remove all connections
+    /// Remove all saved connections.
+    func removeAll() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
@@ -65,7 +74,8 @@ class DataManager {
         }
     }
     
-    var connections: [RemoteConnection] { // Return connections saved to disk
+    /// Returns an array of representation of saved connections.
+    var connections: [RemoteConnection] {
         
         var fetchedConnections = [RemoteConnection]()
         

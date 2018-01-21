@@ -7,20 +7,25 @@
 
 import UIKit
 
+/// Static table view controller to manage source control.
 class SourceControlTableViewController: UITableViewController {
     
+    /// Git repo path.
     var repoPath: String!
+    
+    /// Dismiss `navigationController`.
+    @IBAction func done(sender: Any) {
+        if let navVC = navigationController {
+            navVC.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    /// MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         clearsSelectionOnViewWillAppear = true
-    }
-    
-    @IBAction func done(sender: Any) {
-        if let navVC = navigationController {
-            navVC.dismiss(animated: true, completion: nil)
-        }
     }
     
     // MARK: - Table view delegate

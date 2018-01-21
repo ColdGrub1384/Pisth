@@ -7,8 +7,15 @@
 
 import Foundation
 
+/// Enumeration of connection results.
 enum ConnectionResult {
+    
+    /// Connected and authorized, all fine.
     case connectedAndAuthorized
+    
+    /// Connected but not authorized.
     case connected
+    
+    /// Not connected.
     case notConnected
 }

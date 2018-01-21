@@ -11,121 +11,42 @@ import GoogleMobileAds
 import AVFoundation
 import AVKit
 
+/// Table view controller used to manage local files.
 class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate {
-        
+    
+    /// Directory where retrieve files.
     var directory: URL
+    
+    /// Fetched files.
     var files = [URL]()
+    
+    /// Error viewing directory.
     var error: Error?
+    
+    /// File to open did view appear.
     var openFile: URL?
+    
+    /// Delegate used.
     var delegate: LocalDirectoryTableViewControllerDelegate?
+    
+    /// Ad banner view displayed as header of Table view.
     var bannerView: GADBannerView!
     
-    static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
-        
-        func openFile() {
-            if let _ = try? String.init(contentsOfFile: file.path) { // Is text
-                var editTextVC: EditTextViewController! {
-                    let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)!.first as! EditTextViewController
-                    
-                    editTextViewController.file = file
-                        
-                    return editTextViewController
-                }
-                
-                if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
-                    let alert = UIAlertController(title: "Open file", message: "View HTML page or edit?", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "View HTML", style: .default, handler: { (_) in // View HTML
-                        guard let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)?.first as? WebViewController else { return }
-                        webVC.file = file
-
-                        navigationController?.pushViewController(webVC, animated: true)
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
-                        navigationController?.pushViewController(editTextVC, animated: true)
-                    }))
-                    
-                    if viewController == nil {
-                        navigationController?.present(alert, animated: true, completion: nil)
-                    } else {
-                        viewController?.dismiss(animated: true, completion: {
-                            navigationController?.present(alert, animated: true, completion: nil)
-                        })
-                    }
-                } else {
-                    if viewController == nil {
-                        navigationController?.pushViewController(editTextVC!, animated: true)
-                    } else {
-                        viewController?.dismiss(animated: true, completion: {
-                            navigationController?.pushViewController(editTextVC, animated: true)
-                        })
-                    }
-                }
-            } else if let unziped = try? Zip.quickUnzipFile(file) {
-                let newFolderVC = LocalDirectoryTableViewController(directory: unziped)
-                if viewController == nil {
-                    navigationController?.pushViewController(newFolderVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(newFolderVC, animated: true)
-                    })
-                }
-            } else if let image = UIImage(contentsOfFile: file.path) { // Is image
-                let imageVC = Bundle.main.loadNibNamed("ImageViewController", owner: nil, options: nil)!.first! as! ImageViewController
-                imageVC.image = image
-                
-                if viewController == nil {
-                    navigationController?.pushViewController(imageVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(imageVC, animated: true)
-                    })
-                }
-            } else if AVAsset(url: file).isPlayable { // Is video or audio
-                let player = AVPlayer(url: file)
-                let playerVC = AVPlayerViewController()
-                playerVC.player = player
-                
-                if viewController == nil {
-                    navigationController?.pushViewController(playerVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(playerVC, animated: true)
-                    })
-                }
-            } else if isFilePDF(file) { // Is PDF
-                let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
-                webVC.file = file
-                
-                if viewController == nil {
-                    navigationController?.pushViewController(webVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(webVC, animated: true)
-                    })
-                }
-            } else { // Share
-                let shareVC = UIDocumentInteractionController(url: file)
-                if viewController == nil {
-                    shareVC.presentOpenInMenu(from: frame, in: view, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        shareVC.presentOpenInMenu(from: frame, in: view, animated: true)
-                    })
-                }
-            }
-        }
-        
-        let activityVC = ActivityViewController(message: "Loading...")
-        if let viewController = viewController {
-            viewController.present(activityVC, animated: true, completion: {
-                openFile()
-            })
-        } else {
-            openFile()
-        }
+    /// Share file with an `UIActivityViewController`.
+    ///
+    /// - Parameters:
+    ///     - sender: Button that sends the action, where point the `UIActivityViewController` and in wich the `tag` will be used as index of file in `files` array.
+    @objc func shareFile(_ sender: UIButton) {
+        let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
+        shareVC.popoverPresentationController?.sourceView = sender
+        present(shareVC, animated: true, completion: nil)
     }
     
+    /// Init with given directory.
+    /// - Parameters:
+    ///     - directory: Directory to open.
+    ///
+    /// - Returns: A Table view controller listing files in given directory.
     init(directory: URL) {
         
         self.directory = directory
@@ -145,6 +66,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    /// MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,12 +113,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             self.openFile = nil
         }
         
-    }
-    
-    @objc func shareFile(_ sender: UIButton) { // Share file
-        let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
-        shareVC.popoverPresentationController?.sourceView = sender
-        present(shareVC, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -280,11 +198,122 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
-    // MARK: - GADBannerViewDelegate
+    // MARK: - Banner view delegate
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
+    }
+    
+    // MARK: - Static
+    
+    /// Edit, view or share given file.
+    ///
+    /// - Parameters:
+    ///     - file: File to be opened.
+    ///     - frame: Frame where point an `UIActivityController` if the file will be saved.
+    ///     - view: View from wich share the file.
+    ///     - navigationController: Navigation controller in wich push editor or viewer.
+    ///     - viewController: viewController in wich show loading alert.
+    static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
+        
+        func openFile() {
+            if let _ = try? String.init(contentsOfFile: file.path) { // Is text
+                var editTextVC: EditTextViewController! {
+                    let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)!.first as! EditTextViewController
+                    
+                    editTextViewController.file = file
+                    
+                    return editTextViewController
+                }
+                
+                if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
+                    let alert = UIAlertController(title: "Open file", message: "View HTML page or edit?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "View HTML", style: .default, handler: { (_) in // View HTML
+                        guard let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)?.first as? WebViewController else { return }
+                        webVC.file = file
+                        
+                        navigationController?.pushViewController(webVC, animated: true)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
+                        navigationController?.pushViewController(editTextVC, animated: true)
+                    }))
+                    
+                    if viewController == nil {
+                        navigationController?.present(alert, animated: true, completion: nil)
+                    } else {
+                        viewController?.dismiss(animated: true, completion: {
+                            navigationController?.present(alert, animated: true, completion: nil)
+                        })
+                    }
+                } else {
+                    if viewController == nil {
+                        navigationController?.pushViewController(editTextVC!, animated: true)
+                    } else {
+                        viewController?.dismiss(animated: true, completion: {
+                            navigationController?.pushViewController(editTextVC, animated: true)
+                        })
+                    }
+                }
+            } else if let unziped = try? Zip.quickUnzipFile(file) {
+                let newFolderVC = LocalDirectoryTableViewController(directory: unziped)
+                if viewController == nil {
+                    navigationController?.pushViewController(newFolderVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(newFolderVC, animated: true)
+                    })
+                }
+            } else if let image = UIImage(contentsOfFile: file.path) { // Is image
+                let imageVC = Bundle.main.loadNibNamed("ImageViewController", owner: nil, options: nil)!.first! as! ImageViewController
+                imageVC.image = image
+                
+                if viewController == nil {
+                    navigationController?.pushViewController(imageVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(imageVC, animated: true)
+                    })
+                }
+            } else if AVAsset(url: file).isPlayable { // Is video or audio
+                let player = AVPlayer(url: file)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                
+                if viewController == nil {
+                    navigationController?.pushViewController(playerVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(playerVC, animated: true)
+                    })
+                }
+            } else if isFilePDF(file) { // Is PDF
+                let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
+                webVC.file = file
+                
+                if viewController == nil {
+                    navigationController?.pushViewController(webVC, animated: true)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.pushViewController(webVC, animated: true)
+                    })
+                }
+            } else { // Share
+                let shareVC = UIActivityViewController(activityItems: [file], applicationActivities: nil)
+                shareVC.popoverPresentationController?.sourceView = view
+                viewController?.present(shareVC, animated: true, completion: nil)
+            }
+        }
+        
+        let activityVC = ActivityViewController(message: "Loading...")
+        if let viewController = viewController {
+            viewController.present(activityVC, animated: true, completion: {
+                openFile()
+            })
+        } else {
+            openFile()
+        }
     }
 }
 

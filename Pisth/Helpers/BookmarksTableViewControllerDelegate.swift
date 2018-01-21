@@ -7,6 +7,16 @@
 
 import Foundation
 
+/// Delegate used by `BookmarksTableViewController`s
 protocol BookmarksTableViewControllerDelegate {
-    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController)
+    
+    /// Called did open a connection with `BookmarksTableViewController`.
+    /// # Note
+    /// If the delegate is set for `BookmarksTableViewController`, this you need to present the `directoryTableViewController` manually.
+    ///
+    /// - Parameters:
+    ///     - bookmarksTableViewController: Source `BookmarksTableViewController`.
+    ///     - connection: Representation of connection to be opened.
+    ///     - directoryTableViewController: `DirectoryTableViewController` to be opened.
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController)
 }
