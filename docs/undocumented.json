@@ -1,0 +1,852 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
+      "line": 14,
+      "symbol": "AppDelegate",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
+      "line": 55,
+      "symbol": "AppDelegate.application(_:didFinishLaunchingWithOptions:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
+      "line": 121,
+      "symbol": "AppDelegate.application(_:open:options:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
+      "line": 151,
+      "symbol": "AppDelegate.persistentContainer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
+      "line": 180,
+      "symbol": "AppDelegate.saveContext()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/FileTableViewCell.swift",
+      "line": 23,
+      "symbol": "FileTableViewCell.canPerformAction(_:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/FileTableViewCell.swift",
+      "line": 35,
+      "symbol": "FileTableViewCell.canBecomeFirstResponder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 7,
+      "symbol": "ActivityViewController.activityView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 23,
+      "symbol": "ActivityViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 31,
+      "symbol": "ActivityView.activityIndicatorView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 32,
+      "symbol": "ActivityView.boundingBoxView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 33,
+      "symbol": "ActivityView.messageLabel",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 35,
+      "symbol": "ActivityView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 57,
+      "symbol": "ActivityView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ActivityViewController.swift",
+      "line": 61,
+      "symbol": "ActivityView.layoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ConnectionManager.swift",
+      "line": 15,
+      "symbol": "ConnectionManager.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/DataManager.swift",
+      "line": 16,
+      "symbol": "DataManager.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/Pasteboard.swift",
+      "line": 15,
+      "symbol": "Pasteboard.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 245,
+      "symbol": "BookmarksTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 276,
+      "symbol": "BookmarksTableViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 301,
+      "symbol": "BookmarksTableViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 305,
+      "symbol": "BookmarksTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 314,
+      "symbol": "BookmarksTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 342,
+      "symbol": "BookmarksTableViewController.tableView(_:canEditRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 346,
+      "symbol": "BookmarksTableViewController.tableView(_:commit:forRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 353,
+      "symbol": "BookmarksTableViewController.tableView(_:moveRowAt:to:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 367,
+      "symbol": "BookmarksTableViewController.tableView(_:canMoveRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 374,
+      "symbol": "BookmarksTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 378,
+      "symbol": "BookmarksTableViewController.tableView(_:didSelectRowAt:).connect()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 395,
+      "symbol": "BookmarksTableViewController.tableView(_:didSelectRowAt:).askForPassword()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 411,
+      "symbol": "BookmarksTableViewController.tableView(_:didSelectRowAt:).open()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 440,
+      "symbol": "BookmarksTableViewController.tableView(_:accessoryButtonTappedForRowWith:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 453,
+      "symbol": "BookmarksTableViewController.adViewDidReceiveAd(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift",
+      "line": 460,
+      "symbol": "BookmarksTableViewController.searchBar(_:textDidChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/CommandsTableViewController.swift",
+      "line": 19,
+      "symbol": "CommandsTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/CommandsTableViewController.swift",
+      "line": 33,
+      "symbol": "CommandsTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/CommandsTableViewController.swift",
+      "line": 37,
+      "symbol": "CommandsTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/CommandsTableViewController.swift",
+      "line": 49,
+      "symbol": "CommandsTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/CommandsTableViewController.swift",
+      "line": 58,
+      "symbol": "CommandsTableViewController.adaptivePresentationStyle(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 106,
+      "symbol": "DirectoryTableViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 113,
+      "symbol": "DirectoryTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 162,
+      "symbol": "DirectoryTableViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 459,
+      "symbol": "DirectoryTableViewController.tableView(_:heightForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 463,
+      "symbol": "DirectoryTableViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 467,
+      "symbol": "DirectoryTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 477,
+      "symbol": "DirectoryTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 510,
+      "symbol": "DirectoryTableViewController.tableView(_:canEditRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 514,
+      "symbol": "DirectoryTableViewController.tableView(_:commit:forRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 573,
+      "symbol": "DirectoryTableViewController.tableView(_:canPerformAction:forRowAt:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 582,
+      "symbol": "DirectoryTableViewController.tableView(_:shouldShowMenuForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 586,
+      "symbol": "DirectoryTableViewController.tableView(_:performAction:forRowAt:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 609,
+      "symbol": "DirectoryTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 712,
+      "symbol": "DirectoryTableViewController.localDirectoryTableViewController(_:didOpenFile:).sendFile()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 780,
+      "symbol": "DirectoryTableViewController.adViewDidReceiveAd(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
+      "line": 100,
+      "symbol": "EditTextViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
+      "line": 160,
+      "symbol": "EditTextViewController.viewDidDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
+      "line": 163,
+      "symbol": "EditTextViewController.viewDidDisappear(_:).close()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
+      "line": 299,
+      "symbol": "EditTextViewController.dismissKeyboard(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 55,
+      "symbol": "GitBranchesTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 73,
+      "symbol": "GitBranchesTableViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 147,
+      "symbol": "GitBranchesTableViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 151,
+      "symbol": "GitBranchesTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 155,
+      "symbol": "GitBranchesTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 167,
+      "symbol": "GitBranchesTableViewController.tableView(_:heightForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitBranchesTableViewController.swift",
+      "line": 174,
+      "symbol": "GitBranchesTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitRemotesTableViewController.swift",
+      "line": 13,
+      "symbol": "GitRemotesTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitRemotesTableViewController.swift",
+      "line": 31,
+      "symbol": "GitRemotesTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/GitRemotesTableViewController.swift",
+      "line": 45,
+      "symbol": "GitRemotesTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/ImageViewController.swift",
+      "line": 24,
+      "symbol": "ImageViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/ImageViewController.swift",
+      "line": 40,
+      "symbol": "ImageViewController.viewForZooming(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 66,
+      "symbol": "LocalDirectoryTableViewController.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 95,
+      "symbol": "LocalDirectoryTableViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 120,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:heightForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 124,
+      "symbol": "LocalDirectoryTableViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 128,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 134,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 161,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:canEditRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 165,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:commit:forRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 183,
+      "symbol": "LocalDirectoryTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 203,
+      "symbol": "LocalDirectoryTableViewController.adViewDidReceiveAd(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
+      "line": 220,
+      "symbol": "LocalDirectoryTableViewController.openFile(_:from:in:navigationController:showActivityViewControllerInside:).openFile()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
+      "line": 17,
+      "symbol": "SettingsTableViewController.Index.biometricAuth",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
+      "line": 18,
+      "symbol": "SettingsTableViewController.Index.showHiddenFiles",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
+      "line": 19,
+      "symbol": "SettingsTableViewController.Index.blinkCursor",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
+      "line": 20,
+      "symbol": "SettingsTableViewController.Index.licenses",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
+      "line": 136,
+      "symbol": "SettingsTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SourceControlTableViewController.swift",
+      "line": 33,
+      "symbol": "SourceControlTableViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/SourceControlTableViewController.swift",
+      "line": 43,
+      "symbol": "SourceControlTableViewController.prepare(for:sender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 103,
+      "symbol": "TerminalViewController.canBecomeFirstResponder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 107,
+      "symbol": "TerminalViewController.canResignFirstResponder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 113,
+      "symbol": "TerminalViewController.inputAccessoryView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 117,
+      "symbol": "TerminalViewController.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 134,
+      "symbol": "TerminalViewController.keyCommands",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 153,
+      "symbol": "TerminalViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 161,
+      "symbol": "TerminalViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 180,
+      "symbol": "TerminalViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 231,
+      "symbol": "TerminalViewController.changeSize(completion:).apply()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 262,
+      "symbol": "TerminalViewController.keyboardWillShow(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 271,
+      "symbol": "TerminalViewController.keyboardWillHide(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 332,
+      "symbol": "TerminalViewController.channel(_:didReadData:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 360,
+      "symbol": "TerminalViewController.channelShellDidClose(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 370,
+      "symbol": "TerminalViewController.insertText(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 381,
+      "symbol": "TerminalViewController.deleteBackward()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 387,
+      "symbol": "TerminalViewController.hasText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 393,
+      "symbol": "TerminalViewController.keyboardAppearance",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 394,
+      "symbol": "TerminalViewController.autocorrectionType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 398,
+      "symbol": "TerminalViewController.webView(_:didFinish:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/WebViewController.swift",
+      "line": 35,
+      "symbol": "WebViewController.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/WebViewController.swift",
+      "line": 43,
+      "symbol": "WebViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/WebViewController.swift",
+      "line": 50,
+      "symbol": "WebViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/WebViewController.swift",
+      "line": 86,
+      "symbol": "WebViewController.webView(_:didCommit:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/WebViewController.swift",
+      "line": 91,
+      "symbol": "WebViewController.webView(_:didFinish:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataClass.swift",
+      "line": null,
+      "symbol": "Connection",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataClass.swift",
+      "line": 14,
+      "symbol": "Connection",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 16,
+      "symbol": "Connection.fetchRequest()",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 20,
+      "symbol": "Connection.host",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 21,
+      "symbol": "Connection.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 22,
+      "symbol": "Connection.password",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 23,
+      "symbol": "Connection.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 24,
+      "symbol": "Connection.port",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 25,
+      "symbol": "Connection.username",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/adrian/Documents/Pisth"
+}
