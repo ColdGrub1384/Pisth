@@ -374,7 +374,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
-            
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.navigationController?.popToRootViewController(animated: true)
         }
     }
