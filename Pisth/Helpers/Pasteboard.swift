@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Class hosting local file path.
+/// Class hosting remote file path.
 class Pasteboard {
     
     /// Shared and unique instance of `Pasteboard`.

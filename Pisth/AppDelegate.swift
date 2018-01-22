@@ -11,6 +11,7 @@ import GoogleMobileAds
 import SwiftKeychainWrapper
 
 @UIApplicationMain
+/// The app's delegate.
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
     
     /// The window used with app.
