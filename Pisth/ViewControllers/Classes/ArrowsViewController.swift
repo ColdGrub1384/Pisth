@@ -86,7 +86,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         helpLabel.numberOfLines = 2
         helpLabel.text = "Swipe to send\narrow keys"
         helpLabel.textAlignment = .center
-        helpLabel.textColor = .black
+        helpLabel.textColor = .white
         view.addSubview(helpLabel)
         
         // Arrow label
@@ -95,7 +95,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         arrowLabel.font = UIFont.boldSystemFont(ofSize: 30)
         arrowLabel.isHidden = true
         arrowLabel.textAlignment = .center
-        arrowLabel.textColor = .black
+        arrowLabel.textColor = .white
         view.addSubview(arrowLabel)
         
         // Recognize gestures

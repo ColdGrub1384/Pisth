@@ -296,6 +296,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let popover = arrowsVC.popoverPresentationController {
             popover.barButtonItem = sender
             popover.delegate = arrowsVC
+            popover.backgroundColor = .clear
             
             self.present(arrowsVC, animated: true, completion: nil)
         }
