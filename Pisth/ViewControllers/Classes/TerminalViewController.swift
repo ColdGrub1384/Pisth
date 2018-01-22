@@ -69,6 +69,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let history = UIBarButtonItem(image:#imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
         
+        let arrows = UIBarButtonItem(image: #imageLiteral(resourceName: "touch"), style: .plain, target: self, action: #selector(sendArrows(_:)))
+        
         ctrlKey = UIBarButtonItem(title: "Ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
         
@@ -81,7 +83,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [goBack, history, ctrlKey, space, escKey, fKeys] as [UIBarButtonItem]
+        let items = [goBack, history, ctrlKey, space, arrows, escKey, fKeys] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
@@ -280,6 +282,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Send arrow keys.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender bar button item.
+    @objc func sendArrows(_ sender: UIBarButtonItem) {
+        let arrowsVC = ArrowsViewController()
+        arrowsVC.modalPresentationStyle = .popover
+        arrowsVC.preferredContentSize = CGSize(width: 200, height: 200)
+        
+        if let popover = arrowsVC.popoverPresentationController {
+            popover.barButtonItem = sender
+            popover.delegate = arrowsVC
+            
+            self.present(arrowsVC, animated: true, completion: nil)
+        }
+    }
+    
     /// Insert special key.
     ///
     /// - Parameters:
@@ -292,14 +311,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             ctrl = ctrl.inverted
         } else if sender.tag == 6 { // Esc
             try? channel.write(Keys.esc)
-        } else if sender.tag == 2 { // Left arrow
-            try? channel.write(Keys.arrowLeft)
-        } else if sender.tag == 3 { // Up arrow
-            try? channel.write(Keys.arrowUp)
-        } else if sender.tag == 4 { // Down arrow
-            try? channel.write(Keys.arrowDown)
-        } else if sender.tag == 5 { // Right arrow
-            try? channel.write(Keys.arrowRight)
         } else if sender.tag == 7 { // F keys
             let commandsVC = CommandsTableViewController()
             commandsVC.title = "Function keys"

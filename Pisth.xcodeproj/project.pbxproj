@@ -26,6 +26,7 @@
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
+		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
@@ -80,6 +81,7 @@
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
+		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */,
 				3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */,
 				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
+				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */,
 				3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */,
 				3A2258911FF6A850001B9710 /* Reachability.swift in Sources */,
+				3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */,
 				3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
