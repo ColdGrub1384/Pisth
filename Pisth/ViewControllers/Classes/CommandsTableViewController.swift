@@ -11,7 +11,12 @@ import UIKit
 class CommandsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     /// Commands to display.
-    var commands = [String]()
+    /// Put `String`s for commands or `Array`s of `String`s.
+    ///
+    /// # Example of valid value
+    ///
+    ///     "A command", ["A command", "Title to display"]
+    var commands = [Any]()
     
     
     // MARK: - View controller
@@ -38,7 +43,14 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
         let cell = tableView.dequeueReusableCell(withIdentifier: "command")!
         cell.backgroundColor = .black
         
-        cell.textLabel?.text = commands[indexPath.row]
+        if let command = commands[indexPath.row] as? String {
+            cell.textLabel?.text = command
+        }
+        
+        if let command = commands[indexPath.row] as? [String] {
+            cell.textLabel?.text = command[1]
+        }
+        
         cell.textLabel?.textColor = .white
         
         return cell
@@ -49,7 +61,11 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         dismiss(animated: true) {
-            try? ConnectionManager.shared.session?.channel.write(self.commands[indexPath.row]+"\n")
+            if let command = self.commands[indexPath.row] as? String {
+                try? ConnectionManager.shared.session?.channel.write(command)
+            } else if let command = self.commands[indexPath.row] as? [String] {
+                try? ConnectionManager.shared.session?.channel.write(command[0])
+            }
         }
     }
     

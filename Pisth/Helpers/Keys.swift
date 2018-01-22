@@ -28,6 +28,43 @@ class Keys {
     /// Delete Key.
     static let delete = unicode(dec: 127)
     
+    // MARK: - Function keys
+    
+    /// F1
+    static let f1 = esc+"OP"
+    
+    /// F2
+    static let f2 = esc+"OQ"
+    
+    /// F3
+    static let f3 = esc+"OR"
+    
+    /// F4
+    static let f4 = esc+"OS"
+    
+    /// F5
+    static let f5 = esc+"[15~"
+    
+    /// F6
+    static let f6 = esc+"[17~"
+    
+    /// F7
+    static let f7 = esc+"[18~"
+    
+    /// F8
+    static let f8 = esc+"[19~"
+    
+    /// F9
+    static let f9 = esc+"[20~"
+    
+    /// F10
+    static let f10 = esc+"[21~"
+    
+    /// F11
+    static let f11 = esc+"[23~"
+    
+    /// F12
+    static let f12 = esc+"[24~"
     
     // MARK: - Arrow keys
     

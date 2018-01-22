@@ -67,6 +67,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let goBack = UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))
         
+        let history = UIBarButtonItem(image:#imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
+        
         ctrlKey = UIBarButtonItem(title: "Ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
         
@@ -74,20 +76,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         escKey.setTitleTextAttributes([NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)], for: .normal)
         escKey.tag = 6
         
-        // ⬅︎⬆︎⬇︎➡︎
-        let leftArrow = UIBarButtonItem(title: "⬅︎", style: .done, target: self, action: #selector(insertKey(_:)))
-        leftArrow.tag = 2
-        let upArrow = UIBarButtonItem(title: "⬆︎", style: .done, target: self, action: #selector(insertKey(_:)))
-        upArrow.tag = 3
-        let downArrow = UIBarButtonItem(title: "⬇︎", style: .done, target: self, action: #selector(insertKey(_:)))
-        downArrow.tag = 4
-        let rightArrow = UIBarButtonItem(title: "➡︎", style: .done, target: self, action: #selector(insertKey(_:)))
-        rightArrow.tag = 5
-        
+        let fKeys = UIBarButtonItem(title: "F1-12", style: .done, target: self, action: #selector(insertKey(_:)))
+        fKeys.tag = 7
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [goBack, ctrlKey, leftArrow, space, upArrow, downArrow, space, rightArrow, escKey] as [UIBarButtonItem]
+        let items = [goBack, history, ctrlKey, space, escKey, fKeys] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
@@ -163,10 +157,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             ConnectionManager.shared.session?.channel.closeShell()
             try? ConnectionManager.shared.session?.channel.startShell()
-            
-            // Show commands history
-            let history = UIBarButtonItem(image: #imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
-            navigationItem.setRightBarButtonItems([history], animated: true)
             
             if #available(iOS 11.0, *) {
                 navigationItem.largeTitleDisplayMode = .never
@@ -310,6 +300,18 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             try? channel.write(Keys.arrowDown)
         } else if sender.tag == 5 { // Right arrow
             try? channel.write(Keys.arrowRight)
+        } else if sender.tag == 7 { // F keys
+            let commandsVC = CommandsTableViewController()
+            commandsVC.title = "Function keys"
+            commandsVC.commands = [[Keys.f1, "F1"], [Keys.f2, "F2"], [Keys.f3, "F3"], [Keys.f4, "F4"], [Keys.f5, "F5"], [Keys.f6, "F6"], [Keys.f7, "F7"], [Keys.f8, "F8"], [Keys.f9, "F9"], [Keys.f10, "F10"], [Keys.f11, "F11"], [Keys.f12, "F12"]]
+            commandsVC.modalPresentationStyle = .popover
+            
+            if let popover = commandsVC.popoverPresentationController {
+                popover.barButtonItem = sender
+                popover.delegate = commandsVC
+                
+                self.present(commandsVC, animated: true, completion: nil)
+            }
         }
     }
     
