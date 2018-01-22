@@ -195,6 +195,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
+        
+        ArrowsViewController.current?.dismiss(animated: true, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -385,6 +387,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
+            self.navigationController?.setToolbarHidden(true, animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.navigationController?.popToRootViewController(animated: true)
         }

@@ -78,7 +78,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        ArrowsViewController.current = self
         
         // Help label
         
@@ -117,9 +117,25 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         view.addGestureRecognizer(downSwipe)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        ArrowsViewController.current = nil
+    }
+    
+    override func viewDidLayoutSubviews() {
+        helpLabel.center = view.center
+        arrowLabel.center = view.center
+    }
+    
     // MARK: - Popover presentation controller delegate
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
+    
+    // MARK: - Static
+    
+    /// Current Arrows view controller opened.
+    static var current: ArrowsViewController?
 }
