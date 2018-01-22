@@ -19,7 +19,7 @@ Why use Pisth:
 ```
 <br/>
 
-<a href="https://pisth.github.io"><img src="https://pisth.github.io/docs/badge.svg"></a>
+<a href="https://pisth.github.io/docs"><img src="https://pisth.github.io/docs/badge.svg"></a>
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![version](https://img.shields.io/badge/version-4.0-orange.svg)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-green.svg)
