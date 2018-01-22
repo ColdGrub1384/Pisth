@@ -26,6 +26,7 @@ class SourceControlTableViewController: UITableViewController {
         super.viewDidLoad()
         
         clearsSelectionOnViewWillAppear = true
+        navigationController?.toolbar.barStyle = .black
     }
     
     // MARK: - Table view delegate

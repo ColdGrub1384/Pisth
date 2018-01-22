@@ -52,11 +52,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Navigation bar height.
-    var navBarHeight: CGFloat {
-        return AppDelegate.shared.navigationController.navigationBar.frame.height+UIApplication.shared.statusBarFrame.height
-    }
-    
     /// Is terminal read only.
     var readOnly = false
     
@@ -69,6 +64,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         toolbar.barStyle = .black
         
         // Buttons
+        
+        let goBack = UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))
         
         ctrlKey = UIBarButtonItem(title: "Ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
         ctrlKey.tag = 1
@@ -90,11 +87,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [ctrlKey, leftArrow, space, upArrow, downArrow, space, rightArrow, escKey] as [UIBarButtonItem]
+        let items = [goBack, ctrlKey, leftArrow, space, upArrow, downArrow, space, rightArrow, escKey] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
         self.toolbar = toolbar
+        
+        setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))], animated: true)
     }
     
     
@@ -126,7 +125,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         })
         
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            let newFrame = CGRect(x: 0, y: self.navBarHeight, width: size.width, height: size.height)
+            let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             self.webView.frame = newFrame
         })
     }
@@ -175,6 +174,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             addToolbar()
         }
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -182,7 +184,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if console.isEmpty {
             // Create WebView
-            webView = WKWebView(frame: CGRect(x: 0, y: navBarHeight, width: view.frame.width, height: view.frame.height))
+            webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
             view.addSubview(webView)
             webView.backgroundColor = .black
             webView.navigationDelegate = self
@@ -194,6 +196,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     /// Show commands history.
@@ -263,7 +276,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webView.frame.size.height -= keyboardSize.height+inputAccessoryView!.frame.height
+            webView.frame.size.height -= keyboardSize.height
             webView.reload()
         }
     }
@@ -272,7 +285,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webView.frame.size.height += keyboardSize.height+inputAccessoryView!.frame.height
+            webView.frame.size.height += keyboardSize.height
             webView.reload()
         }
     }

@@ -36,7 +36,7 @@
             if (geometry) {
                 if (term.rows !== geometry.rows || term.cols !== geometry.cols) {
                     term.renderer.clear();
-                    term.resize(geometry.cols, geometry.rows-2);
+                    term.resize(geometry.cols, geometry.rows);
                 }
             }
         }
