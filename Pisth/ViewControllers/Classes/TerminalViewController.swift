@@ -396,7 +396,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     func insertText(_ text: String) {
         do {
             if !ctrl {
-                try ConnectionManager.shared.session?.channel.write(text)
+                try ConnectionManager.shared.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
             } else {
                 try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
                 ctrl = false
