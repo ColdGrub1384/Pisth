@@ -10,7 +10,7 @@ import UIKit
 /// Provide file icon by extension.
 ///
 /// - Parameters:
-///     - extension_: Extension used to retrieve file icon.
+///     - forExtension: Extension used to retrieve file icon.
 ///
 /// - Returns: The file icon associated with the given extension, or the default file icon.
 func fileIcon(forExtension extension_: String) -> UIImage {

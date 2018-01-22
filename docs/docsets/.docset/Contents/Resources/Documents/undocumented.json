@@ -2,35 +2,35 @@
   "warnings": [
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "AppDelegate",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 55,
+      "line": 56,
       "symbol": "AppDelegate.application(_:didFinishLaunchingWithOptions:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 121,
+      "line": 122,
       "symbol": "AppDelegate.application(_:open:options:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 151,
+      "line": 152,
       "symbol": "AppDelegate.persistentContainer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 180,
+      "line": 181,
       "symbol": "AppDelegate.saveContext()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
