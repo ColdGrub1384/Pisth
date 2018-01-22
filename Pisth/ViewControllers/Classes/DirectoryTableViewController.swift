@@ -514,58 +514,76 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            // Remove directory
-            if files![indexPath.row].isDirectory {
-                
-                guard let sftp = ConnectionManager.shared.filesSession?.sftp else { return }
-                
-                func remove(directoryRecursively directory: String) -> Bool? {
-                    while true {
-                        guard let files = sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else { return nil }
-                        
-                        if files.count > 0 {
-                            for file in files {
-                                if !file.isDirectory {
-                                    sftp.removeFile(atPath: directory.nsString.appendingPathComponent(file.filename))
-                                } else if files.count > 0 {
-                                    _ = remove(directoryRecursively: directory.nsString.appendingPathComponent(file.filename))
-                                } else {
-                                    sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(file.filename))
+            checkForConnectionError(errorHandler: {
+                self.showError()
+            }, successHandler: {
+                // Remove directory
+                if self.files![indexPath.row].isDirectory {
+                    
+                    guard let sftp = ConnectionManager.shared.filesSession?.sftp else { return }
+                    
+                    func remove(directoryRecursively directory: String) -> Bool? {
+                        while true {
+                            guard let files = sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else { return nil }
+                            
+                            if files.count > 0 {
+                                for file in files {
+                                    if !file.isDirectory {
+                                        if !sftp.removeFile(atPath: directory.nsString.appendingPathComponent(file.filename)) {
+                                            
+                                            return false
+                                        }
+                                    } else if files.count > 0 {
+                                        let result = remove(directoryRecursively: directory.nsString.appendingPathComponent(file.filename))
+                                        
+                                        if result != nil && !result! {
+                                            return false
+                                        }
+                                        
+                                        if result == nil {
+                                            return nil
+                                        }
+                                    } else {
+                                        if !sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(file.filename)) {
+                                            
+                                            return false
+                                        }
+                                    }
                                 }
+                            } else {
+                                return sftp.removeDirectory(atPath: directory)
                             }
-                        } else {
-                            return sftp.removeDirectory(atPath: directory)
+                            
                         }
-                        
+                    }
+                    
+                    guard let result = remove(directoryRecursively: self.directory.nsString.appendingPathComponent(self.files![indexPath.row].filename)) else {
+                        self.showError()
+                        return
+                    }
+                    
+                    if !result {
+                        let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    } else {
+                        self.reload()
+                    }
+                } else { // Remove file
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: self.directory.nsString.appendingPathComponent(self.files![indexPath.row].filename)) else {
+                        self.showError()
+                        return
+                    }
+                    
+                    if !result {
+                        let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    } else {
+                        self.reload()
                     }
                 }
-                
-                guard let result = remove(directoryRecursively: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
-                    self.showError()
-                    return
-                }
-                
-                if !result {
-                    let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
-                } else {
-                    self.reload()
-                }
-            } else { // Remove file
-                guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directory.nsString.appendingPathComponent(files![indexPath.row].filename)) else {
-                    self.showError()
-                    return
-                }
-                
-                if !result {
-                    let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
-                } else {
-                    self.reload()
-                }
-            }
+            })
 
         }
     }
