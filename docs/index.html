@@ -13,7 +13,7 @@
     <a title="  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (66% documented)</p>
+        <p><a href="index.html"> Docs</a> (69% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -30,22 +30,16 @@
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Classes/ActivityView.html">ActivityView</a>
+                <a href="Classes.html#/c:@M@Pisth@objc(cs)ActivityView">ActivityView</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ActivityViewController.html">ActivityViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/AppDelegate.html">AppDelegate</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/BookmarksTableViewController.html">BookmarksTableViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/CommandsTableViewController.html">CommandsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/Connection.html">Connection</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ConnectionManager.html">ConnectionManager</a>
@@ -66,7 +60,7 @@
                 <a href="Classes/GitBranchesTableViewController.html">GitBranchesTableViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/GitRemotesTableViewController.html">GitRemotesTableViewController</a>
+                <a href="Classes.html#/c:@M@Pisth@objc(cs)GitRemotesTableViewController">GitRemotesTableViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ImageViewController.html">ImageViewController</a>
@@ -87,7 +81,7 @@
                 <a href="Classes/SettingsTableViewController.html">SettingsTableViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/SettingsTableViewController/Index.html">– Index</a>
+                <a href="Classes/SettingsTableViewController.html#/s:5Pisth27SettingsTableViewControllerC5IndexO">– Index</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/ShellStartup.html">ShellStartup</a>
@@ -177,21 +171,25 @@
 <h1 id='pisth' class='heading'>Pisth</h1>
 
 <p><a href="https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8"><img alt="Download on the App Store" src="https://pisth.github.io/appstorebadge.svg"/></a></p>
+<pre class="highlight plaintext"><code>Pisth is an SSH and SFTP client.
+Use Pisth to upload, view and edit files in your SSH server.
 
-<p>Pisth is SSH and SFTP client for iOS. It uses <a href="https://github.com/NMSSH/NMSSH">NMSSH</a> to browse files, upload files, download files and do SSH.</p>
+Why use Pisth:
 
-<p>Pisth is an SSH and SFTP client.
-Use Pisth to upload, view and edit files in your SSH server.</p>
+  - Pisth is totally free (but there is ad banners)
+  - You can manage files in your SSH server and use the Shell in the same app.
+  - You can edit text files and code with colored syntax
+  - The Shell supports colors and real time output and input, so you can use text editors such as nano, vim, etc.
+  - The Shell supports Bluetooth keyboard including arrows and ctrl keys
 
-<p>Why use Pisth:</p>
+</code></pre>
 
-<ul>
-<li>Pisth is totally free (but there is ad banners)</li>
-<li>You can manage files in your SSH server and use the Shell in the same app.</li>
-<li>You can edit text files and code with colored syntax</li>
-<li>The Shell supports colors and real time output and input, so you can use text editors such as nano, vim, etc.</li>
-<li>The Shell supports Bluetooth keyboard including arrows and ctrl keys.</li>
-</ul>
+<p><br/></p>
+
+<p><a href="https://pisth.github.io"><img src="https://pisth.github.io/docs/badge.svg"></a>
+<img src="https://img.shields.io/badge/status-stable-green.svg" alt="status">
+<img src="https://img.shields.io/badge/version-4.0-orange.svg" alt="version">
+<img src="https://img.shields.io/badge/iOS-10.0%2B-green.svg" alt="iOS"></p>
 <h2 id='screenshots' class='heading'>Screenshots</h2>
 
 <div style="display: flex;">
@@ -202,8 +200,26 @@ Use Pisth to upload, view and edit files in your SSH server.</p>
 <img style="float:left; display:inline-block;" src="https://is1-ssl.mzstatic.com/image/thumb/Purple118/v4/83/b7/91/83b7910c-1df1-5d3d-17a2-b8eb4089042e/pr_source.png/0x0ss.jpg" width=200px>
 </div>
 <h2 id='creating-a-pull-request' class='heading'>Creating a pull request</h2>
+<h3 id='documentation' class='heading'>Documentation</h3>
 
-<p>If you need to compile the code, you will need to make some changes, so please create a new branch with all changes you need to do and then apply only needed changes.</p>
+<p>If you want to contribute to the documentation, don&rsquo;t edit the <code>docs</code> directory, but just <a href="http://nshipster.com/swift-documentation/">document the code</a>, the page will be generated by me with <a href="https://github.com/realm/jazzy">Jazzy</a> (but if you want, you can generate the page after commenting).</p>
+<h3 id='style' class='heading'>Style</h3>
+<h4 id='marks' class='heading'>Marks</h4>
+
+<p>Put <code>-</code> in marks.</p>
+
+<p>For protocools or super classes in marks, remove modules prefix, put spaces between words, a capital at start, and no capitals after.</p>
+
+<p>For example, use: <code>// MARK: - The name of protocool</code> instead of <code>// MARK: - PTTheNameOfProtocool</code></p>
+<h4 id='documentation' class='heading'>Documentation</h4>
+
+<p>Put fullstops after documented comments.</p>
+<h4 id='tabs' class='heading'>Tabs</h4>
+
+<p>Use 4 spaces tabs.</p>
+<h2 id='acknowledgements' class='heading'>Acknowledgements</h2>
+
+<p>See licenses <a href="http://htmlpreview.github.io/?https://github.com/ColdGrub1384/Pisth/blob/master/Pisth/Licenses.html">here</a>.</p>
 
           </section>
         </section>
