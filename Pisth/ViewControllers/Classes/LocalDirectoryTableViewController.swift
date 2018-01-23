@@ -70,6 +70,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     /// MARK: - View controller
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,6 +95,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         bannerView.load(GADRequest())
     }
     
+    /// `UIViewController`'s `viewDidAppear(_:)` function.
+    ///
+    /// Show error if there are or open `openFile` file.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -117,20 +123,31 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Table view data source
     
+    /// `UITableViewController`'s `tableView(_:, heightForRowAt:)` function.
+    ///
+    /// - Returns: `87`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
     }
     
+    /// `UITableViewController`'s `numberOfSections(in:)` function.
+    ///
+    /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    /// `UITableViewController`'s `tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)` function.
+    ///
+    /// - Returns: count of `files`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return files.count
     }
     
-    
+    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
+    ///
+    /// - Returns: An `UITableViewCell` with title as the current filename and file icon for current file.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
         cell.contentView.superview?.backgroundColor = .black
@@ -158,10 +175,16 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         return cell
     }
     
+    /// `UITableViewController`'s `tableView(_:, canEditRowAt:)` function.
+    ///
+    /// - Returns: `true`.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
+    /// `UITableViewController`'s `tableView(_:, commit:, forRowAt:)` function.
+    ///
+    /// Remove selected file.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             do {
@@ -180,6 +203,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Table view delegate
     
+    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
+    ///
+    /// Open selected file or directory.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
@@ -200,6 +226,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Banner view delegate
     
+    /// `GADBannerViewDelegate`'s `adViewDidReceiveAd(_:)` function.
+    ///
+    /// Show ad when it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView

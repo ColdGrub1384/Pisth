@@ -14,7 +14,7 @@
     <a title="AppDelegate Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (66% documented)</p>
+        <p><a href="../index.html"> Docs</a> (94% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -38,6 +38,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ArrowsViewController.html">ArrowsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a>
@@ -400,7 +403,9 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIApplicationDelegate</code>&lsquo;s <code>application(_:, didFinishLaunchingWithOptions:)</code> function.</p>
+
+<p>Initialize app&rsquo;s window, and setup / repair saved data.</p>
 
                       </div>
                       <div class="declaration">
@@ -427,7 +432,9 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIApplicationDelegate</code>&lsquo;s <code>application(_:, open:, options:)</code>` function.</p>
+
+<p>Open and upload file.</p>
 
                       </div>
                       <div class="declaration">
@@ -465,7 +472,10 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The persistent container for the application. This implementation
+creates and returns a container, having loaded the store for the
+application to it. This property is optional since there are legitimate
+error conditions that could cause the creation of the store to fail.</p>
 
                       </div>
                       <div class="declaration">
@@ -503,7 +513,7 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Save core data.</p>
 
                       </div>
                       <div class="declaration">
@@ -531,9 +541,9 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF"></a>
+                    <a name="/s:5Pisth11AppDelegateC28directoryTableViewControlleryAA09DirectoryefG0C_SS07didOpenH0tF"></a>
                     <a name="//apple_ref/swift/Method/directoryTableViewController(_:didOpenDirectory:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF">directoryTableViewController(_:didOpenDirectory:)</a>
+                    <a class="token" href="#/s:5Pisth11AppDelegateC28directoryTableViewControlleryAA09DirectoryefG0C_SS07didOpenH0tF">directoryTableViewController(_:didOpenDirectory:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -541,7 +551,10 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p><code><a href="../Protocols/DirectoryTableViewControllerDelegate.html">DirectoryTableViewControllerDelegate</code>&lsquo;s<code></a></code>directoryTableViewController(_:, didOpenDirectory:)&ldquo;function.</p>
+
+<p>Upload file at selected directory.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -568,9 +581,9 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth36BookmarksTableViewControllerDelegateP09bookmarkscdE0yAA0bcdE0C_AA16RemoteConnectionV07didOpenI0AA09DirectorycdE0C02inlcdE0tF"></a>
+                    <a name="/s:5Pisth11AppDelegateC28bookmarksTableViewControlleryAA09BookmarksefG0C_AA16RemoteConnectionV07didOpenJ0AA09DirectoryefG0C02inmefG0tF"></a>
                     <a name="//apple_ref/swift/Method/bookmarksTableViewController(_:didOpenConnection:inDirectoryTableViewController:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth36BookmarksTableViewControllerDelegateP09bookmarkscdE0yAA0bcdE0C_AA16RemoteConnectionV07didOpenI0AA09DirectorycdE0C02inlcdE0tF">bookmarksTableViewController(_:didOpenConnection:inDirectoryTableViewController:)</a>
+                    <a class="token" href="#/s:5Pisth11AppDelegateC28bookmarksTableViewControlleryAA09BookmarksefG0C_AA16RemoteConnectionV07didOpenJ0AA09DirectoryefG0C02inmefG0tF">bookmarksTableViewController(_:didOpenConnection:inDirectoryTableViewController:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -578,7 +591,10 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p><code><a href="../Protocols/BookmarksTableViewControllerDelegate.html">BookmarksTableViewControllerDelegate</a></code>&lsquo;s <code>bookmarksTableViewController(_:, didOpenConnection:, inDirectoryTableViewController:)</code> function.</p>
+
+<p>Upload file at selected connection.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -634,7 +650,7 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-22)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

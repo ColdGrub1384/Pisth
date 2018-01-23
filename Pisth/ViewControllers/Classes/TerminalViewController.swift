@@ -95,20 +95,32 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - View controller
     
+    /// `UIViewController`'s `canBecomeFirstResponder` variable.
+    ///
+    /// Returns if `webView is different than nil`.
     override var canBecomeFirstResponder: Bool {
         return (webView != nil)
     }
 
+    /// `UIViewController`'s `canResignFirstResponder` variable.
+    ///
+    /// Returns inverted value of `preventKeyboardFromBeeingDismissed` and set it to true.
     override var canResignFirstResponder: Bool {
         let canDoIt = preventKeyboardFromBeeingDismissed.inverted
         preventKeyboardFromBeeingDismissed = true
         return canDoIt
     }
     
+    /// `UIViewController`'s `inputAccessoryView` variable.
+    ///
+    /// Returns `toolbar`.
     override var inputAccessoryView: UIView? {
         return toolbar
     }
     
+    /// `UIViewController`'s `viewWillTransition(to:, with:)` function.
+    ///
+    /// Resize `webView`, dismiss and open keyboard (to resize terminal).
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if isFirstResponder {
@@ -126,6 +138,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         })
     }
     
+    /// `UIViewController`'s `keyCommands` variable.
+    ///
+    /// Returns arrow keys, esc keys and ctrl keys from `A` to `_`.
     override var keyCommands: [UIKeyCommand]? {
         // Bluetooth keyboard
         
@@ -145,6 +160,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return commands
     }
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Add notifications to resize `webView` when keyboard appears.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,6 +171,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    /// `UIViewController``s `viewWillAppear(_:)` function.
+    ///
+    /// Close and open shell, add `toolbar` to keyboard and configure `navigationController`.
     override func viewWillAppear(_ animated: Bool) {
         
         if console.isEmpty {
@@ -171,6 +192,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationController?.setToolbarHidden(false, animated: true)
     }
     
+    /// `UIViewController``s `viewDidAppear(_:)` function.
+    ///
+    /// Init `webView`.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -190,6 +214,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// `UIViewController``s `viewWillDisappear(_:)` function.
+    ///
+    /// Undo changes made to `navigationController` and dismiss `ArrowsViewController` if it's presented.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -199,11 +226,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         ArrowsViewController.current?.dismiss(animated: true, completion: nil)
     }
     
+    /// `UIViewController``s `prefersStatusBarHidden` variable.
+    ///
+    /// - Returns: `true`.
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     /// Show commands history.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender Bar button item.
     @objc func showHistory(_ sender: UIBarButtonItem) {
         
         do {
@@ -229,7 +262,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     
-    /// Change terminal size to page size
+    /// Change terminal size to page size.
+    ///
+    /// - Parameters:
+    ///     - completion: Function to call after resizing terminal.
     func changeSize(completion: (() -> Void)?) {
         
         var cols_: Any?
@@ -266,6 +302,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - Keyboard
     
+    /// Resize `webView` when keyboard will show.
     @objc func keyboardWillShow(_ notification:Notification) {
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
@@ -275,6 +312,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Resize `webView` when keyboard will hide.
     @objc func keyboardWillHide(_ notification:Notification) {
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
@@ -358,6 +396,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: NMSSH channel delegate
     
+    /// `NMSSHChannelDelegate`'s `channel(_:, didReadData:)` function.
+    ///
+    /// Write data to `webView`.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
@@ -386,6 +427,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// `NMSSHChannelDelegate`'s `channelShellDidClose(_:)` function.
+    ///
+    /// Undo changes made to `navigationController` and pop to Root view controller.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
             self.navigationController?.setToolbarHidden(true, animated: true)
@@ -397,6 +441,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Key input
     
+    /// `UIKeyInput`'s `insertText(_:)` function.
+    ///
+    /// Send text or ctrl key to shell.
     func insertText(_ text: String) {
         do {
             if !ctrl {
@@ -408,24 +455,41 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } catch {}
     }
     
+    /// `UIKeyInput`'s `deleteBackward` function.
+    ///
+    /// Send backspace to shell.
     func deleteBackward() {
         do {
             try ConnectionManager.shared.session?.channel.write(Keys.delete)
         } catch {}
     }
     
+    /// `UIKeyInput`s `hasText` variable.
+    ///
+    /// Returns true.
     var hasText: Bool {
         return true
     }
     
     // MARK: Text input traits
     
+    /// `UITextInputTraits`'s `keyboardAppearance` variable.
+    ///
+    /// `UIKeyboardAppearance.dark`
     var keyboardAppearance: UIKeyboardAppearance = .dark
+    
+    /// `UITextInputTraits`'s `autocorrectionType` variable.
+    ///
+    /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
+    
     
     // MARK: Web kit navigation delegate
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { // Get colored output
+    /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function.
+    ///
+    /// Run startup commands if `console` is empty, enable blinking cursor if `UserDefaults` 'blink' value is `true` and resize terminal if the Web view was reloaded.
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         if UserDefaults.standard.bool(forKey: "blink") {
             webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)

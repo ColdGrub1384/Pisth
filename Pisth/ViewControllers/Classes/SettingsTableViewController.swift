@@ -23,6 +23,9 @@ class SettingsTableViewController: UITableViewController {
     
     /// MARK: - View controller
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Display current settings.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,6 +136,9 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: Table view delegate
     
+    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
+    ///
+    /// Open licenses or deselect selected row.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if indexPath.row == Index.licenses.rawValue {

@@ -21,6 +21,9 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: - View controller
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,10 +38,16 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Table view data source
     
+    /// `UITableViewController`'s `tableView(_:, numberOfRowsInSection:)` function.
+    ///
+    /// - Returns: count of `commands`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commands.count
     }
     
+    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
+    ///
+    /// - Returns: An `UITableViewCell` with title as command or command title.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "command")!
         cell.backgroundColor = .black
@@ -58,6 +67,9 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Table view delgate
     
+    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
+    ///
+    /// Send selected command and dismiss `self`.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         dismiss(animated: true) {
@@ -71,6 +83,9 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Popover presentation controller delegate
     
+    /// `UIPopoverPresentationControllerDelegate`'s `adaptivePresentationStyle(for:)` function.
+    ///
+    /// - Returns: `UIModalPresentationStyle.none`
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }

@@ -10,7 +10,7 @@ import Foundation
 /// Delegate used by `LocalDirectoryTableViewController`s
 protocol LocalDirectoryTableViewControllerDelegate {
     
-    /// Called did open a local file with `LocalDirectoryTableViewController`
+    /// Called when opening a local file with `LocalDirectoryTableViewController`
     /// ## Note
     /// If the `LocalDirectoryTableViewController`'s delegate is set, this function will override the default handler.
     ///

@@ -14,7 +14,7 @@
     <a title="TerminalViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (66% documented)</p>
+        <p><a href="../index.html"> Docs</a> (94% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -38,6 +38,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ArrowsViewController.html">ArrowsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a>
@@ -432,33 +435,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth22TerminalViewControllerC12navBarHeight12CoreGraphics7CGFloatVv"></a>
-                    <a name="//apple_ref/swift/Property/navBarHeight" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth22TerminalViewControllerC12navBarHeight12CoreGraphics7CGFloatVv">navBarHeight</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Navigation bar height.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">navBarHeight</span><span class="p">:</span> <span class="kt">CGFloat</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:5Pisth22TerminalViewControllerC8readOnlySbv"></a>
                     <a name="//apple_ref/swift/Property/readOnly" class="dashAnchor"></a>
                     <a class="token" href="#/s:5Pisth22TerminalViewControllerC8readOnlySbv">readOnly</a>
@@ -561,7 +537,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>canBecomeFirstResponder</code> variable.</p>
+
+<p>Returns if <code>webView is different than nil</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -588,7 +566,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>canResignFirstResponder</code> variable.</p>
+
+<p>Returns inverted value of <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC34preventKeyboardFromBeeingDismissedSbv">preventKeyboardFromBeeingDismissed</a></code> and set it to true.</p>
 
                       </div>
                       <div class="declaration">
@@ -615,7 +595,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>inputAccessoryView</code> variable.</p>
+
+<p>Returns <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC7toolbarSQySo9UIToolbarCGv">toolbar</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -642,7 +624,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewWillTransition(to:, with:)</code> function.</p>
+
+<p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code>, dismiss and open keyboard (to resize terminal).</p>
 
                       </div>
                       <div class="declaration">
@@ -669,7 +653,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>keyCommands</code> variable.</p>
+
+<p>Returns arrow keys, esc keys and ctrl keys from <code>A</code> to <code>_</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -696,7 +682,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidLoad</code> function.</p>
+
+<p>Add notifications to resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard appears.</p>
 
                       </div>
                       <div class="declaration">
@@ -723,7 +711,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code><code>s</code>viewWillAppear(_:)` function.</p>
+
+<p>Close and open shell, add <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC7toolbarSQySo9UIToolbarCGv">toolbar</a></code> to keyboard and configure <code>navigationController</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -750,7 +740,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code><code>s</code>viewDidAppear(_:)` function.</p>
+
+<p>Init <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -760,6 +752,66 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">_</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)viewWillDisappear:"></a>
+                    <a name="//apple_ref/swift/Method/viewWillDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)viewWillDisappear:">viewWillDisappear(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIViewController</code><code>s</code>viewWillDisappear(_:)` function.</p>
+
+<p>Undo changes made to <code>navigationController</code> and dismiss <code><a href="../Classes/ArrowsViewController.html">ArrowsViewController</a></code> if it&rsquo;s presented.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewWillDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(py)prefersStatusBarHidden"></a>
+                    <a name="//apple_ref/swift/Property/prefersStatusBarHidden" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(py)prefersStatusBarHidden">prefersStatusBarHidden</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIViewController</code><code>s</code>prefersStatusBarHidden` variable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">prefersStatusBarHidden</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -788,6 +840,25 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Sender Bar button item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -804,7 +875,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Change terminal size to page size</p>
+                        <p>Change terminal size to page size.</p>
 
                         <a href="../Classes/TerminalViewController/changeSize(completion:).html" class="slightly-smaller">See more</a>
                       </div>
@@ -815,6 +886,25 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changeSize</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to call after resizing terminal.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -843,7 +933,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard will show.</p>
 
                       </div>
                       <div class="declaration">
@@ -870,7 +960,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard will hide.</p>
 
                       </div>
                       <div class="declaration">
@@ -880,6 +970,52 @@
                           <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">keyboardWillHide</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span><span class="kt">Notification</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)sendArrows:"></a>
+                    <a name="//apple_ref/swift/Method/sendArrows(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)sendArrows:">sendArrows(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send arrow keys.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">sendArrows</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Sender bar button item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1000,7 +1136,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>NMSSHChannelDelegate</code>&lsquo;s <code>channel(_:, didReadData:)</code> function.</p>
+
+<p>Write data to <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1027,7 +1165,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>NMSSHChannelDelegate</code>&lsquo;s <code>channelShellDidClose(_:)</code> function.</p>
+
+<p>Undo changes made to <code>navigationController</code> and pop to Root view controller.</p>
 
                       </div>
                       <div class="declaration">
@@ -1065,7 +1205,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIKeyInput</code>&lsquo;s <code>insertText(_:)</code> function.</p>
+
+<p>Send text or ctrl key to shell.</p>
 
                       </div>
                       <div class="declaration">
@@ -1092,7 +1234,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIKeyInput</code>&lsquo;s <code>deleteBackward</code> function.</p>
+
+<p>Send backspace to shell.</p>
 
                       </div>
                       <div class="declaration">
@@ -1119,7 +1263,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIKeyInput</code>s <code>hasText</code> variable.</p>
+
+<p>Returns true.</p>
 
                       </div>
                       <div class="declaration">
@@ -1157,7 +1303,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITextInputTraits</code>&lsquo;s <code>keyboardAppearance</code> variable.</p>
+
+<p><code>UIKeyboardAppearance.dark</code></p>
 
                       </div>
                       <div class="declaration">
@@ -1184,7 +1332,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITextInputTraits</code>&lsquo;s <code>autocorrectionType</code> variable.</p>
+
+<p><code>UITextAutocorrectionType.no</code></p>
 
                       </div>
                       <div class="declaration">
@@ -1222,7 +1372,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>WKNavigationDelegate</code>&lsquo;s <code>webView(_:, didFinish:)</code> function.</p>
+
+<p>Run startup commands if <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC7consoleSSv">console</a></code> is empty, enable blinking cursor if <code>UserDefaults</code> &#39;blink&rsquo; value is <code>true</code> and resize terminal if the Web view was reloaded.</p>
 
                       </div>
                       <div class="declaration">
@@ -1279,7 +1431,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-22)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

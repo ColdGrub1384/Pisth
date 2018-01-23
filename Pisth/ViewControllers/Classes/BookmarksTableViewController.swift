@@ -242,6 +242,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - View controller
     
+    /// `UIViewController`s `viewDidLoad` function.
+    ///
+    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -273,6 +276,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
+    /// `UIViewController`'s `viewDidAppear(_:)` function.
+    ///
+    /// Close opened connections did back here.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -298,10 +304,16 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Table view data source
 
+    /// `UITableViewController`'s `numberOfSections(in:)` function.
+    ///
+    /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    /// `UITableViewController`'s `tableView(_:, numberOfRowsInSection:)` function.
+    ///
+    /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
             return fetched.count
@@ -310,7 +322,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return DataManager.shared.connections.count
     }
 
-    
+    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
+    ///
+    /// - Returns: A cell with with title as the connection's nickname and subtitle as connection's details.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
         cell.backgroundColor = .clear
@@ -338,11 +352,17 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         
         return cell
     }
-
+    
+    /// `UITableViewController`'s `tableView(_:, canEditRowAt:)` function.
+    ///
+    /// - Returns: `true` to allow editing.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
+    /// `UITableViewController`'s `tableView(_:, commit:, forRowAt:)` function.
+    ///
+    /// Remove connection.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             DataManager.shared.removeConnection(at: indexPath.row)
@@ -350,6 +370,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
 
+    /// `UITableViewController`'s `tableView(_:, moveRowAt:, to:)` function.
+    ///
+    /// Move connections.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         var connections = DataManager.shared.connections
         
@@ -364,6 +387,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
+    /// `UITableViewController`'s `tableView(_:, canMoveRowAt:)` function.
+    ///
+    /// Allow moving rows.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -371,10 +397,14 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Table view delegate
     
+    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
+    ///
+    /// Connect to selected connection.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var connection = DataManager.shared.connections[indexPath.row]
         
+        /// Open connection.
         func connect() {
             let activityVC = ActivityViewController(message: "Connecting")
             self.present(activityVC, animated: true) {
@@ -392,6 +422,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             }
         }
         
+        /// Ask for password if biometric auth failed.
         func askForPassword() {
             let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
             passwordAlert.addTextField(configurationHandler: { (textField) in
@@ -408,6 +439,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             self.present(passwordAlert, animated: true, completion: nil)
         }
         
+        /// Open connection or ask for biometric authentication.
         func open() {
             if UserDefaults.standard.bool(forKey: "biometricAuth") {
                 BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
@@ -437,6 +469,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
+    /// `UITableViewController`'s `tableView(_:, accessoryButtonTappedForRowWith:)`
+    ///
+    /// Show connection information.
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if searchController.isActive {
             searchController.dismiss(animated: true, completion: {
@@ -450,13 +485,16 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Banner view delegate
     
+    /// `GADBannerViewDelegate`'s `adViewDidReceiveAd(_:)` function.
+    /// Show ad did it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        // Show ad only when it received
         tableView.tableHeaderView = bannerView
     }
     
     // MARK: Search bar delegate
     
+    /// `UISearchBarDelegate`'s `searchBar(_:, textDidChange:)` function.
+    /// Search for connection.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         fetched = []

@@ -91,12 +91,18 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     /// MARK: - View controller
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Call `setupTextView` function.
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         setupTextView()
     }
 
+    /// `UIViewController`'s `viewDidAppear(_:)` function.
+    ///
+    /// Open `file` and highlight it.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -157,6 +163,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    /// `UIViewController`'s `viewDidDisappear(_:)` function.
+    ///
+    /// Save file if is needed.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -296,11 +305,15 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Keyboard
     
+    /// Dismiss keyboard.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender Bar button item.
     @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
         textView.resignFirstResponder()
     }
     
-    /// Resize `textView` will show keyboard.
+    /// Resize `textView` when will show keyboard.
     @objc func keyboardWillShow(_ notification:Notification) {
         let d = notification.userInfo!
         var r = d[UIKeyboardFrameEndUserInfoKey] as! CGRect
@@ -310,7 +323,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.scrollIndicatorInsets.bottom = r.size.height
     }
     
-    /// Resize `textView` will hide keyboard.
+    /// Resize `textView` when will hide keyboard.
     @objc func keyboardWillHide(_ notification:Notification) {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero

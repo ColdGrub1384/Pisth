@@ -4,6 +4,7 @@ import UIKit
 /// Alert with an indicator view at center.
 class ActivityViewController: UIViewController {
     
+    /// `ActivityView` to use as view.
     let activityView = ActivityView()
     
     /// Initialize with given message.
@@ -20,18 +21,26 @@ class ActivityViewController: UIViewController {
         view = activityView
     }
     
+    /// init(coder:) is not implemented.
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-/// View used in `ActivityViewController`.
+/// View used in `ActivityViewController` with an indicator view at center.
 class ActivityView: UIView {
     
+    /// Activity indicator.
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
+    /// Alert view.
     let boundingBoxView = UIView(frame: CGRect.zero)
+    
+    /// Message displayed.
     let messageLabel = UILabel(frame: CGRect.zero)
     
+    
+    /// Init this view.
     init() {
         super.init(frame: CGRect.zero)
         
@@ -54,10 +63,14 @@ class ActivityView: UIView {
         addSubview(messageLabel)
     }
     
+    /// init(coder:) is not implemented.
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// `UIViewController`'s `layoutSubviews()` function.
+    ///
+    /// Keep view's size.
     override func layoutSubviews() {
         super.layoutSubviews()
         

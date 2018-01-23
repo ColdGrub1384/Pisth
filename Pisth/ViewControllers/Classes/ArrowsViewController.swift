@@ -75,6 +75,9 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     
     // MARK: - View controller
     
+    /// `UIViewController`'s `viewDidLoad` function.
+    ///
+    /// Setup views and singleton.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,12 +120,18 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         view.addGestureRecognizer(downSwipe)
     }
     
+    /// `UIViewController`'s `viewDidDisappear(_:)` function.
+    ///
+    /// Unset singleton.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         ArrowsViewController.current = nil
     }
     
+    /// `UIViewController`'s `viewDidLayoutSubviews` function.
+    ///
+    /// Resize views.
     override func viewDidLayoutSubviews() {
         helpLabel.center = view.center
         arrowLabel.center = view.center
@@ -130,6 +139,9 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     
     // MARK: - Popover presentation controller delegate
     
+    /// `UIPopoverPresentationControllerDelegate`'s `adaptivePresentationStyle(for:)` function.
+    ///
+    /// - Returns: UIModalPresentationStyle.none
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }

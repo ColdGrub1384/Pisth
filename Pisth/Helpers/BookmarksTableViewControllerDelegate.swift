@@ -10,7 +10,7 @@ import Foundation
 /// Delegate used by `BookmarksTableViewController`s
 protocol BookmarksTableViewControllerDelegate {
     
-    /// Called did open a connection with `BookmarksTableViewController`.
+    /// Called did opening a connection with `BookmarksTableViewController`.
     /// # Note
     /// If the delegate is set for `BookmarksTableViewController`, this you need to present the `directoryTableViewController` manually.
     ///

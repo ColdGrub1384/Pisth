@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SettingsTableViewController Class Reference</title>
+    <title>ArrowsViewController Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/SettingsTableViewController" class="dashAnchor"></a>
-    <a title="SettingsTableViewController Class Reference"></a>
+    <a name="//apple_ref/swift/Class/ArrowsViewController" class="dashAnchor"></a>
+    <a title="ArrowsViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (94% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        SettingsTableViewController Class Reference
+        ArrowsViewController Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -176,14 +176,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>SettingsTableViewController</h1>
+            <h1>ArrowsViewController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">SettingsTableViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ArrowsViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">UIPopoverPresentationControllerDelegate</span></code></pre>
 
                 </div>
               </div>
-            <p>Table view controller for displaying and changing settings.</p>
+            <p>View controller used to send arrow keys.</p>
 
           </section>
           <section class="section task-group-section">
@@ -192,9 +192,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC5IndexO"></a>
-                    <a name="//apple_ref/swift/Enum/Index" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC5IndexO">Index</a>
+                    <a name="/s:5Pisth20ArrowsViewControllerC10arrowLabelSQySo7UILabelCGv"></a>
+                    <a name="//apple_ref/swift/Property/arrowLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth20ArrowsViewControllerC10arrowLabelSQySo7UILabelCGv">arrowLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -202,15 +202,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Indexes of each settings</p>
+                        <p>Label indicating arrow to send.</p>
 
-                        <a href="../Classes/SettingsTableViewController/Index.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Index</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">arrowLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -220,9 +219,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(im)viewDidLoad"></a>
-                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(im)viewDidLoad">viewDidLoad()</a>
+                    <a name="/s:5Pisth20ArrowsViewControllerC9helpLabelSQySo7UILabelCGv"></a>
+                    <a name="//apple_ref/swift/Property/helpLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth20ArrowsViewControllerC9helpLabelSQySo7UILabelCGv">helpLabel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -230,10 +229,185 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>MARK: - View controller
-<code>UIViewController</code>&lsquo;s <code>viewDidLoad</code> function.</p>
+                        <p>Label with help.</p>
 
-<p>Display current settings.</p>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">helpLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)ArrowsViewController(im)sendArrow:"></a>
+                    <a name="//apple_ref/swift/Method/sendArrow(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)ArrowsViewController(im)sendArrow:">sendArrow(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send arrow to shell with given gesture.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">sendArrow</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UISwipeGestureRecognizer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Sender gesture.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth20ArrowsViewControllerC13indicateArrowySC33UISwipeGestureRecognizerDirectionV04withJ0_tF"></a>
+                    <a name="//apple_ref/swift/Method/indicateArrow(withDirection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth20ArrowsViewControllerC13indicateArrowySC33UISwipeGestureRecognizerDirectionV04withJ0_tF">indicateArrow(withDirection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show arrow to send in <code><a href="../Classes/ArrowsViewController.html#/s:5Pisth20ArrowsViewControllerC10arrowLabelSQySo7UILabelCGv">arrowLabel</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">indicateArrow</span><span class="p">(</span><span class="n">withDirection</span> <span class="nv">direction</span><span class="p">:</span> <span class="kt">UISwipeGestureRecognizerDirection</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Direction where arrow will point.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth20ArrowsViewControllerC9sendArrowySC33UISwipeGestureRecognizerDirectionV04withJ0_tF"></a>
+                    <a name="//apple_ref/swift/Method/sendArrow(withDirection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth20ArrowsViewControllerC9sendArrowySC33UISwipeGestureRecognizerDirectionV04withJ0_tF">sendArrow(withDirection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send arrow to the shell with given direction.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">sendArrow</span><span class="p">(</span><span class="n">withDirection</span> <span class="nv">direction</span><span class="p">:</span> <span class="kt">UISwipeGestureRecognizerDirection</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>direction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Direction where arrow will point.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/View%20controller"></a>
+                <a name="//apple_ref/swift/Section/View controller" class="dashAnchor"></a>
+                <a href="#/View%20controller">
+                  <h3 class="section-name">View controller</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidLoad"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLoad()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidLoad">viewDidLoad()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidLoad</code> function.</p>
+
+<p>Setup views and singleton.</p>
 
                       </div>
                       <div class="declaration">
@@ -247,23 +421,12 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Blink%20cursor"></a>
-                <a name="//apple_ref/swift/Section/Blink cursor" class="dashAnchor"></a>
-                <a href="#/Blink%20cursor">
-                  <h3 class="section-name">Blink cursor</h3>
-                </a>
-              </div>
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(py)blinkCursorSwitch"></a>
-                    <a name="//apple_ref/swift/Property/blinkCursorSwitch" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(py)blinkCursorSwitch">blinkCursorSwitch</a>
+                    <a name="/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidDisappear:"></a>
+                    <a name="//apple_ref/swift/Method/viewDidDisappear(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidDisappear:">viewDidDisappear(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -271,14 +434,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Switch to toggle blinking cursor.</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidDisappear(_:)</code> function.</p>
+
+<p>Unset singleton.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">blinkCursorSwitch</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidDisappear</span><span class="p">(</span><span class="n">_</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -288,9 +453,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleBlinkCursor:"></a>
-                    <a name="//apple_ref/swift/Method/toggleBlinkCursor(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleBlinkCursor:">toggleBlinkCursor(_:)</a>
+                    <a name="/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidLayoutSubviews"></a>
+                    <a name="//apple_ref/swift/Method/viewDidLayoutSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)ArrowsViewController(im)viewDidLayoutSubviews">viewDidLayoutSubviews()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -298,62 +463,60 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Toogle blinking cursor.</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidLayoutSubviews</code> function.</p>
+
+<p>Resize views.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">toggleBlinkCursor</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLayoutSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Popover%20presentation%20controller%20delegate"></a>
+                <a name="//apple_ref/swift/Section/Popover presentation controller delegate" class="dashAnchor"></a>
+                <a href="#/Popover%20presentation%20controller%20delegate">
+                  <h3 class="section-name">Popover presentation controller delegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)ArrowsViewController(im)adaptivePresentationStyleForPresentationController:"></a>
+                    <a name="//apple_ref/swift/Method/adaptivePresentationStyle(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)ArrowsViewController(im)adaptivePresentationStyleForPresentationController:">adaptivePresentationStyle(for:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIPopoverPresentationControllerDelegate</code>&lsquo;s <code>adaptivePresentationStyle(for:)</code> function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">adaptivePresentationStyle</span><span class="p">(</span><span class="k">for</span> <span class="nv">controller</span><span class="p">:</span> <span class="kt">UIPresentationController</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIModalPresentationStyle</span></code></pre>
 
                         </div>
                       </div>
                       <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sender</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Sender switch.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC22initBlinkCursorSettingyyF"></a>
-                    <a name="//apple_ref/swift/Method/initBlinkCursorSetting()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC22initBlinkCursorSettingyyF">initBlinkCursorSetting()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Display current blinking cursor setting</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initBlinkCursorSetting</span><span class="p">()</span></code></pre>
-
-                        </div>
+                        <h4>Return Value</h4>
+                        <p>UIModalPresentationStyle.none</p>
                       </div>
                     </section>
                   </div>
@@ -362,19 +525,19 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Show%20hidden%20files"></a>
-                <a name="//apple_ref/swift/Section/Show hidden files" class="dashAnchor"></a>
-                <a href="#/Show%20hidden%20files">
-                  <h3 class="section-name">Show hidden files</h3>
+                <a name="/Static"></a>
+                <a name="//apple_ref/swift/Section/Static" class="dashAnchor"></a>
+                <a href="#/Static">
+                  <h3 class="section-name">Static</h3>
                 </a>
               </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(py)showHiddenFilesSwitch"></a>
-                    <a name="//apple_ref/swift/Property/showHiddenFilesSwitch" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(py)showHiddenFilesSwitch">showHiddenFilesSwitch</a>
+                    <a name="/s:5Pisth20ArrowsViewControllerC7currentACSgvZ"></a>
+                    <a name="//apple_ref/swift/Variable/current" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth20ArrowsViewControllerC7currentACSgvZ">current</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -382,265 +545,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Switch to toggle showing hidden files.</p>
+                        <p>Current Arrows view controller opened.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">showHiddenFilesSwitch</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="o">!</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleHiddenFiles:"></a>
-                    <a name="//apple_ref/swift/Method/toggleHiddenFiles(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleHiddenFiles:">toggleHiddenFiles(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Toogle showing hidden files.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">toggleHiddenFiles</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sender</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Sender switch.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC26initShowHiddenFilesSettingyyF"></a>
-                    <a name="//apple_ref/swift/Method/initShowHiddenFilesSetting()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC26initShowHiddenFilesSettingyyF">initShowHiddenFilesSetting()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Display current blinking cursor setting</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initShowHiddenFilesSetting</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Biometric%20authentication"></a>
-                <a name="//apple_ref/swift/Section/Biometric authentication" class="dashAnchor"></a>
-                <a href="#/Biometric%20authentication">
-                  <h3 class="section-name">Biometric authentication</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(py)biometricAuthSwitch"></a>
-                    <a name="//apple_ref/swift/Property/biometricAuthSwitch" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(py)biometricAuthSwitch">biometricAuthSwitch</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Switch to toggle biometric authentication.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">biometricAuthSwitch</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="o">!</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(py)biometricAuthLabel"></a>
-                    <a name="//apple_ref/swift/Property/biometricAuthLabel" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(py)biometricAuthLabel">biometricAuthLabel</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Label for setting&rsquo;s title.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">biometricAuthLabel</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleBiometricAuth:"></a>
-                    <a name="//apple_ref/swift/Method/toggleBiometricAuth(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(im)toggleBiometricAuth:">toggleBiometricAuth(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Toogle biometric authentication.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">toggleBiometricAuth</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sender</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Sender switch.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC34initBiometricAuthenticationSettingyyF"></a>
-                    <a name="//apple_ref/swift/Method/initBiometricAuthenticationSetting()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC34initBiometricAuthenticationSettingyyF">initBiometricAuthenticationSetting()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Display current biometric authentication setting.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initBiometricAuthenticationSetting</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Table%20view%20delegate"></a>
-                <a name="//apple_ref/swift/Section/Table view delegate" class="dashAnchor"></a>
-                <a href="#/Table%20view%20delegate">
-                  <h3 class="section-name">Table view delegate</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Pisth@objc(cs)SettingsTableViewController(im)tableView:didSelectRowAtIndexPath:"></a>
-                    <a name="//apple_ref/swift/Method/tableView(_:didSelectRowAt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)SettingsTableViewController(im)tableView:didSelectRowAtIndexPath:">tableView(_:didSelectRowAt:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, didSelectRowAt:)</code> function.</p>
-
-<p>Open licenses or deselect selected row.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">didSelectRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">current</span><span class="p">:</span> <span class="kt">ArrowsViewController</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>

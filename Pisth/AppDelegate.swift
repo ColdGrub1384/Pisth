@@ -53,6 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Application delegate
     
+    
+    /// `UIApplicationDelegate`'s `application(_:, didFinishLaunchingWithOptions:)` function.
+    ///
+    /// Initialize app's window, and setup / repair saved data.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIMenuController.shared.menuItems = [UIMenuItem(title: "Move", action: #selector(FileTableViewCell.moveFile(_:))), UIMenuItem(title: "Rename", action: #selector(FileTableViewCell.renameFile(_:)))]
@@ -120,6 +124,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return true
     }
     
+    /// `UIApplicationDelegate`'s `application(_:, open:, options:)`` function.
+    ///
+    /// Open and upload file.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if url.absoluteString.hasPrefix("file://") { // Upload file
@@ -150,13 +157,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Core Data stack
     
+    /// The persistent container for the application. This implementation
+    /// creates and returns a container, having loaded the store for the
+    /// application to it. This property is optional since there are legitimate
+    /// error conditions that could cause the creation of the store to fail.
     lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
         let container = NSPersistentContainer(name: "Pisth")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -179,6 +184,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Core Data Saving support
     
+    /// Save core data.
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -195,7 +201,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Directory table view controller delegate
     
-    // Upload file at selected directory
+    /// `DirectoryTableViewControllerDelegate`'s` `directoryTableViewController(_:, didOpenDirectory:)``function.
+    ///
+    /// Upload file at selected directory.
     func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
         directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
         directoryTableViewController.delegate = self
@@ -208,7 +216,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Bookmarks table view controller delegate
     
-    // Upload file at selected connection
+    /// `BookmarksTableViewControllerDelegate`'s `bookmarksTableViewController(_:, didOpenConnection:, inDirectoryTableViewController:)` function.
+    ///
+    /// Upload file at selected connection.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
         
         directoryTableViewController.navigationItem.prompt = "Select folder where upload file"

@@ -19,7 +19,9 @@ class FileTableViewCell: UITableViewCell {
     /// File permissions.
     @IBOutlet weak var permssions: UILabel!
     
-    // Allow moving and renaming file if this cell represents a remote file
+    /// `UITableViewCell`'s `canPerformAction(_:, withSender:)` function.
+    ///
+    /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
@@ -32,6 +34,9 @@ class FileTableViewCell: UITableViewCell {
         return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(moveFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(renameFile(_:)))
     }
     
+    /// `UIViewController`'s `canBecomeFirstResponder` variable.
+    ///
+    /// Returnns true to allow actions.
     override var canBecomeFirstResponder: Bool {
         return true
     }

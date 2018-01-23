@@ -14,7 +14,7 @@
     <a title="DirectoryTableViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (66% documented)</p>
+        <p><a href="../index.html"> Docs</a> (94% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -38,6 +38,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/AppDelegate.html">AppDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ArrowsViewController.html">ArrowsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a>
@@ -461,7 +464,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidLoad</code> function.</p>
+
+<p>Setup views.</p>
 
                       </div>
                       <div class="declaration">
@@ -488,7 +493,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UIViewController</code>&lsquo;s <code>viewDidAppear(_:)</code> function.</p>
+
+<p>Show errors if there are.</p>
 
                       </div>
                       <div class="declaration">
@@ -810,7 +817,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, heightForRowAt:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -820,6 +827,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">heightForRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>87</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -837,7 +848,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>numberOfSections(in:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -847,6 +858,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">numberOfSections</span><span class="p">(</span><span class="k">in</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>1</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -864,7 +879,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, numberOfRowsInSection:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -874,6 +889,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>count of <code><a href="../Classes/DirectoryTableViewController.html#/s:5Pisth28DirectoryTableViewControllerC5filesXev">files</a></code>.</p>
                       </div>
                     </section>
                   </div>
@@ -891,7 +910,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, cellForRowAt:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -901,6 +920,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UITableViewCell</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code>UITableViewCell</code> with title as current file name, with icon for current file, and permissions for current file.</p>
                       </div>
                     </section>
                   </div>
@@ -918,7 +941,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, canEditRowAt:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -928,6 +951,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">canEditRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -945,7 +972,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, commit:, forRowAt:)</code> function.</p>
+
+<p>Remove selected file or directory.</p>
 
                       </div>
                       <div class="declaration">
@@ -972,7 +1001,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, canPerformAction:, forRowAt:, withSender:)</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -982,6 +1011,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">canPerformAction</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Selector</span><span class="p">,</span> <span class="n">forRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">withSender</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Enable copying for files but not directories.</p>
                       </div>
                     </section>
                   </div>
@@ -999,7 +1032,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_ tableView:, shouldShowMenuForRowAt:</code> function.</p>
 
                       </div>
                       <div class="declaration">
@@ -1009,6 +1042,10 @@
                           <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">shouldShowMenuForRowAt</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -1026,7 +1063,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, performAction:, forRowAt:, withSender:)</code> function.</p>
+
+<p>Copy selected file.</p>
 
                       </div>
                       <div class="declaration">
@@ -1064,7 +1103,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>UITableViewController</code>&lsquo;s <code>tableView(_:, didSelectRowAt:)</code> function.</p>
+
+<p>Open selected file or directory.</p>
 
                       </div>
                       <div class="declaration">
@@ -1092,9 +1133,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth41LocalDirectoryTableViewControllerDelegateP05localcdeF0yAA0bcdeF0C_10Foundation3URLV11didOpenFiletF"></a>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC05localbcdE0yAA05LocalbcdE0C_10Foundation3URLV11didOpenFiletF"></a>
                     <a name="//apple_ref/swift/Method/localDirectoryTableViewController(_:didOpenFile:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth41LocalDirectoryTableViewControllerDelegateP05localcdeF0yAA0bcdeF0C_10Foundation3URLV11didOpenFiletF">localDirectoryTableViewController(_:didOpenFile:)</a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC05localbcdE0yAA05LocalbcdE0C_10Foundation3URLV11didOpenFiletF">localDirectoryTableViewController(_:didOpenFile:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1102,7 +1143,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p><code><a href="../Protocols/LocalDirectoryTableViewControllerDelegate.html">LocalDirectoryTableViewControllerDelegate</a></code>&lsquo;s <code>localDirectoryTableViewController(_:, didOpenFile:)</code> function.</p>
+
+<p>Upload local file.</p>
+
                         <a href="../Classes/DirectoryTableViewController/localDirectoryTableViewController(_:didOpenFile:).html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -1130,9 +1174,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF"></a>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC09directorycdE0yAC_SS07didOpenB0tF"></a>
                     <a name="//apple_ref/swift/Method/directoryTableViewController(_:didOpenDirectory:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF">directoryTableViewController(_:didOpenDirectory:)</a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC09directorycdE0yAC_SS07didOpenB0tF">directoryTableViewController(_:didOpenDirectory:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1140,7 +1184,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p><code><a href="../Protocols/DirectoryTableViewControllerDelegate.html">DirectoryTableViewControllerDelegate</a></code>&lsquo;s <code>directoryTableViewController(_:, didOpenDirectory:)</code> function.</p>
+
+<p>Copy or move remote file.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1177,7 +1224,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p><code>GADBannerViewDelegate</code>&lsquo;s <code>adViewDidReceiveAd(_:)</code> function.</p>
+
+<p>Show ad when it&rsquo;s received.</p>
 
                       </div>
                       <div class="declaration">
@@ -1234,7 +1283,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-22)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

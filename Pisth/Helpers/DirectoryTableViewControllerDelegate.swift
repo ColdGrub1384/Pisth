@@ -10,7 +10,7 @@ import Foundation
 /// Delegate used by `DirectoryTableViewController`s
 protocol DirectoryTableViewControllerDelegate {
     
-    /// Called did open a remote directoty with `DirectoryTableViewController`.
+    /// Called when opening a remote directoty with `DirectoryTableViewController`.
     ///
     /// ## Note
     /// This will override the default handler.
