@@ -10,8 +10,8 @@ import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
 
-@UIApplicationMain
 /// The app's delegate.
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
     
     /// The window used with app.
@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return true
     }
     
-    /// `UIApplicationDelegate`'s `application(_:, open:, options:)`` function.
+    /// `UIApplicationDelegate`'s `application(_:, open:, options:)` function.
     ///
     /// Open and upload file.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
