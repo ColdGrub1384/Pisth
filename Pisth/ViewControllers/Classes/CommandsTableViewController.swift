@@ -69,7 +69,7 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
         }
     }
     
-    // MARK: UIPopoverPresentationControllerDelegate
+    // MARK: Popover presentation controller delegate
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
