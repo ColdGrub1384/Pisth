@@ -221,6 +221,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return false
     }
     
+    /// `UIApplicationDelegate`'s `application(_:, performActionFor:, completionHandler:)` function.
+    ///
+    /// Open connection for shortcut.
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         navigationController.popToRootViewController(animated: true) {
