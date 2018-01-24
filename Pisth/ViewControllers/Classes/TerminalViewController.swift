@@ -337,7 +337,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///     - sender: Sender bar button item. If its tint color is blue, this function will enable swiping and set its tint color to white, and if its tint color is white, this function will disable swiping and set its tint color to blue.
     @objc func sendArrows(_ sender: UIBarButtonItem) {
         
-        if sender.tintColor == toolbar.tintColor {
+        if sender.tintColor != .white {
             let arrowsVC = ArrowsViewController()
             
             view.addSubview(arrowsVC.view)
@@ -348,6 +348,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             ArrowsViewController.current?.helpLabel.isHidden = false
             ArrowsViewController.current?.helpLabel.alpha = 1
             ArrowsViewController.current?.helpLabel.text = "Scroll to\ngo down /\ngo up."
+            
+            for recognizer in ArrowsViewController.current!.view.gestureRecognizers! {
+                recognizer.isEnabled = false
+            }
             
             _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
                 UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
