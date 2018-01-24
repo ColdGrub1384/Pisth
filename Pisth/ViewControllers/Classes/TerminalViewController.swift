@@ -292,8 +292,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
-        
-        ArrowsViewController.current?.dismiss(animated: true, completion: nil)
     }
     
     /// `UIViewController``s `prefersStatusBarHidden` variable.
@@ -312,6 +310,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             webView.frame.size.height -= keyboardSize.height
             webView.reload()
+            
+            if let arrowsVC = ArrowsViewController.current {
+                arrowsVC.view.frame = webView.frame
+            }
         }
     }
     
@@ -322,24 +324,42 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             webView.frame.size.height += keyboardSize.height
             webView.reload()
+            
+            if let arrowsVC = ArrowsViewController.current {
+                arrowsVC.view.frame = webView.frame
+            }
         }
     }
     
-    /// Send arrow keys.
+    /// Enable or disable swiping to send arrow keys.
     ///
     /// - Parameters:
-    ///     - sender: Sender bar button item.
+    ///     - sender: Sender bar button item. If its tint color is blue, this function will enable swiping and set its tint color to white, and if its tint color is white, this function will disable swiping and set its tint color to blue.
     @objc func sendArrows(_ sender: UIBarButtonItem) {
-        let arrowsVC = ArrowsViewController()
-        arrowsVC.modalPresentationStyle = .popover
-        arrowsVC.preferredContentSize = CGSize(width: 200, height: 200)
         
-        if let popover = arrowsVC.popoverPresentationController {
-            popover.barButtonItem = sender
-            popover.delegate = arrowsVC
-            popover.backgroundColor = .clear
+        if sender.tintColor == toolbar.tintColor {
+            let arrowsVC = ArrowsViewController()
             
-            self.present(arrowsVC, animated: true, completion: nil)
+            view.addSubview(arrowsVC.view)
+            arrowsVC.view.frame = webView.frame
+            
+            sender.tintColor = .white
+        } else {
+            ArrowsViewController.current?.helpLabel.isHidden = false
+            ArrowsViewController.current?.helpLabel.alpha = 1
+            ArrowsViewController.current?.helpLabel.text = "Scroll to\ngo down /\ngo up."
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+                UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+                    ArrowsViewController.current?.helpLabel.alpha = 0
+                }, completion: { _ in
+                    ArrowsViewController.current?.helpLabel.isHidden = true
+                    
+                    ArrowsViewController.current?.view.removeFromSuperview()
+                })
+            })
+            
+            sender.tintColor = toolbar.tintColor
         }
     }
     

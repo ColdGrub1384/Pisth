@@ -80,25 +80,36 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     /// Setup views and singleton.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ArrowsViewController.current = self
         
         // Help label
         
-        helpLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        helpLabel.numberOfLines = 2
-        helpLabel.text = "Swipe to send\narrow keys"
+        helpLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        helpLabel.numberOfLines = 3
+        helpLabel.text = "Swipe to\n send\narrow keys"
+        helpLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.heavy)
         helpLabel.textAlignment = .center
-        helpLabel.textColor = .white
+        helpLabel.textColor = .black
+        helpLabel.backgroundColor = .white
+        helpLabel.layer.borderWidth = 4
+        helpLabel.layer.cornerRadius = 8
+        helpLabel.layer.masksToBounds = true
+        helpLabel.layer.borderColor = helpLabel.backgroundColor?.cgColor
         view.addSubview(helpLabel)
         
         // Arrow label
         
-        arrowLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        arrowLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         arrowLabel.font = UIFont.boldSystemFont(ofSize: 30)
         arrowLabel.isHidden = true
         arrowLabel.textAlignment = .center
-        arrowLabel.textColor = .white
+        arrowLabel.textColor = .black
+        arrowLabel.backgroundColor = UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5)
+        arrowLabel.layer.borderWidth = 4
+        arrowLabel.layer.cornerRadius = 8
+        arrowLabel.layer.masksToBounds = true
+        arrowLabel.layer.borderColor = arrowLabel.backgroundColor?.cgColor
         view.addSubview(arrowLabel)
         
         // Recognize gestures
@@ -118,6 +129,12 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(sendArrow(_:)))
         downSwipe.direction = .down
         view.addGestureRecognizer(downSwipe)
+        
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+            self.helpLabel.alpha = 0
+        }, completion: { _ in
+            self.helpLabel.isHidden = true
+        })
     }
     
     /// `UIViewController`'s `viewDidDisappear(_:)` function.
