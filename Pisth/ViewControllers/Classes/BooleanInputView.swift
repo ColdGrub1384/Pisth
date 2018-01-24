@@ -70,13 +70,6 @@ class BooleanInputView: UIView {
         addObserver(self, forKeyPath: "bounds", options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
     }
     
-    override func didMoveToWindow() {
-        
-        if view == nil {
-            
-        }        
-    }
-    
     /// init(coder:) has not been implemented
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
