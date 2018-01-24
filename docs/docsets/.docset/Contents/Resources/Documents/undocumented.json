@@ -1,13 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/adrian/Documents/Pisth/Pisth/AppDelegate.swift",
-      "line": 15,
-      "symbol": "AppDelegate",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/adrian/Documents/Pisth/Pisth/Helpers/ConnectionManager.swift",
       "line": 15,
       "symbol": "ConnectionManager.init()",
