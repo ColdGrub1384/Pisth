@@ -61,7 +61,74 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// If true, all addtional commands will not be executed and the shell with be launched 'purely'.
     var pureMode = false
     
-    /// Add keyboard's toolbar
+    /// Show commands history.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender Bar button item.
+    @objc func showHistory(_ sender: UIBarButtonItem) {
+        
+        do {
+            guard let session = ConnectionManager.shared.filesSession else { return }
+            let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
+            
+            let commandsVC = CommandsTableViewController()
+            commandsVC.title = "History"
+            commandsVC.commands = history
+            commandsVC.modalPresentationStyle = .popover
+            
+            if let popover = commandsVC.popoverPresentationController {
+                popover.barButtonItem = sender
+                popover.delegate = commandsVC
+                
+                self.present(commandsVC, animated: true, completion: {
+                    commandsVC.tableView.scrollToRow(at: IndexPath(row: history.count-1, section: 0), at: .bottom, animated: true)
+                })
+            }
+        } catch {
+            print("Error sending command: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    /// Change terminal size to page size.
+    ///
+    /// - Parameters:
+    ///     - completion: Function to call after resizing terminal.
+    func changeSize(completion: (() -> Void)?) {
+        
+        var cols_: Any?
+        var rows_: Any?
+        
+        func apply() {
+            guard let cols = cols_ as? UInt else { return }
+            guard let rows = rows_ as? UInt else { return }
+            print(cols)
+            print(rows)
+            ConnectionManager.shared.session?.channel.requestSizeWidth(cols, height: rows)
+        }
+        
+        // Get and set columns
+        webView.evaluateJavaScript("term.cols") { (cols, error) in
+            
+            if let cols = cols {
+                cols_ = cols
+            }
+            
+            // Get and set rows
+            self.webView.evaluateJavaScript("term.rows") { (rows, error) in
+                if let rows = rows {
+                    rows_ = rows
+                    
+                    apply()
+                    if let completion = completion {
+                        completion()
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Add keyboard's toolbar.
     func addToolbar() {
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         toolbar.barStyle = .black
@@ -235,73 +302,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Returns: `true`.
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-    /// Show commands history.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender Bar button item.
-    @objc func showHistory(_ sender: UIBarButtonItem) {
-        
-        do {
-            guard let session = ConnectionManager.shared.filesSession else { return }
-            let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
-                
-            let commandsVC = CommandsTableViewController()
-            commandsVC.title = "History"
-            commandsVC.commands = history
-            commandsVC.modalPresentationStyle = .popover
-                
-            if let popover = commandsVC.popoverPresentationController {
-                popover.barButtonItem = sender
-                popover.delegate = commandsVC
-                    
-                self.present(commandsVC, animated: true, completion: {
-                    commandsVC.tableView.scrollToRow(at: IndexPath(row: history.count-1, section: 0), at: .bottom, animated: true)
-                })
-            }
-        } catch {
-            print("Error sending command: \(error.localizedDescription)")
-        }
-    }
-    
-    
-    /// Change terminal size to page size.
-    ///
-    /// - Parameters:
-    ///     - completion: Function to call after resizing terminal.
-    func changeSize(completion: (() -> Void)?) {
-        
-        var cols_: Any?
-        var rows_: Any?
-        
-        func apply() {
-            guard let cols = cols_ as? UInt else { return }
-            guard let rows = rows_ as? UInt else { return }
-            print(cols)
-            print(rows)
-            ConnectionManager.shared.session?.channel.requestSizeWidth(cols, height: rows)
-        }
-        
-        // Get and set columns
-        webView.evaluateJavaScript("term.cols") { (cols, error) in
-            
-            if let cols = cols {
-                cols_ = cols
-            }
-            
-            // Get and set rows
-            self.webView.evaluateJavaScript("term.rows") { (rows, error) in
-                if let rows = rows {
-                    rows_ = rows
-                    
-                    apply()
-                    if let completion = completion {
-                        completion()
-                    }
-                }
-            }
-        }
     }
     
     // MARK: - Keyboard
