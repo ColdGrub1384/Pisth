@@ -22,6 +22,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BooleanInputView.swift",
+      "line": 99,
+      "symbol": "BooleanInputView.observeValue(forKeyPath:of:change:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
       "line": 106,
       "symbol": "DirectoryTableViewController.init(coder:)",
@@ -86,7 +93,7 @@
     },
     {
       "file": "/Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 274,
+      "line": 101,
       "symbol": "TerminalViewController.changeSize(completion:).apply()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
@@ -150,6 +157,13 @@
     {
       "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
       "line": 25,
+      "symbol": "Connection.sftp",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Documents/Pisth/build/Pisth.build/Release-iphoneos/Pisth.build/DerivedSources/CoreDataGenerated/Pisth/Connection+CoreDataProperties.swift",
+      "line": 26,
       "symbol": "Connection.username",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
