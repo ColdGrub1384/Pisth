@@ -254,6 +254,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
+    /// `BookmarksTableViewControllerDelegate`'s `bookmarksTableViewController(_:, didOpenConnection:, inTerminalViewController:)` function.
+    ///
+    /// Show alert saying a file cannot be uploaded with SFTP disabled.
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inTerminalViewController terminalViewController: TerminalViewController) {
+        
+        bookmarksTableViewController.viewDidAppear(true)
+        
+        let alert = UIAlertController(title: "Cannot upload file!", message: "SFTP must be enabled.\nIf you want to upload file here, press the \"info\" button and enable SFTP.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        bookmarksTableViewController.present(alert, animated: true, completion: nil)
+    }
     
     // MARK: - Static
     

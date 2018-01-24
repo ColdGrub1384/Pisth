@@ -456,7 +456,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     activityVC.dismiss(animated: true, completion: {
                         tableView.deselectRow(at: indexPath, animated: true)
                         
-                        self.navigationController?.pushViewController(termVC, animated: true)
+                        if let delegate = self.delegate {
+                            delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
+                        } else {
+                            self.navigationController?.pushViewController(termVC, animated: true)
+                        }
                     })
                 }
             }
