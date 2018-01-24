@@ -17,22 +17,25 @@ import Foundation
 ///     - port: Port used to connect.
 struct RemoteConnection {
     
-    /// Hostname or IP address used to connect
+    /// Hostname or IP address used to connect.
     var host: String
     
-    /// Username used to login
+    /// Username used to login.
     var username: String
     
-    /// Password used to authenticate
+    /// Password used to authenticate.
     var password: String
     
-    /// Name that appears in bookmarks
+    /// Name that appears in bookmarks.
     var name: String
     
-    /// Path where start
+    /// Path where start.
     var path: String
     
-    /// Port used to connect
+    /// Port used to connect.
     var port: UInt64
+    
+    /// Use SFTP
+    var useSFTP: Bool
 }
 

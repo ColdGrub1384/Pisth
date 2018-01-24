@@ -58,6 +58,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Web view used to display content.
     var webView: WKWebView!
     
+    /// If true, all addtional commands will not be executed and the shell with be launched 'purely'.
+    var pureMode = false
+    
     /// Add keyboard's toolbar
     func addToolbar() {
         let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -91,7 +94,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))], animated: true)
     }
-    
     
     // MARK: - View controller
     
@@ -149,7 +151,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Down Arrow"),
             UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Left Arrow"),
             UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Right Arrow"),
-            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Esc key")
+            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Esc key"),
         ]
         
         let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
@@ -178,8 +180,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if console.isEmpty {
             
-            ConnectionManager.shared.session?.channel.closeShell()
-            try? ConnectionManager.shared.session?.channel.startShell()
+            if !pureMode {
+                ConnectionManager.shared.session?.channel.closeShell()
+                try? ConnectionManager.shared.session?.channel.startShell()
+            }
             
             if #available(iOS 11.0, *) {
                 navigationItem.largeTitleDisplayMode = .never
@@ -409,21 +413,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.resignFirstResponder()
             }
             
-            self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
-                
-                // Scroll to top if dontScroll is true
-                if self.dontScroll {
-                    self.webView.evaluateJavaScript("term.scrollToTop()", completionHandler: { (returnValue, error) in
-                        if let returnValue = returnValue {
-                            print(returnValue)
-                        }
-                        
-                        if let error = error {
-                            print(error)
-                        }
-                    })
-                }
-            })
+            if self.webView != nil {
+                self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
+                    
+                    // Scroll to top if dontScroll is true
+                    if self.dontScroll {
+                        self.webView.evaluateJavaScript("term.scrollToTop()", completionHandler: { (returnValue, error) in
+                            if let returnValue = returnValue {
+                                print(returnValue)
+                            }
+                            
+                            if let error = error {
+                                print(error)
+                            }
+                        })
+                    }
+                })
+            }
         }
     }
     
@@ -503,24 +509,45 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
+            if !session.isConnected {
+                let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
+                webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
+                preventKeyboardFromBeeingDismissed = false
+                resignFirstResponder()
+                return
+            }
+            
+            if !session.isAuthorized {
+                let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
+                webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
+                preventKeyboardFromBeeingDismissed = false
+                resignFirstResponder()
+                return
+            }
+            
             do {
                 
                 session.channel.delegate = self
                 
-                let clearLastFromHistory = "history -d $(history 1)"
-                
-                if let pwd = self.pwd {
-                    try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
-                }
-                
-                for command in ShellStartup.commands {
-                    try session.channel.write("\(command); \(clearLastFromHistory);\n")
-                }
-                
-                try session.channel.write("clear; \(clearLastFromHistory)\n")
-                
-                if let command = self.command {
-                    try session.channel.write("\(command);\n")
+                if !self.pureMode {
+                    let clearLastFromHistory = "history -d $(history 1)"
+                    
+                    if let pwd = self.pwd {
+                        try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                    }
+                    
+                    for command in ShellStartup.commands {
+                        try session.channel.write("\(command); \(clearLastFromHistory);\n")
+                    }
+                    
+                    try session.channel.write("clear; \(clearLastFromHistory)\n")
+                    
+                    if let command = self.command {
+                        try session.channel.write("\(command);\n")
+                    }
+                } else {
+                    try session.channel.startShell()
+                    toolbar.items?[1].isEnabled = false
                 }
                 
                 changeSize(completion: nil)

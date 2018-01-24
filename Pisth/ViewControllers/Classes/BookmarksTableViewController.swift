@@ -102,6 +102,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             password.isSecureTextEntry = true
         }
         
+        // SFTP
+        addNewAlertController.addTextField { (sftp) in // Requierd
+            sftp.text = "Don't use SFTP"
+            sftp.inputView = BooleanInputView(title: "Use SFTP", textField: sftp, on: "Use SFTP", off: "Don't use SFTP", currentState: false, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+        }
+        
         // Path
         addNewAlertController.addTextField { (path) in // Optional
             path.placeholder = "Path (~)"
@@ -116,7 +122,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             addNewAlertController.textFields![2].text = "\(connection.port)"
             addNewAlertController.textFields![3].text = connection.username
             addNewAlertController.textFields![4].text = connection.password
-            addNewAlertController.textFields![5].text = connection.path
+            addNewAlertController.textFields![6].text = connection.path
+            
+            if connection.useSFTP {
+                addNewAlertController.textFields![5].text = "Use SFTP"
+                (addNewAlertController.textFields![5].inputView as! BooleanInputView).currentState = true
+            }
         }
         
         // Create connection
@@ -126,7 +137,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             var port = addNewAlertController.textFields![2].text!
             let username = addNewAlertController.textFields![3].text!
             let password = addNewAlertController.textFields![4].text!
-            var path = addNewAlertController.textFields![5].text!
+            var path = addNewAlertController.textFields![6].text!
+            let useSFTP = (addNewAlertController.textFields![5].text! == "Use SFTP")
             
             // Check for requierd fields
             if host == "" || username == "" {
@@ -153,7 +165,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                 }
                 
                 if let port = UInt64(port) {
-                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port))
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP))
                     
                     self.tableView.reloadData()
                 } else {
@@ -172,7 +184,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             var port = addNewAlertController.textFields![2].text!
             let username = addNewAlertController.textFields![3].text!
             let password = addNewAlertController.textFields![4].text!
-            var path = addNewAlertController.textFields![5].text!
+            var path = addNewAlertController.textFields![6].text!
+            let useSFTP = (addNewAlertController.textFields![5].text == "Use SFTP")
             
             // Check for requierd fields
             if host == "" || username == "" {
@@ -211,6 +224,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         result.setValue(username, forKey: "username")
                         result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
+                        result.setValue(useSFTP, forKey: "sftp")
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
                         try? AppDelegate.shared.coreDataContext.save()
@@ -408,17 +422,31 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         func connect() {
             let activityVC = ActivityViewController(message: "Connecting")
             self.present(activityVC, animated: true) {
-                let dirVC = DirectoryTableViewController(connection: connection)
-                
-                activityVC.dismiss(animated: true, completion: {
-                    tableView.deselectRow(at: indexPath, animated: true)
+                if DataManager.shared.connections[indexPath.row].useSFTP {
+                    let dirVC = DirectoryTableViewController(connection: connection)
                     
-                    if let delegate = self.delegate {
-                        delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
-                    } else {
-                        self.navigationController?.pushViewController(dirVC, animated: true)
-                    }
-                })
+                    activityVC.dismiss(animated: true, completion: {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        
+                        if let delegate = self.delegate {
+                            delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
+                        } else {
+                            self.navigationController?.pushViewController(dirVC, animated: true)
+                        }
+                    })
+                } else {
+                    ConnectionManager.shared.connection = connection
+                    ConnectionManager.shared.connect()
+                    
+                    let termVC = TerminalViewController()
+                    termVC.pureMode = true
+                                        
+                    activityVC.dismiss(animated: true, completion: {
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        
+                        self.navigationController?.pushViewController(termVC, animated: true)
+                    })
+                }
             }
         }
         

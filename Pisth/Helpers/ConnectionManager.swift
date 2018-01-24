@@ -76,27 +76,34 @@ class ConnectionManager {
         }
         
         if session!.isConnected && session!.isAuthorized {
-            session?.sftp.connect()
+            
+            if connection.useSFTP {
+                session?.sftp.connect()
+            }
+            
             result = .connectedAndAuthorized
         } else {
             return
         }
         
-        filesSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
-        filesSession?.connect()
-        if filesSession!.isConnected {
-            result = .connected
-            filesSession?.authenticate(byPassword: connection.password)
-        } else {
-            result = .notConnected
-            return
-        }
-        
-        if filesSession!.isConnected && filesSession!.isAuthorized {
-            filesSession?.sftp.connect()
-            result = .connectedAndAuthorized
-        } else {
-            return
+        if connection.useSFTP {
+            
+            filesSession = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
+            filesSession?.connect()
+            if filesSession!.isConnected {
+                result = .connected
+                filesSession?.authenticate(byPassword: connection.password)
+            } else {
+                result = .notConnected
+                return
+            }
+            
+            if filesSession!.isConnected && filesSession!.isAuthorized {
+                filesSession?.sftp.connect()
+                result = .connectedAndAuthorized
+            } else {
+                return
+            }
         }
         
         session!.channel.requestPty = true
@@ -105,8 +112,10 @@ class ConnectionManager {
         if result == .connectedAndAuthorized {
             do {
                 // Start the shell to not close the connection when enter in background
-                try session?.channel.startShell()
-                try filesSession?.channel.startShell()
+                if connection.useSFTP {
+                    try session?.channel.startShell()
+                    try filesSession?.channel.startShell()
+                }
             } catch {
                 result = .notConnected
             }

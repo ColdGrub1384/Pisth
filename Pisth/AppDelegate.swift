@@ -109,6 +109,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Add 'sftp' attributes to saved connections if there are not
+        // 'sftp' attribute was added in 5.1
+        if !UserDefaults.standard.bool(forKey: "addedSftpAttribute") {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                
+                for result in results {
+                    if result.value(forKey: "sftp") == nil {
+                        result.setValue(true, forKey: "sftp")
+                    }
+                }
+                
+                try? coreDataContext.save()
+            } catch let error {
+                print("Error retrieving connections: \(error.localizedDescription)")
+            }
+            
+            UserDefaults.standard.setValue(true, forKey: "addedSftpAttribute")
+            UserDefaults.standard.synchronize()
+        }
+        
         // Blink cursor by default
         if UserDefaults.standard.value(forKey: "blink") == nil {
             UserDefaults.standard.set(true, forKey: "blink")
