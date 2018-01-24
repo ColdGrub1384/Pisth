@@ -51,6 +51,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
+    /// Update 3D touch shortucts from connections.
+    func update3DTouchShortucts() {
+        
+        var shortcuts = [UIApplicationShortcutItem]()
+        
+        var i = 0
+        for connection in DataManager.shared.connections {
+            var icon: UIApplicationShortcutIcon {
+                if connection.useSFTP {
+                    return UIApplicationShortcutIcon(templateImageName: "folder black")
+                } else {
+                    return UIApplicationShortcutIcon(templateImageName: "shell")
+                }
+            }
+            
+            var title: String {
+                if connection.name == "" {
+                    return "\(connection.username)@\(connection.host)"
+                } else {
+                    return connection.name
+                }
+            }
+            
+            var subtitle: String? {
+                if connection.name == "" {
+                    return nil
+                } else {
+                    return "\(connection.username)@\(connection.host)"
+                }
+            }
+            
+            shortcuts.append(UIApplicationShortcutItem.init(type: "connection \(i)", localizedTitle: title, localizedSubtitle: subtitle, icon: icon, userInfo: nil))
+            
+            i += 1
+        }
+        
+        UIApplication.shared.shortcutItems = shortcuts
+    }
+    
     // MARK: - Application delegate
     
     
@@ -133,6 +172,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Setup 3D touch shortcuts
+        AppDelegate.shared.update3DTouchShortucts()
+        
         // Blink cursor by default
         if UserDefaults.standard.value(forKey: "blink") == nil {
             UserDefaults.standard.set(true, forKey: "blink")
@@ -179,6 +221,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return false
     }
     
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        navigationController.popToRootViewController(animated: true) {
+            guard let bookmarksVC = self.navigationController.visibleViewController as? BookmarksTableViewController else {
+                
+                completionHandler(false)
+                return
+            }
+            
+            guard let index = Int(shortcutItem.type.components(separatedBy: " ")[1]) else {
+                completionHandler(false)
+                return
+            }
+            
+            guard bookmarksVC.tableView.cellForRow(at: IndexPath(row: index, section: 0)) != nil else {
+                completionHandler(false)
+                return
+            }
+            
+            bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 0))
+        }
+    }
+    
     // MARK: - Core Data stack
     
     /// The persistent container for the application. This implementation
@@ -208,12 +273,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Core Data Saving support
     
-    /// Save core data.
+    /// Save core data and update 3D touch shortcuts.
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
+                update3DTouchShortucts()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

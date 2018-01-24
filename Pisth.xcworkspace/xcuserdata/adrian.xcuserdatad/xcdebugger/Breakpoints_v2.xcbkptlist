@@ -2,4 +2,189 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+            timestampString = "538521631.96303"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.325709"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "connect #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.32884"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in connect #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.332006"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in connect #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.33532"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; () in connect #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.3386689"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "askForPassword #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.341718"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__ObjC.UIAlertAction) -&gt; () in askForPassword #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.3451999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "open #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.348472"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in open #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.3516999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (BiometricAuthentication.AuthenticationError) -&gt; () in open #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.355148"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Pisth.BookmarksTableViewController.tableView(__ObjC.UITableView, didSelectRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Pisth"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/Documents/Pisth/Pisth/ViewControllers/Classes/BookmarksTableViewController.swift"
+                  timestampString = "538521632.358457"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "431"
+                  endingLineNumber = "431"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
