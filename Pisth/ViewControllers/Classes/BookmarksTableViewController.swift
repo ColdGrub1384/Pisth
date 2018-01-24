@@ -105,12 +105,22 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         // SFTP
         addNewAlertController.addTextField { (sftp) in // Requierd
             sftp.text = "Don't use SFTP"
-            sftp.inputView = BooleanInputView(title: "Use SFTP", textField: sftp, on: "Use SFTP", off: "Don't use SFTP", currentState: false, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+            
+            let inputView = BooleanInputView(title: "Use SFTP", textField: sftp, on: "Use SFTP", off: "Don't use SFTP", currentState: false, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
+            inputView.completion = { (isOn) in
+                
+                let pathTextField = addNewAlertController.textFields![6]
+                    
+                pathTextField.isEnabled = isOn
+            }
+            
+            sftp.inputView = inputView
         }
         
         // Path
         addNewAlertController.addTextField { (path) in // Optional
             path.placeholder = "Path (~)"
+            path.isEnabled = false
         }
         
         // Fill info with given index
@@ -127,6 +137,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             if connection.useSFTP {
                 addNewAlertController.textFields![5].text = "Use SFTP"
                 (addNewAlertController.textFields![5].inputView as! BooleanInputView).currentState = true
+                
+                addNewAlertController.textFields![6].isEnabled = true
             }
         }
         

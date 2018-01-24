@@ -10,6 +10,11 @@ import UIKit
 /// A view used as input view to write "Yes" or "No" to a Text View with a Switch.
 class BooleanInputView: UIView {
     
+    /// Called when switch state changes.
+    ///
+    /// - Bool: If switch is on or off.
+    var completion: ((Bool) -> Void)?
+    
     /// Subview from nib.
     var view: UIView!
     
@@ -84,6 +89,10 @@ class BooleanInputView: UIView {
             textField?.text = on
         } else {
             textField?.text = off
+        }
+        
+        if let completion = completion {
+            completion(sender.isOn)
         }
     }
     
