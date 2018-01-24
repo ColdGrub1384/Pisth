@@ -239,7 +239,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         result.setValue(useSFTP, forKey: "sftp")
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
-                        try? AppDelegate.shared.coreDataContext.save()
+                        AppDelegate.shared.saveContext()
                     } catch let error {
                         print("Error retrieving connections: \(error.localizedDescription)")
                     }

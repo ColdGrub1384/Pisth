@@ -34,11 +34,7 @@ class DataManager {
         newConnection.setValue(key, forKey: "password")
         KeychainWrapper.standard.set(connection.password, forKey: key)
         
-        do {
-            try AppDelegate.shared.coreDataContext.save()
-        } catch let error {
-            print("Error saving context: \(error.localizedDescription)")
-        }
+        AppDelegate.shared.saveContext()
     }
     
     /// Remove connection at given index.
