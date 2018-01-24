@@ -89,7 +89,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    
     /// Change terminal size to page size.
     ///
     /// - Parameters:
