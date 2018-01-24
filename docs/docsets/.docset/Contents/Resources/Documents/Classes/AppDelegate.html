@@ -382,6 +382,33 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth11AppDelegateC22update3DTouchShortuctsyyF"></a>
+                    <a name="//apple_ref/swift/Method/update3DTouchShortucts()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth11AppDelegateC22update3DTouchShortuctsyyF">update3DTouchShortucts()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update 3D touch shortucts from connections.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">update3DTouchShortucts</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -445,6 +472,35 @@ Called did close the BookmarksTableViewController opened when upload a file.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)AppDelegate(im)application:performActionForShortcutItem:completionHandler:"></a>
+                    <a name="//apple_ref/swift/Method/application(_:performActionFor:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)AppDelegate(im)application:performActionForShortcutItem:completionHandler:">application(_:performActionFor:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIApplicationDelegate</code>&lsquo;s <code>application(_:, performActionFor:, completionHandler:)</code> function.</p>
+
+<p>Open connection for shortcut.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">performActionFor</span> <span class="nv">shortcutItem</span><span class="p">:</span> <span class="kt">UIApplicationShortcutItem</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -516,7 +572,7 @@ error conditions that could cause the creation of the store to fail.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Save core data.</p>
+                        <p>Save core data and update 3D touch shortcuts.</p>
 
                       </div>
                       <div class="declaration">
@@ -604,6 +660,35 @@ error conditions that could cause the creation of the store to fail.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">bookmarksTableViewController</span><span class="p">(</span><span class="n">_</span> <span class="nv">bookmarksTableViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a></span><span class="p">,</span> <span class="n">didOpenConnection</span> <span class="nv">connection</span><span class="p">:</span> <span class="kt"><a href="../Structs/RemoteConnection.html">RemoteConnection</a></span><span class="p">,</span> <span class="n">inDirectoryTableViewController</span> <span class="nv">directoryTableViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/DirectoryTableViewController.html">DirectoryTableViewController</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth11AppDelegateC28bookmarksTableViewControlleryAA09BookmarksefG0C_AA16RemoteConnectionV07didOpenJ0AA08TerminalfG0C02inmfG0tF"></a>
+                    <a name="//apple_ref/swift/Method/bookmarksTableViewController(_:didOpenConnection:inTerminalViewController:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth11AppDelegateC28bookmarksTableViewControlleryAA09BookmarksefG0C_AA16RemoteConnectionV07didOpenJ0AA08TerminalfG0C02inmfG0tF">bookmarksTableViewController(_:didOpenConnection:inTerminalViewController:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code><a href="../Protocols/BookmarksTableViewControllerDelegate.html">BookmarksTableViewControllerDelegate</a></code>&lsquo;s <code>bookmarksTableViewController(_:, didOpenConnection:, inTerminalViewController:)</code> function.</p>
+
+<p>Show alert saying a file cannot be uploaded with SFTP disabled.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">bookmarksTableViewController</span><span class="p">(</span><span class="n">_</span> <span class="nv">bookmarksTableViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a></span><span class="p">,</span> <span class="n">didOpenConnection</span> <span class="nv">connection</span><span class="p">:</span> <span class="kt"><a href="../Structs/RemoteConnection.html">RemoteConnection</a></span><span class="p">,</span> <span class="n">inTerminalViewController</span> <span class="nv">terminalViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/TerminalViewController.html">TerminalViewController</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
