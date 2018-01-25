@@ -345,6 +345,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             sender.tintColor = .white
         } else {
+            
+            sender.isEnabled = false
+            
             ArrowsViewController.current?.helpLabel.isHidden = false
             ArrowsViewController.current?.helpLabel.alpha = 1
             ArrowsViewController.current?.helpLabel.text = "Scroll to\ngo down /\ngo up."
@@ -360,6 +363,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     ArrowsViewController.current?.helpLabel.isHidden = true
                     
                     ArrowsViewController.current?.view.removeFromSuperview()
+                    
+                    sender.isEnabled = true
                 })
             })
             
