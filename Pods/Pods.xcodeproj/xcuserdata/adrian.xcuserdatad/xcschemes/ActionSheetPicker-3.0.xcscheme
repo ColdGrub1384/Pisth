@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AFDD9001FF140FE0061677B"
-               BuildableName = "Pisth.app"
-               BlueprintName = "Pisth"
-               ReferencedContainer = "container:Pisth.xcodeproj">
+               BlueprintIdentifier = "965699190112DDBD9B7864D091660DBC"
+               BuildableName = "ActionSheetPicker_3_0.framework"
+               BlueprintName = "ActionSheetPicker-3.0"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,15 +30,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AFDD9001FF140FE0061677B"
-            BuildableName = "Pisth.app"
-            BlueprintName = "Pisth"
-            ReferencedContainer = "container:Pisth.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -53,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AFDD9001FF140FE0061677B"
-            BuildableName = "Pisth.app"
-            BlueprintName = "Pisth"
-            ReferencedContainer = "container:Pisth.xcodeproj">
+            BlueprintIdentifier = "965699190112DDBD9B7864D091660DBC"
+            BuildableName = "ActionSheetPicker_3_0.framework"
+            BlueprintName = "ActionSheetPicker-3.0"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,16 +62,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AFDD9001FF140FE0061677B"
-            BuildableName = "Pisth.app"
-            BlueprintName = "Pisth"
-            ReferencedContainer = "container:Pisth.xcodeproj">
+            BlueprintIdentifier = "965699190112DDBD9B7864D091660DBC"
+            BuildableName = "ActionSheetPicker_3_0.framework"
+            BlueprintName = "ActionSheetPicker-3.0"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
