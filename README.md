@@ -22,6 +22,7 @@ Why use Pisth:
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![version](https://img.shields.io/badge/version-4.0-orange.svg)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-green.svg)
+[![Build status](https://build.appcenter.ms/v0.1/apps/3ba4cc7e-7510-4345-b79e-e09b8b046f38/branches/master/badge)](https://appcenter.ms)
 
 ## Screenshots
 <div style="display: flex;">
