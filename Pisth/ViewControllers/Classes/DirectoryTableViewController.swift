@@ -167,7 +167,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Show errors if there are.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
+		 // Toolbar
+
+		 setToolbarItems([UIBarButtonItem(title:"/", target: self, selector: #selector(goToRoot))])
+		 navigationController?.setToolbarHidden(false, animated: true)
+
         // Connection errors
         checkForConnectionError(errorHandler: {
             self.showError()
@@ -181,6 +186,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         }
     }
+
+	 /// `UIViewController`'s `viewDidDisappear_:)` function.
+	 ///
+	 /// Hides toolbar.
+	 override func viewDidDisappear(_ animated: Bool) {
+		 super.viewDidDisappear(animated)
+
+		 navigationController?.setToolbarHidden(true, animated: true)
+	 }
+
 
     // MARK: - Connection errors handling
     
@@ -237,10 +252,35 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     
     // MARK: - Actions
+
+    /// Go to "/".
+    @objc func goToRoot() {
+        checkForConnectionError(errorHandler: {
+            self.showError()
+        }) {
+
+            let activityVC = ActivityViewController(message: "Loading")
+            self.present(activityVC, animated: true, completion: {
+                let dirVC = DirectoryTableViewController(connection: self.connection, directory: "/")
+                if let delegate = self.delegate {
+                    activityVC.dismiss(animated: true, completion: {
+                            
+                        delegate.directoryTableViewController(dirVC, didOpenDirectory: path)
+                    })
+                } else {
+                    activityVC.dismiss(animated: true, completion: {
+                            
+                        self.navigationController?.pushViewController(dirVC, animated: true)
+                    })
+                }
+            })
+        }
+    }
+
     
     /// Dismiss `navigationController`.
     @objc func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
+    	 navigationController?.dismiss(animated: true, completion: nil)
     }
     
     /// Open source control manager for Git repos.
