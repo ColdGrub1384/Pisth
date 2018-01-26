@@ -170,7 +170,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
 
 		 // Toolbar
 
-		 setToolbarItems([UIBarButtonItem(title:"/", , style: .plain, target: self, action: #selector(goToRoot))], animated: true)
+		 setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot))], animated: true)
 		 navigationController?.setToolbarHidden(false, animated: true)
 
         // Connection errors
