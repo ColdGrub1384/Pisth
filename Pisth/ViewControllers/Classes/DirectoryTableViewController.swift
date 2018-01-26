@@ -170,7 +170,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
 
 		 // Toolbar
 
-		 setToolbarItems([UIBarButtonItem(title:"/", target: self, selector: #selector(goToRoot))] animated: true)
+		 setToolbarItems([UIBarButtonItem(title:"/", target: self, action: #selector(goToRoot))], animated: true)
 		 navigationController?.setToolbarHidden(false, animated: true)
 
         // Connection errors
@@ -265,7 +265,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 if let delegate = self.delegate {
                     activityVC.dismiss(animated: true, completion: {
                             
-                        delegate.directoryTableViewController(dirVC, didOpenDirectory: path)
+                        delegate.directoryTableViewController(dirVC, didOpenDirectory: "/")
                     })
                 } else {
                     activityVC.dismiss(animated: true, completion: {
