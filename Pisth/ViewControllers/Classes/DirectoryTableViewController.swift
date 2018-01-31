@@ -160,6 +160,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
         bannerView.delegate = self
         bannerView.load(GADRequest())
+        
+        // Toolbar
+        
+        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot))], animated: true)
+        setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome))], animated: true)
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     /// `UIViewController`'s `viewDidAppear(_:)` function.
@@ -167,11 +173,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Show errors if there are.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-		 // Toolbar
-
-		 setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot))], animated: true)
-		 navigationController?.setToolbarHidden(false, animated: true)
 
         // Connection errors
         checkForConnectionError(errorHandler: {
@@ -253,28 +254,37 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     // MARK: - Actions
 
-    /// Go to "/".
-    @objc func goToRoot() {
+    func goTo(directory: String) {
         checkForConnectionError(errorHandler: {
             self.showError()
         }) {
-
+            
             let activityVC = ActivityViewController(message: "Loading")
             self.present(activityVC, animated: true, completion: {
-                let dirVC = DirectoryTableViewController(connection: self.connection, directory: "/")
+                let dirVC = DirectoryTableViewController(connection: self.connection, directory: directory)
                 if let delegate = self.delegate {
                     activityVC.dismiss(animated: true, completion: {
-                            
-                        delegate.directoryTableViewController(dirVC, didOpenDirectory: "/")
+                        
+                        delegate.directoryTableViewController(dirVC, didOpenDirectory: directory)
                     })
                 } else {
                     activityVC.dismiss(animated: true, completion: {
-                            
+                        
                         self.navigationController?.pushViewController(dirVC, animated: true)
                     })
                 }
             })
         }
+    }
+    
+    /// Go to "~".
+    @objc func goToHome() {
+        goTo(directory: "~")
+    }
+    
+    /// Go to "/".
+    @objc func goToRoot() {
+        goTo(directory: "/")
     }
 
     
