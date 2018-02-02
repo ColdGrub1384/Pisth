@@ -58,6 +58,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Web view used to display content.
     var webView: WKWebView!
     
+    /// Text view with plain output
+    var selectionTextView: UITextView!
+    
     /// If true, all addtional commands will not be executed and the shell with be launched 'purely'.
     var pureMode = false
     
@@ -136,6 +139,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let goBack = UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))
         
+        let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(selectionMode(_:)))
+        
+        let paste = UIBarButtonItem(image: #imageLiteral(resourceName: "clipboard"), style: .plain, target: self, action: #selector(pasteText))
+        
         let history = UIBarButtonItem(image:#imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
         
         let arrows = UIBarButtonItem(image: #imageLiteral(resourceName: "touch"), style: .plain, target: self, action: #selector(sendArrows(_:)))
@@ -152,13 +159,51 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [goBack, history, ctrlKey, space, arrows, escKey, fKeys] as [UIBarButtonItem]
+        let items = [goBack, share, paste, history, ctrlKey, space, arrows, escKey, fKeys] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
         self.toolbar = toolbar
         
-        setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))], animated: true)
+        setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:))), UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(selectionMode(_:)))], animated: true)
+    }
+    
+    /// Show plain output and allow selection.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender Bar button item
+    @objc func selectionMode(_ sender: UIBarButtonItem) {
+        selectionTextView.isHidden = selectionTextView.isHidden.inverted
+        
+        if !selectionTextView.isHidden {
+            
+            preventKeyboardFromBeeingDismissed = false
+            
+            resignFirstResponder()
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                self.webView.evaluateJavaScript("term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
+                    
+                    if let result = result as? String {
+                        self.selectionTextView.text = result
+                    }
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                        self.webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
+                    })
+                    
+                })
+            })
+        } else {
+            becomeFirstResponder()
+        }
+    }
+    
+    /// Send clipboard.
+    @objc func pasteText() {
+        if isFirstResponder {
+            insertText(UIPasteboard.general.string ?? "")
+        }
     }
     
     // MARK: - View controller
@@ -167,7 +212,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// Returns if `webView is different than nil`.
     override var canBecomeFirstResponder: Bool {
-        return (webView != nil)
+        return (webView != nil && !readOnly)
     }
 
     /// `UIViewController`'s `canResignFirstResponder` variable.
@@ -183,6 +228,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// Returns `toolbar`.
     override var inputAccessoryView: UIView? {
+        
+        if !isFirstResponder {
+            return nil
+        }
+        
         return toolbar
     }
     
@@ -203,6 +253,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             self.webView.frame = newFrame
+            self.selectionTextView.frame = newFrame
         })
     }
     
@@ -213,6 +264,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Bluetooth keyboard
         
         var commands =  [
+            UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: "Paste text"),
             UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Up Arrow"),
             UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Down Arrow"),
             UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Left Arrow"),
@@ -269,18 +321,29 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewDidAppear(animated)
         
         if console.isEmpty {
+            
             // Create WebView
             webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
             view.addSubview(webView)
             webView.backgroundColor = .black
             webView.navigationDelegate = self
             webView.scrollView.isScrollEnabled = false
+            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
+            
+            // Create selection Textview
+            selectionTextView = UITextView(frame: webView.frame)
+            selectionTextView.backgroundColor = .black
+            selectionTextView.textColor = .white
+            selectionTextView.isHidden = true
+            selectionTextView.font = UIFont(name: "Courier", size: 15)
+            selectionTextView.isEditable = false
+            view.addSubview(selectionTextView)
+            
             if !readOnly {
                 becomeFirstResponder()
             } else {
                 preventKeyboardFromBeeingDismissed = false
             }
-            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
         }
     }
     
@@ -314,6 +377,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let arrowsVC = ArrowsViewController.current {
                 arrowsVC.view.frame = webView.frame
             }
+            
+            selectionTextView.frame = webView.frame
         }
     }
     
@@ -328,6 +393,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let arrowsVC = ArrowsViewController.current {
                 arrowsVC.view.frame = webView.frame
             }
+            
+            selectionTextView.frame = webView.frame
         }
     }
     
@@ -439,6 +506,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.preventKeyboardFromBeeingDismissed = false
                 self.console = self.console.replacingOccurrences(of: TerminalViewController.close, with: "")
                 self.resignFirstResponder()
+                self.readOnly = true
             }
             
             if self.webView != nil {
@@ -575,7 +643,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     }
                 } else {
                     try session.channel.startShell()
-                    toolbar.items?[1].isEnabled = false
+                    toolbar.items?[3].isEnabled = false
                 }
                 
                 changeSize(completion: nil)
