@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A050CCE1FF81E2400364306 /* ShellStartup.swift */; };
+		3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0AA6362024F4C300603142 /* BooleanInputView.xib */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A2837412017D5A200D157A0 /* BooleanInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2837402017D5A200D157A0 /* BooleanInputView.swift */; };
-		3A2837432017D5EC00D157A0 /* BooleanInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2837422017D5EC00D157A0 /* BooleanInputView.xib */; };
 		3A288B581FF6810E008C523A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A288B571FF6810E008C523A /* String.swift */; };
 		3A36DFA020012D520089039F /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9E20012D500089039F /* xterm.css */; };
 		3A36DFA120012D520089039F /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9F20012D510089039F /* xterm.js */; };
@@ -65,11 +65,11 @@
 
 /* Begin PBXFileReference section */
 		3A050CCE1FF81E2400364306 /* ShellStartup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellStartup.swift; sourceTree = "<group>"; };
+		3A0AA6362024F4C300603142 /* BooleanInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooleanInputView.xib; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A2837402017D5A200D157A0 /* BooleanInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanInputView.swift; sourceTree = "<group>"; };
-		3A2837422017D5EC00D157A0 /* BooleanInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BooleanInputView.xib; sourceTree = "<group>"; };
 		3A288B571FF6810E008C523A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3A36DF9E20012D500089039F /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
 		3A36DF9F20012D510089039F /* xterm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = xterm.js; sourceTree = "<group>"; };
@@ -168,6 +168,8 @@
 				3ADD28CE1FFBC27800977905 /* RemoteDirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
+				3A0AA6362024F4C300603142 /* BooleanInputView.xib */,
+				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -210,7 +212,6 @@
 		3AF9AEAF1FF55C3200840E8A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
@@ -232,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */,
-				3A2837422017D5EC00D157A0 /* BooleanInputView.xib */,
 				3AE835A01FF2DE350073D06E /* WebViewController.xib */,
 				3AF9AEA71FF5461300840E8A /* SettingsTableViewController.storyboard */,
 				3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */,
@@ -347,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */,
 				3A36DFA020012D520089039F /* xterm.css in Resources */,
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
@@ -361,7 +362,6 @@
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
-				3A2837432017D5EC00D157A0 /* BooleanInputView.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
