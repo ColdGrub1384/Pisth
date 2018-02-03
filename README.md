@@ -25,13 +25,7 @@ Why use Pisth:
 [![Build status](https://build.appcenter.ms/v0.1/apps/3ba4cc7e-7510-4345-b79e-e09b8b046f38/branches/master/badge)](https://appcenter.ms)
 
 ## Screenshots
-<div style="display: flex;">
-<img style="float:left; display:inline-block;" src="https://pisth.github.io/screenshots/1.PNG" width=200px>
-<img style="float:left; display:inline-block;" src="https://pisth.github.io/screenshots/2.PNG" width=200px>
-<img style="float:left; display:inline-block;" src="https://pisth.github.io/screenshots/3.jpeg" width=200px>
-<img style="float:left; display:inline-block;" src="https://pisth.github.io/screenshots/4.PNG" width=200px>
-<img style="float:left; display:inline-block;" src="https://pisth.github.io/screenshots/5.PNG" width=200px>
-</div>
+![Screenshots](https://pisth.github.io/screenshots.png)
 
 ## Creating a pull request
 
