@@ -159,7 +159,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [goBack, share, paste, history, ctrlKey, space, arrows, escKey, fKeys] as [UIBarButtonItem]
+        let items = [goBack, share, paste, history, space, arrows, ctrlKey, escKey, fKeys] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
