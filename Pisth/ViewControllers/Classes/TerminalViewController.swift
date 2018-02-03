@@ -177,6 +177,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if !selectionTextView.isHidden {
             
+            toolbar.items![1].tintColor = .white
+            toolbarItems![1].tintColor = .white
+            
             preventKeyboardFromBeeingDismissed = false
             
             resignFirstResponder()
@@ -195,6 +198,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 })
             })
         } else {
+            
+            toolbar.items![1].tintColor = toolbar.tintColor
+            toolbarItems![1].tintColor = view.tintColor
+            
             becomeFirstResponder()
         }
     }
@@ -311,7 +318,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     /// `UIViewController``s `viewDidAppear(_:)` function.
@@ -319,6 +325,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Init `webView`.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        navigationController?.setToolbarHidden(false, animated: true)
         
         if console.isEmpty {
             
