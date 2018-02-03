@@ -93,11 +93,15 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     /// `UIViewController`'s `viewDidLoad` function.
     ///
-    /// Call `setupTextView` function.
+    /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         setupTextView()
+        
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     /// `UIViewController`'s `viewDidAppear(_:)` function.

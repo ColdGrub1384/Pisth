@@ -12,6 +12,10 @@ import NMSSH
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate {
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     /// Directory used to list files.
     var directory: String
     
@@ -116,6 +120,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showErrorIfThereIsOne), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
         let titleComponents = directory.components(separatedBy: "/")
         title = titleComponents.last
         if directory.hasSuffix("/") {
@@ -164,19 +170,37 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// `UIViewController`'s `viewDidAppear(_:)` function.
     ///
-    /// Show errors if there are.
+    /// Show errors if there are and setup Notification center to call this function when Application becomes active.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         // Toolbar
         setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome))], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
         
         // Connection errors
+        showErrorIfThereIsOne()
+    }
+
+	 /// `UIViewController`'s `viewDidDisappear_:)` function.
+	 ///
+	 /// Hides toolbar.
+	 override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        navigationController?.setToolbarHidden(true, animated: true)
+	 }
+
+
+    // MARK: - Connection errors handling
+    
+    /// Show error if there is one.
+    @objc func showErrorIfThereIsOne() {
         checkForConnectionError(errorHandler: {
             self.showError()
         }) {
             if self.files == nil {
+                
                 self.navigationController?.popViewController(animated: true, completion: {
                     let alert = UIAlertController(title: "Error opening directory!", message: "Check for permissions.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -185,18 +209,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         }
     }
-
-	 /// `UIViewController`'s `viewDidDisappear_:)` function.
-	 ///
-	 /// Hides toolbar.
-	 override func viewDidDisappear(_ animated: Bool) {
-		 super.viewDidDisappear(animated)
-
-		 navigationController?.setToolbarHidden(true, animated: true)
-	 }
-
-
-    // MARK: - Connection errors handling
     
     /// Go back and show error.
     func showError() {
@@ -210,12 +222,21 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         case .connected:
             alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
         default:
-            alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
+            alert = UIAlertController(title: "Connection was closed!", message: "An error with the connection occurred.", preferredStyle: .alert)
         }
         
         if alert != nil {
+            
+            let visibleVC = navVC.visibleViewController ?? nil
             navVC.popToRootViewController(animated: true, completion: {
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                    if !(visibleVC is DirectoryTableViewController) {
+                        if let visibleVC = visibleVC {
+                            navVC.pushViewController(visibleVC, animated: true)
+                        }
+                    }
+                }))
                 UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
             })
         }
@@ -223,7 +244,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Check for connection errors and run handler if there is an error.
     func checkForConnectionError(errorHandler: @escaping () -> Void, successHandler: (() -> Void)? = nil) {
-        guard let session = ConnectionManager.shared.filesSession else {
+        guard let session = ConnectionManager.shared.session else {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
             errorHandler()
@@ -244,8 +265,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             return
         }
         
-        if let handler = successHandler {
-            handler()
+        do {
+            try session.channel.write("")
+            if let handler = successHandler {
+                handler()
+            }
+        } catch {
+            errorHandler()
         }
     }
     
