@@ -27,13 +27,13 @@
 		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
-		3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
 		3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F61FF4281E007BB84A /* fileIcon.swift */; };
-		3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */; };
+		3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */; };
+		3AA3FDBE2027549900C07C7A /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
@@ -84,13 +84,13 @@
 		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
-		3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
-		3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
+		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
+		3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
@@ -145,31 +145,78 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		3AAF00EC1FF2D50D00ECCA6F /* Helpers */ = {
+		3A665F2C2027505A0098C482 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				3AFDD9041FF140FE0061677B /* AppDelegate.swift */,
+				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
+				3AFF2EF31FF199AC004D2D9D /* DataManager.swift */,
+				3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */,
+			);
+			path = Singletons;
+			sourceTree = "<group>";
+		};
+		3A665F2D202751210098C482 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */,
+				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
+				3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3A665F2E202752560098C482 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3AA3FDBF202754AB00C07C7A /* Classes */,
+				3AA3FDC0202754BE00C07C7A /* Interface Builder */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3AA3FDBF202754AB00C07C7A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */,
+				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3AA3FDC0202754BE00C07C7A /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */,
+				3A0AA6362024F4C300603142 /* BooleanInputView.xib */,
+			);
+			path = "Interface Builder";
+			sourceTree = "<group>";
+		};
+		3AA3FDC1202754EF00C07C7A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */,
-				3AFF2EF31FF199AC004D2D9D /* DataManager.swift */,
-				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
-				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
-				3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */,
-				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
-				3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */,
-				3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
+				3A288B571FF6810E008C523A /* String.swift */,
+				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3AAF00EC1FF2D50D00ECCA6F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3AA3FDC1202754EF00C07C7A /* Extensions */,
+				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
+				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
+				3A2258901FF6A850001B9710 /* Reachability.swift */,
 				3AA117F61FF4281E007BB84A /* fileIcon.swift */,
 				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
-				3A288B571FF6810E008C523A /* String.swift */,
-				3A2258901FF6A850001B9710 /* Reachability.swift */,
-				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
 				3A050CCE1FF81E2400364306 /* ShellStartup.swift */,
-				3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */,
 				3ADD28CE1FFBC27800977905 /* RemoteDirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
-				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
-				3A0AA6362024F4C300603142 /* BooleanInputView.xib */,
-				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -212,6 +259,7 @@
 		3AF9AEAF1FF55C3200840E8A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */,
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
@@ -262,11 +310,11 @@
 		3AFDD9031FF140FE0061677B /* Pisth */ = {
 			isa = PBXGroup;
 			children = (
-				3AFDD9041FF140FE0061677B /* AppDelegate.swift */,
-				3AAF00E41FF2C1DE00ECCA6F /* FileTableViewCell.swift */,
-				3A5A60E81FF1C6D300E94579 /* FileTableViewCell.xib */,
-				3AAF00EC1FF2D50D00ECCA6F /* Helpers */,
+				3A665F2C2027505A0098C482 /* Singletons */,
+				3A665F2D202751210098C482 /* Protocols */,
+				3A665F2E202752560098C482 /* Views */,
 				3AAF00ED1FF2D52300ECCA6F /* ViewControllers */,
+				3AAF00EC1FF2D50D00ECCA6F /* Helpers */,
 				3AF9AE981FF53BEA00840E8A /* Ressources */,
 			);
 			path = Pisth;
@@ -356,7 +404,7 @@
 				3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */,
 				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
-				3A5A60E91FF1C6D300E94579 /* FileTableViewCell.xib in Resources */,
+				3AA3FDBE2027549900C07C7A /* FileTableViewCell.xib in Resources */,
 				3A36DFA120012D520089039F /* xterm.js in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
@@ -430,6 +478,7 @@
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
+				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
 				3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
@@ -446,7 +495,6 @@
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
-				3AAF00E51FF2C1DE00ECCA6F /* FileTableViewCell.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* RemoteDirectoryAction.swift in Sources */,
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
 				3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */,
