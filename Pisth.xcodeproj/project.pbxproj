@@ -181,7 +181,7 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		3A4801BE2029FAC10069379B /* Resources */ = {
+		3A4801BF202A06AD0069379B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				3A4801BB2029F8E50069379B /* Licenses.html */,
@@ -190,7 +190,7 @@
 				3AA3FDCF20275E9200C07C7A /* Info.plist */,
 				3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */,
 			);
-			path = Resources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		3A665F2C2027505A0098C482 /* Singletons */ = {
@@ -255,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA3FDC820275E9200C07C7A /* PisthViewerAppDelegate.swift */,
-				3A4801BE2029FAC10069379B /* Resources */,
+				3A4801BF202A06AD0069379B /* Resources */,
 			);
 			path = "Pisth Viewer";
 			sourceTree = "<group>";
