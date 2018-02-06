@@ -304,7 +304,7 @@
 			name = html;
 			sourceTree = "<group>";
 		};
-		3AF9AE981FF53BEA00840E8A /* Ressources */ = {
+		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				3AFDD9101FF140FE0061677B /* Info.plist */,
@@ -315,7 +315,7 @@
 				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
 				3AEF1119201115850089389E /* empty */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		3AF9AEAF1FF55C3200840E8A /* Classes */ = {
@@ -381,7 +381,7 @@
 				3A665F2E202752560098C482 /* Views */,
 				3AAF00ED1FF2D52300ECCA6F /* ViewControllers */,
 				3AAF00EC1FF2D50D00ECCA6F /* Helpers */,
-				3AF9AE981FF53BEA00840E8A /* Ressources */,
+				3AF9AE981FF53BEA00840E8A /* Resources */,
 			);
 			path = Pisth;
 			sourceTree = "<group>";
