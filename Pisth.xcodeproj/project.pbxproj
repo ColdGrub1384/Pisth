@@ -32,6 +32,7 @@
 		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
+		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
@@ -97,6 +98,7 @@
 		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
+		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA3FDC1202754EF00C07C7A /* Extensions */,
+				3A843EEC202A64030096632E /* ReviewHelper.swift */,
 				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
@@ -613,6 +616,7 @@
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
+				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* RemoteDirectoryAction.swift in Sources */,
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
 				3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */,

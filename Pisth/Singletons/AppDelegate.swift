@@ -187,6 +187,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Request app review
+        ReviewHelper.shared.launches += 1
+        ReviewHelper.shared.requestReview()
+        
         return true
     }
     
