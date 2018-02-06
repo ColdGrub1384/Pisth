@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>DirectoryTableViewControllerDelegate Protocol Reference</title>
+    <title>TerminalInfo Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/DirectoryTableViewControllerDelegate" class="dashAnchor"></a>
-    <a title="DirectoryTableViewControllerDelegate Protocol Reference"></a>
+    <a name="//apple_ref/swift/Class/TerminalInfo" class="dashAnchor"></a>
+    <a title="TerminalInfo Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Pisth Docs</a> (93% documented)</p>
@@ -23,7 +23,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Pisth Reference</a>
         <img id="carat" src="../img/carat.png" />
-        DirectoryTableViewControllerDelegate Protocol Reference
+        TerminalInfo Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -184,14 +184,20 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>DirectoryTableViewControllerDelegate</h1>
+            <h1>TerminalInfo</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">protocol</span> <span class="kt">DirectoryTableViewControllerDelegate</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TerminalInfo</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">NSCoding</span></code></pre>
 
                 </div>
               </div>
-            <p>Delegate used by <code><a href="../Classes/DirectoryTableViewController.html">DirectoryTableViewController</a></code>s</p>
+            <p>Info sent via Multipeer connectivity.</p>
+<h2 id='contains' class='heading'>Contains:</h2>
+
+<ul>
+<li>Size of terminal.</li>
+<li>Message to show in terminal.</li>
+</ul>
 
           </section>
           <section class="section task-group-section">
@@ -200,9 +206,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF"></a>
-                    <a name="//apple_ref/swift/Method/directoryTableViewController(_:didOpenDirectory:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth36DirectoryTableViewControllerDelegateP09directorycdE0yAA0bcdE0C_SS07didOpenB0tF">directoryTableViewController(_:didOpenDirectory:)</a>
+                    <a name="/s:5Pisth12TerminalInfoCACSS7message_SaySfG12terminalSizetcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(message:terminalSize:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth12TerminalInfoCACSS7message_SaySfG12terminalSizetcfc">init(message:terminalSize:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -210,19 +216,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Called when opening a remote directoty with <code><a href="../Classes/DirectoryTableViewController.html">DirectoryTableViewController</a></code>.</p>
-<h2 id='note' class='heading'>Note</h2>
-
-<p>This will override the default handler.
-If you want to present the directory, present <code>directoryTableViewController</code>,
-directoryTableViewController is not the source controller, but the controller to be opened.</p>
+                        <p>Init from given message and size.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">directoryTableViewController</span><span class="p">(</span><span class="n">_</span> <span class="nv">directoryTableViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/DirectoryTableViewController.html">DirectoryTableViewController</a></span><span class="p">,</span> <span class="n">didOpenDirectory</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">terminalSize</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -233,29 +234,184 @@ directoryTableViewController is not the source controller, but the controller to
                             <tr>
                               <td>
                                 <code>
-                                <em>directoryTableViewController</em>
+                                <em>message</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The DirectoryTableViewController to be opened.</p>
+                                  <p>Message to show in terminal.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>directory</em>
+                                <em>terminalSize</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The remote path to the directory to be opened.</p>
+                                  <p>Size of terminal (in Floats, not in cols or rows). This is an Array, so provide two values, the first, width and the second, height.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth12TerminalInfoC7messageSSv"></a>
+                    <a name="//apple_ref/swift/Property/message" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth12TerminalInfoC7messageSSv">message</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Message to show in terminal.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth12TerminalInfoC13terminalSize_023_A6CE2BC6608718FC0F0479I7C5880EELLSaySfGv"></a>
+                    <a name="//apple_ref/swift/Property/terminalSize_" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth12TerminalInfoC13terminalSize_023_A6CE2BC6608718FC0F0479I7C5880EELLSaySfGv">terminalSize_</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Size of terminal (in Floats, not in cols or rows).</p>
+
+<p>The first value is the width, and the second value is the height.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">terminalSize_</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth12TerminalInfoC12terminalSizeSaySfGv"></a>
+                    <a name="//apple_ref/swift/Property/terminalSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth12TerminalInfoC12terminalSizeSaySfGv">terminalSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Size of terminal (in Floats, not in cols or rows).</p>
+
+<p>The first value is the width, and the second value is the height.
+The setter of this variable put <code>0</code> for missing values, or remove extra values.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">terminalSize</span><span class="p">:</span> <span class="p">[</span><span class="kt">Float</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Coding"></a>
+                <a name="//apple_ref/swift/Section/Coding" class="dashAnchor"></a>
+                <a href="#/Coding">
+                  <h3 class="section-name">Coding</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalInfo(im)encodeWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/encode(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalInfo(im)encodeWithCoder:">encode(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>NSCoding</code>&lsquo;s <code>encode(with:)</code> function.</p>
+
+<p>Encode info.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">with</span> <span class="nv">aCoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalInfo(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalInfo(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>NSCoding</code>&lsquo;s <code>init(coder:)</code> function.</p>
+
+<p>Decode given <code>NSCoder</code> and set variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>

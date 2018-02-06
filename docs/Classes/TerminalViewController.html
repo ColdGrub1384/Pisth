@@ -105,6 +105,9 @@
                 <a href="../Classes/SourceControlTableViewController.html">SourceControlTableViewController</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/TerminalInfo.html">TerminalInfo</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/TerminalViewController.html">TerminalViewController</a>
               </li>
               <li class="nav-group-task">
@@ -184,7 +187,7 @@
             <h1>TerminalViewController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TerminalViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">NMSSHChannelDelegate</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span><span class="p">,</span> <span class="kt">UIKeyInput</span><span class="p">,</span> <span class="kt">UITextInputTraits</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TerminalViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">NMSSHChannelDelegate</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span><span class="p">,</span> <span class="kt">UIKeyInput</span><span class="p">,</span> <span class="kt">UITextInputTraits</span><span class="p">,</span> <span class="kt">MCNearbyServiceAdvertiserDelegate</span><span class="p">,</span> <span class="kt">MCSessionDelegate</span></code></pre>
 
                 </div>
               </div>
@@ -909,7 +912,7 @@
                       <div class="abstract">
                         <p><code>UIViewController</code>&lsquo;s <code>viewDidLoad</code> function.</p>
 
-<p>Add notifications to resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard appears.</p>
+<p>Add notifications to resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard appears and setup multipeer connectivity.</p>
 
                       </div>
                       <div class="declaration">
@@ -996,7 +999,7 @@
                       <div class="abstract">
                         <p><code>UIViewController</code><code>s</code>viewWillDisappear(_:)` function.</p>
 
-<p>Undo changes made to <code>navigationController</code> and dismiss <code><a href="../Classes/ArrowsViewController.html">ArrowsViewController</a></code> if it&rsquo;s presented.</p>
+<p>Undo changes made to <code>navigationController</code>, dismiss <code><a href="../Classes/ArrowsViewController.html">ArrowsViewController</a></code> if it&rsquo;s presented and stop multipeer connectivity session.</p>
 
                       </div>
                       <div class="declaration">
@@ -1270,7 +1273,7 @@
                       <div class="abstract">
                         <p><code>NMSSHChannelDelegate</code>&lsquo;s <code>channel(_:, didReadData:)</code> function.</p>
 
-<p>Write data to <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code>.</p>
+<p>Write data to <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> and send data to MC peers.</p>
 
                       </div>
                       <div class="declaration">
@@ -1524,6 +1527,266 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Multipeer%20connectivity"></a>
+                <a name="//apple_ref/swift/Section/Multipeer connectivity" class="dashAnchor"></a>
+                <a href="#/Multipeer%20connectivity">
+                  <h3 class="section-name">Multipeer connectivity</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth22TerminalViewControllerC6peerIDSQySo06MCPeerF0CGv"></a>
+                    <a name="//apple_ref/swift/Property/peerID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth22TerminalViewControllerC6peerIDSQySo06MCPeerF0CGv">peerID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Peer ID used in <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC9mcSessionSQySo9MCSessionCGv">mcSession</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth22TerminalViewControllerC9mcSessionSQySo9MCSessionCGv"></a>
+                    <a name="//apple_ref/swift/Property/mcSession" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth22TerminalViewControllerC9mcSessionSQySo9MCSessionCGv">mcSession</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Multipeer connectivity to send data to the Mac app.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">mcSession</span><span class="p">:</span> <span class="kt">MCSession</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth22TerminalViewControllerC25mcNearbyServiceAdvertiserSQySo08MCNearbygH0CGv"></a>
+                    <a name="//apple_ref/swift/Property/mcNearbyServiceAdvertiser" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth22TerminalViewControllerC25mcNearbyServiceAdvertiserSQySo08MCNearbygH0CGv">mcNearbyServiceAdvertiser</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCNearbyServiceAdvertiser</code> used to be discoverable by the Mac app.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">mcNearbyServiceAdvertiser</span><span class="p">:</span> <span class="kt">MCNearbyServiceAdvertiser</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)advertiser:didReceiveInvitationFromPeer:withContext:invitationHandler:"></a>
+                    <a name="//apple_ref/swift/Method/advertiser(_:didReceiveInvitationFromPeer:withContext:invitationHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)advertiser:didReceiveInvitationFromPeer:withContext:invitationHandler:">advertiser(_:didReceiveInvitationFromPeer:withContext:invitationHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCNearbyServiceAdvertiserDelegate</code>&lsquo;s <code>advertiser(_:, didReceiveInvitationFromPeer:, withContext:, invitationHandler:)</code> function.</p>
+
+<p>Display an alert to accept or decline invitation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">advertiser</span><span class="p">(</span><span class="n">_</span> <span class="nv">advertiser</span><span class="p">:</span> <span class="kt">MCNearbyServiceAdvertiser</span><span class="p">,</span> <span class="n">didReceiveInvitationFromPeer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="n">withContext</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">invitationHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">MCSession</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)session:peer:didChangeState:"></a>
+                    <a name="//apple_ref/swift/Method/session(_:peer:didChange:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)session:peer:didChangeState:">session(_:peer:didChange:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCSessionDelegate</code>&lsquo;s <code>session(_:, peer:, didChange:)</code> function.</p>
+
+<p>If <code>state</code> is connected, send initial information to <code>peer</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">session</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">MCSession</span><span class="p">,</span> <span class="n">peer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="n">didChange</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">MCSessionState</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didReceiveData:fromPeer:"></a>
+                    <a name="//apple_ref/swift/Method/session(_:didReceive:fromPeer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didReceiveData:fromPeer:">session(_:didReceive:fromPeer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCSessionDelegate</code>&lsquo;s <code>session(_ session:, didReceive:, fromPeer:)</code> function.</p>
+
+<p>Write received String to the Shell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">session</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">MCSession</span><span class="p">,</span> <span class="n">didReceive</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="n">fromPeer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didReceiveStream:withName:fromPeer:"></a>
+                    <a name="//apple_ref/swift/Method/session(_:didReceive:withName:fromPeer:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didReceiveStream:withName:fromPeer:">session(_:didReceive:withName:fromPeer:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCSessionDelegate</code>&lsquo;s <code>session(_:, didReceive:, withName:, fromPeer:)</code> function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">session</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">MCSession</span><span class="p">,</span> <span class="n">didReceive</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">InputStream</span><span class="p">,</span> <span class="n">withName</span> <span class="nv">streamName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">fromPeer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didStartReceivingResourceWithName:fromPeer:withProgress:"></a>
+                    <a name="//apple_ref/swift/Method/session(_:didStartReceivingResourceWithName:fromPeer:with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didStartReceivingResourceWithName:fromPeer:withProgress:">session(_:didStartReceivingResourceWithName:fromPeer:with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCSessionDelegate</code>&lsquo;s <code>session(_:, didStartReceivingResourceWithName:, fromPeer:, with:)</code> function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">session</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">MCSession</span><span class="p">,</span> <span class="n">didStartReceivingResourceWithName</span> <span class="nv">resourceName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">fromPeer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="n">with</span> <span class="nv">progress</span><span class="p">:</span> <span class="kt">Progress</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didFinishReceivingResourceWithName:fromPeer:atURL:withError:"></a>
+                    <a name="//apple_ref/swift/Method/session(_:didFinishReceivingResourceWithName:fromPeer:at:withError:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)session:didFinishReceivingResourceWithName:fromPeer:atURL:withError:">session(_:didFinishReceivingResourceWithName:fromPeer:at:withError:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>MCSessionDelegate</code>&lsquo;s <code>session(_:, didFinishReceivingResourceWithName:, fromPeer:, at:, withError:)</code> function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">session</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">MCSession</span><span class="p">,</span> <span class="n">didFinishReceivingResourceWithName</span> <span class="nv">resourceName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">fromPeer</span> <span class="nv">peerID</span><span class="p">:</span> <span class="kt">MCPeerID</span><span class="p">,</span> <span class="n">at</span> <span class="nv">localURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?,</span> <span class="n">withError</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Static"></a>
                 <a name="//apple_ref/swift/Section/Static" class="dashAnchor"></a>
                 <a href="#/Static">
@@ -1563,7 +1826,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-03)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
