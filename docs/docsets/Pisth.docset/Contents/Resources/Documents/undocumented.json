@@ -1,28 +1,21 @@
 {
   "warnings": [
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/BooleanInputView.swift",
-      "line": 99,
-      "symbol": "BooleanInputView.observeValue(forKeyPath:of:change:context:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/ConnectionManager.swift",
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/ConnectionManager.swift",
       "line": 15,
       "symbol": "ConnectionManager.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/DataManager.swift",
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/DataManager.swift",
       "line": 16,
       "symbol": "DataManager.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Pasteboard.swift",
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/Pasteboard.swift",
       "line": 15,
       "symbol": "Pasteboard.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -30,28 +23,35 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 106,
+      "line": 15,
+      "symbol": "DirectoryTableViewController.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
+      "line": 110,
       "symbol": "DirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 255,
+      "line": 281,
       "symbol": "DirectoryTableViewController.goTo(directory:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 816,
+      "line": 842,
       "symbol": "DirectoryTableViewController.localDirectoryTableViewController(_:didOpenFile:).sendFile()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
-      "line": 172,
+      "line": 176,
       "symbol": "EditTextViewController.viewDidDisappear(_:).close()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
@@ -100,9 +100,16 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 104,
+      "line": 105,
       "symbol": "TerminalViewController.changeSize(completion:).apply()",
       "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Views/Classes/BooleanInputView.swift",
+      "line": 99,
+      "symbol": "BooleanInputView.observeValue(forKeyPath:of:change:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
