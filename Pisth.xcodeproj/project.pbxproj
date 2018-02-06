@@ -21,6 +21,11 @@
 		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
 		3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
+		3A4801B32028D4900069379B /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4801B22028D48F0069379B /* TerminalInfo.swift */; };
+		3A4801B42028D4900069379B /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4801B22028D48F0069379B /* TerminalInfo.swift */; };
+		3A4801B52028D86E0069379B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
+		3A4801B62028D8820069379B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A288B571FF6810E008C523A /* String.swift */; };
+		3A4801BD2029F8E50069379B /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A4801BB2029F8E50069379B /* Licenses.html */; };
 		3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */; };
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
 		3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */; };
@@ -34,6 +39,12 @@
 		3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F61FF4281E007BB84A /* fileIcon.swift */; };
 		3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */; };
 		3AA3FDBE2027549900C07C7A /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */; };
+		3AA3FDC920275E9200C07C7A /* PisthViewerAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDC820275E9200C07C7A /* PisthViewerAppDelegate.swift */; };
+		3AA3FDCB20275E9200C07C7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDCA20275E9200C07C7A /* Assets.xcassets */; };
+		3AA3FDCE20275E9200C07C7A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDCC20275E9200C07C7A /* MainMenu.xib */; };
+		3AA3FDD52027781800C07C7A /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9E20012D500089039F /* xterm.css */; };
+		3AA3FDD62027781B00C07C7A /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9F20012D510089039F /* xterm.js */; };
+		3AA3FDD72027781D00C07C7A /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A38FC4F1FF56AA800690382 /* terminal.html */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
@@ -78,6 +89,8 @@
 		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
 		3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		3A4801B22028D48F0069379B /* TerminalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalInfo.swift; sourceTree = "<group>"; };
+		3A4801BB2029F8E50069379B /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +104,12 @@
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
 		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
+		3AA3FDC620275E9100C07C7A /* Pisth Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AA3FDC820275E9200C07C7A /* PisthViewerAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthViewerAppDelegate.swift; sourceTree = "<group>"; };
+		3AA3FDCA20275E9200C07C7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3AA3FDCD20275E9200C07C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3AA3FDCF20275E9200C07C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pisth_Viewer.entitlements; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +144,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3AA3FDC320275E9100C07C7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3AFDD8FE1FF140FE0061677B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +169,28 @@
 				D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3A4801B12028D43A0069379B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3A4801B22028D48F0069379B /* TerminalInfo.swift */,
+				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
+				3A288B571FF6810E008C523A /* String.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		3A4801BE2029FAC10069379B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A4801BB2029F8E50069379B /* Licenses.html */,
+				3AA3FDCA20275E9200C07C7A /* Assets.xcassets */,
+				3AA3FDCC20275E9200C07C7A /* MainMenu.xib */,
+				3AA3FDCF20275E9200C07C7A /* Info.plist */,
+				3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		3A665F2C2027505A0098C482 /* Singletons */ = {
@@ -198,17 +246,34 @@
 			children = (
 				3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
-				3A288B571FF6810E008C523A /* String.swift */,
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3AA3FDC720275E9100C07C7A /* Pisth Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				3AA3FDC820275E9200C07C7A /* PisthViewerAppDelegate.swift */,
+				3A4801BE2029FAC10069379B /* Resources */,
+			);
+			path = "Pisth Viewer";
+			sourceTree = "<group>";
+		};
+		3AA3FDD42027780000C07C7A /* Terminal */ = {
+			isa = PBXGroup;
+			children = (
+				3A36DF9E20012D500089039F /* xterm.css */,
+				3A36DF9F20012D510089039F /* xterm.js */,
+				3A38FC4F1FF56AA800690382 /* terminal.html */,
+			);
+			path = Terminal;
 			sourceTree = "<group>";
 		};
 		3AAF00EC1FF2D50D00ECCA6F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				3AA3FDC1202754EF00C07C7A /* Extensions */,
-				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
 				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
@@ -233,9 +298,6 @@
 		3ADDFEB920068E5500FA6ACD /* html */ = {
 			isa = PBXGroup;
 			children = (
-				3A36DF9E20012D500089039F /* xterm.css */,
-				3A36DF9F20012D510089039F /* xterm.js */,
-				3A38FC4F1FF56AA800690382 /* terminal.html */,
 				3AF9AE991FF53C3000840E8A /* Licenses.html */,
 				3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */,
 			);
@@ -292,7 +354,10 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
+				3A4801B12028D43A0069379B /* Shared */,
+				3AA3FDD42027780000C07C7A /* Terminal */,
 				3AFDD9031FF140FE0061677B /* Pisth */,
+				3AA3FDC720275E9100C07C7A /* Pisth Viewer */,
 				3AFDD9021FF140FE0061677B /* Products */,
 				2A2C0BF266D722E068E3424D /* Pods */,
 				56249940C7FBF904B64CFA50 /* Frameworks */,
@@ -303,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD9011FF140FE0061677B /* Pisth.app */,
+				3AA3FDC620275E9100C07C7A /* Pisth Viewer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,6 +397,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3AA3FDC520275E9100C07C7A /* Pisth Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AA3FDD120275E9200C07C7A /* Build configuration list for PBXNativeTarget "Pisth Viewer" */;
+			buildPhases = (
+				3AA3FDC220275E9100C07C7A /* Sources */,
+				3AA3FDC320275E9100C07C7A /* Frameworks */,
+				3AA3FDC420275E9100C07C7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pisth Viewer";
+			productName = "Pisth Viewer";
+			productReference = 3AA3FDC620275E9100C07C7A /* Pisth Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3AFDD9001FF140FE0061677B /* Pisth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AFDD9131FF140FE0061677B /* Build configuration list for PBXNativeTarget "Pisth" */;
@@ -357,10 +440,19 @@
 		3AFDD8F91FF140FD0061677B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = ADA;
 				TargetAttributes = {
+					3AA3FDC520275E9100C07C7A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
 					3AFDD9001FF140FE0061677B = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
@@ -386,11 +478,25 @@
 			projectRoot = "";
 			targets = (
 				3AFDD9001FF140FE0061677B /* Pisth */,
+				3AA3FDC520275E9100C07C7A /* Pisth Viewer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3AA3FDC420275E9100C07C7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AA3FDCB20275E9200C07C7A /* Assets.xcassets in Resources */,
+				3AA3FDCE20275E9200C07C7A /* MainMenu.xib in Resources */,
+				3A4801BD2029F8E50069379B /* Licenses.html in Resources */,
+				3AA3FDD52027781800C07C7A /* xterm.css in Resources */,
+				3AA3FDD72027781D00C07C7A /* terminal.html in Resources */,
+				3AA3FDD62027781B00C07C7A /* xterm.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3AFDD8FF1FF140FE0061677B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +571,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3AA3FDC220275E9100C07C7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AA3FDC920275E9200C07C7A /* PisthViewerAppDelegate.swift in Sources */,
+				3A4801B52028D86E0069379B /* Keys.swift in Sources */,
+				3A4801B62028D8820069379B /* String.swift in Sources */,
+				3A4801B42028D4900069379B /* TerminalInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3AFDD8FD1FF140FE0061677B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,6 +595,7 @@
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
+				3A4801B32028D4900069379B /* TerminalInfo.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
 				3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
@@ -512,6 +630,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3AA3FDCC20275E9200C07C7A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3AA3FDCD20275E9200C07C7A /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -523,6 +649,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3AA3FDD220275E9200C07C7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FTTZS623CZ;
+				INFOPLIST_FILE = "Pisth Viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-Viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		3AA3FDD320275E9200C07C7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FTTZS623CZ;
+				INFOPLIST_FILE = "Pisth Viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-Viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		3AFDD9111FF140FE0061677B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -673,6 +835,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3AA3FDD120275E9200C07C7A /* Build configuration list for PBXNativeTarget "Pisth Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AA3FDD220275E9200C07C7A /* Debug */,
+				3AA3FDD320275E9200C07C7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3AFDD8FC1FF140FD0061677B /* Build configuration list for PBXProject "Pisth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

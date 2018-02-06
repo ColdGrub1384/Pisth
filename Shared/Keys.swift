@@ -5,7 +5,7 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
-import UIKit
+import Foundation
 
 /// Class hosting special keys as Unicode characters to be sent to SSH.
 class Keys {

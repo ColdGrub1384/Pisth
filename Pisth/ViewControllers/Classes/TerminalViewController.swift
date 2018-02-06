@@ -8,9 +8,10 @@
 import UIKit
 import NMSSH
 import WebKit
+import MultipeerConnectivity
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
     
     /// Directory to open.
     var pwd: String?
@@ -289,13 +290,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// `UIViewController`'s `viewDidLoad` function.
     ///
-    /// Add notifications to resize `webView` when keyboard appears.
+    /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Setup connectivity
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
+        mcSession.delegate = self
+        mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "terminal")
+        mcNearbyServiceAdvertiser.delegate = self
+        mcNearbyServiceAdvertiser.startAdvertisingPeer()
     }
     
     /// `UIViewController``s `viewWillAppear(_:)` function.
@@ -357,12 +366,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// `UIViewController``s `viewWillDisappear(_:)` function.
     ///
-    /// Undo changes made to `navigationController` and dismiss `ArrowsViewController` if it's presented.
+    /// Undo changes made to `navigationController`, dismiss `ArrowsViewController` if it's presented and stop multipeer connectivity session.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.setToolbarHidden(true, animated: true)
+        
+        mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
     
     /// `UIViewController``s `prefersStatusBarHidden` variable.
@@ -505,7 +516,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// `NMSSHChannelDelegate`'s `channel(_:, didReadData:)` function.
     ///
-    /// Write data to `webView`.
+    /// Write data to `webView` and send data to MC peers.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
@@ -519,6 +530,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             if self.webView != nil {
                 self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
+                    
+                    // Send data to peer
+                    let info = TerminalInfo(message: message, terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
+                    let data = NSKeyedArchiver.archivedData(withRootObject: info)
+                    if self.mcSession.connectedPeers.count > 0 {
+                        try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)
+                    }
                     
                     // Scroll to top if dontScroll is true
                     if self.dontScroll {
@@ -661,6 +680,83 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
             changeSize(completion: nil)
         }
+    }
+    
+    // MARK: - Multipeer connectivity
+    
+    /// Peer ID used in `mcSession`.
+    var peerID: MCPeerID!
+    
+    /// Multipeer connectivity to send data to the Mac app.
+    var mcSession: MCSession!
+    
+    /// `MCNearbyServiceAdvertiser` used to be discoverable by the Mac app.
+    var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
+    
+    /// `MCNearbyServiceAdvertiserDelegate`'s ` advertiser(_:, didReceiveInvitationFromPeer:, withContext:, invitationHandler:)` function.
+    ///
+    /// Display an alert to accept or decline invitation.
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        
+        let alert = UIAlertController(title: "Acept invitation from \(peerID.displayName)?", message: "\(peerID.displayName) wants to see the terminal.", preferredStyle: .alert)
+        
+        let acceptAction: UIAlertAction = UIAlertAction(title: "Accept", style: .default) { (alertAction) -> Void in
+            invitationHandler(true, self.mcSession)
+        }
+        
+        let declineAction = UIAlertAction(title: "Decline", style: .cancel) { (alertAction) -> Void in
+            invitationHandler(false, nil)
+        }
+        
+        alert.addAction(acceptAction)
+        alert.addAction(declineAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    /// `MCSessionDelegate`'s `session(_:, peer:, didChange:)` function.
+    ///
+    /// If `state` is connected, send initial information to `peer`.
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+
+        if state == .connected {
+            print("Connected!")
+            DispatchQueue.main.async {
+                // Send data to peer
+                let info = TerminalInfo(message: self.console, terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
+                let data = NSKeyedArchiver.archivedData(withRootObject: info)
+                try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)
+            }
+        } else if state == .connecting {
+            print("Connecting...")
+        } else {
+            print("Disconnected!")
+        }
+    }
+    
+    /// `MCSessionDelegate`'s `session(_ session:, didReceive:, fromPeer:)` function.
+    ///
+    /// Write received String to the Shell.
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        if let str = String(data: data, encoding: .utf8) {
+            insertText(str)
+        }
+    }
+    
+    /// `MCSessionDelegate`'s `session(_:, didReceive:, withName:, fromPeer:)` function.
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        print("Received stream")
+    }
+    
+    /// `MCSessionDelegate`'s `session(_:, didStartReceivingResourceWithName:, fromPeer:, with:)` function.
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        print("Start receiving resource")
+    }
+    
+    /// `MCSessionDelegate`'s `session(_:, didFinishReceivingResourceWithName:, fromPeer:, at:, withError:)` function.
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        print("Finish receiving resource")
     }
     
     // MARK: - Static
