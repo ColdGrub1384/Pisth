@@ -10,7 +10,7 @@ import GoogleMobileAds
 import NMSSH
 
 /// Table view controller to manage remote files.
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -386,6 +386,69 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationController?.pushViewController(terminalVC, animated: true)
     }
     
+    /// Upload file in current directory.
+    ///
+    /// - Parameters:
+    ///     - file: Local file url.
+    ///     - uploadHandler: Code to execute after uploading file, nil by default.
+    ///
+    /// - Returns: Alert asking for sending file.
+    func upload(file: URL, uploadHandler: (() -> Void)? = nil) -> UIAlertController {
+        // Upload file
+        func sendFile() {
+            
+            let activityVC = ActivityViewController(message: "Uploading")
+            self.present(activityVC, animated: true) {
+                do {
+                    let dataToSend = try Data(contentsOf: file)
+                    
+                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                    
+                    if self.closeAfterSending {
+                        activityVC.dismiss(animated: true, completion: {
+                            AppDelegate.shared.close()
+                        })
+                    } else {
+                        activityVC.dismiss(animated: true, completion: {
+                            self.reload()
+                            if let handler = uploadHandler {
+                                handler()
+                            }
+                        })
+                    }
+                    
+                } catch let error {
+                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+                        
+                        if let handler = uploadHandler {
+                            handler()
+                        }
+                        
+                    }))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }
+        }
+        
+        // Ask user to send file
+        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+            
+            if let handler = uploadHandler {
+                handler()
+            }
+            
+        }))
+        
+        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            sendFile()
+        }))
+        
+        return confirmAlert
+    }
+    
     /// Show an alert to choose if import a file, create blank file, or create directory.
     ///
     /// - Parameters:
@@ -398,7 +461,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file
+        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
+            let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+            if #available(iOS 11.0, *) {
+                picker.allowsMultipleSelection = true
+            }
+            picker.delegate = self
+            
+            self.present(picker, animated: true, completion: nil)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Import from Pisth", style: .default, handler: { (_) in // Upload file from Pisth
             let localDirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
             localDirVC.delegate = self
             
@@ -838,46 +911,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Upload local file.
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
         
-        // Upload file
-        func sendFile() {
-            
-            let activityVC = ActivityViewController(message: "Uploading")
-            self.present(activityVC, animated: true) {
-                do {
-                    let dataToSend = try Data(contentsOf: file)
-                    
-                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
-                    
-                    if self.closeAfterSending {
-                        activityVC.dismiss(animated: true, completion: {
-                            AppDelegate.shared.close()
-                        })
-                    } else {
-                        activityVC.dismiss(animated: true, completion: {
-                            self.reload()
-                        })
-                    }
-                    
-                } catch let error {
-                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
-                }
-            }
-        }
-        
-        // Ask user to send file
-        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
-        
-        confirmAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            sendFile()
-        }))
-        
         // Go back here
         navigationController?.popToViewController(self, animated: true, completion: {
-            self.present(confirmAlert, animated: true, completion: nil)
+            self.present(self.upload(file: file), animated: true, completion: nil)
         })
     }
     
@@ -916,6 +952,58 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
+    }
+    
+    // MARK: - Document picker delegate
+    
+    /// `UIDocumentPickerDelegate`'s `documentPickerWasCancelled(_:)` function.
+    ///
+    /// Dismiss browser.
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    /// `UIDocumentPickerDelegate`'s `documentPicker(_:, didPickDocumentAt:)` function.
+    ///
+    /// Send selected file.
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        present(upload(file: url), animated: true, completion: nil)
+    }
+    
+    /// `UIDocumentPickerDelegate`'s `documentPicker(_:, didPickDocumentsAt:)` function.
+    ///
+    /// Send selected files.
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        
+        /// Get app's top View controller.
+        func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+            if let nav = base as? UINavigationController {
+                return topViewController(nav.visibleViewController)
+            }
+            if let tab = base as? UITabBarController {
+                if let selected = tab.selectedViewController {
+                    return topViewController(selected)
+                }
+            }
+            if let presented = base?.presentedViewController {
+                return topViewController(presented)
+            }
+            return base
+        }
+        
+        var i = 0
+        
+        /// Upload next file.
+        func uploadNext() {
+            topViewController()?.present(upload(file: urls[i], uploadHandler: {
+                i += 1
+                if urls.indices.contains(i) {
+                    uploadNext()
+                }
+            }), animated: true, completion: nil)
+        }
+        
+        uploadNext()
     }
     
     // MARK: - Static
