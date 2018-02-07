@@ -386,6 +386,47 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationController?.pushViewController(terminalVC, animated: true)
     }
     
+    /// Upload given file in current dircectory.
+    ///
+    /// - Parameters:
+    ///     - file: Local file to upload.
+    ///     - uploadHandler: Code to execute after uploading file, nil by default.
+    func sendFile(file: URL, uploadHandler: (() -> Void)? = nil) {
+        
+        let activityVC = ActivityViewController(message: "Uploading")
+        self.present(activityVC, animated: true) {
+            do {
+                let dataToSend = try Data(contentsOf: file)
+                
+                ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                
+                if self.closeAfterSending {
+                    activityVC.dismiss(animated: true, completion: {
+                        AppDelegate.shared.close()
+                    })
+                } else {
+                    activityVC.dismiss(animated: true, completion: {
+                        self.reload()
+                        if let handler = uploadHandler {
+                            handler()
+                        }
+                    })
+                }
+                
+            } catch let error {
+                let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+                    
+                    if let handler = uploadHandler {
+                        handler()
+                    }
+                    
+                }))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     /// Upload file in current directory.
     ///
     /// - Parameters:
@@ -395,41 +436,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// - Returns: Alert asking for sending file.
     func upload(file: URL, uploadHandler: (() -> Void)? = nil) -> UIAlertController {
         // Upload file
-        func sendFile() {
-            
-            let activityVC = ActivityViewController(message: "Uploading")
-            self.present(activityVC, animated: true) {
-                do {
-                    let dataToSend = try Data(contentsOf: file)
-                    
-                    ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
-                    
-                    if self.closeAfterSending {
-                        activityVC.dismiss(animated: true, completion: {
-                            AppDelegate.shared.close()
-                        })
-                    } else {
-                        activityVC.dismiss(animated: true, completion: {
-                            self.reload()
-                            if let handler = uploadHandler {
-                                handler()
-                            }
-                        })
-                    }
-                    
-                } catch let error {
-                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
-                        
-                        if let handler = uploadHandler {
-                            handler()
-                        }
-                        
-                    }))
-                    self.present(errorAlert, animated: true, completion: nil)
-                }
-            }
-        }
         
         // Ask user to send file
         let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
@@ -443,7 +449,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }))
         
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            sendFile()
+            self.sendFile(file: file, uploadHandler: uploadHandler)
         }))
         
         return confirmAlert
@@ -975,35 +981,31 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Send selected files.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
-        /// Get app's top View controller.
-        func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-            if let nav = base as? UINavigationController {
-                return topViewController(nav.visibleViewController)
-            }
-            if let tab = base as? UITabBarController {
-                if let selected = tab.selectedViewController {
-                    return topViewController(selected)
-                }
-            }
-            if let presented = base?.presentedViewController {
-                return topViewController(presented)
-            }
-            return base
+        if urls.count == 1 {
+            documentPicker(controller, didPickDocumentAt: urls[0])
+            return
         }
         
-        var i = 0
+        let alert = UIAlertController(title: "Upload \(urls.count) files?", message: "Do you want to upload \(urls.count) files to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+            var i = 0
+            
+            /// Upload next file.
+            func uploadNext() {
+                self.sendFile(file: urls[i], uploadHandler: {
+                    i += 1
+                    
+                    if urls.indices.contains(i) {
+                        uploadNext()
+                    }
+                })
+            }
+            
+            uploadNext()
+        }))
         
-        /// Upload next file.
-        func uploadNext() {
-            topViewController()?.present(upload(file: urls[i], uploadHandler: {
-                i += 1
-                if urls.indices.contains(i) {
-                    uploadNext()
-                }
-            }), animated: true, completion: nil)
-        }
-        
-        uploadNext()
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Static
