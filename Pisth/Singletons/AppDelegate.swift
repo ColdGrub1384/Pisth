@@ -208,6 +208,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             let navVC = UINavigationController(rootViewController: bookmarksVC)
             navVC.navigationBar.barStyle = .black
             navVC.navigationBar.isTranslucent = true
+            navVC.toolbar.barStyle = .black
+            navVC.toolbar.isTranslucent = true
             if #available(iOS 11.0, *) {
                 navVC.navigationBar.prefersLargeTitles = true
             }
