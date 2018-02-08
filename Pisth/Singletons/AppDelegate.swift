@@ -308,8 +308,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         directoryTableViewController.delegate = self
         directoryTableViewController.closeAfterSending = true
         self.directoryTableViewController = directoryTableViewController
-        UIApplication.shared.keyWindow?.rootViewController?.navigationController?.pushViewController(directoryTableViewController, animated: true) {
-            directoryTableViewController.navigationItem.rightBarButtonItems?.remove(at: 1)
+        (navigationController.presentedViewController as? UINavigationController)?.pushViewController(directoryTableViewController, animated: true) {
+            directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
         }
     }
     
