@@ -44,8 +44,13 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             
             let supportedLanguages = highlightr!.supportedLanguages()
             if supportedLanguages.contains(language_!) {
-                return language_?.replacingOccurrences(of: "-", with: "")
+                return language_?.replacingFirstOccurrence(of: "-", with: "")
             } else {
+                
+                if supportedLanguages.contains(language_!.replacingFirstOccurrence(of: "-", with: "")) {
+                    return language_?.replacingFirstOccurrence(of: "-", with: "")
+                }
+                
                 return nil
             }
         }
@@ -150,8 +155,11 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
                 
                 for language in languagesForFile {
-                    if highlightr!.supportedLanguages().contains(language) {
-                        chooseAlert.addAction(UIAlertAction(title: language, style: .default, handler: { (_) in
+                    
+                    let languageForHighlightr = language.replacingOccurrences(of: "-", with: "")
+                    
+                    if highlightr!.supportedLanguages().contains(languageForHighlightr) {
+                        chooseAlert.addAction(UIAlertAction(title: language.prefix(1).uppercased()+String(language.dropFirst()), style: .default, handler: { (_) in
                             self.language = language
                             self.textStorage.language = self.language
                         }))
