@@ -17,7 +17,7 @@ class SettingsTableViewController: UITableViewController {
         case biometricAuth = 0
         case showHiddenFiles = 1
         case blinkCursor = 2
-        case licenses = 3
+        case licenses = 4
     }
     
     

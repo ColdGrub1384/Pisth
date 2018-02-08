@@ -28,7 +28,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// Open app's settings.
     @objc func openSettings() {
-        navigationController?.pushViewController(UIStoryboard(name: "SettingsTableViewController", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
+        navigationController?.pushViewController(UIStoryboard(name: "Settings", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
     }
     
     /// Open local documents.
