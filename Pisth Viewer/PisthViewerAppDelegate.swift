@@ -16,18 +16,6 @@ import MultipeerConnectivity
 @NSApplicationMain
 class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate, WKNavigationDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
     
-    /// Current version features.
-    var versionNews: String? {
-        
-        get {
-            return UserDefaults.standard.string(forKey: "versionNews")
-        }
-        
-        set {
-            UserDefaults.standard.set(newValue, forKey: "versionNews")
-        }
-    }
-    
     /// Web view used to display licenses.
     @IBOutlet weak var licensesWebView: WKWebView!
     
@@ -248,26 +236,22 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
             }
             
             if let str = String(data: data, encoding: .utf8) {
-                if self.versionNews != nil {
-                    if self.versionNews != str {
+                if (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) != str.components(separatedBy: "\n\n")[0] {
                         
-                        let alert = NSAlert()
-                        alert.messageText = "New version available"
-                        alert.informativeText = str
+                    let alert = NSAlert()
+                    alert.messageText = "New version available"
+                    alert.informativeText = str
+                    
+                    alert.addButton(withTitle: "Update")
+                    alert.addButton(withTitle: "Don't update")
                         
-                        alert.addButton(withTitle: "Update")
-                        alert.addButton(withTitle: "Don't update")
+                    alert.alertStyle = .informational
                         
-                        alert.alertStyle = .informational
-                        
-                        if alert.runModal() == .alertFirstButtonReturn {
-                            NSWorkspace.shared.open(URL(string: "https://pisth.github.io/PisthViewer")!)
-                        }
-                        
-                        alert.beginSheetModal(for: self.window, completionHandler: nil)
+                    if alert.runModal() == .alertFirstButtonReturn {
+                        NSWorkspace.shared.open(URL(string: "https://pisth.github.io/PisthViewer")!)
                     }
-                } else {
-                    self.versionNews = str
+                        
+                    alert.beginSheetModal(for: self.window, completionHandler: nil)
                 }
             }
         }
