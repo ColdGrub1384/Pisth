@@ -392,7 +392,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     ///     - file: Local file to upload.
     ///     - directory: Directory where upload files, default is current directory.
     ///     - uploadHandler: Code to execute after uploading file, nil by default.
-    func sendFile(file: URL, toDirectory path: String? = nil, uploadHandler: (() -> Void)? = nil, showAlert: Bool = true) {
+    ///     - errorHandler: Code to execute after the upload failed.
+    ///     - showAlert: If show uploading alert.
+    ///
+    /// - Returns: `false` if upload failed, always returns `true` if `showAlert` is `true`.
+    @discardableResult func sendFile(file: URL, toDirectory path: String? = nil, uploadHandler: (() -> Void)? = nil, errorHandler: (() -> Void)? = nil, showAlert: Bool = true) -> Bool {
         
         var directory: String!
         if path == nil {
@@ -404,32 +408,48 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         let activityVC = ActivityViewController(message: "Uploading")
         
         /// Upload file with given parameters of parent function.
-        func upload() {
+        ///
+        /// - Returns: `false` if upload failed.
+        func upload() -> Bool {
             do {
                 let dataToSend = try Data(contentsOf: file)
                 
-                /// Show upload error.
-                func showError() {
-                    activityVC.dismiss(animated: true, completion: {
+                /// Show error or run error handler.
+                func showError_() {
+                    if let handler = errorHandler {
+                        handler()
+                    } else {
                         let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
-                            if let handler = uploadHandler {
+                            if let handler = errorHandler {
                                 handler()
                             }
                         }))
                         self.present(alert, animated: true, completion: nil)
-                    })
+                    }
+                }
+                
+                /// Show upload error and dismiss uploding alert.
+                func showError() {
+                    if showAlert {
+                        activityVC.dismiss(animated: true, completion: {
+                            showError_()
+                        })
+                    } else {
+                        showError_()
+                    }
                 }
                 
                 guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(file.lastPathComponent)) else {
                     
                     showError()
                     
-                    return
+                    return false
                 }
                 
                 if !result {
                     showError()
+                    return false
                 }
                 
                 if self.closeAfterSending {
@@ -447,44 +467,84 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     if result {
                         close(alert: activityVC)
                     } else {
-                        activityVC.dismiss(animated: true, completion: {
+                        
+                        /// Show error and call `close(alert:)` after clicking "Ok".
+                        func showErrorAndCallClose() {
                             let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                                 close(alert: alert)
                             }))
                             self.present(alert, animated: true, completion: nil)
-                        })
+                        }
+                        
+                        if showAlert {
+                            activityVC.dismiss(animated: true, completion: {
+                                showErrorAndCallClose()
+                            })
+                            
+                            return false
+                        } else {
+                            showErrorAndCallClose()
+                            
+                            return false
+                        }
                     }
                     
                 } else {
-                    activityVC.dismiss(animated: true, completion: {
+                    if showAlert {
+                        activityVC.dismiss(animated: true, completion: {
+                            self.reload()
+                            if let handler = uploadHandler {
+                                handler()
+                            }
+                        })
+                    } else {
                         self.reload()
                         if let handler = uploadHandler {
                             handler()
                         }
-                    })
+                    }
                 }
                 
             } catch let error {
-                let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+                /// Show error reading file.
+                func showErrorReadingFile() {
+                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+                        
+                        if let handler = uploadHandler {
+                            handler()
+                        }
+                        
+                    }))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                if showAlert {
+                    activityVC.dismiss(animated: true, completion: {
+                        showErrorReadingFile()
+                    })
                     
-                    if let handler = uploadHandler {
-                        handler()
-                    }
+                    return false
+                } else {
+                    showErrorReadingFile()
                     
-                }))
-                self.present(errorAlert, animated: true, completion: nil)
+                    return false
+                }
             }
+            
+            return true
         }
         
         if showAlert {
             self.present(activityVC, animated: true) {
-                upload()
+                _ = upload()
             }
         } else {
-            upload()
+            return upload()
         }
+        
+        return true
     }
     
     /// Upload file in current directory.
@@ -546,36 +606,69 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             if isItemDirectory(file) { // Upload directory
                 
+                let activityVC = ActivityViewController(message: "Uploading")
+                
                 /// Upload files in given directory.
                 ///
                 /// - Parameters:
                 ///     - directory: Local directory URL.
                 ///     - path: Remote directory path.
-                func uploadFilesInDirectory(_ directory: URL, toPath path: String) {
+                ///
+                /// - Returns: `false` if upload failed.
+                func uploadFilesInDirectory(_ directory: URL, toPath path: String) -> Bool {
                     
                     guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: path) else {
-                        showError()
-                        return
+                        
+                        activityVC.dismiss(animated: true, completion: {
+                            showError()
+                        })
+                        
+                        return false
                     }
                     
                     guard result else {
-                        showError()
-                        return
+                        activityVC.dismiss(animated: true, completion: {
+                            showError()
+                        })
+                        
+                        return false
                     }
                     
                     for url in filesIn(directory: directory) {
                         
                         if isItemDirectory(url) {
                                 
-                            uploadFilesInDirectory(url, toPath: path.nsString.appendingPathComponent(url.lastPathComponent))
+                            if !uploadFilesInDirectory(url, toPath: path.nsString.appendingPathComponent(url.lastPathComponent)) {
+                                
+                                activityVC.dismiss(animated: true, completion: {
+                                    showError()
+                                })
+                                
+                                return false
+                            }
                                 
                         } else {
-                            self.sendFile(file: url, toDirectory: path, showAlert: false)
+                            if !self.sendFile(file: url, toDirectory: path, showAlert: false) {
+                                
+                                activityVC.dismiss(animated: true, completion: {
+                                    showError()
+                                })
+                                
+                                return false
+                            }
                         }
                     }
+                    
+                    activityVC.dismiss(animated: true, completion: {
+                        self.reload()
+                    })
+                    
+                    return true
                 }
                 
-                uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                self.present(activityVC, animated: true, completion: {
+                     _ = uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                })
                 
                 
             } else { // Upload file
