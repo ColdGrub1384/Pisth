@@ -390,20 +390,72 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     ///
     /// - Parameters:
     ///     - file: Local file to upload.
+    ///     - directory: Directory where upload files, default is current directory.
     ///     - uploadHandler: Code to execute after uploading file, nil by default.
-    func sendFile(file: URL, uploadHandler: (() -> Void)? = nil) {
+    func sendFile(file: URL, toDirectory path: String? = nil, uploadHandler: (() -> Void)? = nil, showAlert: Bool = true) {
+        
+        var directory: String!
+        if path == nil {
+            directory = self.directory
+        } else {
+            directory = path
+        }
         
         let activityVC = ActivityViewController(message: "Uploading")
-        self.present(activityVC, animated: true) {
+        
+        /// Upload file with given parameters of parent function.
+        func upload() {
             do {
                 let dataToSend = try Data(contentsOf: file)
                 
-                ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                /// Show upload error.
+                func showError() {
+                    activityVC.dismiss(animated: true, completion: {
+                        let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                            if let handler = uploadHandler {
+                                handler()
+                            }
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    })
+                }
+                
+                guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(file.lastPathComponent)) else {
+                    
+                    showError()
+                    
+                    return
+                }
+                
+                if !result {
+                    showError()
+                }
                 
                 if self.closeAfterSending {
-                    activityVC.dismiss(animated: true, completion: {
-                        AppDelegate.shared.close()
-                    })
+                    /// Close this Navigation controller.
+                    func close(alert: UIViewController) {
+                        alert.dismiss(animated: true, completion: {
+                            if let handler = uploadHandler {
+                                handler()
+                            } else {
+                                AppDelegate.shared.close()
+                            }
+                        })
+                    }
+                    
+                    if result {
+                        close(alert: activityVC)
+                    } else {
+                        activityVC.dismiss(animated: true, completion: {
+                            let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                                close(alert: alert)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        })
+                    }
+                    
                 } else {
                     activityVC.dismiss(animated: true, completion: {
                         self.reload()
@@ -424,6 +476,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 }))
                 self.present(errorAlert, animated: true, completion: nil)
             }
+        }
+        
+        if showAlert {
+            self.present(activityVC, animated: true) {
+                upload()
+            }
+        } else {
+            upload()
         }
     }
     
@@ -449,7 +509,79 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }))
         
         confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            self.sendFile(file: file, uploadHandler: uploadHandler)
+            
+            /// - Parameters:
+            ///     - item: Local file or directory URL.
+            /// - Returns: `true` if given item is directory.
+            func isItemDirectory(_ item: URL) -> Bool {
+                var isDir: ObjCBool = false
+                if FileManager.default.fileExists(atPath: item.path, isDirectory: &isDir) {
+                    return isDir.boolValue
+                } else {
+                    return false
+                }
+            }
+            
+            /// - Parameters:
+            ///     - directory: Local directory URL.
+            /// - Returns: Files in given directory..
+            func filesIn(directory: URL) -> [URL] {
+                if let files = try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil) {
+                    return files
+                } else {
+                    return []
+                }
+            }
+            
+            /// Show upload error.
+            func showError() {
+                let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                    if let handler = uploadHandler {
+                        handler()
+                    }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            if isItemDirectory(file) { // Upload directory
+                
+                /// Upload files in given directory.
+                ///
+                /// - Parameters:
+                ///     - directory: Local directory URL.
+                ///     - path: Remote directory path.
+                func uploadFilesInDirectory(_ directory: URL, toPath path: String) {
+                    
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: path) else {
+                        showError()
+                        return
+                    }
+                    
+                    guard result else {
+                        showError()
+                        return
+                    }
+                    
+                    for url in filesIn(directory: directory) {
+                        
+                        if isItemDirectory(url) {
+                                
+                            uploadFilesInDirectory(url, toPath: path.nsString.appendingPathComponent(url.lastPathComponent))
+                                
+                        } else {
+                            self.sendFile(file: url, toDirectory: path, showAlert: false)
+                        }
+                    }
+                }
+                
+                uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                
+                
+            } else { // Upload file
+                self.sendFile(file: file, uploadHandler: uploadHandler)
+            }
+            
         }))
         
         return confirmAlert
