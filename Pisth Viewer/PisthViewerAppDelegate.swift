@@ -238,23 +238,25 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
             if let str = String(data: data, encoding: .utf8) {
                 if (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) != str.components(separatedBy: "\n\n")[0] {
                         
-                    let alert = NSAlert()
-                    alert.messageText = "New version available"
-                    alert.informativeText = str
-                    
-                    alert.addButton(withTitle: "Update")
-                    alert.addButton(withTitle: "Don't update")
+                    DispatchQueue.main.async {
+                        let alert = NSAlert()
+                        alert.messageText = "New version available"
+                        alert.informativeText = str
                         
-                    alert.alertStyle = .informational
+                        alert.addButton(withTitle: "Update")
+                        alert.addButton(withTitle: "Don't update")
                         
-                    if alert.runModal() == .alertFirstButtonReturn {
-                        NSWorkspace.shared.open(URL(string: "https://pisth.github.io/PisthViewer")!)
+                        alert.alertStyle = .informational
+                        
+                        if alert.runModal() == .alertFirstButtonReturn {
+                            NSWorkspace.shared.open(URL(string: "https://pisth.github.io/PisthViewer")!)
+                        }
+                        
+                        alert.beginSheetModal(for: self.window, completionHandler: nil)
                     }
-                        
-                    alert.beginSheetModal(for: self.window, completionHandler: nil)
                 }
             }
-        }
+        }.resume()
         
         // Keys handling
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) in
