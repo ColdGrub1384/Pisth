@@ -255,6 +255,69 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 }
             }
         }
+        
+        // Keys handling
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) in
+            
+            guard var character = event.characters else {
+                return nil
+            }
+            
+            guard let utf16view = event.charactersIgnoringModifiers?.utf16 else {
+                return nil
+            }
+            
+            let key = Int(utf16view[utf16view.startIndex])
+            
+            switch key {
+                
+            // Arrow keys
+            case NSUpArrowFunctionKey:
+                character = Keys.arrowUp
+            case NSDownArrowFunctionKey:
+                character = Keys.arrowDown
+            case NSLeftArrowFunctionKey:
+                character = Keys.arrowLeft
+            case NSRightArrowFunctionKey:
+                character = Keys.arrowRight
+            
+            // Function Keys
+            case NSF1FunctionKey:
+                character = Keys.f1
+            case NSF2FunctionKey:
+                character = Keys.f2
+            case NSF3FunctionKey:
+                character = Keys.f3
+            case NSF4FunctionKey:
+                character = Keys.f4
+            case NSF5FunctionKey:
+                character = Keys.f5
+            case NSF6FunctionKey:
+                character = Keys.f6
+            case NSF7FunctionKey:
+                character = Keys.f7
+            case NSF8FunctionKey:
+                character = Keys.f8
+            case NSF2FunctionKey:
+                character = Keys.f2
+            case NSF9FunctionKey:
+                character = Keys.f9
+            case NSF10FunctionKey:
+                character = Keys.f10
+            case NSF11FunctionKey:
+                character = Keys.f11
+            default:
+                break
+            }
+            
+            guard let data = character.data(using: .utf8) else {
+                return nil
+            }
+            
+            try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+            
+            return nil
+        }
     }
     
     
