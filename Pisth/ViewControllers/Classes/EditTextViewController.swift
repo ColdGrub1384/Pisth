@@ -115,6 +115,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        navigationController?.setToolbarHidden(true, animated: true)
+        
         textView.setContentOffset(CGPoint.zero, animated: false)
         
         if highlightr != nil {
@@ -180,7 +182,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     /// Save file if is needed.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+                
         func close() {
             if ConnectionManager.shared.saveFile != nil {
                 ConnectionManager.shared.saveFile = nil
