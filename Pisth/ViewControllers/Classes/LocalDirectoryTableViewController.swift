@@ -12,7 +12,7 @@ import AVFoundation
 import AVKit
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate {
+class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -40,6 +40,69 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
         shareVC.popoverPresentationController?.sourceView = sender
         present(shareVC, animated: true, completion: nil)
+    }
+    
+    /// Move file stored in `Pasteboard` in current directory.
+    @objc func moveFile() {
+        
+        guard let filePath = Pasteboard.local.localFilePath else {
+            
+            let errorAlert = UIAlertController(title: "Error moving file!", message: "No file in pasteboard.", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(errorAlert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        do {
+            try FileManager.default.moveItem(atPath: filePath, toPath: directory.appendingPathComponent(filePath.nsString.lastPathComponent).path)
+            
+            navigationController?.dismiss(animated: true, completion: {
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+                    dirVC.reload()
+                }
+            })
+        } catch {
+            let errorAlert = UIAlertController(title: "Error moving file!", message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(errorAlert, animated: true, completion: nil)
+        }
+        
+        Pasteboard.local.localFilePath = nil
+    }
+    
+    /// Copy file stored in `Pasteboard` in current directory.
+    @objc func copyFile() {
+        
+        guard let filePath = Pasteboard.local.localFilePath else {
+            
+            let errorAlert = UIAlertController(title: "Error copying file!", message: "No file in pasteboard.", preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(errorAlert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        do {
+            try FileManager.default.copyItem(atPath: filePath, toPath: directory.appendingPathComponent(filePath.nsString.lastPathComponent).path)
+            
+            navigationController?.dismiss(animated: true, completion: {
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+                    dirVC.reload()
+                }
+            })
+        } catch {
+            let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(errorAlert, animated: true, completion: nil)
+        }
+        
+        Pasteboard.local.localFilePath = nil
+    }
+    
+    /// Dismiss `navigationController`.
+    @objc func close() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     /// Create or import file or directory.
@@ -211,6 +274,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             self.openFile = nil
         }
         
+        reload()
+        
     }
     
     // MARK: - Table view data source
@@ -293,6 +358,45 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
+    /// `UITableViewController`'s `tableView(_:, canPerformAction:, forRowAt:, withSender:)` function.
+    ///
+    /// - Returns: Enable copying files.
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        
+        return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
+    }
+    
+    /// `UITableViewController`'s `tableView(_ tableView:, shouldShowMenuForRowAt:` function.
+    ///
+    /// - Returns: `true`.
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    /// `UITableViewController`'s `tableView(_:, performAction:, forRowAt:, withSender:)` function.
+    ///
+    /// Copy selected file.
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)) { // Copy file
+            
+            Pasteboard.local.localFilePath = directory.appendingPathComponent(files[indexPath.row].lastPathComponent).path
+            
+            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            dirVC.navigationItem.prompt = "Select a directory where copy file"
+            dirVC.delegate = dirVC
+            LocalDirectoryTableViewController.action = .copyFile
+            
+            
+            let navVC = UINavigationController(rootViewController: dirVC)
+            navVC.navigationBar.barStyle = .black
+            navVC.navigationBar.isTranslucent = true
+            present(navVC, animated: true, completion: {
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+            })
+        }
+    }
+    
     // MARK: - Table view delegate
     
     /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
@@ -305,8 +409,13 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         tableView.deselectRow(at: indexPath, animated: true)
         if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
             let dirVC = LocalDirectoryTableViewController(directory: self.files[indexPath.row])
-            dirVC.delegate = delegate
-            self.navigationController?.pushViewController(dirVC, animated: true)
+            
+            if let delegate = delegate {
+                delegate.localDirectoryTableViewController(dirVC, didOpenDirectory: self.files[indexPath.row])
+            } else {
+                dirVC.delegate = delegate
+                self.navigationController?.pushViewController(dirVC, animated: true)
+            }
         } else {
             if let delegate = delegate { // Handle the file with delegate
                 delegate.localDirectoryTableViewController(self, didOpenFile: self.files[indexPath.row])
@@ -351,7 +460,45 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
+    // MARK: - Local directory table view controller
+    
+    /// `LocalDirectoryTableViewController`'s `localDirectoryTableViewController(_:, didOpenDirectory:)` function.
+    ///
+    /// Copy or move file.
+    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL) {
+        localDirectoryTableViewController.delegate = localDirectoryTableViewController
+        
+        if LocalDirectoryTableViewController.action == .copyFile {
+            localDirectoryTableViewController.navigationItem.prompt = "Select a directory where copy file"
+        }
+        
+        if LocalDirectoryTableViewController.action == .moveFile {
+            localDirectoryTableViewController.navigationItem.prompt = "Select a directory where move file"
+        }
+        
+        navigationController?.pushViewController(localDirectoryTableViewController, animated: true, completion: {
+            if LocalDirectoryTableViewController.action == .copyFile {
+                localDirectoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: localDirectoryTableViewController, action: #selector(localDirectoryTableViewController.copyFile))], animated: true)
+            }
+            
+            if LocalDirectoryTableViewController.action == .moveFile {
+                localDirectoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: localDirectoryTableViewController, action: #selector(localDirectoryTableViewController.moveFile))], animated: true)
+            }
+        })
+        
+    }
+    
+    /// `LocalDirectoryTableViewController`'s `localDirectoryTableViewController(_:, didOpenFile:)` function.
+    ///
+    /// Call defailt handler.
+    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
+        LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.tableView.cellForRow(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
+    }
+    
     // MARK: - Static
+    
+    /// Action to do.
+    static var action = DirectoryAction.none
     
     /// Edit, view or share given file.
     ///

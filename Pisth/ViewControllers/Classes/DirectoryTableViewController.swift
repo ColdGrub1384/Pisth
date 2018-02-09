@@ -1148,6 +1148,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
+    /// `LocalDirectoryTableViewControllerDelegate`'s `localDirectoryTableViewController(_:, didOpenDirectory:)` function.
+    ///
+    /// Open directory.
+    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL) {
+        
+        localDirectoryTableViewController.navigationController?.pushViewController(localDirectoryTableViewController, animated: true)
+        
+    }
+    
     // MARK: - Directory table view controller delegate
     
     /// `DirectoryTableViewControllerDelegate`'s `directoryTableViewController(_:, didOpenDirectory:)` function.
@@ -1236,6 +1245,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     // MARK: - Static
     
     /// Action to do.
-    static var action = RemoteDirectoryAction.none
+    static var action = DirectoryAction.none
 }
 

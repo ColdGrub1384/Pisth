@@ -41,8 +41,10 @@ class FileTableViewCell: UITableViewCell {
         return true
     }
     
-    /// Rename the remote file represented by the cell.
+    /// Rename the file represented by the cell.
     @objc func renameFile(_ sender: Any) {
+        
+        // Rename remote file
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
             directoryTableViewController.checkForConnectionError(errorHandler: {
@@ -74,18 +76,46 @@ class FileTableViewCell: UITableViewCell {
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             directoryTableViewController.present(renameAlert, animated: true, completion: nil)
+            
+        // Rename local file
+        } else if let localDirectoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+            
+            let fileToRename = localDirectoryTableViewController.files[localDirectoryTableViewController.tableView.indexPath(for: self)!.row]
+            
+            let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.lastPathComponent).", preferredStyle: .alert)
+            renameAlert.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New file name"
+                textField.text = fileToRename.lastPathComponent
+            })
+            
+            renameAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
+                do {
+                    try FileManager.default.moveItem(at: fileToRename, to: fileToRename.deletingLastPathComponent().appendingPathComponent(renameAlert.textFields![0].text!))
+                    localDirectoryTableViewController.reload()
+                } catch {
+                    let alert = UIAlertController(title: "Error renaming file!", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    localDirectoryTableViewController.present(alert, animated: true, completion: nil)
+                }
+            }))
+            
+            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            localDirectoryTableViewController.present(renameAlert, animated: true, completion: nil)
         }
     }
     
-    /// Move remote file represented by the cell.
+    /// Move file represented by the cell.
     @objc func moveFile(_ sender: Any) {
+        
+        // Move remote file
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
             
             directoryTableViewController.checkForConnectionError(errorHandler: {
                 directoryTableViewController.showError()
             })
             
-            Pasteboard.local.filePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
+            Pasteboard.local.localFilePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
             
             let dirVC = DirectoryTableViewController(connection: directoryTableViewController.connection, directory: directoryTableViewController.directory)
             dirVC.navigationItem.prompt = "Select a directory where move file"
@@ -96,6 +126,25 @@ class FileTableViewCell: UITableViewCell {
             navVC.navigationBar.barStyle = .black
             navVC.navigationBar.isTranslucent = true
             directoryTableViewController.present(navVC, animated: true, completion: {
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+            })
+            
+        // Move local file
+        } else if let localDirectoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController  {
+            
+            Pasteboard.local.localFilePath = localDirectoryTableViewController.directory.appendingPathComponent(localDirectoryTableViewController.files[localDirectoryTableViewController.tableView.indexPath(for: self)!.row].lastPathComponent).path
+            
+            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            dirVC.navigationItem.prompt = "Select a directory where move file"
+            dirVC.delegate = dirVC
+            
+            LocalDirectoryTableViewController.action = .moveFile
+            
+            let navVC = UINavigationController(rootViewController: dirVC)
+            navVC.navigationBar.barStyle = .black
+            navVC.navigationBar.isTranslucent = true
+            localDirectoryTableViewController.present(navVC, animated: true, completion: {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })

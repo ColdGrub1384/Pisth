@@ -14,6 +14,9 @@ class Pasteboard {
     static let local = Pasteboard()
     private init() {}
     
-    /// File path saved.
+    /// Remote file path saved.
     var filePath: String?
+    
+    /// Local file path saved.
+    var localFilePath: String?
 }

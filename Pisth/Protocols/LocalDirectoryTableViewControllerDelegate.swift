@@ -21,4 +21,16 @@ protocol LocalDirectoryTableViewControllerDelegate {
     ///     - localDirectoryTableViewController: Source `LocalDirectoryTableViewController`.
     ///     - file: File opened.
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL)
+    
+    /// Called when opening a local directory with `LocalDirectoryTableViewController`
+    /// ## Note
+    /// If the `LocalDirectoryTableViewController`'s delegate is set, this function will override the default handler.
+    /// If you want to present the directory, present `localDirectoryTableViewController`,
+    /// localDirectoryTableViewController is not the source controller, but the controller to be opened.
+    ///
+    ///
+    /// - Parameters:
+    ///     - localDirectoryTableViewController: Source `LocalDirectoryTableViewController`.
+    ///     - directory: File opened.
+    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL)
 }

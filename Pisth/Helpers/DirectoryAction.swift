@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// Enumeration of actions to do in a `DirectoryTableViewController`.
-enum RemoteDirectoryAction {
+/// Enumeration of actions to do in a `DirectoryTableViewController` or `LocalDirectoryTableViewController`.
+enum DirectoryAction {
     
     /// Copy file at current path.
     case copyFile
