@@ -12,7 +12,7 @@ import AVFoundation
 import AVKit
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate {
+class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -40,6 +40,94 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
         shareVC.popoverPresentationController?.sourceView = sender
         present(shareVC, animated: true, completion: nil)
+    }
+    
+    /// Create or import file or directory.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender Bar button item.
+    @objc func create(_ sender: UIBarButtonItem) {
+        let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
+            let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+            if #available(iOS 11.0, *) {
+                picker.allowsMultipleSelection = true
+            }
+            picker.delegate = self
+            
+            self.present(picker, animated: true, completion: nil)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Create blank file", style: .default, handler: { (_) in // Create file
+            
+            let chooseName = UIAlertController(title: "Create blank file", message: "Choose new file name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New file name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                
+                guard let filename = chooseName.textFields?[0].text else {
+                    return
+                }
+                
+                if FileManager.default.createFile(atPath: self.directory.appendingPathComponent(filename).path, contents: nil, attributes: nil) {
+                    self.reload()
+                } else {
+                    let errorAlert = UIAlertController(title: "Error creating file!", message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+            
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Create folder", style: .default, handler: { (_) in // Create folder
+            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New folder name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                
+                guard let dirname = chooseName.textFields?[0].text else {
+                    return
+                }
+                
+                do {
+                    try FileManager.default.createDirectory(atPath: self.directory.appendingPathComponent(dirname).path, withIntermediateDirectories: true, attributes: nil)
+                    self.reload()
+                } catch {
+                    let errorAlert = UIAlertController(title: "Error creating directory!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        chooseAlert.popoverPresentationController?.barButtonItem = sender
+        
+        self.present(chooseAlert, animated: true, completion: nil)
+    }
+    
+    /// Reload content of directory.
+    func reload() {
+        files = []
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
+            for file in files {
+                self.files.append(directory.appendingPathComponent(file))
+            }
+            
+            tableView.reloadData()
+        } catch {}
     }
     
     /// Init with given directory.
@@ -86,6 +174,10 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+     
+        // Navigation bar items
+        let createFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(create(_:)))
+        navigationItem.setRightBarButtonItems([createFile], animated: true)
         
         // Banner ad
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
@@ -232,6 +324,31 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
         tableView.tableHeaderView = bannerView
+    }
+    
+    // MARK: - Document picker delegate
+    
+    /// `UIDocumentPickerDelegate`'s `documentPickerWasCancelled(_:)` function.
+    ///
+    /// Dismiss document picker.
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    /// `UIDocumentPickerDelegate`'s `documentPicker(_:, didPickDocumentsAt:)` function.
+    ///
+    /// Import selected documents.
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        for url in urls {
+            do {
+                try FileManager.default.copyItem(atPath: url.path, toPath: directory.appendingPathComponent(url.lastPathComponent).path)
+                reload()
+            } catch {
+                let errorAlert = UIAlertController(title: "Error importing \(url.lastPathComponent)!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(errorAlert, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: - Static
