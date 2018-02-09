@@ -1,27 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/ConnectionManager.swift",
-      "line": 15,
-      "symbol": "ConnectionManager.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/DataManager.swift",
-      "line": 16,
-      "symbol": "DataManager.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Singletons/Pasteboard.swift",
-      "line": 15,
-      "symbol": "Pasteboard.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
       "line": 15,
       "symbol": "DirectoryTableViewController.deinit",
@@ -43,31 +22,10 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 842,
-      "symbol": "DirectoryTableViewController.localDirectoryTableViewController(_:didOpenFile:).sendFile()",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/EditTextViewController.swift",
-      "line": 176,
-      "symbol": "EditTextViewController.viewDidDisappear(_:).close()",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
       "line": 66,
       "symbol": "LocalDirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
-      "line": 249,
-      "symbol": "LocalDirectoryTableViewController.openFile(_:from:in:navigationController:showActivityViewControllerInside:).openFile()",
-      "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
@@ -96,13 +54,6 @@
       "line": 20,
       "symbol": "SettingsTableViewController.Index.licenses",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 105,
-      "symbol": "TerminalViewController.changeSize(completion:).apply()",
-      "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {

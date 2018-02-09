@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Index Enumeration Reference</title>
+    <title>upload(file:uploadHandler:) Instance Method Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/Index" class="dashAnchor"></a>
-    <a title="Index Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Method/upload(file:uploadHandler:)" class="dashAnchor"></a>
+    <a title="upload(file:uploadHandler:) Instance Method Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html">Pisth Docs</a> (95% documented)</p>
@@ -23,7 +23,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html">Pisth Reference</a>
         <img id="carat" src="../../img/carat.png" />
-        Index Enumeration Reference
+        upload(file:uploadHandler:) Instance Method Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -187,14 +187,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Index</h1>
+            <h1>upload(file:uploadHandler:)</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Index</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">upload</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">uploadHandler</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIAlertController</span></code></pre>
 
                 </div>
               </div>
-            <p>Indexes of each settings</p>
+            <p>Upload file in current directory.</p>
 
           </section>
           <section class="section task-group-section">
@@ -203,9 +203,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC5IndexO13biometricAuthA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/biometricAuth" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC5IndexO13biometricAuthA2EmF">biometricAuth</a>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_06isItemB0L_SbAIF"></a>
+                    <a name="//apple_ref/swift/Function/isItemDirectory(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_06isItemB0L_SbAIF">isItemDirectory(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -213,30 +213,124 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">isItemDirectory</span><span class="p">(</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Local file or directory URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if given item is directory.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_7filesInL_SayAIGAI9directory_tF"></a>
+                    <a name="//apple_ref/swift/Function/filesIn(directory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_7filesInL_SayAIGAI9directory_tF">filesIn(directory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">filesIn</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">URL</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>directory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Local directory URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Files in given directory..</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_9showErrorL_yyF"></a>
+                    <a name="//apple_ref/swift/Function/showError()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_9showErrorL_yyF">showError()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Show upload error.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">biometricAuth</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">showError</span><span class="p">()</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC5IndexO15showHiddenFilesA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/showHiddenFiles" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC5IndexO15showHiddenFilesA2EmF">showHiddenFiles</a>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_0f7FilesInB0L_SbAI_SS6toPathtF"></a>
+                    <a name="//apple_ref/swift/Function/uploadFilesInDirectory(_:toPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6uploadSo07UIAlertE0C10Foundation3URLV4file_yycSg0F7HandlertFySo0G6ActionCcfU0_0f7FilesInB0L_SbAI_SS6toPathtF">uploadFilesInDirectory(_:toPath:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -244,78 +338,51 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Upload files in given directory.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">showHiddenFiles</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">uploadFilesInDirectory</span><span class="p">(</span><span class="n">_</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">toPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC5IndexO11blinkCursorA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/blinkCursor" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC5IndexO11blinkCursorA2EmF">blinkCursor</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>directory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Local directory URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Remote directory path.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">blinkCursor</span> <span class="o">=</span> <span class="mi">2</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Pisth27SettingsTableViewControllerC5IndexO8licensesA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/licenses" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth27SettingsTableViewControllerC5IndexO8licensesA2EmF">licenses</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">licenses</span> <span class="o">=</span> <span class="mi">4</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>false</code> if upload failed.</p>
                       </div>
                     </section>
                   </div>
