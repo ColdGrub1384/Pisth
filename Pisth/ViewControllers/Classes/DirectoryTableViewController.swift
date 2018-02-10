@@ -10,7 +10,7 @@ import GoogleMobileAds
 import NMSSH
 
 /// Table view controller to manage remote files.
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -137,6 +137,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if #available(iOS 11.0, *) {
+            tableView.dropDelegate = self
+            tableView.dragDelegate = self
+            tableView.dragInteractionEnabled = true
+        }
         
         // Initialize the refresh control.
         refreshControl = UIRefreshControl()
@@ -822,7 +827,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 self.showError()
             })
             
-            guard let result =  ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
+            guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
                 
             if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
                 dirVC.reload()
@@ -1240,6 +1245,130 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }))
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Table view drop delegate
+    
+    /// `UITableViewDropDelegate`'s `tableView(_:, performDropWith:)` function.
+    ///
+    /// Move dropped file to destination folder.
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+        guard let sftp = ConnectionManager.shared.filesSession?.sftp else {
+            return
+        }
+        
+        guard let file = coordinator.items.first?.dragItem.localObject as? NMSFTPFile else {
+            return
+        }
+        
+        guard let indexPath = coordinator.destinationIndexPath else {
+            return
+        }
+        
+        guard let files = files else {
+            return
+        }
+        
+        guard files[indexPath.row].isDirectory else {
+            return
+        }
+        
+        guard file != files[indexPath.row] else {
+            return
+        }
+        
+        let target = directory.nsString.appendingPathComponent(file.filename)
+        let destination: String
+        
+        if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
+            destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
+        } else {
+            destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+        }
+        
+        if sftp.moveItem(atPath: target, toPath: destination) {
+            
+            reload()
+            
+        } else {
+            let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(errorAlert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    /// `UITableViewDropDelegate`'s `tableView(_:, dropSessionDidUpdate:, withDestinationIndexPath:)` function.
+    ///
+    /// Set animation for moving files into a directory.
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
+    }
+    
+    // MARK: - Table view drag delegate
+    
+    /// `UITableViewDragDelegate`'s `tableView(_:, itemsForBeginning:, at:)` function.
+    ///
+    /// Start dragging file.
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else {
+            return []
+        }
+        
+        guard let files = files else {
+            return []
+        }
+        
+        guard files.indices.contains(indexPath.row) else {
+            return []
+        }
+        
+        let file = files[indexPath.row]
+        
+        let item = UIDragItem(itemProvider: NSItemProvider(item: nil, typeIdentifier: "remote"))
+        item.localObject = file
+        item.previewProvider = {
+            
+            guard let iconView = cell.iconView else {
+                return nil
+            }
+            
+            let dragPreview = UIDragPreview(view: iconView)
+            dragPreview.parameters.backgroundColor = .clear
+            
+            return dragPreview
+        }
+        
+        return [item]
+    }
+    
+    /// `UITableViewDragDelegate`'s `tableView(_:, canHandle:)` function.
+    ///
+    /// Allow dragging only if the selected file is not the parent directory.
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        
+        guard let files = files else {
+            return false
+        }
+        
+        guard let file = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
+            return false
+        }
+        
+        if directory.removingUnnecessariesSlashes == "/" {
+            return true
+        } else if file != files.last {
+            return true
+        }
+        
+        return false
     }
     
     // MARK: - Static
