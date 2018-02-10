@@ -115,7 +115,7 @@ class FileTableViewCell: UITableViewCell {
                 directoryTableViewController.showError()
             })
             
-            Pasteboard.local.localFilePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
+            Pasteboard.local.filePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
             
             let dirVC = DirectoryTableViewController(connection: directoryTableViewController.connection, directory: directoryTableViewController.directory)
             dirVC.navigationItem.prompt = "Select a directory where move file"
