@@ -1,8 +1,9 @@
-<img style="border-radius: 25px;" src="https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png">
+![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
 
 # Pisth
 
-<a href="https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8"><img alt="Download on the App Store" src="https://pisth.github.io/appstorebadge.svg"/></a>
+[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8)
+
 
 ```
 Pisth is an SSH and SFTP client.
@@ -16,9 +17,8 @@ Why use Pisth:
   • The Shell supports colors and real time output and input, so you can use text editors such as nano, vim, etc.
   • The Shell supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
 ```
-<br/>
 
-<a href="https://pisth.github.io/docs"><img src="https://pisth.github.io/docs/badge.svg"></a>
+[![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![Swift](https://img.shields.io/badge/swift-4.0-orange.svg)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-green.svg)
