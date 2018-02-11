@@ -1248,7 +1248,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     // MARK: - Table view drop delegate
-    
+        
     /// `UITableViewDropDelegate`'s `tableView(_:, performDropWith:)` function.
     ///
     /// Move dropped file to destination folder.
@@ -1259,45 +1259,100 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             return
         }
         
-        guard let file = coordinator.items.first?.dragItem.localObject as? NMSFTPFile else {
-            return
-        }
-        
-        guard let indexPath = coordinator.destinationIndexPath else {
-            return
-        }
-        
-        guard let files = files else {
-            return
-        }
-        
-        guard files[indexPath.row].isDirectory else {
-            return
-        }
-        
-        guard file != files[indexPath.row] else {
-            return
-        }
-        
-        let target = directory.nsString.appendingPathComponent(file.filename)
-        let destination: String
-        
-        if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
-            destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
-        } else {
-            destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
-        }
-        
-        if sftp.moveItem(atPath: target, toPath: destination) {
+        if let file = coordinator.items.first?.dragItem.localObject as? NMSFTPFile {
+            // Move file
             
-            reload()
+            guard let indexPath = coordinator.destinationIndexPath else {
+                return
+            }
             
+            guard let files = files else {
+                return
+            }
+            
+            guard files[indexPath.row].isDirectory else {
+                return
+            }
+            
+            guard file != files[indexPath.row] else {
+                return
+            }
+            
+            let target = directory.nsString.appendingPathComponent(file.filename)
+            let destination: String
+            
+            if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
+                destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
+            } else {
+                destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+            }
+            
+            if sftp.moveItem(atPath: target, toPath: destination) {
+                
+                reload()
+                
+            } else {
+                let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                present(errorAlert, animated: true, completion: nil)
+            }
         } else {
-            let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            present(errorAlert, animated: true, completion: nil)
+            let item = coordinator.items[0]
+            
+            let fileName = item.dragItem.itemProvider.suggestedName
+            
+            item.dragItem.itemProvider.loadInPlaceFileRepresentation(forTypeIdentifier: item.dragItem.itemProvider.registeredTypeIdentifiers[0], completionHandler: { (file, inPlace, error) in
+                
+                if let error = error {
+                    let errorAlert = UIAlertController(title: "Error uploading file!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                if let file = file {
+                    if !inPlace { // Copy file and upload it
+                        do {
+                            let newFile = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(fileName ?? file.lastPathComponent)
+                            try FileManager.default.copyItem(at: file, to: newFile)
+                            self.present(self.upload(file: newFile, uploadHandler: {
+                                try? FileManager.default.removeItem(at: newFile)
+                            }), animated: true, completion: nil)
+                        } catch {
+                            let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            self.present(errorAlert, animated: true, completion: nil)
+                        }
+                    } else { // Upload file and rename it
+                        self.present(self.upload(file: file, uploadHandler: {
+                            guard let files = self.files else {
+                                return
+                            }
+                            
+                            for sftpFile in files {
+                                if sftpFile.filename == file.lastPathComponent {
+                                    // Rename file
+                                    
+                                    guard let fileName = fileName else {
+                                        return
+                                    }
+                                    
+                                    if sftp.moveItem(atPath: self.directory.nsString.appendingPathComponent(sftpFile.filename), toPath: self.directory.nsString.appendingPathComponent(fileName)) {
+                                        
+                                        self.reload()
+                                        
+                                    } else {
+                                        let errorAlert = UIAlertController(title: "Error renaming file!", message: "Error changing file's default name!", preferredStyle: .alert)
+                                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                        self.present(errorAlert, animated: true, completion: nil)
+                                    }
+                                    break
+                                }
+                            }
+                        }), animated: true, completion: nil)
+                    }
+                }
+            })
         }
-        
     }
     
     /// `UITableViewDropDelegate`'s `tableView(_:, dropSessionDidUpdate:, withDestinationIndexPath:)` function.
@@ -1305,6 +1360,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Set animation for moving files into a directory.
     @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
+            return UITableViewDropProposal(operation: .copy, intent: .automatic)
+        }
         
         return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
     }
@@ -1359,7 +1418,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         guard let file = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
-            return false
+            return (session.hasItemsConforming(toTypeIdentifiers: ["public.item"]))
         }
         
         if directory.removingUnnecessariesSlashes == "/" {
