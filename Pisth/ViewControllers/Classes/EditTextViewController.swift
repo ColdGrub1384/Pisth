@@ -10,7 +10,7 @@ import Highlightr
 import ActionSheetPicker_3_0
 
 /// View controller used to edit text files.
-class EditTextViewController: UIViewController, UITextViewDelegate {
+class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDelegate {
     
     /// View created from IB managing size of `textView`.
     @IBOutlet weak var placeholderView: UIView!
@@ -72,6 +72,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         let layoutManager = NSLayoutManager()
         textStorage.addLayoutManager(layoutManager)
+        textStorage.highlightDelegate = self
         
         let textContainer = NSTextContainer(size: view.bounds.size)
         layoutManager.addTextContainer(textContainer)
@@ -98,7 +99,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         setupTextView()
         
         if #available(iOS 11.0, *) {
@@ -357,5 +358,30 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     @objc func keyboardWillHide(_ notification:Notification) {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero
+    }
+    
+    // MARK: - Highlight delegate
+    
+    /// `HighlightDelegate`'s `shouldHighlight(_:)` function.
+    ///
+    /// Show network activity indicator.
+    func shouldHighlight(_ range: NSRange) -> Bool {
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        
+        return true
+    }
+    
+    /// `HighlightDelegate`'s `diddHighlight(_:, success:)` function.
+    ///
+    /// Hide network activity indicator.
+    func didHighlight(_ range: NSRange, success: Bool) {
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
+        
     }
 }
