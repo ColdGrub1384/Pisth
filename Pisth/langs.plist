@@ -2072,6 +2072,10 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>htm</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>xquery</key>
 	<array>
 		<string>xquery</string>
