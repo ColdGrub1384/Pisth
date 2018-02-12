@@ -12,14 +12,25 @@ import BiometricAuthentication
 /// Table view controller for displaying and changing settings.
 class SettingsTableViewController: UITableViewController {
     
-    /// Indexes of each settings
-    enum Index: Int {
-        case biometricAuth = 0
-        case showHiddenFiles = 1
-        case blinkCursor = 2
-        case licenses = 4
+    /// Index of each setting.
+    class IndexPaths {
+        private init() {}
+        
+        /// Toggle biometric auth.
+        static let biometricAuth = IndexPath(row: 0, section: 3)
+        
+        /// Show hidden files.
+        static let showHiddenFiles = IndexPath(row: 0, section: 1)
+        
+        /// Toggle blinking cursor.
+        static let blinkCursor = IndexPath(row: 0, section: 2)
+        
+        /// Promote Pisth Viewer.
+        static let pisthViewer = IndexPath(row: 0, section: 3)
+        
+        /// Show licenses.
+        static let licenses = IndexPath(row: 1, section: 3)
     }
-    
     
     /// MARK: - View controller
     
@@ -141,7 +152,7 @@ class SettingsTableViewController: UITableViewController {
     /// Open licenses or deselect selected row.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if indexPath.row == Index.licenses.rawValue {
+        if indexPath == IndexPaths.licenses {
             
             // Open Licenses
             let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
