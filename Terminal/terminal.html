@@ -50,7 +50,7 @@
             };
         }
     
-    
+
         fit(term);
         
         term.focus();
@@ -59,15 +59,7 @@
         function writeText(text) {
             term.write(text);
         }
+    
+        document.body.style.backgroundColor = document.getElementsByClassName("xterm-viewport")[0].style.backgroundColor;
     </script>
 </body>
-
-<Style>
-    body {
-        background-color: black;
-    }
-
-    div {
-        background-color: black;
-    }
-</Style>
