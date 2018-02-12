@@ -283,6 +283,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     // MARK: - Actions
 
+    /// Go to given directory.
+    ///
+    /// - Parameters:
+    ///     - directory: Directory where go.
     func goTo(directory: String) {
         checkForConnectionError(errorHandler: {
             self.showError()
