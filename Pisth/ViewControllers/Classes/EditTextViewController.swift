@@ -27,36 +27,33 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     /// Highlightr managing syntax highlighting.
     var highlightr: Highlightr!
     
+    /// Returns recommended languages for current file.
+    var recommendedLanguages: [String] {
+        let languages = NSDictionary(contentsOf: Bundle.main.bundleURL.appendingPathComponent("langs.plist"))! as! [String:[String]] // List of languages associated by file extensions
+        
+        return languages[file.pathExtension.lowercased()] ?? []
+    }
+    
     /// Langauge used to highlight code.
     private var language_: String?
     
     /// Langauge used to highlight code but with correct format.
     var language: String? {
         get {
-            
-            if language_ == nil {
-                return nil
-            }
-            
-            if language_ == "html" {
-                return "htmlbars"
-            }
-            
-            let supportedLanguages = highlightr!.supportedLanguages()
-            if supportedLanguages.contains(language_!) {
-                return language_?.replacingFirstOccurrence(of: "-", with: "")
-            } else {
-                
-                if supportedLanguages.contains(language_!.replacingFirstOccurrence(of: "-", with: "")) {
-                    return language_?.replacingFirstOccurrence(of: "-", with: "")
-                }
-                
-                return nil
-            }
+            return language_
         }
         
         set {
+            textStorage.language = newValue
             language_ = newValue
+            
+            if newValue == nil {
+                textStorage.language = nil
+           
+                setTextColor()
+                
+                textStorage.setAttributes([.font:highlightr.theme.codeFont, .foregroundColor:textView.textColor ?? .white], range: NSRange(location: 0, length: textStorage.length))
+            }
         }
     }
     
@@ -150,29 +147,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         // Syntax coloring
         
         if let languagesForFile = languages[file.pathExtension.lowercased()] {
-            if languagesForFile.count == 1 {
+            if languagesForFile.count > 0 {
                 language = languagesForFile[0]
-                textStorage.language = language
-            } else if languagesForFile.count > 1 {
-                let chooseAlert = UIAlertController(title: "Choose language", message: "Highlight this file as: ", preferredStyle: .alert)
-                
-                for language in languagesForFile {
-                    
-                    let languageForHighlightr = language.replacingOccurrences(of: "-", with: "")
-                    
-                    if highlightr!.supportedLanguages().contains(languageForHighlightr) {
-                        chooseAlert.addAction(UIAlertAction(title: language.prefix(1).uppercased()+String(language.dropFirst()), style: .default, handler: { (_) in
-                            self.language = language
-                            self.textStorage.language = self.language
-                        }))
-                    }
-                }
-                
-                chooseAlert.addAction(UIAlertAction(title: "None", style: .cancel, handler: nil))
-                
-                present(chooseAlert, animated: true, completion: nil)
-            } else {
-                textStorage.language = "swift"
             }
         }
     }
@@ -278,7 +254,47 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.replace(textView.selectedTextRange!, withText: "\t")
     }
     
+    /// Change highlighter language.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func changeLanguage(_ sender: Any) {
+        let wasFirstResponder = textView.isFirstResponder
+        
+        textView.resignFirstResponder()
+        
+        let languages = ["None"]+highlightr.supportedLanguages()
+        let initialSelection = languages.index(of: language ?? "None") ?? 0
+        
+        let picker = ActionSheetStringPicker(title: "Select a language", rows: languages, initialSelection: initialSelection, doneBlock: { (picker, row, language) in
+            
+            if let language = language as? String {
+                if language != "None" {
+                    self.language = language
+                } else {
+                    self.language = nil
+                }
+            }
+            
+            if wasFirstResponder {
+                self.textView.becomeFirstResponder()
+            }
+            
+        }, cancel: { (picker) in
+            if wasFirstResponder {
+                self.textView.becomeFirstResponder()
+            }
+        }, origin: sender)
+        
+        picker?.addCustomButton(withTitle: "Default", value: initialSelection)
+        
+        picker?.show()
+    }
+    
     /// Change editor's theme.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
     @IBAction func changeTheme(_ sender: Any) {
         
         let wasFirstResponder = textView.isFirstResponder
