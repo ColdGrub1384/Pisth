@@ -2,103 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>1</key>
+	<key>bsl</key>
 	<array>
-		<string>groff</string>
+		<string>1c</string>
 	</array>
-	<key>2</key>
+	<key>os</key>
 	<array>
-		<string>groff</string>
+		<string>1c</string>
 	</array>
-	<key>3</key>
+	<key>abnf</key>
 	<array>
-		<string>groff</string>
-	</array>
-	<key>4</key>
-	<array>
-		<string>groff</string>
-	</array>
-	<key>5</key>
-	<array>
-		<string>groff</string>
-	</array>
-	<key>6</key>
-	<array>
-		<string>groff</string>
-	</array>
-	<key>7</key>
-	<array>
-		<string>groff</string>
-	</array>
-	<key>abap</key>
-	<array>
-		<string>abap</string>
-	</array>
-	<key>asc</key>
-	<array>
-		<string>ags script</string>
-		<string>asciidoc</string>
-		<string>public key</string>
-	</array>
-	<key>ash</key>
-	<array>
-		<string>ags script</string>
-	</array>
-	<key>ampl</key>
-	<array>
-		<string>ampl</string>
-	</array>
-	<key>g4</key>
-	<array>
-		<string>antlr</string>
-	</array>
-	<key>apl</key>
-	<array>
-		<string>apl</string>
-	</array>
-	<key>dyalog</key>
-	<array>
-		<string>apl</string>
-	</array>
-	<key>asp</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>asax</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>ascx</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>ashx</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>asmx</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>aspx</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>axd</key>
-	<array>
-		<string>asp</string>
-	</array>
-	<key>dats</key>
-	<array>
-		<string>ats</string>
-	</array>
-	<key>hats</key>
-	<array>
-		<string>ats</string>
-	</array>
-	<key>sats</key>
-	<array>
-		<string>ats</string>
+		<string>abnf</string>
 	</array>
 	<key>as</key>
 	<array>
@@ -116,24 +30,14 @@
 	<array>
 		<string>ada</string>
 	</array>
-	<key>agda</key>
-	<array>
-		<string>agda</string>
-	</array>
-	<key>als</key>
-	<array>
-		<string>alloy</string>
-	</array>
 	<key>apacheconf</key>
 	<array>
-		<string>apacheconf</string>
+		<string>apache</string>
 	</array>
-	<key>cls</key>
+	<key>vhost</key>
 	<array>
-		<string>apex</string>
-		<string>openedge abl</string>
-		<string>tex</string>
-		<string>visual basic</string>
+		<string>apache</string>
+		<string>nginx</string>
 	</array>
 	<key>applescript</key>
 	<array>
@@ -143,19 +47,12 @@
 	<array>
 		<string>applescript</string>
 	</array>
-	<key>arc</key>
-	<array>
-		<string>arc</string>
-	</array>
 	<key>ino</key>
 	<array>
+		<string>cpp</string>
 		<string>arduino</string>
 	</array>
-	<key>asciidoc</key>
-	<array>
-		<string>asciidoc</string>
-	</array>
-	<key>adoc</key>
+	<key>asc</key>
 	<array>
 		<string>asciidoc</string>
 	</array>
@@ -163,37 +60,37 @@
 	<array>
 		<string>aspectj</string>
 	</array>
-	<key>asm</key>
-	<array>
-		<string>assembly</string>
-	</array>
-	<key>a51</key>
-	<array>
-		<string>assembly</string>
-	</array>
-	<key>nasm</key>
-	<array>
-		<string>assembly</string>
-	</array>
-	<key>aug</key>
-	<array>
-		<string>augeas</string>
-	</array>
 	<key>ahk</key>
-	<array>
-		<string>autohotkey</string>
-	</array>
-	<key>ahkl</key>
 	<array>
 		<string>autohotkey</string>
 	</array>
 	<key>au3</key>
 	<array>
-		<string>autoit</string>
+		<string>autohit</string>
+	</array>
+	<key>armasm</key>
+	<array>
+		<string>armasm</string>
+	</array>
+	<key>avrasm</key>
+	<array>
+		<string>avrasm</string>
 	</array>
 	<key>awk</key>
 	<array>
 		<string>awk</string>
+	</array>
+	<key>asciidoc</key>
+	<array>
+		<string>asciidoc</string>
+	</array>
+	<key>adoc</key>
+	<array>
+		<string>adoc</string>
+	</array>
+	<key>ahkl</key>
+	<array>
+		<string>autohotkey</string>
 	</array>
 	<key>auk</key>
 	<array>
@@ -211,220 +108,165 @@
 	<array>
 		<string>awk</string>
 	</array>
-	<key>bat</key>
+	<key>sh</key>
 	<array>
-		<string>batchfile</string>
+		<string>bash</string>
 	</array>
-	<key>cmd</key>
+	<key>bash</key>
 	<array>
-		<string>batchfile</string>
+		<string>bash</string>
 	</array>
-	<key>befunge</key>
+	<key>bats</key>
 	<array>
-		<string>befunge</string>
+		<string>bash</string>
 	</array>
-	<key>y</key>
+	<key>command</key>
 	<array>
-		<string>bison</string>
+		<string>bash</string>
+	</array>
+	<key>ksh</key>
+	<array>
+		<string>bash</string>
+	</array>
+	<key>zsh</key>
+	<array>
+		<string>bash</string>
 	</array>
 	<key>bb</key>
 	<array>
-		<string>bitbake</string>
-		<string>blitzbasic</string>
+		<string>basic</string>
 	</array>
 	<key>decls</key>
 	<array>
-		<string>blitzbasic</string>
+		<string>basic</string>
 	</array>
-	<key>bmx</key>
+	<key>pb</key>
 	<array>
-		<string>blitzmax</string>
+		<string>purebasic</string>
+		<string>basic</string>
 	</array>
-	<key>bsv</key>
+	<key>pbi</key>
 	<array>
-		<string>bluespec</string>
+		<string>purebasic</string>
+		<string>basic</string>
 	</array>
-	<key>boo</key>
+	<key>rbbas</key>
 	<array>
-		<string>boo</string>
+		<string>basic</string>
+	</array>
+	<key>rbfrm</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>rbmnu</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>rbres</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>rbtbar</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>rbuistate</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>vb</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>bas</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>cls</key>
+	<array>
+		<string>basic</string>
+		<string>tex</string>
+	</array>
+	<key>frm</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>frx</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>vba</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>vbhtml</key>
+	<array>
+		<string>basic</string>
+	</array>
+	<key>vbs</key>
+	<array>
+		<string>basic</string>
 	</array>
 	<key>b</key>
 	<array>
 		<string>brainfuck</string>
-		<string>limbo</string>
 	</array>
 	<key>bf</key>
 	<array>
 		<string>brainfuck</string>
 	</array>
-	<key>brs</key>
-	<array>
-		<string>brightscript</string>
-	</array>
-	<key>bro</key>
-	<array>
-		<string>bro</string>
-	</array>
-	<key>c</key>
-	<array>
-		<string>c</string>
-	</array>
-	<key>cats</key>
-	<array>
-		<string>c</string>
-	</array>
-	<key>h</key>
-	<array>
-		<string>c</string>
-		<string>c++</string>
-		<string>objective-c</string>
-	</array>
-	<key>idc</key>
-	<array>
-		<string>c</string>
-	</array>
-	<key>w</key>
-	<array>
-		<string>c</string>
-	</array>
-	<key>cs</key>
-	<array>
-		<string>c#</string>
-		<string>smalltalk</string>
-	</array>
-	<key>cshtml</key>
-	<array>
-		<string>c#</string>
-	</array>
-	<key>csx</key>
-	<array>
-		<string>c#</string>
-	</array>
-	<key>cpp</key>
-	<array>
-		<string>c++</string>
-	</array>
-	<key>c++</key>
-	<array>
-		<string>c++</string>
-	</array>
-	<key>cc</key>
-	<array>
-		<string>c++</string>
-	</array>
 	<key>cp</key>
 	<array>
-		<string>c++</string>
-		<string>component pascal</string>
+		<string>delphi</string>
+		<string>cpp</string>
 	</array>
-	<key>cxx</key>
+	<key>cps</key>
 	<array>
-		<string>c++</string>
+		<string>delphi</string>
 	</array>
-	<key>h++</key>
+	<key>pas</key>
 	<array>
-		<string>c++</string>
+		<string>delphi</string>
 	</array>
-	<key>hh</key>
+	<key>dfm</key>
 	<array>
-		<string>c++</string>
-		<string>hack</string>
+		<string>delphi</string>
 	</array>
-	<key>hpp</key>
+	<key>dpr</key>
 	<array>
-		<string>c++</string>
+		<string>delphi</string>
 	</array>
-	<key>hxx</key>
+	<key>inc</key>
 	<array>
-		<string>c++</string>
+		<string>cpp</string>
+		<string>delphi</string>
+		<string>php</string>
+		<string>sql</string>
+		<string>armasm</string>
+		<string>armasm</string>
+		<string>mipsasm</string>
+		<string>x86asm</string>
 	</array>
-	<key>inl</key>
+	<key>lpr</key>
 	<array>
-		<string>c++</string>
+		<string>delphi</string>
 	</array>
-	<key>ipp</key>
+	<key>pascal</key>
 	<array>
-		<string>c++</string>
+		<string>delphi</string>
 	</array>
-	<key>tcc</key>
+	<key>pp</key>
 	<array>
-		<string>c++</string>
-	</array>
-	<key>tpp</key>
-	<array>
-		<string>c++</string>
-	</array>
-	<key>c-objdump</key>
-	<array>
-		<string>c-objdump</string>
-	</array>
-	<key>chs</key>
-	<array>
-		<string>c2hs haskell</string>
-	</array>
-	<key>clp</key>
-	<array>
-		<string>clips</string>
-	</array>
-	<key>cmake</key>
-	<array>
-		<string>cmake</string>
-	</array>
-	<key>cmake.in</key>
-	<array>
-		<string>cmake</string>
-	</array>
-	<key>cob</key>
-	<array>
-		<string>cobol</string>
-	</array>
-	<key>cbl</key>
-	<array>
-		<string>cobol</string>
-	</array>
-	<key>ccp</key>
-	<array>
-		<string>cobol</string>
-	</array>
-	<key>cobol</key>
-	<array>
-		<string>cobol</string>
-	</array>
-	<key>cpy</key>
-	<array>
-		<string>cobol</string>
-	</array>
-	<key>css</key>
-	<array>
-		<string>css</string>
+		<string>delphi</string>
+		<string>puppet</string>
 	</array>
 	<key>capnp</key>
 	<array>
-		<string>cap&apos;n proto</string>
-	</array>
-	<key>mss</key>
-	<array>
-		<string>cartocss</string>
+		<string>capnproto</string>
 	</array>
 	<key>ceylon</key>
 	<array>
 		<string>ceylon</string>
-	</array>
-	<key>chpl</key>
-	<array>
-		<string>chapel</string>
-	</array>
-	<key>ck</key>
-	<array>
-		<string>chuck</string>
-	</array>
-	<key>cirru</key>
-	<array>
-		<string>cirru</string>
-	</array>
-	<key>clw</key>
-	<array>
-		<string>clarion</string>
 	</array>
 	<key>icl</key>
 	<array>
@@ -437,38 +279,46 @@
 	<key>clj</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>boot</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>cl2</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>cljc</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>cljs</key>
 	<array>
 		<string>clojure</string>
-	</array>
-	<key>cljs.hl</key>
-	<array>
-		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>cljscm</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>cljx</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
 	</array>
 	<key>hic</key>
 	<array>
 		<string>clojure</string>
+		<string>clojure.repl</string>
+	</array>
+	<key>cmake</key>
+	<array>
+		<string>cmake</string>
 	</array>
 	<key>coffee</key>
 	<array>
@@ -478,61 +328,18 @@
 	<array>
 		<string>coffeescript</string>
 	</array>
-	<key>cjsx</key>
+	<key>cake</key>
 	<array>
 		<string>coffeescript</string>
+		<string>cs</string>
 	</array>
-	<key>cson</key>
+	<key>cjsx</key>
 	<array>
 		<string>coffeescript</string>
 	</array>
 	<key>iced</key>
 	<array>
 		<string>coffeescript</string>
-	</array>
-	<key>cfm</key>
-	<array>
-		<string>coldfusion</string>
-	</array>
-	<key>cfml</key>
-	<array>
-		<string>coldfusion</string>
-	</array>
-	<key>cfc</key>
-	<array>
-		<string>coldfusion cfc</string>
-	</array>
-	<key>lisp</key>
-	<array>
-		<string>common lisp</string>
-		<string>newlisp</string>
-	</array>
-	<key>asd</key>
-	<array>
-		<string>common lisp</string>
-	</array>
-	<key>cl</key>
-	<array>
-		<string>common lisp</string>
-		<string>cool</string>
-		<string>opencl</string>
-	</array>
-	<key>lsp</key>
-	<array>
-		<string>common lisp</string>
-		<string>newlisp</string>
-	</array>
-	<key>ny</key>
-	<array>
-		<string>common lisp</string>
-	</array>
-	<key>podsl</key>
-	<array>
-		<string>common lisp</string>
-	</array>
-	<key>cps</key>
-	<array>
-		<string>component pascal</string>
 	</array>
 	<key>coq</key>
 	<array>
@@ -543,91 +350,105 @@
 		<string>coq</string>
 		<string>verilog</string>
 	</array>
-	<key>cppobjdump</key>
+	<key>cpp</key>
 	<array>
-		<string>cpp-objdump</string>
+		<string>cpp</string>
 	</array>
-	<key>c++-objdump</key>
+	<key>c++</key>
 	<array>
-		<string>cpp-objdump</string>
+		<string>cpp</string>
 	</array>
-	<key>c++objdump</key>
+	<key>cc</key>
 	<array>
-		<string>cpp-objdump</string>
+		<string>cpp</string>
 	</array>
-	<key>cpp-objdump</key>
+	<key>cxx</key>
 	<array>
-		<string>cpp-objdump</string>
+		<string>cpp</string>
 	</array>
-	<key>cxx-objdump</key>
+	<key>h</key>
 	<array>
-		<string>cpp-objdump</string>
+		<string>objectivec</string>
+		<string>cpp</string>
+		<string>c</string>
 	</array>
-	<key>creole</key>
+	<key>h++</key>
 	<array>
-		<string>creole</string>
+		<string>cpp</string>
+	</array>
+	<key>hh</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>hpp</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>hxx</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>inl</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>ipp</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>re</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>tcc</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>tpp</key>
+	<array>
+		<string>cpp</string>
+	</array>
+	<key>c</key>
+	<array>
+		<string>cpp</string>
 	</array>
 	<key>cr</key>
 	<array>
 		<string>crystal</string>
 	</array>
-	<key>feature</key>
+	<key>cs</key>
 	<array>
-		<string>cucumber</string>
+		<string>cs</string>
+		<string>smalltalk</string>
 	</array>
-	<key>cu</key>
+	<key>cats</key>
 	<array>
-		<string>cuda</string>
+		<string>cpp</string>
 	</array>
-	<key>cuh</key>
+	<key>idc</key>
 	<array>
-		<string>cuda</string>
+		<string>cpp</string>
 	</array>
-	<key>cy</key>
+	<key>cshtml</key>
 	<array>
-		<string>cycript</string>
+		<string>cs</string>
 	</array>
-	<key>pyx</key>
+	<key>csx</key>
 	<array>
-		<string>cython</string>
+		<string>cs</string>
 	</array>
-	<key>pxd</key>
+	<key>css</key>
 	<array>
-		<string>cython</string>
-	</array>
-	<key>pxi</key>
-	<array>
-		<string>cython</string>
+		<string>css</string>
 	</array>
 	<key>d</key>
 	<array>
 		<string>d</string>
-		<string>dtrace</string>
 		<string>makefile</string>
 	</array>
 	<key>di</key>
 	<array>
 		<string>d</string>
-	</array>
-	<key>d-objdump</key>
-	<array>
-		<string>d-objdump</string>
-	</array>
-	<key>com</key>
-	<array>
-		<string>digital command language</string>
-	</array>
-	<key>dm</key>
-	<array>
-		<string>dm</string>
-	</array>
-	<key>darcspatch</key>
-	<array>
-		<string>darcs patch</string>
-	</array>
-	<key>dpatch</key>
-	<array>
-		<string>darcs patch</string>
 	</array>
 	<key>dart</key>
 	<array>
@@ -641,59 +462,41 @@
 	<array>
 		<string>diff</string>
 	</array>
+	<key>jinja</key>
+	<array>
+		<string>django</string>
+	</array>
+	<key>mustache</key>
+	<array>
+		<string>django</string>
+	</array>
+	<key>njk</key>
+	<array>
+		<string>django</string>
+	</array>
+	<key>zone</key>
+	<array>
+		<string>dns</string>
+	</array>
+	<key>arpa</key>
+	<array>
+		<string>arpa</string>
+	</array>
 	<key>dockerfile</key>
 	<array>
 		<string>dockerfile</string>
 	</array>
-	<key>djs</key>
+	<key>bat</key>
 	<array>
-		<string>dogescript</string>
+		<string>dos</string>
 	</array>
-	<key>dylan</key>
+	<key>cmd</key>
 	<array>
-		<string>dylan</string>
+		<string>dos</string>
 	</array>
-	<key>dyl</key>
+	<key>ebnf</key>
 	<array>
-		<string>dylan</string>
-	</array>
-	<key>intr</key>
-	<array>
-		<string>dylan</string>
-	</array>
-	<key>lid</key>
-	<array>
-		<string>dylan</string>
-	</array>
-	<key>E</key>
-	<array>
-		<string>e</string>
-	</array>
-	<key>ecl</key>
-	<array>
-		<string>ecl</string>
-		<string>prolog</string>
-	</array>
-	<key>eclxml</key>
-	<array>
-		<string>ecl</string>
-	</array>
-	<key>sch</key>
-	<array>
-		<string>eagle</string>
-		<string>kicad</string>
-	</array>
-	<key>brd</key>
-	<array>
-		<string>eagle</string>
-	</array>
-	<key>epj</key>
-	<array>
-		<string>ecere projects</string>
-	</array>
-	<key>e</key>
-	<array>
-		<string>eiffel</string>
+		<string>ebnf</string>
 	</array>
 	<key>ex</key>
 	<array>
@@ -707,64 +510,40 @@
 	<array>
 		<string>elm</string>
 	</array>
-	<key>el</key>
+	<key>erb</key>
 	<array>
-		<string>emacs lisp</string>
-	</array>
-	<key>emacs</key>
-	<array>
-		<string>emacs lisp</string>
-	</array>
-	<key>emacs.desktop</key>
-	<array>
-		<string>emacs lisp</string>
-	</array>
-	<key>em</key>
-	<array>
-		<string>emberscript</string>
-	</array>
-	<key>emberscript</key>
-	<array>
-		<string>emberscript</string>
+		<string>erb</string>
 	</array>
 	<key>erl</key>
 	<array>
 		<string>erlang</string>
+		<string>erlang-repl</string>
 	</array>
 	<key>es</key>
 	<array>
 		<string>erlang</string>
+		<string>erlang-repl</string>
+		<string>javascript</string>
 	</array>
 	<key>escript</key>
 	<array>
 		<string>erlang</string>
+		<string>erlang-repl</string>
 	</array>
 	<key>hrl</key>
 	<array>
 		<string>erlang</string>
+		<string>erlang-repl</string>
 	</array>
-	<key>fs</key>
+	<key>xrl</key>
 	<array>
-		<string>f#</string>
-		<string>filterscript</string>
-		<string>forth</string>
-		<string>glsl</string>
+		<string>erlang</string>
+		<string>erlang-repl</string>
 	</array>
-	<key>fsi</key>
+	<key>yrl</key>
 	<array>
-		<string>f#</string>
-	</array>
-	<key>fsx</key>
-	<array>
-		<string>f#</string>
-	</array>
-	<key>fx</key>
-	<array>
-		<string>flux</string>
-	</array>
-	<key>flux</key>
-	<array>
-		<string>flux</string>
+		<string>erlang</string>
+		<string>erlang-repl</string>
 	</array>
 	<key>f90</key>
 	<array>
@@ -773,7 +552,6 @@
 	<key>f</key>
 	<array>
 		<string>fortran</string>
-		<string>forth</string>
 	</array>
 	<key>f03</key>
 	<array>
@@ -794,89 +572,43 @@
 	<key>for</key>
 	<array>
 		<string>fortran</string>
-		<string>formatted</string>
-		<string>forth</string>
 	</array>
 	<key>fpp</key>
 	<array>
 		<string>fortran</string>
 	</array>
-	<key>factor</key>
+	<key>fs</key>
 	<array>
-		<string>factor</string>
+		<string>fsharp</string>
+		<string>glsl</string>
 	</array>
-	<key>fy</key>
+	<key>fsi</key>
 	<array>
-		<string>fancy</string>
+		<string>fsharp</string>
 	</array>
-	<key>fancypack</key>
+	<key>fsx</key>
 	<array>
-		<string>fancy</string>
-	</array>
-	<key>fan</key>
-	<array>
-		<string>fantom</string>
-	</array>
-	<key>fth</key>
-	<array>
-		<string>forth</string>
-	</array>
-	<key>4th</key>
-	<array>
-		<string>forth</string>
-	</array>
-	<key>forth</key>
-	<array>
-		<string>forth</string>
-	</array>
-	<key>fr</key>
-	<array>
-		<string>forth</string>
-		<string>frege</string>
-		<string>text</string>
-	</array>
-	<key>frt</key>
-	<array>
-		<string>forth</string>
-	</array>
-	<key>g</key>
-	<array>
-		<string>g-code</string>
-		<string>gap</string>
-	</array>
-	<key>gco</key>
-	<array>
-		<string>g-code</string>
-	</array>
-	<key>gcode</key>
-	<array>
-		<string>g-code</string>
+		<string>fsharp</string>
 	</array>
 	<key>gms</key>
 	<array>
 		<string>gams</string>
 	</array>
-	<key>gap</key>
+	<key>g</key>
 	<array>
-		<string>gap</string>
+		<string>gcode</string>
 	</array>
-	<key>gd</key>
+	<key>gco</key>
 	<array>
-		<string>gap</string>
-		<string>gdscript</string>
+		<string>gcode</string>
 	</array>
-	<key>gi</key>
+	<key>gcode</key>
 	<array>
-		<string>gap</string>
+		<string>gcode</string>
 	</array>
-	<key>tst</key>
+	<key>feature</key>
 	<array>
-		<string>gap</string>
-		<string>scilab</string>
-	</array>
-	<key>s</key>
-	<array>
-		<string>gas</string>
+		<string>gherkin</string>
 	</array>
 	<key>glsl</key>
 	<array>
@@ -919,6 +651,18 @@
 	<array>
 		<string>glsl</string>
 	</array>
+	<key>tesc</key>
+	<array>
+		<string>glsl</string>
+	</array>
+	<key>tese</key>
+	<array>
+		<string>glsl</string>
+	</array>
+	<key>fsh</key>
+	<array>
+		<string>glsl</string>
+	</array>
 	<key>vert</key>
 	<array>
 		<string>glsl</string>
@@ -927,58 +671,13 @@
 	<array>
 		<string>glsl</string>
 	</array>
-	<key>vshader</key>
+	<key>vsh</key>
 	<array>
 		<string>glsl</string>
 	</array>
-	<key>gml</key>
+	<key>vshader</key>
 	<array>
-		<string>game maker language</string>
-		<string>graph modeling language</string>
-	</array>
-	<key>kid</key>
-	<array>
-		<string>genshi</string>
-	</array>
-	<key>ebuild</key>
-	<array>
-		<string>gentoo ebuild</string>
-	</array>
-	<key>eclass</key>
-	<array>
-		<string>gentoo eclass</string>
-	</array>
-	<key>po</key>
-	<array>
-		<string>gettext catalog</string>
-	</array>
-	<key>pot</key>
-	<array>
-		<string>gettext catalog</string>
-	</array>
-	<key>glf</key>
-	<array>
-		<string>glyph</string>
-	</array>
-	<key>gp</key>
-	<array>
-		<string>gnuplot</string>
-	</array>
-	<key>gnu</key>
-	<array>
-		<string>gnuplot</string>
-	</array>
-	<key>gnuplot</key>
-	<array>
-		<string>gnuplot</string>
-	</array>
-	<key>plot</key>
-	<array>
-		<string>gnuplot</string>
-	</array>
-	<key>plt</key>
-	<array>
-		<string>gnuplot</string>
+		<string>glsl</string>
 	</array>
 	<key>go</key>
 	<array>
@@ -988,46 +687,9 @@
 	<array>
 		<string>golo</string>
 	</array>
-	<key>gs</key>
-	<array>
-		<string>gosu</string>
-		<string>javascript</string>
-	</array>
-	<key>gst</key>
-	<array>
-		<string>gosu</string>
-	</array>
-	<key>gsx</key>
-	<array>
-		<string>gosu</string>
-	</array>
-	<key>vark</key>
-	<array>
-		<string>gosu</string>
-	</array>
-	<key>grace</key>
-	<array>
-		<string>grace</string>
-	</array>
 	<key>gradle</key>
 	<array>
 		<string>gradle</string>
-	</array>
-	<key>gf</key>
-	<array>
-		<string>grammatical framework</string>
-	</array>
-	<key>dot</key>
-	<array>
-		<string>graphviz (dot)</string>
-	</array>
-	<key>gv</key>
-	<array>
-		<string>graphviz (dot)</string>
-	</array>
-	<key>man</key>
-	<array>
-		<string>groff</string>
 	</array>
 	<key>groovy</key>
 	<array>
@@ -1045,83 +707,19 @@
 	<array>
 		<string>groovy</string>
 	</array>
-	<key>gsp</key>
-	<array>
-		<string>groovy server pages</string>
-	</array>
-	<key>html</key>
-	<array>
-		<string>html</string>
-	</array>
-	<key>htm</key>
-	<array>
-		<string>html</string>
-	</array>
-	<key>html.hl</key>
-	<array>
-		<string>html</string>
-	</array>
-	<key>st</key>
-	<array>
-		<string>html</string>
-		<string>smalltalk</string>
-	</array>
-	<key>xht</key>
-	<array>
-		<string>html</string>
-	</array>
-	<key>xhtml</key>
-	<array>
-		<string>html</string>
-	</array>
-	<key>mustache</key>
-	<array>
-		<string>html+django</string>
-	</array>
-	<key>jinja</key>
-	<array>
-		<string>html+django</string>
-	</array>
-	<key>erb</key>
-	<array>
-		<string>html+erb</string>
-	</array>
-	<key>erb.deface</key>
-	<array>
-		<string>html+erb</string>
-	</array>
-	<key>phtml</key>
-	<array>
-		<string>html+php</string>
-	</array>
-	<key>http</key>
-	<array>
-		<string>http</string>
-	</array>
-	<key>php</key>
-	<array>
-		<string>hack</string>
-		<string>php</string>
-	</array>
 	<key>haml</key>
-	<array>
-		<string>haml</string>
-	</array>
-	<key>haml.deface</key>
 	<array>
 		<string>haml</string>
 	</array>
 	<key>handlebars</key>
 	<array>
 		<string>handlebars</string>
+		<string>htmlbars</string>
 	</array>
 	<key>hbs</key>
 	<array>
 		<string>handlebars</string>
-	</array>
-	<key>hb</key>
-	<array>
-		<string>harbour</string>
+		<string>htmlbars</string>
 	</array>
 	<key>hs</key>
 	<array>
@@ -1139,24 +737,17 @@
 	<array>
 		<string>haxe</string>
 	</array>
-	<key>hy</key>
+	<key>http</key>
 	<array>
-		<string>hy</string>
+		<string>http</string>
 	</array>
-	<key>pro</key>
+	<key>ni</key>
 	<array>
-		<string>idl</string>
-		<string>ini</string>
-		<string>prolog</string>
-		<string>qmake</string>
+		<string>inform7</string>
 	</array>
-	<key>dlm</key>
+	<key>i7x</key>
 	<array>
-		<string>idl</string>
-	</array>
-	<key>ipf</key>
-	<array>
-		<string>igor pro</string>
+		<string>inform7</string>
 	</array>
 	<key>ini</key>
 	<array>
@@ -1170,98 +761,18 @@
 	<array>
 		<string>ini</string>
 	</array>
+	<key>pro</key>
+	<array>
+		<string>ini</string>
+		<string>prolog</string>
+	</array>
 	<key>properties</key>
 	<array>
 		<string>ini</string>
 	</array>
-	<key>irclog</key>
-	<array>
-		<string>irc log</string>
-	</array>
-	<key>weechatlog</key>
-	<array>
-		<string>irc log</string>
-	</array>
-	<key>idr</key>
-	<array>
-		<string>idris</string>
-	</array>
-	<key>lidr</key>
-	<array>
-		<string>idris</string>
-	</array>
-	<key>ni</key>
-	<array>
-		<string>inform 7</string>
-	</array>
-	<key>i7x</key>
-	<array>
-		<string>inform 7</string>
-	</array>
-	<key>iss</key>
-	<array>
-		<string>inno setup</string>
-	</array>
-	<key>io</key>
-	<array>
-		<string>io</string>
-	</array>
-	<key>ik</key>
-	<array>
-		<string>ioke</string>
-	</array>
-	<key>thy</key>
-	<array>
-		<string>isabelle</string>
-	</array>
-	<key>ijs</key>
-	<array>
-		<string>j</string>
-	</array>
-	<key>flex</key>
-	<array>
-		<string>jflex</string>
-	</array>
-	<key>jflex</key>
-	<array>
-		<string>jflex</string>
-	</array>
-	<key>json</key>
-	<array>
-		<string>json</string>
-	</array>
-	<key>lock</key>
-	<array>
-		<string>json</string>
-	</array>
-	<key>json5</key>
-	<array>
-		<string>json5</string>
-	</array>
-	<key>jsonld</key>
-	<array>
-		<string>jsonld</string>
-	</array>
-	<key>jq</key>
-	<array>
-		<string>jsoniq</string>
-	</array>
-	<key>jade</key>
-	<array>
-		<string>jade</string>
-	</array>
-	<key>j</key>
-	<array>
-		<string>jasmin</string>
-		<string>objective-j</string>
-	</array>
 	<key>java</key>
 	<array>
 		<string>java</string>
-	</array>
-	<key>jsp</key>
-	<array>
-		<string>java server pages</string>
 	</array>
 	<key>js</key>
 	<array>
@@ -1279,11 +790,19 @@
 	<array>
 		<string>javascript</string>
 	</array>
+	<key>gs</key>
+	<array>
+		<string>javascript</string>
+	</array>
 	<key>jake</key>
 	<array>
 		<string>javascript</string>
 	</array>
 	<key>jsb</key>
+	<array>
+		<string>javascript</string>
+	</array>
+	<key>jscad</key>
 	<array>
 		<string>javascript</string>
 	</array>
@@ -1299,7 +818,7 @@
 	<array>
 		<string>javascript</string>
 	</array>
-	<key>jsx</key>
+	<key>mjs</key>
 	<array>
 		<string>javascript</string>
 	</array>
@@ -1319,58 +838,6 @@
 	<array>
 		<string>javascript</string>
 	</array>
-	<key>sublime-build</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-commands</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-completions</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-keymap</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-macro</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-menu</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-mousemap</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-project</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-settings</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-theme</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime-workspace</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime_metrics</key>
-	<array>
-		<string>javascript</string>
-	</array>
-	<key>sublime_session</key>
-	<array>
-		<string>javascript</string>
-	</array>
 	<key>xsjs</key>
 	<array>
 		<string>javascript</string>
@@ -1379,17 +846,25 @@
 	<array>
 		<string>javascript</string>
 	</array>
+	<key>json</key>
+	<array>
+		<string>json</string>
+	</array>
+	<key>geojson</key>
+	<array>
+		<string>json</string>
+	</array>
+	<key>JSON-tmLanguage</key>
+	<array>
+		<string>json</string>
+	</array>
+	<key>topojson</key>
+	<array>
+		<string>json</string>
+	</array>
 	<key>jl</key>
 	<array>
 		<string>julia</string>
-	</array>
-	<key>krl</key>
-	<array>
-		<string>krl</string>
-	</array>
-	<key>kit</key>
-	<array>
-		<string>kit</string>
 	</array>
 	<key>kt</key>
 	<array>
@@ -1402,26 +877,6 @@
 	<key>kts</key>
 	<array>
 		<string>kotlin</string>
-	</array>
-	<key>lfe</key>
-	<array>
-		<string>lfe</string>
-	</array>
-	<key>ll</key>
-	<array>
-		<string>llvm</string>
-	</array>
-	<key>lol</key>
-	<array>
-		<string>lolcode</string>
-	</array>
-	<key>lsl</key>
-	<array>
-		<string>lsl</string>
-	</array>
-	<key>lvproj</key>
-	<array>
-		<string>labview</string>
 	</array>
 	<key>lasso</key>
 	<array>
@@ -1443,109 +898,65 @@
 	<array>
 		<string>lasso</string>
 	</array>
-	<key>latte</key>
-	<array>
-		<string>latte</string>
-	</array>
-	<key>lean</key>
-	<array>
-		<string>lean</string>
-	</array>
-	<key>hlean</key>
-	<array>
-		<string>lean</string>
-	</array>
 	<key>less</key>
 	<array>
 		<string>less</string>
 	</array>
-	<key>ly</key>
+	<key>lisp</key>
 	<array>
-		<string>lilypond</string>
+		<string>lisp</string>
 	</array>
-	<key>ily</key>
+	<key>asd</key>
 	<array>
-		<string>lilypond</string>
+		<string>lisp</string>
 	</array>
-	<key>m</key>
+	<key>cl</key>
 	<array>
-		<string>limbo</string>
-		<string>m</string>
-		<string>muf</string>
-		<string>mathematica</string>
-		<string>matlab</string>
-		<string>mercury</string>
-		<string>objective-c</string>
+		<string>lisp</string>
 	</array>
-	<key>ld</key>
+	<key>l</key>
 	<array>
-		<string>linker script</string>
+		<string>lisp</string>
 	</array>
-	<key>lds</key>
+	<key>lsp</key>
 	<array>
-		<string>linker script</string>
+		<string>lisp</string>
 	</array>
-	<key>liquid</key>
+	<key>ny</key>
 	<array>
-		<string>liquid</string>
+		<string>lisp</string>
 	</array>
-	<key>lagda</key>
+	<key>podsl</key>
 	<array>
-		<string>literate agda</string>
+		<string>lisp</string>
 	</array>
-	<key>litcoffee</key>
+	<key>sexp</key>
 	<array>
-		<string>literate coffeescript</string>
-	</array>
-	<key>lhs</key>
-	<array>
-		<string>literate haskell</string>
+		<string>lisp</string>
 	</array>
 	<key>ls</key>
 	<array>
 		<string>livescript</string>
-		<string>loomscript</string>
 	</array>
 	<key>_ls</key>
 	<array>
 		<string>livescript</string>
 	</array>
-	<key>xm</key>
+	<key>ll</key>
 	<array>
-		<string>logos</string>
+		<string>llvm</string>
 	</array>
-	<key>x</key>
+	<key>lsl</key>
 	<array>
-		<string>logos</string>
+		<string>lsl</string>
 	</array>
-	<key>xi</key>
+	<key>lslp</key>
 	<array>
-		<string>logos</string>
-	</array>
-	<key>lgt</key>
-	<array>
-		<string>logtalk</string>
-	</array>
-	<key>logtalk</key>
-	<array>
-		<string>logtalk</string>
-	</array>
-	<key>lookml</key>
-	<array>
-		<string>lookml</string>
+		<string>lsl</string>
 	</array>
 	<key>lua</key>
 	<array>
 		<string>lua</string>
-	</array>
-	<key>fcgi</key>
-	<array>
-		<string>lua</string>
-		<string>php</string>
-		<string>perl</string>
-		<string>python</string>
-		<string>ruby</string>
-		<string>shell</string>
 	</array>
 	<key>nse</key>
 	<array>
@@ -1563,19 +974,11 @@
 	<array>
 		<string>lua</string>
 	</array>
-	<key>mumps</key>
-	<array>
-		<string>m</string>
-	</array>
-	<key>mtml</key>
-	<array>
-		<string>mtml</string>
-	</array>
-	<key>muf</key>
-	<array>
-		<string>muf</string>
-	</array>
 	<key>mak</key>
+	<array>
+		<string>makefile</string>
+	</array>
+	<key>make</key>
 	<array>
 		<string>makefile</string>
 	</array>
@@ -1583,41 +986,9 @@
 	<array>
 		<string>makefile</string>
 	</array>
-	<key>mako</key>
+	<key>mkfile</key>
 	<array>
-		<string>mako</string>
-	</array>
-	<key>mao</key>
-	<array>
-		<string>mako</string>
-	</array>
-	<key>md</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>markdown</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>mkd</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>mkdn</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>mkdown</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>ron</key>
-	<array>
-		<string>markdown</string>
-	</array>
-	<key>mask</key>
-	<array>
-		<string>mask</string>
+		<string>makefile</string>
 	</array>
 	<key>mathematica</key>
 	<array>
@@ -1627,7 +998,18 @@
 	<array>
 		<string>mathematica</string>
 	</array>
+	<key>m</key>
+	<array>
+		<string>objectivec</string>
+		<string>mathematica</string>
+		<string>matlab</string>
+		<string>mercury</string>
+	</array>
 	<key>ma</key>
+	<array>
+		<string>mathematica</string>
+	</array>
+	<key>mt</key>
 	<array>
 		<string>mathematica</string>
 	</array>
@@ -1651,115 +1033,25 @@
 	<array>
 		<string>matlab</string>
 	</array>
-	<key>maxpat</key>
-	<array>
-		<string>max</string>
-	</array>
-	<key>maxhelp</key>
-	<array>
-		<string>max</string>
-	</array>
-	<key>maxproj</key>
-	<array>
-		<string>max</string>
-	</array>
-	<key>mxt</key>
-	<array>
-		<string>max</string>
-	</array>
-	<key>pat</key>
-	<array>
-		<string>max</string>
-	</array>
-	<key>mediawiki</key>
-	<array>
-		<string>mediawiki</string>
-	</array>
 	<key>moo</key>
 	<array>
 		<string>mercury</string>
-		<string>moocode</string>
 	</array>
-	<key>minid</key>
+	<key>mipsasm</key>
 	<array>
-		<string>minid</string>
-	</array>
-	<key>druby</key>
-	<array>
-		<string>mirah</string>
-	</array>
-	<key>duby</key>
-	<array>
-		<string>mirah</string>
-	</array>
-	<key>mir</key>
-	<array>
-		<string>mirah</string>
-	</array>
-	<key>mirah</key>
-	<array>
-		<string>mirah</string>
-	</array>
-	<key>mo</key>
-	<array>
-		<string>modelica</string>
-	</array>
-	<key>mms</key>
-	<array>
-		<string>module management system</string>
-	</array>
-	<key>mmk</key>
-	<array>
-		<string>module management system</string>
+		<string>mipsasm</string>
 	</array>
 	<key>monkey</key>
+	<array>
+		<string>monkey</string>
+	</array>
+	<key>monkey2</key>
 	<array>
 		<string>monkey</string>
 	</array>
 	<key>moon</key>
 	<array>
 		<string>moonscript</string>
-	</array>
-	<key>myt</key>
-	<array>
-		<string>myghty</string>
-	</array>
-	<key>nl</key>
-	<array>
-		<string>nl</string>
-		<string>newlisp</string>
-	</array>
-	<key>nsi</key>
-	<array>
-		<string>nsis</string>
-	</array>
-	<key>nsh</key>
-	<array>
-		<string>nsis</string>
-	</array>
-	<key>n</key>
-	<array>
-		<string>nemerle</string>
-	</array>
-	<key>axs</key>
-	<array>
-		<string>netlinx</string>
-	</array>
-	<key>axi</key>
-	<array>
-		<string>netlinx</string>
-	</array>
-	<key>axs.erb</key>
-	<array>
-		<string>netlinx+erb</string>
-	</array>
-	<key>axi.erb</key>
-	<array>
-		<string>netlinx+erb</string>
-	</array>
-	<key>nlogo</key>
-	<array>
-		<string>netlogo</string>
 	</array>
 	<key>nginxconf</key>
 	<array>
@@ -1773,37 +1065,26 @@
 	<array>
 		<string>nimrod</string>
 	</array>
-	<key>ninja</key>
-	<array>
-		<string>ninja</string>
-	</array>
-	<key>nit</key>
-	<array>
-		<string>nit</string>
-	</array>
 	<key>nix</key>
 	<array>
 		<string>nix</string>
 	</array>
-	<key>nu</key>
+	<key>nsi</key>
 	<array>
-		<string>nu</string>
+		<string>nsis</string>
 	</array>
-	<key>numpy</key>
+	<key>nsh</key>
 	<array>
-		<string>numpy</string>
+		<string>nsis</string>
 	</array>
-	<key>numpyw</key>
+	<key>mm</key>
 	<array>
-		<string>numpy</string>
-	</array>
-	<key>numsc</key>
-	<array>
-		<string>numpy</string>
+		<string>xml</string>
 	</array>
 	<key>ml</key>
 	<array>
 		<string>ocaml</string>
+		<string>sml</string>
 	</array>
 	<key>eliom</key>
 	<array>
@@ -1829,70 +1110,64 @@
 	<array>
 		<string>ocaml</string>
 	</array>
-	<key>objdump</key>
-	<array>
-		<string>objdump</string>
-	</array>
-	<key>mm</key>
-	<array>
-		<string>objective-c</string>
-		<string>xml</string>
-	</array>
-	<key>sj</key>
-	<array>
-		<string>objective-j</string>
-	</array>
-	<key>omgrofl</key>
-	<array>
-		<string>omgrofl</string>
-	</array>
-	<key>opa</key>
-	<array>
-		<string>opa</string>
-	</array>
-	<key>opal</key>
-	<array>
-		<string>opal</string>
-	</array>
-	<key>opencl</key>
-	<array>
-		<string>opencl</string>
-	</array>
-	<key>p</key>
-	<array>
-		<string>openedge abl</string>
-	</array>
 	<key>scad</key>
 	<array>
 		<string>openscad</string>
-	</array>
-	<key>org</key>
-	<array>
-		<string>org</string>
-	</array>
-	<key>ox</key>
-	<array>
-		<string>ox</string>
-	</array>
-	<key>oxh</key>
-	<array>
-		<string>ox</string>
-	</array>
-	<key>oxo</key>
-	<array>
-		<string>ox</string>
 	</array>
 	<key>oxygene</key>
 	<array>
 		<string>oxygene</string>
 	</array>
-	<key>oz</key>
+	<key>cgi</key>
 	<array>
-		<string>oz</string>
+		<string>bash</string>
+		<string>perl</string>
+		<string>python</string>
 	</array>
-	<key>pwn</key>
+	<key>pl</key>
 	<array>
-		<string>pawn</string>
+		<string>perl</string>
+		<string>prolog</string>
+	</array>
+	<key>al</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>perl</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>ph</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>plx</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>pm</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>psgi</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>t</key>
+	<array>
+		<string>perl</string>
+	</array>
+	<key>fcgi</key>
+	<array>
+		<string>bash</string>
+		<string>perl</string>
+		<string>ruby</string>
+		<string>lua</string>
+		<string>php</string>
+	</array>
+	<key>php</key>
+	<array>
+		<string>php</string>
 	</array>
 	<key>aw</key>
 	<array>
@@ -1914,177 +1189,17 @@
 	<array>
 		<string>php</string>
 	</array>
+	<key>phps</key>
+	<array>
+		<string>php</string>
+	</array>
 	<key>phpt</key>
 	<array>
 		<string>php</string>
 	</array>
-	<key>pls</key>
+	<key>pony</key>
 	<array>
-		<string>plsql</string>
-	</array>
-	<key>pkb</key>
-	<array>
-		<string>plsql</string>
-	</array>
-	<key>pks</key>
-	<array>
-		<string>plsql</string>
-	</array>
-	<key>plb</key>
-	<array>
-		<string>plsql</string>
-	</array>
-	<key>plsql</key>
-	<array>
-		<string>plsql</string>
-	</array>
-	<key>sql</key>
-	<array>
-		<string>plsql</string>
-		<string>plpgsql</string>
-		<string>sql</string>
-		<string>sqlpl</string>
-	</array>
-	<key>pan</key>
-	<array>
-		<string>pan</string>
-	</array>
-	<key>psc</key>
-	<array>
-		<string>papyrus</string>
-	</array>
-	<key>parrot</key>
-	<array>
-		<string>parrot</string>
-	</array>
-	<key>pasm</key>
-	<array>
-		<string>parrot assembly</string>
-	</array>
-	<key>pir</key>
-	<array>
-		<string>parrot internal representation</string>
-	</array>
-	<key>pas</key>
-	<array>
-		<string>pascal</string>
-	</array>
-	<key>dfm</key>
-	<array>
-		<string>pascal</string>
-	</array>
-	<key>dpr</key>
-	<array>
-		<string>pascal</string>
-	</array>
-	<key>lpr</key>
-	<array>
-		<string>pascal</string>
-	</array>
-	<key>pp</key>
-	<array>
-		<string>pascal</string>
-		<string>puppet</string>
-	</array>
-	<key>pl</key>
-	<array>
-		<string>perl</string>
-		<string>perl6</string>
-		<string>prolog</string>
-	</array>
-	<key>cgi</key>
-	<array>
-		<string>perl</string>
-		<string>python</string>
-		<string>shell</string>
-	</array>
-	<key>perl</key>
-	<array>
-		<string>perl</string>
-	</array>
-	<key>ph</key>
-	<array>
-		<string>perl</string>
-	</array>
-	<key>plx</key>
-	<array>
-		<string>perl</string>
-	</array>
-	<key>pm</key>
-	<array>
-		<string>perl</string>
-		<string>perl6</string>
-	</array>
-	<key>pod</key>
-	<array>
-		<string>perl</string>
-		<string>pod</string>
-	</array>
-	<key>psgi</key>
-	<array>
-		<string>perl</string>
-	</array>
-	<key>t</key>
-	<array>
-		<string>perl</string>
-		<string>perl6</string>
-		<string>turing</string>
-	</array>
-	<key>6pl</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>6pm</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>nqp</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>p6</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>p6l</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>p6m</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>pl6</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>pm6</key>
-	<array>
-		<string>perl6</string>
-	</array>
-	<key>pig</key>
-	<array>
-		<string>piglatin</string>
-	</array>
-	<key>pike</key>
-	<array>
-		<string>pike</string>
-	</array>
-	<key>pmod</key>
-	<array>
-		<string>pike</string>
-	</array>
-	<key>pogo</key>
-	<array>
-		<string>pogoscript</string>
-	</array>
-	<key>ps</key>
-	<array>
-		<string>postscript</string>
-	</array>
-	<key>eps</key>
-	<array>
-		<string>postscript</string>
+		<string>pony</string>
 	</array>
 	<key>ps1</key>
 	<array>
@@ -2106,35 +1221,19 @@
 	<array>
 		<string>prolog</string>
 	</array>
-	<key>spin</key>
+	<key>yap</key>
 	<array>
-		<string>propeller spin</string>
+		<string>prolog</string>
 	</array>
 	<key>proto</key>
 	<array>
-		<string>protocol buffer</string>
-	</array>
-	<key>pub</key>
-	<array>
-		<string>public key</string>
-	</array>
-	<key>pd</key>
-	<array>
-		<string>pure data</string>
-	</array>
-	<key>pb</key>
-	<array>
-		<string>purebasic</string>
-	</array>
-	<key>pbi</key>
-	<array>
-		<string>purebasic</string>
-	</array>
-	<key>purs</key>
-	<array>
-		<string>purescript</string>
+		<string>protobuf</string>
 	</array>
 	<key>py</key>
+	<array>
+		<string>python</string>
+	</array>
+	<key>bzl</key>
 	<array>
 		<string>python</string>
 	</array>
@@ -2142,11 +1241,23 @@
 	<array>
 		<string>python</string>
 	</array>
+	<key>gypi</key>
+	<array>
+		<string>python</string>
+	</array>
 	<key>lmi</key>
 	<array>
 		<string>python</string>
 	</array>
+	<key>py3</key>
+	<array>
+		<string>python</string>
+	</array>
 	<key>pyde</key>
+	<array>
+		<string>python</string>
+	</array>
+	<key>pyi</key>
 	<array>
 		<string>python</string>
 	</array>
@@ -2162,6 +1273,15 @@
 	<array>
 		<string>python</string>
 	</array>
+	<key>rpy</key>
+	<array>
+		<string>python</string>
+	</array>
+	<key>spec</key>
+	<array>
+		<string>python</string>
+		<string>ruby</string>
+	</array>
 	<key>tac</key>
 	<array>
 		<string>python</string>
@@ -2174,22 +1294,17 @@
 	<array>
 		<string>python</string>
 	</array>
-	<key>pytb</key>
-	<array>
-		<string>python traceback</string>
-	</array>
 	<key>qml</key>
 	<array>
 		<string>qml</string>
 	</array>
-	<key>pri</key>
+	<key>qbs</key>
 	<array>
-		<string>qmake</string>
+		<string>qml</string>
 	</array>
 	<key>r</key>
 	<array>
 		<string>r</string>
-		<string>rebol</string>
 	</array>
 	<key>rd</key>
 	<array>
@@ -2199,115 +1314,6 @@
 	<array>
 		<string>r</string>
 	</array>
-	<key>raml</key>
-	<array>
-		<string>raml</string>
-	</array>
-	<key>rdoc</key>
-	<array>
-		<string>rdoc</string>
-	</array>
-	<key>rbbas</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rbfrm</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rbmnu</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rbres</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rbtbar</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rbuistate</key>
-	<array>
-		<string>realbasic</string>
-	</array>
-	<key>rhtml</key>
-	<array>
-		<string>rhtml</string>
-	</array>
-	<key>rmd</key>
-	<array>
-		<string>rmarkdown</string>
-	</array>
-	<key>rkt</key>
-	<array>
-		<string>racket</string>
-	</array>
-	<key>rktd</key>
-	<array>
-		<string>racket</string>
-	</array>
-	<key>rktl</key>
-	<array>
-		<string>racket</string>
-	</array>
-	<key>scrbl</key>
-	<array>
-		<string>racket</string>
-	</array>
-	<key>rl</key>
-	<array>
-		<string>ragel in ruby host</string>
-	</array>
-	<key>raw</key>
-	<array>
-		<string>raw token data</string>
-	</array>
-	<key>reb</key>
-	<array>
-		<string>rebol</string>
-	</array>
-	<key>r2</key>
-	<array>
-		<string>rebol</string>
-	</array>
-	<key>r3</key>
-	<array>
-		<string>rebol</string>
-	</array>
-	<key>rebol</key>
-	<array>
-		<string>rebol</string>
-	</array>
-	<key>red</key>
-	<array>
-		<string>red</string>
-	</array>
-	<key>reds</key>
-	<array>
-		<string>red</string>
-	</array>
-	<key>cw</key>
-	<array>
-		<string>redcode</string>
-	</array>
-	<key>rs</key>
-	<array>
-		<string>renderscript</string>
-		<string>rust</string>
-	</array>
-	<key>rsh</key>
-	<array>
-		<string>renderscript</string>
-	</array>
-	<key>robot</key>
-	<array>
-		<string>robotframework</string>
-	</array>
-	<key>rg</key>
-	<array>
-		<string>rouge</string>
-	</array>
 	<key>rb</key>
 	<array>
 		<string>ruby</string>
@@ -2316,15 +1322,15 @@
 	<array>
 		<string>ruby</string>
 	</array>
+	<key>eye</key>
+	<array>
+		<string>ruby</string>
+	</array>
 	<key>gemspec</key>
 	<array>
 		<string>ruby</string>
 	</array>
 	<key>god</key>
-	<array>
-		<string>ruby</string>
-	</array>
-	<key>irbrc</key>
 	<array>
 		<string>ruby</string>
 	</array>
@@ -2338,7 +1344,6 @@
 	</array>
 	<key>pluginspec</key>
 	<array>
-		<string>ruby</string>
 		<string>xml</string>
 	</array>
 	<key>podspec</key>
@@ -2381,84 +1386,15 @@
 	<array>
 		<string>ruby</string>
 	</array>
-	<key>sas</key>
+	<key>rs</key>
 	<array>
-		<string>sas</string>
-	</array>
-	<key>scss</key>
-	<array>
-		<string>scss</string>
-	</array>
-	<key>sparql</key>
-	<array>
-		<string>sparql</string>
-	</array>
-	<key>rq</key>
-	<array>
-		<string>sparql</string>
-	</array>
-	<key>sqf</key>
-	<array>
-		<string>sqf</string>
-	</array>
-	<key>hqf</key>
-	<array>
-		<string>sqf</string>
-	</array>
-	<key>cql</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>ddl</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>prc</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>tab</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>udf</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>viw</key>
-	<array>
-		<string>sql</string>
-	</array>
-	<key>db2</key>
-	<array>
-		<string>sqlpl</string>
-	</array>
-	<key>ston</key>
-	<array>
-		<string>ston</string>
-	</array>
-	<key>svg</key>
-	<array>
-		<string>svg</string>
-	</array>
-	<key>sage</key>
-	<array>
-		<string>sage</string>
-	</array>
-	<key>sagews</key>
-	<array>
-		<string>sage</string>
-	</array>
-	<key>sls</key>
-	<array>
-		<string>saltstack</string>
-		<string>scheme</string>
-	</array>
-	<key>sass</key>
-	<array>
-		<string>sass</string>
+		<string>rust</string>
 	</array>
 	<key>scala</key>
+	<array>
+		<string>scala</string>
+	</array>
+	<key>kojo</key>
 	<array>
 		<string>scala</string>
 	</array>
@@ -2469,17 +1405,20 @@
 	<key>sc</key>
 	<array>
 		<string>scala</string>
-		<string>supercollider</string>
-	</array>
-	<key>scaml</key>
-	<array>
-		<string>scaml</string>
 	</array>
 	<key>scm</key>
 	<array>
 		<string>scheme</string>
 	</array>
+	<key>sch</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>sld</key>
+	<array>
+		<string>scheme</string>
+	</array>
+	<key>sls</key>
 	<array>
 		<string>scheme</string>
 	</array>
@@ -2499,89 +1438,77 @@
 	<array>
 		<string>scilab</string>
 	</array>
-	<key>self</key>
+	<key>tst</key>
 	<array>
-		<string>self</string>
+		<string>scilab</string>
 	</array>
-	<key>sh</key>
+	<key>scss</key>
 	<array>
-		<string>shell</string>
+		<string>scss</string>
 	</array>
-	<key>bash</key>
+	<key>smali</key>
 	<array>
-		<string>shell</string>
+		<string>smali</string>
 	</array>
-	<key>bats</key>
+	<key>st</key>
 	<array>
-		<string>shell</string>
-	</array>
-	<key>command</key>
-	<array>
-		<string>shell</string>
-	</array>
-	<key>ksh</key>
-	<array>
-		<string>shell</string>
-	</array>
-	<key>tmux</key>
-	<array>
-		<string>shell</string>
-	</array>
-	<key>tool</key>
-	<array>
-		<string>shell</string>
-	</array>
-	<key>zsh</key>
-	<array>
-		<string>shell</string>
-	</array>
-	<key>sh-session</key>
-	<array>
-		<string>shellsession</string>
-	</array>
-	<key>shen</key>
-	<array>
-		<string>shen</string>
-	</array>
-	<key>sl</key>
-	<array>
-		<string>slash</string>
-	</array>
-	<key>slim</key>
-	<array>
-		<string>slim</string>
-	</array>
-	<key>tpl</key>
-	<array>
-		<string>smarty</string>
-	</array>
-	<key>sp</key>
-	<array>
-		<string>sourcepawn</string>
-	</array>
-	<key>sma</key>
-	<array>
-		<string>sourcepawn</string>
-	</array>
-	<key>nut</key>
-	<array>
-		<string>squirrel</string>
-	</array>
-	<key>ML</key>
-	<array>
-		<string>standard ml</string>
+		<string>smalltalk</string>
 	</array>
 	<key>fun</key>
 	<array>
-		<string>standard ml</string>
+		<string>sml</string>
 	</array>
 	<key>sig</key>
 	<array>
-		<string>standard ml</string>
+		<string>sml</string>
 	</array>
 	<key>sml</key>
 	<array>
-		<string>standard ml</string>
+		<string>sml</string>
+	</array>
+	<key>sqf</key>
+	<array>
+		<string>sqf</string>
+	</array>
+	<key>hqf</key>
+	<array>
+		<string>sqf</string>
+	</array>
+	<key>sql</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>cql</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>ddl</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>mysql</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>prc</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>tab</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>udf</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>viw</key>
+	<array>
+		<string>sql</string>
+	</array>
+	<key>stan</key>
+	<array>
+		<string>stan</string>
 	</array>
 	<key>do</key>
 	<array>
@@ -2615,33 +1542,9 @@
 	<array>
 		<string>stylus</string>
 	</array>
-	<key>scd</key>
-	<array>
-		<string>supercollider</string>
-	</array>
 	<key>swift</key>
 	<array>
 		<string>swift</string>
-	</array>
-	<key>sv</key>
-	<array>
-		<string>systemverilog</string>
-	</array>
-	<key>svh</key>
-	<array>
-		<string>systemverilog</string>
-	</array>
-	<key>vh</key>
-	<array>
-		<string>systemverilog</string>
-	</array>
-	<key>toml</key>
-	<array>
-		<string>toml</string>
-	</array>
-	<key>txl</key>
-	<array>
-		<string>txl</string>
 	</array>
 	<key>tcl</key>
 	<array>
@@ -2654,14 +1557,6 @@
 	<key>tm</key>
 	<array>
 		<string>tcl</string>
-	</array>
-	<key>tcsh</key>
-	<array>
-		<string>tcsh</string>
-	</array>
-	<key>csh</key>
-	<array>
-		<string>tcsh</string>
 	</array>
 	<key>tex</key>
 	<array>
@@ -2719,29 +1614,9 @@
 	<array>
 		<string>tex</string>
 	</array>
-	<key>tea</key>
-	<array>
-		<string>tea</string>
-	</array>
-	<key>txt</key>
-	<array>
-		<string>text</string>
-	</array>
-	<key>textile</key>
-	<array>
-		<string>textile</string>
-	</array>
 	<key>thrift</key>
 	<array>
 		<string>thrift</string>
-	</array>
-	<key>tu</key>
-	<array>
-		<string>turing</string>
-	</array>
-	<key>ttl</key>
-	<array>
-		<string>turtle</string>
 	</array>
 	<key>twig</key>
 	<array>
@@ -2749,20 +1624,23 @@
 	</array>
 	<key>ts</key>
 	<array>
-		<string>typescript</string>
 		<string>xml</string>
 	</array>
-	<key>upc</key>
+	<key>tsx</key>
 	<array>
-		<string>unified parallel c</string>
+		<string>xml</string>
 	</array>
-	<key>uc</key>
+	<key>vala</key>
 	<array>
-		<string>unrealscript</string>
+		<string>vala</string>
 	</array>
-	<key>vcl</key>
+	<key>vapi</key>
 	<array>
-		<string>vcl</string>
+		<string>vala</string>
+	</array>
+	<key>veo</key>
+	<array>
+		<string>verilog</string>
 	</array>
 	<key>vhdl</key>
 	<array>
@@ -2796,67 +1674,33 @@
 	<array>
 		<string>vhdl</string>
 	</array>
-	<key>vala</key>
-	<array>
-		<string>vala</string>
-	</array>
-	<key>vapi</key>
-	<array>
-		<string>vala</string>
-	</array>
-	<key>veo</key>
-	<array>
-		<string>verilog</string>
-	</array>
 	<key>vim</key>
 	<array>
-		<string>viml</string>
+		<string>wim</string>
 	</array>
-	<key>vb</key>
+	<key>asm</key>
 	<array>
-		<string>visual basic</string>
+		<string>armasm</string>
+		<string>avrasm</string>
+		<string>mipsasm</string>
+		<string>x86asm</string>
 	</array>
-	<key>bas</key>
+	<key>a51</key>
 	<array>
-		<string>visual basic</string>
-	</array>
-	<key>frm</key>
-	<array>
-		<string>visual basic</string>
-	</array>
-	<key>frx</key>
-	<array>
-		<string>visual basic</string>
-	</array>
-	<key>vba</key>
-	<array>
-		<string>visual basic</string>
-	</array>
-	<key>vbhtml</key>
-	<array>
-		<string>visual basic</string>
-	</array>
-	<key>vbs</key>
-	<array>
-		<string>visual basic</string>
-	</array>
-	<key>volt</key>
-	<array>
-		<string>volt</string>
-	</array>
-	<key>owl</key>
-	<array>
-		<string>web ontology language</string>
-	</array>
-	<key>webidl</key>
-	<array>
-		<string>webidl</string>
-	</array>
-	<key>xc</key>
-	<array>
-		<string>xc</string>
+		<string>armasm</string>
+		<string>avrasm</string>
+		<string>mipsasm</string>
+		<string>x86asm</string>
 	</array>
 	<key>xml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>adml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>admx</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2865,6 +1709,14 @@
 		<string>xml</string>
 	</array>
 	<key>axml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>builds</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>ccproj</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2880,11 +1732,27 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>sscfg</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>csdef</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>csl</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>csproj</key>
 	<array>
 		<string>xml</string>
 	</array>
 	<key>ct</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>depproj</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2900,7 +1768,7 @@
 	<array>
 		<string>xml</string>
 	</array>
-	<key>dll.config</key>
+	<key>dotsettings</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2920,7 +1788,15 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>gml</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>grxml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>iml</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2932,6 +1808,10 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>jsproj</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>kml</key>
 	<array>
 		<string>xml</string>
@@ -2940,7 +1820,27 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>mdpolicy</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>mjml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>mod</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>mxml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>natvis</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>ndproj</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2960,7 +1860,19 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>pkgproj</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>plist</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>proj</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>props</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -2980,11 +1892,23 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>resx</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>rss</key>
 	<array>
 		<string>xml</string>
 	</array>
 	<key>scxml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>sfproj</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>shproj</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -3040,6 +1964,10 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>ux</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>vbproj</key>
 	<array>
 		<string>xml</string>
@@ -3048,7 +1976,23 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>vsixmanifest</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>vssettings</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>vstemplate</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>vxml</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>wixproj</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -3104,7 +2048,15 @@
 	<array>
 		<string>xml</string>
 	</array>
+	<key>xproj</key>
+	<array>
+		<string>xml</string>
+	</array>
 	<key>xsd</key>
+	<array>
+		<string>xml</string>
+	</array>
+	<key>xspec</key>
 	<array>
 		<string>xml</string>
 	</array>
@@ -3116,13 +2068,9 @@
 	<array>
 		<string>xml</string>
 	</array>
-	<key>xpl</key>
+	<key>html</key>
 	<array>
-		<string>xproc</string>
-	</array>
-	<key>xproc</key>
-	<array>
-		<string>xproc</string>
+		<string>xml</string>
 	</array>
 	<key>xquery</key>
 	<array>
@@ -3144,46 +2092,6 @@
 	<array>
 		<string>xquery</string>
 	</array>
-	<key>xs</key>
-	<array>
-		<string>xs</string>
-	</array>
-	<key>xslt</key>
-	<array>
-		<string>xslt</string>
-	</array>
-	<key>xsl</key>
-	<array>
-		<string>xslt</string>
-	</array>
-	<key>xojo_code</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xojo_menu</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xojo_report</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xojo_script</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xojo_toolbar</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xojo_window</key>
-	<array>
-		<string>xojo</string>
-	</array>
-	<key>xtend</key>
-	<array>
-		<string>xtend</string>
-	</array>
 	<key>yml</key>
 	<array>
 		<string>yaml</string>
@@ -3196,77 +2104,25 @@
 	<array>
 		<string>yaml</string>
 	</array>
+	<key>sublime-syntax</key>
+	<array>
+		<string>yaml</string>
+	</array>
+	<key>syntax</key>
+	<array>
+		<string>yaml</string>
+	</array>
 	<key>yaml</key>
+	<array>
+		<string>yaml</string>
+	</array>
+	<key>yaml-tmlanguage</key>
 	<array>
 		<string>yaml</string>
 	</array>
 	<key>zep</key>
 	<array>
 		<string>zephir</string>
-	</array>
-	<key>zimpl</key>
-	<array>
-		<string>zimpl</string>
-	</array>
-	<key>zmpl</key>
-	<array>
-		<string>zimpl</string>
-	</array>
-	<key>zpl</key>
-	<array>
-		<string>zimpl</string>
-	</array>
-	<key>desktop</key>
-	<array>
-		<string>desktop</string>
-	</array>
-	<key>desktop.in</key>
-	<array>
-		<string>desktop</string>
-	</array>
-	<key>ec</key>
-	<array>
-		<string>ec</string>
-	</array>
-	<key>eh</key>
-	<array>
-		<string>ec</string>
-	</array>
-	<key>edn</key>
-	<array>
-		<string>edn</string>
-	</array>
-	<key>fish</key>
-	<array>
-		<string>fish</string>
-	</array>
-	<key>mu</key>
-	<array>
-		<string>mupad</string>
-	</array>
-	<key>nc</key>
-	<array>
-		<string>nesc</string>
-	</array>
-	<key>ooc</key>
-	<array>
-		<string>ooc</string>
-	</array>
-	<key>rst</key>
-	<array>
-		<string>restructuredtext</string>
-	</array>
-	<key>rest</key>
-	<array>
-		<string>restructuredtext</string>
-	</array>
-	<key>wisp</key>
-	<array>
-		<string>wisp</string>
-	</array>
-	<key>prg</key>
-	<array>
-		<string>xbase</string>
 	</array>
 </dict>
 </plist>
