@@ -112,9 +112,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDel
     /// Open `file` and highlight it.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        navigationController?.setToolbarHidden(true, animated: true)
-        
+                
         textView.setContentOffset(CGPoint.zero, animated: false)
         
         if highlightr != nil {

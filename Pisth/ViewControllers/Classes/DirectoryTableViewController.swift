@@ -193,7 +193,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
 	 override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        navigationController?.setToolbarHidden(true, animated: true)
+        (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.setToolbarHidden(true, animated: true)
 	 }
 
 
