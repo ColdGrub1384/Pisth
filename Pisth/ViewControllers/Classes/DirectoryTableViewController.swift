@@ -1386,7 +1386,28 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         
         guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
+            
+            guard let indexPath = destinationIndexPath else {
+                return UITableViewDropProposal(operation: .copy, intent: .insertIntoDestinationIndexPath)
+            }
+            
+            if let _ = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
+                if !self.files![indexPath.row].isDirectory {
+                    return UITableViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
+                }
+            }
+            
             return UITableViewDropProposal(operation: .copy, intent: .automatic)
+        }
+        
+        guard let indexPath = destinationIndexPath else {
+            return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
+        }
+        
+        if let _ = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
+            if !self.files![indexPath.row].isDirectory {
+                return UITableViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
+            }
         }
         
         return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
