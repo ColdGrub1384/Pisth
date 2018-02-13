@@ -25,6 +25,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         /// Toggle blinking cursor.
         static let blinkCursor = IndexPath(row: 0, section: 2)
         
+        /// Set text size.
+        static let textSize = IndexPath(row: 1, section: 2)
+        
         /// Set terminal theme.
         static let terminalTheme = IndexPath(row: 0, section: 3)
         
@@ -50,6 +53,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         initBiometricAuthenticationSetting()
         initShowHiddenFilesSetting()
         initBlinkCursorSetting()
+        initTextSizeSetting()
     }
     
     
@@ -148,6 +152,67 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         }
     }
     
+    
+    // MARK: - Text size
+    
+    /// Button to set the text size to 18px.
+    @IBOutlet weak var px18: UIButton!
+    
+    /// Button to set the text size to 17px.
+    @IBOutlet weak var px17: UIButton!
+    
+    /// Button to set the text size to 16px.
+    @IBOutlet weak var px16: UIButton!
+    
+    /// Button to set the text size to 15px.
+    @IBOutlet weak var px15: UIButton!
+    
+    /// Button to set the text size to 14px.
+    @IBOutlet weak var px14: UIButton!
+    
+    /// Button to set the text size to 13px.
+    @IBOutlet weak var px13: UIButton!
+    
+    /// Button to set the text size to 12px.
+    @IBOutlet weak var px12: UIButton!
+    
+    /// Set text size as the sender's button text size.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button.
+    @IBAction func setTextSize(_ sender: UIButton) {
+        
+        UserDefaults.standard.set(sender.titleLabel?.font.pointSize, forKey: "terminalTextSize")
+        UserDefaults.standard.synchronize()
+        
+        let buttons = [px18, px17, px16, px15, px14, px13, px12]
+        
+        for button in buttons {
+            button?.isEnabled = true
+        }
+        
+        sender.isEnabled = false
+    }
+    
+    /// Display current text size setting.
+    func initTextSizeSetting() {
+        let buttons = [px18, px17, px16, px15, px14, px13, px12]
+        
+        for button in buttons {
+            
+            guard let size = button?.titleLabel?.font.pointSize else {
+                return
+            }
+            
+            if Int(size) == UserDefaults.standard.integer(forKey: "terminalTextSize") {
+                
+                button?.isEnabled = false
+                
+            }
+        }
+    }
+    
+    
     // MARK: Table view delegate
     
     /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
@@ -166,6 +231,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
+    
     
     // MARK: - Collection view data source
     
@@ -195,6 +261,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         return cell
     }
+    
     
     // MARK: - Collection view delegate
     

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -125,12 +126,106 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TV9-D7-RXN">
+                                        <rect key="frame" x="0.0" y="299.33333333333337" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TV9-D7-RXN" id="xX1-5l-u2s">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUg-za-cZE">
+                                                    <rect key="frame" x="16" y="13" width="74" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="74" id="39L-A5-mH5"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZS-Em-dtz">
+                                                    <rect key="frame" x="149" y="8" width="210" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BkJ-Ht-xYc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="12"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="MQc-Ur-qfl"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDa-4W-yBG">
+                                                            <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="13"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="b3m-vx-mFS"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrL-EH-fgs">
+                                                            <rect key="frame" x="60" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="14"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="mDS-JI-rpy"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WI-aT-pZH">
+                                                            <rect key="frame" x="90" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="15"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="Xbd-Rh-Zuf"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ube-lm-1LG">
+                                                            <rect key="frame" x="120" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="16"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="OBn-pm-w0x"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iHM-6k-xSo">
+                                                            <rect key="frame" x="150" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="17"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="i5b-pz-RGu"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pg7-DU-Q5J">
+                                                            <rect key="frame" x="180" y="0.0" width="30" height="30"/>
+                                                            <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="18"/>
+                                                            <state key="normal" title="Aa"/>
+                                                            <connections>
+                                                                <action selector="setTextSize:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="eUT-wE-6xG"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="PDa-4W-yBG" firstAttribute="baseline" secondItem="MrL-EH-fgs" secondAttribute="firstBaseline" id="DdJ-sL-CVY"/>
+                                                        <constraint firstItem="iHM-6k-xSo" firstAttribute="baseline" secondItem="Pg7-DU-Q5J" secondAttribute="firstBaseline" id="LEE-3m-2Ih"/>
+                                                        <constraint firstItem="8WI-aT-pZH" firstAttribute="baseline" secondItem="ube-lm-1LG" secondAttribute="firstBaseline" id="QnD-75-R8d"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nZS-Em-dtz" firstAttribute="trailing" secondItem="xX1-5l-u2s" secondAttribute="trailingMargin" id="E8N-rd-qZK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="LUg-za-cZE" secondAttribute="bottom" constant="-1" id="Jpl-lv-xTf"/>
+                                                <constraint firstItem="nZS-Em-dtz" firstAttribute="top" secondItem="xX1-5l-u2s" secondAttribute="topMargin" constant="-3" id="enW-sA-dmv"/>
+                                                <constraint firstItem="LUg-za-cZE" firstAttribute="top" secondItem="xX1-5l-u2s" secondAttribute="topMargin" constant="2" id="gKt-gC-HwD"/>
+                                                <constraint firstItem="LUg-za-cZE" firstAttribute="leading" secondItem="xX1-5l-u2s" secondAttribute="leadingMargin" id="iTP-A1-4WP"/>
+                                                <constraint firstItem="LUg-za-cZE" firstAttribute="centerY" secondItem="nZS-Em-dtz" secondAttribute="centerY" id="roY-BD-Ojd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Terminal theme" id="hqb-uF-Uyc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="74" id="Dg8-9H-YNd">
-                                        <rect key="frame" x="0.0" y="355.33333333333337" width="375" height="74"/>
+                                        <rect key="frame" x="0.0" y="399.33333333333337" width="375" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dg8-9H-YNd" id="qal-zt-zMZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73.666666666666671"/>
@@ -392,7 +487,7 @@
                             <tableViewSection headerTitle="Other" id="on8-JP-1yY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="p2Y-ao-WgN" style="IBUITableViewCellStyleDefault" id="zhH-VI-j1d">
-                                        <rect key="frame" x="0.0" y="485.33333333333337" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="529.33333333333337" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zhH-VI-j1d" id="6Rz-Ib-GUo">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
@@ -413,7 +508,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="y7W-Pi-yRF" style="IBUITableViewCellStyleDefault" id="V9a-lW-Hec">
-                                        <rect key="frame" x="0.0" y="529.33333333333337" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="573.33333333333337" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V9a-lW-Hec" id="ZQk-HC-pco">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
@@ -443,12 +538,19 @@
                         <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
                         <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>
                         <outlet property="blinkCursorSwitch" destination="g7S-12-QcK" id="sQc-tB-aBx"/>
+                        <outlet property="px12" destination="BkJ-Ht-xYc" id="HZK-TZ-8wo"/>
+                        <outlet property="px13" destination="PDa-4W-yBG" id="y1J-86-nyD"/>
+                        <outlet property="px14" destination="MrL-EH-fgs" id="jmt-vE-mO8"/>
+                        <outlet property="px15" destination="8WI-aT-pZH" id="tEA-MR-1LU"/>
+                        <outlet property="px16" destination="ube-lm-1LG" id="IF4-7q-tFo"/>
+                        <outlet property="px17" destination="iHM-6k-xSo" id="8n7-hZ-4LT"/>
+                        <outlet property="px18" destination="Pg7-DU-Q5J" id="ijk-u3-XcX"/>
                         <outlet property="showHiddenFilesSwitch" destination="ywO-un-kCr" id="ztH-IB-ajp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIU-LF-Kqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="94.002998500749626"/>
+            <point key="canvasLocation" x="-292" y="93.103448275862078"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Uhr-y1-fLB">

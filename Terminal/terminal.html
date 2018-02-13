@@ -27,7 +27,7 @@
                 return null;
             }
             var parentElementStyle = window.getComputedStyle(term.element.parentElement);
-            var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')) - 17);
+            var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
             var elementStyle = window.getComputedStyle(term.element);
             var elementPaddingVer = parseInt(elementStyle.getPropertyValue('padding-top')) + parseInt(elementStyle.getPropertyValue('padding-bottom'));
             var elementPaddingHor = parseInt(elementStyle.getPropertyValue('padding-right')) + parseInt(elementStyle.getPropertyValue('padding-left'));
@@ -45,7 +45,14 @@
             if (geometry) {
                 if (term.rows !== geometry.rows || term.cols !== geometry.cols) {
                     term.renderer.clear();
-                    term.resize(geometry.cols, geometry.rows);
+                    
+                    var rows = geometry.rows;
+                    
+                    if (term.fontSize < 15) {
+                        rows = rows-1;
+                    }
+                    
+                    term.resize(geometry.cols, rows);
                 }
             }
         }
@@ -59,9 +66,6 @@
             };
         }
     
-
-        fit(term);
-        
         term.focus();
         term.textarea.readOnly = true;
                 

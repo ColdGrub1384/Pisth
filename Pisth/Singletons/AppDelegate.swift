@@ -193,6 +193,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Set default terminal text size
+        if UserDefaults.standard.value(forKey: "terminalTextSize") == nil || UserDefaults.standard.integer(forKey: "terminalTextSize") == 0 {
+            UserDefaults.standard.set(15, forKey: "terminalTextSize")
+            UserDefaults.standard.synchronize()
+        }
+        
         // Request app review
         ReviewHelper.shared.launches += 1
         ReviewHelper.shared.requestReview()
