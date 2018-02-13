@@ -10,7 +10,7 @@ import BiometricAuthentication
 
 
 /// Table view controller for displaying and changing settings.
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     /// Index of each setting.
     class IndexPaths {
@@ -25,11 +25,14 @@ class SettingsTableViewController: UITableViewController {
         /// Toggle blinking cursor.
         static let blinkCursor = IndexPath(row: 0, section: 2)
         
+        /// Set terminal theme.
+        static let terminalTheme = IndexPath(row: 0, section: 3)
+        
         /// Promote Pisth Viewer.
-        static let pisthViewer = IndexPath(row: 0, section: 3)
+        static let pisthViewer = IndexPath(row: 0, section: 4)
         
         /// Show licenses.
-        static let licenses = IndexPath(row: 1, section: 3)
+        static let licenses = IndexPath(row: 1, section: 4)
     }
     
     /// MARK: - View controller
@@ -84,7 +87,7 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.synchronize()
     }
     
-    /// Display current blinking cursor setting
+    /// Display current blinking cursor setting.
     func initShowHiddenFilesSetting() {
         showHiddenFilesSwitch.isOn = UserDefaults.standard.bool(forKey: "hidden")
     }
@@ -162,5 +165,57 @@ class SettingsTableViewController: UITableViewController {
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    // MARK: - Collection view data source
+    
+    /// `UICollectionViewDataSource`'s `collectionView(_:, numberOfItemsInSection:)` function.
+    ///
+    /// - Returns: `9`.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    /// `UICollectionViewDataSource`'s `collectionView(_:, cellForItemAt:)` function.
+    ///
+    /// - Returns: the cell corresponding to the index path.
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(indexPath.row)", for: indexPath)
+        
+        guard let title = cell.viewWithTag(1) as? UILabel else {
+            return cell
+        }
+        
+        if title.text == UserDefaults.standard.string(forKey: "terminalTheme") {
+            cell.viewWithTag(2)?.isHidden = false
+        } else {
+            cell.viewWithTag(2)?.isHidden = true
+        }
+        
+        return cell
+    }
+    
+    // MARK: - Collection view delegate
+    
+    /// `UICollectionViewDelegate`'s `collectionView(_:, didSelectItemAt:)` function.
+    ///
+    /// Set theme for selected item.
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(indexPath.row)", for: indexPath)
+        
+        guard let title = cell.viewWithTag(1) as? UILabel else {
+            return
+        }
+        
+        guard TerminalTheme.themes.keys.contains(title.text!) else {
+            return
+        }
+        
+        UserDefaults.standard.set(title.text, forKey: "terminalTheme")
+        UserDefaults.standard.synchronize()
+        
+        collectionView.reloadData()
     }
 }

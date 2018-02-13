@@ -172,6 +172,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Set default terminal theme
+        if UserDefaults.standard.string(forKey: "terminalTheme") == nil {
+            UserDefaults.standard.set("Pro", forKey: "terminalTheme")
+            UserDefaults.standard.synchronize()
+        }
+        
         // Setup 3D touch shortcuts
         AppDelegate.shared.update3DTouchShortucts()
         

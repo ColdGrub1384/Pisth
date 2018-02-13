@@ -623,6 +623,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if UserDefaults.standard.bool(forKey: "blink") {
             webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)
         }
+                
+        let themeName = UserDefaults.standard.string(forKey: "terminalTheme")!
+        if let theme = TerminalTheme.themes[themeName] {
+            webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
+            webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.toHexString() ?? "#000000")'", completionHandler: nil)
+        }
         
         if console.isEmpty {
             
