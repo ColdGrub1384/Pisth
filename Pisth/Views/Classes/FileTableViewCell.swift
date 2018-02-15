@@ -125,6 +125,8 @@ class FileTableViewCell: UITableViewCell {
             let navVC = UINavigationController(rootViewController: dirVC)
             navVC.navigationBar.barStyle = .black
             navVC.navigationBar.isTranslucent = true
+            navVC.toolbar.barStyle = .black
+            navVC.toolbar.isTranslucent = true
             directoryTableViewController.present(navVC, animated: true, completion: {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
