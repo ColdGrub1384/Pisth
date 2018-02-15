@@ -200,6 +200,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Display help message.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         showHelpMessage()
+        webView.evaluateJavaScript("fit(term)", completionHandler: nil)
     }
     
     

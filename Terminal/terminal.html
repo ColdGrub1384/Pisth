@@ -22,12 +22,13 @@
         term.open(document.getElementById('terminal'));
         
         // Fit terminal
+        
         function proposeGeometry(term) {
             if (!term.element.parentElement) {
                 return null;
             }
             var parentElementStyle = window.getComputedStyle(term.element.parentElement);
-            var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
+            var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')) - 17);
             var elementStyle = window.getComputedStyle(term.element);
             var elementPaddingVer = parseInt(elementStyle.getPropertyValue('padding-top')) + parseInt(elementStyle.getPropertyValue('padding-bottom'));
             var elementPaddingHor = parseInt(elementStyle.getPropertyValue('padding-right')) + parseInt(elementStyle.getPropertyValue('padding-left'));
@@ -65,8 +66,6 @@
                 return fit(this);
             };
         }
-    
-        fit(term);
     
         term.focus();
         term.textarea.readOnly = true;

@@ -659,33 +659,37 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
+            webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
+                self.changeSize(completion: nil)
+            })
             
-            session.channel.delegate = self
-                
-            changeSize {
-                do {
-                    if !self.pureMode {
-                        let clearLastFromHistory = "history -d $(history 1)"
-                        
-                        if let pwd = self.pwd {
-                            try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
-                        }
-                        
-                        for command in ShellStartup.commands {
-                            try session.channel.write("\(command); \(clearLastFromHistory);\n")
-                        }
-                        
-                        try session.channel.write("clear; \(clearLastFromHistory)\n")
-                        
-                        if let command = self.command {
-                            try session.channel.write("\(command);\n")
-                        }
-                    } else {
-                        try session.channel.startShell()
-                        self.toolbar.items?[3].isEnabled = false
+            do {
+                if !self.pureMode {
+                    let clearLastFromHistory = "history -d $(history 1)"
+                    
+                    session.channel.closeShell()
+                    session.channel.delegate = self
+                    try session.channel.startShell()
+                    
+                    if let pwd = self.pwd {
+                        try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
                     }
-                } catch {}
-            }
+                    
+                    for command in ShellStartup.commands {
+                        try session.channel.write("\(command); \(clearLastFromHistory);\n")
+                    }
+                    
+                    try session.channel.write("clear; \(clearLastFromHistory)\n")
+                    
+                    if let command = self.command {
+                        try session.channel.write("\(command);\n")
+                    }
+                } else {
+                    session.channel.delegate = self
+                    try session.channel.startShell()
+                    self.toolbar.items?[3].isEnabled = false
+                }
+            } catch {}
         } else {
             webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
             changeSize(completion: nil)

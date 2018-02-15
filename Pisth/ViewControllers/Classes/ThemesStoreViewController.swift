@@ -131,6 +131,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         }
         
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
+        webView.evaluateJavaScript("fit(term)", completionHandler: nil)
         webView.evaluateJavaScript("term.writeln('\(Keys.esc)[7m \(name) Theme \(Keys.esc)[0m')", completionHandler: nil)
         webView.evaluateJavaScript("term.writeln('')", completionHandler: nil)
         webView.evaluateJavaScript("term.writeln('')", completionHandler: nil)
