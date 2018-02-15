@@ -635,8 +635,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             selectionTextView.textColor = theme.foregroundColor
         }
         
-        webView.evaluateJavaScript("fit(term)", completionHandler: nil)
-        
         if console.isEmpty {
             
             // Session
@@ -661,33 +659,32 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
-            do {
+            
+            session.channel.delegate = self
                 
-                session.channel.delegate = self
-                
-                if !self.pureMode {
-                    let clearLastFromHistory = "history -d $(history 1)"
-                    
-                    if let pwd = self.pwd {
-                        try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+            changeSize {
+                do {
+                    if !self.pureMode {
+                        let clearLastFromHistory = "history -d $(history 1)"
+                        
+                        if let pwd = self.pwd {
+                            try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                        }
+                        
+                        for command in ShellStartup.commands {
+                            try session.channel.write("\(command); \(clearLastFromHistory);\n")
+                        }
+                        
+                        try session.channel.write("clear; \(clearLastFromHistory)\n")
+                        
+                        if let command = self.command {
+                            try session.channel.write("\(command);\n")
+                        }
+                    } else {
+                        try session.channel.startShell()
+                        self.toolbar.items?[3].isEnabled = false
                     }
-                    
-                    for command in ShellStartup.commands {
-                        try session.channel.write("\(command); \(clearLastFromHistory);\n")
-                    }
-                    
-                    try session.channel.write("clear; \(clearLastFromHistory)\n")
-                    
-                    if let command = self.command {
-                        try session.channel.write("\(command);\n")
-                    }
-                } else {
-                    try session.channel.startShell()
-                    toolbar.items?[3].isEnabled = false
-                }
-                
-                changeSize(completion: nil)
-            } catch {
+                } catch {}
             }
         } else {
             webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
