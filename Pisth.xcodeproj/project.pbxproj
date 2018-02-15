@@ -17,10 +17,13 @@
 		3A2EC44F20332EFC007D102D /* TerminalTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2EC44E20332EFC007D102D /* TerminalTheme.swift */; };
 		3A36DFA020012D520089039F /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9E20012D500089039F /* xterm.css */; };
 		3A36DFA120012D520089039F /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9F20012D510089039F /* xterm.js */; };
+		3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A38DC402035D9980093A091 /* StoreKit.framework */; };
+		3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38DC422035DD480093A091 /* PurchaseHelper.swift */; };
 		3A38FC501FF56AA800690382 /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A38FC4F1FF56AA800690382 /* terminal.html */; };
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
+		3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */; };
 		3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */; };
 		3A4801B32028D4900069379B /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4801B22028D48F0069379B /* TerminalInfo.swift */; };
 		3A4801B42028D4900069379B /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4801B22028D48F0069379B /* TerminalInfo.swift */; };
@@ -33,6 +36,7 @@
 		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
+		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
@@ -108,10 +112,13 @@
 		3A2EC44E20332EFC007D102D /* TerminalTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalTheme.swift; sourceTree = "<group>"; };
 		3A36DF9E20012D500089039F /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
 		3A36DF9F20012D510089039F /* xterm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = xterm.js; sourceTree = "<group>"; };
+		3A38DC402035D9980093A091 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		3A38DC422035DD480093A091 /* PurchaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHelper.swift; sourceTree = "<group>"; };
 		3A38FC4F1FF56AA800690382 /* terminal.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = terminal.html; sourceTree = "<group>"; };
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
+		3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesStoreViewController.xib; sourceTree = "<group>"; };
 		3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3A4801B22028D48F0069379B /* TerminalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalInfo.swift; sourceTree = "<group>"; };
 		3A4801BB2029F8E50069379B /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
@@ -121,6 +128,7 @@
 		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
+		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
+				3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +338,7 @@
 			children = (
 				3AA3FDC1202754EF00C07C7A /* Extensions */,
 				3A843EEC202A64030096632E /* ReviewHelper.swift */,
+				3A38DC422035DD480093A091 /* PurchaseHelper.swift */,
 				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
@@ -390,6 +400,7 @@
 				3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */,
 				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
+				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -401,6 +412,7 @@
 				3AE835A01FF2DE350073D06E /* WebViewController.xib */,
 				3AF9AEAA1FF54C8B00840E8A /* ImageViewController.xib */,
 				3AF9AEA71FF5461300840E8A /* Settings.storyboard */,
+				3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */,
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
 			);
 			path = "Interface Builder";
@@ -444,6 +456,7 @@
 		56249940C7FBF904B64CFA50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A38DC402035D9980093A091 /* StoreKit.framework */,
 				9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */,
 			);
 			name = Frameworks;
@@ -515,6 +528,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -572,6 +588,7 @@
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
+				3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +695,7 @@
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
 				3AB18849203340FA00E71C08 /* Novel.swift in Sources */,
 				3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */,
+				3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
@@ -688,6 +706,7 @@
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
 				3AB1883B2033367F00E71C08 /* Color.swift in Sources */,
+				3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */,
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
 				3A43ECE51FF6DD4F00C9FA14 /* Keys.swift in Sources */,

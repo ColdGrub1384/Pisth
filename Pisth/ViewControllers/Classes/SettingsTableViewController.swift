@@ -54,8 +54,8 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         initShowHiddenFilesSetting()
         initBlinkCursorSetting()
         initTextSizeSetting()
+        initThemesIAPSetting()
     }
-    
     
     // MARK: - Blink cursor
     
@@ -210,6 +210,55 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
                 
             }
         }
+    }
+    
+    
+    // MARK: - Unlock themes
+    
+    /// View blocking access to themes if they are not purchased.
+    @IBOutlet weak var themesStore: UIVisualEffectView!
+    
+    /// Button used to buy themes iap.
+    @IBOutlet weak var buyThemesButton: UIButton!
+    
+    /// Button used to restore themes iap.
+    @IBOutlet weak var restoreThemesButton: UIButton!
+    
+    /// Buy themes iap.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button.
+    @IBAction func buyThemes(_ sender: UIButton) {
+        guard let vc = Bundle.main.loadNibNamed("ThemesStoreViewController", owner: nil, options: nil)?[0] as? UIViewController else {
+            return
+        }
+        
+        vc.modalPresentationStyle = .overCurrentContext
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
+    /// Restore themes iap.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button.
+    @IBAction func restoreThemes(_ sender: UIButton) {
+        Product.restorePurchases { (results) in
+            for purchase in results.restoredPurchases {
+                if purchase.productId == ProductsID.themes.rawValue {
+                    UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
+                    UserDefaults.standard.synchronize()
+                    self.themesStore.isHidden = true
+                }
+            }
+        }
+    }
+    
+    func initThemesIAPSetting() {
+        buyThemesButton.layer.cornerRadius = 16
+        restoreThemesButton.layer.cornerRadius = 16
+        buyThemesButton.setTitle(Product.terminalThemes.price ?? "Buy", for: .normal)
+        themesStore.isHidden = UserDefaults.standard.bool(forKey: "terminalThemesPurchased")
     }
     
     

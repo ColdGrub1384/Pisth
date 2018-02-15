@@ -5,6 +5,7 @@ PODS:
   - Highlightr (1.1.0)
   - NMSSH (2.2.8)
   - SwiftKeychainWrapper (3.0.1)
+  - SwiftyStoreKit (0.12.1)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Highlightr
   - NMSSH
   - SwiftKeychainWrapper
+  - SwiftyStoreKit
   - Zip
 
 SPEC CHECKSUMS:
@@ -23,8 +25,9 @@ SPEC CHECKSUMS:
   Highlightr: 519911a0a9a040d76e591f6fe58bb5177c8bdaa3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftyStoreKit: 98742f9d7941ecaca0f248de0f49c5ecf585bc95
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 4ade501583f311832c3758f8e86fcb7dbf8ad504
+PODFILE CHECKSUM: 829915e36730eb37922f30e7514170289f512bcd
 
 COCOAPODS: 1.1.1

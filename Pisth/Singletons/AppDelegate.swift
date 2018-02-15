@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
+import SwiftyStoreKit
 
 /// The app's delegate.
 @UIApplicationMain
@@ -16,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     /// The window used with app.
     var window: UIWindow?
-
+    
     /// The shared Navigation controller used in the app.
     var navigationController = UINavigationController()
     
@@ -91,7 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     }
     
     // MARK: - Application delegate
-    
     
     /// `UIApplicationDelegate`'s `application(_:, didFinishLaunchingWithOptions:)` function.
     ///
@@ -198,6 +198,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.set(15, forKey: "terminalTextSize")
             UserDefaults.standard.synchronize()
         }
+        
+        // Finish transactions
+        SwiftyStoreKit.completeTransactions(atomically: false) { (purchases) in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    
+                    if purchase.productId == ProductsID.themes.rawValue {
+                        UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
+                        UserDefaults.standard.synchronize()
+                    }
+                case .failed, .purchasing, .deferred:
+                    break
+                }
+            }
+        }
+        
+        // Initiliaze iAP products
+        Product.initProducts()
         
         // Request app review
         ReviewHelper.shared.launches += 1

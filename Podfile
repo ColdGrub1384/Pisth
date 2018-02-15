@@ -14,4 +14,5 @@ target 'Pisth' do
   pod 'SwiftKeychainWrapper'
   pod 'BiometricAuthentication'
   pod 'ActionSheetPicker-3.0'
+  pod 'SwiftyStoreKit'
 end
