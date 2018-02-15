@@ -218,6 +218,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             }
         }
         
+        // Buy themes from App Store
+        SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
+            return (product.productIdentifier == ProductsID.themes.rawValue && !UserDefaults.standard.bool(forKey: "terminalThemesPurchased"))
+        }
+        
         // Initiliaze iAP products
         Product.initProducts()
         
