@@ -146,6 +146,8 @@ class Product {
         }
     }
     
+    // MARK: - Registered products
+    
     /// Initialize registered products.
     static func initProducts() {
         let _ = terminalThemes

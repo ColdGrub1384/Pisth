@@ -15,51 +15,44 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 281,
-      "symbol": "DirectoryTableViewController.goTo(directory:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
-      "line": 66,
+      "line": 217,
       "symbol": "LocalDirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
-      "line": 17,
-      "symbol": "SettingsTableViewController.Index.biometricAuth",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
-      "line": 18,
-      "symbol": "SettingsTableViewController.Index.showHiddenFiles",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
-      "line": 19,
-      "symbol": "SettingsTableViewController.Index.blinkCursor",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
-      "line": 20,
-      "symbol": "SettingsTableViewController.Index.licenses",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 257,
+      "symbol": "SettingsTableViewController.initThemesIAPSetting()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/Views/Classes/BooleanInputView.swift",
       "line": 99,
       "symbol": "BooleanInputView.observeValue(forKeyPath:of:change:context:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
+      "line": null,
+      "symbol": "Color",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
+      "line": 13,
+      "symbol": "Color.init(hexString:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
+      "line": 36,
+      "symbol": "Color.toHexString()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
