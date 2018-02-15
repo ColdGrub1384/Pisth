@@ -14,7 +14,7 @@
     <a title="DirectoryTableViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Pisth Docs</a> (95% documented)</p>
+        <p><a href="../index.html">Pisth Docs</a> (96% documented)</p>
         <p class="header-right"><a href="https://github.com/ColdGrub1384/Pisth"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fpisth%2Egithub%2Eio%2Fdocs%2Fdocsets%2FPisth%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -43,6 +43,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/ArrowsViewController.html">ArrowsViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BasicTheme.html">BasicTheme</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/BookmarksTableViewController.html">BookmarksTableViewController</a>
@@ -78,6 +81,12 @@
                 <a href="../Classes/GitRemotesTableViewController.html">GitRemotesTableViewController</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/GrassTheme.html">GrassTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/HomebrewTheme.html">HomebrewTheme</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/ImageViewController.html">ImageViewController</a>
               </li>
               <li class="nav-group-task">
@@ -87,10 +96,28 @@
                 <a href="../Classes/LocalDirectoryTableViewController.html">LocalDirectoryTableViewController</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/ManPageTheme.html">ManPageTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NovelTheme.html">NovelTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/OceanTheme.html">OceanTheme</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Pasteboard.html">Pasteboard</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/ProTheme.html">ProTheme</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Product.html">Product</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/Reachability.html">Reachability</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RedSandsTheme.html">RedSandsTheme</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/ReviewHelper.html">ReviewHelper</a>
@@ -99,10 +126,13 @@
                 <a href="../Classes/SettingsTableViewController.html">SettingsTableViewController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/SettingsTableViewController/Index.html">– Index</a>
+                <a href="../Classes/SettingsTableViewController/IndexPaths.html">– IndexPaths</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/ShellStartup.html">ShellStartup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SilverAerogelTheme.html">SilverAerogelTheme</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/SourceControlTableViewController.html">SourceControlTableViewController</a>
@@ -111,7 +141,13 @@
                 <a href="../Classes/TerminalInfo.html">TerminalInfo</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/TerminalTheme.html">TerminalTheme</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/TerminalViewController.html">TerminalViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ThemesStoreViewController.html">ThemesStoreViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/WebViewController.html">WebViewController</a>
@@ -125,7 +161,10 @@
                 <a href="../Enums/ConnectionResult.html">ConnectionResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Enums/RemoteDirectoryAction.html">RemoteDirectoryAction</a>
+                <a href="../Enums/DirectoryAction.html">DirectoryAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ProductsID.html">ProductsID</a>
               </li>
             </ul>
           </li>
@@ -134,6 +173,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Color.html">Color</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/FileManager.html">FileManager</a>
@@ -175,6 +217,9 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/AnsiColors.html">AnsiColors</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/RemoteConnection.html">RemoteConnection</a>
               </li>
               <li class="nav-group-task">
@@ -190,7 +235,7 @@
             <h1>DirectoryTableViewController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">DirectoryTableViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span><span class="p">,</span> <span class="kt"><a href="../Protocols/LocalDirectoryTableViewControllerDelegate.html">LocalDirectoryTableViewControllerDelegate</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/DirectoryTableViewControllerDelegate.html">DirectoryTableViewControllerDelegate</a></span><span class="p">,</span> <span class="kt">GADBannerViewDelegate</span><span class="p">,</span> <span class="kt">UIDocumentPickerDelegate</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">DirectoryTableViewController</span><span class="p">:</span> <span class="kt">UITableViewController</span><span class="p">,</span> <span class="kt"><a href="../Protocols/LocalDirectoryTableViewControllerDelegate.html">LocalDirectoryTableViewControllerDelegate</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/DirectoryTableViewControllerDelegate.html">DirectoryTableViewControllerDelegate</a></span><span class="p">,</span> <span class="kt">GADBannerViewDelegate</span><span class="p">,</span> <span class="kt">UIDocumentPickerDelegate</span><span class="p">,</span> <span class="kt">UITableViewDragDelegate</span><span class="p">,</span> <span class="kt">UITableViewDropDelegate</span></code></pre>
 
                 </div>
               </div>
@@ -692,7 +737,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Go to given directory.</p>
 
                       </div>
                       <div class="declaration">
@@ -702,6 +747,25 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">goTo</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>directory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Directory where go.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1495,6 +1559,35 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC05localbcdE0yAA05LocalbcdE0C_10Foundation3URLV07didOpenB0tF"></a>
+                    <a name="//apple_ref/swift/Method/localDirectoryTableViewController(_:didOpenDirectory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC05localbcdE0yAA05LocalbcdE0C_10Foundation3URLV07didOpenB0tF">localDirectoryTableViewController(_:didOpenDirectory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code><a href="../Protocols/LocalDirectoryTableViewControllerDelegate.html">LocalDirectoryTableViewControllerDelegate</a></code>&lsquo;s <code>localDirectoryTableViewController(_:, didOpenDirectory:)</code> function.</p>
+
+<p>Open directory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">localDirectoryTableViewController</span><span class="p">(</span><span class="n">_</span> <span class="nv">localDirectoryTableViewController</span><span class="p">:</span> <span class="kt"><a href="../Classes/LocalDirectoryTableViewController.html">LocalDirectoryTableViewController</a></span><span class="p">,</span> <span class="n">didOpenDirectory</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -1678,6 +1771,144 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Table%20view%20drop%20delegate"></a>
+                <a name="//apple_ref/swift/Section/Table view drop delegate" class="dashAnchor"></a>
+                <a href="#/Table%20view%20drop%20delegate">
+                  <h3 class="section-name">Table view drop delegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:performDropWithCoordinator:"></a>
+                    <a name="//apple_ref/swift/Method/tableView(_:performDropWith:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:performDropWithCoordinator:">tableView(_:performDropWith:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UITableViewDropDelegate</code>&lsquo;s <code>tableView(_:, performDropWith:)</code> function.</p>
+
+<p>Move dropped file to destination folder.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">performDropWith</span> <span class="nv">coordinator</span><span class="p">:</span> <span class="kt">UITableViewDropCoordinator</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:dropSessionDidUpdate:withDestinationIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/tableView(_:dropSessionDidUpdate:withDestinationIndexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:dropSessionDidUpdate:withDestinationIndexPath:">tableView(_:dropSessionDidUpdate:withDestinationIndexPath:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UITableViewDropDelegate</code>&lsquo;s <code>tableView(_:, dropSessionDidUpdate:, withDestinationIndexPath:)</code> function.</p>
+
+<p>Set animation for moving files into a directory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">dropSessionDidUpdate</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">UIDropSession</span><span class="p">,</span> <span class="n">withDestinationIndexPath</span> <span class="nv">destinationIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">UITableViewDropProposal</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Table%20view%20drag%20delegate"></a>
+                <a name="//apple_ref/swift/Section/Table view drag delegate" class="dashAnchor"></a>
+                <a href="#/Table%20view%20drag%20delegate">
+                  <h3 class="section-name">Table view drag delegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:itemsForBeginningDragSession:atIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/tableView(_:itemsForBeginning:at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:itemsForBeginningDragSession:atIndexPath:">tableView(_:itemsForBeginning:at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UITableViewDragDelegate</code>&lsquo;s <code>tableView(_:, itemsForBeginning:, at:)</code> function.</p>
+
+<p>Start dragging file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">itemsForBeginning</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">UIDragSession</span><span class="p">,</span> <span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UIDragItem</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:canHandleDropSession:"></a>
+                    <a name="//apple_ref/swift/Method/tableView(_:canHandle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)DirectoryTableViewController(im)tableView:canHandleDropSession:">tableView(_:canHandle:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UITableViewDragDelegate</code>&lsquo;s <code>tableView(_:, canHandle:)</code> function.</p>
+
+<p>Allow dragging only if the selected file is not the parent directory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">canHandle</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">UIDropSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Static"></a>
                 <a name="//apple_ref/swift/Section/Static" class="dashAnchor"></a>
                 <a href="#/Static">
@@ -1688,9 +1919,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Pisth28DirectoryTableViewControllerC6actionAA06RemoteB6ActionOvZ"></a>
+                    <a name="/s:5Pisth28DirectoryTableViewControllerC6actionAA0B6ActionOvZ"></a>
                     <a name="//apple_ref/swift/Variable/action" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6actionAA06RemoteB6ActionOvZ">action</a>
+                    <a class="token" href="#/s:5Pisth28DirectoryTableViewControllerC6actionAA0B6ActionOvZ">action</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1705,7 +1936,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">action</span> <span class="o">=</span> <span class="kt"><a href="../Enums/RemoteDirectoryAction.html">RemoteDirectoryAction</a></span><span class="o">.</span><span class="k">none</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">action</span> <span class="o">=</span> <span class="kt"><a href="../Enums/DirectoryAction.html">DirectoryAction</a></span><span class="o">.</span><span class="k">none</span></code></pre>
 
                         </div>
                       </div>
@@ -1717,7 +1948,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
