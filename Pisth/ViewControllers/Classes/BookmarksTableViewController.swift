@@ -287,11 +287,13 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         
         // Banner ad
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.rootViewController = self
-        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-        bannerView.delegate = self
-        bannerView.load(GADRequest())
+        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerView.rootViewController = self
+            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+            bannerView.delegate = self
+            bannerView.load(GADRequest())
+        }
         
         // Search
         searchController = UISearchController(searchResultsController: nil)

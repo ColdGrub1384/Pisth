@@ -166,11 +166,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationItem.setRightBarButtonItems(buttons, animated: true)
         
         // Banner ad
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.rootViewController = self
-        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-        bannerView.delegate = self
-        bannerView.load(GADRequest())
+        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerView.rootViewController = self
+            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+            bannerView.delegate = self
+            bannerView.load(GADRequest())
+        }
     }
     
     /// `UIViewController`'s `viewDidAppear(_:)` function.
