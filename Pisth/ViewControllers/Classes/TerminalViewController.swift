@@ -688,6 +688,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         
                         if let result = result as? String {
                             self.selectionTextView.text = result
+                            self.selectionTextView.scrollRangeToVisible(NSRange(location: self.selectionTextView.text.nsString.length, length: 1))
                         }
                         
                         webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
