@@ -65,6 +65,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// If true, all addtional commands will not be executed and the shell with be launched 'purely'.
     var pureMode = false
     
+    /// Select text after loading terminal and put text in `selectionTextView`.
+    var selectText = false
+    
     /// Show commands history.
     ///
     /// - Parameters:
@@ -183,21 +186,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             preventKeyboardFromBeeingDismissed = false
             
-            resignFirstResponder()
+            selectText = true
             
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                self.webView.evaluateJavaScript("term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
-                    
-                    if let result = result as? String {
-                        self.selectionTextView.text = result
-                    }
-                    
-                    _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                        self.webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
-                    })
-                    
-                })
-            })
+            resignFirstResponder()
         } else {
             
             toolbar.items![1].tintColor = toolbar.tintColor
@@ -635,6 +626,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             selectionTextView.textColor = theme.foregroundColor
         }
         
+        webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
+            self.changeSize(completion: nil)
+        })
+        
         if console.isEmpty {
             
             // Session
@@ -658,10 +653,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 resignFirstResponder()
                 return
             }
-            
-            webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
-                self.changeSize(completion: nil)
-            })
             
             do {
                 if !self.pureMode {
@@ -691,8 +682,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
         } else {
-            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: nil)
-            changeSize(completion: nil)
+            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
+                if self.selectText {
+                    webView.evaluateJavaScript("term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
+                        
+                        if let result = result as? String {
+                            self.selectionTextView.text = result
+                        }
+                        
+                        webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
+                        
+                    })
+                    
+                    self.selectText = false
+                }
+            })
         }
     }
     
