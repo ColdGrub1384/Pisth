@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A050CCE1FF81E2400364306 /* ShellStartup.swift */; };
 		3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0AA6362024F4C300603142 /* BooleanInputView.xib */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
@@ -102,7 +101,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A050CCE1FF81E2400364306 /* ShellStartup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellStartup.swift; sourceTree = "<group>"; };
 		3A0AA6362024F4C300603142 /* BooleanInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooleanInputView.xib; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
@@ -344,7 +342,6 @@
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
 				3AA117F61FF4281E007BB84A /* fileIcon.swift */,
 				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
-				3A050CCE1FF81E2400364306 /* ShellStartup.swift */,
 				3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
 			);
@@ -680,7 +677,6 @@
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
 				3A4801B32028D4900069379B /* TerminalInfo.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
-				3A050CCF1FF81E2400364306 /* ShellStartup.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3A2EC44F20332EFC007D102D /* TerminalTheme.swift in Sources */,
 				3AB1884E2033420600E71C08 /* Ocean.swift in Sources */,

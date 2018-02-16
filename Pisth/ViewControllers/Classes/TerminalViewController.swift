@@ -163,7 +163,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        let items = [goBack, share, paste, history, space, arrows, ctrlKey, escKey, fKeys] as [UIBarButtonItem]
+        let items = [goBack, share, paste/*, history*/, space, arrows, ctrlKey, escKey, fKeys] as [UIBarButtonItem]
         toolbar.items = items
         toolbar.sizeToFit()
         
@@ -666,10 +666,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
                     }
                     
-                    for command in ShellStartup.commands {
-                        try session.channel.write("\(command); \(clearLastFromHistory);\n")
-                    }
-                    
                     try session.channel.write("clear; \(clearLastFromHistory)\n")
                     
                     if let command = self.command {
@@ -678,7 +674,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 } else {
                     session.channel.delegate = self
                     try session.channel.startShell()
-                    self.toolbar.items?[3].isEnabled = false
                 }
             } catch {}
         } else {
