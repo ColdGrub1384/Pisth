@@ -65,6 +65,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Select text after loading terminal and put text in `selectionTextView`.
     var selectText = false
     
+    /// Variable used to delay a long press of the arrow keys.
+    private var arrowsLongPressDelay = 2
+    
     /// Show commands history.
     ///
     /// - Parameters:
@@ -132,7 +135,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Add keyboard's toolbar.
-    func addToolbar() {
+    @objc func addToolbar() {
         guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[0] as? UIToolbar else {
             return
         }
@@ -152,7 +155,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 item.target = navigationController
                 item.action = #selector(navigationController?.popViewController(animated:))
             case ItemsTag.more.rawValue:
-                print("More")
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleSecondToolbar(_:)), for: .touchUpInside)
             case ItemsTag.finger.rawValue:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(sendArrows(_:)), for: .touchUpInside)
             case ItemsTag.hideKeyboard.rawValue:
@@ -173,6 +176,61 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         setToolbarItems([goBack, showKeyboard], animated: true)
         
         self.toolbar = toolbar
+    }
+    
+    /// Show or hide the first toolbar of the keyboard.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button.
+    @objc func toggleFirstToolbar(_ sender: UIButton) {
+        addToolbar()
+        
+        if isFirstResponder {
+            resignFirstResponder()
+            becomeFirstResponder()
+        }
+    }
+    
+    /// Show or hide the second toolbar of the keyboard.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button.
+    @objc func toggleSecondToolbar(_ sender: UIButton) {
+        guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[1] as? UIToolbar else {
+            return
+        }
+        
+        enum ItemsTag: Int {
+            case more = 1
+            case fKeys = 2
+            case arrowRight = 3
+            case arrowDown = 4
+            case arrowUp = 5
+            case arrowLeft = 6
+        }
+        
+        for item in toolbar.items ?? [] {
+            switch item.tag {
+            case ItemsTag.more.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleFirstToolbar(_:)), for: .touchUpInside)
+            case ItemsTag.fKeys.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
+            case ItemsTag.arrowLeft.rawValue, ItemsTag.arrowUp.rawValue, ItemsTag.arrowDown.rawValue, ItemsTag.arrowRight.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
+                
+                let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(insertKeyByLongPress(_:)))
+                (item.customView as? UIButton)?.addGestureRecognizer(longPressRecognizer)
+            default:
+                break
+            }
+        }
+        
+        self.toolbar = toolbar
+        
+        if isFirstResponder {
+            resignFirstResponder()
+            becomeFirstResponder()
+        }
     }
     
     /// Show plain output and allow selection.
@@ -486,6 +544,29 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 self.present(commandsVC, animated: true, completion: nil)
             }
+        } else if sender.tag == 8 { // Left arrow
+            try? channel.write(Keys.arrowLeft)
+        } else if sender.tag == 9 { // Up arrow
+            try? channel.write(Keys.arrowUp)
+        } else if sender.tag == 10 { // Down arrow
+            try? channel.write(Keys.arrowDown)
+        } else if sender.tag == 11 { // Right arrow
+            try? channel.write(Keys.arrowRight)
+        }
+    }
+    
+    @objc func insertKeyByLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        arrowsLongPressDelay -= 1
+        
+        guard arrowsLongPressDelay <= 0 else {
+            return
+        }
+        
+        arrowsLongPressDelay = 2
+        
+        if let button = sender.view as? UIButton {
+            insertKey(button)
         }
     }
     
