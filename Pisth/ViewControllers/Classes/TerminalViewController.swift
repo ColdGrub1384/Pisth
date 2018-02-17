@@ -156,7 +156,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case ItemsTag.finger.rawValue:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(sendArrows(_:)), for: .touchUpInside)
             case ItemsTag.hideKeyboard.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(resignFirstResponder), for: .touchUpInside)
+                item.target = self
+                item.action = #selector(resignFirstResponder)
             default:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
                 if item.tag == ItemsTag.ctrl.rawValue {
