@@ -1,6 +1,34 @@
 {
   "warnings": [
     {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Extensions/UIButton.swift",
+      "line": 5,
+      "symbol": "UIButton.borderWidth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Extensions/UIButton.swift",
+      "line": 14,
+      "symbol": "UIButton.cornerRadius",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Extensions/UIButton.swift",
+      "line": 23,
+      "symbol": "UIButton.borderColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Extensions/UIImage+init.swift",
+      "line": 4,
+      "symbol": "UIImage.init(color:size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
       "line": 15,
       "symbol": "DirectoryTableViewController.deinit",
@@ -25,6 +53,13 @@
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
       "line": 257,
       "symbol": "SettingsTableViewController.initThemesIAPSetting()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
+      "line": 560,
+      "symbol": "TerminalViewController.insertKeyByLongPress(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
