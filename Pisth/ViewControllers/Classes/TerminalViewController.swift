@@ -385,14 +385,22 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            webView.frame.size.height -= keyboardSize.height
-            webView.reload()
-            
-            if let arrowsVC = ArrowsViewController.current {
-                arrowsVC.view.frame = webView.frame
-            }
-            
-            selectionTextView.frame = webView.frame
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                if self.isFirstResponder {
+                    self.webView.frame.size.height -= keyboardSize.height
+                    
+                    self.webView.reload()
+                    
+                    if let arrowsVC = ArrowsViewController.current {
+                        arrowsVC.view.frame = self.webView.frame
+                    }
+                    
+                    self.selectionTextView.frame = self.webView.frame
+                } else {
+                    self.webView.frame.size.height -= keyboardSize.height
+                    self.webView.resignFirstResponder()
+                }
+            })
         }
     }
     
