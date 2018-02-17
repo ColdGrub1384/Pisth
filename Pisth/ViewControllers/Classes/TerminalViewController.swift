@@ -395,6 +395,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             // Create WebView
             webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            webView.isOpaque = false
+            webView.backgroundColor = .clear
             view.addSubview(webView)
             webView.backgroundColor = .black
             webView.navigationDelegate = self
@@ -717,7 +719,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let themeName = UserDefaults.standard.string(forKey: "terminalTheme")!
         if let theme = TerminalTheme.themes[themeName] {
             webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
-            webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.toHexString() ?? "#000000")'", completionHandler: nil)
+            webView.backgroundColor = theme.backgroundColor
             selectionTextView.backgroundColor = theme.backgroundColor
             selectionTextView.textColor = theme.foregroundColor
         }
