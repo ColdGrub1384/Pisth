@@ -238,18 +238,25 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Resize `webView`, dismiss and open keyboard (to resize terminal).
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
+        let wasFirstResponder = isFirstResponder
+        
         if isFirstResponder {
             resignFirstResponder()
         }
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            self.becomeFirstResponder()
+            if wasFirstResponder {
+                self.becomeFirstResponder()
+            }
         })
         
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             self.webView.frame = newFrame
             self.selectionTextView.frame = newFrame
+            if !wasFirstResponder {
+                self.webView.reload()
+            }
         })
     }
     
