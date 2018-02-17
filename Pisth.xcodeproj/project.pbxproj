@@ -38,6 +38,9 @@
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
+		3A89B5BC2037760D00B750D9 /* UIImage+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BB2037760D00B750D9 /* UIImage+init.swift */; };
+		3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */; };
+		3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BF2037793D00B750D9 /* UIButton.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
@@ -129,6 +132,9 @@
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
+		3A89B5BB2037760D00B750D9 /* UIImage+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+init.swift"; sourceTree = "<group>"; };
+		3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalToolbar.xib; sourceTree = "<group>"; };
+		3A89B5BF2037793D00B750D9 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
@@ -296,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */,
+				3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */,
 				3A0AA6362024F4C300603142 /* BooleanInputView.xib */,
 			);
 			path = "Interface Builder";
@@ -305,7 +312,9 @@
 			isa = PBXGroup;
 			children = (
 				3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */,
+				3A89B5BF2037793D00B750D9 /* UIButton.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
+				3A89B5BB2037760D00B750D9 /* UIImage+init.swift */,
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 			);
 			path = Extensions;
@@ -584,6 +593,7 @@
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
+				3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
 				3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */,
 			);
@@ -709,8 +719,10 @@
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3AB18854203343C100E71C08 /* SilverAerogel.swift in Sources */,
 				3AB1883F20333D0300E71C08 /* BasicTheme.swift in Sources */,
+				3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
 				3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */,
+				3A89B5BC2037760D00B750D9 /* UIImage+init.swift in Sources */,
 				3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */,
 				3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */,
 				3A2258911FF6A850001B9710 /* Reachability.swift in Sources */,

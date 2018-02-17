@@ -23,10 +23,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var command: String?
     
     /// Ctrl key button.
-    var ctrlKey: UIBarButtonItem!
-    
-    /// Disallow to dismiss keyboard.
-    var preventKeyboardFromBeeingDismissed = true
+    var ctrlKey: UIButton!
     
     /// Toolbar used in keyboard.
     var toolbar: UIToolbar!
@@ -42,9 +39,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         set {
             ctrl_ = newValue
             if self.ctrl_ {
-                ctrlKey.tintColor = .white
+                ctrlKey.setTitleColor(.lightGray, for: .normal)
             } else {
-                ctrlKey.tintColor = view.tintColor
+                ctrlKey.setTitleColor(.white, for: .normal)
             }
         }
         
@@ -136,40 +133,45 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Add keyboard's toolbar.
     func addToolbar() {
-        let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        toolbar.barStyle = .black
+        guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[0] as? UIToolbar else {
+            return
+        }
         
-        // Buttons
+        enum ItemsTag: Int {
+            case finger = 1
+            case ctrl = 2
+            case esc = 3
+            case more = 4
+            case hideKeyboard = 5
+            case back = 6
+        }
+        
+        for item in toolbar.items ?? [] {
+            switch item.tag {
+            case ItemsTag.back.rawValue:
+                item.target = navigationController
+                item.action = #selector(navigationController?.popViewController(animated:))
+            case ItemsTag.more.rawValue:
+                print("More")
+            case ItemsTag.finger.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendArrows(_:)), for: .touchUpInside)
+            case ItemsTag.hideKeyboard.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(resignFirstResponder), for: .touchUpInside)
+            default:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
+                if item.tag == ItemsTag.ctrl.rawValue {
+                    self.ctrlKey = (item.customView as? UIButton)
+                }
+            }
+        }
         
         let goBack = UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))
         
-        let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(selectionMode(_:)))
+        let showKeyboard = UIBarButtonItem(image: #imageLiteral(resourceName: "show-keyboard"), style: .plain, target: self, action: #selector(becomeFirstResponder))
         
-        let paste = UIBarButtonItem(image: #imageLiteral(resourceName: "clipboard"), style: .plain, target: self, action: #selector(pasteText))
-        
-        let history = UIBarButtonItem(image:#imageLiteral(resourceName: "history"), style: .plain, target: self, action: #selector(showHistory(_:)))
-        
-        let arrows = UIBarButtonItem(image: #imageLiteral(resourceName: "touch"), style: .plain, target: self, action: #selector(sendArrows(_:)))
-        
-        ctrlKey = UIBarButtonItem(title: "Ctrl", style: .done, target: self, action: #selector(insertKey(_:)))
-        ctrlKey.tag = 1
-        
-        let escKey = UIBarButtonItem(title: "⎋", style: .done, target: self, action: #selector(insertKey(_:)))
-        escKey.setTitleTextAttributes([NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)], for: .normal)
-        escKey.tag = 6
-        
-        let fKeys = UIBarButtonItem(title: "F1-12", style: .done, target: self, action: #selector(insertKey(_:)))
-        fKeys.tag = 7
-        
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        let items = [goBack, share, paste/*, history*/, space, arrows, ctrlKey, escKey, fKeys] as [UIBarButtonItem]
-        toolbar.items = items
-        toolbar.sizeToFit()
+        setToolbarItems([goBack, showKeyboard], animated: true)
         
         self.toolbar = toolbar
-        
-        setToolbarItems([UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:))), UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(selectionMode(_:)))], animated: true)
     }
     
     /// Show plain output and allow selection.
@@ -183,8 +185,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             toolbar.items![1].tintColor = .white
             toolbarItems![1].tintColor = .white
-            
-            preventKeyboardFromBeeingDismissed = false
             
             selectText = true
             
@@ -218,9 +218,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// Returns inverted value of `preventKeyboardFromBeeingDismissed` and set it to true.
     override var canResignFirstResponder: Bool {
-        let canDoIt = preventKeyboardFromBeeingDismissed.inverted
-        preventKeyboardFromBeeingDismissed = true
-        return canDoIt
+        return true
     }
     
     /// `UIViewController`'s `inputAccessoryView` variable.
@@ -241,7 +239,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if isFirstResponder {
-            preventKeyboardFromBeeingDismissed = false
             resignFirstResponder()
         }
         
@@ -350,7 +347,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !readOnly {
                 becomeFirstResponder()
             } else {
-                preventKeyboardFromBeeingDismissed = false
+                toolbarItems?.remove(at: 1)
             }
         }
     }
@@ -411,16 +408,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Enable or disable swiping to send arrow keys.
     ///
     /// - Parameters:
-    ///     - sender: Sender bar button item. If its tint color is blue, this function will enable swiping and set its tint color to white, and if its tint color is white, this function will disable swiping and set its tint color to blue.
-    @objc func sendArrows(_ sender: UIBarButtonItem) {
+    ///     - sender: Sender button. If its tint color is white, this function will enable swiping and set its tint color to white, and if its tint color is gray, this function will disable swiping and set its tint color to blue.
+    @objc func sendArrows(_ sender: UIButton) {
         
-        if sender.tintColor != .white {
+        if sender.tintColor != .lightGray {
             let arrowsVC = ArrowsViewController()
             
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
-            sender.tintColor = .white
+            sender.tintColor = .lightGray
         } else {
             
             sender.isEnabled = false
@@ -445,7 +442,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 })
             })
             
-            sender.tintColor = toolbar.tintColor
+            sender.tintColor = .white
         }
     }
     
@@ -453,7 +450,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// - Parameters:
     ///     - sender: Sender bar button item.
-    @objc func insertKey(_ sender: UIBarButtonItem) {
+    @objc func insertKey(_ sender: UIButton) {
         
         guard let channel = ConnectionManager.shared.session?.channel else { return }
         
@@ -468,7 +465,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             commandsVC.modalPresentationStyle = .popover
             
             if let popover = commandsVC.popoverPresentationController {
-                popover.barButtonItem = sender
+                popover.sourceView = sender
                 popover.delegate = commandsVC
                 
                 self.present(commandsVC, animated: true, completion: nil)
@@ -513,10 +510,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             self.console += message
             
             if self.console.contains(TerminalViewController.close) { // Close shell
-                self.preventKeyboardFromBeeingDismissed = false
                 self.console = self.console.replacingOccurrences(of: TerminalViewController.close, with: "")
                 self.resignFirstResponder()
                 self.readOnly = true
+                if self.toolbarItems?.count == 2 {
+                    self.toolbarItems?.remove(at: 1)
+                }
             }
             
             if self.webView != nil {
@@ -641,7 +640,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !session.isConnected {
                 let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
-                preventKeyboardFromBeeingDismissed = false
                 resignFirstResponder()
                 return
             }
@@ -649,7 +647,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !session.isAuthorized {
                 let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
-                preventKeyboardFromBeeingDismissed = false
                 resignFirstResponder()
                 return
             }
