@@ -216,7 +216,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
 
     /// `UIViewController`'s `canResignFirstResponder` variable.
     ///
-    /// Returns inverted value of `preventKeyboardFromBeeingDismissed` and set it to true.
+    /// Returns `true`.
     override var canResignFirstResponder: Bool {
         return true
     }
