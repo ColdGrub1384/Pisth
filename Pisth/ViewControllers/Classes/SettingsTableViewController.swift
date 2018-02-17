@@ -288,7 +288,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     ///
     /// - Returns: `9`.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     
     /// `UICollectionViewDataSource`'s `collectionView(_:, cellForItemAt:)` function.

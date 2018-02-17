@@ -66,7 +66,7 @@ struct AnsiColors {
 class TerminalTheme {
     
     /// Get theme by name.
-    static let themes = ["Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme()] as [String:TerminalTheme]
+    static let themes = ["Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme(), "Ubuntu":UbuntuTheme()] as [String:TerminalTheme]
     
     /// Cursor colors.
     var cursorColor: Color? {
