@@ -10,12 +10,12 @@ import Foundation
 /// Ubuntu theme for the terminal.
 class UbuntuTheme: TerminalTheme {
     
-    /// Returns gray.
+    /// Returns purple.
     override var backgroundColor: Color? {
         return Color(red: 48/255, green: 10/255, blue: 36/255, alpha: 1)
     }
     
-    /// Returns black.
+    /// Returns white.
     override var foregroundColor: Color? {
         return Color(red: 255/255, green: 253/255, blue: 244/255, alpha: 1)
     }
