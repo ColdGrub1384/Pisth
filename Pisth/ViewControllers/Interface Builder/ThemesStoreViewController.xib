@@ -41,7 +41,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Unlock 8 new themes for the terminal and remove ads." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Fv-Ku-gig">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Unlock 9 new themes for the terminal and remove ads." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Fv-Ku-gig">
                                     <rect key="frame" x="46" y="99" width="284" height="78"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="78" id="pns-C3-18L"/>
