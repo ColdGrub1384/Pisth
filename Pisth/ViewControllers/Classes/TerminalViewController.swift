@@ -397,7 +397,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if console.isEmpty {
             
             // Create WebView
-            webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
             webView.isOpaque = false
             webView.backgroundColor = .clear
             view.addSubview(webView)
@@ -449,22 +449,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let userInfo = notification.userInfo {
             let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
             
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                if self.isFirstResponder {
-                    self.webView.frame.size.height -= keyboardSize.height
-                    
-                    self.webView.reload()
-                    
-                    if let arrowsVC = ArrowsViewController.current {
-                        arrowsVC.view.frame = self.webView.frame
-                    }
-                    
-                    self.selectionTextView.frame = self.webView.frame
-                } else {
-                    self.webView.frame.size.height -= keyboardSize.height
-                    self.webView.resignFirstResponder()
-                }
-            })
+            self.webView.frame.size.height -= keyboardSize.height
+            
+            self.webView.reload()
+            
+            if let arrowsVC = ArrowsViewController.current {
+                arrowsVC.view.frame = self.webView.frame
+            }
+            
+            self.selectionTextView.frame = self.webView.frame
         }
     }
     
