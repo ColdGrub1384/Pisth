@@ -14,7 +14,7 @@
     <a title="TerminalViewController Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Pisth Docs</a> (95% documented)</p>
+        <p><a href="../index.html">Pisth Docs</a> (96% documented)</p>
         <p class="header-right"><a href="https://github.com/ColdGrub1384/Pisth"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fpisth%2Egithub%2Eio%2Fdocs%2Fdocsets%2FPisth%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -144,6 +144,9 @@
                 <a href="../Classes/TerminalViewController.html">TerminalViewController</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/TerminalWebView.html">TerminalWebView</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/ThemesStoreViewController.html">ThemesStoreViewController</a>
               </li>
               <li class="nav-group-task">
@@ -241,7 +244,7 @@
             <h1>TerminalViewController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TerminalViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">NMSSHChannelDelegate</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span><span class="p">,</span> <span class="kt">UIKeyInput</span><span class="p">,</span> <span class="kt">UITextInputTraits</span><span class="p">,</span> <span class="kt">MCNearbyServiceAdvertiserDelegate</span><span class="p">,</span> <span class="kt">MCSessionDelegate</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TerminalViewController</span><span class="p">:</span> <span class="kt">UIViewController</span><span class="p">,</span> <span class="kt">NMSSHChannelDelegate</span><span class="p">,</span> <span class="kt">WKNavigationDelegate</span><span class="p">,</span> <span class="kt">UIKeyInput</span><span class="p">,</span> <span class="kt">UITextInputTraits</span><span class="p">,</span> <span class="kt">MCNearbyServiceAdvertiserDelegate</span><span class="p">,</span> <span class="kt">MCSessionDelegate</span><span class="p">,</span> <span class="kt">UIGestureRecognizerDelegate</span></code></pre>
 
                 </div>
               </div>
@@ -859,6 +862,87 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)sendPassword"></a>
+                    <a name="//apple_ref/swift/Method/sendPassword()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)sendPassword">sendPassword()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send user password.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">sendPassword</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)showNavBar"></a>
+                    <a name="//apple_ref/swift/Method/showNavBar()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)showNavBar">showNavBar()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Hide or show navigation bar.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">showNavBar</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)showActions:"></a>
+                    <a name="//apple_ref/swift/Method/showActions(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)showActions:">showActions(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enter in selection mode or paste text.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">showActions</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIBarButtonItem</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -1176,9 +1260,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardWillShow:"></a>
-                    <a name="//apple_ref/swift/Method/keyboardWillShow(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardWillShow:">keyboardWillShow(_:)</a>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardDidShow:"></a>
+                    <a name="//apple_ref/swift/Method/keyboardDidShow(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardDidShow:">keyboardDidShow(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1186,14 +1270,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard will show.</p>
+                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard is shown.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">keyboardWillShow</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span><span class="kt">Notification</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">keyboardDidShow</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span><span class="kt">Notification</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1203,9 +1287,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardWillHide:"></a>
-                    <a name="//apple_ref/swift/Method/keyboardWillHide(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardWillHide:">keyboardWillHide(_:)</a>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardDidHide:"></a>
+                    <a name="//apple_ref/swift/Method/keyboardDidHide(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)keyboardDidHide:">keyboardDidHide(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1213,14 +1297,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard will hide.</p>
+                        <p>Resize <code><a href="../Classes/TerminalViewController.html#/s:5Pisth22TerminalViewControllerC03webC0SQySo05WKWebC0CGv">webView</a></code> when keyboard is hidden.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">keyboardWillHide</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span><span class="kt">Notification</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span> <span class="kd">func</span> <span class="nf">keyboardDidHide</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span><span class="kt">Notification</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1932,6 +2016,48 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Gesture%20recognizer%20delegate"></a>
+                <a name="//apple_ref/swift/Section/Gesture recognizer delegate" class="dashAnchor"></a>
+                <a href="#/Gesture%20recognizer%20delegate">
+                  <h3 class="section-name">Gesture recognizer delegate</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@Pisth@objc(cs)TerminalViewController(im)gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:"></a>
+                    <a name="//apple_ref/swift/Method/gestureRecognizer(_:shouldRecognizeSimultaneouslyWith:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@Pisth@objc(cs)TerminalViewController(im)gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:">gestureRecognizer(_:shouldRecognizeSimultaneouslyWith:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>UIGestureRecognizerDelegate</code>&lsquo;s <code>gestureRecognizer(_:, shouldRecognizeSimultaneouslyWith:)</code> function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">gestureRecognizer</span><span class="p">(</span><span class="n">_</span> <span class="nv">gestureRecognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">,</span> <span class="n">shouldRecognizeSimultaneouslyWith</span> <span class="nv">otherGestureRecognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Static"></a>
                 <a name="//apple_ref/swift/Section/Static" class="dashAnchor"></a>
                 <a href="#/Static">
@@ -1971,7 +2097,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-17)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-19)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

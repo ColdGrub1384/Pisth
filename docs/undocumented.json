@@ -58,7 +58,7 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 560,
+      "line": 646,
       "symbol": "TerminalViewController.insertKeyByLongPress(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
