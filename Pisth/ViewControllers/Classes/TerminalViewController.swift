@@ -12,7 +12,7 @@ import MultipeerConnectivity
 import BiometricAuthentication
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
     
     /// Directory to open.
     var pwd: String?
@@ -289,6 +289,47 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Hide or show navigation bar.
+    @objc func showNavBar() {
+        navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden.inverted ?? true, animated: true)
+        webView.reload()
+    }
+    
+    /// Enter in selection mode or paste text.
+    @objc func showActions(_ sender: UIBarButtonItem) {
+        var actions = [UIAlertAction]()
+        
+        if !selectionTextView.isHidden {
+            actions.append(UIAlertAction(title: "Insert mode", style: .default, handler: { (_) in
+                self.selectionTextView.isHidden = true
+                
+                self.becomeFirstResponder()
+            }))
+        } else {
+            actions.append(UIAlertAction(title: "Selection mode", style: .default, handler: { (_) in
+                self.selectionTextView.isHidden = false
+                
+                self.selectText = true
+                
+                self.resignFirstResponder()
+            }))
+        }
+        
+        actions.append(UIAlertAction(title: "Paste", style: .default, handler: { (_) in
+            self.insertText(UIPasteboard.general.string ?? "")
+        }))
+        
+        actions.append(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        let alert = UIAlertController(title: "Select action", message: nil, preferredStyle: .actionSheet)
+        alert.popoverPresentationController?.barButtonItem = sender
+        for action in actions {
+            alert.addAction(action)
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -373,6 +414,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let connection = ConnectionManager.shared.connection {
+            if connection.name.isEmpty {
+                title = "\(connection.username)@\(connection.host)"
+            } else {
+                title = connection.name
+            }
+        }
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:)))]
+        
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
@@ -424,6 +475,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             // Create WebView
             webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             webView.isOpaque = false
             webView.backgroundColor = .clear
             view.addSubview(webView)
@@ -431,6 +483,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView.navigationDelegate = self
             webView.scrollView.isScrollEnabled = false
             webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
+            tapGesture.delegate = self
+            webView.addGestureRecognizer(tapGesture)
             
             // Create selection Textview
             selectionTextView = UITextView(frame: webView.frame)
@@ -501,7 +557,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        webView.frame = view.frame
+        webView.frame = view.bounds
         webView.reload()
         
         if let arrowsVC = ArrowsViewController.current {
@@ -897,6 +953,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// `MCSessionDelegate`'s `session(_:, didFinishReceivingResourceWithName:, fromPeer:, at:, withError:)` function.
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving resource")
+    }
+    
+    // MARK: - Gesture recognizer delegate
+    
+    /// `UIGestureRecognizerDelegate`'s `gestureRecognizer(_:, shouldRecognizeSimultaneouslyWith:)` function.
+    ///
+    /// - Returns: `true`.
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     // MARK: - Static
