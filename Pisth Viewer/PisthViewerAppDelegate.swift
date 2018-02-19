@@ -19,6 +19,19 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Web view used to display licenses.
     @IBOutlet weak var licensesWebView: WKWebView!
     
+    /// Paste text.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func pasteText(_ sender: Any) {
+        let string = NSPasteboard.general.string(forType: .string) ?? ""
+        guard let data = string.data(using: .utf8) else {
+            return
+        }
+        try? mcSession?.send(data, toPeers: mcSession?.connectedPeers ?? [], with: .unreliable)
+    }
+    
+    
     // MARK: - Show nearby devices
     
     /// Nearby devices.

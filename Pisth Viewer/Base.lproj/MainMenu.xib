@@ -101,6 +101,12 @@
                                     <action selector="copy:" target="-1" id="G1f-GL-Joy"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Paste" id="REK-S0-Pdh">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="pasteText:" target="Voe-Tx-rLC" id="auT-1H-ut9"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Select All" id="Ruw-6m-B2m">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
