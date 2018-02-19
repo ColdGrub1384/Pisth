@@ -65,6 +65,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Select text after loading terminal and put text in `selectionTextView`.
     var selectText = false
     
+    /// Ignored notifications name strings.
+    /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
+    private var ignoredNotifications = [Notification.Name]()
+    
     /// Variable used to delay a long press of the arrow keys.
     private var arrowsLongPressDelay = 2
     
@@ -352,8 +356,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.trailingBarButtonGroups = []
         
         // Resize webView
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         // Setup connectivity
         peerID = MCPeerID(displayName: UIDevice.current.name)
@@ -444,37 +448,45 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - Keyboard
     
-    /// Resize `webView` when keyboard will show.
-    @objc func keyboardWillShow(_ notification:Notification) {
-        if let userInfo = notification.userInfo {
-            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
-            
-            self.webView.frame.size.height -= keyboardSize.height
-            
-            self.webView.reload()
-            
-            if let arrowsVC = ArrowsViewController.current {
-                arrowsVC.view.frame = self.webView.frame
+    /// Resize `webView` when keyboard is shown.
+    @objc func keyboardDidShow(_ notification:Notification) {
+        
+        guard !ignoredNotifications.contains(notification.name) else {
+            if let i = ignoredNotifications.index(of: notification.name) {
+                ignoredNotifications.remove(at: i)
             }
-            
-            self.selectionTextView.frame = self.webView.frame
+            return
         }
+        
+        let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
+        webView.frame.size.height = toolbarFrame.origin.y
+        webView.reload()
+        
+        if let arrowsVC = ArrowsViewController.current {
+            arrowsVC.view.frame = webView.frame
+        }
+            
+        selectionTextView.frame = webView.frame
     }
     
-    /// Resize `webView` when keyboard will hide.
-    @objc func keyboardWillHide(_ notification:Notification) {
-        if let userInfo = notification.userInfo {
-            let keyboardSize: CGSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.size
-            
-            webView.frame.size.height += keyboardSize.height
-            webView.reload()
-            
-            if let arrowsVC = ArrowsViewController.current {
-                arrowsVC.view.frame = webView.frame
+    /// Resize `webView` when keyboard is hidden.
+    @objc func keyboardDidHide(_ notification:Notification) {
+        
+        guard !ignoredNotifications.contains(notification.name) else {
+            if let i = ignoredNotifications.index(of: notification.name) {
+                ignoredNotifications.remove(at: i)
             }
-            
-            selectionTextView.frame = webView.frame
+            return
         }
+        
+        webView.frame = view.frame
+        webView.reload()
+        
+        if let arrowsVC = ArrowsViewController.current {
+            arrowsVC.view.frame = webView.frame
+        }
+        
+        selectionTextView.frame = webView.frame
     }
     
     /// Enable or disable swiping to send arrow keys.
