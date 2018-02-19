@@ -247,8 +247,8 @@
 			children = (
 				3A4801B22028D48F0069379B /* TerminalInfo.swift */,
 				3A43ECE41FF6DD4F00C9FA14 /* Keys.swift */,
-				3A288B571FF6810E008C523A /* String.swift */,
-				3AB1883A2033367F00E71C08 /* Color.swift */,
+				3A60970E203B564E00CB0776 /* Extensions */,
+				3A2EC44D20332EDB007D102D /* Themes */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -263,6 +263,15 @@
 				3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		3A60970E203B564E00CB0776 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A288B571FF6810E008C523A /* String.swift */,
+				3AB1883A2033367F00E71C08 /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3A665F2C2027505A0098C482 /* Singletons */ = {
@@ -342,7 +351,6 @@
 				3A36DF9E20012D500089039F /* xterm.css */,
 				3A36DF9F20012D510089039F /* xterm.js */,
 				3A38FC4F1FF56AA800690382 /* terminal.html */,
-				3A2EC44D20332EDB007D102D /* Themes */,
 			);
 			path = Terminal;
 			sourceTree = "<group>";
