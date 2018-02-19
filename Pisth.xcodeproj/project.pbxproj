@@ -36,6 +36,7 @@
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
+		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
 		3A6F5BF12038C87300347171 /* Ubuntu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6F5BF02038C87300347171 /* Ubuntu.swift */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
@@ -131,6 +132,7 @@
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
+		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A6F5BF02038C87300347171 /* Ubuntu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ubuntu.swift; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			children = (
 				3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */,
 				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
+				3A60970B203B1F5600CB0776 /* TerminalWebView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
+				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
 				3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */,
 				3AB188522033432800E71C08 /* RedSands.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
