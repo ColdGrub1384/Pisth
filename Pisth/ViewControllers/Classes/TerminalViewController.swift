@@ -373,6 +373,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Close and open shell, add `toolbar` to keyboard and configure `navigationController`.
     override func viewWillAppear(_ animated: Bool) {
         
+        edgesForExtendedLayout = []
+        
         if console.isEmpty {
             
             if !pureMode {
@@ -386,8 +388,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             addToolbar()
         }
-        
-        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     /// `UIViewController``s `viewDidAppear(_:)` function.
@@ -397,6 +397,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewDidAppear(animated)
         
         navigationController?.setToolbarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         
         if console.isEmpty {
             
