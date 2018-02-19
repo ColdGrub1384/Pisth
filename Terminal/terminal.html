@@ -47,13 +47,7 @@
                 if (term.rows !== geometry.rows || term.cols !== geometry.cols) {
                     term.renderer.clear();
                     
-                    var rows = geometry.rows;
-                    
-                    if (term.fontSize < 15) {
-                        rows = rows-1;
-                    }
-                    
-                    term.resize(geometry.cols, rows);
+                    term.resize(geometry.cols, geometry.rows-1);
                 }
             }
         }
