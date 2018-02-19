@@ -18,7 +18,24 @@
             <items>
                 <barButtonItem tag="6" image="back" id="3Fw-cN-o1B"/>
                 <barButtonItem tag="5" image="hide-keyboard" id="xrd-uf-x6E"/>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="B3e-xn-CZ4"/>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="QRp-4N-eHU"/>
+                <barButtonItem tag="7" style="plain" id="fTO-Gv-G97">
+                    <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZL4-L1-AnU">
+                        <rect key="frame" x="129" y="7" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="password">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </barButtonItem>
+                <barButtonItem width="6" style="plain" systemItem="fixedSpace" id="RYV-1q-XLI"/>
                 <barButtonItem tag="1" style="plain" id="Fi6-Vu-My2">
                     <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oIx-tw-Sjz">
                         <rect key="frame" x="165" y="7" width="30" height="30"/>
@@ -196,6 +213,7 @@
     <resources>
         <image name="back" width="22" height="22"/>
         <image name="hide-keyboard" width="22" height="22"/>
+        <image name="password" width="21" height="21"/>
         <image name="touch" width="22" height="19"/>
     </resources>
 </document>

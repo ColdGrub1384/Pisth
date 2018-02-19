@@ -9,6 +9,7 @@ import UIKit
 import NMSSH
 import WebKit
 import MultipeerConnectivity
+import BiometricAuthentication
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
@@ -151,6 +152,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case more = 4
             case hideKeyboard = 5
             case back = 6
+            case sendPassword = 7
         }
         
         for item in toolbar.items ?? [] {
@@ -165,6 +167,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case ItemsTag.hideKeyboard.rawValue:
                 item.target = self
                 item.action = #selector(resignFirstResponder)
+            case ItemsTag.sendPassword.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendPassword), for: .touchUpInside)
             default:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
                 if item.tag == ItemsTag.ctrl.rawValue {
@@ -265,6 +269,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @objc func pasteText() {
         if isFirstResponder {
             insertText(UIPasteboard.general.string ?? "")
+        }
+    }
+    
+    /// Send user password.
+    @objc func sendPassword() {
+        if isFirstResponder {
+            
+            BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to send '\(ConnectionManager.shared.connection?.username ?? "user")' password.", fallbackTitle: "", cancelTitle: nil, success: {
+                
+                self.insertText(ConnectionManager.shared.connection?.password ?? "")
+                
+            }, failure: { (error) in
+                
+                if error == .biometryNotEnrolled || error == .passcodeNotSet {
+                    self.insertText(ConnectionManager.shared.connection?.password ?? "")
+                }
+            })
         }
     }
     
