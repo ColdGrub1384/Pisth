@@ -58,7 +58,7 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 646,
+      "line": 658,
       "symbol": "TerminalViewController.insertKeyByLongPress(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -71,24 +71,10 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
+      "file": "/Users/adrian/Desktop/Pisth/Shared/Extensions/Color.swift",
       "line": null,
-      "symbol": "Color",
+      "symbol": "SWColor",
       "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
-      "line": 13,
-      "symbol": "Color.init(hexString:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Shared/Color.swift",
-      "line": 36,
-      "symbol": "Color.toHexString()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
