@@ -88,6 +88,7 @@
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
 		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
+		3AF74774203C682D00400CB0 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3AF74773203C682D00400CB0 /* fit.js */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
@@ -173,6 +174,7 @@
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
+		3AF74773203C682D00400CB0 /* fit.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = fit.js; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 			children = (
 				3A36DF9E20012D500089039F /* xterm.css */,
 				3A36DF9F20012D510089039F /* xterm.js */,
+				3AF74773203C682D00400CB0 /* fit.js */,
 				3A38FC4F1FF56AA800690382 /* terminal.html */,
 			);
 			path = Terminal;
@@ -608,6 +611,7 @@
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
+				3AF74774203C682D00400CB0 /* fit.js in Resources */,
 				3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
 				3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */,
