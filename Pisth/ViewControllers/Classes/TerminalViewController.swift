@@ -719,7 +719,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                     
                     // Send data to peer
-                    let info = TerminalInfo(message: message, terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     if self.mcSession.connectedPeers.count > 0 {
@@ -931,7 +931,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             print("Connected!")
             DispatchQueue.main.async {
                 // Send data to peer
-                let info = TerminalInfo(message: self.console, terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
                 NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                 let data = NSKeyedArchiver.archivedData(withRootObject: info)
                 try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)

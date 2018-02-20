@@ -141,6 +141,8 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         
         if let info = NSKeyedUnarchiver.unarchiveObject(with: data) as? TerminalInfo {
         
+            let theme = TerminalTheme.themes[info.themeName] ?? ProTheme()
+            
             DispatchQueue.main.async {
                 
                 let width = CGFloat(info.terminalSize[0])
@@ -152,6 +154,8 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 self.outlineView.superview?.superview?.frame.origin.y = 0
                 
                 self.webView.evaluateJavaScript("fit(term); term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
+                self.webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
+                self.webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.toHexString() ?? "#000000")'", completionHandler: nil)
             }
         }
     }

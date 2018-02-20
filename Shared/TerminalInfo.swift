@@ -19,8 +19,9 @@ class TerminalInfo: NSObject, NSCoding {
     /// - Parameters:
     ///     - message: Message to show in terminal.
     ///     - terminalSize: Size of terminal (in Floats, not in cols or rows). This is an Array, so provide two values, the first, width and the second, height.
-    init(message: String, terminalSize: [Float]) {
+    init(message: String, themeName: String, terminalSize: [Float]) {
         self.message = message
+        self.themeName = themeName
         
         if terminalSize.count == 1 {
             terminalSize_ = [terminalSize[0], 0]
@@ -31,8 +32,11 @@ class TerminalInfo: NSObject, NSCoding {
         }
     }
     
+    /// Name of theme for the terminal.
+    var themeName = "Pro"
+    
     /// Message to show in terminal.
-    var message: String = ""
+    var message = ""
     
     /// Size of terminal (in Floats, not in cols or rows).
     ///
@@ -68,6 +72,7 @@ class TerminalInfo: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(message, forKey: "message")
         aCoder.encode(terminalSize, forKey: "terminalSize")
+        aCoder.encode(themeName, forKey: "theme")
     }
     
     /// `NSCoding`'s `init(coder:)` function.
@@ -85,7 +90,12 @@ class TerminalInfo: NSObject, NSCoding {
             return
         }
         
+        guard let terminalTheme = aDecoder.decodeObject(forKey: "theme") as? String else {
+            return
+        }
+        
         self.message = message
         self.terminalSize = terminalSize
+        self.themeName = terminalTheme
     }
 }
