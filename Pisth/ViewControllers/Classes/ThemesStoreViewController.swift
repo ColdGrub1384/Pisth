@@ -135,7 +135,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         webView.evaluateJavaScript("term.writeln('\(Keys.esc)[7m \(name) Theme \(Keys.esc)[0m')", completionHandler: nil)
         webView.evaluateJavaScript("term.writeln('')", completionHandler: nil)
         webView.evaluateJavaScript("term.writeln('')", completionHandler: nil)
-        webView.evaluateJavaScript("writeText('Pisth:~ pisth$ ')", completionHandler: nil)
+        webView.evaluateJavaScript("term.write('Pisth:~ pisth$ ')", completionHandler: nil)
         webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.toHexString() ?? "#000000")'", completionHandler: nil)
     }
     

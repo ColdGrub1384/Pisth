@@ -151,7 +151,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 self.webView.frame.origin = CGPoint(x: self.outlineView.frame.width, y: 0)
                 self.outlineView.superview?.superview?.frame.origin.y = 0
                 
-                self.webView.evaluateJavaScript("fit(term); writeText(\(info.message.javaScriptEscapedString))", completionHandler: nil)
+                self.webView.evaluateJavaScript("fit(term); term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
             }
         }
     }
@@ -196,12 +196,12 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     
     /// Show help message.
     func showHelpMessage() {
-        webView.evaluateJavaScript("writeText('Open a terminal from Pisth in your iOS device.')", completionHandler: nil)
+        webView.evaluateJavaScript("term.write('Open a terminal from Pisth in your iOS device.')", completionHandler: nil)
     }
     
     /// Clear terminal.
     func clearTerminal() {
-        webView.evaluateJavaScript("writeText('\(Keys.esc)[2J\(Keys.esc)[H\')", completionHandler: nil)
+        webView.evaluateJavaScript("term.write('\(Keys.esc)[2J\(Keys.esc)[H\')", completionHandler: nil)
     }
     
     /// Web view used to display terminal.

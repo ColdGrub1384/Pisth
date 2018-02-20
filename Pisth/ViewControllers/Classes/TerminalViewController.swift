@@ -716,7 +716,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             if self.webView != nil {
-                self.webView.evaluateJavaScript("writeText(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
+                self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                     
                     // Send data to peer
                     let info = TerminalInfo(message: message, terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
@@ -836,14 +836,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             if !session.isConnected {
                 let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
-                webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
+                webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 resignFirstResponder()
                 return
             }
             
             if !session.isAuthorized {
                 let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
-                webView.evaluateJavaScript("writeText(\(errorMessage))", completionHandler: nil)
+                webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 resignFirstResponder()
                 return
             }
@@ -871,7 +871,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
         } else {
-            webView.evaluateJavaScript("writeText(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
+            webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
                 if self.selectText {
                     webView.evaluateJavaScript("term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
                         
