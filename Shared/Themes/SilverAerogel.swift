@@ -5,10 +5,24 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
-import Foundation
+#if os(iOS)
+    import UIKit
+#endif
 
 /// Silver Aerogel theme for the terminal.
 class SilverAerogelTheme: TerminalTheme {
+    
+    #if os(iOS)
+        /// Returns light.
+        override var keyboardAppearance: UIKeyboardAppearance {
+            return .light
+        }
+    
+        /// Returns default.
+        override var toolbarStyle: UIBarStyle {
+            return .default
+        }
+    #endif
     
     /// Returns gray.
     override var backgroundColor: Color? {

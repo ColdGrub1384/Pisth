@@ -5,8 +5,24 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
+#if os(iOS)
+    import UIKit
+#endif
+
 /// Basic theme for the terminal.
 class BasicTheme: TerminalTheme {
+    
+    #if os(iOS)
+        /// Returns light.
+        override var keyboardAppearance: UIKeyboardAppearance {
+            return .light
+        }
+    
+        /// Returns default.
+        override var toolbarStyle: UIBarStyle {
+            return .default
+        }
+    #endif
     
     /// Returns white.
     override var backgroundColor: Color? {

@@ -5,8 +5,6 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
-import Foundation
-
 /// Homebrew theme for the terminal.
 class HomebrewTheme: TerminalTheme {
     

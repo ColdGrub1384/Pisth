@@ -145,6 +145,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
+        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
+            return
+        }
+        
+        toolbar.barStyle = theme.toolbarStyle
+        
         enum ItemsTag: Int {
             case finger = 1
             case ctrl = 2
@@ -207,6 +213,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[1] as? UIToolbar else {
             return
         }
+        
+        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
+            return
+        }
+        
+        toolbar.barStyle = theme.toolbarStyle
         
         enum ItemsTag: Int {
             case more = 1
@@ -780,7 +792,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// `UITextInputTraits`'s `keyboardAppearance` variable.
     ///
     /// `UIKeyboardAppearance.dark`
-    var keyboardAppearance: UIKeyboardAppearance = .dark
+    var keyboardAppearance: UIKeyboardAppearance = ((TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] ?? ProTheme()).keyboardAppearance)
     
     /// `UITextInputTraits`'s `autocorrectionType` variable.
     ///

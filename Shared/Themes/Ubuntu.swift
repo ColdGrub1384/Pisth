@@ -5,8 +5,6 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
-import Foundation
-
 /// Ubuntu theme for the terminal.
 class UbuntuTheme: TerminalTheme {
     

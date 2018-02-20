@@ -5,10 +5,24 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
-import Foundation
+#if os(iOS)
+    import UIKit
+#endif
 
 /// Grass theme for the terminal.
 class GrassTheme: TerminalTheme {
+    
+    #if os(iOS)
+        /// Returns light.
+        override var keyboardAppearance: UIKeyboardAppearance {
+            return .light
+        }
+    
+        /// Returns default.
+        override var toolbarStyle: UIBarStyle {
+            return .default
+        }
+    #endif
     
     /// Returns green.
     override var backgroundColor: Color? {
