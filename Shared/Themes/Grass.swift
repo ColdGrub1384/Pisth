@@ -24,6 +24,11 @@ class GrassTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns red.
+    override var selectionColor: Color? {
+        return Color(red: 182/255, green: 73/255, blue: 38/255, alpha: 0.5)
+    }
+    
     /// Returns green.
     override var backgroundColor: Color? {
         return Color(red: 19/255, green: 129/255, blue: 61/255, alpha: 1)

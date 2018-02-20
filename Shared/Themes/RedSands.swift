@@ -24,6 +24,11 @@ class RedSandsTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns brown.
+    override var selectionColor: Color? {
+        return Color(red: 61/255, green: 25/255, blue: 22/255, alpha: 0.5)
+    }
+    
     /// Returns a sort of red.
     override var backgroundColor: Color? {
         return Color(red: 122/255, green: 37/255, blue: 30/255, alpha: 1)

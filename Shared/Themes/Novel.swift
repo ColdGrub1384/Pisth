@@ -24,6 +24,11 @@ class NovelTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns gray.
+    override var selectionColor: Color? {
+        return Color(red: 116/255, green: 115/255, blue: 80/255, alpha: 0.5)
+    }
+    
     /// Returns a sort of brown.
     override var backgroundColor: Color? {
         return Color(red: 223/255, green: 219/255, blue: 195/255, alpha: 1)

@@ -25,6 +25,11 @@ class OceanTheme: TerminalTheme {
     #endif
     
     /// Returns blue.
+    override var selectionColor: Color? {
+        return Color(red: 33/255, green: 109/255, blue: 255/255, alpha: 0.5)
+    }
+    
+    /// Returns blue.
     override var backgroundColor: Color? {
         return Color(red: 34/255, green: 79/255, blue: 188/255, alpha: 1)
     }

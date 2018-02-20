@@ -24,6 +24,11 @@ class ManPageTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns light blue.
+    override var selectionColor: Color? {
+        return Color(red: 164/255, green: 205/255, blue: 255/255, alpha: 0.5)
+    }
+    
     /// Returns a sort of yellow.
     override var backgroundColor: Color? {
         return Color(red: 254/255, green: 244/255, blue: 156/255, alpha: 1)

@@ -8,6 +8,11 @@
 /// Homebrew theme for the terminal.
 class HomebrewTheme: TerminalTheme {
     
+    /// Returns blue.
+    override var selectionColor: Color? {
+        return Color(red: 9/255, green: 0/255, blue: 233/255, alpha: 0.5)
+    }
+    
     /// Returns black.
     override var backgroundColor: Color? {
         return .black

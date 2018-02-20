@@ -88,6 +88,11 @@ class TerminalTheme {
         }
     #endif
     
+    /// Selection color
+    var selectionColor: Color? {
+        return nil
+    }
+    
     /// Cursor colors.
     var cursorColor: Color? {
         return nil
@@ -114,84 +119,93 @@ class TerminalTheme {
         var theme = "{"
         
         if foregroundColor != nil {
-            theme += "foreground: '\(foregroundColor!.toHexString())'"
+            theme += "foreground: '\(foregroundColor!.rgbaString)'"
         }
         
         if backgroundColor != nil {
-            theme += ", background: '\(backgroundColor!.toHexString())'"
+            theme += ", background: '\(backgroundColor!.rgbaString)'"
         }
         
         if cursorColor != nil {
-            theme += ", cursor: '\(cursorColor!.toHexString())'"
+            theme += ", cursor: '\(cursorColor!.rgbaString)'"
         }
+        
+        #if os(OSX)
+            if selectionColor != nil {
+                let selection = ", selection: '\(selectionColor!.rgbaString)'"
+                theme += selection
+            }
+        #endif
         
         if self.ansiColors != nil {
             if self.ansiColors?.black != nil {
-                theme += ", black: '\(self.ansiColors!.black!.toHexString())'"
+                theme += ", black: '\(self.ansiColors!.black!.rgbaString)'"
             }
             
             if self.ansiColors?.red != nil {
-                theme += ", red: '\(self.ansiColors!.red!.toHexString())'"
+                theme += ", red: '\(self.ansiColors!.red!.rgbaString)'"
             }
             
             if self.ansiColors?.green != nil {
-                theme += ", green: '\(self.ansiColors!.green!.toHexString())'"
+                theme += ", green: '\(self.ansiColors!.green!.rgbaString)'"
             }
             
             if self.ansiColors?.yellow != nil {
-                theme += ", yellow: '\(self.ansiColors!.yellow!.toHexString())'"
+                theme += ", yellow: '\(self.ansiColors!.yellow!.rgbaString)'"
             }
             
             if self.ansiColors?.blue != nil {
-                theme += ", blue: '\(self.ansiColors!.blue!.toHexString())'"
+                theme += ", blue: '\(self.ansiColors!.blue!.rgbaString)'"
             }
             
             if self.ansiColors?.magenta != nil {
-                theme += ", magenta: '\(self.ansiColors!.magenta!.toHexString())'"
+                theme += ", magenta: '\(self.ansiColors!.magenta!.rgbaString)'"
             }
             
             if self.ansiColors?.cyan != nil {
-                theme += ", cyan: '\(self.ansiColors!.cyan!.toHexString())'"
+                theme += ", cyan: '\(self.ansiColors!.cyan!.rgbaString)'"
             }
             
             if self.ansiColors?.white != nil {
-                theme += ", white: '\(self.ansiColors!.white!.toHexString())'"
+                theme += ", white: '\(self.ansiColors!.white!.rgbaString)'"
             }
             
             
             if self.ansiColors?.brightBlack != nil {
-                theme += ", brightBlack: '\(self.ansiColors!.brightBlack!.toHexString())'"
+                theme += ", brightBlack: '\(self.ansiColors!.brightBlack!.rgbaString)'"
             }
             
             if self.ansiColors?.brightRed != nil {
-                theme += ", brightRed: '\(self.ansiColors!.brightRed!.toHexString())'"
+                theme += ", brightRed: '\(self.ansiColors!.brightRed!.rgbaString)'"
             }
             
             if self.ansiColors?.brightGreen != nil {
-                theme += ", brightGreen: '\(self.ansiColors!.brightGreen!.toHexString())'"
+                theme += ", brightGreen: '\(self.ansiColors!.brightGreen!.rgbaString)'"
             }
             
             if self.ansiColors?.brightYellow != nil {
-                theme += ", brightYellow: '\(self.ansiColors!.brightYellow!.toHexString())'"
+                theme += ", brightYellow: '\(self.ansiColors!.brightYellow!.rgbaString)'"
             }
             
             if self.ansiColors?.brightBlue != nil {
-                theme += ", brightBlue: '\(self.ansiColors!.blue!.toHexString())'"
+                theme += ", brightBlue: '\(self.ansiColors!.blue!.rgbaString)'"
             }
             
             if self.ansiColors?.brightMagenta != nil {
-                theme += ", brightMagenta: '\(self.ansiColors!.brightMagenta!.toHexString())'"
+                theme += ", brightMagenta: '\(self.ansiColors!.brightMagenta!.rgbaString)'"
             }
             
             if self.ansiColors?.brightCyan != nil {
-                theme += ", brightCyan: '\(self.ansiColors!.brightCyan!.toHexString())'"
+                theme += ", brightCyan: '\(self.ansiColors!.brightCyan!.rgbaString)'"
             }
             
             if self.ansiColors?.brightWhite != nil {
-                theme += ", brightWhite: '\(self.ansiColors!.brightWhite!.toHexString())'"
+                theme += ", brightWhite: '\(self.ansiColors!.brightWhite!.rgbaString)'"
             }
             
         }
+        
+        print(theme+"}")
         
         return theme+"}"
     }

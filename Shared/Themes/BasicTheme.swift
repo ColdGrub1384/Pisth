@@ -24,6 +24,11 @@ class BasicTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns light blue.
+    override var selectionColor: Color? {
+        return Color(red: 164/255, green: 205/255, blue: 255/255, alpha: 0.5)
+    }
+    
     /// Returns white.
     override var backgroundColor: Color? {
         return .white

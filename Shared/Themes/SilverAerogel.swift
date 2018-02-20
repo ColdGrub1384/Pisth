@@ -24,6 +24,11 @@ class SilverAerogelTheme: TerminalTheme {
         }
     #endif
     
+    /// Returns light blue.
+    override var selectionColor: Color? {
+        return Color(red: 101/255, green: 102/255, blue: 138/255, alpha: 0.5)
+    }
+    
     /// Returns gray.
     override var backgroundColor: Color? {
         return Color(red: 146/255, green: 146/255, blue: 146/255, alpha: 1)

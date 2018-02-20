@@ -153,7 +153,6 @@
 		3AA3FDCA20275E9200C07C7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AA3FDCD20275E9200C07C7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		3AA3FDCF20275E9200C07C7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pisth_Viewer.entitlements; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
 		3AF74773203C682D00400CB0 /* fit.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = fit.js; sourceTree = "<group>"; };
+		3AF74779203C78CC00400CB0 /* Pisth Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Pisth Viewer.entitlements"; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -259,11 +259,11 @@
 		3A4801BF202A06AD0069379B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AF74779203C78CC00400CB0 /* Pisth Viewer.entitlements */,
 				3A4801BB2029F8E50069379B /* Licenses.html */,
 				3AA3FDCA20275E9200C07C7A /* Assets.xcassets */,
 				3AA3FDCC20275E9200C07C7A /* MainMenu.xib */,
 				3AA3FDCF20275E9200C07C7A /* Info.plist */,
-				3AA3FDD020275E9200C07C7A /* Pisth_Viewer.entitlements */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -541,8 +541,11 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
-							com.apple.Sandbox = {
+							com.apple.Keychain = {
 								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
 							};
 						};
 					};
@@ -782,6 +785,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Pisth Viewer/Pisth Viewer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -800,6 +804,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Pisth Viewer/Pisth Viewer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

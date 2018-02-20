@@ -15,6 +15,9 @@ import MultipeerConnectivity
 /// Content received in Pisth for iOS is sent to this app.
 @NSApplicationMain
 class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate, WKNavigationDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+
+    /// Last received theme name.
+    var lastReceivedThemeName = ""
     
     /// Web view used to display licenses.
     @IBOutlet weak var licensesWebView: WKWebView!
@@ -153,9 +156,13 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 self.webView.frame.origin = CGPoint(x: self.outlineView.frame.width, y: 0)
                 self.outlineView.superview?.superview?.frame.origin.y = 0
                 
-                self.webView.evaluateJavaScript("fit(term); term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
-                self.webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
-                self.webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.toHexString() ?? "#000000")'", completionHandler: nil)
+                self.webView.evaluateJavaScript("fit(term)", completionHandler: nil)
+                if info.themeName != self.lastReceivedThemeName {
+                    self.webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
+                    self.lastReceivedThemeName = info.themeName
+                }
+                self.webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.hexString ?? "#000000")'", completionHandler: nil)
+                self.webView.evaluateJavaScript("term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
             }
         }
     }
