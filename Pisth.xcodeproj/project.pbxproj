@@ -89,6 +89,7 @@
 		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
 		3AF74774203C682D00400CB0 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3AF74773203C682D00400CB0 /* fit.js */; };
+		3AF74776203C6D4C00400CB0 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3AF74773203C682D00400CB0 /* fit.js */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
@@ -586,6 +587,7 @@
 				3AA3FDCB20275E9200C07C7A /* Assets.xcassets in Resources */,
 				3AA3FDCE20275E9200C07C7A /* MainMenu.xib in Resources */,
 				3A4801BD2029F8E50069379B /* Licenses.html in Resources */,
+				3AF74776203C6D4C00400CB0 /* fit.js in Resources */,
 				3AA3FDD52027781800C07C7A /* xterm.css in Resources */,
 				3AA3FDD72027781D00C07C7A /* terminal.html in Resources */,
 				3AA3FDD62027781B00C07C7A /* xterm.js in Resources */,
