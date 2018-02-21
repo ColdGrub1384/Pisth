@@ -16,29 +16,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <items>
-                <barButtonItem tag="6" image="back" id="3Fw-cN-o1B"/>
-                <barButtonItem tag="5" image="hide-keyboard" id="xrd-uf-x6E"/>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="QRp-4N-eHU"/>
-                <barButtonItem tag="7" style="plain" id="fTO-Gv-G97">
-                    <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZL4-L1-AnU">
-                        <rect key="frame" x="129" y="7" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" image="password">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
-                </barButtonItem>
                 <barButtonItem width="6" style="plain" systemItem="fixedSpace" id="RYV-1q-XLI"/>
                 <barButtonItem tag="1" style="plain" id="Fi6-Vu-My2">
                     <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oIx-tw-Sjz">
-                        <rect key="frame" x="165" y="7" width="30" height="30"/>
+                        <rect key="frame" x="22" y="7" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,7 +36,7 @@
                 <barButtonItem width="6" style="plain" systemItem="fixedSpace" id="Z9A-Ig-Fho"/>
                 <barButtonItem tag="2" style="plain" id="gq1-dq-kmV">
                     <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jQF-ZU-oo4">
-                        <rect key="frame" x="201" y="7" width="46" height="30"/>
+                        <rect key="frame" x="58" y="7" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <state key="normal" title="ctrl">
@@ -68,13 +49,14 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                 </barButtonItem>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="QRp-4N-eHU"/>
                 <barButtonItem width="6" style="plain" systemItem="fixedSpace" id="iZ3-BM-cYm"/>
                 <barButtonItem tag="3" style="plain" id="J2t-yp-cGc">
                     <button key="customView" opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d8K-5S-PmI">
                         <rect key="frame" x="253" y="7" width="46" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <state key="normal" title="⎋">
+                        <state key="normal" title="esc">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -101,7 +83,7 @@
                     </button>
                 </barButtonItem>
             </items>
-            <point key="canvasLocation" x="58" y="-127"/>
+            <point key="canvasLocation" x="58" y="-143"/>
         </toolbar>
         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="B0G-cJ-lAH">
             <rect key="frame" x="0.0" y="0.0" width="351" height="44"/>
@@ -175,10 +157,10 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                 </barButtonItem>
-                <barButtonItem style="plain" systemItem="flexibleSpace" id="F1z-yC-v4A"/>
+                <barButtonItem width="7" style="plain" systemItem="fixedSpace" id="K2W-1n-dfo"/>
                 <barButtonItem tag="2" style="plain" id="GiR-m3-gHq">
                     <button key="customView" opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dBe-hP-pha">
-                        <rect key="frame" x="222" y="7" width="60" height="30"/>
+                        <rect key="frame" x="158" y="7" width="60" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
@@ -192,7 +174,24 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                 </barButtonItem>
-                <barButtonItem width="23" style="plain" systemItem="fixedSpace" id="YrT-gG-bDF"/>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="F1z-yC-v4A"/>
+                <barButtonItem tag="7" style="plain" id="fTO-Gv-G97">
+                    <button key="customView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZL4-L1-AnU">
+                        <rect key="frame" x="268" y="7" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="password">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </barButtonItem>
+                <barButtonItem width="7" style="plain" systemItem="fixedSpace" id="Wmz-XD-kfF"/>
                 <barButtonItem tag="1" style="plain" id="yVs-iu-yaS">
                     <button key="customView" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E9Z-oQ-egj">
                         <rect key="frame" x="305" y="7" width="30" height="30"/>
@@ -207,12 +206,10 @@
                     </button>
                 </barButtonItem>
             </items>
-            <point key="canvasLocation" x="59" y="12"/>
+            <point key="canvasLocation" x="58" y="-33"/>
         </toolbar>
     </objects>
     <resources>
-        <image name="back" width="22" height="22"/>
-        <image name="hide-keyboard" width="22" height="22"/>
         <image name="password" width="21" height="21"/>
         <image name="touch" width="22" height="19"/>
     </resources>

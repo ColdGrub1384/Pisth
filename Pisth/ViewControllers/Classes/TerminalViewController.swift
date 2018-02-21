@@ -26,6 +26,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Ctrl key button.
     var ctrlKey: UIButton!
     
+    /// Accessory view used in keyboard.
+    var accessoryView: UIView!
+    
     /// Toolbar used in keyboard.
     var toolbar: UIToolbar!
     
@@ -158,7 +161,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case more = 4
             case hideKeyboard = 5
             case back = 6
-            case sendPassword = 7
         }
         
         for item in toolbar.items ?? [] {
@@ -173,8 +175,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case ItemsTag.hideKeyboard.rawValue:
                 item.target = self
                 item.action = #selector(resignFirstResponder)
-            case ItemsTag.sendPassword.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendPassword), for: .touchUpInside)
             default:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
                 if item.tag == ItemsTag.ctrl.rawValue {
@@ -183,12 +183,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         }
         
-        let goBack = UIBarButtonItem(image: #imageLiteral(resourceName: "back"), style: .plain, target: navigationController, action: #selector(navigationController?.popViewController(animated:)))
-        
-        let showKeyboard = UIBarButtonItem(image: #imageLiteral(resourceName: "show-keyboard"), style: .plain, target: self, action: #selector(becomeFirstResponder))
-        
-        setToolbarItems([goBack, showKeyboard], animated: true)
-        
+        self.accessoryView = toolbar
         self.toolbar = toolbar
     }
     
@@ -197,12 +192,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - sender: Sender button.
     @objc func toggleFirstToolbar(_ sender: UIButton) {
-        addToolbar()
-        
-        if isFirstResponder {
-            resignFirstResponder()
-            becomeFirstResponder()
-        }
+        accessoryView = toolbar
+        reloadInputViews()
     }
     
     /// Show or hide the second toolbar of the keyboard.
@@ -227,6 +218,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             case arrowDown = 4
             case arrowUp = 5
             case arrowLeft = 6
+            case sendPassword = 7
         }
         
         for item in toolbar.items ?? [] {
@@ -240,16 +232,33 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(insertKeyByLongPress(_:)))
                 (item.customView as? UIButton)?.addGestureRecognizer(longPressRecognizer)
+            case ItemsTag.sendPassword.rawValue:
+                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendPassword), for: .touchUpInside)
             default:
                 break
             }
         }
         
-        self.toolbar = toolbar
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolbar.frame.height))
+        
+        view.addSubview(toolbar)
+        
+        toolbar.frame.size.width = view.frame.width
+        toolbar.autoresizingMask = [.flexibleWidth]
+        
+        accessoryView = view
         
         if isFirstResponder {
-            resignFirstResponder()
-            becomeFirstResponder()
+            reloadInputViews()
+        }
+        
+        if #available(iOS 11.0, *) {
+            
+            if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
+                toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
+            } else {
+                toolbar.frame.origin.y = 0
+            }
         }
     }
     
@@ -342,6 +351,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         present(alert, animated: true, completion: nil)
     }
     
+    /// Show or hide keyboard.
+    ///
+    /// - Parameters:
+    ///     - sender: Sende bar button item.
+    @objc func toggleKeyboard(_ sender: UIBarButtonItem) {
+        if isFirstResponder {
+            resignFirstResponder()
+            sender.image = #imageLiteral(resourceName: "show-keyboard")
+        } else {
+            becomeFirstResponder()
+            sender.image = #imageLiteral(resourceName: "hide-keyboard")
+        }
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -367,7 +390,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return nil
         }
         
-        return toolbar
+        return accessoryView
     }
     
     /// `UIViewController`'s `viewWillTransition(to:, with:)` function.
@@ -434,7 +457,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         }
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:)))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))]
         
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
@@ -480,7 +503,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.setToolbarHidden(false, animated: true)
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         if console.isEmpty {
@@ -524,7 +546,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.setToolbarHidden(true, animated: true)
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
