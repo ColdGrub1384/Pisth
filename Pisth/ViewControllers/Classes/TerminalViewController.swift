@@ -470,6 +470,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
+        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] ?? ProTheme()
+        view.backgroundColor = theme.backgroundColor
+        navigationController?.navigationBar.barStyle = theme.toolbarStyle
+        
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
@@ -519,9 +523,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
             webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             webView.isOpaque = false
-            webView.backgroundColor = .clear
             view.addSubview(webView)
-            webView.backgroundColor = .black
+            webView.backgroundColor = .clear
             webView.navigationDelegate = self
             webView.scrollView.isScrollEnabled = false
             webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
@@ -554,6 +557,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.barStyle = .black
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
