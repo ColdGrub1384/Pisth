@@ -74,7 +74,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     private var ignoredNotifications = [Notification.Name]()
     
     /// Variable used to delay a long press of the arrow keys.
-    private var arrowsLongPressDelay = 5
+    private var arrowsLongPressDelay = 2
     
     /// Show commands history.
     ///
@@ -696,7 +696,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        arrowsLongPressDelay = 5
+        arrowsLongPressDelay = 2
         
         if let button = sender.view as? UIButton {
             insertKey(button)
