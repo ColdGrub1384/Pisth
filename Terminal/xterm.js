@@ -1,219 +1,6 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Terminal = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Strings = require("./Strings");
-var Browser_1 = require("./shared/utils/Browser");
-var RenderDebouncer_1 = require("./utils/RenderDebouncer");
-var Dom_1 = require("./utils/Dom");
-var MAX_ROWS_TO_READ = 20;
-var ACTIVE_ITEM_ID_PREFIX = 'xterm-active-item-';
-var BoundaryPosition;
-(function (BoundaryPosition) {
-    BoundaryPosition[BoundaryPosition["Top"] = 0] = "Top";
-    BoundaryPosition[BoundaryPosition["Bottom"] = 1] = "Bottom";
-})(BoundaryPosition || (BoundaryPosition = {}));
-var AccessibilityManager = (function () {
-    function AccessibilityManager(_terminal) {
-        var _this = this;
-        this._terminal = _terminal;
-        this._rowElements = [];
-        this._liveRegionLineCount = 0;
-        this._disposables = [];
-        this._charsToConsume = [];
-        this._accessibilityTreeRoot = document.createElement('div');
-        this._accessibilityTreeRoot.classList.add('xterm-accessibility');
-        this._rowContainer = document.createElement('div');
-        this._rowContainer.classList.add('xterm-accessibility-tree');
-        for (var i = 0; i < this._terminal.rows; i++) {
-            this._rowElements[i] = this._createAccessibilityTreeNode();
-            this._rowContainer.appendChild(this._rowElements[i]);
-        }
-        this._topBoundaryFocusListener = function (e) { return _this._onBoundaryFocus(e, BoundaryPosition.Top); };
-        this._bottomBoundaryFocusListener = function (e) { return _this._onBoundaryFocus(e, BoundaryPosition.Bottom); };
-        this._rowElements[0].addEventListener('focus', this._topBoundaryFocusListener);
-        this._rowElements[this._rowElements.length - 1].addEventListener('focus', this._bottomBoundaryFocusListener);
-        this._refreshRowsDimensions();
-        this._accessibilityTreeRoot.appendChild(this._rowContainer);
-        this._renderRowsDebouncer = new RenderDebouncer_1.RenderDebouncer(this._terminal, this._renderRows.bind(this));
-        this._refreshRows();
-        this._liveRegion = document.createElement('div');
-        this._liveRegion.classList.add('live-region');
-        this._liveRegion.setAttribute('aria-live', 'assertive');
-        this._accessibilityTreeRoot.appendChild(this._liveRegion);
-        this._terminal.element.insertAdjacentElement('afterbegin', this._accessibilityTreeRoot);
-        this._disposables.push(this._renderRowsDebouncer);
-        this._disposables.push(this._terminal.addDisposableListener('resize', function (data) { return _this._onResize(data.cols, data.rows); }));
-        this._disposables.push(this._terminal.addDisposableListener('refresh', function (data) { return _this._refreshRows(data.start, data.end); }));
-        this._disposables.push(this._terminal.addDisposableListener('scroll', function (data) { return _this._refreshRows(); }));
-        this._disposables.push(this._terminal.addDisposableListener('a11y.char', function (char) { return _this._onChar(char); }));
-        this._disposables.push(this._terminal.addDisposableListener('linefeed', function () { return _this._onChar('\n'); }));
-        this._disposables.push(this._terminal.addDisposableListener('a11y.tab', function (spaceCount) { return _this._onTab(spaceCount); }));
-        this._disposables.push(this._terminal.addDisposableListener('key', function (keyChar) { return _this._onKey(keyChar); }));
-        this._disposables.push(this._terminal.addDisposableListener('blur', function () { return _this._clearLiveRegion(); }));
-        this._disposables.push(this._terminal.addDisposableListener('dprchange', function () { return _this._refreshRowsDimensions(); }));
-        this._disposables.push(this._terminal.renderer.addDisposableListener('resize', function () { return _this._refreshRowsDimensions(); }));
-        this._disposables.push(Dom_1.addDisposableListener(window, 'resize', function () { return _this._refreshRowsDimensions(); }));
-    }
-    AccessibilityManager.prototype.dispose = function () {
-        this._terminal.element.removeChild(this._accessibilityTreeRoot);
-        this._disposables.forEach(function (d) { return d.dispose(); });
-        this._disposables = null;
-        this._accessibilityTreeRoot = null;
-        this._rowContainer = null;
-        this._liveRegion = null;
-        this._rowContainer = null;
-        this._rowElements = null;
-    };
-    AccessibilityManager.prototype._onBoundaryFocus = function (e, position) {
-        var boundaryElement = e.target;
-        var beforeBoundaryElement = this._rowElements[position === BoundaryPosition.Top ? 1 : this._rowElements.length - 2];
-        var posInSet = boundaryElement.getAttribute('aria-posinset');
-        var lastRowPos = position === BoundaryPosition.Top ? '1' : "" + this._terminal.buffer.lines.length;
-        if (posInSet === lastRowPos) {
-            return;
-        }
-        if (e.relatedTarget !== beforeBoundaryElement) {
-            return;
-        }
-        var topBoundaryElement;
-        var bottomBoundaryElement;
-        if (position === BoundaryPosition.Top) {
-            topBoundaryElement = boundaryElement;
-            bottomBoundaryElement = this._rowElements.pop();
-            this._rowContainer.removeChild(bottomBoundaryElement);
-        }
-        else {
-            topBoundaryElement = this._rowElements.shift();
-            bottomBoundaryElement = boundaryElement;
-            this._rowContainer.removeChild(topBoundaryElement);
-        }
-        topBoundaryElement.removeEventListener('focus', this._topBoundaryFocusListener);
-        bottomBoundaryElement.removeEventListener('focus', this._bottomBoundaryFocusListener);
-        if (position === BoundaryPosition.Top) {
-            var newElement = this._createAccessibilityTreeNode();
-            this._rowElements.unshift(newElement);
-            this._rowContainer.insertAdjacentElement('afterbegin', newElement);
-        }
-        else {
-            var newElement = this._createAccessibilityTreeNode();
-            this._rowElements.push(newElement);
-            this._rowContainer.appendChild(newElement);
-        }
-        this._rowElements[0].addEventListener('focus', this._topBoundaryFocusListener);
-        this._rowElements[this._rowElements.length - 1].addEventListener('focus', this._bottomBoundaryFocusListener);
-        this._terminal.scrollLines(position === BoundaryPosition.Top ? -1 : 1);
-        this._rowElements[position === BoundaryPosition.Top ? 1 : this._rowElements.length - 2].focus();
-        e.preventDefault();
-        e.stopImmediatePropagation();
-    };
-    AccessibilityManager.prototype._onResize = function (cols, rows) {
-        this._rowElements[this._rowElements.length - 1].removeEventListener('focus', this._bottomBoundaryFocusListener);
-        for (var i = this._rowContainer.children.length; i < this._terminal.rows; i++) {
-            this._rowElements[i] = this._createAccessibilityTreeNode();
-            this._rowContainer.appendChild(this._rowElements[i]);
-        }
-        while (this._rowElements.length > rows) {
-            this._rowContainer.removeChild(this._rowElements.pop());
-        }
-        this._rowElements[this._rowElements.length - 1].addEventListener('focus', this._bottomBoundaryFocusListener);
-        this._refreshRowsDimensions();
-    };
-    AccessibilityManager.prototype._createAccessibilityTreeNode = function () {
-        var element = document.createElement('div');
-        element.setAttribute('role', 'listitem');
-        element.tabIndex = -1;
-        this._refreshRowDimensions(element);
-        return element;
-    };
-    AccessibilityManager.prototype._onTab = function (spaceCount) {
-        for (var i = 0; i < spaceCount; i++) {
-            this._onChar(' ');
-        }
-    };
-    AccessibilityManager.prototype._onChar = function (char) {
-        var _this = this;
-        if (this._liveRegionLineCount < MAX_ROWS_TO_READ + 1) {
-            if (this._charsToConsume.length > 0) {
-                var shiftedChar = this._charsToConsume.shift();
-                if (shiftedChar !== char) {
-                    this._announceCharacter(char);
-                }
-            }
-            else {
-                this._announceCharacter(char);
-            }
-            if (char === '\n') {
-                this._liveRegionLineCount++;
-                if (this._liveRegionLineCount === MAX_ROWS_TO_READ + 1) {
-                    this._liveRegion.textContent += Strings.tooMuchOutput;
-                }
-            }
-            if (Browser_1.isMac) {
-                if (this._liveRegion.textContent.length > 0 && !this._liveRegion.parentNode) {
-                    setTimeout(function () {
-                        _this._accessibilityTreeRoot.appendChild(_this._liveRegion);
-                    }, 0);
-                }
-            }
-        }
-    };
-    AccessibilityManager.prototype._clearLiveRegion = function () {
-        this._liveRegion.textContent = '';
-        this._liveRegionLineCount = 0;
-        if (Browser_1.isMac) {
-            if (this._liveRegion.parentNode) {
-                this._accessibilityTreeRoot.removeChild(this._liveRegion);
-            }
-        }
-    };
-    AccessibilityManager.prototype._onKey = function (keyChar) {
-        this._clearLiveRegion();
-        this._charsToConsume.push(keyChar);
-    };
-    AccessibilityManager.prototype._refreshRows = function (start, end) {
-        this._renderRowsDebouncer.refresh(start, end);
-    };
-    AccessibilityManager.prototype._renderRows = function (start, end) {
-        var buffer = this._terminal.buffer;
-        var setSize = buffer.lines.length.toString();
-        for (var i = start; i <= end; i++) {
-            var lineData = buffer.translateBufferLineToString(buffer.ydisp + i, true);
-            var posInSet = (buffer.ydisp + i + 1).toString();
-            var element = this._rowElements[i];
-            element.textContent = lineData.length === 0 ? Strings.blankLine : lineData;
-            element.setAttribute('aria-posinset', posInSet);
-            element.setAttribute('aria-setsize', setSize);
-        }
-    };
-    AccessibilityManager.prototype._refreshRowsDimensions = function () {
-        if (!this._terminal.renderer.dimensions.actualCellHeight) {
-            return;
-        }
-        var buffer = this._terminal.buffer;
-        for (var i = 0; i < this._terminal.rows; i++) {
-            this._refreshRowDimensions(this._rowElements[i]);
-        }
-    };
-    AccessibilityManager.prototype._refreshRowDimensions = function (element) {
-        element.style.height = this._terminal.renderer.dimensions.actualCellHeight + "px";
-    };
-    AccessibilityManager.prototype._announceCharacter = function (char) {
-        if (char === ' ') {
-            this._liveRegion.innerHTML += '&nbsp;';
-        }
-        else {
-            this._liveRegion.textContent += char;
-        }
-    };
-    return AccessibilityManager;
-}());
-exports.AccessibilityManager = AccessibilityManager;
-
-
-
-},{"./Strings":14,"./shared/utils/Browser":32,"./utils/Dom":35,"./utils/RenderDebouncer":37}],2:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var CircularList_1 = require("./utils/CircularList");
 exports.CHAR_DATA_ATTR_INDEX = 0;
 exports.CHAR_DATA_CHAR_INDEX = 1;
@@ -420,7 +207,7 @@ exports.Buffer = Buffer;
 
 
 
-},{"./utils/CircularList":34}],3:[function(require,module,exports){
+},{"./utils/CircularList":32}],2:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -504,7 +291,7 @@ exports.BufferSet = BufferSet;
 
 
 
-},{"./Buffer":2,"./EventEmitter":8}],4:[function(require,module,exports){
+},{"./Buffer":1,"./EventEmitter":7}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wcwidth = (function (opts) {
@@ -656,7 +443,7 @@ exports.wcwidth = (function (opts) {
 
 
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CHARSETS = {};
@@ -819,7 +606,7 @@ exports.CHARSETS['='] = {
 
 
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CompositionHelper = (function () {
@@ -944,7 +731,7 @@ exports.CompositionHelper = CompositionHelper;
 
 
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var C0;
@@ -987,7 +774,7 @@ var C0;
 
 
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventEmitter = (function () {
@@ -997,19 +784,6 @@ var EventEmitter = (function () {
     EventEmitter.prototype.on = function (type, listener) {
         this._events[type] = this._events[type] || [];
         this._events[type].push(listener);
-    };
-    EventEmitter.prototype.addDisposableListener = function (type, handler) {
-        var _this = this;
-        this.on(type, handler);
-        return {
-            dispose: function () {
-                if (!handler) {
-                    return;
-                }
-                _this.off(type, handler);
-                handler = null;
-            }
-        };
     };
     EventEmitter.prototype.off = function (type, listener) {
         if (!this._events[type]) {
@@ -1054,7 +828,7 @@ exports.EventEmitter = EventEmitter;
 
 
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("./EscapeSequences");
@@ -1071,9 +845,6 @@ var InputHandler = (function () {
             var chWidth = CharWidth_1.wcwidth(code);
             if (this._terminal.charset && this._terminal.charset[char]) {
                 char = this._terminal.charset[char];
-            }
-            if (this._terminal.options.screenReaderMode) {
-                this._terminal.emit('a11y.char', char);
             }
             var row = this._terminal.buffer.y + this._terminal.buffer.ybase;
             if (!chWidth && this._terminal.buffer.x) {
@@ -1157,11 +928,7 @@ var InputHandler = (function () {
         }
     };
     InputHandler.prototype.tab = function () {
-        var originalX = this._terminal.buffer.x;
         this._terminal.buffer.x = this._terminal.buffer.nextStop();
-        if (this._terminal.options.screenReaderMode) {
-            this._terminal.emit('a11y.tab', this._terminal.buffer.x - originalX);
-        }
     };
     InputHandler.prototype.shiftOut = function () {
         this._terminal.setgLevel(1);
@@ -1878,7 +1645,7 @@ exports.InputHandler = InputHandler;
 
 
 
-},{"./Buffer":2,"./CharWidth":4,"./Charsets":5,"./EscapeSequences":7,"./renderer/Types":30}],10:[function(require,module,exports){
+},{"./Buffer":1,"./CharWidth":3,"./Charsets":4,"./EscapeSequences":6,"./renderer/Types":28}],9:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -2079,7 +1846,7 @@ exports.Linkifier = Linkifier;
 
 
 
-},{"./EventEmitter":8,"./Types":16,"./input/MouseZoneManager":20}],11:[function(require,module,exports){
+},{"./EventEmitter":7,"./Types":14,"./input/MouseZoneManager":18}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("./EscapeSequences");
@@ -2587,7 +2354,7 @@ exports.Parser = Parser;
 
 
 
-},{"./Charsets":5,"./EscapeSequences":7}],12:[function(require,module,exports){
+},{"./Charsets":4,"./EscapeSequences":6}],11:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3073,7 +2840,7 @@ exports.SelectionManager = SelectionManager;
 
 
 
-},{"./Buffer":2,"./EventEmitter":8,"./SelectionModel":13,"./handlers/AltClickHandler":18,"./shared/utils/Browser":32,"./utils/MouseHelper":36}],13:[function(require,module,exports){
+},{"./Buffer":1,"./EventEmitter":7,"./SelectionModel":12,"./handlers/AltClickHandler":16,"./shared/utils/Browser":30,"./utils/MouseHelper":33}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SelectionModel = (function () {
@@ -3151,16 +2918,7 @@ exports.SelectionModel = SelectionModel;
 
 
 
-},{}],14:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.blankLine = 'Blank line';
-exports.promptLabel = 'Terminal input';
-exports.tooMuchOutput = 'Too much output to announce, navigate to rows manually to read';
-
-
-
-},{}],15:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -3187,13 +2945,10 @@ var Linkifier_1 = require("./Linkifier");
 var SelectionManager_1 = require("./SelectionManager");
 var CharMeasure_1 = require("./utils/CharMeasure");
 var Browser = require("./shared/utils/Browser");
-var Strings = require("./Strings");
 var MouseHelper_1 = require("./utils/MouseHelper");
 var Sounds_1 = require("./utils/Sounds");
 var ColorManager_1 = require("./renderer/ColorManager");
 var MouseZoneManager_1 = require("./input/MouseZoneManager");
-var AccessibilityManager_1 = require("./AccessibilityManager");
-var ScreenDprMonitor_1 = require("./utils/ScreenDprMonitor");
 var document = (typeof window !== 'undefined') ? window.document : null;
 var WRITE_BUFFER_PAUSE_THRESHOLD = 5;
 var WRITE_BATCH_SIZE = 300;
@@ -3215,7 +2970,6 @@ var DEFAULT_OPTIONS = {
     letterSpacing: 0,
     scrollback: 1000,
     screenKeys: false,
-    screenReaderMode: false,
     debug: false,
     macOptionIsMeta: false,
     cancelEvents: false,
@@ -3293,13 +3047,6 @@ var Terminal = (function (_super) {
     Object.defineProperty(Terminal.prototype, "buffer", {
         get: function () {
             return this.buffers.active;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Terminal, "strings", {
-        get: function () {
-            return Strings;
         },
         enumerable: true,
         configurable: true
@@ -3412,19 +3159,6 @@ var Terminal = (function (_super) {
                 this.buffers.resize(this.cols, this.rows);
                 this.viewport.syncScrollArea();
                 break;
-            case 'screenReaderMode':
-                if (value) {
-                    if (!this._accessibilityManager) {
-                        this._accessibilityManager = new AccessibilityManager_1.AccessibilityManager(this);
-                    }
-                }
-                else {
-                    if (this._accessibilityManager) {
-                        this._accessibilityManager.dispose();
-                        this._accessibilityManager = null;
-                    }
-                }
-                break;
             case 'tabStopWidth':
                 this.buffers.setupTabStops();
                 break;
@@ -3449,7 +3183,6 @@ var Terminal = (function (_super) {
         return this.textarea.blur();
     };
     Terminal.prototype._onTextAreaBlur = function () {
-        this.textarea.value = '';
         this.refresh(this.buffer.y, this.buffer.y);
         if (this.sendFocus) {
             this.send(EscapeSequences_1.C0.ESC + '[O');
@@ -3509,8 +3242,13 @@ var Terminal = (function (_super) {
                 _this.focus();
             }
         }, true);
-        on(this.textarea, 'keydown', function (ev) { return _this._keyDown(ev); }, true);
-        on(this.textarea, 'keypress', function (ev) { return _this._keyPress(ev); }, true);
+        on(this.textarea, 'keydown', function (ev) {
+            _this._keyDown(ev);
+        }, true);
+        on(this.textarea, 'keypress', function (ev) {
+            _this._keyPress(ev);
+            _this.textarea.value = '';
+        }, true);
         on(this.textarea, 'compositionstart', function () { return _this.compositionHelper.compositionstart(); });
         on(this.textarea, 'compositionupdate', function (e) { return _this.compositionHelper.compositionupdate(e); });
         on(this.textarea, 'compositionend', function () { return _this.compositionHelper.compositionend(); });
@@ -3528,8 +3266,6 @@ var Terminal = (function (_super) {
         this.context = this.parent.ownerDocument.defaultView;
         this.document = this.parent.ownerDocument;
         this.body = this.document.body;
-        this._screenDprMonitor = new ScreenDprMonitor_1.ScreenDprMonitor();
-        this._screenDprMonitor.setListener(function () { return _this.emit('dprchange', window.devicePixelRatio); });
         this.element = this.document.createElement('div');
         this.element.classList.add('terminal');
         this.element.classList.add('xterm');
@@ -3553,8 +3289,6 @@ var Terminal = (function (_super) {
         this.linkifier.attachToDom(this._mouseZoneManager);
         this.textarea = document.createElement('textarea');
         this.textarea.classList.add('xterm-helper-textarea');
-        this.textarea.setAttribute('aria-label', Strings.promptLabel);
-        this.textarea.setAttribute('aria-multiline', 'false');
         this.textarea.setAttribute('autocorrect', 'off');
         this.textarea.setAttribute('autocapitalize', 'off');
         this.textarea.setAttribute('spellcheck', 'false');
@@ -3579,8 +3313,6 @@ var Terminal = (function (_super) {
         this.on('resize', function () { return _this.renderer.onResize(_this.cols, _this.rows, false); });
         this.on('blur', function () { return _this.renderer.onBlur(); });
         this.on('focus', function () { return _this.renderer.onFocus(); });
-        this.on('dprchange', function () { return _this.renderer.onWindowResize(window.devicePixelRatio); });
-        window.addEventListener('resize', function () { return _this.renderer.onWindowResize(window.devicePixelRatio); });
         this.charMeasure.on('charsizechanged', function () { return _this.renderer.onResize(_this.cols, _this.rows, true); });
         this.renderer.on('resize', function (dimensions) { return _this.viewport.syncScrollArea(); });
         this.selectionManager = new SelectionManager_1.SelectionManager(this, this.charMeasure);
@@ -3597,9 +3329,6 @@ var Terminal = (function (_super) {
         });
         this.viewportElement.addEventListener('scroll', function () { return _this.selectionManager.refresh(); });
         this.mouseHelper = new MouseHelper_1.MouseHelper(this.renderer);
-        if (this.options.screenReaderMode) {
-            this._accessibilityManager = new AccessibilityManager_1.AccessibilityManager(this);
-        }
         this.charMeasure.measure(this.options);
         this.refresh(0, this.rows - 1);
         this.initGlobal();
@@ -3852,7 +3581,7 @@ var Terminal = (function (_super) {
     };
     Terminal.prototype.refresh = function (start, end) {
         if (this.renderer) {
-            this.renderer.refreshRows(start, end);
+            this.renderer.queueRefresh(start, end);
         }
     };
     Terminal.prototype.queueLinkification = function (start, end) {
@@ -4472,9 +4201,7 @@ var Terminal = (function (_super) {
         this.cols = x;
         this.rows = y;
         this.buffers.setupTabStops(this.cols);
-        if (this.charMeasure) {
-            this.charMeasure.measure(this.options);
-        }
+        this.charMeasure.measure(this.options);
         this.refresh(0, this.rows - 1);
         this.emit('resize', { cols: x, rows: y });
     };
@@ -4720,7 +4447,7 @@ function matchColor_(r1, g1, b1) {
 
 
 
-},{"./AccessibilityManager":1,"./Buffer":2,"./BufferSet":3,"./CompositionHelper":6,"./EscapeSequences":7,"./EventEmitter":8,"./InputHandler":9,"./Linkifier":10,"./Parser":11,"./SelectionManager":12,"./Strings":14,"./Viewport":17,"./handlers/Clipboard":19,"./input/MouseZoneManager":20,"./renderer/ColorManager":23,"./renderer/Renderer":27,"./shared/utils/Browser":32,"./utils/CharMeasure":33,"./utils/MouseHelper":36,"./utils/ScreenDprMonitor":38,"./utils/Sounds":39}],16:[function(require,module,exports){
+},{"./Buffer":1,"./BufferSet":2,"./CompositionHelper":5,"./EscapeSequences":6,"./EventEmitter":7,"./InputHandler":8,"./Linkifier":9,"./Parser":10,"./SelectionManager":11,"./Viewport":15,"./handlers/Clipboard":17,"./input/MouseZoneManager":18,"./renderer/ColorManager":21,"./renderer/Renderer":25,"./shared/utils/Browser":30,"./utils/CharMeasure":31,"./utils/MouseHelper":33,"./utils/Sounds":35}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var LinkHoverEventTypes;
@@ -4732,7 +4459,7 @@ var LinkHoverEventTypes;
 
 
 
-},{}],17:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FALLBACK_SCROLL_BAR_WIDTH = 15;
@@ -4824,7 +4551,7 @@ exports.Viewport = Viewport;
 
 
 
-},{}],18:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EscapeSequences_1 = require("../EscapeSequences");
@@ -4972,7 +4699,7 @@ function repeat(count, str) {
 
 
 
-},{"../EscapeSequences":7}],19:[function(require,module,exports){
+},{"../EscapeSequences":6}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function prepareTextForTerminal(text, isMSWindows) {
@@ -5054,7 +4781,7 @@ exports.rightClickHandler = rightClickHandler;
 
 
 
-},{}],20:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var HOVER_DURATION = 500;
@@ -5201,7 +4928,7 @@ exports.MouseZone = MouseZone;
 
 
 
-},{}],21:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CharAtlas_1 = require("./CharAtlas");
@@ -5388,7 +5115,7 @@ exports.BaseRenderLayer = BaseRenderLayer;
 
 
 
-},{"../Buffer":2,"./CharAtlas":22}],22:[function(require,module,exports){
+},{"../Buffer":1,"./CharAtlas":20}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CharAtlasGenerator_1 = require("../shared/CharAtlasGenerator");
@@ -5488,7 +5215,7 @@ function configEquals(a, b) {
 
 
 
-},{"../shared/CharAtlasGenerator":31}],23:[function(require,module,exports){
+},{"../shared/CharAtlasGenerator":29}],21:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DEFAULT_FOREGROUND = '#ffffff';
@@ -5573,7 +5300,7 @@ exports.ColorManager = ColorManager;
 
 
 
-},{}],24:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5862,7 +5589,7 @@ var CursorBlinkStateManager = (function () {
 
 
 
-},{"../Buffer":2,"./BaseRenderLayer":21}],25:[function(require,module,exports){
+},{"../Buffer":1,"./BaseRenderLayer":19}],23:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var GridCache = (function () {
@@ -5894,7 +5621,7 @@ exports.GridCache = GridCache;
 
 
 
-},{}],26:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5945,7 +5672,7 @@ exports.LinkRenderLayer = LinkRenderLayer;
 
 
 
-},{"../Types":16,"./BaseRenderLayer":21}],27:[function(require,module,exports){
+},{"../Types":14,"./BaseRenderLayer":19}],25:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -5964,13 +5691,14 @@ var CursorRenderLayer_1 = require("./CursorRenderLayer");
 var ColorManager_1 = require("./ColorManager");
 var LinkRenderLayer_1 = require("./LinkRenderLayer");
 var EventEmitter_1 = require("../EventEmitter");
-var RenderDebouncer_1 = require("../utils/RenderDebouncer");
 var ScreenDprMonitor_1 = require("../utils/ScreenDprMonitor");
 var Renderer = (function (_super) {
     __extends(Renderer, _super);
     function Renderer(_terminal, theme) {
         var _this = _super.call(this) || this;
         _this._terminal = _terminal;
+        _this._refreshRowsQueue = [];
+        _this._refreshAnimationFrame = null;
         _this._isPaused = false;
         _this._needsFullRefresh = false;
         _this.colorManager = new ColorManager_1.ColorManager();
@@ -6000,7 +5728,6 @@ var Renderer = (function (_super) {
         _this._devicePixelRatio = window.devicePixelRatio;
         _this._updateDimensions();
         _this.onOptionsChanged();
-        _this._renderDebouncer = new RenderDebouncer_1.RenderDebouncer(_this._terminal, _this._renderRows.bind(_this));
         _this._screenDprMonitor = new ScreenDprMonitor_1.ScreenDprMonitor();
         _this._screenDprMonitor.setListener(function () { return _this.onWindowResize(window.devicePixelRatio); });
         if ('IntersectionObserver' in window) {
@@ -6088,15 +5815,40 @@ var Renderer = (function (_super) {
             this._renderLayers.forEach(function (l) { return operation(l); });
         }
     };
-    Renderer.prototype.refreshRows = function (start, end) {
+    Renderer.prototype.queueRefresh = function (start, end) {
         if (this._isPaused) {
             this._needsFullRefresh = true;
             return;
         }
-        this._renderDebouncer.refresh(start, end);
+        this._refreshRowsQueue.push({ start: start, end: end });
+        if (!this._refreshAnimationFrame) {
+            this._refreshAnimationFrame = window.requestAnimationFrame(this._refreshLoop.bind(this));
+        }
     };
-    Renderer.prototype._renderRows = function (start, end) {
+    Renderer.prototype._refreshLoop = function () {
         var _this = this;
+        var start;
+        var end;
+        if (this._refreshRowsQueue.length > 4) {
+            start = 0;
+            end = this._terminal.rows - 1;
+        }
+        else {
+            start = this._refreshRowsQueue[0].start;
+            end = this._refreshRowsQueue[0].end;
+            for (var i = 1; i < this._refreshRowsQueue.length; i++) {
+                if (this._refreshRowsQueue[i].start < start) {
+                    start = this._refreshRowsQueue[i].start;
+                }
+                if (this._refreshRowsQueue[i].end > end) {
+                    end = this._refreshRowsQueue[i].end;
+                }
+            }
+        }
+        this._refreshRowsQueue = [];
+        this._refreshAnimationFrame = null;
+        start = Math.max(start, 0);
+        end = Math.min(end, this._terminal.rows - 1);
         this._renderLayers.forEach(function (l) { return l.onGridChanged(_this._terminal, start, end); });
         this._terminal.emit('refresh', { start: start, end: end });
     };
@@ -6123,7 +5875,7 @@ exports.Renderer = Renderer;
 
 
 
-},{"../EventEmitter":8,"../utils/RenderDebouncer":37,"../utils/ScreenDprMonitor":38,"./ColorManager":23,"./CursorRenderLayer":24,"./LinkRenderLayer":26,"./SelectionRenderLayer":28,"./TextRenderLayer":29}],28:[function(require,module,exports){
+},{"../EventEmitter":7,"../utils/ScreenDprMonitor":34,"./ColorManager":21,"./CursorRenderLayer":22,"./LinkRenderLayer":24,"./SelectionRenderLayer":26,"./TextRenderLayer":27}],26:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6197,7 +5949,7 @@ exports.SelectionRenderLayer = SelectionRenderLayer;
 
 
 
-},{"./BaseRenderLayer":21}],29:[function(require,module,exports){
+},{"./BaseRenderLayer":19}],27:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6356,7 +6108,7 @@ exports.TextRenderLayer = TextRenderLayer;
 
 
 
-},{"../Buffer":2,"./BaseRenderLayer":21,"./GridCache":25,"./Types":30}],30:[function(require,module,exports){
+},{"../Buffer":1,"./BaseRenderLayer":19,"./GridCache":23,"./Types":28}],28:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FLAGS;
@@ -6371,7 +6123,7 @@ var FLAGS;
 
 
 
-},{}],31:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Browser_1 = require("./utils/Browser");
@@ -6454,7 +6206,7 @@ function getFont(fontWeight, request) {
 
 
 
-},{"./utils/Browser":32}],32:[function(require,module,exports){
+},{"./utils/Browser":30}],30:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var isNode = (typeof navigator === 'undefined') ? true : false;
@@ -6473,7 +6225,7 @@ function contains(arr, el) {
 
 
 
-},{}],33:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6536,7 +6288,7 @@ exports.CharMeasure = CharMeasure;
 
 
 
-},{"../EventEmitter":8}],34:[function(require,module,exports){
+},{"../EventEmitter":7}],32:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -6706,27 +6458,7 @@ exports.CircularList = CircularList;
 
 
 
-},{"../EventEmitter":8}],35:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function addDisposableListener(node, type, handler, useCapture) {
-    node.addEventListener(type, handler, useCapture);
-    return {
-        dispose: function () {
-            if (!handler) {
-                return;
-            }
-            node.removeEventListener(type, handler, useCapture);
-            node = null;
-            handler = null;
-        }
-    };
-}
-exports.addDisposableListener = addDisposableListener;
-
-
-
-},{}],36:[function(require,module,exports){
+},{"../EventEmitter":7}],33:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var MouseHelper = (function () {
@@ -6781,47 +6513,7 @@ exports.MouseHelper = MouseHelper;
 
 
 
-},{}],37:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var RenderDebouncer = (function () {
-    function RenderDebouncer(_terminal, _callback) {
-        this._terminal = _terminal;
-        this._callback = _callback;
-        this._animationFrame = null;
-    }
-    RenderDebouncer.prototype.dispose = function () {
-        if (this._animationFrame) {
-            window.cancelAnimationFrame(this._animationFrame);
-            this._animationFrame = null;
-        }
-    };
-    RenderDebouncer.prototype.refresh = function (rowStart, rowEnd) {
-        var _this = this;
-        rowStart = rowStart || 0;
-        rowEnd = rowEnd || this._terminal.rows - 1;
-        this._rowStart = this._rowStart !== undefined ? Math.min(this._rowStart, rowStart) : rowStart;
-        this._rowEnd = this._rowEnd !== undefined ? Math.max(this._rowEnd, rowEnd) : rowEnd;
-        if (this._animationFrame) {
-            return;
-        }
-        this._animationFrame = window.requestAnimationFrame(function () { return _this._innerRefresh(); });
-    };
-    RenderDebouncer.prototype._innerRefresh = function () {
-        this._rowStart = Math.max(this._rowStart, 0);
-        this._rowEnd = Math.min(this._rowEnd, this._terminal.rows - 1);
-        this._callback(this._rowStart, this._rowEnd);
-        this._rowStart = null;
-        this._rowEnd = null;
-        this._animationFrame = null;
-    };
-    return RenderDebouncer;
-}());
-exports.RenderDebouncer = RenderDebouncer;
-
-
-
-},{}],38:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ScreenDprMonitor = (function () {
@@ -6861,14 +6553,14 @@ exports.ScreenDprMonitor = ScreenDprMonitor;
 
 
 
-},{}],39:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BELL_SOUND = 'data:audio/wav;base64,UklGRigBAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQBAADpAFgCwAMlBZoG/wdmCcoKRAypDQ8PbRDBEQQTOxRtFYcWlBePGIUZXhoiG88bcBz7HHIdzh0WHlMeZx51HmkeUx4WHs8dah0AHXwc3hs9G4saxRnyGBIYGBcQFv8U4RPAEoYRQBACD70NWwwHC6gJOwjWBloF7gOBAhABkf8b/qv8R/ve+Xf4Ife79W/0JfPZ8Z/wde9N7ijtE+wU6xvqM+lb6H7nw+YX5mrlxuQz5Mzje+Ma49fioeKD4nXiYeJy4pHitOL04j/jn+MN5IPkFOWs5U3mDefM55/ogOl36m7rdOyE7abuyu8D8Unyj/Pg9D/2qfcb+Yn6/vuK/Qj/lAAlAg==';
 
 
 
-},{}],40:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Terminal_1 = require("./Terminal");
@@ -6876,6 +6568,6 @@ module.exports = Terminal_1.Terminal;
 
 
 
-},{"./Terminal":15}]},{},[40])(40)
+},{"./Terminal":13}]},{},[36])(36)
 });
 //# sourceMappingURL=xterm.js.map

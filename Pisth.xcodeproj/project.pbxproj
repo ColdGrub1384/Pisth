@@ -146,6 +146,7 @@
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
+		3AA25FA6203DF61C00ECC04D /* xterm.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = xterm.js.map; sourceTree = "<group>"; };
 		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3AA3FDC620275E9100C07C7A /* Pisth Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +355,7 @@
 				3A36DF9E20012D500089039F /* xterm.css */,
 				3A36DF9F20012D510089039F /* xterm.js */,
 				3AF74773203C682D00400CB0 /* fit.js */,
+				3AA25FA6203DF61C00ECC04D /* xterm.js.map */,
 				3A38FC4F1FF56AA800690382 /* terminal.html */,
 			);
 			path = Terminal;
