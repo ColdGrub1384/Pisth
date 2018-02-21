@@ -192,7 +192,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - sender: Sender button.
     @objc func toggleFirstToolbar(_ sender: UIButton) {
-        accessoryView = toolbar
+        addToolbar()
         reloadInputViews()
     }
     
@@ -240,12 +240,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolbar.frame.height))
+        view.backgroundColor = .blue
         
         view.addSubview(toolbar)
         
         toolbar.frame.size.width = view.frame.width
         toolbar.autoresizingMask = [.flexibleWidth]
         
+        self.toolbar = toolbar
         accessoryView = view
         
         if isFirstResponder {
