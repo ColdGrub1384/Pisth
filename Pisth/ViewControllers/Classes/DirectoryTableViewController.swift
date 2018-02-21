@@ -392,7 +392,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.showError()
         })
         
-        let terminalVC = TerminalViewController()
+        var terminalVC = TerminalViewController()
+        
+        if #available(iOS 11, *) {
+            terminalVC = TerminalViewControllerIOS11()
+        }
+        
         terminalVC.pwd = directory
         navigationController?.pushViewController(terminalVC, animated: true)
     }

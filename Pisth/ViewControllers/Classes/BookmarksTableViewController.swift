@@ -452,7 +452,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     ConnectionManager.shared.connection = connection
                     ConnectionManager.shared.connect()
                     
-                    let termVC = TerminalViewController()
+                    var termVC = TerminalViewController()
+                    
+                    if #available(iOS 11, *) {
+                        termVC = TerminalViewControllerIOS11()
+                    }
+                    
                     termVC.pureMode = true
                                         
                     activityVC.dismiss(animated: true, completion: {

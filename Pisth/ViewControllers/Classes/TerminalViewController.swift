@@ -832,7 +832,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
     
-    
     // MARK: Web kit navigation delegate
 
     /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function.
@@ -1013,4 +1012,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Print this to dismiss the keyboard (from SSH).
     static let close = "\(Keys.esc)[CLOSE"
+}
+
+/// TerminalViewController subclass used only if iOS 11 is available.
+@available(iOS 11.0, *)
+class TerminalViewControllerIOS11: TerminalViewController {
+    
+    /// `UIKeyInputTraits`s `smartQuotesType` variable.
+    ///
+    /// Returns `.no`.
+    var smartQuotesType: UITextSmartQuotesType = .no
 }

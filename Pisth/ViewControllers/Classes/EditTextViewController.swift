@@ -87,6 +87,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDel
         textView.keyboardAppearance = .dark
         textView.inputAccessoryView = toolbar
         textView.font = textStorage.highlightr.theme.codeFont
+        if #available(iOS 11.0, *) {
+            textView.smartQuotesType = .no
+        }
         setTextColor()
         placeholderView.addSubview(textView)
     }

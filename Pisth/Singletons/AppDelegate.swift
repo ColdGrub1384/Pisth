@@ -103,6 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         AppDelegate.shared = self
         
+        UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
+        UserDefaults.standard.synchronize()
+        
         // Setup Navigation Controller
         let bookmarksVC = BookmarksTableViewController()
         navigationController = UINavigationController(rootViewController: bookmarksVC)

@@ -28,7 +28,11 @@ class GitBranchesTableViewController: UITableViewController {
     ///     - command: Command to run.
     ///     - title: Title of opened terminal.
     func launch(command: String, withTitle title: String) {
-        let terminalVC = TerminalViewController()
+        var terminalVC = TerminalViewController()
+        
+        if #available(iOS 11, *) {
+            terminalVC = TerminalViewControllerIOS11()
+        }
         
         terminalVC.title = title
         terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
