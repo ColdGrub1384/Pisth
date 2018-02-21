@@ -219,7 +219,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     }
     
     
-    /// MARK: - View controller
+    // MARK: - View controller
     
     /// `UIViewController`'s `viewDidLoad` function.
     ///
@@ -242,12 +242,14 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         let createFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(create(_:)))
         navigationItem.setRightBarButtonItems([createFile], animated: true)
         
-        // Banner ad
-        bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.rootViewController = self
-        bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-        bannerView.delegate = self
-        bannerView.load(GADRequest())
+        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            // Banner ad
+            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerView.rootViewController = self
+            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+            bannerView.delegate = self
+            bannerView.load(GADRequest())
+        }
     }
     
     /// `UIViewController`'s `viewDidAppear(_:)` function.
