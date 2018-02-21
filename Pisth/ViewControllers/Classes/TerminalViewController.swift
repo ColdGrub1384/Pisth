@@ -566,7 +566,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// - Returns: `true`.
     override var prefersStatusBarHidden: Bool {
-        return true
+        return navigationController?.isNavigationBarHidden ?? true
     }
     
     // MARK: - Keyboard
