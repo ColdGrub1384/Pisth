@@ -179,6 +179,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
                 if item.tag == ItemsTag.ctrl.rawValue {
                     self.ctrlKey = (item.customView as? UIButton)
+                    
+                    if self.ctrl {
+                        ctrlKey.setTitleColor(.lightGray, for: .normal)
+                    } else {
+                        ctrlKey.setTitleColor(.white, for: .normal)
+                    }
                 }
             }
         }
