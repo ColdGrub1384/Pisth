@@ -67,6 +67,29 @@ struct AnsiColors {
 }
 
 /// Template class for doing a theme for the terminal.
+///
+///
+/// # Discussion
+///
+///
+/// ## Add a theme
+///
+/// - Create a subclass of `TerminalTheme` and override all properties you want.
+/// - Register the theme in `themes` variable.
+///
+///
+/// ## Default themes
+///
+/// - `BasicTheme`
+/// - `GrassTheme`
+/// - `HomebrewTheme`
+/// - `ManPageTheme`
+/// - `NovelTheme`
+/// - `OceanTheme`
+/// - `ProTheme`
+/// - `RedSandsTheme`
+/// - `SilverAerogelTheme`
+/// - `UbuntuTheme`
 class TerminalTheme {
     
     /// Get theme by name.
