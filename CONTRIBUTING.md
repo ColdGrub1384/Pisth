@@ -29,7 +29,7 @@ Respect the hierarchy.
 
 - Put HTML, CSS and JavaScript sources for the terminal inside the [Terminal](https://github.com/ColdGrub1384/Pisth/tree/master/Terminal) directory and group.
 
-- Put sources for Pisth iOS app inside the [Pisth](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth) directory and group and put sources for Pisth Viewer macIS app inside the [Pisth Viewer](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth%20Viewer) directory and group.
+- Put sources for Pisth iOS app inside the [Pisth](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth) directory and group and put sources for Pisth Viewer macOS app inside the [Pisth Viewer](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth%20Viewer) directory and group.
 
 ## Documentation
 
