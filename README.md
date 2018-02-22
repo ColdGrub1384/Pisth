@@ -29,10 +29,10 @@ Why use Pisth:
 
 ## Project hierarchy
 
-- [Shared](https://github.com/ColdGrub1384/Pisth/tree/master/Shared): Shared sources between targets.
-- [Terminal](https://github.com/ColdGrub1384/Pisth/tree/master/Terminal): HTML page for displaying the terminal.
-- [Pisth](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth): iOS Application.
-- [Pisth Viewer](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth%20Viewer): Pisth Viewer macOS Application.
+- [Shared/](Shared): Shared sources between targets.
+- [Terminal/](Terminal): HTML page for displaying the terminal.
+- [Pisth/](Pisth): iOS Application.
+- [Pisth Viewer/](Pisth%20Viewer): Pisth Viewer macOS Application.
 
 ## Projects
 
