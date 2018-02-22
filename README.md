@@ -27,6 +27,13 @@ Why use Pisth:
 ## Screenshots
 ![Screenshots](https://pisth.github.io/screenshots.png)
 
+## Project hierarchy
+
+- [Shared](https://github.com/ColdGrub1384/Pisth/tree/master/Shared): Shared sources between targets.
+- [Terminal](https://github.com/ColdGrub1384/Pisth/tree/master/Terminal): HTML page for displaying the terminal.
+- [Pisth](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth): iOS Application.
+- [Pisth Viewer](https://github.com/ColdGrub1384/Pisth/tree/master/Pisth%20Viewer): Pisth Viewer macOS Application.
+
 ## Creating a pull request
 
 ### Documentation
@@ -57,6 +64,12 @@ Put fullstops after documented comments.
 
 #### Tabs
 Use 4 spaces tabs.
+
+## Projects
+
+- [Pisth/pisth.github.io](https://github.com/Pisth/pisth.github.io): Page for this project.
+- [Pisth/docs](https://github.com/Pisth/docs): Documentation for this project.
+- [Pisth/meta](https://github.com/Pisth/meta): Metadata for iTunes Connect.
 
 ## Acknowledgements
 See licenses [here](http://htmlpreview.github.io/?https://github.com/ColdGrub1384/Pisth/blob/master/Pisth/Licenses.html).
