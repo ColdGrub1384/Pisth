@@ -27,22 +27,32 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ExS-N3-sfW">
-                                <rect key="frame" x="16" y="20" width="343" height="589"/>
+                                <rect key="frame" x="16" y="49" width="343" height="560"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-gO-Wb6">
+                                <rect key="frame" x="16" y="20" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.79445103059544409" green="1" blue="0.78108418814774616" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="leading" secondItem="3Av-4F-neH" secondAttribute="leading" id="39a-T6-cDq"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8qf-yf-Bka"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="AhP-sH-TUV"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="trailing" secondItem="3Av-4F-neH" secondAttribute="trailing" id="C6B-fz-LPe"/>
-                            <constraint firstItem="3Av-4F-neH" firstAttribute="top" secondItem="ExS-N3-sfW" secondAttribute="bottom" constant="8" symbolic="YES" id="Hbh-2P-jZQ"/>
-                            <constraint firstAttribute="bottom" secondItem="3Av-4F-neH" secondAttribute="bottom" constant="20" symbolic="YES" id="gvg-4p-UMb"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iSu-aZ-roQ"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="trailing" secondItem="ExS-N3-sfW" secondAttribute="trailing" id="0aH-Fg-Kxh"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="trailing" secondItem="3Av-4F-neH" secondAttribute="trailing" id="9qW-1y-fna"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ars-WU-JNo"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LGO-Be-twG"/>
+                            <constraint firstAttribute="bottom" secondItem="3Av-4F-neH" secondAttribute="bottom" constant="20" symbolic="YES" id="LwF-Oa-WYG"/>
+                            <constraint firstItem="3Av-4F-neH" firstAttribute="top" secondItem="ExS-N3-sfW" secondAttribute="bottom" constant="8" symbolic="YES" id="WAf-FK-icv"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XiS-zl-C5C"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="top" secondItem="jfL-gO-Wb6" secondAttribute="bottom" constant="8" symbolic="YES" id="ct1-aM-VHX"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="leading" secondItem="3Av-4F-neH" secondAttribute="leading" id="dWb-hO-IzW"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="ExS-N3-sfW" secondAttribute="leading" id="ulb-AB-7vH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="filename" destination="jfL-gO-Wb6" id="vTH-fT-Jla"/>
                         <outlet property="imageView" destination="ExS-N3-sfW" id="vIu-CH-iRp"/>
                         <outlet property="importButton" destination="3Av-4F-neH" id="Oip-kG-Ypk"/>
                     </connections>

@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        if let filename = Pisth.shared.filename(fromURL: url) {
+            (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.filename.text = filename
+        }
+        
         return true
     }
 

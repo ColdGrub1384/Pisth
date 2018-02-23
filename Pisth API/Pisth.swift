@@ -54,4 +54,9 @@ open class Pisth {
         
         UIApplication.shared.open(pisthURLScheme, options: [:], completionHandler: nil)
     }
+    
+    /// Get filename from opened URL.
+    open func filename(fromURL url: URL) -> String? {
+        return url.queryParameters?["filename"]?.removingPercentEncoding
+    }
 }

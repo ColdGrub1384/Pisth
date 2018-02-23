@@ -95,6 +95,7 @@
 		3ACF9AEF204094E4006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9AC920408DED006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9AF42040A839006C3218 /* ConnectionInfoTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF32040A839006C3218 /* ConnectionInfoTableViewController.storyboard */; };
 		3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */; };
+		3ACF9AF82040C3D2006C3218 /* URL+queryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */; };
 		3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */; };
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
@@ -342,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				3A288B571FF6810E008C523A /* String.swift */,
+				3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */,
 				3AB1883A2033367F00E71C08 /* Color.swift */,
 			);
 			path = Extensions;
@@ -406,7 +408,6 @@
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3A89B5BB2037760D00B750D9 /* UIImage+init.swift */,
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
-				3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -881,6 +882,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACF9AF82040C3D2006C3218 /* URL+queryParameters.swift in Sources */,
 				3ACF9AD720408E08006C3218 /* Pisth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

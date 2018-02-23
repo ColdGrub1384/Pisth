@@ -479,7 +479,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             
             navigationController.dismiss(animated: true, completion: {
                 if let dataReceiverAppURLScheme = self.dataReceiverAppURLScheme {
-                    UIApplication.shared.open(URL(string: dataReceiverAppURLScheme.absoluteString+"?success")!, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(URL(string: dataReceiverAppURLScheme.absoluteString+"?filename=\(file.lastPathComponent.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")!, options: [:], completionHandler: nil)
                 }
             })
         }

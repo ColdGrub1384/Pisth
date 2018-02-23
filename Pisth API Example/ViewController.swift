@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var filename: UILabel!
     
     @IBAction func importFromPisth(_ sender: Any) {
         
