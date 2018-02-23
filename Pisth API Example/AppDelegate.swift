@@ -18,13 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set app URL scheme
         Pisth.shared.urlScheme = URL(string: "pisth-api://")
         
-        print(Pisth.shared.dataReceived)
+        
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        print(Pisth.shared.dataReceived)
+        if let data = Pisth.shared.dataReceived {
+            if let image = UIImage(data: data) {
+                (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.imageView.image = image
+            }
+        }
         
         return true
     }

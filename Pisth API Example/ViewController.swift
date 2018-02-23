@@ -11,6 +11,7 @@ import Pisth_API
 class ViewController: UIViewController {
 
     @IBOutlet weak var importButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBAction func importFromPisth(_ sender: Any) {
         
