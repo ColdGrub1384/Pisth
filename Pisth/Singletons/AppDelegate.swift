@@ -13,10 +13,13 @@ import SwiftyStoreKit
 
 /// The app's delegate.
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryTableViewControllerStaticDelegate {
     
     /// The window used with app.
     var window: UIWindow?
+    
+    /// Action to do when opening the app with an URL scheme.
+    var action: AppAction?
     
     /// The shared Navigation controller used in the app.
     var navigationController = UINavigationController()
@@ -30,6 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Returns: `persistentContainer.viewContext`.
     var coreDataContext: NSManagedObjectContext {
         return persistentContainer.viewContext
+    }
+    
+    /// URL scheme of app that is using Pisth API and opened the URL scheme.
+    var dataReceiverAppURLScheme: URL?
+    
+    /// Go back to app that opened the URL scheme.
+    @objc func goToPreviousApp() {
+        window?.rootViewController?.dismiss(animated: true, completion: {
+            
+            if self.dataReceiverAppURLScheme != nil {
+                UIApplication.shared.open(self.dataReceiverAppURLScheme!, options: [:], completionHandler: nil)
+            }
+        })
     }
     
     /// Upload file at directory opened in `directoryTableViewController`.
@@ -238,8 +254,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Open and upload file.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.hasPrefix("file://") { // Upload file
-            self.openedFile = url
+        if url.absoluteString.hasPrefix("file:") { // Upload file
+            
+            action = .upload
+            
+            openedFile = url
             
             // Open a BookmarksTableViewController to select where upload the file
             
@@ -260,6 +279,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                 bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
                 bookmarksVC.navigationItem.prompt = "Select connection where upload file"
+            })
+        } else if url.absoluteString.hasPrefix("pisth-import:") { // Export file with the API
+            
+            LocalDirectoryTableViewController.delegate = self
+            
+            action = .apiImport
+            
+            if let scheme = url.queryParameters?["scheme"]?.removingPercentEncoding {
+                dataReceiverAppURLScheme = URL(string: scheme)
+            }
+            
+            // Open a BookmarksTableViewController to select file to export
+            
+            let bookmarksVC = BookmarksTableViewController()
+            
+            if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
+                let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+                let imageView = UIImageView(image: backgroundImage)
+                let containerView = UIView()
+                containerView.addSubview(imageView)
+                containerView.addSubview(blurView)
+                
+                bookmarksVC.tableView.backgroundView = containerView
+                
+                blurView.frame.size = bookmarksVC.tableView.frame.size
+                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                imageView.frame.size = bookmarksVC.tableView.frame.size
+                imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+                bookmarksVC.tableView.backgroundColor = .clear
+            }
+        
+            let navVC = UINavigationController(rootViewController: bookmarksVC)
+            navVC.navigationBar.barStyle = .black
+            navVC.navigationBar.isTranslucent = true
+            navVC.toolbar.barStyle = .black
+            navVC.toolbar.isTranslucent = true
+            if #available(iOS 11.0, *) {
+                navVC.navigationBar.prefersLargeTitles = true
+            }
+            navigationController.present(navVC, animated: true, completion: {
+                bookmarksVC.delegate = self
+                if #available(iOS 11.0, *) {
+                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                }
+                bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
+                bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
+                bookmarksVC.navigationItem.prompt = "Select connection to export file"
             })
         }
         
@@ -343,12 +410,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     ///
     /// Upload file at selected directory.
     func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
-        directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+        if action == .upload {
+            directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+        } else if action == .apiImport {
+            directoryTableViewController.navigationItem.prompt = "Select file to import"
+        }
         directoryTableViewController.delegate = self
         directoryTableViewController.closeAfterSending = true
         self.directoryTableViewController = directoryTableViewController
+        
         (navigationController.presentedViewController as? UINavigationController)?.pushViewController(directoryTableViewController, animated: true) {
-            directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+            if self.action == .upload {
+                directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+            } else {
+                directoryTableViewController.navigationItem.rightBarButtonItems = []
+            }
+            
         }
     }
     
@@ -359,12 +436,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Upload file at selected connection.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
         
-        directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+        if action == .upload {
+            directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+            directoryTableViewController.closeAfterSending = true
+        } else if action == .apiImport {
+            directoryTableViewController.navigationItem.prompt = "Select file to import"
+        }
         directoryTableViewController.delegate = self
-        directoryTableViewController.closeAfterSending = true
+        
         self.directoryTableViewController = directoryTableViewController
         bookmarksTableViewController.navigationController?.pushViewController(directoryTableViewController, animated: true) {
-            directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+            
+            if self.action == .upload {
+                directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+            } else {
+                directoryTableViewController.navigationItem.rightBarButtonItems = []
+            }
         }
     }
     
@@ -378,6 +465,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         let alert = UIAlertController(title: "Cannot upload file!", message: "SFTP must be enabled.\nIf you want to upload file here, press the \"info\" button and enable SFTP.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         bookmarksTableViewController.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Directory table view controller static delegate
+    
+    func didOpenFile(_ file: URL, withData data: Data) {
+        
+        if action == .apiImport {
+            try? FileManager.default.removeItem(at: file)
+            LocalDirectoryTableViewController.delegate = nil
+            
+            UIPasteboard(name: .init("pisth-import"), create: true)?.setData(data, forPasteboardType: "public.item")
+            
+            navigationController.dismiss(animated: true, completion: {
+                if let dataReceiverAppURLScheme = self.dataReceiverAppURLScheme {
+                    UIApplication.shared.open(URL(string: dataReceiverAppURLScheme.absoluteString+"?success")!, options: [:], completionHandler: nil)
+                }
+            })
+        }
+        
     }
     
     // MARK: - Static

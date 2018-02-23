@@ -81,6 +81,9 @@
 		3AB188572033510500E71C08 /* Pro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1884F203342A300E71C08 /* Pro.swift */; };
 		3AB188582033510800E71C08 /* Ocean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1884D2033420600E71C08 /* Ocean.swift */; };
 		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
+		3ACF9ABF204063D1006C3218 /* URL+queryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */; };
+		3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC0204079A9006C3218 /* AppAction.swift */; };
+		3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */; };
 		3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */; };
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
@@ -168,6 +171,9 @@
 		3AB188512033432800E71C08 /* RedSands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedSands.swift; sourceTree = "<group>"; };
 		3AB18853203343C100E71C08 /* SilverAerogel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilverAerogel.swift; sourceTree = "<group>"; };
 		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
+		3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+queryParameters.swift"; sourceTree = "<group>"; };
+		3ACF9AC0204079A9006C3218 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerStaticDelegate.swift; sourceTree = "<group>"; };
 		3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryAction.swift; sourceTree = "<group>"; };
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
@@ -294,6 +300,7 @@
 			children = (
 				3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */,
 				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
+				3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */,
 				3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */,
 			);
 			path = Protocols;
@@ -336,6 +343,7 @@
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3A89B5BB2037760D00B750D9 /* UIImage+init.swift */,
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
+				3ACF9ABE204063D1006C3218 /* URL+queryParameters.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -367,6 +375,7 @@
 				3AA3FDC1202754EF00C07C7A /* Extensions */,
 				3A843EEC202A64030096632E /* ReviewHelper.swift */,
 				3A38DC422035DD480093A091 /* PurchaseHelper.swift */,
+				3ACF9AC0204079A9006C3218 /* AppAction.swift */,
 				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
@@ -722,6 +731,7 @@
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3A288B581FF6810E008C523A /* String.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
+				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
 				3AB188452033400D00E71C08 /* Homebrew.swift in Sources */,
 				3AB18850203342A300E71C08 /* Pro.swift in Sources */,
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */,
@@ -739,6 +749,7 @@
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
+				3ACF9ABF204063D1006C3218 /* URL+queryParameters.swift in Sources */,
 				3AB1883B2033367F00E71C08 /* Color.swift in Sources */,
 				3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */,
@@ -747,6 +758,7 @@
 				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3AB18854203343C100E71C08 /* SilverAerogel.swift in Sources */,
 				3AB1883F20333D0300E71C08 /* BasicTheme.swift in Sources */,
+				3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */,
 				3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */,
 				3A6F5BF12038C87300347171 /* Ubuntu.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,

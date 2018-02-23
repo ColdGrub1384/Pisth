@@ -499,6 +499,9 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Static
     
+    /// Global delegate.
+    static var delegate: LocalDirectoryTableViewControllerStaticDelegate?
+    
     /// Action to do.
     static var action = DirectoryAction.none
     
@@ -511,6 +514,14 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     ///     - navigationController: Navigation controller in wich push editor or viewer.
     ///     - viewController: viewController in wich show loading alert.
     static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
+        
+        if let delegate = delegate {
+            guard let data = try? Data(contentsOf: file) else {
+                return
+            }
+            delegate.didOpenFile(file, withData: data)
+            return
+        }
         
         func openFile() {
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
