@@ -93,6 +93,8 @@
 		3ACF9AE920409446006C3218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE720409446006C3218 /* LaunchScreen.storyboard */; };
 		3ACF9AEE204094E4006C3218 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9AC920408DED006C3218 /* Pisth_API.framework */; };
 		3ACF9AEF204094E4006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9AC920408DED006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ACF9AF42040A839006C3218 /* ConnectionInfoTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF32040A839006C3218 /* ConnectionInfoTableViewController.storyboard */; };
+		3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */; };
 		3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */; };
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
@@ -218,6 +220,8 @@
 		3ACF9AE520409446006C3218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACF9AE820409446006C3218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACF9AEA20409446006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ACF9AF32040A839006C3218 /* ConnectionInfoTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConnectionInfoTableViewController.storyboard; sourceTree = "<group>"; };
+		3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoTableViewController.swift; sourceTree = "<group>"; };
 		3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryAction.swift; sourceTree = "<group>"; };
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
@@ -519,6 +523,7 @@
 				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
 				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
+				3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				3AF9AEA71FF5461300840E8A /* Settings.storyboard */,
 				3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */,
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
+				3ACF9AF32040A839006C3218 /* ConnectionInfoTableViewController.storyboard */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -788,6 +794,7 @@
 				3AEF111A201115850089389E /* empty in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
+				3ACF9AF42040A839006C3218 /* ConnectionInfoTableViewController.storyboard in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
 				3AF74774203C682D00400CB0 /* fit.js in Resources */,
 				3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */,
@@ -910,6 +917,7 @@
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3A288B581FF6810E008C523A /* String.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
+				3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
 				3AB188452033400D00E71C08 /* Homebrew.swift in Sources */,
 				3AB18850203342A300E71C08 /* Pro.swift in Sources */,
