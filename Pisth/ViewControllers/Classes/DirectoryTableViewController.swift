@@ -219,7 +219,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Go back and show error.
     func showError() {
+        
         guard let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
+        
+        guard navVC.visibleViewController == self else {
+            return
+        }
+        
         let result = ConnectionManager.shared.result
         
         var alert: UIAlertController!
@@ -234,14 +240,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         if alert != nil {
             
-            let visibleVC = navVC.visibleViewController ?? nil
+            let visibleVC = navVC.visibleViewController
             navVC.popToRootViewController(animated: true, completion: {
                 
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    if !(visibleVC is DirectoryTableViewController) {
-                        if let visibleVC = visibleVC {
-                            navVC.pushViewController(visibleVC, animated: true)
-                        }
+                    guard let visibleVC = visibleVC else {
+                        return
+                    }
+                    
+                    if !(visibleVC is DirectoryTableViewController) && !(navVC.viewControllers.contains(visibleVC)) {
+                        navVC.pushViewController(visibleVC, animated: true)
                     }
                 }))
                 UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
