@@ -475,7 +475,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             try? FileManager.default.removeItem(at: file)
             LocalDirectoryTableViewController.delegate = nil
             
-            UIPasteboard(name: .init("pisth-import"), create: true)?.setData(data, forPasteboardType: "public.item")
+            UIPasteboard(name: .init("pisth-import"), create: true)?.setData(data, forPasteboardType: "public.data")
             
             navigationController.dismiss(animated: true, completion: {
                 if let dataReceiverAppURLScheme = self.dataReceiverAppURLScheme {
