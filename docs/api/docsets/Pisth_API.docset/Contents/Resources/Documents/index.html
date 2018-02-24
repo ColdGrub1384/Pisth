@@ -50,27 +50,31 @@
 <ol>
 <li>Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it&rsquo;s very important! Don&rsquo;t use URL schemes like <q>pisth-import</q>, try to include the name of your app, for example: <q>myApp-pisth-import</q>.</li>
 <li>Include the Pisth API framework: Drag the <code>Pisth API</code> project to your workspace and add it to your app&rsquo;s embedded binary.</li>
-<li>In your App delegate:</li>
+<li>Handle data received in your App delegate:</li>
 </ol>
-<pre class="highlight plaintext"><code>import Pisth_API
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Pisth_API</span>
 
- func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+ <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="p">{</span>
 
-     // Give your app's URL scheme for importing files.
-     Pisth.shared.urlScheme = "&lt;YOUR APP URL SCHEME&gt;"
+     <span class="c1">// Give your app's URL scheme for importing files.</span>
+     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">urlScheme</span> <span class="o">=</span> <span class="s">"&lt;YOUR APP URL SCHEME&gt;"</span>
 
- }
+ <span class="p">}</span>
 
- func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -&gt; Bool {
+ <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
 
-     // Getting data received
-     Pisth.shared.dataReceived
+     <span class="c1">// Getting data received</span>
+     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">dataReceived</span>
 
-     // Getting received file name
-     Pisth.shared.filename(fromURL: url)
+     <span class="c1">// Getting received file name</span>
+     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
 
- }
+ <span class="p">}</span>
 </code></pre>
+
+<ol>
+<li>Now, start importing file calling <code>Pisth.shared.importFile()</code>.</li>
+</ol>
 
           </section>
         </section>
