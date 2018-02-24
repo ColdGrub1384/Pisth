@@ -904,7 +904,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         cell.filename.text = files[indexPath.row].filename
         
         if files[indexPath.row].isDirectory {
-            cell.iconView.image = #imageLiteral(resourceName: "folder")
+            cell.iconView.image = #imageLiteral(resourceName: "File icons/folder")
         } else {
             cell.iconView.image = fileIcon(forExtension: files[indexPath.row].filename.nsString.pathExtension)
         }

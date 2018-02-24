@@ -14,10 +14,11 @@ import UIKit
 ///
 /// - Returns: The file icon associated with the given extension, or the default file icon.
 func fileIcon(forExtension extension_: String) -> UIImage {
-    if let defaultIcon = UIImage(named: extension_.lowercased()) {
+    
+    if let defaultIcon = UIImage(named: "File icons/"+extension_.lowercased()) {
         return defaultIcon
     } else {
-        return #imageLiteral(resourceName: "file")
+        return #imageLiteral(resourceName: "File icons/file")
     }
 }
 

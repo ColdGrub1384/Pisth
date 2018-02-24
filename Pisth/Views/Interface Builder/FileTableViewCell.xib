@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="382" height="86.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="file" translatesAutoresizingMaskIntoConstraints="NO" id="XnO-Fc-bEb">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="File icons/file" translatesAutoresizingMaskIntoConstraints="NO" id="XnO-Fc-bEb">
                         <rect key="frame" x="0.0" y="-2" width="102" height="89"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="102" id="zhg-4b-4Bh"/>
@@ -63,6 +63,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="file" width="1024" height="1024"/>
+        <image name="File icons/file" width="297" height="297"/>
     </resources>
 </document>

@@ -319,7 +319,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         var isDir: ObjCBool = false
         if FileManager.default.fileExists(atPath: files[indexPath.row].path, isDirectory: &isDir) {
             if isDir.boolValue { // Is directory
-                cell.iconView.image = #imageLiteral(resourceName: "folder")
+                cell.iconView.image = #imageLiteral(resourceName: "File icons/folder")
             } else { // Is file
                 cell.iconView.image = fileIcon(forExtension: files[indexPath.row].pathExtension)
             }
@@ -410,7 +410,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if cell.iconView.image == #imageLiteral(resourceName: "folder") { // Open folder
+        if cell.iconView.image == #imageLiteral(resourceName: "File icons/folder") { // Open folder
             let dirVC = LocalDirectoryTableViewController(directory: self.files[indexPath.row])
             
             if let delegate = delegate {
