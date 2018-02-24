@@ -8,7 +8,7 @@
  2. Include the Pisth API framework: Drag the `Pisth API` project to your workspace and add it to your app's embedded binary.
  3. In your App delegate:
 
-```
+```swift
 import Pisth_API
 
  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
