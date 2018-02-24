@@ -41,6 +41,6 @@ If you want to contribute to the documentation, don't edit the `docs` directory,
 
 [sudo] gem install jazzy
 
-- And run the [`build-documentation.sh`](https://github.com/ColdGrub1384/Pisth/blob/master/build-documentation.sh) script inside this repo.
+- And run the [`build-documentation.sh`](https://github.com/ColdGrub1384/Pisth/blob/master/build-documentation.sh) script inside [Pisth/](Pisth), [Pisth Viewer/](Pisth%20Viewer/Pisth%20Viewer) or [Pisth API/](Pisth%API/Pisth%API) depending of the documentation you want to build.
 
-- Increment `version` field in [`docs/docsets/Pisth.xml`](https://github.com/ColdGrub1384/Pisth/blob/master/docs/docsets/Pisth.xml).
+- Increment `version` field in `docs/*/docsets/Pisth.xml`

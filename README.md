@@ -29,10 +29,11 @@ Why use Pisth:
 
 ## Project hierarchy
 
-- [Shared/](Shared): Shared sources between targets.
-- [Terminal/](Terminal): HTML page for displaying the terminal.
+- [Pisth Shared/](Pisth%20Shared/Pisth%20Shared): Shared sources between targets.
+- [Pisth Terminal/](Pisth%20Terminal/Pisth%20Terminal): HTML page for displaying the terminal.
 - [Pisth/](Pisth): iOS Application.
-- [Pisth Viewer/](Pisth%20Viewer): Pisth Viewer macOS Application.
+- [Pisth Viewer/](Pisth%20Viewer/Pisth%20Viewer): Pisth Viewer macOS Application.
+- [Pisth API/](Pisth%API/Pisth%API): API for iOS.
 
 ## Projects
 
