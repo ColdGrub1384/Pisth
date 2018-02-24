@@ -16,7 +16,7 @@ import Pisth_Shared
 /// Content received in Pisth for iOS is sent to this app.
 @NSApplicationMain
 class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate, WKNavigationDelegate, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
-
+    
     /// Last received theme name.
     var lastReceivedThemeName = ""
     
@@ -144,7 +144,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         NSKeyedUnarchiver.setClass(TerminalInfo.self, forClassName: "TerminalInfo")
         
         if let info = NSKeyedUnarchiver.unarchiveObject(with: data) as? TerminalInfo {
-        
+            
             let theme = TerminalTheme.themes[info.themeName] ?? ProTheme()
             
             DispatchQueue.main.async {
@@ -264,7 +264,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
             
             if let str = String(data: data, encoding: .utf8) {
                 if (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) != str.components(separatedBy: "\n\n")[0] {
-                        
+                    
                     DispatchQueue.main.async {
                         let alert = NSAlert()
                         alert.messageText = "New version available"
@@ -283,7 +283,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                     }
                 }
             }
-        }.resume()
+            }.resume()
         
         // Keys handling
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) in
@@ -309,7 +309,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 character = Keys.arrowLeft
             case NSRightArrowFunctionKey:
                 character = Keys.arrowRight
-            
+                
             // Function Keys
             case NSF1FunctionKey:
                 character = Keys.f1
@@ -359,4 +359,5 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         exit(0)
     }
 }
+
 
