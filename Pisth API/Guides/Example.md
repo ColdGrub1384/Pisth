@@ -20,14 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
+        let viewController = (UIApplication.shared.keyWindow?.rootViewController as? ViewController)
+
         if let data = Pisth.shared.dataReceived {
+            viewController?.data = data
             if let image = UIImage(data: data) {
-                (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.imageView.image = image
+                viewController?.imageView.image = image
             }
         }
 
         if let filename = Pisth.shared.filename(fromURL: url) {
-            (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.filename.text = filename
+            viewController?.filename.text = filename
         }
 
         return true
@@ -47,6 +50,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var filename: UILabel!
+
+    var data: Data?
+
+    @IBAction func share(_ sender: Any) {
+
+        // Share file
+
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent(filename.text!)
+        _ = FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
+
+        let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = sender as? UIView
+        self.present(activityVC, animated: true, completion: nil)
+    }
 
     @IBAction func importFromPisth(_ sender: Any) {
 
