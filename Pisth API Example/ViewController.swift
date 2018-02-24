@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     var data: Data?
     
     @IBAction func share(_ sender: Any) {
+        
+        // Share file
+        
         let fileURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent(filename.text!)
         _ = FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
         
