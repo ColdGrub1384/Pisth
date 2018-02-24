@@ -36,7 +36,7 @@ open class TerminalInfo: NSObject, NSCoding {
     open var themeName = "Pro"
     
     /// Message to show in terminal.
-    var message = ""
+    open var message = ""
     
     /// Size of terminal (in Floats, not in cols or rows).
     ///

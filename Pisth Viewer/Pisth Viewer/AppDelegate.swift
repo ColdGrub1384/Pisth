@@ -9,6 +9,7 @@ import Cocoa
 import WebKit
 import MultipeerConnectivity
 import Pisth_Shared
+import Pisth_Terminal
 
 /// Pisth Viewer app for macOS.
 /// This app is used to view a terminal opened from Pisth in near iOS device.
@@ -235,7 +236,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// `NSApplicationDelegate`'s `applicationDidFinishLaunching(_:)` function.
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
-        guard let terminal = Bundle.main.url(forResource: "terminal", withExtension: "html") else {
+        guard let terminal = Bundle.terminal.url(forResource: "terminal", withExtension: "html") else {
             return
         }
         webView.loadFileURL(terminal, allowingReadAccessTo: terminal.deletingLastPathComponent())

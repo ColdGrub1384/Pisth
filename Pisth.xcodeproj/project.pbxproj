@@ -12,11 +12,8 @@
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A2837412017D5A200D157A0 /* BooleanInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2837402017D5A200D157A0 /* BooleanInputView.swift */; };
-		3A36DFA020012D520089039F /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9E20012D500089039F /* xterm.css */; };
-		3A36DFA120012D520089039F /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3A36DF9F20012D510089039F /* xterm.js */; };
 		3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A38DC402035D9980093A091 /* StoreKit.framework */; };
 		3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38DC422035DD480093A091 /* PurchaseHelper.swift */; };
-		3A38FC501FF56AA800690382 /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A38FC4F1FF56AA800690382 /* terminal.html */; };
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
@@ -57,6 +54,8 @@
 		3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; };
 		3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; };
+		3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */; };
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */; };
@@ -64,7 +63,6 @@
 		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
 		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
-		3AF74774203C682D00400CB0 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3AF74773203C682D00400CB0 /* fit.js */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
@@ -102,6 +100,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
+				3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,11 +113,8 @@
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A2837402017D5A200D157A0 /* BooleanInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanInputView.swift; sourceTree = "<group>"; };
-		3A36DF9E20012D500089039F /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
-		3A36DF9F20012D510089039F /* xterm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = xterm.js; sourceTree = "<group>"; };
 		3A38DC402035D9980093A091 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3A38DC422035DD480093A091 /* PurchaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHelper.swift; sourceTree = "<group>"; };
-		3A38FC4F1FF56AA800690382 /* terminal.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = terminal.html; sourceTree = "<group>"; };
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
@@ -140,7 +136,6 @@
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
-		3AA25FA6203DF61C00ECC04D /* xterm.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = xterm.js.map; sourceTree = "<group>"; };
 		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +155,7 @@
 		3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B792041BB5B006C3218 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pasteboard.swift; sourceTree = "<group>"; };
 		3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryAction.swift; sourceTree = "<group>"; };
 		3AE8359E1FF2DCB30073D06E /* EditTextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTextViewController.xib; sourceTree = "<group>"; };
@@ -167,7 +163,6 @@
 		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
-		3AF74773203C682D00400CB0 /* fit.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = fit.js; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +201,7 @@
 				3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
 				3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */,
+				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,18 +278,6 @@
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		3AA3FDD42027780000C07C7A /* Terminal */ = {
-			isa = PBXGroup;
-			children = (
-				3A36DF9E20012D500089039F /* xterm.css */,
-				3A36DF9F20012D510089039F /* xterm.js */,
-				3AF74773203C682D00400CB0 /* fit.js */,
-				3AA25FA6203DF61C00ECC04D /* xterm.js.map */,
-				3A38FC4F1FF56AA800690382 /* terminal.html */,
-			);
-			path = Terminal;
 			sourceTree = "<group>";
 		};
 		3AAF00EC1FF2D50D00ECCA6F /* Helpers */ = {
@@ -399,9 +383,9 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
+				3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */,
 				3ACF9B792041BB5B006C3218 /* Pisth_API.framework */,
 				3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */,
-				3AA3FDD42027780000C07C7A /* Terminal */,
 				3AFDD9031FF140FE0061677B /* Pisth */,
 				3ACF9ADD20409446006C3218 /* Pisth API Example */,
 				3AFDD9021FF140FE0061677B /* Products */,
@@ -546,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */,
-				3A36DFA020012D520089039F /* xterm.css in Resources */,
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
 				3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */,
@@ -555,13 +538,10 @@
 				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3AA3FDBE2027549900C07C7A /* FileTableViewCell.xib in Resources */,
-				3A36DFA120012D520089039F /* xterm.js in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
-				3A38FC501FF56AA800690382 /* terminal.html in Resources */,
 				3ACF9AF42040A839006C3218 /* ConnectionInfoTableViewController.storyboard in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
-				3AF74774203C682D00400CB0 /* fit.js in Resources */,
 				3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
 				3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */,

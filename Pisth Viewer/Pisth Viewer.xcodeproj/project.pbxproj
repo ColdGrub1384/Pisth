@@ -11,7 +11,26 @@
 		3ACF9BAE2041BE21006C3218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BAD2041BE21006C3218 /* Assets.xcassets */; };
 		3ACF9BB12041BE21006C3218 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BAF2041BE21006C3218 /* MainMenu.xib */; };
 		3ACF9BBA2041BE84006C3218 /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BB92041BE83006C3218 /* Licenses.html */; };
+		3ACF9BE52041C066006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */; };
+		3ACF9BE62041C066006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3ACF9BE92041C0C6006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */; };
+		3ACF9BEA2041C0C6006C3218 /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3ACF9BE72041C066006C3218 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3ACF9BEA2041C0C6006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
+				3ACF9BE62041C066006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3ACF9BA82041BE21006C3218 /* Pisth Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,6 +40,8 @@
 		3ACF9BB22041BE22006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF9BB32041BE22006C3218 /* Pisth_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pisth_Viewer.entitlements; sourceTree = "<group>"; };
 		3ACF9BB92041BE83006C3218 /* Licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
+		3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ACF9BE92041C0C6006C3218 /* Pisth_Shared.framework in Frameworks */,
+				3ACF9BE52041C066006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +60,8 @@
 		3ACF9B9F2041BE21006C3218 = {
 			isa = PBXGroup;
 			children = (
+				3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */,
+				3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */,
 				3ACF9BAA2041BE21006C3218 /* Pisth Viewer */,
 				3ACF9BA92041BE21006C3218 /* Products */,
 			);
@@ -73,6 +98,7 @@
 				3ACF9BA42041BE21006C3218 /* Sources */,
 				3ACF9BA52041BE21006C3218 /* Frameworks */,
 				3ACF9BA62041BE21006C3218 /* Resources */,
+				3ACF9BE72041C066006C3218 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

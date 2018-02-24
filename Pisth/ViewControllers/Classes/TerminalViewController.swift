@@ -11,6 +11,7 @@ import WebKit
 import MultipeerConnectivity
 import BiometricAuthentication
 import Pisth_Shared
+import Pisth_Terminal
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
@@ -528,7 +529,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView.backgroundColor = .clear
             webView.navigationDelegate = self
             webView.scrollView.isScrollEnabled = false
-            webView.loadFileURL(Bundle.main.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.main.bundleURL)
+            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.terminal.bundleURL)
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
             tapGesture.delegate = self
