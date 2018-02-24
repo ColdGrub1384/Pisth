@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     @IBAction func share(_ sender: Any) {
         let fileURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent(filename.text!)
-        _ = try? FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
+        _ = FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
         
         let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = sender as? UIView
