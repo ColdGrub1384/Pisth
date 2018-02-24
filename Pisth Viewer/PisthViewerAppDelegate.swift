@@ -8,6 +8,7 @@
 import Cocoa
 import WebKit
 import MultipeerConnectivity
+import Pisth_Shared
 
 /// Pisth Viewer app for macOS.
 /// This app is used to view a terminal opened from Pisth in near iOS device.

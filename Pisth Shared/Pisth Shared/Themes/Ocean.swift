@@ -9,38 +9,39 @@
     import UIKit
 #endif
 
-/// Basic theme for the terminal.
-class BasicTheme: TerminalTheme {
+/// Ocean theme for the terminal.
+open class OceanTheme: TerminalTheme {
     
     #if os(iOS)
         /// Returns light.
-        override var keyboardAppearance: UIKeyboardAppearance {
+        open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
         /// Returns default.
-        override var toolbarStyle: UIBarStyle {
+        open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
-    /// Returns light blue.
-    override var selectionColor: Color? {
-        return Color(red: 164/255, green: 205/255, blue: 255/255, alpha: 0.5)
+    /// Returns blue.
+    open override var selectionColor: Color? {
+        return Color(red: 33/255, green: 109/255, blue: 255/255, alpha: 0.5)
+    }
+    
+    /// Returns blue.
+    open override var backgroundColor: Color? {
+        return Color(red: 34/255, green: 79/255, blue: 188/255, alpha: 1)
     }
     
     /// Returns white.
-    override var backgroundColor: Color? {
+    open override var foregroundColor: Color? {
         return .white
     }
     
-    /// Returns black.
-    override var foregroundColor: Color? {
-        return .black
-    }
-    
     /// Returns gray.
-    override var cursorColor: Color? {
+    open override var cursorColor: Color? {
         return Color(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     }
 }
+

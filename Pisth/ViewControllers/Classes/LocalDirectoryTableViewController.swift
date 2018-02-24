@@ -10,6 +10,7 @@ import Zip
 import GoogleMobileAds
 import AVFoundation
 import AVKit
+import Pisth_Shared
 
 /// Table view controller used to manage local files.
 class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate {

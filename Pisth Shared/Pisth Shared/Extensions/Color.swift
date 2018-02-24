@@ -24,13 +24,13 @@ import Foundation
 
 #if os(iOS) || os(tvOS)
     import UIKit
-    typealias SWColor = UIColor
+    public typealias SWColor = UIColor
 #else
     import Cocoa
-    typealias SWColor = NSColor
+    public typealias SWColor = NSColor
 #endif
 
-typealias Color = SWColor
+public typealias Color = SWColor
 
 private extension Int {
     func duplicate4bits() -> Int {

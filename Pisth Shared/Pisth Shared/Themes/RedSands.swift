@@ -10,37 +10,37 @@
 #endif
 
 /// Red Sands theme for the terminal.
-class RedSandsTheme: TerminalTheme {
+open class RedSandsTheme: TerminalTheme {
     
     #if os(iOS)
         /// Returns light.
-        override var keyboardAppearance: UIKeyboardAppearance {
+        open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
         /// Returns default.
-        override var toolbarStyle: UIBarStyle {
+        open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
     /// Returns brown.
-    override var selectionColor: Color? {
+    open override var selectionColor: Color? {
         return Color(red: 61/255, green: 25/255, blue: 22/255, alpha: 0.5)
     }
     
     /// Returns a sort of red.
-    override var backgroundColor: Color? {
+    open override var backgroundColor: Color? {
         return Color(red: 122/255, green: 37/255, blue: 30/255, alpha: 1)
     }
     
     /// Returns a sort of yellow.
-    override var foregroundColor: Color? {
+    open override var foregroundColor: Color? {
         return Color(red: 215/255, green: 201/255, blue: 167/255, alpha: 1)
     }
     
     /// Returns white.
-    override var cursorColor: Color? {
+    open override var cursorColor: Color? {
         return .white
     }
 }

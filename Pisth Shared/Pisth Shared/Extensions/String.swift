@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     /// Returns a literal JavaScript `String` from `String`.
     ///
@@ -9,7 +9,7 @@ extension String {
     ///
     ///     "Hello\nWorld!".javasScriptEscapedString
     ///     // Returns: "\"Hello\\nWorld!\""
-    var javaScriptEscapedString: String {
+    public var javaScriptEscapedString: String {
         // Because JSON is not a subset of JavaScript, the LINE_SEPARATOR and PARAGRAPH_SEPARATOR unicode
         // characters embedded in (valid) JSON will cause the webview's JavaScript parser to error. So we
         // must encode them first. See here: http://timelessrepo.com/json-isnt-a-javascript-subset
@@ -25,7 +25,7 @@ extension String {
     }
     
     /// Returns `self` as `NSString`.
-    var nsString: NSString {
+    public var nsString: NSString {
         return self as NSString
     }
     
@@ -35,7 +35,7 @@ extension String {
     ///
     ///     "/long/path//to//file///inside folder".removingUnnecessariesSlashes.
     ///     // Returns: "/long/path/to/file/inside folder".
-    var removingUnnecessariesSlashes: String {
+    public var removingUnnecessariesSlashes: String {
         var newString = self
         while newString.contains("//") {
             newString = newString.replacingOccurrences(of: "//", with: "/")
@@ -49,7 +49,7 @@ extension String {
     /// - Parameters:
     ///     - target: `String` to be replaced.
     ///     - replacement: `String` by wich replace `target``.
-    func replacingFirstOccurrence(of target: String, with replacement: String) -> String {
+    public func replacingFirstOccurrence(of target: String, with replacement: String) -> String {
         let range = self.range(of: target)
         if let range = range {
             return replacingCharacters(in: range, with: replacement)
@@ -63,7 +63,7 @@ extension String {
     ///
     /// - Parameters:
     ///     - length: Length of returned String.
-    static func random(length: Int = 20) -> String {
+    public static func random(length: Int = 20) -> String {
         let base = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
         var randomString: String = ""
         

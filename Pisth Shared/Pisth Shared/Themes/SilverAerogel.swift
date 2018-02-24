@@ -10,37 +10,37 @@
 #endif
 
 /// Silver Aerogel theme for the terminal.
-class SilverAerogelTheme: TerminalTheme {
+open class SilverAerogelTheme: TerminalTheme {
     
     #if os(iOS)
         /// Returns light.
-        override var keyboardAppearance: UIKeyboardAppearance {
+        open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
         /// Returns default.
-        override var toolbarStyle: UIBarStyle {
+        open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
     /// Returns light blue.
-    override var selectionColor: Color? {
+    open override var selectionColor: Color? {
         return Color(red: 101/255, green: 102/255, blue: 138/255, alpha: 0.5)
     }
     
     /// Returns gray.
-    override var backgroundColor: Color? {
+    open override var backgroundColor: Color? {
         return Color(red: 146/255, green: 146/255, blue: 146/255, alpha: 1)
     }
     
     /// Returns black.
-    override var foregroundColor: Color? {
+    open override var foregroundColor: Color? {
         return .black
     }
     
     /// Returns white.
-    override var cursorColor: Color? {
+    open override var cursorColor: Color? {
         return Color(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
     }
 }

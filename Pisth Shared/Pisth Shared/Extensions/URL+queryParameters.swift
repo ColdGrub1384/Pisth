@@ -1,6 +1,6 @@
 import Foundation
 
-extension URL {
+public extension URL {
     
     public var queryParameters: [String: String]? {
         guard let components = URLComponents(url: self, resolvingAgainstBaseURL: true), let queryItems = components.queryItems else {

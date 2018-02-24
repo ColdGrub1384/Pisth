@@ -7,6 +7,7 @@
 
 import CoreData
 import SwiftKeychainWrapper
+import Pisth_Shared
 
 /// A class for managing saved connections.
 class DataManager {

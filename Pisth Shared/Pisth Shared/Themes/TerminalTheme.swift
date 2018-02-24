@@ -14,71 +14,68 @@ import Foundation
 /// Ansi colors used by terminal.
 ///
 /// If nil is provided for a color, the default color will be used.
-struct AnsiColors {
+public struct AnsiColors {
     
     /// Black color.
-    var black: Color?
+    public var black: Color?
     
     /// Red color.
-    var red: Color?
+    public var red: Color?
     
     /// Green color.
-    var green: Color?
+    public var green: Color?
     
     /// Yellow color.
-    var yellow: Color?
+    public var yellow: Color?
     
     /// Blue color.
-    var blue: Color?
+    public var blue: Color?
     
     /// Magenta color.
-    var magenta: Color?
+    public var magenta: Color?
     
     /// Cyan color.
-    var cyan: Color?
+    public var cyan: Color?
     
     /// White color.
-    var white: Color?
+    public var white: Color?
     
     
     /// Bright black color.
-    var brightBlack: Color?
+    public var brightBlack: Color?
     
     /// Bright red color.
-    var brightRed: Color?
+    public var brightRed: Color?
     
     /// Bright green color.
-    var brightGreen: Color?
+    public var brightGreen: Color?
     
     /// Bright yellow color.
-    var brightYellow: Color?
+    public var brightYellow: Color?
     
     /// Bright blue color.
-    var brightBlue: Color?
+    public var brightBlue: Color?
     
     /// Bright magenta color.
-    var brightMagenta: Color?
+    public var brightMagenta: Color?
     
     /// Bright cyan color.
-    var brightCyan: Color?
+    public var brightCyan: Color?
     
     /// Bright white color.
-    var brightWhite: Color?
+    public var brightWhite: Color?
 }
 
 /// Template class for doing a theme for the terminal.
 ///
 ///
-/// # Discussion
-///
-///
-/// ## Add a theme
+/// # Adding a theme
 ///
 /// - Create a subclass of `TerminalTheme` and override all properties you want.
 /// - Register the theme in `themes` variable.
 ///
 ///
-/// ## Default themes
+/// # Default themes
 ///
 /// - `BasicTheme`
 /// - `GrassTheme`
@@ -90,54 +87,56 @@ struct AnsiColors {
 /// - `RedSandsTheme`
 /// - `SilverAerogelTheme`
 /// - `UbuntuTheme`
-class TerminalTheme {
+open class TerminalTheme {
+    
+    public init() {}
     
     /// Get theme by name.
-    static let themes = ["Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme(), "Ubuntu":UbuntuTheme()] as [String:TerminalTheme]
+    open static let themes = ["Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme(), "Ubuntu":UbuntuTheme()] as [String:TerminalTheme]
     
     #if os(iOS)
         /// Keyboard appearance used in terminal.
         ///
         /// Default is dark.
-        var keyboardAppearance: UIKeyboardAppearance {
+        open var keyboardAppearance: UIKeyboardAppearance {
             return .dark
         }
     
         /// Style used in toolbar in terminal.
         ///
         /// Default is black.
-        var toolbarStyle: UIBarStyle {
+        open var toolbarStyle: UIBarStyle {
             return .black
         }
     #endif
     
     /// Selection color
-    var selectionColor: Color? {
+    open var selectionColor: Color? {
         return nil
     }
     
     /// Cursor colors.
-    var cursorColor: Color? {
+    open var cursorColor: Color? {
         return nil
     }
     
     /// Default text color.
-    var foregroundColor: Color? {
+    open var foregroundColor: Color? {
         return nil
     }
     
     /// Background color.
-    var backgroundColor: Color? {
+    open var backgroundColor: Color? {
         return nil
     }
     
     /// ANSI colors.
-    var ansiColors: AnsiColors? {
+    open var ansiColors: AnsiColors? {
         return nil
     }
     
     /// JavaScript value to be used with `xterm.js`.
-    var javascriptValue: String {
+    open var javascriptValue: String {
         
         var theme = "{"
         

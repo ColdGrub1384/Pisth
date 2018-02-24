@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Pisth Shared/Pisth Shared.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pisth API/Pisth API.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pisth.xcodeproj">
    </FileRef>
    <FileRef

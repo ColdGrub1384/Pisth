@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMobileAds
 import NMSSH
+import Pisth_Shared
 
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate {

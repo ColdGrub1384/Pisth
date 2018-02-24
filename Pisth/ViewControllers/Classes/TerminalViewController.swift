@@ -10,6 +10,7 @@ import NMSSH
 import WebKit
 import MultipeerConnectivity
 import BiometricAuthentication
+import Pisth_Shared
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {

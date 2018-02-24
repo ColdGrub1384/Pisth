@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import SwiftyStoreKit
+import Pisth_Shared
 
 /// View controller used to buy themes iap.
 class ThemesStoreViewController: UIViewController, WKNavigationDelegate {

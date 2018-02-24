@@ -6,20 +6,20 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 /// Grass theme for the terminal.
-class ProTheme: TerminalTheme {
+open class ProTheme: TerminalTheme {
     
     /// Returns black.
-    override var backgroundColor: Color? {
+    open override var backgroundColor: Color? {
         return .black
     }
     
     /// Returns white.
-    override var foregroundColor: Color? {
+    open override var foregroundColor: Color? {
         return Color(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
     }
     
     /// Returns white.
-    override var cursorColor: Color? {
+    open override var cursorColor: Color? {
         return .white
     }
 }

@@ -10,6 +10,7 @@ import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
 import SwiftyStoreKit
+import Pisth_Shared
 
 /// The app's delegate.
 @UIApplicationMain

@@ -8,13 +8,13 @@
 import Foundation
 
 /// Class hosting special keys as Unicode characters to be sent to SSH.
-class Keys {
+open class Keys {
     
     /// Returns unicode character from given `Int`.
     ///
     /// - Parameters:
     ///     - dec: Decimal number from wich return unicode character.
-    static func unicode(dec: Int) -> String {
+    open static func unicode(dec: Int) -> String {
         return String(describing: UnicodeScalar(dec)!)
     }
     
@@ -23,164 +23,164 @@ class Keys {
     // MARK: - Random keys
     
     /// ESC Key.
-    static let esc = unicode(dec: 27)
+    open static let esc = unicode(dec: 27)
     
     /// Delete Key.
-    static let delete = unicode(dec: 127)
+    open static let delete = unicode(dec: 127)
     
     // MARK: - Function keys
     
     /// F1
-    static let f1 = esc+"OP"
+    open static let f1 = esc+"OP"
     
     /// F2
-    static let f2 = esc+"OQ"
+    open static let f2 = esc+"OQ"
     
     /// F3
-    static let f3 = esc+"OR"
+    open static let f3 = esc+"OR"
     
     /// F4
-    static let f4 = esc+"OS"
+    open static let f4 = esc+"OS"
     
     /// F5
-    static let f5 = esc+"[15~"
+    open static let f5 = esc+"[15~"
     
     /// F6
-    static let f6 = esc+"[17~"
+    open static let f6 = esc+"[17~"
     
     /// F7
-    static let f7 = esc+"[18~"
+    open static let f7 = esc+"[18~"
     
     /// F8
-    static let f8 = esc+"[19~"
+    open static let f8 = esc+"[19~"
     
     /// F9
-    static let f9 = esc+"[20~"
+    open static let f9 = esc+"[20~"
     
     /// F10
-    static let f10 = esc+"[21~"
+    open static let f10 = esc+"[21~"
     
     /// F11
-    static let f11 = esc+"[23~"
+    open static let f11 = esc+"[23~"
     
     /// F12
-    static let f12 = esc+"[24~"
+    open static let f12 = esc+"[24~"
     
     // MARK: - Arrow keys
     
     /// Up Arrow Key.
-    static let arrowUp = esc+"[A"
+    open static let arrowUp = esc+"[A"
     
     /// Down Arrow Key.
-    static let arrowDown = esc+"[B"
+    open static let arrowDown = esc+"[B"
     
     /// Right Arrow Key.
-    static let arrowRight = esc+"[C"
+    open static let arrowRight = esc+"[C"
     
     /// Left Arrow Key.
-    static let arrowLeft = esc+"[D"
+    open static let arrowLeft = esc+"[D"
     
     
     // MARK: - Control keys
     
     /// ^@
-    static let ctrlAt = unicode(dec: 0)
+    open static let ctrlAt = unicode(dec: 0)
     
     /// ^A
-    static let ctrlA = unicode(dec: 1)
+    open static let ctrlA = unicode(dec: 1)
     
     /// ^B
-    static let ctrlB = unicode(dec: 2)
+    open static let ctrlB = unicode(dec: 2)
     
     /// ^C
-    static let ctrlC = unicode(dec: 3)
+    open static let ctrlC = unicode(dec: 3)
     
     /// ^D
-    static let ctrlD = unicode(dec: 4)
+    open static let ctrlD = unicode(dec: 4)
     
     /// ^E
-    static let ctrlE = unicode(dec: 5)
+    open static let ctrlE = unicode(dec: 5)
     
     /// ^F
-    static let ctrlF = unicode(dec: 6)
+    open static let ctrlF = unicode(dec: 6)
     
     /// ^G
-    static let ctrlG = unicode(dec: 7)
+    open static let ctrlG = unicode(dec: 7)
     
     /// ^H
-    static let ctrlH = unicode(dec: 8)
+    open static let ctrlH = unicode(dec: 8)
     
     /// ^I
-    static let ctrlI = unicode(dec: 9)
+    open static let ctrlI = unicode(dec: 9)
     
     /// ^J
-    static let ctrlJ = unicode(dec: 10)
+    open static let ctrlJ = unicode(dec: 10)
     
     /// ^K
-    static let ctrlK = unicode(dec: 11)
+    open static let ctrlK = unicode(dec: 11)
     
     /// ^L
-    static let ctrlL = unicode(dec: 12)
+    open static let ctrlL = unicode(dec: 12)
     
     /// ^M
-    static let ctrlM = unicode(dec: 13)
+    open static let ctrlM = unicode(dec: 13)
     
     /// ^N
-    static let ctrlN = unicode(dec: 14)
+    open static let ctrlN = unicode(dec: 14)
     
     /// ^O
-    static let ctrlO = unicode(dec: 15)
+    open static let ctrlO = unicode(dec: 15)
     
     /// ^P
-    static let ctrlP = unicode(dec: 16)
+    open static let ctrlP = unicode(dec: 16)
     
     /// ^Q
-    static let ctrlQ = unicode(dec: 17)
+    open static let ctrlQ = unicode(dec: 17)
     
     /// ^R
-    static let ctrlR = unicode(dec: 18)
+    open static let ctrlR = unicode(dec: 18)
     
     /// ^S
-    static let ctrlS = unicode(dec: 19)
+    open static let ctrlS = unicode(dec: 19)
     
     /// ^T
-    static let ctrlT = unicode(dec: 20)
+    open static let ctrlT = unicode(dec: 20)
     
     /// ^U
-    static let ctrlU = unicode(dec: 21)
+    open static let ctrlU = unicode(dec: 21)
     
     /// ^V
-    static let ctrlV = unicode(dec: 22)
+    open static let ctrlV = unicode(dec: 22)
     
     /// ^W
-    static let ctrlW = unicode(dec: 23)
+    open static let ctrlW = unicode(dec: 23)
     
     /// ^X
-    static let ctrlX = unicode(dec: 24)
+    open static let ctrlX = unicode(dec: 24)
     
     /// ^Y
-    static let ctrlY = unicode(dec: 25)
+    open static let ctrlY = unicode(dec: 25)
     
     /// ^Z
-    static let ctrlZ = unicode(dec: 26)
+    open static let ctrlZ = unicode(dec: 26)
     
     /// ^\
-    static let ctrlBackslash = unicode(dec: 28)
+    open static let ctrlBackslash = unicode(dec: 28)
     
     /// ^]
-    static let ctrlCloseBracket = unicode(dec: 29)
+    open static let ctrlCloseBracket = unicode(dec: 29)
     
     /// ^^
-    static let ctrlCtrl = unicode(dec: 30)
+    open static let ctrlCtrl = unicode(dec: 30)
     
     /// ^_
-    static let ctrl_ = unicode(dec: 31)
+    open static let ctrl_ = unicode(dec: 31)
     
     /// Returns Ctrl key from `String`.
     ///
     /// - Parameters:
     ///     - str: String from wich return the Ctrl key.
-    static func ctrlKey(from str: String) -> String {
+    open static func ctrlKey(from str: String) -> String {
         switch str.lowercased() {
         case "a":
             return (Keys.ctrlA)

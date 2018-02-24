@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import Pisth_Shared
 
 /// Table view controller to display Git branches at `repoPath`.
 class GitBranchesTableViewController: UITableViewController {

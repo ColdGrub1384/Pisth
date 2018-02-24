@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import Pisth_Shared
 
 /// View controller used to send arrow keys.
 class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDelegate {

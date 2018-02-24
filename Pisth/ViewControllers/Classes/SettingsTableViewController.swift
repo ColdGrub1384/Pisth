@@ -7,7 +7,7 @@
 
 import UIKit
 import BiometricAuthentication
-
+import Pisth_Shared
 
 /// Table view controller for displaying and changing settings.
 class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {

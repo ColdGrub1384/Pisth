@@ -12,14 +12,14 @@ import Foundation
 /// ## Contains:
 /// - Size of terminal.
 /// - Message to show in terminal.
-class TerminalInfo: NSObject, NSCoding {
+open class TerminalInfo: NSObject, NSCoding {
     
     /// Init from given message and size.
     ///
     /// - Parameters:
     ///     - message: Message to show in terminal.
     ///     - terminalSize: Size of terminal (in Floats, not in cols or rows). This is an Array, so provide two values, the first, width and the second, height.
-    init(message: String, themeName: String, terminalSize: [Float]) {
+    public init(message: String, themeName: String, terminalSize: [Float]) {
         self.message = message
         self.themeName = themeName
         
@@ -33,7 +33,7 @@ class TerminalInfo: NSObject, NSCoding {
     }
     
     /// Name of theme for the terminal.
-    var themeName = "Pro"
+    open var themeName = "Pro"
     
     /// Message to show in terminal.
     var message = ""
@@ -47,7 +47,7 @@ class TerminalInfo: NSObject, NSCoding {
     ///
     /// The first value is the width, and the second value is the height.
     /// The setter of this variable put `0` for missing values, or remove extra values.
-    var terminalSize: [Float] {
+    open var terminalSize: [Float] {
         set {
             if newValue.count == 1 {
                 terminalSize_ = [newValue[0], 0]
@@ -69,7 +69,7 @@ class TerminalInfo: NSObject, NSCoding {
     /// `NSCoding`'s `encode(with:)` function.
     ///
     /// Encode info.
-    func encode(with aCoder: NSCoder) {
+    open func encode(with aCoder: NSCoder) {
         aCoder.encode(message, forKey: "message")
         aCoder.encode(terminalSize, forKey: "terminalSize")
         aCoder.encode(themeName, forKey: "theme")
@@ -78,7 +78,7 @@ class TerminalInfo: NSObject, NSCoding {
     /// `NSCoding`'s `init(coder:)` function.
     ///
     /// Decode given `NSCoder` and set variables.
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         
         super.init()
         

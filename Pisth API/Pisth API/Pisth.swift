@@ -8,6 +8,14 @@
 import UIKit
 
 /// Helper for importing files from Pisth.
+///
+/// # What is Pisth API?
+/// Pisth API allows you to import files with Pisth from your own iOS app without extension!
+///
+/// # How to use it?
+///
+/// - Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it's very important! Don't use URL schemes like "pisth-import", try to include the name of your app, for example: "myApp-pisth-import".
+/// - Include the Pisth API framework
 open class Pisth {
     
     /// Unique and shared instance.
