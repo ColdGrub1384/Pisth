@@ -14,6 +14,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var filename: UILabel!
     
+    var data: Data?
+    
+    @IBAction func share(_ sender: Any) {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent(filename.text!)
+        try? FileManager.default.createFile(atPath: fileURL.path, contents: data, attributes: nil)
+        
+        let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = sender as! UIView
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
     @IBAction func importFromPisth(_ sender: Any) {
         
         // Import file

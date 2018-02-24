@@ -27,27 +27,39 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ExS-N3-sfW">
-                                <rect key="frame" x="16" y="49" width="343" height="560"/>
+                                <rect key="frame" x="16" y="64" width="343" height="545"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-gO-Wb6">
-                                <rect key="frame" x="16" y="20" width="343" height="21"/>
+                                <rect key="frame" x="16" y="35" width="289" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9b1-MR-4Fc">
+                                <rect key="frame" x="313" y="30" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="WU8-NZ-HJJ"/>
+                                </constraints>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="emJ-By-vKX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.79445103059544409" green="1" blue="0.78108418814774616" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="trailing" secondItem="ExS-N3-sfW" secondAttribute="trailing" id="0aH-Fg-Kxh"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="trailing" secondItem="3Av-4F-neH" secondAttribute="trailing" id="9qW-1y-fna"/>
-                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ars-WU-JNo"/>
-                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="LGO-Be-twG"/>
-                            <constraint firstAttribute="bottom" secondItem="3Av-4F-neH" secondAttribute="bottom" constant="20" symbolic="YES" id="LwF-Oa-WYG"/>
-                            <constraint firstItem="3Av-4F-neH" firstAttribute="top" secondItem="ExS-N3-sfW" secondAttribute="bottom" constant="8" symbolic="YES" id="WAf-FK-icv"/>
-                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XiS-zl-C5C"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="top" secondItem="jfL-gO-Wb6" secondAttribute="bottom" constant="8" symbolic="YES" id="ct1-aM-VHX"/>
-                            <constraint firstItem="ExS-N3-sfW" firstAttribute="leading" secondItem="3Av-4F-neH" secondAttribute="leading" id="dWb-hO-IzW"/>
-                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="ExS-N3-sfW" secondAttribute="leading" id="ulb-AB-7vH"/>
+                            <constraint firstItem="9b1-MR-4Fc" firstAttribute="trailing" secondItem="ExS-N3-sfW" secondAttribute="trailing" id="3kr-33-LmA"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7wf-dO-WX6"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="trailing" secondItem="3Av-4F-neH" secondAttribute="trailing" id="8xt-Ug-dlg"/>
+                            <constraint firstItem="9b1-MR-4Fc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="EjS-Y8-6gd"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="top" secondItem="jfL-gO-Wb6" secondAttribute="bottom" constant="8" symbolic="YES" id="HHX-Ko-t0O"/>
+                            <constraint firstItem="3Av-4F-neH" firstAttribute="top" secondItem="ExS-N3-sfW" secondAttribute="bottom" constant="8" symbolic="YES" id="JS9-vT-JXQ"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="centerY" secondItem="9b1-MR-4Fc" secondAttribute="centerY" id="Lqb-Ra-OhR"/>
+                            <constraint firstAttribute="bottom" secondItem="3Av-4F-neH" secondAttribute="bottom" constant="20" symbolic="YES" id="OMA-bQ-ucN"/>
+                            <constraint firstItem="9b1-MR-4Fc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="QJw-UJ-4cg"/>
+                            <constraint firstItem="ExS-N3-sfW" firstAttribute="leading" secondItem="3Av-4F-neH" secondAttribute="leading" id="WNE-9f-myf"/>
+                            <constraint firstItem="jfL-gO-Wb6" firstAttribute="leading" secondItem="ExS-N3-sfW" secondAttribute="leading" id="ZcZ-8v-uVt"/>
+                            <constraint firstItem="9b1-MR-4Fc" firstAttribute="leading" secondItem="jfL-gO-Wb6" secondAttribute="trailing" constant="8" symbolic="YES" id="pts-G2-g47"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

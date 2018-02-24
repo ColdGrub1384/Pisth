@@ -24,14 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
+        let viewController = (UIApplication.shared.keyWindow?.rootViewController as? ViewController)
+        
         if let data = Pisth.shared.dataReceived {
+            viewController?.data = data
             if let image = UIImage(data: data) {
-                (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.imageView.image = image
+                viewController?.imageView.image = image
             }
         }
         
         if let filename = Pisth.shared.filename(fromURL: url) {
-            (UIApplication.shared.keyWindow?.rootViewController as? ViewController)?.filename.text = filename
+            viewController?.filename.text = filename
         }
         
         return true
