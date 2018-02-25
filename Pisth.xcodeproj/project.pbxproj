@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0AA6362024F4C300603142 /* BooleanInputView.xib */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
-		3A2837412017D5A200D157A0 /* BooleanInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2837402017D5A200D157A0 /* BooleanInputView.swift */; };
 		3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A38DC402035D9980093A091 /* StoreKit.framework */; };
 		3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38DC422035DD480093A091 /* PurchaseHelper.swift */; };
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
@@ -111,11 +109,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A0AA6362024F4C300603142 /* BooleanInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooleanInputView.xib; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		3A2837402017D5A200D157A0 /* BooleanInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanInputView.swift; sourceTree = "<group>"; };
 		3A38DC402035D9980093A091 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3A38DC422035DD480093A091 /* PurchaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseHelper.swift; sourceTree = "<group>"; };
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
@@ -256,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */,
-				3A2837402017D5A200D157A0 /* BooleanInputView.swift */,
 				3A60970B203B1F5600CB0776 /* TerminalWebView.swift */,
 			);
 			path = Classes;
@@ -267,7 +262,6 @@
 			children = (
 				3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */,
 				3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */,
-				3A0AA6362024F4C300603142 /* BooleanInputView.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -533,7 +527,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0AA6372024F4CE00603142 /* BooleanInputView.xib in Resources */,
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
 				3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */,
@@ -617,7 +610,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
-				3A2837412017D5A200D157A0 /* BooleanInputView.swift in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
