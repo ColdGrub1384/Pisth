@@ -867,9 +867,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// `UITableViewController`'s `tableView(_:, heightForRowAt:)` function.
     ///
-    /// - Returns: `87`.
+    /// - Returns: `50`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 87
+        return 60
     }
     
     /// `UITableViewController`'s `numberOfSections(in:)` function.
