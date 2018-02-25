@@ -249,7 +249,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                         return
                     }
                     
-                    if !(visibleVC is DirectoryTableViewController) && !(navVC.viewControllers.contains(visibleVC)) {
+                    if (navVC.viewControllers.contains(visibleVC)) {
                         navVC.pushViewController(visibleVC, animated: true)
                     }
                 }))
