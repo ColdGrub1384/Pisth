@@ -763,15 +763,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     
                     // Scroll to top if dontScroll is true
                     if self.dontScroll {
-                        self.webView.evaluateJavaScript("term.scrollToTop()", completionHandler: { (returnValue, error) in
-                            if let returnValue = returnValue {
-                                print(returnValue)
-                            }
-                            
-                            if let error = error {
-                                print(error)
-                            }
-                        })
+                        self.webView.evaluateJavaScript("term.scrollToTop()", completionHandler: nil)
                     }
                 })
             }
