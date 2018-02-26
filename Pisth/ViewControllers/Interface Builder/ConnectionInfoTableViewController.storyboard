@@ -13,7 +13,6 @@
         <!--Connection Information Table View Controller-->
         <scene sceneID="5Nz-or-AeF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i04-60-H95" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="O8F-t9-cjU" customClass="ConnectionInformationTableViewController" customModule="Pisth" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="TyV-QU-OcY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -208,7 +207,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2uy-ai-jHN">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2uy-ai-jHN">
                                                     <rect key="frame" x="310" y="4" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
@@ -281,6 +280,7 @@
                         <outlet property="username" destination="oJv-fw-uRe" id="eyH-i9-enl"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i04-60-H95" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="492" y="170.68965517241381"/>
         </scene>
