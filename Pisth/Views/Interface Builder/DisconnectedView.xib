@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session disconnected!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoI-Bx-2ec">
+                    <rect key="frame" x="16" y="11" width="216" height="48"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XM-3a-PC2">
+                    <rect key="frame" x="240" y="0.0" width="71" height="30"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="71" id="yGB-04-f6D"/>
+                    </constraints>
+                    <state key="normal" title="Resume">
+                        <color key="titleColor" red="1" green="0.26326825729999997" blue="0.27676361020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whu-g3-3aN">
+                    <rect key="frame" x="240" y="40" width="71" height="30"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Close">
+                        <color key="titleColor" red="1" green="0.26326825729999997" blue="0.27676361020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.26326825728718939" blue="0.27676361018502138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7XM-3a-PC2" firstAttribute="trailing" secondItem="whu-g3-3aN" secondAttribute="trailing" id="DYq-M1-GEi"/>
+                <constraint firstItem="NoI-Bx-2ec" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HCi-H7-Dia"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7XM-3a-PC2" secondAttribute="trailing" constant="9" id="Krr-cs-lvb"/>
+                <constraint firstItem="7XM-3a-PC2" firstAttribute="leading" secondItem="whu-g3-3aN" secondAttribute="leading" id="O8E-Lj-4Uq"/>
+                <constraint firstItem="7XM-3a-PC2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="PAA-yf-BUj"/>
+                <constraint firstItem="NoI-Bx-2ec" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="Phd-Q3-YD4"/>
+                <constraint firstItem="whu-g3-3aN" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="gIz-a7-xnc"/>
+                <constraint firstItem="7XM-3a-PC2" firstAttribute="leading" secondItem="NoI-Bx-2ec" secondAttribute="trailing" constant="8" symbolic="YES" id="iRq-Tc-5ap"/>
+                <constraint firstItem="NoI-Bx-2ec" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="11" id="wY8-dd-B0A"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="84" y="-231"/>
+        </view>
+    </objects>
+</document>

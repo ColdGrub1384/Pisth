@@ -15,6 +15,7 @@
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
+		3A41BA9120445A0300589627 /* DisconnectedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A41BA9020445A0300589627 /* DisconnectedView.xib */; };
 		3A42FE232033B0300061A38B /* ThemesStoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */; };
 		3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */; };
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
@@ -117,6 +118,7 @@
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
+		3A41BA9020445A0300589627 /* DisconnectedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisconnectedView.xib; sourceTree = "<group>"; };
 		3A42FE222033B0300061A38B /* ThemesStoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesStoreViewController.xib; sourceTree = "<group>"; };
 		3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			children = (
 				3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */,
 				3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */,
+				3A41BA9020445A0300589627 /* DisconnectedView.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				3AFDD9171FF147860061677B /* Assets.xcassets in Resources */,
 				3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */,
 				3AF9AEAC1FF54C8B00840E8A /* ImageViewController.xib in Resources */,
+				3A41BA9120445A0300589627 /* DisconnectedView.xib in Resources */,
 				3AF9AEA81FF5461300840E8A /* Settings.storyboard in Resources */,
 				3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */,
 				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,

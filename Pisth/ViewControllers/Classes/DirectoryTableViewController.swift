@@ -13,10 +13,6 @@ import Pisth_Shared
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     /// Directory used to list files.
     var directory: String
     
@@ -34,6 +30,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Ad banner view displayed at top of table view.
     var bannerView: GADBannerView!
+    
+    /// Resume closed session.
+    @objc func resume() {
+        
+        tableView.tableHeaderView = bannerView
+        
+        let dirVC = DirectoryTableViewController(connection: connection, directory: directory)
+        
+        navigationController?.pushViewController(dirVC, animated: true)
+    }
     
     /// Init with given connection and directory.
     ///
@@ -121,8 +127,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showErrorIfThereIsOne), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        
         let titleComponents = directory.components(separatedBy: "/")
         title = titleComponents.last
         if directory.hasSuffix("/") {
@@ -182,6 +186,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
         // Toolbar
         setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome))], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
@@ -197,6 +203,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         super.viewDidDisappear(animated)
         
         (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.setToolbarHidden(true, animated: true)
+        NotificationCenter.default.removeObserver(self)
 	 }
 
 
@@ -216,6 +223,30 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 })
             }
         }
+    }
+    
+    /// Show error banner if it's needed.
+    @objc func showErrorBannerIfItsNeeded() {
+        checkForConnectionError(errorHandler: {
+            ConnectionManager.shared.session = nil
+            ConnectionManager.shared.filesSession = nil
+            self.showErrorBanner()
+        })
+    }
+    
+    /// Show view saying that the connection was closed.
+    @objc func showErrorBanner() {
+        
+        guard let view = Bundle.main.loadNibNamed("DisconnectedView", owner: nil, options: nil)?[0] as? UIView else {
+            return
+        }
+        
+        (view.viewWithTag(1) as? UIButton)?.addTarget(self, action: #selector(resume), for: .touchUpInside)
+        (view.viewWithTag(2) as? UIButton)?.addTarget(navigationController, action: #selector(navigationController?.popToRootViewController(animated:)), for: .touchUpInside)
+        
+        tableView.tableHeaderView = view
+        
+        tableView.setContentOffset(CGPoint(x: 0, y: 0-view.frame.height), animated: true)
     }
     
     /// Go back and show error.
