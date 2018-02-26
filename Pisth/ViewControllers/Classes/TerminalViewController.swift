@@ -783,6 +783,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Undo changes made to `navigationController` and pop to Root view controller.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
+            if self.isFirstResponder {
+                self.resignFirstResponder()
+            }
             self.navigationController?.setToolbarHidden(true, animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             self.navigationController?.popToRootViewController(animated: true)
