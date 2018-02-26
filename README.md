@@ -33,7 +33,7 @@ Why use Pisth:
 - [Pisth Terminal/](Pisth%20Terminal/): HTML page for displaying the terminal.
 - [Pisth/](Pisth): iOS Application.
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
-- [Pisth API/](Pisth%20API/I): API for iOS.
+- [Pisth API/](Pisth%20API/): API for iOS.
 
 ## API
 
