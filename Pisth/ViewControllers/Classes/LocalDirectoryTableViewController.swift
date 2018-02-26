@@ -329,7 +329,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
         shareButton.tag = indexPath.row
         shareButton.addTarget(self, action: #selector(shareFile(_:)), for: .touchUpInside)
-        shareButton.backgroundColor = .black
+        shareButton.backgroundColor = .clear
         cell.accessoryView = shareButton
                 
         return cell
