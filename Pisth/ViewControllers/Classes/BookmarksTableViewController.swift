@@ -343,6 +343,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     // MARK: Search bar delegate
     
     /// `UISearchBarDelegate`'s `searchBar(_:, textDidChange:)` function.
+    ///
     /// Search for connection.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -361,5 +362,14 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
         
         tableView.reloadData()
+    }
+    
+    /// `UISearchBarDelegate`'s `searchBarCancelButtonClicked(_:)` function.
+    ///
+    /// Reset connections.
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            self.tableView.reloadData()
+        })
     }
 }
