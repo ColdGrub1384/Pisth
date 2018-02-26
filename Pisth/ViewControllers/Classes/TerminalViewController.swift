@@ -12,6 +12,7 @@ import MultipeerConnectivity
 import BiometricAuthentication
 import Pisth_Shared
 import Pisth_Terminal
+import Firebase
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
@@ -458,6 +459,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Terminal", AnalyticsParameterItemName : "Terminal"])
         
         if let connection = ConnectionManager.shared.connection {
             if connection.name.isEmpty {

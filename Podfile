@@ -15,4 +15,6 @@ target 'Pisth' do
   pod 'BiometricAuthentication'
   pod 'ActionSheetPicker-3.0'
   pod 'SwiftyStoreKit'
+  pod 'Crashlytics'
+  pod 'Firebase/Core'
 end

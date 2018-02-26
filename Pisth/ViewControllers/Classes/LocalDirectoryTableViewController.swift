@@ -11,6 +11,7 @@ import GoogleMobileAds
 import AVFoundation
 import AVKit
 import Pisth_Shared
+import Firebase
 
 /// Table view controller used to manage local files.
 class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate {
@@ -227,6 +228,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-LocalFileBrowser", AnalyticsParameterItemName : "Local File Browser"])
         
         title = directory.lastPathComponent
         

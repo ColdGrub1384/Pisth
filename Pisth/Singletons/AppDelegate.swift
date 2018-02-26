@@ -11,6 +11,7 @@ import GoogleMobileAds
 import SwiftKeychainWrapper
 import SwiftyStoreKit
 import Pisth_Shared
+import Firebase
 
 /// The app's delegate.
 @UIApplicationMain
@@ -137,6 +138,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         // Initialize the Google Mobile Ads SDK.
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~2846344793")
+        
+        // Firebase analytics
+        FirebaseApp.configure()
         
         // Save passwords to keychain if they are not
         // See how passwords are managed since 3.0 at 'Helpers/DataManager.swift'

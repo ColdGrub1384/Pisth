@@ -1,8 +1,31 @@
 PODS:
   - ActionSheetPicker-3.0 (2.3.0)
   - BiometricAuthentication (1.0.3)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
+  - Firebase/Core (4.8.0):
+    - FirebaseAnalytics (= 4.0.5)
+    - FirebaseCore (= 4.0.13)
+  - FirebaseAnalytics (4.0.5):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
+  - FirebaseCore (4.0.13):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (2.0.8):
+    - FirebaseCore (~> 4.0)
   - Google-Mobile-Ads-SDK (7.27.0)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - Highlightr (1.1.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - NMSSH (2.2.8)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyStoreKit (0.12.1)
@@ -11,6 +34,8 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - BiometricAuthentication
+  - Crashlytics
+  - Firebase/Core
   - Google-Mobile-Ads-SDK
   - Highlightr
   - NMSSH
@@ -21,13 +46,21 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   BiometricAuthentication: 8f64df242862b0497b2f8a12910ef0b999ad83c8
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
+  FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
+  FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
+  FirebaseInstanceID: 81df5805a08001e69138664bdd02c6719a9ac80f
   Google-Mobile-Ads-SDK: 83f7f890e638ce8f1debd440ea363338c9f6be3b
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   Highlightr: 519911a0a9a040d76e591f6fe58bb5177c8bdaa3
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyStoreKit: 98742f9d7941ecaca0f248de0f49c5ecf585bc95
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 829915e36730eb37922f30e7514170289f512bcd
+PODFILE CHECKSUM: 65f93f706c0adf5479870d6ee3451f604c127cae
 
 COCOAPODS: 1.1.1

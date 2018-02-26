@@ -103,6 +103,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Editor", AnalyticsParameterItemName : "Code Editor"])
+        
         setupTextView()
         
         if #available(iOS 11.0, *) {

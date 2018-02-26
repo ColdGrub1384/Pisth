@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 import SwiftyStoreKit
 import Pisth_Shared
+import Firebase
 
 /// View controller used to buy themes iap.
 class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
@@ -85,6 +86,8 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
     /// Setup previews.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-ThemesStore", AnalyticsParameterItemName : "Themes Store"])
         
         restoreButton.layer.cornerRadius = 16
         buyButton.layer.cornerRadius = 16

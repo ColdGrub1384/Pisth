@@ -7,6 +7,7 @@
 
 import UIKit
 import Pisth_Shared
+import Firebase
 
 /// Table view controller to display Git branches at `repoPath`.
 class GitBranchesTableViewController: UITableViewController {
@@ -63,6 +64,8 @@ class GitBranchesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-SourceControl", AnalyticsParameterItemName : "Source Control"])
+        
         if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch").replacingOccurrences(of: " ", with: "") {
             for branch in result.components(separatedBy: "\n") {
                 if branch.hasPrefix("*") {

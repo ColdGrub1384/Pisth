@@ -127,6 +127,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-RemoteFileBrowser", AnalyticsParameterItemName : "Remote File Browser"])
+        
         let titleComponents = directory.components(separatedBy: "/")
         title = titleComponents.last
         if directory.hasSuffix("/") {
