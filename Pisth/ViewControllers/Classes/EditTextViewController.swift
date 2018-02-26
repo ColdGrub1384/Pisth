@@ -8,6 +8,7 @@
 import UIKit
 import Highlightr
 import ActionSheetPicker_3_0
+import Firebase
 
 /// View controller used to edit text files.
 class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDelegate {

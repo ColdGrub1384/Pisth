@@ -25,6 +25,7 @@
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
+		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3A89B5BC2037760D00B750D9 /* UIImage+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BB2037760D00B750D9 /* UIImage+init.swift */; };
@@ -128,6 +129,7 @@
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
+		3A7C919A2044972C006E0434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3A89B5BB2037760D00B750D9 /* UIImage+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+init.swift"; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				3A3A015B2007ADE900B5B655 /* langs.plist */,
 				3ADDFEB920068E5500FA6ACD /* html */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
+				3A7C919A2044972C006E0434 /* GoogleService-Info.plist */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
 				3AEF1119201115850089389E /* empty */,
@@ -542,6 +545,7 @@
 				3AEF111A201115850089389E /* empty in Resources */,
 				3AE8359F1FF2DCB30073D06E /* EditTextViewController.xib in Resources */,
 				3ACF9AF42040A839006C3218 /* ConnectionInfoTableViewController.storyboard in Resources */,
+				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
 				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
 				3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* WebViewController.xib in Resources */,
@@ -835,6 +839,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

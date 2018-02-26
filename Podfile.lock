@@ -1,9 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.3.0)
   - BiometricAuthentication (1.0.3)
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
-  - Fabric (1.7.2)
   - Firebase/Core (4.8.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.13)
@@ -34,7 +31,6 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - BiometricAuthentication
-  - Crashlytics
   - Firebase/Core
   - Google-Mobile-Ads-SDK
   - Highlightr
@@ -46,8 +42,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   BiometricAuthentication: 8f64df242862b0497b2f8a12910ef0b999ad83c8
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   Firebase: 710decbbc6d9d48530e9a5dba3209740c3532e05
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 3c02ec652db3d03fdc8bc6d9154af3e20d64b6f5
@@ -61,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 98742f9d7941ecaca0f248de0f49c5ecf585bc95
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 65f93f706c0adf5479870d6ee3451f604c127cae
+PODFILE CHECKSUM: a9066a91a9a4e74716c892a19076773dfc711ace
 
 COCOAPODS: 1.1.1
