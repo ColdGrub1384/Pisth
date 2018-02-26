@@ -19,6 +19,17 @@ class FileTableViewCell: UITableViewCell {
     /// File permissions.
     @IBOutlet weak var permssions: UILabel!
     
+    // MARK: Table view cell
+    
+    /// `UITableViewCell`'s `didMoveToWindow` function.
+    ///
+    /// Set selection color.
+    override func didMoveToWindow() {
+        let view = UIView()
+        view.backgroundColor = tintColor
+        selectedBackgroundView = view
+    }
+    
     /// `UITableViewCell`'s `canPerformAction(_:, withSender:)` function.
     ///
     /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
@@ -40,6 +51,8 @@ class FileTableViewCell: UITableViewCell {
     override var canBecomeFirstResponder: Bool {
         return true
     }
+    
+    // MARK: - Actions
     
     /// Rename the file represented by the cell.
     @objc func renameFile(_ sender: Any) {
