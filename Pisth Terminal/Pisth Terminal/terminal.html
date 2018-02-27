@@ -26,5 +26,10 @@
         term.setOption("theme", {background: "rgba(0,0,0,0)"});
         
         term.focus();
+        
+        // Bell
+        term.on("bell", function () {
+            alert("bell");
+        })
     </script>
 </body>

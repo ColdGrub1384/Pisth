@@ -13,9 +13,10 @@ import BiometricAuthentication
 import Pisth_Shared
 import Pisth_Terminal
 import Firebase
+import AVFoundation
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
     
     /// Directory to open.
     var pwd: String?
@@ -376,6 +377,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Play bell.
+    @objc func bell() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -525,12 +531,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if console.isEmpty {
             
             // Create WebView
-            webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            let config = WKWebViewConfiguration()
+            config.mediaTypesRequiringUserActionForPlayback = .video
+            webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
             webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             webView.isOpaque = false
             view.addSubview(webView)
             webView.backgroundColor = .clear
             webView.navigationDelegate = self
+            webView.uiDelegate = self
             webView.scrollView.isScrollEnabled = false
             webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.terminal.bundleURL)
             
@@ -920,6 +929,19 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             })
         }
+    }
+    
+    // MARK: Web kit ui delegate
+    
+    /// `WKUIDelegate`'s `webView(_:, runJavaScriptAlertPanelWithMessage:, initiatedByFrame:, completionHandler:)` function.
+    ///
+    /// Sound bell if the text of the alert is "bell".
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        if message == "bell" { // Play bell
+            bell()
+        }
+        
+        completionHandler()
     }
     
     // MARK: - Multipeer connectivity
