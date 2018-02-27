@@ -31,5 +31,11 @@
         term.on("bell", function () {
             alert("bell");
         })
+        
+        // Change title
+        term.on("title", function (title) {
+            console.log("Change title to "+title);
+            alert("changeTitle"+title);
+        })
     </script>
 </body>

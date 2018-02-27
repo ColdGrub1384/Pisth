@@ -468,14 +468,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Terminal", AnalyticsParameterItemName : "Terminal"])
         
-        if let connection = ConnectionManager.shared.connection {
-            if connection.name.isEmpty {
-                title = "\(connection.username)@\(connection.host)"
-            } else {
-                title = connection.name
-            }
-        }
-        
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))]
         
         inputAssistantItem.leadingBarButtonGroups = []
@@ -939,8 +931,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         if message == "bell" { // Play bell
             bell()
+        } else if message.hasPrefix("changeTitle") { // Change title
+            title = message.replacingFirstOccurrence(of: "changeTitle", with: "")
         }
-        
         completionHandler()
     }
     
