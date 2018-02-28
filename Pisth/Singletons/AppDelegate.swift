@@ -220,6 +220,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
+        // Create plugins directory
+        let pluginsDir = FileManager.default.library.appendingPathComponent("Plugins")
+        if !FileManager.default.fileExists(atPath: pluginsDir.path) {
+            try? FileManager.default.createDirectory(at: pluginsDir, withIntermediateDirectories: false, attributes: nil)
+        }
+        
+        // Remove temporary files
+        for file in (try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())) ?? [] {
+            try? FileManager.default.removeItem(at: URL(fileURLWithPath: NSTemporaryDirectory().nsString.appendingPathComponent(file)))
+        }
+        
         // Finish transactions
         SwiftyStoreKit.completeTransactions(atomically: false) { (purchases) in
             for purchase in purchases {
@@ -259,83 +270,132 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Open and upload file.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.hasPrefix("file:") { // Upload file
-            
-            action = .upload
-            
-            openedFile = url
-            
-            // Open a BookmarksTableViewController to select where upload the file
-            
-            let bookmarksVC = BookmarksTableViewController()
-            let navVC = UINavigationController(rootViewController: bookmarksVC)
-            navVC.navigationBar.barStyle = .black
-            navVC.navigationBar.isTranslucent = true
-            navVC.toolbar.barStyle = .black
-            navVC.toolbar.isTranslucent = true
-            if #available(iOS 11.0, *) {
-                navVC.navigationBar.prefersLargeTitles = true
-            }
-            navigationController.present(navVC, animated: true, completion: {
-                bookmarksVC.delegate = self
-                if #available(iOS 11.0, *) {
-                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+        /// Handle URL.
+        func handle() {
+            if url.absoluteString.hasPrefix("file:") { // Upload file or import plugin or theme.
+                
+                if url.pathExtension.lowercased() == "termplugin" { // Import plugin
+                    
+                    let alert = UIAlertController(title: "Use plugin?", message: "Do you want to use this terminal plugin? This plugin will have access to all the content of the terminal, I recommend to view the content of the plugin in the settings before using it. You can disable it from settings.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Use plugin", style: .destructive, handler: { (_) in
+                        var pluginURL = FileManager.default.library.appendingPathComponent("Plugins").appendingPathComponent(url.lastPathComponent)
+                        
+                        var i = 1
+                        while FileManager.default.fileExists(atPath: pluginURL.path) {
+                            pluginURL = pluginURL.deletingLastPathComponent().appendingPathComponent("\(url.lastPathComponent)-\(i).\(url.pathExtension)")
+                            
+                            i += 1
+                        }
+                        
+                        do {
+                            try FileManager.default.copyItem(at: url, to: pluginURL)
+                        } catch {
+                            let alert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                            
+                        }
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                    
                 }
-                bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
-                bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
-                bookmarksVC.navigationItem.prompt = "Select connection where upload file"
-            })
-        } else if url.absoluteString.hasPrefix("pisth-import:") { // Export file with the API
-            
-            LocalDirectoryTableViewController.delegate = self
-            
-            action = .apiImport
-            
-            if let scheme = url.queryParameters?["scheme"]?.removingPercentEncoding {
-                dataReceiverAppURLScheme = URL(string: scheme)
-            }
-            
-            // Open a BookmarksTableViewController to select file to export
-            
-            let bookmarksVC = BookmarksTableViewController()
-            
-            if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
-                let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-                let imageView = UIImageView(image: backgroundImage)
-                let containerView = UIView()
-                containerView.addSubview(imageView)
-                containerView.addSubview(blurView)
                 
-                bookmarksVC.tableView.backgroundView = containerView
+                // Upload file
                 
-                blurView.frame.size = bookmarksVC.tableView.frame.size
-                blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                imageView.frame.size = bookmarksVC.tableView.frame.size
-                imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                action = .upload
                 
-                bookmarksVC.tableView.backgroundColor = .clear
-            }
-        
-            let navVC = UINavigationController(rootViewController: bookmarksVC)
-            navVC.navigationBar.barStyle = .black
-            navVC.navigationBar.isTranslucent = true
-            navVC.toolbar.barStyle = .black
-            navVC.toolbar.isTranslucent = true
-            if #available(iOS 11.0, *) {
-                navVC.navigationBar.prefersLargeTitles = true
-            }
-            navigationController.present(navVC, animated: true, completion: {
-                bookmarksVC.delegate = self
+                openedFile = url
+                
+                // Open a BookmarksTableViewController to select where upload the file
+                
+                let bookmarksVC = BookmarksTableViewController()
+                let navVC = UINavigationController(rootViewController: bookmarksVC)
+                navVC.navigationBar.barStyle = .black
+                navVC.navigationBar.isTranslucent = true
+                navVC.toolbar.barStyle = .black
+                navVC.toolbar.isTranslucent = true
                 if #available(iOS 11.0, *) {
-                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    navVC.navigationBar.prefersLargeTitles = true
                 }
-                bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
-                bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
-                bookmarksVC.navigationItem.prompt = "Select connection to export file"
-            })
+                navigationController.present(navVC, animated: true, completion: {
+                    bookmarksVC.delegate = self
+                    if #available(iOS 11.0, *) {
+                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    }
+                    bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
+                    bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
+                    bookmarksVC.navigationItem.prompt = "Select connection where upload file"
+                })
+            } else if url.absoluteString.hasPrefix("pisth-import:") { // Export file with the API
+                
+                LocalDirectoryTableViewController.delegate = self
+                
+                action = .apiImport
+                
+                if let scheme = url.queryParameters?["scheme"]?.removingPercentEncoding {
+                    dataReceiverAppURLScheme = URL(string: scheme)
+                }
+                
+                // Open a BookmarksTableViewController to select file to export
+                
+                let bookmarksVC = BookmarksTableViewController()
+                
+                if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
+                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+                    let imageView = UIImageView(image: backgroundImage)
+                    let containerView = UIView()
+                    containerView.addSubview(imageView)
+                    containerView.addSubview(blurView)
+                    
+                    bookmarksVC.tableView.backgroundView = containerView
+                    
+                    blurView.frame.size = bookmarksVC.tableView.frame.size
+                    blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    imageView.frame.size = bookmarksVC.tableView.frame.size
+                    imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    
+                    bookmarksVC.tableView.backgroundColor = .clear
+                }
+                
+                let navVC = UINavigationController(rootViewController: bookmarksVC)
+                navVC.navigationBar.barStyle = .black
+                navVC.navigationBar.isTranslucent = true
+                navVC.toolbar.barStyle = .black
+                navVC.toolbar.isTranslucent = true
+                if #available(iOS 11.0, *) {
+                    navVC.navigationBar.prefersLargeTitles = true
+                }
+                navigationController.present(navVC, animated: true, completion: {
+                    bookmarksVC.delegate = self
+                    if #available(iOS 11.0, *) {
+                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    }
+                    bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
+                    bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
+                    bookmarksVC.navigationItem.prompt = "Select connection to export file"
+                })
+            }
         }
         
-        return false
+        var dismissed = false
+        
+        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: {
+            dismissed = true
+            handle()
+        })
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            if !dismissed {
+                dismissed = true
+                handle()
+            }
+        })
+        
+        return true
     }
     
     /// `UIApplicationDelegate`'s `application(_:, performActionFor:, completionHandler:)` function.

@@ -13,4 +13,9 @@ extension FileManager {
     var documents: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0]
     }
+    
+    /// Returns the app's library directory.
+    var library: URL {
+        return FileManager.default.urls(for: .libraryDirectory, in: .allDomainsMask)[0]
+    }
 }

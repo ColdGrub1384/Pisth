@@ -31,6 +31,7 @@
 		3A89B5BC2037760D00B750D9 /* UIImage+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BB2037760D00B750D9 /* UIImage+init.swift */; };
 		3A89B5BE2037777600B750D9 /* TerminalToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */; };
 		3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BF2037793D00B750D9 /* UIButton.swift */; };
+		3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
@@ -38,7 +39,7 @@
 		3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */; };
 		3AA3FDBE2027549900C07C7A /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
-		3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */; };
+		3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
 		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
 		3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC0204079A9006C3218 /* AppAction.swift */; };
@@ -135,6 +136,7 @@
 		3A89B5BB2037760D00B750D9 /* UIImage+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+init.swift"; sourceTree = "<group>"; };
 		3A89B5BD2037777600B750D9 /* TerminalToolbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalToolbar.xib; sourceTree = "<group>"; };
 		3A89B5BF2037793D00B750D9 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsLocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
@@ -142,7 +144,7 @@
 		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		3AA3FDBC2027549800C07C7A /* FileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
-		3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIleManager+documents.swift"; sourceTree = "<group>"; };
+		3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleManager.swift; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9AC0204079A9006C3218 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -274,7 +276,7 @@
 		3AA3FDC1202754EF00C07C7A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3AAF00EA1FF2D4F400ECCA6F /* FIleManager+documents.swift */,
+				3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */,
 				3A89B5BF2037793D00B750D9 /* UIButton.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3A89B5BB2037760D00B750D9 /* UIImage+init.swift */,
@@ -354,6 +356,7 @@
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
+				3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */,
 				3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */,
 				3AF9AE9B1FF53E5700840E8A /* WebViewController.swift */,
 				3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */,
@@ -628,6 +631,7 @@
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
+				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */,
@@ -637,7 +641,7 @@
 				3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */,
 				3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
-				3AAF00EB1FF2D4F400ECCA6F /* FIleManager+documents.swift in Sources */,
+				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
 				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
 				3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */,

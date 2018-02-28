@@ -175,6 +175,86 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             self.present(chooseName, animated: true, completion: nil)
         }))
         
+        if self is PluginsLocalDirectoryTableViewController {
+            chooseAlert.addAction(UIAlertAction(title: "Create terminal plugin", style: .default, handler: { (_) in // Create plugin
+                let chooseName = UIAlertController(title: "Create plugin", message: "Choose new plugin name", preferredStyle: .alert)
+                chooseName.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = "New plugin name"
+                })
+                chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                    
+                    guard let dirname = chooseName.textFields?[0].text else {
+                        return
+                    }
+                    
+                    do {
+                        try FileManager.default.createDirectory(atPath: self.directory.appendingPathComponent(dirname+".termplugin").path, withIntermediateDirectories: true, attributes: nil)
+                        if !FileManager.default.createFile(atPath: self.directory.appendingPathComponent(dirname+".termplugin").appendingPathComponent("index.js").path, contents: """
+                            /* Write here JavaScript code to execute after loading the terminal.
+
+                               - Use the `term` variable to modify the terminal. See more at https://xtermjs.org/docs/api/terminal/.
+                               - Call `alert("bell")` to vibrate device.
+                               - Call `alert("changeTitle<New title>")` to change the terminal title. NOTE: If it doesn't work, it's because the title was changed before by the shell, so don't call it at begining.
+                               - You can put resources in the plugin folder, access with the `bundlePath` constant: `bundlePath+"/<File name>"`.
+                               - You can't write to the session!
+
+                               # Options
+
+                               `term` supports options, set them like: `term.setOption("<Option name>", <value>)`.
+
+                                - 'bellStyle': "visual" || "sound" || "both" || "none"
+                                - 'cursorStyle': "block" || "underline" || "bar"
+                                - 'lineHeight': Number
+                                - 'tabStopWidth': Number
+                                - 'theme': {foreground: String, background: String, cursor: String, selection: String, black: String, red: String, green: String, yellow: String, blue: String, magenta: String, cyan: String, white: String, brightBlack: String, brightRed: String, brightGreen: String, brightYellow: String, brightBlue: String, brightMagenta: String, brightCyan: String, brightWhite: String} (All properties are optional)
+                                - 'fontFamily': String
+                                - 'fontSize': Number
+                                - 'scrollBack': Number
+                                - 'enableBold': Boolean
+                                - 'letterSpacing': Number
+                                - 'lineHeight': Number
+                                - 'fontWeight': Number
+                                - 'fontWeightBold': Number
+                                - 'screenReaderModer': Bolean
+                                - 'tabStopWidth': Number
+                                - 'allowTransparency': Boolean
+                                - 'cancelEvents': Boolean
+                                - 'cols': Number
+                                - 'rows': Number
+                                - 'convertsEol': Boolean
+                                - 'cursorBlink': Boolean
+                                - 'debug': Boolean
+                                - 'disableStdin': Boolean
+                                - 'macOptionIsMeta': Boolean
+                                - 'rightClickSelectsWord': Boolean
+                                - 'screenKeys': Boolean
+                                - 'termName': String
+                                - 'useFlowControl': Boolean
+                            */
+                            
+                            const bundlePath = document.currentScript.bundlePath;
+
+                            
+                            """.data(using: .utf8), attributes: nil) {
+                            
+                            let errorAlert = UIAlertController(title: "Error creating plugin!", message: "Error creating index.js.", preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            self.present(errorAlert, animated: true, completion: nil)
+                            
+                        }
+                        self.reload()
+                    } catch {
+                        let errorAlert = UIAlertController(title: "Error creating plugin!", message: error.localizedDescription, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    }
+                }))
+                
+                self.present(chooseName, animated: true, completion: nil)
+            }))
+        }
+        
         chooseAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         chooseAlert.popoverPresentationController?.barButtonItem = sender

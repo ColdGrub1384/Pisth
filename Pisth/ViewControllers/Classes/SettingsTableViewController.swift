@@ -28,6 +28,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         /// Set text size.
         static let textSize = IndexPath(row: 1, section: 2)
         
+        /// Manage plugins.
+        static let plugins = IndexPath(row: 2, section: 2)
+        
         /// Set terminal theme.
         static let terminalTheme = IndexPath(row: 0, section: 3)
         
@@ -276,6 +279,12 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
             navigationController?.pushViewController(webVC, animated: true)
 
+        } else if indexPath == IndexPaths.plugins {
+            
+            // Manage plugins
+            let pluginsVC = PluginsLocalDirectoryTableViewController()
+            navigationController?.pushViewController(pluginsVC, animated: true)
+            
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }

@@ -559,7 +559,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             webView.navigationDelegate = self
             webView.uiDelegate = self
             webView.scrollView.isScrollEnabled = false
-            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: Bundle.terminal.bundleURL)
+            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
             tapGesture.delegate = self
@@ -947,6 +947,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     self.selectText = false
                 }
             })
+        }
+        
+        for plugin in (try? FileManager.default.contentsOfDirectory(at: FileManager.default.library.appendingPathComponent("Plugins"), includingPropertiesForKeys: nil, options: .skipsHiddenFiles)) ?? [] {
+            
+            var isDir: ObjCBool = false
+            if FileManager.default.fileExists(atPath: plugin.path, isDirectory: &isDir) && isDir.boolValue && plugin.pathExtension.lowercased() == "termplugin" {
+                let tmpPlugin = URL(fileURLWithPath: NSTemporaryDirectory().nsString.appendingPathComponent(plugin.lastPathComponent))
+                
+                try? FileManager.default.removeItem(at: tmpPlugin)
+                try? FileManager.default.copyItem(at: plugin, to: tmpPlugin)
+                
+                webView.evaluateJavaScript("var js = document.createElement('script'); js.type = 'text/javascript'; js.src = 'file://\(tmpPlugin.appendingPathComponent("index.js").path)'; js.bundlePath = '\(tmpPlugin.path)'; document.head.appendChild(js)", completionHandler: nil)
+            }
+            
         }
     }
     
