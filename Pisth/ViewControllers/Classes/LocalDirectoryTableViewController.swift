@@ -183,7 +183,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     }
     
     /// Reload content of directory.
-    func reload() {
+    @objc func reload() {
         files = []
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: directory.path)
@@ -193,6 +193,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             
             tableView.reloadData()
         } catch {}
+        
+        refreshControl?.endRefreshing()
     }
     
     /// Init with given directory.
@@ -242,6 +244,10 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
      
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = .white
+        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+        
         // Navigation bar items
         let createFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(create(_:)))
         navigationItem.setRightBarButtonItems([createFile], animated: true)
@@ -262,6 +268,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .UIApplicationDidBecomeActive, object: nil)
+        
         if let error = error {
             let errorAlert = UIAlertController(title: "Error opening directory!", message: error.localizedDescription, preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
@@ -281,7 +289,15 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
         
         reload()
+    }
+    
+    /// `UIViewController`'s `viewDidDisappear(_:)` function.
+    ///
+    /// Remove observer.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Table view data source
