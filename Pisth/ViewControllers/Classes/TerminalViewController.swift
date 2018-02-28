@@ -325,7 +325,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Hide or show navigation bar.
     @objc func showNavBar() {
         navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden.inverted ?? true, animated: true)
-        webView.reload()
+        reload()
     }
     
     /// Enter in selection mode or paste text.
@@ -382,6 +382,31 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
+    /// Reload terminal with animation.
+    @objc func reload() {
+        let view = UIView(frame: self.webView.frame)
+        
+        self.view.addSubview(view)
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            UIView.animate(withDuration: 0.5) {
+                view.backgroundColor = self.webView.backgroundColor
+            }
+        })
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
+            UIView.animate(withDuration: 0.5, animations: {
+                view.backgroundColor = .clear
+            })
+        })
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false, block: { (_) in
+            view.removeFromSuperview()
+        })
+        
+        self.webView.reload()
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -432,7 +457,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             self.webView.frame = newFrame
             self.selectionTextView.frame = newFrame
             if !wasFirstResponder {
-                self.webView.reload()
+                self.reload()
             }
         })
     }
@@ -589,7 +614,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
         webView.frame.size.height = toolbarFrame.origin.y
-        webView.reload()
+        
+        self.reload()
         
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
@@ -609,7 +635,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         webView.frame = view.bounds
-        webView.reload()
+        reload()
         
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
