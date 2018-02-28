@@ -37,21 +37,14 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 16,
-      "symbol": "DirectoryTableViewController.deinit",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/DirectoryTableViewController.swift",
-      "line": 111,
+      "line": 118,
       "symbol": "DirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
-      "line": 218,
+      "line": 219,
       "symbol": "LocalDirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -65,15 +58,8 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 693,
+      "line": 724,
       "symbol": "TerminalViewController.insertKeyByLongPress(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Views/Classes/BooleanInputView.swift",
-      "line": 99,
-      "symbol": "BooleanInputView.observeValue(forKeyPath:of:change:context:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
