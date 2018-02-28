@@ -286,6 +286,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             toolbar.items![1].tintColor = .white
             toolbarItems![1].tintColor = .white
             
+            reload()
             selectText = true
             
             resignFirstResponder()
