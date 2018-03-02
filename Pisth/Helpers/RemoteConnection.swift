@@ -37,5 +37,8 @@ struct RemoteConnection {
     
     /// Use SFTP
     var useSFTP: Bool
+    
+    /// OS name.
+    var os: String?
 }
 

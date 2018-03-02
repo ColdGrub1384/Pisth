@@ -14,6 +14,7 @@ import Pisth_Shared
 import Pisth_Terminal
 import Firebase
 import AVFoundation
+import CoreData
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
@@ -925,6 +926,39 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         try session.channel.write("\(command);\n")
                     }
                 } else {
+                    
+                    // Sorry Termius ;-(
+                    let os = try? ConnectionManager.shared.session?.channel.execute("""
+                    SA_OS_TYPE="Linux"
+                    REAL_OS_NAME=`uname`
+                    if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
+                    then
+                    echo $REAL_OS_NAME
+                    else
+                    DISTRIB_ID=\"`cat /etc/*release`\"
+                    echo $DISTRIB_ID;
+                    fi;
+                    """)
+                    
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+                    request.returnsObjectsAsFaults = false
+                    
+                    do {
+                        let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                        
+                        for result in results {
+                            if result.value(forKey: "host") as? String == ConnectionManager.shared.connection?.host {
+                                if let os = os {
+                                    result.setValue(os, forKey: "os")
+                                }
+                            }
+                        }
+                        
+                        AppDelegate.shared.saveContext()
+                    } catch let error {
+                        print("Error retrieving connections: \(error.localizedDescription)")
+                    }
+                    
                     session.channel.delegate = self
                     try session.channel.startShell()
                 }

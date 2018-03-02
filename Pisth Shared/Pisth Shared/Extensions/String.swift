@@ -3,6 +3,22 @@ import Foundation
 
 public extension String {
     
+    /// Get substring between two substrings.
+    ///
+    /// - Parameters:
+    ///     - from: Starting string.
+    ///     - to: End string.
+    ///
+    /// - Returns: String between `from` and `to`.
+    func slice(from: String, to: String) -> String? {
+        
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+    
     /// Returns a literal JavaScript `String` from `String`.
     ///
     /// ## Example

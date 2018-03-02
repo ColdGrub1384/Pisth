@@ -109,7 +109,7 @@ class ConnectionInformationTableViewController: UITableViewController {
                     
                     navigationController?.popViewController(animated: true)
                 } else {
-                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP))
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
                     
                     navigationController?.popViewController(animated: true)
                 }

@@ -28,6 +28,7 @@ class DataManager {
         newConnection.setValue(connection.path, forKey: "path")
         newConnection.setValue(connection.port, forKey: "port")
         newConnection.setValue(connection.useSFTP, forKey: "sftp")
+        newConnection.setValue(connection.os, forKey: "os")
         
         // Set password
         // The password in database is a random string, a password is saved to the keychain with key the random string
@@ -94,7 +95,7 @@ class DataManager {
                 guard let password = KeychainWrapper.standard.string(forKey: passKey) else { return fetchedConnections }
                 guard let useSFTP = result.value(forKey: "sftp") as? Bool else { return fetchedConnections }
                 
-                fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP))
+                fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: result.value(forKey: "os") as? String))
             }
         } catch let error {
             print("Error retrieving connections: \(error.localizedDescription)")

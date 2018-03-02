@@ -10,6 +10,7 @@ import GoogleMobileAds
 import NMSSH
 import Pisth_Shared
 import Firebase
+import CoreData
 
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
@@ -89,6 +90,39 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     return
                 }
                 self.files!.append(parent)
+            }
+            
+            // Sorry Termius ;-(
+            let os = try? ConnectionManager.shared.filesSession?.channel.execute("""
+            SA_OS_TYPE="Linux"
+            REAL_OS_NAME=`uname`
+            if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
+            then
+            echo $REAL_OS_NAME
+            else
+            DISTRIB_ID=\"`cat /etc/*release`\"
+            echo $DISTRIB_ID;
+            fi;
+            exit;
+            """)
+            
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                
+                for result in results {
+                    if result.value(forKey: "host") as? String == connection.host {
+                        if let os = os {
+                            result.setValue(os, forKey: "os")
+                        }
+                    }
+                }
+                
+                AppDelegate.shared.saveContext()
+            } catch let error {
+                print("Error retrieving connections: \(error.localizedDescription)")
             }
             
             // TODO: - Make it compatible with only SFTP
