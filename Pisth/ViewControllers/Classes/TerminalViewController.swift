@@ -657,6 +657,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
+            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
+            
             sender.tintColor = .lightGray
         } else {
             
