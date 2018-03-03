@@ -381,7 +381,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Play bell.
     @objc func bell() {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        AudioServicesPlayAlertSound(1054)
     }
     
     /// Reload terminal with animation.
