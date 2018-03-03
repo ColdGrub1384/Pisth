@@ -38,7 +38,6 @@ class GitBranchesTableViewController: UITableViewController {
         
         terminalVC.title = title
         terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
-        terminalVC.dontScroll = true
         navigationController?.pushViewController(terminalVC, animated: true, completion: {
             terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
         })
