@@ -2,10 +2,11 @@
 
 
 [![Version](https://img.shields.io/cocoapods/v/Highlightr.svg?style=flat)](http://cocoapods.org/pods/Highlightr)
+[![CocoaPods](https://img.shields.io/cocoapods/metrics/doc-percent/Highlightr.svg)](http://cocoadocs.org/docsets/Highlightr/1.1.0/)
 [![License](https://img.shields.io/cocoapods/l/Highlightr.svg?style=flat)](http://cocoapods.org/pods/Highlightr)
 [![Platform](https://img.shields.io/cocoapods/p/Highlightr.svg?style=flat)](http://cocoapods.org/pods/Highlightr)
 
-Highlightr is an iOS & macOS syntax highlighter built with Swift. It uses [highlight.js](https://highlightjs.org/) as it core, supports [169 languages and comes with 77 styles](https://highlightjs.org/static/demo/).
+Highlightr is an iOS & macOS syntax highlighter built with Swift. It uses [highlight.js](https://highlightjs.org/) as it core, supports [176 languages and comes with 79 styles](https://highlightjs.org/static/demo/).
 
 Takes your lame string with code and returns a NSAttributtedString with proper syntax highlighting.
 
@@ -49,6 +50,10 @@ Yes, Highlightr relies on iOS & macOS [JavaScriptCore](https://developer.apple.c
 It will never be as fast as a native solution, but it's fast enough to be used on a real time editor.
 
 It comes with a custom made HTML parser for creating NSAttributtedStrings, is pre-processing the themes and is preloading the JS libraries. As result it's taking around of 50 ms on my iPhone 6s for processing 500 lines of code.
+
+## Documentation
+
+You can find the documentation for the latest release on [cocoadocs](http://cocoadocs.org/docsets/Highlightr/).
 
 ## License
 

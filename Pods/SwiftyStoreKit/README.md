@@ -7,6 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/bizz84/SwiftyStoreKit.svg?style=flat)](https://github.com/bizz84/SwiftyStoreKit/issues)
 [![Cocoapod](http://img.shields.io/cocoapods/v/SwiftyStoreKit.svg?style=flat)](http://cocoadocs.org/docsets/SwiftyStoreKit/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Downloads](https://img.shields.io/cocoapods/dm/SwiftyStoreKit.svg)]()
 [![Twitter](https://img.shields.io/badge/twitter-@biz84-blue.svg?maxAge=2592000)](http://twitter.com/biz84)
 
 SwiftyStoreKit is a lightweight In App Purchases framework for iOS 8.0+, tvOS 9.0+ and macOS 10.10+.
@@ -21,9 +22,79 @@ I started [**Sustainable Earth**](https://github.com/bizz84/Sustainable-Earth), 
 
 ### Like SwiftyStoreKit? Please consider [becoming a Patron](https://www.patreon.com/biz84).
 
+## Content
+
+- [Installation](#installation)
+	- [CocoaPods](#cocoapods)
+	- [Carthage](#carthage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [App startup](#app-startup)
+	- [Complete Transactions](#complete-transactions)
+- [Purchases](#purchases)
+	- [Retrieve products info](#retrieve-products-info)
+	- [Purchase a product (given a product id)](#purchase-a-product-given-a-product-id)
+	- [Purchase a product (given a SKProduct)](#purchase-a-product-given-a-skproduct)
+	- [Handle purchases started on the App Store (iOS 11)](#handle-purchases-started-on-the-app-store-ios-11)
+	- [Restore previous purchases](#restore-previous-purchases)
+	- [Downloading content hosted with Apple](#downloading-content-hosted-with-apple)
+- [Receipt verification](#receipt-verification)
+	- [Retrieve local receipt (encrypted)](#retrieve-local-receipt-encrypted)
+	- [Fetch receipt (encrypted)](#fetch-receipt-encrypted)
+	- [Verify Receipt](#verify-receipt)
+- [Verifying purchases and subscriptions](#verifying-purchases-and-subscriptions)
+	- [Verify Purchase](#verify-purchase)
+	- [Verify Subscription](#verify-subscription)
+	- [Subscription Groups](#subscription-groups)
+- [Notes](#notes)
+- [Change Log](#change-log)
+- [Sample Code](#sample-code)
+- [Essential Reading](#essential-reading)
+	- [Troubleshooting](#troubleshooting)
+- [Video Tutorials](#video-tutorials)
+- [Payment flows: implementation details](#payment-flows-implementation-details)
+- [Credits](#credits)
+- [Apps using SwiftyStoreKit](#apps-using-swiftystorekit)
+- [License](#license)
+	
+## Installation
+
+### CocoaPods
+
+SwiftyStoreKit can be installed as a [CocoaPod](https://cocoapods.org/) and builds as a Swift framework. To install, include this in your Podfile.
+
+```ruby
+use_frameworks!
+
+pod 'SwiftyStoreKit'
+```
+Once installed, just ```import SwiftyStoreKit``` in your classes and you're good to go.
+
+### Carthage
+
+To integrate SwiftyStoreKit into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
+
+```ogdl
+github "bizz84/SwiftyStoreKit"
+```
+
+**NOTE**: Please ensure that you have the [latest](https://github.com/Carthage/Carthage/releases) Carthage installed.
+
+## Features
+
+- Super easy to use block based API
+- Support for consumable, non-consumable in-app purchases
+- Support for free, auto-renewable and non-renewing subscriptions
+- Support for in-app purchases started in the App Store (iOS 11)
+- Remote receipt verification
+- Verify purchases, subscriptions, subscription groups
+- Downloading content hosted with Apple
+- iOS, tvOS and macOS compatible
+
 ## Contributing
 
 #### Got issues / pull requests / want to contribute? [Read here](CONTRIBUTING.md).
+
 
 ## App startup
 
@@ -147,7 +218,7 @@ SwiftyStoreKit.retrieveProductsInfo(["com.musevisions.SwiftyStoreKit.Purchase1"]
 
 Using this `purchaseProduct` method guarantees that only one network call is made to StoreKit to perform the purchase, as opposed to one call to get the product and another to perform the purchase.
 
-### Should add store payment handling (iOS 11)
+### Handle purchases started on the App Store (iOS 11)
 
 iOS 11 adds a new delegate method on `SKPaymentTransactionObserver`:
 
@@ -254,6 +325,48 @@ SwiftyStoreKit provides three operations that can be performed **atomically** or
 * Restoring purchases
 * Completing transactions on app launch
 
+### Downloading content hosted with Apple
+
+Quoting Apple Docs:
+
+> When you create a product in iTunes Connect, you can associate one or more pieces of downloadable content with it. At runtime, when a product is purchased by a user, your app uses SKDownload objects to download the content from the App Store.
+
+> Your app never directly creates a SKDownload object. Instead, after a payment is processed, your app reads the transaction object’s downloads property to retrieve an array of SKDownload objects associated with the transaction.
+
+> To download the content, you queue a download object on the payment queue and wait for the content to be downloaded. After a download completes, read the download object’s contentURL property to get a URL to the downloaded content. Your app must process the downloaded file before completing the transaction. For example, it might copy the file into a directory whose contents are persistent. When all downloads are complete, you finish the transaction. After the transaction is finished, the download objects cannot be queued to the payment queue and any URLs to the downloaded content are invalid.
+
+To start the downloads (this can be done in `purchaseProduct()`, `completeTransactions()` or `restorePurchases()`):
+
+```swift
+SwiftyStoreKit.purchaseProduct("com.musevisions.SwiftyStoreKit.Purchase1", quantity: 1, atomically: false) { result in
+    switch result {
+    case .success(let product):
+        let downloads = purchase.transaction.downloads
+        if !downloads.isEmpty {
+            SwiftyStoreKit.start(downloads)
+        }
+    case .error(let error):
+        print("\(error)")
+    }
+}
+```
+
+To check the updated downloads, setup a `updatedDownloadsHandler` block in your AppDelegate:
+
+```swift
+SwiftyStoreKit.updatedDownloadsHandler = { downloads in
+
+    // contentURL is not nil if downloadState == .finished
+    let contentURLs = downloads.flatMap { $0.contentURL }
+    if contentURLs.count == downloads.count {
+        // process all downloaded files, then finish the transaction
+        SwiftyStoreKit.finishTransaction(downloads[0].transaction)
+    }
+}
+```
+
+To control the state of the downloads, SwiftyStoreKit offers `start()`, `pause()`, `resume()`, `cancel()` methods.
+
 ## Receipt verification
 
 According to [Apple - Delivering Products](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/DeliverProduct.html#//apple_ref/doc/uid/TP40008267-CH5-SW4):
@@ -326,7 +439,7 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator, forceRefresh: false) { resul
         print("Verify receipt success: \(receipt)")
     case .error(let error):
         print("Verify receipt failed: \(error)")
-	}
+    }
 }
 ```
 
@@ -511,30 +624,7 @@ SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
 ## Notes
 The framework provides a simple block based API with robust error handling on top of the existing StoreKit framework. It does **NOT** persist in app purchases data locally. It is up to clients to do this with a storage solution of choice (i.e. NSUserDefaults, CoreData, Keychain).
 
-## Installation
-
-### CocoaPods
-
-SwiftyStoreKit can be installed as a [CocoaPod](https://cocoapods.org/) and builds as a Swift framework. To install, include this in your Podfile.
-
-```ruby
-use_frameworks!
-
-pod 'SwiftyStoreKit'
-```
-Once installed, just ```import SwiftyStoreKit``` in your classes and you're good to go.
-
-### Carthage
-
-To integrate SwiftyStoreKit into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your Cartfile:
-
-```ogdl
-github "bizz84/SwiftyStoreKit"
-```
-
-**NOTE**: Please ensure that you have the [latest](https://github.com/Carthage/Carthage/releases) Carthage installed.
-
-## Swift 2.x / 3.x / 4.x
+#### Swift 2.x / 3.x / 4.x
 
 | Language  | Branch | Pod version | Xcode version |
 | --------- | ------ | ----------- | ------------- |
@@ -543,38 +633,21 @@ github "bizz84/SwiftyStoreKit"
 | Swift 2.3 | [swift-2.3](https://github.com/bizz84/SwiftyStoreKit/tree/swift-2.3) | 0.4.x | Xcode 8, Xcode 7.3.x |
 | Swift 2.2 | [swift-2.2](https://github.com/bizz84/SwiftyStoreKit/tree/swift-2.2) | 0.3.x | Xcode 7.3.x |
 
+
 ## Change Log
 
-See the [Releases Page](https://github.com/bizz84/SwiftyStoreKit/releases)
+See the [Releases Page](https://github.com/bizz84/SwiftyStoreKit/releases).
 
 ## Sample Code
 The project includes demo apps [for iOS](https://github.com/bizz84/SwiftyStoreKit/blob/master/SwiftyStoreKit-iOS-Demo/ViewController.swift) [and macOS](https://github.com/bizz84/SwiftyStoreKit/blob/master/SwiftyStoreKit-macOS-Demo/ViewController.swift) showing how to use SwiftyStoreKit.
 Note that the pre-registered in app purchases in the demo apps are for illustration purposes only and may not work as iTunes Connect may invalidate them.
 
-#### Features
-
-- Super easy to use block based API
-- Support for consumable, non-consumable in-app purchases
-- Support for free, auto renewable and non renewing subscriptions
-- Receipt verification
-- iOS, tvOS and macOS compatible
-
-
-## Video Tutorials
-
-#### Jared Davidson: In App Purchases! (Swift 3 in Xcode : Swifty Store Kit)
-
-<a href="https://www.youtube.com/watch?v=dwPFtwDJ7tcb"><img src="https://raw.githubusercontent.com/bizz84/SwiftyStoreKit/master/Screenshots/VideoTutorial-JaredDavidson.jpg" width="854" /></a>
-
-#### [@rebeloper](https://github.com/rebeloper): Ultimate In-app Purchases Guide
-
-<a href="https://www.youtube.com/watch?v=bIyj6BZ1-Qw&list=PL_csAAO9PQ8b9kqrltk2_SpYslTwyrwjb"><img src="https://raw.githubusercontent.com/bizz84/SwiftyStoreKit/master/Screenshots/VideoTutorial-Rebeloper.jpg" width="854" /></a>
-
-
 ## Essential Reading
 * [Apple - WWDC16, Session 702: Using Store Kit for In-app Purchases with Swift 3](https://developer.apple.com/videos/play/wwdc2016/702/)
 * [Apple - TN2387: In-App Purchase Best Practices](https://developer.apple.com/library/content/technotes/tn2387/_index.html)
 * [Apple - TN2413: In-App Purchase FAQ](https://developer.apple.com/library/content/technotes/tn2413/_index.html) (also see [Cannot connect to iTunes Store](https://developer.apple.com/library/content/technotes/tn2413/_index.html#//apple_ref/doc/uid/DTS40016228-CH1-ERROR_MESSAGES-CANNOT_CONNECT_TO_ITUNES_STORE))
+* [Apple - TN2259: Adding In-App Purchase to Your Applications](https://developer.apple.com/library/content/technotes/tn2259/_index.html)
+* [iTunes Connect Developer Help - Workflow for configuring in-app purchases](https://help.apple.com/itunes-connect/developer/#/devb57be10e7)
 * [Apple - About Receipt Validation](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Introduction.html)
 * [Apple - Receipt Validation Programming Guide](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ReceiptFields.html#//apple_ref/doc/uid/TP40010573-CH106-SW1)
 * [Apple - Validating Receipts Locally](https://developer.apple.com/library/content/releasenotes/General/ValidateAppStoreReceipt/Chapters/ValidateLocally.html)
@@ -596,7 +669,17 @@ I have also written about building SwiftyStoreKit on Medium:
 * [Testing Auto-Renewable Subscriptions on iOS](http://davidbarnard.com/post/164337147440/testing-auto-renewable-subscriptions-on-ios)
 * [Apple forums - iOS 11 beta sandbox - cannot connect to App Store](https://forums.developer.apple.com/message/261428#261428)
 
-## Payment flows - implementation Details
+## Video Tutorials
+
+#### Jared Davidson: In App Purchases! (Swift 3 in Xcode : Swifty Store Kit)
+
+<a href="https://www.youtube.com/watch?v=dwPFtwDJ7tcb"><img src="https://raw.githubusercontent.com/bizz84/SwiftyStoreKit/master/Screenshots/VideoTutorial-JaredDavidson.jpg" width="854" /></a>
+
+#### [@rebeloper](https://github.com/rebeloper): Ultimate In-app Purchases Guide
+
+<a href="https://www.youtube.com/watch?v=bIyj6BZ1-Qw&list=PL_csAAO9PQ8b9kqrltk2_SpYslTwyrwjb"><img src="https://raw.githubusercontent.com/bizz84/SwiftyStoreKit/master/Screenshots/VideoTutorial-Rebeloper.jpg" width="854" /></a>
+
+## Payment flows: implementation details
 In order to make a purchase, two operations are needed:
 
 - Perform a `SKProductRequest` to obtain the `SKProduct` corresponding to the product identifier.
@@ -605,7 +688,7 @@ In order to make a purchase, two operations are needed:
 
 The framework takes care of caching SKProducts so that future requests for the same `SKProduct` don't need to perform a new `SKProductRequest`.
 
-### Payment queue
+#### Payment queue
 
 The following list outlines how requests are processed by SwiftyStoreKit.
 
@@ -655,7 +738,7 @@ A full list of apps is published [on AppSight](https://www.appsight.io/sdk/57415
 
 ## License
 
-Copyright (c) 2015-2017 Andrea Bizzotto bizz84@gmail.com
+Copyright (c) 2015-2018 Andrea Bizzotto bizz84@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

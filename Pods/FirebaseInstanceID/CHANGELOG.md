@@ -1,3 +1,7 @@
+# 2018-02-06 -- v2.0.9
+- Improved support for language targeting for FCM service. Server updates happen more efficiently when language changes.
+- Improved support for FCM token auto generation enable/disable functions.
+
 # 2017-12-11 -- v2.0.8
 - Fixed a crash caused by a reflection call during logging.
 - Updating server with the latest parameters and deprecating old ones.
