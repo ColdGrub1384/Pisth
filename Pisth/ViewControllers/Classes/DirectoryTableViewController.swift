@@ -42,7 +42,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         present(activityVC, animated: true) {
             let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.directory)
 
-            activity.dismiss(animated: true) {
+            activityVC.dismiss(animated: true) {
                 self.navigationController?.pushViewController(dirVC, animated: true)
             }
         }
