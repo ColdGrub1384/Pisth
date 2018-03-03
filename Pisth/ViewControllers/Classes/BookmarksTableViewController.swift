@@ -125,6 +125,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         ConnectionManager.shared.session = nil
         ConnectionManager.shared.filesSession = nil
         ConnectionManager.shared.result = .notConnected
+        if let task = ConnectionManager.shared.backgroundTask {
+            UIApplication.shared.endBackgroundTask(task)
+            ConnectionManager.shared.backgroundTask = nil
+        }
     }
     
     

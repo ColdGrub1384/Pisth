@@ -14,6 +14,8 @@ class ConnectionManager {
     static let shared = ConnectionManager()
     private init() {}
     
+    /// Background task to keep the session active.
+    var backgroundTask: UIBackgroundTaskIdentifier?
     
     // NMSSH cannot download files and write to an SSH Shell at same time, so two sessions are used.
     
@@ -115,6 +117,8 @@ class ConnectionManager {
                 if connection.useSFTP {
                     try session?.channel.startShell()
                     try filesSession?.channel.startShell()
+                    
+                    backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
                 }
             } catch {
                 result = .notConnected
