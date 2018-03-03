@@ -10,6 +10,7 @@ import WebKit
 import SwiftyStoreKit
 import Pisth_Shared
 import Firebase
+import Pisth_Terminal
 
 /// View controller used to buy themes iap.
 class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
