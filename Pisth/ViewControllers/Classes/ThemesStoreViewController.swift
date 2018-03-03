@@ -112,7 +112,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
             themes[webView] = theme
             themesName[webView] = name
             
-            webView.loadFileURL(Bundle.main.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
+            webView.loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
             webView.isUserInteractionEnabled = false
             
             i += 1
