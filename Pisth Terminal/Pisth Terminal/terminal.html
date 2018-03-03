@@ -27,15 +27,15 @@
         
         term.focus();
         
+        // Change title
+        term.on("title", function (title) {
+            alert("changeTitle"+title);
+        })
+        
+        // Bell
         setTimeout(function () {
-            // Bell
             term.on("bell", function () {
                 alert("bell");
-            })
-                   
-            // Change title
-            term.on("title", function (title) {
-                alert("changeTitle"+title);
             })
         }, 1000);
     </script>
