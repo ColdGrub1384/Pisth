@@ -38,9 +38,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         tableView.tableHeaderView = bannerView
         
-        let dirVC = DirectoryTableViewController(connection: connection, directory: directory)
-        
-        navigationController?.pushViewController(dirVC, animated: true)
+        let activityVC = ActivityViewController(message: "Loading...")
+        present(activityVC, animated: true) {
+            let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.directory)
+
+            activity.dismiss(animated: true) {
+                self.navigationController?.pushViewController(dirVC, animated: true)
+            }
+        }
     }
     
     /// Init with given connection and directory.
