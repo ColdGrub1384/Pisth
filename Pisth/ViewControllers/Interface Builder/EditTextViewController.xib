@@ -29,6 +29,12 @@
                                     <action selector="save:" destination="8Xd-vQ-p0D" id="Hgl-LN-k3G"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem style="plain" systemItem="flexibleSpace" id="h4e-X9-mnN"/>
+                            <barButtonItem systemItem="action" id="Klr-SW-kyT">
+                                <connections>
+                                    <action selector="share:" destination="8Xd-vQ-p0D" id="nrW-hz-naV"/>
+                                </connections>
+                            </barButtonItem>
                         </items>
                     </toolbar>
                 </subviews>

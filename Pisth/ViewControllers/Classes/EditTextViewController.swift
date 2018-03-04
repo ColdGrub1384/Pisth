@@ -95,6 +95,15 @@ class EditTextViewController: UIViewController, UITextViewDelegate, HighlightDel
         placeholderView.addSubview(textView)
     }
     
+    /// Share current file.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func share(_ sender: Any) {
+        let activityVC = UIActivityViewController(activityItems: [file], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
+    }
+    
     
     /// MARK: - View controller
     
