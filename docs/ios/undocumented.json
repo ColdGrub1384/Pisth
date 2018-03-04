@@ -22,13 +22,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/adrian/Desktop/Pisth/Pisth/Helpers/Extensions/UIImage+init.swift",
-      "line": 4,
-      "symbol": "UIImage.init(color:size:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/ConnectionInfoTableViewController.swift",
       "line": 23,
       "symbol": "ConnectionInformationTableViewController.viewDidLoad()",
@@ -44,7 +37,7 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/LocalDirectoryTableViewController.swift",
-      "line": 301,
+      "line": 316,
       "symbol": "LocalDirectoryTableViewController.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
