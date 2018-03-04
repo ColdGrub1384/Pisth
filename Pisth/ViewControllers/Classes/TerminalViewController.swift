@@ -261,9 +261,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         self.toolbar = toolbar
         accessoryView = view
         
-        if isFirstResponder {
-            reloadInputViews()
-        }
+        reloadInputViews()
         
         if #available(iOS 11.0, *) {
             
@@ -614,9 +612,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
-        webView.frame.size.height = toolbarFrame.origin.y
         
-        self.reload()
+        let newHeight = toolbarFrame.origin.y
+        if webView.frame.height != newHeight {
+            webView.frame.size.height = newHeight
+            reload()
+        }
         
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
