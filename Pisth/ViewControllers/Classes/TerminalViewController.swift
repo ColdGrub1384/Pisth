@@ -50,7 +50,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if self.ctrl_ {
                 ctrlKey.setTitleColor(.lightGray, for: .normal)
             } else {
-                ctrlKey.setTitleColor(.white, for: .normal)
+                if TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"]?.toolbarStyle == .default {
+                    ctrlKey.setTitleColor(.black, for: .normal)
+                } else {
+                    ctrlKey.setTitleColor(.white, for: .normal)
+                }
             }
         }
         
@@ -149,15 +153,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Add keyboard's toolbar.
     @objc func addToolbar() {
-        guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[0] as? UIToolbar else {
-            return
-        }
-        
         guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
             return
         }
         
-        toolbar.barStyle = theme.toolbarStyle
+        var nibName: String {
+            if theme.toolbarStyle == .default {
+                return "TerminalToolbar-White"
+            } else {
+                return "TerminalToolbar-Black"
+            }
+        }
+        
+        guard let toolbar = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)?[0] as? UIToolbar else {
+            return
+        }
         
         enum ItemsTag: Int {
             case finger = 1
@@ -169,6 +179,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         for item in toolbar.items ?? [] {
+            
             switch item.tag {
             case ItemsTag.back.rawValue:
                 item.target = navigationController
@@ -187,8 +198,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     
                     if self.ctrl {
                         ctrlKey.setTitleColor(.lightGray, for: .normal)
-                    } else {
-                        ctrlKey.setTitleColor(.white, for: .normal)
                     }
                 }
             }
@@ -212,16 +221,22 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - sender: Sender button.
     @objc func toggleSecondToolbar(_ sender: UIButton) {
-        guard let toolbar = Bundle.main.loadNibNamed("TerminalToolbar", owner: nil, options: nil)?[1] as? UIToolbar else {
-            return
-        }
-        
         guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
             return
         }
         
-        toolbar.barStyle = theme.toolbarStyle
+        var nibName: String {
+            if theme.toolbarStyle == .default {
+                return "TerminalToolbar-White"
+            } else {
+                return "TerminalToolbar-Black"
+            }
+        }
         
+        guard let toolbar = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)?[1] as? UIToolbar else {
+            return
+        }
+                
         enum ItemsTag: Int {
             case more = 1
             case fKeys = 2
@@ -233,6 +248,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         for item in toolbar.items ?? [] {
+            
             switch item.tag {
             case ItemsTag.more.rawValue:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleFirstToolbar(_:)), for: .touchUpInside)
@@ -251,7 +267,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolbar.frame.height))
-        view.backgroundColor = .blue
         
         view.addSubview(toolbar)
         
