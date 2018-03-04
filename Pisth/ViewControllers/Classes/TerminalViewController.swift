@@ -510,6 +510,36 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "terminal")
         mcNearbyServiceAdvertiser.delegate = self
         mcNearbyServiceAdvertiser.startAdvertisingPeer()
+        
+        // Create WebView
+        let config = WKWebViewConfiguration()
+        config.mediaTypesRequiringUserActionForPlayback = .video
+        webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        webView.isOpaque = false
+        view.addSubview(webView)
+        webView.backgroundColor = .clear
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        webView.scrollView.isScrollEnabled = false
+        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
+        tapGesture.delegate = self
+        webView.addGestureRecognizer(tapGesture)
+        
+        // Create selection Textview
+        selectionTextView = UITextView(frame: webView.frame)
+        selectionTextView.backgroundColor = .black
+        selectionTextView.textColor = .white
+        selectionTextView.isHidden = true
+        selectionTextView.font = UIFont(name: "Courier", size: 15)
+        selectionTextView.isEditable = false
+        view.addSubview(selectionTextView)
+        
+        if readOnly {
+            toolbarItems?.remove(at: 1)
+        }
     }
     
     /// `UIViewController``s `viewWillAppear(_:)` function.
@@ -531,50 +561,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             addToolbar()
-        }
-    }
-    
-    /// `UIViewController``s `viewDidAppear(_:)` function.
-    ///
-    /// Init `webView`.
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        if console.isEmpty {
-            
-            // Create WebView
-            let config = WKWebViewConfiguration()
-            config.mediaTypesRequiringUserActionForPlayback = .video
-            webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
-            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            webView.isOpaque = false
-            view.addSubview(webView)
-            webView.backgroundColor = .clear
-            webView.navigationDelegate = self
-            webView.uiDelegate = self
-            webView.scrollView.isScrollEnabled = false
-            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
-            
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
-            tapGesture.delegate = self
-            webView.addGestureRecognizer(tapGesture)
-            
-            // Create selection Textview
-            selectionTextView = UITextView(frame: webView.frame)
-            selectionTextView.backgroundColor = .black
-            selectionTextView.textColor = .white
-            selectionTextView.isHidden = true
-            selectionTextView.font = UIFont(name: "Courier", size: 15)
-            selectionTextView.isEditable = false
-            view.addSubview(selectionTextView)
-            
-            if !readOnly {
-                becomeFirstResponder()
-            } else {
-                toolbarItems?.remove(at: 1)
-            }
         }
     }
     
@@ -981,6 +967,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     try session.channel.startShell()
                 }
             } catch {}
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                self.showNavBar()
+            })
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
                 if self.selectText {
