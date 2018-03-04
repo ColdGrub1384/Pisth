@@ -702,17 +702,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         navigationController?.pushViewController(newFolderVC, animated: true)
                     })
                 }
-            } else if let image = UIImage(contentsOfFile: file.path) { // Is image
-                let imageVC = Bundle.main.loadNibNamed("ImageViewController", owner: nil, options: nil)!.first! as! ImageViewController
-                imageVC.image = image
-                
-                if viewController == nil {
-                    navigationController?.pushViewController(imageVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(imageVC, animated: true)
-                    })
-                }
             } else if AVAsset(url: file).isPlayable { // Is video or audio
                 let player = AVPlayer(url: file)
                 let playerVC = AVPlayerViewController()
@@ -723,17 +712,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 } else {
                     viewController?.dismiss(animated: true, completion: {
                         navigationController?.pushViewController(playerVC, animated: true)
-                    })
-                }
-            } else if isFilePDF(file) { // Is PDF
-                let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
-                webVC.file = file
-                
-                if viewController == nil {
-                    navigationController?.pushViewController(webVC, animated: true)
-                } else {
-                    viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(webVC, animated: true)
                     })
                 }
             } else { // Preview
