@@ -12,9 +12,10 @@ import AVFoundation
 import AVKit
 import Pisth_Shared
 import Firebase
+import QuickLook
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate {
+class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -42,6 +43,20 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
         shareVC.popoverPresentationController?.sourceView = sender
         present(shareVC, animated: true, completion: nil)
+    }
+    
+    /// Preview file with a `QLPreviewController`.
+    ///
+    /// - Parameters:
+    ///     - index: Index of file in the `files` array.
+    ///
+    /// - Returns: `QLPreviewController` to present.
+    @objc func previewFile(atIndex index: Int) -> QLPreviewController {
+        let qlVC = QLPreviewController()
+        qlVC.dataSource = self
+        qlVC.currentPreviewItemIndex = files.index(of: files[index]) ?? 0
+        
+        return qlVC
     }
     
     /// Move file stored in `Pasteboard` in current directory.
@@ -597,6 +612,17 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.tableView.cellForRow(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
     }
     
+    // MARK: - Preview controller data source
+    
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return files.count
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return files[index] as QLPreviewItem
+    }
+    
     // MARK: - Static
     
     /// Global delegate.
@@ -705,10 +731,15 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         navigationController?.pushViewController(webVC, animated: true)
                     })
                 }
-            } else { // Share
-                let shareVC = UIActivityViewController(activityItems: [file], applicationActivities: nil)
-                shareVC.popoverPresentationController?.sourceView = view
-                viewController?.present(shareVC, animated: true, completion: nil)
+            } else { // Preview
+                let vc = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+                if viewController == nil {
+                    navigationController?.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        navigationController?.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                    })
+                }
             }
         }
         
