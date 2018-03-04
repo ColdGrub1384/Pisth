@@ -868,6 +868,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Run startup commands if `console` is empty, enable blinking cursor if `UserDefaults` 'blink' value is `true` and resize terminal if the Web view was reloaded.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
+        // Animation
+        for view in view.subviews {
+            if view.tag == 5 {
+                _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
+                    UIView.animate(withDuration: 0.5, animations: {
+                        view.alpha = 0
+                    })
+                })
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false, block: { (_) in
+                    view.removeFromSuperview()
+                })
+            }
+        }
+        
         if UserDefaults.standard.bool(forKey: "blink") {
             webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)
         }
@@ -899,6 +914,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 resignFirstResponder()
+                navigationItem.rightBarButtonItems = []
                 return
             }
             
@@ -906,6 +922,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 resignFirstResponder()
+                navigationItem.rightBarButtonItems = []
                 return
             }
             
@@ -981,21 +998,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     self.selectText = false
                 }
             })
-        }
-        
-        // Animation
-        for view in view.subviews {
-            if view.tag == 5 {
-                _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
-                    UIView.animate(withDuration: 0.5, animations: {
-                        view.alpha = 0
-                    })
-                })
-                
-                _ = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false, block: { (_) in
-                    view.removeFromSuperview()
-                })
-            }
         }
         
         // Plugins
