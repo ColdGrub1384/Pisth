@@ -399,11 +399,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         self.webView.reload()
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            UIView.animate(withDuration: 0.5) {
-                view.alpha = 1
-            }
-        })
+        UIView.animate(withDuration: 0.5) {
+            view.alpha = 1
+        }
     }
     
     // MARK: - View controller
