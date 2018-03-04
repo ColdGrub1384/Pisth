@@ -968,7 +968,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
             
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                 self.showNavBar()
             })
         } else {
