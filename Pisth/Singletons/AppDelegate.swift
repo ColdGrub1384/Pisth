@@ -267,12 +267,100 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     /// `UIApplicationDelegate`'s `application(_:, open:, options:)` function.
     ///
-    /// Open and upload file.
+    /// Open file, upload file or open connection.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         /// Handle URL.
         func handle() {
-            if url.absoluteString.hasPrefix("file:") { // Upload file or import plugin or theme.
+            if url.absoluteString.hasPrefix("ssh:") { // Open SSH connection.
+                let connection = url.absoluteString.components(separatedBy: "://")[1]
+                
+                var host: String {
+                    
+                    let components = connection.components(separatedBy: "@")
+                    
+                    if components.indices.contains(1) {
+                        return components[1].components(separatedBy: ":")[0]
+                    }
+                    
+                    return components[0].components(separatedBy: ":")[0]
+                }
+                
+                var user: String {
+                    let user_ = connection.components(separatedBy: "@")[0].components(separatedBy: ":")[0]
+                    
+                    if user_ != host {
+                        return user_
+                    }
+                    
+                    return ""
+                }
+                
+                var port: String {
+                    
+                    let components = connection.components(separatedBy: ":")
+                    
+                    if components.indices.contains(1) {
+                        return components[1]
+                    }
+                    
+                    return ""
+                }
+                
+                let alert = UIAlertController(title: "Open SSH connection", message: "Authenticate as \(user) user.", preferredStyle: .alert)
+                
+                var userTextField: UITextField? {
+                    if alert.textFields?.count == 2 {
+                        return alert.textFields?[0]
+                    } else {
+                        return nil
+                    }
+                }
+                
+                var passwordTextField: UITextField? {
+                    if alert.textFields?.count == 2 {
+                        return alert.textFields?[1]
+                    } else {
+                        return alert.textFields?[0]
+                    }
+                }
+                
+                if user.isEmpty {
+                    alert.addTextField(configurationHandler: { (textField) in
+                        textField.placeholder = "Username"
+                    })
+                }
+                
+                alert.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = "Password"
+                    textField.isSecureTextEntry = true
+                })
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                    
+                    let activityVC = ActivityViewController(message: "Loading...")
+                    
+                    UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
+                        ConnectionManager.shared.connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "", port: UInt64(port) ?? 22, useSFTP: false, os: nil)
+                        ConnectionManager.shared.connect()
+                        
+                        activityVC.dismiss(animated: true, completion: {
+                            var terminalVC = TerminalViewController()
+                            
+                            if #available(iOS 11.0, *) {
+                                terminalVC = TerminalViewControllerIOS11()
+                            }
+                            
+                            terminalVC.pureMode = true
+                            
+                            self.navigationController.pushViewController(terminalVC, animated: true)
+                        })
+                    })                    
+                }))
+                
+                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            } else if url.absoluteString.hasPrefix("file:") { // Upload file or import plugin or theme.
                 
                 if url.pathExtension.lowercased() == "termplugin" { // Import plugin
                     
