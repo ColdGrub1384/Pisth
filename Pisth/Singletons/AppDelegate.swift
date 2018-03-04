@@ -272,7 +272,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         /// Handle URL.
         func handle() {
-            if url.absoluteString.hasPrefix("ssh:") { // Open SSH connection.
+            if url.absoluteString.hasPrefix("ssh:") || url.absoluteString.hasPrefix("sftp:") { // Open connection.
                 let connection = url.absoluteString.components(separatedBy: "://")[1]
                 
                 var host: String {
@@ -342,20 +342,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     let activityVC = ActivityViewController(message: "Loading...")
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
-                        ConnectionManager.shared.connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "", port: UInt64(port) ?? 22, useSFTP: false, os: nil)
-                        ConnectionManager.shared.connect()
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "~", port: UInt64(port) ?? 22, useSFTP: url.absoluteString.hasPrefix("sftp:"), os: nil)
                         
-                        activityVC.dismiss(animated: true, completion: {
-                            var terminalVC = TerminalViewController()
+                        if !connection.useSFTP { // SSH
                             
-                            if #available(iOS 11.0, *) {
-                                terminalVC = TerminalViewControllerIOS11()
-                            }
+                            ConnectionManager.shared.connection = connection
+                            ConnectionManager.shared.connect()
                             
-                            terminalVC.pureMode = true
+                            activityVC.dismiss(animated: true, completion: {
+                                var terminalVC = TerminalViewController()
+                                
+                                if #available(iOS 11.0, *) {
+                                    terminalVC = TerminalViewControllerIOS11()
+                                }
+                                
+                                terminalVC.pureMode = true
+                                
+                                self.navigationController.pushViewController(terminalVC, animated: true)
+                            })
+                        } else {
+                            let dirVC = DirectoryTableViewController(connection: connection)
                             
-                            self.navigationController.pushViewController(terminalVC, animated: true)
-                        })
+                            activityVC.dismiss(animated: true, completion: {
+                                self.navigationController.pushViewController(dirVC, animated: true)
+                            })
+                        }
                     })                    
                 }))
                 
