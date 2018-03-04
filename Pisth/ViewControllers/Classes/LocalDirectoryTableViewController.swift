@@ -614,11 +614,16 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Preview controller data source
     
-    
+    /// `QLPreviewControllerDataSource`'s `numberOfPreviewItems(in:)` function.
+    ///
+    /// - Returns: count of `files.`
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return files.count
     }
     
+    /// `QLPreviewControllerDataSource`'s `previewController(_:, previewItemAt:)` function.
+    ///
+    /// - Returns: file in `files` at current index.
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return files[index] as QLPreviewItem
     }
