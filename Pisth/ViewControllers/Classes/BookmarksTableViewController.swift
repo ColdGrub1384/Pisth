@@ -28,7 +28,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// Open app's settings.
     @objc func openSettings() {
-        navigationController?.pushViewController(UIStoryboard(name: "Settings", bundle: Bundle.main).instantiateInitialViewController()!, animated: true)
+        navigationController?.pushViewController(UIViewController.settings, animated: true)
     }
     
     /// Open local documents.
@@ -49,9 +49,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     ///     - index: Index of connection to edit.
     func showInfoAlert(editInfoAt index: Int? = nil) {
         
-        guard let editConnectionVC = UIStoryboard(name: "ConnectionInfoTableViewController", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController else {
-            return
-        }
+        let editConnectionVC = UIViewController.connectionInfo
         
         if let index = index {
             editConnectionVC.connection = DataManager.shared.connections[index]

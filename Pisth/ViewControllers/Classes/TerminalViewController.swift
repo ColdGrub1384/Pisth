@@ -157,16 +157,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        var nibName: String {
-            if theme.toolbarStyle == .default {
-                return "TerminalToolbar-White"
-            } else {
-                return "TerminalToolbar-Black"
-            }
-        }
+        var toolbar: UIToolbar
         
-        guard let toolbar = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)?[0] as? UIToolbar else {
-            return
+        if theme.toolbarStyle == .default {
+            toolbar = UIView.whiteTerminalToolbar
+        } else {
+            toolbar = UIView.blackTerminalToolbar
         }
         
         enum ItemsTag: Int {
@@ -225,16 +221,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        var nibName: String {
-            if theme.toolbarStyle == .default {
-                return "TerminalToolbar-White"
-            } else {
-                return "TerminalToolbar-Black"
-            }
-        }
+        var toolbar: UIToolbar
         
-        guard let toolbar = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil)?[1] as? UIToolbar else {
-            return
+        if theme.toolbarStyle == .default {
+            toolbar = UIView.whiteTerminalToolbar
+        } else {
+            toolbar = UIView.blackTerminalToolbar
         }
                 
         enum ItemsTag: Int {

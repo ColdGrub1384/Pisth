@@ -232,9 +232,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     /// - Parameters:
     ///     - sender: Sender button.
     @IBAction func buyThemes(_ sender: UIButton) {
-        guard let vc = Bundle.main.loadNibNamed("ThemesStoreViewController", owner: nil, options: nil)?[0] as? UIViewController else {
-            return
-        }
+        let vc = UIViewController.themesStore
         
         vc.modalPresentationStyle = .overCurrentContext
         
@@ -275,7 +273,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         if indexPath == IndexPaths.licenses {
             
             // Open Licenses
-            let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)!.first! as! WebViewController
+            let webVC = UIViewController.webViewController
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
             navigationController?.pushViewController(webVC, animated: true)
 

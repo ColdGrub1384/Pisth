@@ -106,7 +106,7 @@ class GitBranchesTableViewController: UITableViewController {
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func pull(_ sender: Any) {
-        guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
+        let remotesVC = UIViewController.gitRemoteBranches
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)
@@ -137,7 +137,7 @@ class GitBranchesTableViewController: UITableViewController {
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func push(_ sender: Any) {
-        guard let remotesVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateViewController(withIdentifier: "remoteBranches") as? GitRemotesTableViewController else { return }
+        let remotesVC = UIViewController.gitRemoteBranches
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)

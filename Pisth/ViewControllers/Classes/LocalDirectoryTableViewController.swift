@@ -334,7 +334,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             navigationItem.largeTitleDisplayMode = .never
         }
         
-        tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
+        tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -657,7 +657,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         func openFile() {
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
                 var editTextVC: EditTextViewController! {
-                    let editTextViewController = Bundle.main.loadNibNamed("EditTextViewController", owner: nil, options: nil)!.first as! EditTextViewController
+                    let editTextViewController = UIViewController.codeEditor
                     
                     editTextViewController.file = file
                     
@@ -667,7 +667,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
                     let alert = UIAlertController(title: "Open file", message: "View HTML page or edit?", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "View HTML", style: .default, handler: { (_) in // View HTML
-                        guard let webVC = Bundle.main.loadNibNamed("WebViewController", owner: nil, options: nil)?.first as? WebViewController else { return }
+                        let webVC = UIViewController.webViewController
                         webVC.file = file
                         
                         navigationController?.pushViewController(webVC, animated: true)

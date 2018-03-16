@@ -180,7 +180,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         // TableView cells
-        tableView.register(UINib(nibName: "FileTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "file")
+        tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
         tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -279,9 +279,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Show view saying that the connection was closed.
     @objc func showErrorBanner() {
         
-        guard let view = Bundle.main.loadNibNamed("DisconnectedView", owner: nil, options: nil)?[0] as? UIView else {
-            return
-        }
+        let view = UIView.disconnected
         
         (view.viewWithTag(1) as? UIButton)?.addTarget(self, action: #selector(resume), for: .touchUpInside)
         (view.viewWithTag(2) as? UIButton)?.addTarget(navigationController, action: #selector(navigationController?.popToRootViewController(animated:)), for: .touchUpInside)
@@ -412,7 +410,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Open source control manager for Git repos.
     @objc func git() {
-        guard let navVC = UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController else { return }
+        let navVC = UIViewController.gitNavigationController
         guard let branchesVC = navVC.topViewController as? SourceControlTableViewController else { return }
         
         branchesVC.repoPath = directory
