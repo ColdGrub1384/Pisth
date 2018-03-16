@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController modalPresentationStyle="overCurrentContext" id="FIg-ZS-635" customClass="ContributeViewController" customModule="Pisth" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="LxQ-WL-oeO">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pIj-lu-94n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zeb-6a-5gc">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jZ-2h-SAn">
+                                    <rect key="frame" x="45" y="698" width="286" height="38"/>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="ynE-Uc-tvS"/>
+                                    </constraints>
+                                    <state key="normal" title="Source code (GitHub)">
+                                        <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="showSourceCode:" destination="FIg-ZS-635" eventType="touchUpInside" id="mrv-oM-xhY"/>
+                                    </connections>
+                                </button>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8AI-ql-Viy">
+                                    <rect key="frame" x="45" y="70" width="286" height="496"/>
+                                    <string key="text">Hey! Thanks for using Pisth! Pisth is open source, so if you want to contribute, feel free to do it. Also, I'm now at school, so I don't have a lot of time to work on this project.</string>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                </textView>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://github.com/ColdGrub1384/Pisth" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vuE-CD-lzQ">
+                                    <rect key="frame" x="0.0" y="654" width="375" height="36"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="UK0-xn-SdO"/>
+                                    </constraints>
+                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfR-S5-kBj">
+                                    <rect key="frame" x="283" y="32" width="48" height="30"/>
+                                    <state key="normal" title="Cancel"/>
+                                    <connections>
+                                        <action selector="cancel:" destination="FIg-ZS-635" eventType="touchUpInside" id="51X-Ba-8QO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="sfR-S5-kBj" firstAttribute="trailing" secondItem="8AI-ql-Viy" secondAttribute="trailing" id="0RX-Tz-dWj"/>
+                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="centerX" secondItem="8jZ-2h-SAn" secondAttribute="centerX" id="EHi-dU-JyN"/>
+                                <constraint firstItem="sfR-S5-kBj" firstAttribute="top" secondItem="Zeb-6a-5gc" secondAttribute="top" constant="32" id="Pw6-oe-3f1"/>
+                                <constraint firstItem="8AI-ql-Viy" firstAttribute="trailing" secondItem="8jZ-2h-SAn" secondAttribute="trailing" id="T5y-QA-KWJ"/>
+                                <constraint firstAttribute="bottom" secondItem="8jZ-2h-SAn" secondAttribute="bottom" constant="76" id="UMd-xd-2h9"/>
+                                <constraint firstItem="8AI-ql-Viy" firstAttribute="leading" secondItem="8jZ-2h-SAn" secondAttribute="leading" id="YEk-uV-EIe"/>
+                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="top" secondItem="8AI-ql-Viy" secondAttribute="bottom" constant="88" id="fv9-Bb-SgS"/>
+                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" id="jdh-1E-lAo"/>
+                                <constraint firstItem="8jZ-2h-SAn" firstAttribute="top" secondItem="vuE-CD-lzQ" secondAttribute="bottom" constant="8" symbolic="YES" id="qQ2-FW-tzo"/>
+                                <constraint firstItem="8AI-ql-Viy" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" constant="45" id="sZq-1n-BnN"/>
+                                <constraint firstItem="8AI-ql-Viy" firstAttribute="top" secondItem="sfR-S5-kBj" secondAttribute="bottom" constant="8" symbolic="YES" id="yWl-zz-HYB"/>
+                                <constraint firstAttribute="trailing" secondItem="vuE-CD-lzQ" secondAttribute="trailing" id="zgZ-ct-VCb"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="dark"/>
+                    </visualEffectView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="pIj-lu-94n" secondAttribute="bottom" id="0s8-5x-h9Q"/>
+                    <constraint firstItem="pIj-lu-94n" firstAttribute="leading" secondItem="LxQ-WL-oeO" secondAttribute="leading" id="KxJ-2F-Nxb"/>
+                    <constraint firstAttribute="trailing" secondItem="pIj-lu-94n" secondAttribute="trailing" id="aGt-iS-fTA"/>
+                    <constraint firstItem="pIj-lu-94n" firstAttribute="top" secondItem="LxQ-WL-oeO" secondAttribute="top" id="pRe-At-YDN"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="yeS-2H-gGk"/>
+            </view>
+            <point key="canvasLocation" x="78.5" y="125"/>
+        </viewController>
+    </objects>
+</document>

@@ -53,4 +53,9 @@ extension UIViewController {
     static var connectionInfo: ConnectionInformationTableViewController {
         return (UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController) ?? ConnectionInformationTableViewController()
     }
+    
+    /// Returns the View controller to invite people to contribute.
+    static var contribute: ContributeViewController {
+        return (Bundle.main.loadNibNamed("Contribute", owner: nil, options: nil)?[0] as? ContributeViewController) ?? ContributeViewController()
+    }
 }

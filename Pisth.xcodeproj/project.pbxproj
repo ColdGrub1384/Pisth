@@ -23,6 +23,8 @@
 		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
 		3A5888B1205C62540002F9E1 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B0205C62540002F9E1 /* UIViewController.swift */; };
 		3A5888B3205C64CB0002F9E1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B2205C64CB0002F9E1 /* UIView.swift */; };
+		3A5888B5205C6BCD0002F9E1 /* Contribute.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5888B4205C6BCD0002F9E1 /* Contribute.xib */; };
+		3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
@@ -144,6 +146,8 @@
 		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
 		3A5888B0205C62540002F9E1 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		3A5888B2205C64CB0002F9E1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		3A5888B4205C6BCD0002F9E1 /* Contribute.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Contribute.xib; sourceTree = "<group>"; };
+		3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributeViewController.swift; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
 				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
 				3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */,
+				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				3A42FE222033B0300061A38B /* Themes Store.xib */,
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
 				3ACF9AF32040A839006C3218 /* Connection Info.storyboard */,
+				3A5888B4205C6BCD0002F9E1 /* Contribute.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -622,6 +628,7 @@
 				3AD7E05A2049E8D000834D59 /* darwin.png in Resources */,
 				3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */,
 				3AE835A11FF2DE350073D06E /* Web.xib in Resources */,
+				3A5888B5205C6BCD0002F9E1 /* Contribute.xib in Resources */,
 				3A42FE232033B0300061A38B /* Themes Store.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,6 +708,7 @@
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
 				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
+				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
