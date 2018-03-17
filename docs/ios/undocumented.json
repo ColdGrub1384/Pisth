@@ -22,9 +22,44 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/BetaViewController.swift",
+      "line": 14,
+      "symbol": "BetaViewController.cancel(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/BetaViewController.swift",
+      "line": 18,
+      "symbol": "BetaViewController.sendRequest(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/BetaViewController.swift",
+      "line": 31,
+      "symbol": "BetaViewController.mailComposeController(_:didFinishWith:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/ConnectionInfoTableViewController.swift",
       "line": 23,
       "symbol": "ConnectionInformationTableViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/ContributeViewController.swift",
+      "line": 14,
+      "symbol": "ContributeViewController.showSourceCode(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/ContributeViewController.swift",
+      "line": 19,
+      "symbol": "ContributeViewController.cancel(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -51,14 +86,14 @@
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/SettingsTableViewController.swift",
-      "line": 260,
+      "line": 264,
       "symbol": "SettingsTableViewController.initThemesIAPSetting()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/adrian/Desktop/Pisth/Pisth/ViewControllers/Classes/TerminalViewController.swift",
-      "line": 726,
+      "line": 728,
       "symbol": "TerminalViewController.insertKeyByLongPress(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -124,9 +124,9 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Multipeer connectivity browser used to browser nearby devices.
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     
-    /// `MCSessionDelegate`'s `` function.
+    /// `MCSessionDelegate`'s `session(_:, peer:, didChange:)` function.
     ///
-    ///
+    /// Clear the terminal if the state is connected.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         print("Changed state!")
         
