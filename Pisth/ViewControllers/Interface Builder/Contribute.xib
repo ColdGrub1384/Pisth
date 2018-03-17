@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,10 +25,10 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jZ-2h-SAn">
-                                    <rect key="frame" x="45" y="698" width="286" height="38"/>
+                                    <rect key="frame" x="43" y="698" width="288" height="38"/>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="38" id="ynE-Uc-tvS"/>
+                                        <constraint firstAttribute="height" constant="38" id="6F9-nB-W5H"/>
                                     </constraints>
                                     <state key="normal" title="Source code (GitHub)">
                                         <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -41,18 +42,10 @@
                                         <action selector="showSourceCode:" destination="FIg-ZS-635" eventType="touchUpInside" id="mrv-oM-xhY"/>
                                     </connections>
                                 </button>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8AI-ql-Viy">
-                                    <rect key="frame" x="45" y="70" width="286" height="496"/>
-                                    <string key="text">Hey! Thanks for using Pisth! Pisth is open source, so if you want to contribute, feel free to do it. Also, I'm now at school, so I don't have a lot of time to work on this project.</string>
-                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                </textView>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://github.com/ColdGrub1384/Pisth" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vuE-CD-lzQ">
                                     <rect key="frame" x="0.0" y="654" width="375" height="36"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="36" id="UK0-xn-SdO"/>
+                                        <constraint firstAttribute="height" constant="36" id="xPx-9A-EfF"/>
                                     </constraints>
                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -66,30 +59,38 @@
                                         <action selector="cancel:" destination="FIg-ZS-635" eventType="touchUpInside" id="51X-Ba-8QO"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contribute to the project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUf-xz-6e1">
+                                    <rect key="frame" x="8" y="70" width="359" height="66"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="66" id="yxR-Kf-Uqr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="sfR-S5-kBj" firstAttribute="trailing" secondItem="8AI-ql-Viy" secondAttribute="trailing" id="0RX-Tz-dWj"/>
-                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="centerX" secondItem="8jZ-2h-SAn" secondAttribute="centerX" id="EHi-dU-JyN"/>
-                                <constraint firstItem="sfR-S5-kBj" firstAttribute="top" secondItem="Zeb-6a-5gc" secondAttribute="top" constant="32" id="Pw6-oe-3f1"/>
-                                <constraint firstItem="8AI-ql-Viy" firstAttribute="trailing" secondItem="8jZ-2h-SAn" secondAttribute="trailing" id="T5y-QA-KWJ"/>
-                                <constraint firstAttribute="bottom" secondItem="8jZ-2h-SAn" secondAttribute="bottom" constant="76" id="UMd-xd-2h9"/>
-                                <constraint firstItem="8AI-ql-Viy" firstAttribute="leading" secondItem="8jZ-2h-SAn" secondAttribute="leading" id="YEk-uV-EIe"/>
-                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="top" secondItem="8AI-ql-Viy" secondAttribute="bottom" constant="88" id="fv9-Bb-SgS"/>
-                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" id="jdh-1E-lAo"/>
-                                <constraint firstItem="8jZ-2h-SAn" firstAttribute="top" secondItem="vuE-CD-lzQ" secondAttribute="bottom" constant="8" symbolic="YES" id="qQ2-FW-tzo"/>
-                                <constraint firstItem="8AI-ql-Viy" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" constant="45" id="sZq-1n-BnN"/>
-                                <constraint firstItem="8AI-ql-Viy" firstAttribute="top" secondItem="sfR-S5-kBj" secondAttribute="bottom" constant="8" symbolic="YES" id="yWl-zz-HYB"/>
-                                <constraint firstAttribute="trailing" secondItem="vuE-CD-lzQ" secondAttribute="trailing" id="zgZ-ct-VCb"/>
+                                <constraint firstItem="sfR-S5-kBj" firstAttribute="trailing" secondItem="8jZ-2h-SAn" secondAttribute="trailing" id="0Z0-r2-asL"/>
+                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="centerX" secondItem="8jZ-2h-SAn" secondAttribute="centerX" id="1Qa-6B-cxx"/>
+                                <constraint firstAttribute="trailing" secondItem="vuE-CD-lzQ" secondAttribute="trailing" id="3fb-66-Mcv"/>
+                                <constraint firstItem="sfR-S5-kBj" firstAttribute="top" secondItem="Zeb-6a-5gc" secondAttribute="top" constant="32" id="7H1-UJ-7pR"/>
+                                <constraint firstItem="vuE-CD-lzQ" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" id="93Z-jb-Sk7"/>
+                                <constraint firstItem="mUf-xz-6e1" firstAttribute="top" secondItem="sfR-S5-kBj" secondAttribute="bottom" constant="8" symbolic="YES" id="E3A-QA-fOG"/>
+                                <constraint firstAttribute="bottom" secondItem="8jZ-2h-SAn" secondAttribute="bottom" constant="76" id="HXG-5K-tgz"/>
+                                <constraint firstItem="mUf-xz-6e1" firstAttribute="centerX" secondItem="vuE-CD-lzQ" secondAttribute="centerX" id="LOy-6Z-kZc"/>
+                                <constraint firstItem="8jZ-2h-SAn" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leading" constant="43" id="RIS-wt-YFF"/>
+                                <constraint firstItem="8jZ-2h-SAn" firstAttribute="top" secondItem="vuE-CD-lzQ" secondAttribute="bottom" constant="8" symbolic="YES" id="XU8-fh-iZK"/>
+                                <constraint firstItem="mUf-xz-6e1" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leadingMargin" id="ZxE-Yq-JTc"/>
                             </constraints>
                         </view>
                         <blurEffect style="dark"/>
                     </visualEffectView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="pIj-lu-94n" secondAttribute="bottom" id="0s8-5x-h9Q"/>
-                    <constraint firstItem="pIj-lu-94n" firstAttribute="leading" secondItem="LxQ-WL-oeO" secondAttribute="leading" id="KxJ-2F-Nxb"/>
-                    <constraint firstAttribute="trailing" secondItem="pIj-lu-94n" secondAttribute="trailing" id="aGt-iS-fTA"/>
-                    <constraint firstItem="pIj-lu-94n" firstAttribute="top" secondItem="LxQ-WL-oeO" secondAttribute="top" id="pRe-At-YDN"/>
+                    <constraint firstItem="pIj-lu-94n" firstAttribute="leading" secondItem="LxQ-WL-oeO" secondAttribute="leading" id="5hm-X7-Fxj"/>
+                    <constraint firstItem="pIj-lu-94n" firstAttribute="top" secondItem="LxQ-WL-oeO" secondAttribute="top" id="LL0-OX-CYG"/>
+                    <constraint firstAttribute="trailing" secondItem="pIj-lu-94n" secondAttribute="trailing" id="N98-50-q0s"/>
+                    <constraint firstAttribute="bottom" secondItem="pIj-lu-94n" secondAttribute="bottom" id="xA2-Uy-tpY"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="yeS-2H-gGk"/>
             </view>
