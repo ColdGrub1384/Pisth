@@ -231,9 +231,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         var toolbar: UIToolbar
         
         if theme.toolbarStyle == .default {
-            toolbar = UIView.whiteTerminalToolbar
+            toolbar = UIView.secondWhiteTerminalToolbar
         } else {
-            toolbar = UIView.blackTerminalToolbar
+            toolbar = UIView.secondBlackTerminalToolbar
         }
                 
         enum ItemsTag: Int {
