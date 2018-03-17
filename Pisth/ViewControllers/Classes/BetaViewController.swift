@@ -21,12 +21,7 @@ class BetaViewController: UIViewController, MFMailComposeViewControllerDelegate 
         vc.mailComposeDelegate = self
         vc.setToRecipients(["adri_labbe@hotmail.com"])
         vc.setSubject("Pisth Beta Testing")
-        vc.setMessageBody("""
-        
-        Device Model: \(UIDevice.current.modelName)
-        iOS Version: \(UIDevice.current.systemVersion)
-        
-        """, isHTML: false)
+        vc.setMessageBody("Name: \nLastname: \n\nDevice Model: \(UIDevice.current.modelName)\niOS Version: \(UIDevice.current.systemVersion)", isHTML: false)
         
         present(vc, animated: true, completion: nil)
     }
