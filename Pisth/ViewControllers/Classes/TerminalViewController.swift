@@ -398,6 +398,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Reload terminal with animation.
     @objc func reload() {
+        
+        webView.reload()
+        
         let view = UIVisualEffectView(frame: webView.frame)
         
         if keyboardAppearance == .dark {
@@ -410,8 +413,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         view.tag = 5
         
         self.view.addSubview(view)
-        
-        self.webView.reload()
         
         UIView.animate(withDuration: 0.5) {
             view.alpha = 1
@@ -895,13 +896,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Animation
         for view in view.subviews {
             if view.tag == 5 {
-                _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
-                    UIView.animate(withDuration: 0.5, animations: {
-                        view.alpha = 0
-                    })
+                UIView.animate(withDuration: 0.5, animations: {
+                    view.alpha = 0
                 })
                 
-                _ = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false, block: { (_) in
+                _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
                     view.removeFromSuperview()
                 })
             }
