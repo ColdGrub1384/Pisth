@@ -58,4 +58,9 @@ extension UIViewController {
     static var contribute: ContributeViewController {
         return (Bundle.main.loadNibNamed("Contribute", owner: nil, options: nil)?[0] as? ContributeViewController) ?? ContributeViewController()
     }
+    
+    /// Returns the View controller to invite people to participate in beta testing.
+    static var beta: BetaViewController {
+        return (Bundle.main.loadNibNamed("Beta", owner: nil, options: nil)?[0] as? BetaViewController) ?? BetaViewController()
+    }
 }

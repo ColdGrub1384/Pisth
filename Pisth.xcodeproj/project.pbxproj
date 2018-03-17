@@ -30,6 +30,9 @@
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
 		3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */; };
+		3A729778205D58B100F94BA7 /* Beta.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A729777205D58B100F94BA7 /* Beta.xib */; };
+		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
+		3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */; };
 		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
@@ -153,6 +156,9 @@
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Terminal Toolbar-White.xib"; sourceTree = "<group>"; };
+		3A729777205D58B100F94BA7 /* Beta.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Beta.xib; sourceTree = "<group>"; };
+		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
+		3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3A7C919A2044972C006E0434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +346,7 @@
 				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 				3A5888B0205C62540002F9E1 /* UIViewController.swift */,
 				3A5888B2205C64CB0002F9E1 /* UIView.swift */,
+				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -430,6 +437,7 @@
 				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
 				3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */,
 				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
+				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
 				3ACF9AF32040A839006C3218 /* Connection Info.storyboard */,
 				3A5888B4205C6BCD0002F9E1 /* Contribute.xib */,
+				3A729777205D58B100F94BA7 /* Beta.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -608,6 +617,7 @@
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3AA3FDBE2027549900C07C7A /* File Cell.xib in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
+				3A729778205D58B100F94BA7 /* Beta.xib in Resources */,
 				3AE8359F1FF2DCB30073D06E /* Code Editor.xib in Resources */,
 				3ACF9AF42040A839006C3218 /* Connection Info.storyboard in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
@@ -710,6 +720,7 @@
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
+				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */,
@@ -726,6 +737,7 @@
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
+				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,
 				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
 				3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */,
 				3A5888B1205C62540002F9E1 /* UIViewController.swift in Sources */,
