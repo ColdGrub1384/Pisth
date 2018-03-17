@@ -19,6 +19,12 @@ import CoreData
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
     
+    /// Terminal size in this format: `"0,0"`.
+    private var terminalSize: String?
+    
+    /// If the terminal is in viewer mode.
+    var viewer = false
+    
     /// Directory to open.
     var pwd: String?
     
@@ -127,6 +133,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             guard let rows = rows_ as? UInt else { return }
             print(cols)
             print(rows)
+            self.terminalSize = "\(cols),\(rows)"
             ConnectionManager.shared.session?.channel.requestSizeWidth(cols, height: rows)
         }
         
@@ -511,12 +518,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         // Setup connectivity
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        if peerID == nil {
+            peerID = MCPeerID(displayName: UIDevice.current.name)
+        }
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession.delegate = self
         mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "terminal")
         mcNearbyServiceAdvertiser.delegate = self
-        mcNearbyServiceAdvertiser.startAdvertisingPeer()
+        if !viewer {
+            mcNearbyServiceAdvertiser.startAdvertisingPeer()
+        }
         
         // Create WebView
         let config = WKWebViewConfiguration()
@@ -686,12 +697,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///     - sender: Sender bar button item.
     @objc func insertKey(_ sender: UIButton) {
         
-        guard let channel = ConnectionManager.shared.session?.channel else { return }
-        
         if sender.tag == 1 { // ctrl
             ctrl = ctrl.inverted
         } else if sender.tag == 6 { // Esc
-            try? channel.write(Keys.esc)
+            insertText(Keys.esc)
         } else if sender.tag == 7 { // F keys
             let commandsVC = CommandsTableViewController()
             commandsVC.title = "Function keys"
@@ -705,13 +714,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.present(commandsVC, animated: true, completion: nil)
             }
         } else if sender.tag == 8 { // Left arrow
-            try? channel.write(Keys.arrowLeft)
+           insertText(Keys.arrowLeft)
         } else if sender.tag == 9 { // Up arrow
-            try? channel.write(Keys.arrowUp)
+            insertText(Keys.arrowUp)
         } else if sender.tag == 10 { // Down arrow
-            try? channel.write(Keys.arrowDown)
+            insertText(Keys.arrowDown)
         } else if sender.tag == 11 { // Right arrow
-            try? channel.write(Keys.arrowRight)
+            insertText(Keys.arrowRight)
         }
     }
     
@@ -779,7 +788,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                     
                     // Send data to peer
-                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     if self.mcSession.connectedPeers.count > 0 {
@@ -817,12 +826,28 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Send text or ctrl key to shell.
     func insertText(_ text: String) {
         do {
+            
             if !ctrl {
-                try ConnectionManager.shared.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
+                if viewer {
+                    if let data = text.data(using: .utf8) {
+                        try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
+                    }
+                } else {
+                    try ConnectionManager.shared.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
+                }
             } else {
-                try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
+                if viewer {
+                    if let data = Keys.ctrlKey(from: text).data(using: .utf8) {
+                        try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
+                    }
+                } else {
+                    try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
+                }
+                
                 ctrl = false
+                
             }
+            
         } catch {}
     }
     
@@ -831,7 +856,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Send backspace to shell.
     func deleteBackward() {
         do {
-            try ConnectionManager.shared.session?.channel.write(Keys.delete)
+            if viewer {
+                if let data = Keys.delete.data(using: .utf8) {
+                    try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
+                }
+            } else {
+                try ConnectionManager.shared.session?.channel.write(Keys.delete)
+            }
         } catch {}
     }
     
@@ -892,10 +923,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
-            self.changeSize(completion: nil)
+            if !self.viewer {
+                self.changeSize(completion: nil)
+            }
         })
         
         if console.isEmpty {
+            
+            guard !viewer else {
+                return
+            }
             
             // Session
             guard let session = ConnectionManager.shared.session else {
@@ -1066,12 +1103,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
 
         if state == .connected {
             print("Connected!")
-            DispatchQueue.main.async {
-                // Send data to peer
-                let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
-                NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
-                let data = NSKeyedArchiver.archivedData(withRootObject: info)
-                try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)
+            if !viewer {
+                DispatchQueue.main.async {
+                    // Send data to peer
+                    let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
+                    let data = NSKeyedArchiver.archivedData(withRootObject: info)
+                    try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)
+                }
             }
         } else if state == .connecting {
             print("Connecting...")
@@ -1084,8 +1123,28 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///
     /// Write received String to the Shell.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let str = String(data: data, encoding: .utf8) {
-            insertText(str)
+        NSKeyedUnarchiver.setClass(TerminalInfo.self, forClassName: "TerminalInfo")
+        
+        DispatchQueue.main.async {
+            if let str = String(data: data, encoding: .utf8) {
+                if self.viewer {
+                    self.webView.evaluateJavaScript("term.write(\(str.javaScriptEscapedString))", completionHandler: nil)
+                    self.console += str
+                } else {
+                    self.insertText(str)
+                }
+            } else if let info = NSKeyedUnarchiver.unarchiveObject(with: data) as? TerminalInfo {
+                
+                if let size = info.terminalColsAndRows {
+                    self.webView.evaluateJavaScript("term.resize(\(size))", completionHandler: { (_, _) in
+                        self.webView.evaluateJavaScript("term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
+                    })
+                } else {
+                    self.webView.evaluateJavaScript("term.write(\(info.message.javaScriptEscapedString))", completionHandler: nil)
+                }
+                
+                self.console += info.message
+            }
         }
     }
     

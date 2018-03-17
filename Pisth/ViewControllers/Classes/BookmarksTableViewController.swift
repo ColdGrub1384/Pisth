@@ -10,9 +10,10 @@ import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
 import BiometricAuthentication
+import MultipeerConnectivity
 
 /// `TableViewController` used to list, connections.
-class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate {
+class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate, MCNearbyServiceBrowserDelegate {
     
     /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
@@ -24,7 +25,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     var searchController: UISearchController!
     
     /// Fetched connections by `searchController` to display.
-    var fetched = [RemoteConnection]()
+    var fetchedConnections = [RemoteConnection]()
+    
+    /// Fetched nearby devices by `searchController` to display.
+    var fetchedNearby = [MCPeerID]()
     
     /// Open app's settings.
     @objc func openSettings() {
@@ -96,6 +100,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         }
+        
+        // Multipeer connectivity
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "terminal")
+        mcNearbyServiceBrowser.delegate = self
+        mcNearbyServiceBrowser.startBrowsingForPeers()
     }
     
     /// `UIViewController`'s `viewDidAppear(_:)` function.
@@ -134,20 +144,49 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
 
     /// `UITableViewController`'s `numberOfSections(in:)` function.
     ///
-    /// - Returns: `1`.
+    /// - Returns: `2`.
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
+    }
+    
+    /// `UITableViewController`'s `tableView(_:, titleForHeaderInSection:)` function.
+    ///
+    /// - Returns: ``"Connections"` or `"Nearby Devices"` if there are nearby devices.
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard (devices.count > 0) else {
+            return nil
+        }
+        
+        if section == 0 {
+            return "Connections"
+        } else if section == 1 {
+            return "Nearby Devices"
+        }
+        
+        return nil
     }
 
     /// `UITableViewController`'s `tableView(_:, numberOfRowsInSection:)` function.
     ///
     /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
-            return fetched.count
+        if section == 0 {
+            if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+                return fetchedConnections.count
+            }
+            
+            return DataManager.shared.connections.count
+        } else if section == 1 {
+            
+            if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+                return fetchedNearby.count
+            }
+            
+            return devices.count
         }
         
-        return DataManager.shared.connections.count
+        return 0
     }
 
     /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
@@ -156,39 +195,56 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
         cell.backgroundColor = .clear
-        cell.accessoryType = .detailButton
         
-        var connection = DataManager.shared.connections[indexPath.row]
-        
-        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
-           connection = fetched[indexPath.row]
+        // Connections
+        if indexPath.section == 0 {
+            
+            cell.accessoryType = .detailButton
+            
+            var connection = DataManager.shared.connections[indexPath.row]
+            
+            if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+                connection = fetchedConnections[indexPath.row]
+            }
+            
+            // Configure the cell...
+            
+            cell.textLabel?.text = connection.name
+            cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
+            if let os = connection.os?.lowercased() {
+                cell.imageView?.image = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: ""))
+            }
+            
+            // If the connection has no name, set the title as username@host
+            if cell.textLabel?.text == "" {
+                cell.textLabel?.text = cell.detailTextLabel?.text
+                cell.detailTextLabel?.text = ""
+            }
+            
+            cell.textLabel?.textColor = .white
+            cell.detailTextLabel?.textColor = .white
+            
+        // Near devices
+        } else if indexPath.section == 1 {
+            
+            var devices = self.devices
+            
+            if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+                devices = fetchedNearby
+            }
+            
+            cell.textLabel?.text = devices[indexPath.row].displayName
+            cell.textLabel?.textColor = .white
         }
-        
-        // Configure the cell...
-        
-        cell.textLabel?.text = connection.name
-        cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
-        if let os = connection.os?.lowercased() {
-            cell.imageView?.image = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: ""))
-        }
-        
-        // If the connection has no name, set the title as username@host
-        if cell.textLabel?.text == "" {
-            cell.textLabel?.text = cell.detailTextLabel?.text
-            cell.detailTextLabel?.text = ""
-        }
-        
-        cell.textLabel?.textColor = .white
-        cell.detailTextLabel?.textColor = .white
         
         return cell
     }
     
     /// `UITableViewController`'s `tableView(_:, canEditRowAt:)` function.
     ///
-    /// - Returns: `true` to allow editing.
+    /// - Returns: `true` for first section.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return (indexPath.section == 0)
     }
     
     /// `UITableViewController`'s `tableView(_:, commit:, forRowAt:)` function.
@@ -220,9 +276,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// `UITableViewController`'s `tableView(_:, canMoveRowAt:)` function.
     ///
-    /// Allow moving rows.
+    /// Allow moving rows for first section.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return (indexPath.section == 0)
     }
     
     
@@ -233,94 +289,118 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Connect to selected connection.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var connection = DataManager.shared.connections[indexPath.row]
-        
-        /// Open connection.
-        func connect() {
-            let activityVC = ActivityViewController(message: "Connecting")
-            self.present(activityVC, animated: true) {
-                if DataManager.shared.connections[indexPath.row].useSFTP {
-                    let dirVC = DirectoryTableViewController(connection: connection)
-                    
-                    activityVC.dismiss(animated: true, completion: {
-                        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 { // Open connection
+            var connection = DataManager.shared.connections[indexPath.row]
+            
+            /// Open connection.
+            func connect() {
+                let activityVC = ActivityViewController(message: "Connecting")
+                self.present(activityVC, animated: true) {
+                    if DataManager.shared.connections[indexPath.row].useSFTP {
+                        let dirVC = DirectoryTableViewController(connection: connection)
                         
-                        if let delegate = self.delegate {
-                            delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
+                        activityVC.dismiss(animated: true, completion: {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            
+                            if let delegate = self.delegate {
+                                delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
+                            } else {
+                                self.navigationController?.pushViewController(dirVC, animated: true)
+                            }
+                        })
+                    } else {
+                        ConnectionManager.shared.connection = connection
+                        ConnectionManager.shared.connect()
+                        
+                        var termVC = TerminalViewController()
+                        
+                        if #available(iOS 11, *) {
+                            termVC = TerminalViewControllerIOS11()
+                        }
+                        
+                        termVC.pureMode = true
+                        
+                        activityVC.dismiss(animated: true, completion: {
+                            tableView.deselectRow(at: indexPath, animated: true)
+                            
+                            if let delegate = self.delegate {
+                                delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
+                            } else {
+                                self.navigationController?.pushViewController(termVC, animated: true)
+                            }
+                        })
+                    }
+                }
+            }
+            
+            /// Ask for password if biometric auth failed.
+            func askForPassword() {
+                let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
+                passwordAlert.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = "Password"
+                    textField.isSecureTextEntry = true
+                })
+                passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                    connection.password = passwordAlert.textFields![0].text!
+                    connect()
+                }))
+                passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }))
+                self.present(passwordAlert, animated: true, completion: nil)
+            }
+            
+            /// Open connection or ask for biometric authentication.
+            func open() {
+                if UserDefaults.standard.bool(forKey: "biometricAuth") {
+                    BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
+                        connect()
+                    }, failure: { (error) in
+                        if error != .canceledByUser && error != .canceledBySystem {
+                            askForPassword()
                         } else {
-                            self.navigationController?.pushViewController(dirVC, animated: true)
+                            tableView.deselectRow(at: indexPath, animated: true)
                         }
                     })
                 } else {
-                    ConnectionManager.shared.connection = connection
-                    ConnectionManager.shared.connect()
-                    
-                    var termVC = TerminalViewController()
-                    
-                    if #available(iOS 11, *) {
-                        termVC = TerminalViewControllerIOS11()
-                    }
-                    
-                    termVC.pureMode = true
-                                        
-                    activityVC.dismiss(animated: true, completion: {
-                        tableView.deselectRow(at: indexPath, animated: true)
-                        
-                        if let delegate = self.delegate {
-                            delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
-                        } else {
-                            self.navigationController?.pushViewController(termVC, animated: true)
-                        }
-                    })
+                    connect()
                 }
             }
-        }
-        
-        /// Ask for password if biometric auth failed.
-        func askForPassword() {
-            let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
-            passwordAlert.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "Password"
-                textField.isSecureTextEntry = true
-            })
-            passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
-                connection.password = passwordAlert.textFields![0].text!
-                connect()
-            }))
-            passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-                tableView.deselectRow(at: indexPath, animated: true)
-            }))
-            self.present(passwordAlert, animated: true, completion: nil)
-        }
-        
-        /// Open connection or ask for biometric authentication.
-        func open() {
-            if UserDefaults.standard.bool(forKey: "biometricAuth") {
-                BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
-                    connect()
-                }, failure: { (error) in
-                    if error != .canceledByUser && error != .canceledBySystem {
-                        askForPassword()
-                    } else {
-                        tableView.deselectRow(at: indexPath, animated: true)
-                    }
+            
+            if searchController.isActive {
+                if searchController.searchBar.text != "" {
+                    connection = fetchedConnections[indexPath.row]
+                }
+                
+                searchController.dismiss(animated: true, completion: {
+                    open()
                 })
             } else {
-                connect()
+                open()
             }
-        }
-        
-        if searchController.isActive {
-            if searchController.searchBar.text != "" {
-                connection = fetched[indexPath.row]
+        } else if indexPath.section == 1 { // Multipeer connectivity
+            
+            ConnectionManager.shared.connection = nil
+            
+            var termVC: TerminalViewController
+            
+            if #available(iOS 11, *) {
+                termVC = TerminalViewControllerIOS11()
+            } else {
+                termVC = TerminalViewController()
             }
             
-            searchController.dismiss(animated: true, completion: {
-                open()
+            termVC.pureMode = true
+            termVC.viewer = true
+            termVC.peerID = peerID
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            self.navigationController?.pushViewController(termVC, animated: true, completion: {
+                self.mcNearbyServiceBrowser.invitePeer(self.devices[indexPath.row], to: termVC.mcSession, withContext: nil, timeout: 10)
             })
-        } else {
-            open()
         }
+        
     }
     
     /// `UITableViewController`'s `tableView(_:, accessoryButtonTappedForRowWith:)`
@@ -352,17 +432,24 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Search for connection.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        fetched = []
+        fetchedConnections = []
+        fetchedNearby = []
         
         if !searchText.isEmpty {
             
             for connection in DataManager.shared.connections {
                 if connection.name.lowercased().contains(searchText.lowercased()) || connection.host.lowercased().contains(searchText.lowercased()) || connection.username.lowercased().contains(searchText.lowercased()) || connection.path.lowercased().contains(searchText.lowercased()) || "\(connection.port)".contains(searchText) {
                     
-                    fetched.append(connection)
+                    fetchedConnections.append(connection)
                     
                 }
                 
+            }
+            
+            for device in devices {
+                if device.displayName.lowercased().contains(searchText.lowercased()) {
+                    fetchedNearby.append(device)
+                }
             }
         }
         
@@ -376,5 +463,43 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()
         })
+    }
+    
+    // MARK: - Multipeer connectivity
+    
+    /// Near devices.
+    var devices = [MCPeerID]()
+    
+    /// Current device ID.
+    var peerID: MCPeerID!
+    
+    /// Browser for near devices.
+    var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
+    
+    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, foundPeer:, withDiscoveryInfo:)` function.
+    ///
+    /// Display found peer.
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        
+        if !devices.contains(peerID) {
+            devices.append(peerID)
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: devices.count-1, section: 1)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
+    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, lostPeer:)` function.
+    ///
+    /// Hide lost peer.
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        
+        if let i = devices.index(of: peerID) {
+            devices.remove(at: i)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
+            tableView.endUpdates()
+        }
     }
 }

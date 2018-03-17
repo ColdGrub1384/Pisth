@@ -19,9 +19,10 @@ open class TerminalInfo: NSObject, NSCoding {
     /// - Parameters:
     ///     - message: Message to show in terminal.
     ///     - terminalSize: Size of terminal (in Floats, not in cols or rows). This is an Array, so provide two values, the first, width and the second, height.
-    public init(message: String, themeName: String, terminalSize: [Float]) {
+    public init(message: String, themeName: String, terminalSize: [Float], terminalColsAndRows: String? = nil) {
         self.message = message
         self.themeName = themeName
+        self.terminalColsAndRows = terminalColsAndRows
         
         if terminalSize.count == 1 {
             terminalSize_ = [terminalSize[0], 0]
@@ -37,6 +38,9 @@ open class TerminalInfo: NSObject, NSCoding {
     
     /// Message to show in terminal.
     open var message = ""
+    
+    /// Size of terminal in cols and rows in this format: `"0,0"`
+    open var terminalColsAndRows: String?
     
     /// Size of terminal (in Floats, not in cols or rows).
     ///
@@ -73,6 +77,7 @@ open class TerminalInfo: NSObject, NSCoding {
         aCoder.encode(message, forKey: "message")
         aCoder.encode(terminalSize, forKey: "terminalSize")
         aCoder.encode(themeName, forKey: "theme")
+        aCoder.encode(terminalColsAndRows, forKey: "terminalColsAndRows")
     }
     
     /// `NSCoding`'s `init(coder:)` function.
@@ -97,5 +102,9 @@ open class TerminalInfo: NSObject, NSCoding {
         self.message = message
         self.terminalSize = terminalSize
         self.themeName = terminalTheme
+        
+        if let terminalColsAndRows = aDecoder.decodeObject(forKey: "terminalColsAndRows") as? String {
+            self.terminalColsAndRows = terminalColsAndRows
+        }
     }
 }

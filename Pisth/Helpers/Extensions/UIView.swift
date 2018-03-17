@@ -24,6 +24,16 @@ extension UIView {
         return (Bundle.main.loadNibNamed("Terminal Toolbar-Black", owner: nil, options: nil)?[0] as? UIToolbar) ?? UIToolbar()
     }
     
+    /// Returns the white toolbar used with the terminal from nib.
+    static var secondWhiteTerminalToolbar: UIToolbar {
+        return (Bundle.main.loadNibNamed("Terminal Toolbar-White", owner: nil, options: nil)?[1] as? UIToolbar) ?? UIToolbar()
+    }
+    
+    /// Returns the black toolbar used with the terminal from nib.
+    static var secondBlackTerminalToolbar: UIToolbar {
+        return (Bundle.main.loadNibNamed("Terminal Toolbar-Black", owner: nil, options: nil)?[1] as? UIToolbar) ?? UIToolbar()
+    }
+    
     /// Returns the view used to resume a connection.
     static var disconnected: UIView {
         return (Bundle.main.loadNibNamed("Disconnected", owner: nil, options: nil)?[0] as? UIView) ?? UIView()
