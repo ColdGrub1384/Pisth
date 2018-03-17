@@ -34,11 +34,17 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         /// Set terminal theme.
         static let terminalTheme = IndexPath(row: 0, section: 3)
         
+        /// Send beta testing request.
+        static let beta = IndexPath(row: 0, section: 4)
+        
+        /// Show source code.
+        static let sourceCode = IndexPath(row: 1, section: 4)
+        
         /// Promote Pisth Viewer.
-        static let pisthViewer = IndexPath(row: 0, section: 4)
+        static let pisthViewer = IndexPath(row: 0, section: 5)
         
         /// Show licenses.
-        static let licenses = IndexPath(row: 1, section: 4)
+        static let licenses = IndexPath(row: 1, section: 5)
     }
     
     /// MARK: - View controller
@@ -283,6 +289,18 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             let pluginsVC = PluginsLocalDirectoryTableViewController()
             navigationController?.pushViewController(pluginsVC, animated: true)
             
+        } else if indexPath == IndexPaths.beta {
+            
+            // Send beta test request
+            present(UIViewController.beta, animated: true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+        } else if indexPath == IndexPaths.sourceCode {
+                
+            // View the source code
+            present(UIViewController.contribute, animated: true, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+            
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -313,6 +331,11 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             cell.viewWithTag(2)?.isHidden = false
         } else {
             cell.viewWithTag(2)?.isHidden = true
+        }
+        
+        if indexPath == IndexPaths.beta && UIApplication.shared.isBeta {
+            title.alpha = 0.5
+            cell.isUserInteractionEnabled = false
         }
         
         return cell

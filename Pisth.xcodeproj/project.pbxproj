@@ -33,6 +33,7 @@
 		3A729778205D58B100F94BA7 /* Beta.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A729777205D58B100F94BA7 /* Beta.xib */; };
 		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
 		3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */; };
+		3A72977E205D612700F94BA7 /* UIApplication+isBeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977D205D612700F94BA7 /* UIApplication+isBeta.swift */; };
 		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
@@ -159,6 +160,7 @@
 		3A729777205D58B100F94BA7 /* Beta.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Beta.xib; sourceTree = "<group>"; };
 		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
 		3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
+		3A72977D205D612700F94BA7 /* UIApplication+isBeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+isBeta.swift"; sourceTree = "<group>"; };
 		3A7C919A2044972C006E0434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				3A5888B0205C62540002F9E1 /* UIViewController.swift */,
 				3A5888B2205C64CB0002F9E1 /* UIView.swift */,
 				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
+				3A72977D205D612700F94BA7 /* UIApplication+isBeta.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
 				3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */,
 				3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */,
+				3A72977E205D612700F94BA7 /* UIApplication+isBeta.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
