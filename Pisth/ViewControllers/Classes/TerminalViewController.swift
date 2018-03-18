@@ -399,8 +399,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Reload terminal with animation.
     @objc func reload() {
         
-        webView.reload()
-        
         let view = UIVisualEffectView(frame: webView.frame)
         
         if keyboardAppearance == .dark {
@@ -413,6 +411,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         view.tag = 5
         
         self.view.addSubview(view)
+        
+        webView.reload()
         
         UIView.animate(withDuration: 0.5) {
             view.alpha = 1
@@ -893,19 +893,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Run startup commands if `console` is empty, enable blinking cursor if `UserDefaults` 'blink' value is `true` and resize terminal if the Web view was reloaded.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        // Animation
-        for view in view.subviews {
-            if view.tag == 5 {
-                UIView.animate(withDuration: 0.5, animations: {
-                    view.alpha = 0
-                })
-                
-                _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
-                    view.removeFromSuperview()
-                })
-            }
-        }
-        
         if UserDefaults.standard.bool(forKey: "blink") {
             webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)
         }
@@ -924,6 +911,19 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
             if !self.viewer {
                 self.changeSize(completion: nil)
+            }
+            
+            // Animation
+            for view in self.view.subviews {
+                if view.tag == 5 {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        view.alpha = 0
+                    })
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false, block: { (_) in
+                        view.removeFromSuperview()
+                    })
+                }
             }
         })
         
