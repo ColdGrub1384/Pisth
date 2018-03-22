@@ -272,7 +272,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         /// Handle URL.
         func handle() {
-            if url.absoluteString.hasPrefix("ssh:") || url.absoluteString.hasPrefix("sftp:") { // Open connection.
+            if url.absoluteString.hasPrefix("ssh:") || url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthssh:") || url.absoluteString.hasPrefix("pisthsftp:") { // Open connection.
                 let connection = url.absoluteString.components(separatedBy: "://")[1]
                 
                 var host: String {
@@ -342,7 +342,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     let activityVC = ActivityViewController(message: "Loading...")
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
-                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "~", port: UInt64(port) ?? 22, useSFTP: url.absoluteString.hasPrefix("sftp:"), os: nil)
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         
                         if !connection.useSFTP { // SSH
                             
