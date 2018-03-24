@@ -14,13 +14,23 @@ open class Pisth {
     let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
     
     var pisthURLScheme: URL {
-        var string = "pisth-import://?scheme=\(urlScheme?.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
+        var string = "pisth-import://?scheme=\(urlScheme.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
         
         if let message = message {
             string += "&message=\(message.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
         }
         
         return URL(string: string)!
+    }
+    
+    /// Init from given message and URL scheme.
+    ///
+    /// - Parameters:
+    ///     - message: Message to show in the Pisth navigation bar.
+    ///     - urlScheme: This app URL scheme.
+    init(message: String?, urlScheme: URL) {
+        self.message = message
+        self.urlScheme = urlScheme
     }
     
     /// Imported file data.
@@ -32,7 +42,7 @@ open class Pisth {
     open var message: String?
     
     /// This app URL scheme.
-    open var urlScheme: URL?
+    open var urlScheme: URL
     
     /// Returns `true` if current application can open Pisth URL scheme.
     open var canOpen: Bool {
