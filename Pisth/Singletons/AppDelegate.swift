@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// The window used with app.
     var window: UIWindow?
     
+    /// Message from Pisth API.
+    var importReason: String?
+    
     /// Action to do when opening the app with an URL scheme.
     var action: AppAction?
     
@@ -436,6 +439,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     dataReceiverAppURLScheme = URL(string: scheme)
                 }
                 
+                importReason = url.queryParameters?["message"]?.removingPercentEncoding
+                
                 // Open a BookmarksTableViewController to select file to export
                 
                 let bookmarksVC = BookmarksTableViewController()
@@ -556,7 +561,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
             directoryTableViewController.closeAfterSending = true
         } else if action == .apiImport {
-            directoryTableViewController.navigationItem.prompt = "Select file to import"
+            directoryTableViewController.navigationItem.prompt = importReason ?? "Select file to import"
         }
         directoryTableViewController.delegate = self
         
