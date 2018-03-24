@@ -6,7 +6,6 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
-import Pisth_Shared
 
 /// The class for interacting with the API.
 open class Pisth {
@@ -71,6 +70,16 @@ open class Pisth {
     
     /// Get filename from opened URL.
     open func filename(fromURL url: URL) -> String? {
-        return url.queryParameters?["filename"]?.removingPercentEncoding
+        
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true), let queryItems = components.queryItems else {
+            return nil
+        }
+        
+        var parameters = [String: String]()
+        for item in queryItems {
+            parameters[item.name] = item.value
+        }
+        
+        return parameters?["filename"]?.removingPercentEncoding
     }
 }

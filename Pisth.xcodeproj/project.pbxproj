@@ -64,8 +64,6 @@
 		3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; };
 		3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3ACF9BF620420AFD006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; };
-		3ACF9BF720420AFD006C3218 /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AD7E0572049E8CC00834D59 /* amzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E0302049E12F00834D59 /* amzn.png */; };
 		3AD7E0582049E8CD00834D59 /* arch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E02F2049E12F00834D59 /* arch.png */; };
 		3AD7E0592049E8CF00834D59 /* centos.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E0342049E12F00834D59 /* centos.png */; };
@@ -109,7 +107,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3ACF9BF720420AFD006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
 				3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -231,7 +228,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF9BF620420AFD006C3218 /* Pisth_Shared.framework in Frameworks */,
 				3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

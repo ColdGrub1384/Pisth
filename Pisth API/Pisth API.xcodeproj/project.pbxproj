@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3ACF9B212041B356006C3218 /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B202041B356006C3218 /* Pisth.swift */; };
-		3ACF9BF420420AB7006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BF520420AB7006C3218 /* Pisth_Shared.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +22,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF9BF420420AB7006C3218 /* Pisth_Shared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
