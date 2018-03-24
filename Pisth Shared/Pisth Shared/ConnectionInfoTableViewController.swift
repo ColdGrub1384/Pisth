@@ -39,7 +39,7 @@ public class ConnectionInformationTableViewController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        textFields = [name, host, port, username, password, path]
+        textFields = [name, host, port, username]
         
         for field in textFields {
             field.autocorrectionType = .no
@@ -56,8 +56,6 @@ public class ConnectionInformationTableViewController: UITableViewController {
             port.text = "\(connection.port)"
             username.text = connection.username
             password.text = connection.password
-            useSFTP.isOn = connection.useSFTP
-            path.text = connection.path
         }
         
         if #available(iOS 11.0, *) {
@@ -75,8 +73,8 @@ public class ConnectionInformationTableViewController: UITableViewController {
         var port = self.port.text!
         let username = self.username.text!
         let password = self.password.text!
-        var path = self.path.text!
-        let useSFTP = self.useSFTP.isOn
+        var path = ""
+        let useSFTP = false
         
         // Check for requierd fields
         if host == "" || username == "" {
@@ -152,12 +150,6 @@ public class ConnectionInformationTableViewController: UITableViewController {
     
     /// Password field.
     @IBOutlet weak var password: UITextField!
-    
-    /// Use SFTP field.
-    @IBOutlet weak var useSFTP: UISwitch!
-    
-    /// Path field.
-    @IBOutlet weak var path: UITextField!
     
     /// All text fields
     var textFields: [UITextField]!
