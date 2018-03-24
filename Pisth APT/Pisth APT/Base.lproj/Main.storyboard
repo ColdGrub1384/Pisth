@@ -13,7 +13,7 @@
         <!--Packages-->
         <scene sceneID="ZaY-Ia-zXy">
             <objects>
-                <viewController id="Wo8-Bt-4JW" sceneMemberID="viewController">
+                <viewController id="Wo8-Bt-4JW" customClass="PackagesViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4YS-Pt-CY3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +29,7 @@
         <!--Sources-->
         <scene sceneID="jA4-Ze-S9i">
             <objects>
-                <viewController id="xDD-Lj-EZh" sceneMemberID="viewController">
+                <viewController id="xDD-Lj-EZh" customClass="SourcesViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7OF-4M-sR4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,22 +101,6 @@
             <point key="canvasLocation" x="383" y="-428"/>
         </scene>
         <!--Settings-->
-        <scene sceneID="fzM-Rb-wBo">
-            <objects>
-                <viewController id="qhg-ej-ovX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gzI-Cq-tXp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="6Xm-CJ-kW8"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Settings" id="Hvw-gA-cuf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h05-fy-COZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1145" y="253"/>
-        </scene>
-        <!--Settings-->
         <scene sceneID="adq-gC-0b9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j2A-K7-bzx" sceneMemberID="viewController">
@@ -128,17 +112,113 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="qhg-ej-ovX" kind="relationship" relationship="rootViewController" id="92z-Y3-Dum"/>
+                        <segue destination="qt4-3I-HIu" kind="relationship" relationship="rootViewController" id="Qdk-Lo-Vc4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGy-yh-y54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="382" y="253"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="XXA-a2-S66">
+            <objects>
+                <tableViewController id="qt4-3I-HIu" customClass="SettingsTableViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="lId-Oq-SLS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="X3C-bk-Y5Q">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="8a7-Nl-Ji8" style="IBUITableViewCellStyleDefault" id="rh1-v6-61F">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rh1-v6-61F" id="9Zf-VJ-9X0">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Connections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8a7-Nl-Ji8">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="8kO-5r-qFB" kind="show" id="M4c-ix-hzo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="qt4-3I-HIu" id="waP-8h-rB8"/>
+                            <outlet property="delegate" destination="qt4-3I-HIu" id="KGI-1s-lPq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="2W5-Ab-lM4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWa-3W-fKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1145" y="252"/>
+        </scene>
+        <!--Select connection-->
+        <scene sceneID="tvl-DQ-9zS">
+            <objects>
+                <tableViewController id="8kO-5r-qFB" customClass="ConnectionsTableViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xOv-dh-dHi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="connection" textLabel="lCs-07-zFm" detailTextLabel="LM5-IL-rZY" style="IBUITableViewCellStyleSubtitle" id="dCD-io-dpf">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dCD-io-dpf" id="e6U-5d-nxj">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lCs-07-zFm">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LM5-IL-rZY">
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8kO-5r-qFB" id="yak-JJ-lXW"/>
+                            <outlet property="delegate" destination="8kO-5r-qFB" id="JaM-vb-9UX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select connection" largeTitleDisplayMode="never" id="LAV-sV-2q2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9lp-ZK-5tB">
+                            <connections>
+                                <action selector="add:" destination="8kO-5r-qFB" id="n4X-Xv-DqV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gUi-CQ-jIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="251"/>
+        </scene>
         <!--Updates-->
         <scene sceneID="9m8-nA-hFy">
             <objects>
-                <viewController id="KI8-CD-nJk" sceneMemberID="viewController">
+                <viewController id="KI8-CD-nJk" customClass="UpdatesViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wNe-Kn-WQe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
