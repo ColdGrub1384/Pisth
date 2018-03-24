@@ -31,14 +31,14 @@ class ViewController: UIViewController {
     @IBAction func importFromPisth(_ sender: Any) {
         
         // Import file
-        Pisth.shared.importFile()
+        pisth.importFile()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Enable button only if app can import file from Pisth
-        importButton.isEnabled = Pisth.shared.canOpen
+        importButton.isEnabled = pisth.canOpen
     }
 
 }

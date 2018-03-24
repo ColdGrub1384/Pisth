@@ -8,16 +8,17 @@
 import UIKit
 import Pisth_API
 
+var pisth: Pisth!
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Set app URL scheme
-        Pisth.shared.urlScheme = URL(string: "pisth-api://")
-        
+        // Setup Pisth API
+        pisth = Pisth(message: nil /* Default message */, urlScheme: URL(string: "pisth-api://")! /* This app URL scheme */)
         
         return true
     }
@@ -26,14 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let viewController = (UIApplication.shared.keyWindow?.rootViewController as? ViewController)
         
-        if let data = Pisth.shared.dataReceived {
+        if let data = pisth.dataReceived {
             viewController?.data = data
             if let image = UIImage(data: data) {
                 viewController?.imageView.image = image
             }
         }
         
-        if let filename = Pisth.shared.filename(fromURL: url) {
+        if let filename = pisth.filename(fromURL: url) {
             viewController?.filename.text = filename
         }
         
