@@ -6,15 +6,51 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import NMSSH
+import Pisth_Shared
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-
-
+    /// Shared and unique instance.
+    static var shared: AppDelegate!
+    
+    /// Updates.
+    var updates = [String]()
+    
+    /// SSH session.
+    var session: NMSSHSession?
+    
+    func searchForUpdates() {
+        // Search for updates
+        if let session = session {
+            if session.isConnected && session.isAuthorized {
+                let activityVC = ActivityViewController(message: "Searching for updates")
+                
+            }
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        AppDelegate.shared = self
+    
+        UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        
+        // Connect
+        if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) {
+            let connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+            
+            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
+                if session.isConnected {
+                    session.authenticate(byPassword: connection.password)
+                }
+                
+                self.session = session
+            }
+
+        }
+        
         return true
     }
 
@@ -33,7 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        searchForUpdates()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
