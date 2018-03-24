@@ -24,10 +24,10 @@ public class ConnectionInformationTableViewController: UITableViewController {
     }
     
     /// Existing connection to edit.
-    var connection: RemoteConnection?
+    public var connection: RemoteConnection?
     
     /// Index of connection to edit.
-    var index: Int?
+    public var index: Int?
     
     // MARK: - View controller
     
