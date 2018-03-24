@@ -57,7 +57,7 @@
 
 <ol>
 <li>Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it&rsquo;s very important! Don&rsquo;t use URL schemes like <q>pisth-import</q>, try to include the name of your app, for example: <q>myApp-pisth-import</q>.</li>
-<li>Include the Pisth API framework: Drag the <code>Pisth API</code> and <code>Pisth_Shared</code> projects to your workspace and add them to your app&rsquo;s embedded binary.</li>
+<li>Include the Pisth API framework: Drag the <code>Pisth API</code> project to your workspace and add them to your app&rsquo;s embedded binary.</li>
 <li>Configure the <code><a href="Classes/Pisth.html">Pisth</a></code> instance:
 <code>swift
 let pisth = Pisth(message: nil /* Default message */, urlScheme: URL(string: &quot;pisth-api://&quot;)! /* This app URL scheme */)
