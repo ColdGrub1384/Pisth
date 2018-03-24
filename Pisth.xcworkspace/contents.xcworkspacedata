@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Pisth APT/Pisth APT.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pisth Terminal/Pisth Terminal.xcodeproj">
    </FileRef>
    <FileRef
