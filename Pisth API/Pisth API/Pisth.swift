@@ -11,10 +11,6 @@ import Pisth_Shared
 /// The class for interacting with the API.
 open class Pisth {
     
-    /// Unique and shared instance.
-    static open let shared = Pisth()
-    private init() {}
-    
     /// Shared pasteboard.
     open let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
     
