@@ -52,7 +52,7 @@ extension UIViewController {
     
     /// Returns the `ConnectionInformationTableViewController` from storyboard.
     static var connectionInfo: ConnectionInformationTableViewController {
-        return (UIStoryboard(name: "Connection Info", bundle: Bundle(for: ConnectionInfoViewTableViewController)).instantiateInitialViewController() as? ConnectionInformationTableViewController) ?? ConnectionInformationTableViewController()
+        return (UIStoryboard(name: "Connection Info", bundle: Bundle(for: ConnectionInformationTableViewController)).instantiateInitialViewController() as? ConnectionInformationTableViewController) ?? ConnectionInformationTableViewController()
     }
     
     /// Returns the View controller to invite people to contribute.
