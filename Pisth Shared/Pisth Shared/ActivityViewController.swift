@@ -68,8 +68,6 @@ class ActivityView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// `UIViewController`'s `layoutSubviews()` function.
-    ///
     /// Keep view's size.
     override func layoutSubviews() {
         super.layoutSubviews()

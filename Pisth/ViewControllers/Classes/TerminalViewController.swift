@@ -447,8 +447,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return accessoryView
     }
     
-    /// `UIViewController`'s `viewWillTransition(to:, with:)` function.
-    ///
     /// Resize `webView`, dismiss and open keyboard (to resize terminal).
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
@@ -474,8 +472,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         })
     }
     
-    /// `UIViewController`'s `keyCommands` variable.
-    ///
     /// Returns arrow keys, esc keys and ctrl keys from `A` to `_`.
     override var keyCommands: [UIKeyCommand]? {
         // Bluetooth keyboard
@@ -497,8 +493,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return commands
     }
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -561,8 +555,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// `UIViewController``s `viewWillAppear(_:)` function.
-    ///
     /// Close and open shell, add `toolbar` to keyboard and configure `navigationController`.
     override func viewWillAppear(_ animated: Bool) {
         
@@ -583,8 +575,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// `UIViewController``s `viewWillDisappear(_:)` function.
-    ///
     /// Undo changes made to `navigationController`, dismiss `ArrowsViewController` if it's presented and stop multipeer connectivity session.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -595,8 +585,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
     
-    /// `UIViewController``s `prefersStatusBarHidden` variable.
-    ///
     /// - Returns: `true`.
     override var prefersStatusBarHidden: Bool {
         return navigationController?.isNavigationBarHidden ?? true
@@ -725,6 +713,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Insert key by a long press gesture.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender event.
     @objc func insertKeyByLongPress(_ sender: UILongPressGestureRecognizer) {
         
         arrowsLongPressDelay -= 1
@@ -769,8 +761,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: NMSSH channel delegate
     
-    /// `NMSSHChannelDelegate`'s `channel(_:, didReadData:)` function.
-    ///
     /// Write data to `webView` and send data to MC peers.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
@@ -805,8 +795,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// `NMSSHChannelDelegate`'s `channelShellDidClose(_:)` function.
-    ///
     /// Undo changes made to `navigationController` and pop to Root view controller.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
@@ -822,8 +810,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Key input
     
-    /// `UIKeyInput`'s `insertText(_:)` function.
-    ///
     /// Send text or ctrl key to shell.
     func insertText(_ text: String) {
         do {
@@ -852,8 +838,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } catch {}
     }
     
-    /// `UIKeyInput`'s `deleteBackward` function.
-    ///
     /// Send backspace to shell.
     func deleteBackward() {
         do {
@@ -867,8 +851,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } catch {}
     }
     
-    /// `UIKeyInput`s `hasText` variable.
-    ///
     /// Returns true.
     var hasText: Bool {
         return true
@@ -876,20 +858,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Text input traits
     
-    /// `UITextInputTraits`'s `keyboardAppearance` variable.
-    ///
     /// `UIKeyboardAppearance.dark`
     var keyboardAppearance: UIKeyboardAppearance = ((TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] ?? ProTheme()).keyboardAppearance)
     
-    /// `UITextInputTraits`'s `autocorrectionType` variable.
-    ///
     /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
     
     // MARK: Web kit navigation delegate
 
-    /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function.
-    ///
     /// Run startup commands if `console` is empty, enable blinking cursor if `UserDefaults` 'blink' value is `true` and resize terminal if the Web view was reloaded.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
@@ -1051,8 +1027,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Web kit ui delegate
     
-    /// `WKUIDelegate`'s `webView(_:, runJavaScriptAlertPanelWithMessage:, initiatedByFrame:, completionHandler:)` function.
-    ///
     /// Sound bell if the text of the alert is "bell".
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         if message == "bell" { // Play bell
@@ -1074,8 +1048,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// `MCNearbyServiceAdvertiser` used to be discoverable by the Mac app.
     var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     
-    /// `MCNearbyServiceAdvertiserDelegate`'s ` advertiser(_:, didReceiveInvitationFromPeer:, withContext:, invitationHandler:)` function.
-    ///
     /// Display an alert to accept or decline invitation.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
@@ -1095,8 +1067,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         present(alert, animated: true, completion: nil)
     }
     
-    /// `MCSessionDelegate`'s `session(_:, peer:, didChange:)` function.
-    ///
     /// If `state` is connected, send initial information to `peer`.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 
@@ -1118,8 +1088,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// `MCSessionDelegate`'s `session(_ session:, didReceive:, fromPeer:)` function.
-    ///
     /// Write received String to the Shell.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSKeyedUnarchiver.setClass(TerminalInfo.self, forClassName: "TerminalInfo")
@@ -1147,25 +1115,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didReceive:, withName:, fromPeer:)` function.
+    /// Do nothing.
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         print("Received stream")
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didStartReceivingResourceWithName:, fromPeer:, with:)` function.
+    /// Do nothing.
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         print("Start receiving resource")
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didFinishReceivingResourceWithName:, fromPeer:, at:, withError:)` function.
+    /// Do nothing
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving resource")
     }
     
     // MARK: - Gesture recognizer delegate
     
-    /// `UIGestureRecognizerDelegate`'s `gestureRecognizer(_:, shouldRecognizeSimultaneouslyWith:)` function.
-    ///
     /// - Returns: `true`.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -1181,8 +1147,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
 @available(iOS 11.0, *)
 class TerminalViewControllerIOS11: TerminalViewController {
     
-    /// `UIKeyInputTraits`s `smartQuotesType` variable.
-    ///
     /// Returns `.no`.
     var smartQuotesType: UITextSmartQuotesType = .no
 }

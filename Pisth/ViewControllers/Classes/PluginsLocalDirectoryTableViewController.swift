@@ -11,8 +11,6 @@ import UIKit
 /// Local directory table view controller for managing terminal plugins.
 class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewController {
     
-    /// `PluginsLocalDirectoryTableViewController`'s `init(directory:)` function.
-    ///
     /// Not supported.
     @available(*, unavailable, message:"PluginsLocalDirectoryTableViewController cannot init from given directory, it init from default plugins directory.")
     override init(directory: URL) {
@@ -30,8 +28,6 @@ class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewControlle
     
     // MARK: - Table view data source
     
-    /// `LocalDirectoryTableViewController`'s `tableView(_:, cellForRowAt:)` function.
-    ///
     /// Disable files that are not plugins.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -49,8 +45,6 @@ class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewControlle
     
     // MARK: - Table view delegate
     
-    /// `LocalDirectoryTableViewController`'s `tableView(_:, didSelectRowAt:)` function.
-    ///
     /// Do nothing if the selected file is not a plugin.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var isDir: ObjCBool = false

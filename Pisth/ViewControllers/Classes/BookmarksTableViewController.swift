@@ -67,8 +67,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - View controller
     
-    /// `UIViewController`s `viewDidLoad` function.
-    ///
     /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,8 +107,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         mcNearbyServiceBrowser.startBrowsingForPeers()
     }
     
-    /// `UIViewController`'s `viewDidAppear(_:)` function.
-    ///
     /// Close opened connections did back here.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -143,15 +139,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Table view data source
 
-    /// `UITableViewController`'s `numberOfSections(in:)` function.
-    ///
     /// - Returns: `2`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    /// `UITableViewController`'s `tableView(_:, titleForHeaderInSection:)` function.
-    ///
     /// - Returns: ``"Connections"` or `"Nearby Devices"` if there are nearby devices.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
@@ -168,8 +160,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return nil
     }
 
-    /// `UITableViewController`'s `tableView(_:, numberOfRowsInSection:)` function.
-    ///
     /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -190,8 +180,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return 0
     }
 
-    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
-    ///
     /// - Returns: A cell with with title as the connection's nickname and subtitle as connection's details.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
@@ -241,15 +229,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return cell
     }
     
-    /// `UITableViewController`'s `tableView(_:, canEditRowAt:)` function.
-    ///
     /// - Returns: `true` for first section.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
     }
     
-    /// `UITableViewController`'s `tableView(_:, commit:, forRowAt:)` function.
-    ///
     /// Remove connection.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -258,8 +242,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
 
-    /// `UITableViewController`'s `tableView(_:, moveRowAt:, to:)` function.
-    ///
     /// Move connections.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         var connections = DataManager.shared.connections
@@ -275,8 +257,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
-    /// `UITableViewController`'s `tableView(_:, canMoveRowAt:)` function.
-    ///
     /// Allow moving rows for first section.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
@@ -285,8 +265,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Table view delegate
     
-    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
-    ///
     /// Connect to selected connection.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -404,8 +382,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         
     }
     
-    /// `UITableViewController`'s `tableView(_:, accessoryButtonTappedForRowWith:)`
-    ///
     /// Show connection information.
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if searchController.isActive {
@@ -420,7 +396,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Banner view delegate
     
-    /// `GADBannerViewDelegate`'s `adViewDidReceiveAd(_:)` function.
     /// Show ad did it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         tableView.tableHeaderView = bannerView
@@ -428,8 +403,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: Search bar delegate
     
-    /// `UISearchBarDelegate`'s `searchBar(_:, textDidChange:)` function.
-    ///
     /// Search for connection.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -457,8 +430,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         tableView.reloadData()
     }
     
-    /// `UISearchBarDelegate`'s `searchBarCancelButtonClicked(_:)` function.
-    ///
     /// Reset connections.
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
@@ -477,8 +448,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Browser for near devices.
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     
-    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, foundPeer:, withDiscoveryInfo:)` function.
-    ///
     /// Display found peer.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
@@ -490,8 +459,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
-    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, lostPeer:)` function.
-    ///
     /// Hide lost peer.
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         

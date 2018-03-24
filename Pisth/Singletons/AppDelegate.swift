@@ -109,8 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Application delegate
     
-    /// `UIApplicationDelegate`'s `application(_:, didFinishLaunchingWithOptions:)` function.
-    ///
     /// Initialize app's window, and setup / repair saved data.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -265,8 +263,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return true
     }
     
-    /// `UIApplicationDelegate`'s `application(_:, open:, options:)` function.
-    ///
     /// Open file, upload file or open connection.
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
@@ -499,8 +495,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return true
     }
     
-    /// `UIApplicationDelegate`'s `application(_:, performActionFor:, completionHandler:)` function.
-    ///
     /// Open connection for shortcut.
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
@@ -552,8 +546,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Bookmarks table view controller delegate
     
-    /// `BookmarksTableViewControllerDelegate`'s `bookmarksTableViewController(_:, didOpenConnection:, inDirectoryTableViewController:)` function.
-    ///
     /// Upload file at selected connection.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
         
@@ -576,8 +568,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
-    /// `BookmarksTableViewControllerDelegate`'s `bookmarksTableViewController(_:, didOpenConnection:, inTerminalViewController:)` function.
-    ///
     /// Show alert saying a file cannot be uploaded with SFTP disabled.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inTerminalViewController terminalViewController: TerminalViewController) {
         

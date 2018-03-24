@@ -50,29 +50,21 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// View displaying near devices.
     @IBOutlet weak var outlineView: NSOutlineView!
     
-    /// `NSOutlineViewDataSource`'s `outlineView(_:, numberOfChildrenOfItem:)` function.
-    ///
     /// - Returns: Count of `devices`.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         return devices.count
     }
     
-    /// `NSOutlineViewDataSource`'s `outlineView(_:, isItemExpandable:)` function.
-    ///
     /// - Returns: `false`.
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return false
     }
     
-    /// `NSOutlineViewDataSource`'s `outlineView(_:, child:, ofItem:)` function.
-    ///
     /// - Returns device for given index.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         return devices[index]
     }
     
-    /// `NSOutlineViewDelegate`'s `outlineView(_:, viewFor:?, item:)` function.
-    ///
     /// - Returns: The header view if the item is the first or a cell displaying the peer display name.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let peerID = item as? MCPeerID else {
@@ -97,16 +89,12 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// `NSOutlineViewDelegate`'s `outlineViewSelectionDidChange(_:)` function.
-    ///
     /// Invite peer for selected row.
     func outlineViewSelectionDidChange(_ notification: Notification) {
         print(outlineView.selectedRow)
         mcNearbyServiceBrowser.invitePeer(devices[outlineView.selectedRow], to: mcSession, withContext: nil, timeout: 10)
     }
     
-    /// `NSOutlineViewDelegate`'s `outlineView(_:, shouldSelectItem:)` function.
-    ///
     /// Disable selection for header.
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
         return ((item as? MCPeerID) != devices[0])
@@ -124,8 +112,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Multipeer connectivity browser used to browser nearby devices.
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     
-    /// `MCSessionDelegate`'s `session(_:, peer:, didChange:)` function.
-    ///
     /// Clear the terminal if the state is connected.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         print("Changed state!")
@@ -137,8 +123,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didReceive:, fromPeer:)` function.
-    ///
     /// Resize window for received size and display received message.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
@@ -169,23 +153,21 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didReceive:, withName:, fromPeer:)` function.
+    /// Do nothing.
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         print("Received stream")
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didStartReceivingResourceWithName:, fromPeer:, with:)` function.
+    /// Do nothing.
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         print("Start receiving resource")
     }
     
-    /// `MCSessionDelegate`'s `session(_:, didFinishReceivingResourceWithName:, fromPeer:, at:, withError:)` function.
+    /// Do nothing.
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving resource")
     }
     
-    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, foundPeer:, withDiscoveryInfo:)` function.
-    ///
     /// Display found peer.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         devices.append(peerID)
@@ -193,8 +175,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         print(devices)
     }
     
-    /// `MCNearbyServiceBrowserDelegate`'s `browser(_:, lostPeer:)` function.
-    ///
     /// Hide lost peer.
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         if let index = devices.index(of: peerID) {
@@ -221,8 +201,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     @IBOutlet weak var webView: WKWebView!
     
     
-    /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function
-    ///
     /// Display help message.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         showHelpMessage()
@@ -233,7 +211,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     
     // MARK: - App delegate
     
-    /// `NSApplicationDelegate`'s `applicationDidFinishLaunching(_:)` function.
+    /// Setup browser and check for updates.
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         guard let terminal = Bundle.terminal.url(forResource: "terminal", withExtension: "html") else {
@@ -353,8 +331,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     
     // MARK: - Window delegate
     
-    /// `NSWindowDelegate`'s `windowWillClose(_:)` function.
-    ///
     /// Exit app.
     func windowWillClose(_ notification: Notification) {
         exit(0)

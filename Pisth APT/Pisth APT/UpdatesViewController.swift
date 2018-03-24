@@ -11,6 +11,7 @@ import Pisth_Shared
 /// View controller for updating packages.
 class UpdatesViewController: UIViewController, UITableViewDataSource {
     
+    /// Table view containing updates.
     @IBOutlet weak var tableView: UITableView!
     
     /// Search for updates.
@@ -30,6 +31,7 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
         
     }
     
+    /// Setup `tableView`.
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -43,11 +45,12 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
         navigationController?.tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
     }
     
-    
+    /// - Returns: Count of available updates.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return AppDelegate.shared.updates.count
     }
     
+    /// - Returns: A cell with the title as the package for current index.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "package") else {
             return UITableViewCell()

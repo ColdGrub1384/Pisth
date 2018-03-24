@@ -32,8 +32,6 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
     
     // MARK: - View controller
     
-    /// `UIViewController`'s `viewWillTransition(to:, with:)` function.
-    ///
     /// Resize `webView`.
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
@@ -43,8 +41,6 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
         })
     }
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Init `webView`.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +50,6 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
     }
     
     
-    /// `UIViewController`'s `viewWillAppear(_:)` function.
-    ///
     /// Load file in `webView`.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,16 +87,12 @@ class WebViewController: UIViewController, WKNavigationDelegate  {
     
     // MARK: - Web kit navigation delegate
     
-    /// `WKNavigationDelegate`'s `webView(_:, didCommit:)` function.
-    ///
     /// Enable or disbale go back and go forward buttons.
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         goBackButton.isEnabled = webView.canGoBack
         goForwardButton.isEnabled = webView.canGoForward
     }
     
-    /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function.
-    ///
     /// Display page title.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("document.title") { (title, _) in

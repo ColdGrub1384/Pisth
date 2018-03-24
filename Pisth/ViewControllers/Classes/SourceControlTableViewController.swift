@@ -22,8 +22,6 @@ class SourceControlTableViewController: UITableViewController {
     
     /// MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Setup View controller.
     override func viewDidLoad() {
         super.viewDidLoad()

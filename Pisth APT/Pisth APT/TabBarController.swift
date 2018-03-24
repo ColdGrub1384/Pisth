@@ -13,8 +13,6 @@ class TabBarController: UITabBarController {
     /// Main instance.
     static var shared: TabBarController!
     
-    /// `TabBarController`'s `viewDidLoad` function.
-    ///
     /// Set singleton.
     override func viewDidLoad() {
         super.viewDidLoad()

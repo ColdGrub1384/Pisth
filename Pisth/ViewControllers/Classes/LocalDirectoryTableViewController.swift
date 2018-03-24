@@ -320,8 +320,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -357,8 +355,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
-    /// `UIViewController`'s `viewDidAppear(_:)` function.
-    ///
     /// Show error if there are or open `openFile` file.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -386,8 +382,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         reload()
     }
     
-    /// `UIViewController`'s `viewDidDisappear(_:)` function.
-    ///
     /// Remove observer.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -397,30 +391,22 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Table view data source
     
-    /// `UITableViewController`'s `tableView(_:, heightForRowAt:)` function.
-    ///
     /// - Returns: `50`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
-    /// `UITableViewController`'s `numberOfSections(in:)` function.
-    ///
     /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    /// `UITableViewController`'s `tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)` function.
-    ///
     /// - Returns: count of `files`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return files.count
     }
     
-    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
-    ///
     /// - Returns: An `UITableViewCell` with title as the current filename and file icon for current file.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
@@ -449,15 +435,11 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         return cell
     }
     
-    /// `UITableViewController`'s `tableView(_:, canEditRowAt:)` function.
-    ///
     /// - Returns: `true`.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    /// `UITableViewController`'s `tableView(_:, commit:, forRowAt:)` function.
-    ///
     /// Remove selected file.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -475,23 +457,17 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
-    /// `UITableViewController`'s `tableView(_:, canPerformAction:, forRowAt:, withSender:)` function.
-    ///
     /// - Returns: Enable copying files.
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         
         return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
     }
     
-    /// `UITableViewController`'s `tableView(_ tableView:, shouldShowMenuForRowAt:` function.
-    ///
     /// - Returns: `true`.
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    /// `UITableViewController`'s `tableView(_:, performAction:, forRowAt:, withSender:)` function.
-    ///
     /// Copy selected file.
     override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         if action == #selector(copy(_:)) { // Copy file
@@ -516,8 +492,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Table view delegate
     
-    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
-    ///
     /// Open selected file or directory.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -544,8 +518,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Banner view delegate
     
-    /// `GADBannerViewDelegate`'s `adViewDidReceiveAd(_:)` function.
-    ///
     /// Show ad when it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         // Show ad only when it received
@@ -554,15 +526,11 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Document picker delegate
     
-    /// `UIDocumentPickerDelegate`'s `documentPickerWasCancelled(_:)` function.
-    ///
     /// Dismiss document picker.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    /// `UIDocumentPickerDelegate`'s `documentPicker(_:, didPickDocumentsAt:)` function.
-    ///
     /// Import selected documents.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
@@ -579,8 +547,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Local directory table view controller
     
-    /// `LocalDirectoryTableViewController`'s `localDirectoryTableViewController(_:, didOpenDirectory:)` function.
-    ///
     /// Copy or move file.
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL) {
         localDirectoryTableViewController.delegate = localDirectoryTableViewController
@@ -605,8 +571,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
     }
     
-    /// `LocalDirectoryTableViewController`'s `localDirectoryTableViewController(_:, didOpenFile:)` function.
-    ///
     /// Call defailt handler.
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
         LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.tableView.cellForRow(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
@@ -614,15 +578,11 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Preview controller data source
     
-    /// `QLPreviewControllerDataSource`'s `numberOfPreviewItems(in:)` function.
-    ///
     /// - Returns: count of `files.`
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return files.count
     }
     
-    /// `QLPreviewControllerDataSource`'s `previewController(_:, previewItemAt:)` function.
-    ///
     /// - Returns: file in `files` at current index.
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return files[index] as QLPreviewItem

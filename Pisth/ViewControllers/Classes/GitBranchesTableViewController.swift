@@ -57,8 +57,6 @@ class GitBranchesTableViewController: UITableViewController {
     
     // MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// List branches at Git repo.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,8 +78,6 @@ class GitBranchesTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    /// `UIViewController`'s `viewWillDisappear(_:)` function.
-    ///
     /// Setup `navigationController`.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -157,22 +153,16 @@ class GitBranchesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    /// `UITableViewController`'s `numberOfSections(in:)` function.
-    ///
     /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    /// `UITableViewController`'s `tableView(_:, numberOfRowsInSection:)` function.
-    ///
     /// - Returns: count of `branches`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return branches.count
     }
 
-    /// `UITableViewController`'s `tableView(_:, cellForRowAt:)` function.
-    ///
     /// - Returns: An `UITableViewCell` with title as branch name.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "branch", for: indexPath)
@@ -186,8 +176,6 @@ class GitBranchesTableViewController: UITableViewController {
         return cell
     }
 
-    /// `UITableViewController`'s `tableView(_:, heightForRowAt:)` function.
-    ///
     /// - Returns: `87`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
@@ -196,8 +184,6 @@ class GitBranchesTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
 
-    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
-    ///
     /// View commits for selected branch.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

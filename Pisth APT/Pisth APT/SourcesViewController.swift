@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// View controller for showing sources.
 class SourcesViewController: UIViewController {
     
 }

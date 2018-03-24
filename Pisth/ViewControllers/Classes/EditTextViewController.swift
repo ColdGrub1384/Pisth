@@ -107,8 +107,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     /// MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,8 +120,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    /// `UIViewController`'s `viewDidAppear(_:)` function.
-    ///
     /// Open `file` and highlight it.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -167,8 +163,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    /// `UIViewController`'s `viewDidDisappear(_:)` function.
-    ///
     /// Save file if is needed.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

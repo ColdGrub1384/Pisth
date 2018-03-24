@@ -49,8 +49,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Display current settings.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -271,8 +269,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: Table view delegate
     
-    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)` function.
-    ///
     /// Open licenses or deselect selected row.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -309,15 +305,11 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view data source
     
-    /// `UICollectionViewDataSource`'s `collectionView(_:, numberOfItemsInSection:)` function.
-    ///
     /// - Returns: `9`.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    /// `UICollectionViewDataSource`'s `collectionView(_:, cellForItemAt:)` function.
-    ///
     /// - Returns: the cell corresponding to the index path.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -344,8 +336,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view delegate
     
-    /// `UICollectionViewDelegate`'s `collectionView(_:, didSelectItemAt:)` function.
-    ///
     /// Set theme for selected item.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

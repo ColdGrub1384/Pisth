@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// View controller containing packages.
 class PackagesViewController: UIViewController {
     
 }

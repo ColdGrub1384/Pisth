@@ -82,8 +82,6 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - View controller
     
-    /// `UIViewController`'s `viewDidLoad` function.
-    ///
     /// Setup previews.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,8 +120,6 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - Web kit navigation delegate
     
-    /// `WKNavigationDelegate`'s `webView(_:, didFinish:)` function.
-    ///
     /// Display theme preview.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         

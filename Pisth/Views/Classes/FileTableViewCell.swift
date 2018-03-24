@@ -21,8 +21,6 @@ class FileTableViewCell: UITableViewCell {
     
     // MARK: Table view cell
     
-    /// `UITableViewCell`'s `didMoveToWindow` function.
-    ///
     /// Set selection color.
     override func didMoveToWindow() {
         let view = UIView()
@@ -30,8 +28,6 @@ class FileTableViewCell: UITableViewCell {
         selectedBackgroundView = view
     }
     
-    /// `UITableViewCell`'s `canPerformAction(_:, withSender:)` function.
-    ///
     /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
