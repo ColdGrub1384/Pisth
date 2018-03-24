@@ -31,6 +31,8 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
         
     }
     
+    // MARK: - View controller
+    
     /// Setup `tableView`.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,8 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
         
         navigationController?.tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
     }
+    
+    // MARK: - Table view data source
     
     /// - Returns: Count of available updates.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
