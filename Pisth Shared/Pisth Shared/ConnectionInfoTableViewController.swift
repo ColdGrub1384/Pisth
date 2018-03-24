@@ -19,8 +19,13 @@ public class ConnectionInformationTableViewController: UITableViewController {
         super.init(style: style)
     }
     
+    /// Init.
+    public init() {
+        super.init(style: .plain)
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     /// Existing connection to edit.
