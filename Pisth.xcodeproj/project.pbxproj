@@ -29,6 +29,7 @@
 		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
+		3A61DEBB2066AE760002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEBA2066AE760002353B /* Connection Info.storyboard */; };
 		3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */; };
 		3A729778205D58B100F94BA7 /* Beta.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A729777205D58B100F94BA7 /* Beta.xib */; };
 		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
@@ -149,6 +150,7 @@
 		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
+		3A61DEBA2066AE760002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
 		3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Terminal Toolbar-White.xib"; sourceTree = "<group>"; };
 		3A729777205D58B100F94BA7 /* Beta.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Beta.xib; sourceTree = "<group>"; };
 		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 		3AF9AEB01FF55C4C00840E8A /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
+				3A61DEBA2066AE760002353B /* Connection Info.storyboard */,
 				3AE8359E1FF2DCB30073D06E /* Code Editor.xib */,
 				3AE835A01FF2DE350073D06E /* Web.xib */,
 				3AF9AEAA1FF54C8B00840E8A /* Image.xib */,
@@ -626,6 +629,7 @@
 				3AE835A11FF2DE350073D06E /* Web.xib in Resources */,
 				3A5888B5205C6BCD0002F9E1 /* Contribute.xib in Resources */,
 				3A42FE232033B0300061A38B /* Themes Store.xib in Resources */,
+				3A61DEBB2066AE760002353B /* Connection Info.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
