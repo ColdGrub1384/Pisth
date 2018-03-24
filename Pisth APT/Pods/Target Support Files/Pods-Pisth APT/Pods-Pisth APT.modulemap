@@ -1,0 +1,6 @@
+framework module Pods_Pisth_APT {
+  umbrella header "Pods-Pisth APT-umbrella.h"
+
+  export *
+  module * { export * }
+}

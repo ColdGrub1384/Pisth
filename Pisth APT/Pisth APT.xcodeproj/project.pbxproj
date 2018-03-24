@@ -10,6 +10,9 @@
 		3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9220668D450002353B /* Pisth.xcdatamodeld */; };
 		3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEAF2066998B0002353B /* Connection Info.storyboard */; };
 		3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */; };
+		3A61DEB72066A8FF0002353B /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */; };
+		3A61DEB82066A8FF0002353B /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7532CD2066DF8000CF85D3 /* TabBarController.swift */; };
 		3ACDC3DE2065AEBD0049034F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */; };
 		3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E12065AEBE0049034F /* Main.storyboard */; };
 		3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E42065AEC00049034F /* Assets.xcassets */; };
@@ -18,12 +21,47 @@
 		3ACDC3F22065D2450049034F /* UpdatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F12065D2450049034F /* UpdatesViewController.swift */; };
 		3ACDC3F42065D2610049034F /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F32065D2610049034F /* PackagesViewController.swift */; };
 		3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */; };
+		D1B65A4FA557546ADBC80216 /* Pods_Pisth_APT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4D5ED25D29628E51FDD5E4 /* Pods_Pisth_APT.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A7532C92066CD2600CF85D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F2A7DB89C766474A2333E8C6EE30AE5;
+			remoteInfo = NMSSH;
+		};
+		3A7532CB2066CD2600CF85D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3EA44E6B68C01AEA61FA1060100FD7A5;
+			remoteInfo = "Pods-Pisth APT";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3A61DEB92066A8FF0002353B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3A61DEB82066A8FF0002353B /* Pisth_Shared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A61DE9320668D450002353B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		3A61DEAF2066998B0002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
 		3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsTableViewController.swift; sourceTree = "<group>"; };
+		3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		3A7532CD2066DF8000CF85D3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3ACDC3DA2065AEBD0049034F /* Pisth APT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth APT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACDC3E22065AEBE0049034F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,6 +72,9 @@
 		3ACDC3F12065D2450049034F /* UpdatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F32065D2610049034F /* PackagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		612B074A4DE12A21D7587FCA /* Pods-Pisth APT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth APT.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT.release.xcconfig"; sourceTree = "<group>"; };
+		C4645E0208D03FCCC0AA820B /* Pods-Pisth APT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth APT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT.debug.xcconfig"; sourceTree = "<group>"; };
+		CA4D5ED25D29628E51FDD5E4 /* Pods_Pisth_APT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_APT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +82,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A61DEB72066A8FF0002353B /* Pisth_Shared.framework in Frameworks */,
+				D1B65A4FA557546ADBC80216 /* Pods_Pisth_APT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A61DEB32066A85D0002353B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA4D5ED25D29628E51FDD5E4 /* Pods_Pisth_APT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A7532C52066CD2300CF85D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A7532CA2066CD2600CF85D3 /* NMSSH.framework */,
+				3A7532CC2066CD2600CF85D3 /* Pods_Pisth_APT.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3ACDC3D12065AEBD0049034F = {
 			isa = PBXGroup;
 			children = (
+				3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */,
+				3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */,
 				3ACDC3DC2065AEBD0049034F /* Pisth APT */,
 				3ACDC3DB2065AEBD0049034F /* Products */,
+				3A61DEB32066A85D0002353B /* Frameworks */,
+				515F5C750F3936DB365F4445 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +136,7 @@
 				3ACDC3F32065D2610049034F /* PackagesViewController.swift */,
 				3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */,
 				3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */,
+				3A7532CD2066DF8000CF85D3 /* TabBarController.swift */,
 				3A61DE9220668D450002353B /* Pisth.xcdatamodeld */,
 				3ACDC3E12065AEBE0049034F /* Main.storyboard */,
 				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
@@ -82,6 +147,15 @@
 			path = "Pisth APT";
 			sourceTree = "<group>";
 		};
+		515F5C750F3936DB365F4445 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4645E0208D03FCCC0AA820B /* Pods-Pisth APT.debug.xcconfig */,
+				612B074A4DE12A21D7587FCA /* Pods-Pisth APT.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +163,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3ACDC3EC2065AEC20049034F /* Build configuration list for PBXNativeTarget "Pisth APT" */;
 			buildPhases = (
+				2CE6744BE0F86C6AF269A6D6 /* [CP] Check Pods Manifest.lock */,
 				3ACDC3D62065AEBD0049034F /* Sources */,
 				3ACDC3D72065AEBD0049034F /* Frameworks */,
 				3ACDC3D82065AEBD0049034F /* Resources */,
+				3A61DEB92066A8FF0002353B /* Embed Frameworks */,
+				C03109140F4BF34FE4D66CC3 /* [CP] Embed Pods Frameworks */,
+				770ACCE3D5877D5E9A4C3958 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,12 +207,35 @@
 			mainGroup = 3ACDC3D12065AEBD0049034F;
 			productRefGroup = 3ACDC3DB2065AEBD0049034F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3A7532C52066CD2300CF85D3 /* Products */;
+					ProjectRef = 3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3ACDC3D92065AEBD0049034F /* Pisth APT */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3A7532CA2066CD2600CF85D3 /* NMSSH.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NMSSH.framework;
+			remoteRef = 3A7532C92066CD2600CF85D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A7532CC2066CD2600CF85D3 /* Pods_Pisth_APT.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_Pisth_APT.framework;
+			remoteRef = 3A7532CB2066CD2600CF85D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3ACDC3D82065AEBD0049034F /* Resources */ = {
@@ -150,12 +251,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2CE6744BE0F86C6AF269A6D6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		770ACCE3D5877D5E9A4C3958 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C03109140F4BF34FE4D66CC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3ACDC3D62065AEBD0049034F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3ACDC3DE2065AEBD0049034F /* AppDelegate.swift in Sources */,
+				3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */,
 				3ACDC3F42065D2610049034F /* PackagesViewController.swift in Sources */,
 				3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */,
 				3ACDC3F02065D2280049034F /* SourcesViewController.swift in Sources */,
@@ -296,11 +446,13 @@
 		};
 		3ACDC3ED2065AEC20049034F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4645E0208D03FCCC0AA820B /* Pods-Pisth APT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth APT/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-APT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,11 +463,13 @@
 		};
 		3ACDC3EE2065AEC20049034F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 612B074A4DE12A21D7587FCA /* Pods-Pisth APT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth APT/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-APT";
 				PRODUCT_NAME = "$(TARGET_NAME)";

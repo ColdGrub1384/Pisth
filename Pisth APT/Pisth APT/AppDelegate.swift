@@ -25,8 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Search for updates
         if let session = session {
             if session.isConnected && session.isAuthorized {
-                let activityVC = ActivityViewController(message: "Searching for updates")
-                
+                if let packages = (try? session.channel.execute("aptitude -F%p --disable-columns search ~U").components(separatedBy: "\n")) {
+                    self.updates = packages
+                    
+                    if TabBarController.shared != nil {
+                        DispatchQueue.main.async {
+                            if self.updates.count != 0 {
+                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count)"
+                            } else {
+                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -70,7 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         
-        searchForUpdates()
+        let activityVC = ActivityViewController(message: "Loading...")
+        UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true) {
+            self.searchForUpdates()
+            activityVC.dismiss(animated: true, completion: nil)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
