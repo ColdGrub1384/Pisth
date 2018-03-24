@@ -76,8 +76,8 @@ public class ConnectionInformationTableViewController: UITableViewController {
         var port = self.port.text!
         let username = self.username.text!
         let password = self.password.text!
-        var path = ""
-        let useSFTP = false
+        var path = self.path.text!
+        let useSFTP = self.useSFTP.isOn
         
         // Check for requierd fields
         if host == "" || username == "" {
