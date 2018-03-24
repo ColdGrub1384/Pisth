@@ -28,7 +28,7 @@ open class Pisth {
     /// - Parameters:
     ///     - message: Message to show in the Pisth navigation bar.
     ///     - urlScheme: This app URL scheme.
-    init(message: String?, urlScheme: URL) {
+    public init(message: String?, urlScheme: URL) {
         self.message = message
         self.urlScheme = urlScheme
     }
