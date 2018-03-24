@@ -6,11 +6,22 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
-import SwiftKeychainWrapper
 import CoreData
 
 /// Table view controller containing information about a connection.
-class ConnectionInformationTableViewController: UITableViewController {
+public class ConnectionInformationTableViewController: UITableViewController {
+    
+    /// Init with given style.
+    ///
+    /// - Parameters:
+    ///     - style: Style to use.
+    public override init(style: UITableViewStyle) {
+        super.init(style: style)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     /// Existing connection to edit.
     var connection: RemoteConnection?
@@ -20,7 +31,7 @@ class ConnectionInformationTableViewController: UITableViewController {
     
     // MARK: - View controller
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [name, host, port, username, password, path]
@@ -91,7 +102,7 @@ class ConnectionInformationTableViewController: UITableViewController {
                     request.returnsObjectsAsFaults = false
                     
                     do {
-                        let result = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index]
+                        let result = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index]
                         let passKey = String.random(length: 100)
                         result.setValue(name, forKey: "name")
                         result.setValue(host, forKey: "host")
@@ -102,7 +113,7 @@ class ConnectionInformationTableViewController: UITableViewController {
                         result.setValue(useSFTP, forKey: "sftp")
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
-                        AppDelegate.shared.saveContext()
+                        DataManager.shared.saveContext()
                     } catch let error {
                         print("Error retrieving connections: \(error.localizedDescription)")
                     }

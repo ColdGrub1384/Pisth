@@ -15,30 +15,42 @@ import Foundation
 ///     - name: Name that appears in bookmarks.
 ///     - path: Path where start.
 ///     - port: Port used to connect.
-struct RemoteConnection {
+public struct RemoteConnection {
     
     /// Hostname or IP address used to connect.
-    var host: String
+    public var host: String
     
     /// Username used to login.
-    var username: String
+    public var username: String
     
     /// Password used to authenticate.
-    var password: String
+    public var password: String
     
     /// Name that appears in bookmarks.
-    var name: String
+    public var name: String
     
     /// Path where start.
-    var path: String
+    public var path: String
     
     /// Port used to connect.
-    var port: UInt64
+    public var port: UInt64
     
     /// Use SFTP
-    var useSFTP: Bool
+    public var useSFTP: Bool
     
     /// OS name.
-    var os: String?
+    public var os: String?
+    
+    /// Init from given info.
+    public init(host: String, username: String, password: String, name: String, path: String, port: UInt64, useSFTP: Bool, os: String?) {
+        self.host = host
+        self.username = username
+        self.password = password
+        self.name = name
+        self.path = path
+        self.port = port
+        self.useSFTP = useSFTP
+        self.os = os
+    }
 }
 

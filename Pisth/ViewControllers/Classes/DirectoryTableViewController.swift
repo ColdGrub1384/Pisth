@@ -115,7 +115,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             request.returnsObjectsAsFaults = false
             
             do {
-                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                 
                 for result in results {
                     if result.value(forKey: "host") as? String == connection.host {
@@ -125,7 +125,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     }
                 }
                 
-                AppDelegate.shared.saveContext()
+                DataManager.shared.saveContext()
             } catch let error {
                 print("Error retrieving connections: \(error.localizedDescription)")
             }

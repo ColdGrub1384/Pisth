@@ -58,8 +58,6 @@
 		3ACF9AE420409446006C3218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE220409446006C3218 /* Main.storyboard */; };
 		3ACF9AE620409446006C3218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE520409446006C3218 /* Assets.xcassets */; };
 		3ACF9AE920409446006C3218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE720409446006C3218 /* LaunchScreen.storyboard */; };
-		3ACF9AF42040A839006C3218 /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF32040A839006C3218 /* Connection Info.storyboard */; };
-		3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */; };
 		3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; };
 		3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; };
@@ -101,8 +99,6 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
-		3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */; };
-		3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF2EF31FF199AC004D2D9D /* DataManager.swift */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
@@ -187,8 +183,6 @@
 		3ACF9AE520409446006C3218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACF9AE820409446006C3218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACF9AEA20409446006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACF9AF32040A839006C3218 /* Connection Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
-		3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B792041BB5B006C3218 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,8 +221,6 @@
 		3AFDD9161FF147860061677B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewController.swift; sourceTree = "<group>"; };
 		3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
-		3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConnection.swift; sourceTree = "<group>"; };
-		3AFF2EF31FF199AC004D2D9D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
@@ -272,7 +264,6 @@
 			children = (
 				3AFDD9041FF140FE0061677B /* AppDelegate.swift */,
 				3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */,
-				3AFF2EF31FF199AC004D2D9D /* DataManager.swift */,
 				3ADD28CA1FFAFC3900977905 /* Pasteboard.swift */,
 			);
 			path = Singletons;
@@ -361,7 +352,6 @@
 				3A843EEC202A64030096632E /* ReviewHelper.swift */,
 				3A38DC422035DD480093A091 /* PurchaseHelper.swift */,
 				3ACF9AC0204079A9006C3218 /* AppAction.swift */,
-				3AFDD91F1FF1541E0061677B /* RemoteConnection.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
 				3AA117F61FF4281E007BB84A /* fileIcon.swift */,
@@ -438,7 +428,6 @@
 				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
 				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
-				3ACF9AF52040AC2F006C3218 /* ConnectionInfoTableViewController.swift */,
 				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
 				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
 			);
@@ -454,7 +443,6 @@
 				3AF9AEA71FF5461300840E8A /* Settings.storyboard */,
 				3A42FE222033B0300061A38B /* Themes Store.xib */,
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
-				3ACF9AF32040A839006C3218 /* Connection Info.storyboard */,
 				3A5888B4205C6BCD0002F9E1 /* Contribute.xib */,
 				3A729777205D58B100F94BA7 /* Beta.xib */,
 			);
@@ -622,7 +610,6 @@
 				3AEF111A201115850089389E /* empty in Resources */,
 				3A729778205D58B100F94BA7 /* Beta.xib in Resources */,
 				3AE8359F1FF2DCB30073D06E /* Code Editor.xib in Resources */,
-				3ACF9AF42040A839006C3218 /* Connection Info.storyboard in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
 				3AD7E0572049E8CC00834D59 /* amzn.png in Resources */,
 				3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */,
@@ -719,14 +706,12 @@
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
-				3AFF2EF41FF199AC004D2D9D /* DataManager.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
-				3ACF9AF62040AC2F006C3218 /* ConnectionInfoTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */,
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
@@ -748,7 +733,6 @@
 				3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */,
 				3A5888B3205C64CB0002F9E1 /* UIView.swift in Sources */,
 				3AF9AE9C1FF53E5700840E8A /* WebViewController.swift in Sources */,
-				3AFDD9201FF1541E0061677B /* RemoteConnection.swift in Sources */,
 				3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */,
 				3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */,
 				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,

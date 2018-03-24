@@ -32,11 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// The file opened from share menu.
     var openedFile: URL?
     
-    /// Returns: `persistentContainer.viewContext`.
-    var coreDataContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
     /// URL scheme of app that is using Pisth API and opened the URL scheme.
     var dataReceiverAppURLScheme: URL?
     
@@ -119,6 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         UIMenuController.shared.menuItems = [UIMenuItem(title: "Move", action: #selector(FileTableViewCell.moveFile(_:))), UIMenuItem(title: "Rename", action: #selector(FileTableViewCell.renameFile(_:)))]
         UIMenuController.shared.update()
         
+        DataManager.shared.saveCompletion = update3DTouchShortucts
+        
         AppDelegate.shared = self
         
         // Setup Navigation Controller
@@ -150,17 +147,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             request.returnsObjectsAsFaults = false
             
             do {
-                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                 
                 for result in results {
                     let passKey = String.random(length: 100)
                     if let password = result.value(forKey: "password") as? String {
-                        KeychainWrapper.standard.set(password, forKey: passKey)
+                        SwiftKeychainWrapper.KeychainWrapper.standard.set(password, forKey: passKey)
                     }
                     result.setValue(passKey, forKey: "password")
                 }
                 
-                try? coreDataContext.save()
+                try? DataManager.shared.coreDataContext.save()
             } catch let error {
                 print("Error retrieving connections: \(error.localizedDescription)")
             }
@@ -176,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             request.returnsObjectsAsFaults = false
             
             do {
-                let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                 
                 for result in results {
                     if result.value(forKey: "sftp") == nil {
@@ -184,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     }
                 }
                 
-                try? coreDataContext.save()
+                try? DataManager.shared.coreDataContext.save()
             } catch let error {
                 print("Error retrieving connections: \(error.localizedDescription)")
             }
@@ -520,51 +517,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             }
             
             bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 0))
-        }
-    }
-    
-    // MARK: - Core Data stack
-    
-    /// The persistent container for the application. This implementation
-    /// creates and returns a container, having loaded the store for the
-    /// application to it. This property is optional since there are legitimate
-    /// error conditions that could cause the creation of the store to fail.
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Pisth")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    // MARK: - Core Data Saving support
-    
-    /// Save core data and update 3D touch shortcuts.
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-                update3DTouchShortucts()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
         }
     }
     

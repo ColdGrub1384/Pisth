@@ -11,6 +11,7 @@ import GoogleMobileAds
 import SwiftKeychainWrapper
 import BiometricAuthentication
 import MultipeerConnectivity
+import Pisth_Shared
 
 /// `TableViewController` used to list, connections.
 class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate, MCNearbyServiceBrowserDelegate {

@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import Pisth_Shared
 
 extension UIViewController {
     
@@ -51,7 +52,7 @@ extension UIViewController {
     
     /// Returns the `ConnectionInformationTableViewController` from storyboard.
     static var connectionInfo: ConnectionInformationTableViewController {
-        return (UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController) ?? ConnectionInformationTableViewController()
+        return (UIStoryboard(name: "Connection Info", bundle: Bundle(for: ConnectionInfoViewTableViewController)).instantiateInitialViewController() as? ConnectionInformationTableViewController) ?? ConnectionInformationTableViewController()
     }
     
     /// Returns the View controller to invite people to contribute.

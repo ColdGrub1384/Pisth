@@ -991,7 +991,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     request.returnsObjectsAsFaults = false
                     
                     do {
-                        let results = try (AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                        let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                         
                         for result in results {
                             if result.value(forKey: "host") as? String == ConnectionManager.shared.connection?.host {
@@ -1001,7 +1001,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                             }
                         }
                         
-                        AppDelegate.shared.saveContext()
+                        DataManager.shared.saveContext()
                     } catch let error {
                         print("Error retrieving connections: \(error.localizedDescription)")
                     }

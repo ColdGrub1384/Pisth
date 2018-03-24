@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import Foundation
+import Pisth_Shared
 
 /// Delegate used by `BookmarksTableViewController`s
 protocol BookmarksTableViewControllerDelegate {

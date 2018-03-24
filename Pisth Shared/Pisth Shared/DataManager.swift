@@ -6,22 +6,28 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import CoreData
-import SwiftKeychainWrapper
-import Pisth_Shared
 
 /// A class for managing saved connections.
-class DataManager {
+public class DataManager {
     
     /// Shared and unique instance of DataManager.
-    static let shared = DataManager()
+    public static let shared = DataManager()
     private init() {}
+    
+    /// Code to execute after saving context.
+    public var saveCompletion: (() -> Void)?
+    
+    /// Returns: `persistentContainer.viewContext`.
+    public var coreDataContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
     
     /// Create and save connection.
     /// - Parameters:
     ///     - connection: Representation of the connection to add.
-    func addNew(connection: RemoteConnection) {
+    public func addNew(connection: RemoteConnection) {
         
-        let newConnection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: AppDelegate.shared.coreDataContext)
+        let newConnection = NSEntityDescription.insertNewObject(forEntityName: "Connection", into: coreDataContext)
         newConnection.setValue(connection.host, forKey: "host")
         newConnection.setValue(connection.username, forKey: "username")
         newConnection.setValue(connection.name, forKey: "name")
@@ -36,37 +42,37 @@ class DataManager {
         newConnection.setValue(key, forKey: "password")
         KeychainWrapper.standard.set(connection.password, forKey: key)
         
-        AppDelegate.shared.saveContext()
+        saveContext()
     }
     
     /// Remove connection at given index.
     /// - Parameters:
     ///     - index: Index of connection to remove.
-    func removeConnection(at index: Int) {
+    public func removeConnection(at index: Int) {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         request.returnsObjectsAsFaults = false
         
         do {
-            let results = try AppDelegate.shared.coreDataContext.fetch(request) as! [NSManagedObject]
+            let results = try coreDataContext.fetch(request) as! [NSManagedObject]
             if let passKey = results[index].value(forKey: "password") as? String {
                 KeychainWrapper.standard.removeObject(forKey: passKey)
             }
-            AppDelegate.shared.coreDataContext.delete(results[index])
-            AppDelegate.shared.saveContext()
+            coreDataContext.delete(results[index])
+            saveContext()
         } catch let error {
             print("Error retrieving connections: \(error.localizedDescription)")
         }
     }
     
     /// Remove all saved connections.
-    func removeAll() {
+    public func removeAll() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
-            try AppDelegate.shared.coreDataContext.execute(deleteRequest)
-            AppDelegate.shared.saveContext()
+            try coreDataContext.execute(deleteRequest)
+            saveContext()
             _ = KeychainWrapper.standard.removeAllKeys()
         } catch let error {
             print("Error removing all: \(error.localizedDescription)")
@@ -74,7 +80,7 @@ class DataManager {
     }
     
     /// Returns an array of representation of saved connections.
-    var connections: [RemoteConnection] {
+    public var connections: [RemoteConnection] {
         
         var fetchedConnections = [RemoteConnection]()
         
@@ -82,7 +88,7 @@ class DataManager {
         request.returnsObjectsAsFaults = false
         
         do {
-            let results = try AppDelegate.shared.coreDataContext.fetch(request)
+            let results = try coreDataContext.fetch(request)
             
             for result in results as! [NSManagedObject] {
                 
@@ -103,5 +109,51 @@ class DataManager {
         }
         
         return fetchedConnections
+    }
+    
+    // MARK: - Core Data stack
+    
+    /// The persistent container for the application. This implementation
+    /// creates and returns a container, having loaded the store for the
+    /// application to it. This property is optional since there are legitimate
+    /// error conditions that could cause the creation of the store to fail.
+    public lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Pisth")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    // MARK: - Core Data Saving support
+    
+    /// Save core data and update 3D touch shortcuts.
+    public func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+                
+                saveCompletion?()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import NMSSH
+import Pisth_Shared
 
 /// A class that manages SSH connections.
 class ConnectionManager {
