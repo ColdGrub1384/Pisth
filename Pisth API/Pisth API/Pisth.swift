@@ -11,18 +11,25 @@ import Pisth_Shared
 /// The class for interacting with the API.
 open class Pisth {
     
-    /// Shared pasteboard.
-    open let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
+    let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
+    
+    var pisthURLScheme: URL {
+        var string = "pisth-import://?scheme=\(urlScheme?.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
+        
+        if let message = message {
+            string += "&message=\(message.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"
+        }
+        
+        return URL(string: string)!
+    }
     
     /// Imported file data.
     open var dataReceived: Data? {
         return pasteboard?.data(forPasteboardType: "public.data")
     }
     
-    /// Pisth URL scheme used to import files.
-    open var pisthURLScheme: URL {
-        return URL(string: "pisth-import://?scheme=\(urlScheme?.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")")!
-    }
+    /// Message to show in the Pisth navigation bar.
+    open var message: String?
     
     /// This app URL scheme.
     open var urlScheme: URL?
