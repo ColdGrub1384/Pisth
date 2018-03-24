@@ -16,7 +16,10 @@ import Firebase
 /// The app's delegate.
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryTableViewControllerStaticDelegate {
-        
+    
+    /// The window used with app.
+    var window: UIWindow?
+    
     /// Message from Pisth API.
     var importReason: String?
     
