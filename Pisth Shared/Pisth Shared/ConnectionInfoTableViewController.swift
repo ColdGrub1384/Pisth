@@ -43,22 +43,22 @@ public class ConnectionInformationTableViewController: UITableViewController {
         textFields = [name, host, port, username, password, path]
         
         for field in textFields {
-            field.autocorrectionType = .no
+            field?.autocorrectionType = .no
             
             let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
             toolbar.barStyle = .black
-            toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), UIBarButtonItem(title: "Done", style: .done, target: field, action: #selector(field.resignFirstResponder))]
-            field.inputAccessoryView = toolbar
+            toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), UIBarButtonItem(title: "Done", style: .done, target: field, action: #selector(field?.resignFirstResponder))]
+            field?.inputAccessoryView = toolbar
         }
         
         if let connection = connection {
-            name.text = connection.name
-            host.text = connection.host
-            port.text = "\(connection.port)"
-            username.text = connection.username
-            password.text = connection.password
-            useSFTP.isOn = connection.useSFTP
-            path.text = connection.path
+            name?.text = connection.name
+            host?.text = connection.host
+            port?.text = "\(connection.port)"
+            username?.text = connection.username
+            password?.text = connection.password
+            useSFTP?.isOn = connection.useSFTP
+            path?.text = connection.path
         }
         
         if #available(iOS 11.0, *) {
@@ -71,26 +71,26 @@ public class ConnectionInformationTableViewController: UITableViewController {
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func save(_ sender: Any) {
-        let name = self.name.text!
-        let host = self.host.text!
-        var port = self.port.text!
-        let username = self.username.text!
-        let password = self.password.text!
-        var path = self.path.text!
-        let useSFTP = self.useSFTP.isOn
+        let name = self.name?.text ?? ""
+        let host = self.host?.text ?? ""
+        var port = self.port?.text ?? ""
+        let username = self.username?.text ?? ""
+        let password = self.password?.text ?? ""
+        var path = self.path?.text ?? ""
+        let useSFTP = self.useSFTP?.isOn ?? false
         
         // Check for requierd fields
         if host == "" || username == "" {
             if host == "" {
-                self.host.backgroundColor = .red
+                self.host?.backgroundColor = .red
             } else {
-                self.host.backgroundColor = .clear
+                self.host?.backgroundColor = .clear
             }
             
             if username == "" {
-                self.username.backgroundColor = .red
+                self.username?.backgroundColor = .red
             } else {
-                self.username.backgroundColor = .clear
+                self.username?.backgroundColor = .clear
             }
         } else {
             if port == "" { // Port is 22 by default
@@ -132,7 +132,7 @@ public class ConnectionInformationTableViewController: UITableViewController {
                 }
                 
             } else {
-                self.port.backgroundColor = .red
+                self.port?.backgroundColor = .red
             }
         }
     }
@@ -140,28 +140,28 @@ public class ConnectionInformationTableViewController: UITableViewController {
     // MARK: - Fields
     
     /// Name field.
-    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var name: UITextField?
     
     /// Host field.
-    @IBOutlet weak var host: UITextField!
+    @IBOutlet weak var host: UITextField?
     
     /// Port field.
-    @IBOutlet weak var port: UITextField!
+    @IBOutlet weak var port: UITextField?
     
     /// Username field.
-    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var username: UITextField?
     
     /// Password field.
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var password: UITextField?
     
     /// Use SFTP field.
-    @IBOutlet weak var useSFTP: UISwitch!
+    @IBOutlet weak var useSFTP: UISwitch?
     
     /// Path field.
-    @IBOutlet weak var path: UITextField!
+    @IBOutlet weak var path: UITextField?
     
     /// All text fields
-    var textFields: [UITextField]!
+    var textFields: [UITextField?]!
     
 }
 #endif

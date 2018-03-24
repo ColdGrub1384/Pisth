@@ -13,6 +13,7 @@
 		3A61DEA5206692B80002353B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEA2206692B70002353B /* KeychainWrapper.swift */; };
 		3A61DEA6206692B80002353B /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A61DEA3206692B70002353B /* SwiftKeychainWrapper.h */; };
 		3A61DEA8206697C30002353B /* ConnectionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */; };
+		3ACD8CCB2066E90900184947 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD8CCA2066E90900184947 /* ActivityViewController.swift */; };
 		3ACF9B3B2041B475006C3218 /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3A2041B475006C3218 /* TerminalInfo.swift */; };
 		3ACF9B3D2041B47D006C3218 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3C2041B47D006C3218 /* Keys.swift */; };
 		3ACF9B682041B8C6006C3218 /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B5D2041B8C6006C3218 /* Basic.swift */; };
@@ -42,6 +43,7 @@
 		3A61DEA2206692B70002353B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		3A61DEA3206692B70002353B /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionInfoTableViewController.swift; sourceTree = "<group>"; };
+		3ACD8CCA2066E90900184947 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3ACF9B2F2041B417006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B332041B417006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF9B3A2041B475006C3218 /* TerminalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalInfo.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		3ACF9B312041B417006C3218 /* Pisth Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3ACD8CCA2066E90900184947 /* ActivityViewController.swift */,
 				3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */,
 				3ACF9B3A2041B475006C3218 /* TerminalInfo.swift */,
 				3ACF9B3C2041B47D006C3218 /* Keys.swift */,
@@ -266,6 +269,7 @@
 				3A61DEA4206692B80002353B /* KeychainItemAccessibility.swift in Sources */,
 				3ACF9B752041B914006C3218 /* String.swift in Sources */,
 				3ACF9B742041B912006C3218 /* URL+queryParameters.swift in Sources */,
+				3ACD8CCB2066E90900184947 /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

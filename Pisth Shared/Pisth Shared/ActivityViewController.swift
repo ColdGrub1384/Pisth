@@ -1,8 +1,8 @@
-
+#if os(iOS)
 import UIKit
 
 /// Alert with an indicator view at center.
-class ActivityViewController: UIViewController {
+public class ActivityViewController: UIViewController {
     
     /// `ActivityView` to use as view.
     let activityView = ActivityView()
@@ -13,7 +13,7 @@ class ActivityViewController: UIViewController {
     ///     - message: Message to be displayed in alert.
     ///
     /// - Returns: An alert with an indicator view at center and given message.
-    init(message: String) {
+    public init(message: String) {
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overFullScreen
@@ -22,7 +22,7 @@ class ActivityViewController: UIViewController {
     }
     
     /// init(coder:) is not implemented.
-    required init(coder aDecoder: NSCoder) {
+    public required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -89,4 +89,4 @@ class ActivityView: UIView {
         messageLabel.frame.origin.y = ceil(activityIndicatorView.frame.origin.y + activityIndicatorView.frame.size.height + ((boundingBoxView.frame.height - activityIndicatorView.frame.height) / 4.0) - (messageLabel.frame.height / 2.0))
     }
 }
-
+#endif

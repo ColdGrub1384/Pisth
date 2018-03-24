@@ -82,7 +82,6 @@
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AE8359F1FF2DCB30073D06E /* Code Editor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8359E1FF2DCB30073D06E /* Code Editor.xib */; };
 		3AE835A11FF2DE350073D06E /* Web.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE835A01FF2DE350073D06E /* Web.xib */; };
-		3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */; };
 		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
 		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
@@ -202,7 +201,6 @@
 		3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryAction.swift; sourceTree = "<group>"; };
 		3AE8359E1FF2DCB30073D06E /* Code Editor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Code Editor.xib"; sourceTree = "<group>"; };
 		3AE835A01FF2DE350073D06E /* Web.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
-		3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
@@ -410,7 +408,6 @@
 		3AF9AEAF1FF55C3200840E8A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3AEC43391FF2F18B0066BC33 /* ActivityViewController.swift */,
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
@@ -722,7 +719,6 @@
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
 				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
-				3AEC433A1FF2F18B0066BC33 /* ActivityViewController.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
