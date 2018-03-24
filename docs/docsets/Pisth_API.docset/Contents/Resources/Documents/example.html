@@ -53,7 +53,9 @@
         <section>
           <section class="section">
             
-            <h1 id='appdelegate' class='heading'>AppDelegate</h1>
+            <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pisth</span><span class="p">:</span> <span class="kt">Pisth</span><span class="o">!</span>
+</code></pre>
+<h1 id='appdelegate' class='heading'>AppDelegate</h1>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">UIKit</span>
 <span class="kd">import</span> <span class="kt">Pisth_API</span>
 
@@ -64,9 +66,8 @@
 
     <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
 
-        <span class="c1">// Set app URL scheme</span>
-        <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">urlScheme</span> <span class="o">=</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span>
-
+        <span class="c1">// Setup Pisth API</span>
+        <span class="n">pisth</span> <span class="o">=</span> <span class="nf">Pisth</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kc">nil</span> <span class="cm">/* Default message */</span><span class="p">,</span> <span class="nv">urlScheme</span><span class="p">:</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app URL scheme */</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="kc">true</span>
     <span class="p">}</span>
@@ -75,14 +76,14 @@
 
         <span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="p">(</span><span class="kt">UIApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">keyWindow</span><span class="p">?</span><span class="o">.</span><span class="n">rootViewController</span> <span class="k">as?</span> <span class="kt">ViewController</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataReceived</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">pisth</span><span class="o">.</span><span class="nf">dataReceived</span> <span class="p">{</span>
             <span class="n">viewController</span><span class="p">?</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
             <span class="k">if</span> <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="nf">UIImage</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">viewController</span><span class="p">?</span><span class="o">.</span><span class="n">imageView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
             <span class="p">}</span>
         <span class="p">}</span>
 
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="n">pisth</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">viewController</span><span class="p">?</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="p">}</span>
 
@@ -118,14 +119,14 @@
     <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">importFromPisth</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span> <span class="p">{</span>
 
         <span class="c1">// Import file</span>
-        <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">importFile</span><span class="p">()</span>
+        <span class="n">pisth</span><span class="o">.</span><span class="nf">importFile</span><span class="p">()</span>
     <span class="p">}</span>
 
     <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
 
         <span class="c1">// Enable button only if app can import file from Pisth</span>
-        <span class="n">importButton</span><span class="o">.</span><span class="n">isEnabled</span> <span class="o">=</span> <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">canOpen</span>
+        <span class="n">importButton</span><span class="o">.</span><span class="n">isEnabled</span> <span class="o">=</span> <span class="n">pisth</span><span class="o">.</span><span class="n">canOpen</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
@@ -135,7 +136,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-24)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

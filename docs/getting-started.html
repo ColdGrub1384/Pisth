@@ -57,37 +57,38 @@
 
 <ol>
 <li>Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it&rsquo;s very important! Don&rsquo;t use URL schemes like <q>pisth-import</q>, try to include the name of your app, for example: <q>myApp-pisth-import</q>.</li>
-<li>Include the Pisth API framework: Drag the <code>Pisth API</code> and <code>Pisth_Shared</code> projects to your workspace and add theme to your app&rsquo;s embedded binary.</li>
+<li>Include the Pisth API framework: Drag the <code>Pisth API</code> and <code>Pisth_Shared</code> projects to your workspace and add them to your app&rsquo;s embedded binary.</li>
+<li>Configure the <code><a href="Classes/Pisth.html">Pisth</a></code> instance:
+<code>swift
+let pisth = Pisth(message: nil /* Default message */, urlScheme: URL(string: &quot;pisth-api://&quot;)! /* This app URL scheme */)
+</code></li>
 <li>Handle data received in your App delegate:</li>
 </ol>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Pisth_API</span>
 
- <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="p">{</span>
+<span class="kd">@UIApplicationMain</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="nf">UIApplicationDelegate</span> <span class="p">{</span>
 
-     <span class="c1">// Give your app's URL scheme for importing files.</span>
-     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">urlScheme</span> <span class="o">=</span> <span class="s">"&lt;YOUR APP URL SCHEME&gt;"</span>
+    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
 
- <span class="p">}</span>
+        <span class="c1">// Getting data received</span>
+        <span class="n">pisth</span><span class="o">.</span><span class="n">dataReceived</span>
 
- <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
+        <span class="c1">// Getting received file name</span>
+        <span class="n">pisth</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
 
-     <span class="c1">// Getting data received</span>
-     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">dataReceived</span>
-
-     <span class="c1">// Getting received file name</span>
-     <span class="kt">Pisth</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
-
- <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
 <ol>
-<li>Now, start importing file calling <code>Pisth.shared.importFile()</code>.</li>
+<li>Now, start importing file calling <code>pisth.importFile()</code>.</li>
 </ol>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-02-24)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
