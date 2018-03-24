@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Shared and unique instance.
     static var shared: AppDelegate!
     
+    /// The app's window.
+    var window: UIWindow?
+    
     /// Updates.
     var updates = [String]()
     
