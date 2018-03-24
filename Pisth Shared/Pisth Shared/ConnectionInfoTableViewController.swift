@@ -5,6 +5,7 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
+#if os(iOS)
 import UIKit
 import CoreData
 
@@ -154,5 +155,5 @@ public class ConnectionInformationTableViewController: UITableViewController {
     /// All text fields
     var textFields: [UITextField]!
     
-    
 }
+#endif
