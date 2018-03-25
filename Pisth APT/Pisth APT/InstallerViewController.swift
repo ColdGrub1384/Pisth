@@ -39,6 +39,51 @@ class InstallerViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    /// Launch command in a terminal with given title.
+    ///
+    /// - Parameters:
+    ///     - command: Command to launch.
+    ///     - title: Title of the view controller.
+    func launch(command: String, withTitle title: String) {
+        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+            return
+        }
+        
+        termVC.command = "clear; \(command); echo -e \"\\033[CLOSE\""
+        termVC.title = title
+        
+        let navVC = UINavigationController(rootViewController: termVC)
+        navVC.view.backgroundColor = .clear
+        navVC.modalPresentationStyle = .overCurrentContext
+        
+        present(navVC, animated: true, completion: nil)
+    }
+    
+    /// Install package.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func install(_ sender: Any) {
+        launch(command: "sudo apt-get --assume-yes install '\(package ?? "")'", withTitle: "Installing \(package ?? "")...")
+    }
+    
+    /// Update package.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func update(_ sender: Any) {
+        launch(command: "sudo apt-get --assume-yes install --only-upgrade '\(package ?? "")'", withTitle: "Upgrading \(package ?? "")...")
+    }
+    
+    /// Remove package.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func remove(_ sender: Any) {
+        launch(command: "sudo apt-get --assume-yes purge --auto-remove '\(package ?? "")'", withTitle: "Removing \(package ?? "")...")
+    }
+    
+    
     // MARK: - View controller
     
     /// Setup views

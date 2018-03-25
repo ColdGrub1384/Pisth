@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '20EBF11616DE9C778F1430EA34B861BB'
-               BlueprintName = 'Pods-Pisth APT'
+               BlueprintIdentifier = '09F8E087091C60688A3B878681637BC9'
+               BlueprintName = 'BiometricAuthentication'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods-Pisth APT.framework'>
+               BuildableName = 'BiometricAuthentication.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

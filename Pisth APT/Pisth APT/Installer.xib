@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -61,9 +60,21 @@
                     </connections>
                 </barButtonItem>
                 <rightBarButtonItems>
-                    <barButtonItem enabled="NO" title="Remove" id="ntG-4F-Lgt"/>
-                    <barButtonItem enabled="NO" title="Update" id="Pvt-mr-xrA"/>
-                    <barButtonItem enabled="NO" title="Install" id="RmK-vs-IRu"/>
+                    <barButtonItem enabled="NO" title="Remove" id="ntG-4F-Lgt">
+                        <connections>
+                            <action selector="remove:" destination="J3f-E6-TUo" id="xps-Nl-ijh"/>
+                        </connections>
+                    </barButtonItem>
+                    <barButtonItem enabled="NO" title="Update" id="Pvt-mr-xrA">
+                        <connections>
+                            <action selector="update:" destination="J3f-E6-TUo" id="Xlg-Vi-h86"/>
+                        </connections>
+                    </barButtonItem>
+                    <barButtonItem enabled="NO" title="Install" id="RmK-vs-IRu">
+                        <connections>
+                            <action selector="install:" destination="J3f-E6-TUo" id="w6Q-8t-fIv"/>
+                        </connections>
+                    </barButtonItem>
                 </rightBarButtonItems>
             </navigationItem>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

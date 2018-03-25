@@ -1,12 +1,15 @@
 PODS:
+  - BiometricAuthentication (1.0.5)
   - NMSSH (2.2.8)
 
 DEPENDENCIES:
+  - BiometricAuthentication
   - NMSSH
 
 SPEC CHECKSUMS:
+  BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
 
-PODFILE CHECKSUM: 3193a47688bd128459c603dfbaa8dda333446159
+PODFILE CHECKSUM: ba7893ecd00cac8300508c9d5edc9a1cae54758c
 
 COCOAPODS: 1.1.1

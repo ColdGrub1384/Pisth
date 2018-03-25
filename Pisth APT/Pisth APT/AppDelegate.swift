@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// SSH session.
     var session: NMSSHSession?
     
+    /// Session used for the shell
+    var shellSession: NMSSHSession?
+    
     /// Search for updates
     func searchForUpdates() {
         // Search for updates
@@ -41,13 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if TabBarController.shared != nil {
                         DispatchQueue.main.async {
-                            if let tableView = ((TabBarController.shared.viewControllers?[3] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView {
+                            if let tableView = ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesTableViewController)?.tableView {
                                 tableView.reloadData()
                             }
                             if self.updates.count > 1 {
-                                TabBarController.shared.viewControllers?[3].tabBarItem.badgeValue = "\(self.updates.count-1)"
+                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
                             } else {
-                                TabBarController.shared.viewControllers?[3].tabBarItem.badgeValue = nil
+                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
                             }
                         }
                     }
@@ -57,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.installed = installed
                     
                     DispatchQueue.main.async {
-                        if let tableView = ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
+                        if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
                             tableView.reloadData()
                         }
                     }
@@ -66,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let allPackages = (try? session.channel.execute("apt-cache search .").components(separatedBy: "\n")) {
                     self.allPackages = allPackages
                     
-                    if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? PackagesViewController)?.tableView {
+                    if let tableView = ((TabBarController.shared.viewControllers?[0] as? UINavigationController)?.topViewController as? PackagesTableViewController)?.tableView {
                         tableView.reloadData()
                     }
                 }
@@ -88,24 +91,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
                 if session.isConnected {
                     session.authenticate(byPassword: connection.password)
+                    
+                    if session.isAuthorized {
+                        try? session.channel.startShell()
+                        
+                        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                            // Search for updates
+                            let activityVC = ActivityViewController(message: "Loading...")
+                            UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
+                                self.searchForUpdates()
+                                activityVC.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                    }
                 }
                 
                 self.session = session
+            }
+            
+            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
+                if session.isConnected {
+                    session.authenticate(byPassword: connection.password)
+                    
+                    if session.isAuthorized {
+                        session.channel.requestPty = true
+                        session.channel.ptyTerminalType = .xterm
+                        try? session.channel.startShell()
+                    }
+                }
+                
+                self.shellSession = session
             }
 
         }
         
         return true
-    }
-
-    /// Search for updates.
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-        let activityVC = ActivityViewController(message: "Loading...")
-        UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true) {
-            self.searchForUpdates()
-            activityVC.dismiss(animated: true, completion: nil)
-        }
     }
 
 }
