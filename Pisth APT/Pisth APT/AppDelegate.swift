@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Updates available.
     var updates = [String]()
     
+    /// Installed packages.
+    var installed = [String]()
+    
     /// SSH session.
     var session: NMSSHSession?
     
@@ -42,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             }
                         }
                     }
+                }
+                
+                if let installed = (try? session.channel.execute("apt-mark showmanual").components(separatedBy: "\n")) {
+                    self.installed = installed
                 }
             }
         }
