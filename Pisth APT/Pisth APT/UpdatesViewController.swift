@@ -9,7 +9,7 @@ import UIKit
 import Pisth_Shared
 
 /// View controller for updating packages.
-class UpdatesViewController: UIViewController, UITableViewDataSource {
+class UpdatesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /// Table view containing updates.
     @IBOutlet weak var tableView: UITableView!
@@ -33,18 +33,21 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - View controller
     
-    /// Setup `tableView`.
+    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         tableView.dataSource = self
+        tableView.delegate = self
         
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.backgroundColor = .clear
         tableView.refreshControl?.tintColor = .gray
         tableView.refreshControl?.addTarget(self, action: #selector(update(_:)), for: .valueChanged)
         
-        navigationController?.tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
+        if AppDelegate.shared.updates.count != 0 {
+            navigationController?.tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
+        }
     }
     
     // MARK: - Table view data source
@@ -63,5 +66,18 @@ class UpdatesViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = AppDelegate.shared.updates[indexPath.row]
         
         return cell
+    }
+    
+    // MARK: - Table view delegate
+    
+    /// Show package.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let installer = Bundle.main.loadNibNamed("Installer", owner: nil, options: nil)?[0] as? InstallerViewController {
+            installer.package = AppDelegate.shared.updates[indexPath.row]
+            present(UINavigationController(rootViewController: installer), animated: true, completion: nil)
+        }
     }
 }
