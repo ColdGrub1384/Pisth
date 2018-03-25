@@ -25,7 +25,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
             AppDelegate.shared.searchForUpdates()
             activityVC.dismiss(animated: true, completion: {
                 sender.endRefreshing()
-                self.tableView.reloadData()
             })
         }
         

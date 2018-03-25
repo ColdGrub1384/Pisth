@@ -22,7 +22,6 @@ class InstalledTableViewController: UITableViewController {
             AppDelegate.shared.searchForUpdates()
             activityVC.dismiss(animated: true, completion: {
                 sender.endRefreshing()
-                self.tableView.reloadData()
             })
         }
         
