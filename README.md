@@ -34,17 +34,18 @@ Why use Pisth:
 - [Pisth/](Pisth): iOS Application.
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
 - [Pisth API/](Pisth%20API/): API for iOS.
+- [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
 
 ## API
 
 Pisth has an API that allows you to import files from your own apps with Pisth.
 
-More information at https://pisth.github.io/docs/api/getting-started.html.
+More information at https://pisth.github.io/docs/getting-started.html.
 
 ## Projects
 
 - [Pisth/pisth.github.io](https://github.com/Pisth/pisth.github.io): Page for this project.
-- [Pisth/docs](https://github.com/Pisth/docs): Documentation for this project.
+- [Pisth/docs](https://github.com/Pisth/docs): Documentation for the API.
 - [Pisth/meta](https://github.com/Pisth/meta): Metadata for iTunes Connect.
 
 ## Acknowledgements
