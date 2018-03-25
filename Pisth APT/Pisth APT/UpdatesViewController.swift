@@ -44,10 +44,6 @@ class UpdatesViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.refreshControl?.backgroundColor = .clear
         tableView.refreshControl?.tintColor = .gray
         tableView.refreshControl?.addTarget(self, action: #selector(update(_:)), for: .valueChanged)
-        
-        if AppDelegate.shared.updates.count != 0 {
-            navigationController?.tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
-        }
     }
     
     // MARK: - Table view data source

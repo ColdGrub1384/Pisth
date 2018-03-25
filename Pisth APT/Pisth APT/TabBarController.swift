@@ -18,7 +18,5 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         TabBarController.shared = self
-        
-        viewControllers?[2].tabBarItem.badgeValue = "\(AppDelegate.shared.updates.count)"
     }
 }

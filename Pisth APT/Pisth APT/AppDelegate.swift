@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// The app's window.
     var window: UIWindow?
     
-    /// Updates.
+    /// Updates available.
     var updates = [String]()
     
     /// SSH session.
@@ -35,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if TabBarController.shared != nil {
                         DispatchQueue.main.async {
-                            if self.updates.count != 0 {
-                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count)"
+                            if self.updates.count > 1 {
+                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
                             } else {
                                 TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
                             }
