@@ -11,7 +11,7 @@ import Pisth_Shared
 /// Table view controller for listing installed packages.
 class InstalledTableViewController: UITableViewController {
     
-    /// Search for updates.
+    /// Refresh.
     ///
     /// - Parameters:
     ///     - sender: Sender refresh control.

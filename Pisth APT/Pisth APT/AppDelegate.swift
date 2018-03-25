@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Installed packages.
     var installed = [String]()
     
+    /// All available packages with name and description.
+    var allPackages = [String]()
+    
     /// SSH session.
     var session: NMSSHSession?
     
@@ -38,7 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if TabBarController.shared != nil {
                         DispatchQueue.main.async {
-                            ((TabBarController.shared.viewControllers?[3] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
+                            if let tableView = ((TabBarController.shared.viewControllers?[3] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView {
+                                tableView.reloadData()
+                            }
                             if self.updates.count > 1 {
                                 TabBarController.shared.viewControllers?[3].tabBarItem.badgeValue = "\(self.updates.count-1)"
                             } else {
@@ -52,7 +57,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.installed = installed
                     
                     DispatchQueue.main.async {
-                        ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView.reloadData()
+                        if let tableView = ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
+                            tableView.reloadData()
+                        }
+                    }
+                }
+                
+                if let allPackages = (try? session.channel.execute("apt-cache search .").components(separatedBy: "\n")) {
+                    self.allPackages = allPackages
+                    
+                    if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? PackagesViewController)?.tableView {
+                        tableView.reloadData()
                     }
                 }
             }
