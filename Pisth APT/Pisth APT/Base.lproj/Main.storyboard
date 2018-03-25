@@ -67,22 +67,6 @@
             </objects>
             <point key="canvasLocation" x="1144.8" y="-428.57142857142861"/>
         </scene>
-        <!--Sources-->
-        <scene sceneID="jA4-Ze-S9i">
-            <objects>
-                <viewController id="xDD-Lj-EZh" customClass="SourcesViewController" customModule="Pisth_APT" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7OF-4M-sR4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="6bG-Zw-qp0"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Sources" id="Yks-8K-TRi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1O2-hK-ea9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1145" y="-1092"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0So-Cz-CxL">
             <objects>
@@ -93,7 +77,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="cCk-qq-mcj" kind="relationship" relationship="viewControllers" id="8Fs-vE-8fY"/>
                         <segue destination="6n0-S2-CpJ" kind="relationship" relationship="viewControllers" id="QQK-Tz-M7x"/>
                         <segue destination="lav-dJ-ZDV" kind="relationship" relationship="viewControllers" id="XFU-Mt-YXc"/>
                         <segue destination="FdL-HQ-FYA" kind="relationship" relationship="viewControllers" id="PmH-wI-ZQ4"/>
@@ -103,25 +86,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXz-AB-HA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-564" y="-92"/>
-        </scene>
-        <!--Sources-->
-        <scene sceneID="avY-Lk-CQX">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cCk-qq-mcj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sources" image="package" id="gTm-i4-b5j"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="0t0-97-gqw">
-                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xDD-Lj-EZh" kind="relationship" relationship="rootViewController" id="C0R-Pf-6DE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ncT-aM-bHF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="383" y="-1092"/>
         </scene>
         <!--Packages-->
         <scene sceneID="2Q6-Xw-vrv">
