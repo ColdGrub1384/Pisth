@@ -34,6 +34,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Session used for the shell
     var shellSession: NMSSHSession?
     
+    /// Open the session.
+    func connect() {
+        // Connect
+        if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) {
+            let connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+            
+            let errorTitle = "Error opening the session!"
+            var error: String?
+            
+            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
+                if session.isConnected {
+                    session.authenticate(byPassword: connection.password)
+                    
+                    if session.isAuthorized {
+                        try? session.channel.startShell()
+                    } else {
+                        error = "There was an error trying to login as '\(connection.username)'. Check for the username and for the password."
+                    }
+                } else {
+                    error = "There was an error trying to connect to the server, check for the connection IP address and for your internet connection."
+                }
+                
+                self.session = session
+            }
+            
+            if error != nil {
+                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                    if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
+                        UIApplication.shared.keyWindow?.rootViewController = vc
+                        vc.errorLabel.text = error
+                        vc.errorTitleLabel.text = errorTitle
+                    }
+                })
+            }
+            
+            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
+                if session.isConnected {
+                    session.authenticate(byPassword: connection.password)
+                    
+                    if session.isAuthorized {
+                        session.channel.requestPty = true
+                        session.channel.ptyTerminalType = .xterm
+                        try? session.channel.startShell()
+                    }
+                }
+                
+                self.shellSession = session
+            }
+            
+        } else {
+            // No connection
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
+                    UIApplication.shared.keyWindow?.rootViewController = vc
+                    vc.errorTitleLabel.text = "No connection"
+                    vc.errorLabel.text = "Setup an SSH connection in settings."
+                    vc.errorView.backgroundColor = .orange
+                    vc.retryButton.isHidden = true
+                }
+            })
+        }
+    }
+    
     /// Search for updates
     func searchForUpdates() {
         // Search for updates
@@ -84,46 +148,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        // Connect
-        if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) {
-            let connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
-            
-            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
-                if session.isConnected {
-                    session.authenticate(byPassword: connection.password)
-                    
-                    if session.isAuthorized {
-                        try? session.channel.startShell()
-                        
-                        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                            // Search for updates
-                            let activityVC = ActivityViewController(message: "Loading...")
-                            UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
-                                self.searchForUpdates()
-                                activityVC.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                    }
-                }
-                
-                self.session = session
+        connect()
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            // Search for updates
+            let activityVC = ActivityViewController(message: "Loading...")
+            UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
+                self.searchForUpdates()
+                activityVC.dismiss(animated: true, completion: nil)
             }
-            
-            if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
-                if session.isConnected {
-                    session.authenticate(byPassword: connection.password)
-                    
-                    if session.isAuthorized {
-                        session.channel.requestPty = true
-                        session.channel.ptyTerminalType = .xterm
-                        try? session.channel.startShell()
-                    }
-                }
-                
-                self.shellSession = session
-            }
-
-        }
+        })
         
         return true
     }

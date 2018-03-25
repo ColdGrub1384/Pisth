@@ -16,6 +16,7 @@
 		3A6C51172067ED9700034753 /* Terminal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51162067ED9700034753 /* Terminal.xib */; };
 		3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7532CD2066DF8000CF85D3 /* TabBarController.swift */; };
 		3A862DDF2067FFE500090160 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A862DDE2067FFE500090160 /* TerminalWebView.swift */; };
+		3A9B210C206846F100FAA9DF /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B210B206846F100FAA9DF /* ErrorViewController.swift */; };
 		3AA3FA052067D4FB00FBF00A /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */; };
 		3AA3FA092067DD4300FBF00A /* InstalledTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */; };
 		3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */; };
@@ -79,6 +80,7 @@
 		3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		3A7532CD2066DF8000CF85D3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3A862DDE2067FFE500090160 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
+		3A9B210B206846F100FAA9DF /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledTableViewController.swift; sourceTree = "<group>"; };
 		3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+topViewController.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				3A7532CD2066DF8000CF85D3 /* TabBarController.swift */,
 				3A862DDE2067FFE500090160 /* TerminalWebView.swift */,
 				3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */,
+				3A9B210B206846F100FAA9DF /* ErrorViewController.swift */,
 				3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */,
 				3ACDC3E12065AEBE0049034F /* Main.storyboard */,
 				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
@@ -222,6 +225,11 @@
 					3ACDC3D92065AEBD0049034F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -349,6 +357,7 @@
 				3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */,
 				3ACDC3F42065D2610049034F /* PackagesTableViewController.swift in Sources */,
 				3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */,
+				3A9B210C206846F100FAA9DF /* ErrorViewController.swift in Sources */,
 				3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */,
 				3A862DDF2067FFE500090160 /* TerminalWebView.swift in Sources */,
 				3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */,

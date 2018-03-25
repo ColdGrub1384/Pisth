@@ -11,9 +11,29 @@ import Pisth_Shared
 /// View controller used to manage connections.
 class ConnectionsTableViewController: UITableViewController {
     
+    private var wasConnectionInformationTableViewControllerPushed = false
+    
+    private func connect() {
+        let activityVC = ActivityViewController(message: "Loading...")
+        UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
+            AppDelegate.shared.connect()
+            activityVC.dismiss(animated: true, completion: {
+                
+                // Search for updates
+                let activityVC = ActivityViewController(message: "Loading...")
+                UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
+                    AppDelegate.shared.searchForUpdates()
+                    activityVC.dismiss(animated: true, completion: nil)
+                }
+                
+            })
+        }
+    }
+    
     /// Add new connection
     @IBAction func add(_ sender: Any) {
         if let vc = UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() {
+            wasConnectionInformationTableViewControllerPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -32,6 +52,13 @@ class ConnectionsTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         tableView.reloadData()
+        
+        if wasConnectionInformationTableViewControllerPushed {
+            
+            connect()
+            
+            wasConnectionInformationTableViewControllerPushed = false
+        }
     }
     
     // MARK: - Table view data source
@@ -55,6 +82,8 @@ class ConnectionsTableViewController: UITableViewController {
         
         if indexPath.row == UserDefaults.standard.integer(forKey: "connection") {
             cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
         
         let connection = DataManager.shared.connections[indexPath.row]
@@ -91,6 +120,7 @@ class ConnectionsTableViewController: UITableViewController {
                 vc.index = indexPath.row
                 vc.connection = DataManager.shared.connections[indexPath.row]
                 
+                self.wasConnectionInformationTableViewControllerPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -124,6 +154,11 @@ class ConnectionsTableViewController: UITableViewController {
     
     /// Select connection
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row != UserDefaults.standard.integer(forKey: "connection") {
+            connect()
+        }
+        
         UserDefaults.standard.set(indexPath.row, forKey: "connection")
         UserDefaults.standard.synchronize()
         
