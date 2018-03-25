@@ -40,8 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         DispatchQueue.main.async {
                             if self.updates.count > 1 {
                                 TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
+                                ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
                             } else {
                                 TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
+                                ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
                             }
                         }
                     }
