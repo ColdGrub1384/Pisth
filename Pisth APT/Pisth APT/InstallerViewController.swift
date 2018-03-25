@@ -106,6 +106,8 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         
         packageNameLabel.text = package
         
+        activityView.isHidden = false
+        
         if let package = package {
             if let session = AppDelegate.shared.session {
                 if session.isConnected && session.isAuthorized {
@@ -160,10 +162,6 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         
         if properties[indexPath.row].components(separatedBy: ": ").count >= 2 {
             cell.contentTextView.text = properties[indexPath.row].components(separatedBy: ": ")[1]
-            
-//            cell.contentTextViewHeightConstraint.constant = cell.contentTextView.contentSize.height
-            
-//            cell.contentTextView.backgroundColor = .red
         }
         
         return cell

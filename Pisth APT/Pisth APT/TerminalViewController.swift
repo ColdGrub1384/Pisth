@@ -178,8 +178,11 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
             if message.contains("[sudo] password") {
                 self.sendPassword()
             }
-            
-            self.doneButton.isEnabled = self.console.contains(TerminalViewController.close)
+        
+            if self.console.contains(TerminalViewController.close) {
+                self.doneButton.isEnabled = true
+                self.title = "FInished!"
+            }
             
             if self.webView != nil && !self.webView.isLoading {
                 self.webView.evaluateJavaScript("term.write(\(message.components(separatedBy: TerminalViewController.close)[0].javaScriptEscapedString))", completionHandler: nil)
