@@ -8,19 +8,22 @@
 import UIKit
 
 /// View controller for displaying a package.
-class InstallerViewController: UIViewController {
+class InstallerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /// The package to show.
     var package: String?
+    
+    /// Package description to parse and show.
+    private var packageProperties: [String]?
+    
+    /// Table view containing properties.
+    @IBOutlet weak var propertiesTableView: UITableView!
     
     /// Activity view.
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     /// Label containing package name.
     @IBOutlet weak var packageNameLabel: UILabel!
-    
-    /// Text view containing package description.
-    @IBOutlet weak var packageDescriptionTextView: UITextView!
     
     /// Button for removing the package.
     @IBOutlet weak var removeButton: UIBarButtonItem!
@@ -90,8 +93,11 @@ class InstallerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        propertiesTableView.dataSource = self
+        propertiesTableView.delegate = self
+        propertiesTableView.rowHeight = UITableViewAutomaticDimension
+        propertiesTableView.estimatedRowHeight = 200
         packageNameLabel.text = ""
-        packageDescriptionTextView.text = ""
     }
     
     /// Fetch info.
@@ -104,7 +110,21 @@ class InstallerViewController: UIViewController {
             if let session = AppDelegate.shared.session {
                 if session.isConnected && session.isAuthorized {
                     if let description = try? session.channel.execute("aptitude show '\(package)'") {
-                        packageDescriptionTextView.text = description
+                        
+                        var properties = [String]()
+                        for property in description.components(separatedBy: "\n") {
+                            if property.contains(": ") {
+                                properties.append(property)
+                            } else {
+                                if let last = properties.last {
+                                    properties.remove(at: properties.count-1)
+                                    properties.append(last+"\n"+property)
+                                }
+                            }
+                        }
+                        
+                        self.packageProperties = properties
+                        self.propertiesTableView.reloadData()
                     }
                 }
             }
@@ -116,5 +136,41 @@ class InstallerViewController: UIViewController {
             
             activityView.isHidden = true
         }
+    }
+    
+    // MARK: - Table view data source
+    
+    /// - Returns: The number of properties.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return packageProperties?.count ?? 0
+    }
+    
+    /// - Returns: A cell with the name and the value of the property.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "property") as? PackagePropertyTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        guard let properties = packageProperties else {
+            return cell
+        }
+        
+        cell.nameLabel.text = properties[indexPath.row].components(separatedBy: ": ")[0]
+        
+        if properties[indexPath.row].components(separatedBy: ": ").count >= 2 {
+            cell.contentTextView.text = properties[indexPath.row].components(separatedBy: ": ")[1]
+            
+//            cell.contentTextViewHeightConstraint.constant = cell.contentTextView.contentSize.height
+            
+//            cell.contentTextView.backgroundColor = .red
+        }
+        
+        return cell
+    }
+    
+    /// - Returns: `200`.
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }

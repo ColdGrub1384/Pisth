@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A5F983E2066FCB100E43793 /* Installer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F983D2066FCB100E43793 /* Installer.xib */; };
 		3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F983F2066FFB900E43793 /* InstallerViewController.swift */; };
 		3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9220668D450002353B /* Pisth.xcdatamodeld */; };
 		3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEAF2066998B0002353B /* Connection Info.storyboard */; };
@@ -20,6 +19,8 @@
 		3AA3FA052067D4FB00FBF00A /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */; };
 		3AA3FA092067DD4300FBF00A /* InstalledTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */; };
 		3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */; };
+		3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9BC88206821AE004AF281 /* Installer.storyboard */; };
+		3AA9BC8B20682330004AF281 /* PackagePropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */; };
 		3ACDC3DE2065AEBD0049034F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */; };
 		3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E12065AEBE0049034F /* Main.storyboard */; };
 		3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E42065AEC00049034F /* Assets.xcassets */; };
@@ -69,7 +70,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A5F983D2066FCB100E43793 /* Installer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Installer.xib; sourceTree = "<group>"; };
 		3A5F983F2066FFB900E43793 /* InstallerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerViewController.swift; sourceTree = "<group>"; };
 		3A61DE9320668D450002353B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		3A61DEAF2066998B0002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledTableViewController.swift; sourceTree = "<group>"; };
 		3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+topViewController.swift"; sourceTree = "<group>"; };
+		3AA9BC88206821AE004AF281 /* Installer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Installer.storyboard; sourceTree = "<group>"; };
+		3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagePropertyTableViewCell.swift; sourceTree = "<group>"; };
 		3ACDC3DA2065AEBD0049034F /* Pisth APT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth APT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACDC3E22065AEBE0049034F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,10 +162,11 @@
 				3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */,
 				3A7532CD2066DF8000CF85D3 /* TabBarController.swift */,
 				3A862DDE2067FFE500090160 /* TerminalWebView.swift */,
+				3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */,
 				3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */,
 				3ACDC3E12065AEBE0049034F /* Main.storyboard */,
 				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
-				3A5F983D2066FCB100E43793 /* Installer.xib */,
+				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
 				3A6C51162067ED9700034753 /* Terminal.xib */,
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
@@ -275,10 +278,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5F983E2066FCB100E43793 /* Installer.xib in Resources */,
 				3A6C51172067ED9700034753 /* Terminal.xib in Resources */,
 				3ACDC3E82065AEC00049034F /* LaunchScreen.storyboard in Resources */,
 				3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */,
+				3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */,
 				3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */,
 				3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */,
 			);
@@ -350,6 +353,7 @@
 				3A862DDF2067FFE500090160 /* TerminalWebView.swift in Sources */,
 				3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */,
 				3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */,
+				3AA9BC8B20682330004AF281 /* PackagePropertyTableViewCell.swift in Sources */,
 				3ACDC3F22065D2450049034F /* UpdatesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
