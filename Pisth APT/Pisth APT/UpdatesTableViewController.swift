@@ -27,6 +27,22 @@ class UpdatesTableViewController: UITableViewController {
         
     }
     
+    /// Run `apt-get upgrade`.
+    @IBAction func upgrade(_ sender: Any) {
+        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+            return
+        }
+        
+        termVC.command = "clear; sudo apt-get upgrade; echo -e \"\\033[CLOSE\""
+        termVC.title = title
+        
+        let navVC = UINavigationController(rootViewController: termVC)
+        navVC.view.backgroundColor = .clear
+        navVC.modalPresentationStyle = .overCurrentContext
+        
+        UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
+    }
+    
     // MARK: - View controller
     
     /// Setup views.

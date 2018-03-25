@@ -302,7 +302,13 @@
                             <outlet property="delegate" destination="NJO-7F-h8O" id="qRA-jV-hg1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Updates" id="qgb-XZ-esY"/>
+                    <navigationItem key="navigationItem" title="Updates" id="qgb-XZ-esY">
+                        <barButtonItem key="rightBarButtonItem" title="Upgrade" id="L6q-OS-NQy">
+                            <connections>
+                                <action selector="upgrade:" destination="NJO-7F-h8O" id="T5A-3g-lhx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIS-ZS-j7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
