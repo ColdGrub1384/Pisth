@@ -38,12 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if TabBarController.shared != nil {
                         DispatchQueue.main.async {
+                            ((TabBarController.shared.viewControllers?[3] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
                             if self.updates.count > 1 {
-                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
-                                ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
+                                TabBarController.shared.viewControllers?[3].tabBarItem.badgeValue = "\(self.updates.count-1)"
                             } else {
-                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
-                                ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesViewController)?.tableView.reloadData()
+                                TabBarController.shared.viewControllers?[3].tabBarItem.badgeValue = nil
                             }
                         }
                     }
@@ -51,6 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if let installed = (try? session.channel.execute("apt-mark showmanual").components(separatedBy: "\n")) {
                     self.installed = installed
+                    
+                    DispatchQueue.main.async {
+                        ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView.reloadData()
+                    }
                 }
             }
         }
