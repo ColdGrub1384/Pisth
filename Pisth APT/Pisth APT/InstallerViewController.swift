@@ -171,4 +171,19 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
+    // MARK: - Static
+    
+    /// Get a Navigation controller containing an `InstallerViewController` from given package.
+    ///
+    /// - Parameters:
+    ///     - package: Package to show.
+    ///
+    /// - Returns: A Navigation controller containing an `InstallerViewController`.
+    static func forPackage(_ package: String) -> UINavigationController {
+        let vc = (UIStoryboard(name: "Installer", bundle: Bundle.main).instantiateInitialViewController() as? InstallerViewController) ?? InstallerViewController()
+        vc.package = package
+                
+        return UINavigationController(rootViewController: vc)
+    }
 }

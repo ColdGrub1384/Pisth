@@ -80,9 +80,7 @@ class UpdatesTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let installer = UIStoryboard(name: "Installer", bundle: Bundle.main).instantiateInitialViewController() as? InstallerViewController {
-            installer.package = AppDelegate.shared.updates[indexPath.row]
-            present(UINavigationController(rootViewController: installer), animated: true, completion: nil)
-        }
+        let vc = InstallerViewController.forPackage(AppDelegate.shared.updates[indexPath.row])
+        present(vc, animated: true, completion: nil)
     }
 }

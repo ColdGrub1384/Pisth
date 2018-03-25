@@ -87,9 +87,7 @@ class PackagesTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let installer = UIStoryboard(name: "Installer", bundle: Bundle.main).instantiateInitialViewController() as? InstallerViewController {
-            installer.package = AppDelegate.shared.allPackages[indexPath.row].components(separatedBy: " - ")[0]
-            present(UINavigationController(rootViewController: installer), animated: true, completion: nil)
-        }
+        let vc = InstallerViewController.forPackage(AppDelegate.shared.allPackages[indexPath.row].components(separatedBy: " - ")[0])
+        present(vc, animated: true, completion: nil)
     }
 }
