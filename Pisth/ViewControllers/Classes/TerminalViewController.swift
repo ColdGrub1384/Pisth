@@ -329,7 +329,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
             }, failure: { (error) in
                 
-                if error == .biometryNotEnrolled || error == .passcodeNotSet {
+                if error == .biometryNotEnrolled || error == .passcodeNotSet || error == .biometryNotAvailable {
                     self.insertText(ConnectionManager.shared.connection?.password ?? "")
                 }
             })
