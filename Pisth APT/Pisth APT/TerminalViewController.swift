@@ -92,7 +92,7 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
             
         }, failure: { (error) in
             
-            if error == .biometryNotEnrolled || error == .passcodeNotSet {
+            if error == .biometryNotEnrolled || error == .passcodeNotSet || error == .biometryNotAvailable {
                 try? AppDelegate.shared.shellSession?.channel.write(connection.password+"\n")
             }
             
