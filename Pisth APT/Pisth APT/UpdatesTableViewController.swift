@@ -9,7 +9,7 @@ import UIKit
 import Pisth_Shared
 
 /// View controller for updating packages.
-class UpdatesTableViewController: UITableViewController {
+class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
     
     /// Search for updates.
     ///
@@ -43,6 +43,12 @@ class UpdatesTableViewController: UITableViewController {
         UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
     }
     
+    /// Search controller used to search.
+    var searchController: UISearchController!
+    
+    /// Fetched packages with `searchController`.
+    var fetchedPackages = [String]()
+    
     // MARK: - View controller
     
     /// Setup views.
@@ -53,12 +59,25 @@ class UpdatesTableViewController: UITableViewController {
         refreshControl?.backgroundColor = .clear
         refreshControl?.tintColor = .gray
         refreshControl?.addTarget(self, action: #selector(update(_:)), for: .valueChanged)
+        
+        // Search
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        }
     }
     
     // MARK: - Table view data source
     
-    /// - Returns: Count of available updates.
+    /// - Returns: Count of available updates or fetched updates.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            return fetchedPackages.count
+        }
+        
         return AppDelegate.shared.updates.count
     }
     
@@ -68,7 +87,14 @@ class UpdatesTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.textLabel?.text = AppDelegate.shared.updates[indexPath.row]
+        var updates: [String]
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            updates = fetchedPackages
+        } else {
+            updates = AppDelegate.shared.updates
+        }
+        
+        cell.textLabel?.text = updates[indexPath.row]
         
         return cell
     }
@@ -80,7 +106,41 @@ class UpdatesTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = InstallerViewController.forPackage(AppDelegate.shared.updates[indexPath.row])
+        var updates: [String]
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            updates = fetchedPackages
+        } else {
+            updates = AppDelegate.shared.updates
+        }
+        
+        let vc = InstallerViewController.forPackage(updates[indexPath.row])
         present(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: - Search bar delegate
+    
+    /// Search for package.
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        fetchedPackages = []
+        
+        if !searchText.isEmpty {
+            
+            for package in AppDelegate.shared.updates {
+                if package.lowercased().contains(searchText.lowercased()) {
+                    fetchedPackages.append(package)
+                }
+                
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    /// Reset packages.
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            self.tableView.reloadData()
+        })
     }
 }

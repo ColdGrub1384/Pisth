@@ -9,7 +9,7 @@ import UIKit
 import Pisth_Shared
 
 /// Table view controller for listing installed packages.
-class InstalledTableViewController: UITableViewController {
+class InstalledTableViewController: UITableViewController, UISearchBarDelegate {
     
     /// Refresh.
     ///
@@ -27,6 +27,12 @@ class InstalledTableViewController: UITableViewController {
         
     }
     
+    /// Search controller used to search.
+    var searchController: UISearchController!
+    
+    /// Fetched packages with `searchController`.
+    var fetchedPackages = [String]()
+    
     // MARK: - View controller
     
     /// Setup views.
@@ -37,12 +43,25 @@ class InstalledTableViewController: UITableViewController {
         refreshControl?.backgroundColor = .clear
         refreshControl?.tintColor = .gray
         refreshControl?.addTarget(self, action: #selector(update(_:)), for: .valueChanged)
+        
+        // Search
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        }
     }
     
     // MARK: - Table view data source
     
     /// - Returns: Count of installed packages.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            return fetchedPackages.count
+        }
+        
         return AppDelegate.shared.installed.count
     }
     
@@ -52,7 +71,14 @@ class InstalledTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
-        cell.textLabel?.text = AppDelegate.shared.installed[indexPath.row]
+        var installed: [String]
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            installed = fetchedPackages
+        } else {
+            installed = AppDelegate.shared.installed
+        }
+        
+        cell.textLabel?.text = installed[indexPath.row]
         
         return cell
     }
@@ -64,8 +90,42 @@ class InstalledTableViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = InstallerViewController.forPackage(AppDelegate.shared.installed[indexPath.row])
+        var installed: [String]
+        if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
+            installed = fetchedPackages
+        } else {
+            installed = AppDelegate.shared.installed
+        }
+        
+        let vc = InstallerViewController.forPackage(installed[indexPath.row])
         present(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: - Search bar delegate
+    
+    /// Search for package.
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        fetchedPackages = []
+        
+        if !searchText.isEmpty {
+            
+            for package in AppDelegate.shared.installed {
+                if package.lowercased().contains(searchText.lowercased()) {
+                    fetchedPackages.append(package)
+                }
+                
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    /// Reset packages.
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            self.tableView.reloadData()
+        })
     }
     
 }
