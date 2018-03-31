@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A15A9D8206E88BF007A8E7D /* Licenses.html */; };
 		3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F983F2066FFB900E43793 /* InstallerViewController.swift */; };
 		3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9220668D450002353B /* Pisth.xcdatamodeld */; };
 		3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEAF2066998B0002353B /* Connection Info.storyboard */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A15A9D8206E88BF007A8E7D /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3A5F983F2066FFB900E43793 /* InstallerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerViewController.swift; sourceTree = "<group>"; };
 		3A61DE9320668D450002353B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		3A61DEAF2066998B0002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
 				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
 				3A6C51162067ED9700034753 /* Terminal.xib */,
+				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
 				3A61DE9220668D450002353B /* Pisth.xcdatamodeld */,
@@ -286,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */,
 				3A6C51172067ED9700034753 /* Terminal.xib in Resources */,
 				3ACDC3E82065AEC00049034F /* LaunchScreen.storyboard in Resources */,
 				3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */,
