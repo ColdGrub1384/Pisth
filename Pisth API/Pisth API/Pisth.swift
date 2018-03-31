@@ -80,6 +80,6 @@ open class Pisth {
             parameters[item.name] = item.value
         }
         
-        return parameters?["filename"]?.removingPercentEncoding
+        return parameters["filename"]?.removingPercentEncoding
     }
 }
