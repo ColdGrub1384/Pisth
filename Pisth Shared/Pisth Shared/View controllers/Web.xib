@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="fn7-1e-mZK" customClass="WebViewController" customModule="Pisth" customModuleProvider="target">
+        <viewController id="fn7-1e-mZK" customClass="WebViewController" customModule="Pisth_Shared" customModuleProvider="target">
             <view key="view" contentMode="scaleToFill" id="3Xa-s9-4OL">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,6 +45,7 @@
             <connections>
                 <outlet property="goBackButton" destination="B1d-QW-Qmm" id="8NB-jd-LlO"/>
                 <outlet property="goForwardButton" destination="ShT-me-1aS" id="D0v-7q-WPU"/>
+                <outlet property="toolbar" destination="hSt-J3-Rx5" id="KBH-60-QyV"/>
             </connections>
             <point key="canvasLocation" x="32.5" y="5.5"/>
         </viewController>

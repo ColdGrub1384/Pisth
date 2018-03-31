@@ -17,7 +17,7 @@ extension UIViewController {
     
     /// Returns the Web view controller initialised from nib.
     static var webViewController: WebViewController {
-        return (Bundle.main.loadNibNamed("Web", owner: nil, options: nil)?[0] as? WebViewController) ?? WebViewController()
+        return (Bundle(for: WebViewController.self).loadNibNamed("Web", owner: nil, options: nil)?[0] as? WebViewController) ?? WebViewController()
     }
     
     /// Returns the image viewer initialised from nib.
