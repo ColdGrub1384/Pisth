@@ -1,5 +1,7 @@
 # Getting started
 
+Both Pisth and the app using the API have to be signed with the same team ID! So this API is mostly private, but you can experiment it signing Pisth with your team ID.
+
  1. Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it's very important! Don't use URL schemes like "pisth-import", try to include the name of your app, for example: "myApp-pisth-import".
  2. Include the Pisth API framework: Drag the `Pisth API` project to your workspace and add them to your app's embedded binary.
  3. Configure the `Pisth` instance:
