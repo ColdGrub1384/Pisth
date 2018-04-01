@@ -30,14 +30,10 @@ class GitBranchesTableViewController: UITableViewController {
     ///     - command: Command to run.
     ///     - title: Title of opened terminal.
     func launch(command: String, withTitle title: String) {
-        var terminalVC = TerminalViewController()
-        
-        if #available(iOS 11, *) {
-            terminalVC = TerminalViewControllerIOS11()
-        }
-        
+        let terminalVC = TerminalViewController()
         terminalVC.title = title
         terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
+        
         navigationController?.pushViewController(terminalVC, animated: true, completion: {
             terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
         })
@@ -106,8 +102,6 @@ class GitBranchesTableViewController: UITableViewController {
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)
-        navVC.navigationBar.barStyle = .black
-        navVC.navigationBar.isTranslucent = true
         
         present(navVC, animated: true) {
             remotesVC.navigationItem.setLeftBarButton(UIBarButtonItem.init(barButtonSystemItem: .done, target: remotesVC, action: #selector(remotesVC.done(_:))), animated: true)
@@ -137,8 +131,6 @@ class GitBranchesTableViewController: UITableViewController {
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)
-        navVC.navigationBar.barStyle = .black
-        navVC.navigationBar.isTranslucent = true
         
         present(navVC, animated: true) {
             remotesVC.navigationItem.setLeftBarButton(UIBarButtonItem.init(barButtonSystemItem: .done, target: remotesVC, action: #selector(remotesVC.done(_:))), animated: true)

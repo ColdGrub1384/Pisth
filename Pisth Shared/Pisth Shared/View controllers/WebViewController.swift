@@ -5,9 +5,9 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
+#if os(iOS)
 import UIKit
 import WebKit
-
 
 /// View controller displaying web content.
 open class WebViewController: UIViewController, WKNavigationDelegate  {
@@ -91,3 +91,4 @@ open class WebViewController: UIViewController, WKNavigationDelegate  {
         }
     }
 }
+#endif

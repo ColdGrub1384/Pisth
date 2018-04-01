@@ -65,6 +65,7 @@
 		3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; };
 		3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3AD2F69A20713FC10017F2EB /* Web.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD2F69920713FC10017F2EB /* Web.xib */; };
 		3AD7E0572049E8CC00834D59 /* amzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E0302049E12F00834D59 /* amzn.png */; };
 		3AD7E0582049E8CD00834D59 /* arch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E02F2049E12F00834D59 /* arch.png */; };
 		3AD7E0592049E8CF00834D59 /* centos.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E0342049E12F00834D59 /* centos.png */; };
@@ -182,6 +183,7 @@
 		3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B792041BB5B006C3218 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD2F69920713FC10017F2EB /* Web.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
 		3AD7E02D2049E12E00834D59 /* fedora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fedora.png; sourceTree = "<group>"; };
 		3AD7E02E2049E12F00834D59 /* debian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debian.png; sourceTree = "<group>"; };
 		3AD7E02F2049E12F00834D59 /* arch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arch.png; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 				3A5733C21FFFDA02004F4973 /* Git.storyboard */,
 				3A5888B4205C6BCD0002F9E1 /* Contribute.xib */,
 				3A729777205D58B100F94BA7 /* Beta.xib */,
+				3AD2F69920713FC10017F2EB /* Web.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 				3AD7E05A2049E8D000834D59 /* darwin.png in Resources */,
 				3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */,
 				3A5888B5205C6BCD0002F9E1 /* Contribute.xib in Resources */,
+				3AD2F69A20713FC10017F2EB /* Web.xib in Resources */,
 				3A42FE232033B0300061A38B /* Themes Store.xib in Resources */,
 				3A61DEBB2066AE760002353B /* Connection Info.storyboard in Resources */,
 			);
@@ -914,7 +918,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -934,7 +938,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";

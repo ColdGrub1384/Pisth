@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oLq-DB-ksq" firstAttribute="centerX" secondItem="3NA-cV-11k" secondAttribute="centerX" id="5vh-Le-NfI"/>
                             <constraint firstItem="oLq-DB-ksq" firstAttribute="leading" secondItem="3NA-cV-11k" secondAttribute="leading" id="AkF-ci-xwa"/>

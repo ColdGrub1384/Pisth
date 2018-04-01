@@ -53,9 +53,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
         
         initBiometricAuthenticationSetting()
         initShowHiddenFilesSetting()
@@ -305,9 +303,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view data source
     
-    /// - Returns: `9`.
+    /// - Returns: `11`.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 11
     }
     
     /// - Returns: the cell corresponding to the index path.

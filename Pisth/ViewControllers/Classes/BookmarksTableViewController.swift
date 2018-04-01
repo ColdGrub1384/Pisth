@@ -77,7 +77,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
         let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
         
-        tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
@@ -96,9 +95,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchController
-        }
+        navigationItem.searchController = searchController
         
         // Multipeer connectivity
         peerID = MCPeerID(displayName: UIDevice.current.name)
@@ -209,10 +206,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                 cell.textLabel?.text = cell.detailTextLabel?.text
                 cell.detailTextLabel?.text = ""
             }
-            
-            cell.textLabel?.textColor = .white
-            cell.detailTextLabel?.textColor = .white
-            
+                        
         // Near devices
         } else if indexPath.section == 1 {
             
@@ -223,7 +217,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             }
             
             cell.textLabel?.text = devices[indexPath.row].displayName
-            cell.textLabel?.textColor = .white
         }
         
         return cell
@@ -291,12 +284,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         ConnectionManager.shared.connection = connection
                         ConnectionManager.shared.connect()
                         
-                        var termVC = TerminalViewController()
-                        
-                        if #available(iOS 11, *) {
-                            termVC = TerminalViewControllerIOS11()
-                        }
-                        
+                        let termVC = TerminalViewController()
                         termVC.pureMode = true
                         
                         activityVC.dismiss(animated: true, completion: {
@@ -361,13 +349,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             ConnectionManager.shared.connection = nil
             
-            var termVC: TerminalViewController
-            
-            if #available(iOS 11, *) {
-                termVC = TerminalViewControllerIOS11()
-            } else {
-                termVC = TerminalViewController()
-            }
+            let termVC = TerminalViewController()
             
             termVC.pureMode = true
             termVC.viewer = true

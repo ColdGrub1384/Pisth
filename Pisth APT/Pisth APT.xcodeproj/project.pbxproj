@@ -32,6 +32,7 @@
 		3ACDC3F22065D2450049034F /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */; };
 		3ACDC3F42065D2610049034F /* PackagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */; };
 		3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */; };
+		3AD2F69F20713FEF0017F2EB /* Web.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD2F69B20713FEE0017F2EB /* Web.xib */; };
 		D1B65A4FA557546ADBC80216 /* Pods_Pisth_APT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4D5ED25D29628E51FDD5E4 /* Pods_Pisth_APT.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		3AD2F69B20713FEE0017F2EB /* Web.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
 		612B074A4DE12A21D7587FCA /* Pods-Pisth APT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth APT.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT.release.xcconfig"; sourceTree = "<group>"; };
 		C4645E0208D03FCCC0AA820B /* Pods-Pisth APT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth APT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth APT/Pods-Pisth APT.debug.xcconfig"; sourceTree = "<group>"; };
 		CA4D5ED25D29628E51FDD5E4 /* Pods_Pisth_APT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_APT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
 				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
 				3A6C51162067ED9700034753 /* Terminal.xib */,
+				3AD2F69B20713FEE0017F2EB /* Web.xib */,
 				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
@@ -301,6 +304,7 @@
 				3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */,
 				3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */,
 				3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */,
+				3AD2F69F20713FEF0017F2EB /* Web.xib in Resources */,
 				3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

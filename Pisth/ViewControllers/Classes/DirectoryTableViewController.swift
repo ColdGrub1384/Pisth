@@ -173,24 +173,18 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             title = titleComponents[titleComponents.count-2]
         }
         
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
         
         // TableView cells
         tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
-        tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if #available(iOS 11.0, *) {
-            tableView.dropDelegate = self
-            tableView.dragDelegate = self
-            tableView.dragInteractionEnabled = true
-        }
+        tableView.dropDelegate = self
+        tableView.dragDelegate = self
+        tableView.dragInteractionEnabled = true
         
         // Initialize the refresh control.
         refreshControl = UIRefreshControl()
-        refreshControl?.tintColor = UIColor.white
         refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
         
         // Bar buttons
@@ -466,13 +460,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.showError()
         })
         
-        var terminalVC = TerminalViewController()
-        
-        if #available(iOS 11, *) {
-            terminalVC = TerminalViewControllerIOS11()
-        }
-        
+        let terminalVC = TerminalViewController()
         terminalVC.pwd = directory
+        
         navigationController?.pushViewController(terminalVC, animated: true)
     }
     
@@ -784,9 +774,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-            if #available(iOS 11.0, *) {
-                picker.allowsMultipleSelection = true
-            }
+            picker.allowsMultipleSelection = true
             picker.delegate = self
             
             self.present(picker, animated: true, completion: nil)
@@ -1115,10 +1103,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             
             let navVC = UINavigationController(rootViewController: dirVC)
-            navVC.navigationBar.barStyle = .black
-            navVC.navigationBar.isTranslucent = true
-            navVC.toolbar.barStyle = .black
-            navVC.toolbar.isTranslucent = true
             present(navVC, animated: true, completion: {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
@@ -1323,7 +1307,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     // MARK: - Table view drop delegate
         
     /// Move dropped file to destination folder.
-    @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         
         guard let sftp = ConnectionManager.shared.filesSession?.sftp else {
@@ -1427,7 +1410,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     /// Set animation for moving files into a directory.
-    @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         
         guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
@@ -1461,7 +1443,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     // MARK: - Table view drag delegate
     
     /// Start dragging file.
-    @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else {
@@ -1496,7 +1477,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     /// Allow dragging only if the selected file is not the parent directory.
-    @available(iOS 11.0, *)
     func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
         
         guard let files = files else {

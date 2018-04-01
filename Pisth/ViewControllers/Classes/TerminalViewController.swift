@@ -56,7 +56,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if self.ctrl_ {
                 ctrlKey.setTitleColor(.lightGray, for: .normal)
             } else {
-                if TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"]?.toolbarStyle == .default {
+                if TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"]?.toolbarStyle == .default {
                     ctrlKey.setTitleColor(.black, for: .normal)
                 } else {
                     ctrlKey.setTitleColor(.white, for: .normal)
@@ -160,7 +160,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Add keyboard's toolbar.
     @objc func addToolbar() {
-        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
+        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] else {
             return
         }
         
@@ -277,13 +277,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         reloadInputViews()
         
-        if #available(iOS 11.0, *) {
-            
-            if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
-                toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
-            } else {
-                toolbar.frame.origin.y = 0
-            }
+        
+        if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
+            toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
+        } else {
+            toolbar.frame.origin.y = 0
         }
     }
     
@@ -504,7 +502,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
-        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] ?? ProTheme()
+        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()
         view.backgroundColor = theme.backgroundColor
         navigationController?.navigationBar.barStyle = theme.toolbarStyle
         
@@ -543,8 +541,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         // Create selection Textview
         selectionTextView = UITextView(frame: webView.frame)
-        selectionTextView.backgroundColor = .black
-        selectionTextView.textColor = .white
         selectionTextView.isHidden = true
         selectionTextView.font = UIFont(name: "Courier", size: 15)
         selectionTextView.isEditable = false
@@ -567,9 +563,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 try? ConnectionManager.shared.session?.channel.startShell()
             }
             
-            if #available(iOS 11.0, *) {
-                navigationItem.largeTitleDisplayMode = .never
-            }
+            navigationItem.largeTitleDisplayMode = .never
             
             addToolbar()
         }
@@ -580,7 +574,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .default
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
@@ -779,7 +773,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                     
                     // Send data to peer
-                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
+                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     if self.mcSession.connectedPeers.count > 0 {
@@ -859,10 +853,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     // MARK: Text input traits
     
     /// `UIKeyboardAppearance.dark`
-    var keyboardAppearance: UIKeyboardAppearance = ((TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] ?? ProTheme()).keyboardAppearance)
+    var keyboardAppearance: UIKeyboardAppearance = ((TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()).keyboardAppearance)
     
     /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
+    
+    /// Returns `.no`.
+    var smartQuotesType: UITextSmartQuotesType = .no
     
     // MARK: Web kit navigation delegate
 
@@ -1075,7 +1072,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !viewer {
                 DispatchQueue.main.async {
                     // Send data to peer
-                    let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)
@@ -1141,12 +1138,4 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Print this to dismiss the keyboard (from SSH).
     static let close = "\(Keys.esc)[CLOSE"
-}
-
-/// TerminalViewController subclass used only if iOS 11 is available.
-@available(iOS 11.0, *)
-class TerminalViewControllerIOS11: TerminalViewController {
-    
-    /// Returns `.no`.
-    var smartQuotesType: UITextSmartQuotesType = .no
 }

@@ -122,16 +122,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         // Setup Navigation Controller
         let bookmarksVC = BookmarksTableViewController()
         navigationController = UINavigationController(rootViewController: bookmarksVC)
-        navigationController.navigationBar.barStyle = .black
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.toolbar.barStyle = .black
-        if #available(iOS 11.0, *) {
-            navigationController.navigationBar.prefersLargeTitles = true
-        }
+        navigationController.navigationBar.prefersLargeTitles = true
         
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
+        window?.tintColor = UIColor(named: "Purple")
+        UISwitch.appearance().onTintColor = UIColor(named: "Purple")
         window?.makeKeyAndVisible()
         
         // Initialize the Google Mobile Ads SDK.
@@ -192,8 +189,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
         
         // Set default terminal theme
-        if UserDefaults.standard.string(forKey: "terminalTheme") == nil {
-            UserDefaults.standard.set("Pro", forKey: "terminalTheme")
+        if UserDefaults.standard.string(forKey: "terminalTheme") == nil || !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            UserDefaults.standard.set("Pisth", forKey: "terminalTheme")
             UserDefaults.standard.synchronize()
         }
         
@@ -206,9 +203,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             UserDefaults.standard.synchronize()
         }
         
-        // Use paraiso-dark by default
+        // Use Xcode theme by default
         if UserDefaults.standard.value(forKey: "editorTheme") == nil {
-            UserDefaults.standard.set("paraiso-dark", forKey: "editorTheme")
+            UserDefaults.standard.set("xcode", forKey: "editorTheme")
             UserDefaults.standard.synchronize()
         }
         
@@ -346,12 +343,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                             ConnectionManager.shared.connect()
                             
                             activityVC.dismiss(animated: true, completion: {
-                                var terminalVC = TerminalViewController()
-                                
-                                if #available(iOS 11.0, *) {
-                                    terminalVC = TerminalViewControllerIOS11()
-                                }
-                                
+                                let terminalVC = TerminalViewController()
                                 terminalVC.pureMode = true
                                 
                                 self.navigationController.pushViewController(terminalVC, animated: true)
@@ -409,18 +401,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 
                 let bookmarksVC = BookmarksTableViewController()
                 let navVC = UINavigationController(rootViewController: bookmarksVC)
-                navVC.navigationBar.barStyle = .black
-                navVC.navigationBar.isTranslucent = true
-                navVC.toolbar.barStyle = .black
-                navVC.toolbar.isTranslucent = true
-                if #available(iOS 11.0, *) {
-                    navVC.navigationBar.prefersLargeTitles = true
-                }
+                navVC.navigationBar.prefersLargeTitles = true
                 navigationController.present(navVC, animated: true, completion: {
                     bookmarksVC.delegate = self
-                    if #available(iOS 11.0, *) {
-                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
-                    }
+                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
                     bookmarksVC.navigationItem.prompt = "Select connection where upload file"
@@ -459,18 +443,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 }
                 
                 let navVC = UINavigationController(rootViewController: bookmarksVC)
-                navVC.navigationBar.barStyle = .black
-                navVC.navigationBar.isTranslucent = true
-                navVC.toolbar.barStyle = .black
-                navVC.toolbar.isTranslucent = true
-                if #available(iOS 11.0, *) {
-                    navVC.navigationBar.prefersLargeTitles = true
-                }
+                navVC.navigationBar.prefersLargeTitles = true
                 navigationController.present(navVC, animated: true, completion: {
                     bookmarksVC.delegate = self
-                    if #available(iOS 11.0, *) {
-                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
-                    }
+                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
                     bookmarksVC.navigationItem.prompt = "Select connection to export file"

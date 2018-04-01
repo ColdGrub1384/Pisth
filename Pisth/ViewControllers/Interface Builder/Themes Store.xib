@@ -38,7 +38,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terminal themes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2U-8P-x9k">
                                     <rect key="frame" x="46" y="19" width="247" height="34"/>
                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="19"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Unlock 9 new themes for the terminal and remove ads." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Fv-Ku-gig">
@@ -46,7 +46,6 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="78" id="pns-C3-18L"/>
                                     </constraints>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
@@ -71,7 +70,7 @@
                                         <constraint firstAttribute="height" constant="26" id="ZTc-GV-x0P"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmA-eN-bN9">
@@ -116,10 +115,9 @@
                                 <constraint firstItem="VDn-9Y-TQk" firstAttribute="leading" secondItem="MK9-HI-OUw" secondAttribute="trailing" constant="15" id="zlH-Bw-PqX"/>
                             </constraints>
                         </view>
-                        <blurEffect style="dark"/>
+                        <blurEffect style="light"/>
                     </visualEffectView>
                 </subviews>
-                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 <constraints>
                     <constraint firstItem="wvS-7G-xtf" firstAttribute="bottom" secondItem="c20-sd-rmZ" secondAttribute="bottom" id="2Dz-dj-OOv"/>
                     <constraint firstItem="wvS-7G-xtf" firstAttribute="top" secondItem="c20-sd-rmZ" secondAttribute="top" id="AXC-yW-SnH"/>

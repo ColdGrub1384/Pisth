@@ -131,9 +131,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-            if #available(iOS 11.0, *) {
-                picker.allowsMultipleSelection = true
-            }
+            picker.allowsMultipleSelection = true
             picker.delegate = self
             
             self.present(picker, animated: true, completion: nil)
@@ -328,17 +326,13 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         title = directory.lastPathComponent
         
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
         
         tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
-        tableView.backgroundColor = .black
         clearsSelectionOnViewWillAppear = false
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
      
         refreshControl = UIRefreshControl()
-        refreshControl?.tintColor = .white
         refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
         
         // Navigation bar items
@@ -410,7 +404,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     /// - Returns: An `UITableViewCell` with title as the current filename and file icon for current file.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
-        cell.contentView.superview?.backgroundColor = .black
         
         // Configure the cell...
         

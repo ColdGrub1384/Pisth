@@ -85,12 +85,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.autocapitalizationType = UITextAutocapitalizationType.none
-        textView.keyboardAppearance = .dark
         textView.inputAccessoryView = toolbar
         textView.font = textStorage.highlightr.theme.codeFont
-        if #available(iOS 11.0, *) {
-            textView.smartQuotesType = .no
-        }
+        textView.smartQuotesType = .no
         setTextColor()
         placeholderView.addSubview(textView)
     }
@@ -105,7 +102,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    /// MARK: - View controller
+    // MARK: - View controller
     
     /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
@@ -115,9 +112,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         setupTextView()
         
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     /// Open `file` and highlight it.

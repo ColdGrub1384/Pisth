@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A15A9E0206E89EB007A8E7D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A15A9DF206E89EB007A8E7D /* WebViewController.swift */; };
-		3A1F66E7206E8C9E0012C8AA /* Web.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F66E5206E8C9D0012C8AA /* Web.xib */; };
 		3A5BEF00206E949600B2BE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5BEEFF206E949600B2BE1D /* Assets.xcassets */; };
 		3A61DE9820668FE90002353B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9720668FE80002353B /* DataManager.swift */; };
 		3A61DE9F2066921B0002353B /* RemoteConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9E2066921A0002353B /* RemoteConnection.swift */; };
@@ -33,13 +32,13 @@
 		3ACF9B732041B90A006C3218 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B402041B484006C3218 /* Color.swift */; };
 		3ACF9B742041B912006C3218 /* URL+queryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3F2041B484006C3218 /* URL+queryParameters.swift */; };
 		3ACF9B752041B914006C3218 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3E2041B484006C3218 /* String.swift */; };
+		3AF6027F207139B300347BFC /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6027E207139B300347BFC /* Pisth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20A395E5A737F56B93B4B88F /* Pods-Pisth Shared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Shared.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Shared/Pods-Pisth Shared.release.xcconfig"; sourceTree = "<group>"; };
 		31EAD1E96392A3682184F4E0 /* Pods-Pisth Shared.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Shared.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Shared/Pods-Pisth Shared.debug.xcconfig"; sourceTree = "<group>"; };
 		3A15A9DF206E89EB007A8E7D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		3A1F66E5206E8C9D0012C8AA /* Web.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
 		3A5BEEFF206E949600B2BE1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A61DE9720668FE80002353B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3A61DE9B2066903A0002353B /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +67,7 @@
 		3ACF9B652041B8C6006C3218 /* SilverAerogel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SilverAerogel.swift; sourceTree = "<group>"; };
 		3ACF9B662041B8C6006C3218 /* TerminalTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalTheme.swift; sourceTree = "<group>"; };
 		3ACF9B672041B8C6006C3218 /* Ubuntu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ubuntu.swift; sourceTree = "<group>"; };
+		3AF6027E207139B300347BFC /* Pisth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pisth.swift; sourceTree = "<group>"; };
 		5F420224BB8A5D277DF7B7F0 /* Pods_Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -97,7 +97,6 @@
 				3ACD8CCA2066E90900184947 /* ActivityViewController.swift */,
 				3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */,
 				3A15A9DF206E89EB007A8E7D /* WebViewController.swift */,
-				3A1F66E5206E8C9D0012C8AA /* Web.xib */,
 			);
 			path = "View controllers";
 			sourceTree = "<group>";
@@ -172,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				3ACF9B662041B8C6006C3218 /* TerminalTheme.swift */,
+				3AF6027E207139B300347BFC /* Pisth.swift */,
 				3ACF9B5D2041B8C6006C3218 /* Basic.swift */,
 				3ACF9B5E2041B8C6006C3218 /* Grass.swift */,
 				3ACF9B5F2041B8C6006C3218 /* Homebrew.swift */,
@@ -256,7 +256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5BEF00206E949600B2BE1D /* Assets.xcassets in Resources */,
-				3A1F66E7206E8C9E0012C8AA /* Web.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +280,7 @@
 				3A61DE9F2066921B0002353B /* RemoteConnection.swift in Sources */,
 				3A61DE9820668FE90002353B /* DataManager.swift in Sources */,
 				3ACF9B732041B90A006C3218 /* Color.swift in Sources */,
+				3AF6027F207139B300347BFC /* Pisth.swift in Sources */,
 				3A15A9E0206E89EB007A8E7D /* WebViewController.swift in Sources */,
 				3ACF9B6D2041B8C6006C3218 /* Ocean.swift in Sources */,
 				3ACF9B692041B8C6006C3218 /* Grass.swift in Sources */,

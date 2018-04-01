@@ -25,11 +25,8 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 11.0, *) {
-            navigationItem.largeTitleDisplayMode = .never
-        }
+        navigationItem.largeTitleDisplayMode = .never
         
-        tableView.backgroundColor = .black
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "command")
     }
     
@@ -44,7 +41,6 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     /// - Returns: An `UITableViewCell` with title as command or command title.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "command")!
-        cell.backgroundColor = .black
         
         if let command = commands[indexPath.row] as? String {
             cell.textLabel?.text = command
@@ -53,9 +49,7 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
         if let command = commands[indexPath.row] as? [String] {
             cell.textLabel?.text = command[1]
         }
-        
-        cell.textLabel?.textColor = .white
-        
+                
         return cell
     }
     

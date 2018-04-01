@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +27,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jZ-2h-SAn">
                                     <rect key="frame" x="43" y="698" width="288" height="38"/>
-                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="Purple"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="38" id="6F9-nB-W5H"/>
                                     </constraints>
@@ -65,7 +66,7 @@
                                         <constraint firstAttribute="height" constant="66" id="yxR-Kf-Uqr"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
-                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -83,7 +84,7 @@
                                 <constraint firstItem="mUf-xz-6e1" firstAttribute="leading" secondItem="Zeb-6a-5gc" secondAttribute="leadingMargin" id="ZxE-Yq-JTc"/>
                             </constraints>
                         </view>
-                        <blurEffect style="dark"/>
+                        <blurEffect style="light"/>
                     </visualEffectView>
                 </subviews>
                 <constraints>
@@ -97,4 +98,9 @@
             <point key="canvasLocation" x="78.5" y="125"/>
         </viewController>
     </objects>
+    <resources>
+        <namedColor name="Purple">
+            <color red="0.47058823529411764" green="0.12549019607843137" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

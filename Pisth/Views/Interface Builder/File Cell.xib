@@ -31,17 +31,17 @@
                             <constraint firstAttribute="height" constant="19" id="kMR-Fp-3pZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-rw-r--r--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBd-Td-f10">
                         <rect key="frame" x="96" y="38" width="479" height="9"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 <constraints>
                     <constraint firstItem="tjI-YR-D4X" firstAttribute="top" secondItem="S0P-yE-0Te" secondAttribute="topMargin" id="7PF-CG-5hZ"/>
                     <constraint firstItem="jBd-Td-f10" firstAttribute="top" secondItem="tjI-YR-D4X" secondAttribute="bottom" constant="8" symbolic="YES" id="Eaf-Q8-gtN"/>
