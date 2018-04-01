@@ -146,7 +146,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             self.navigationController = navigationController
         }
         splitViewController.view.backgroundColor = .white
-        rootVC.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
