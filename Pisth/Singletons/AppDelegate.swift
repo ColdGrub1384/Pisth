@@ -134,13 +134,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         let rootVC = UIViewController()
         rootVC.view.backgroundColor = .white
         let detailNavigationController = UINavigationController(rootViewController: rootVC)
-        self.navigationController = detailNavigationController
         
         // Setup Split view controller
         splitViewController = UISplitViewController()
-        splitViewController.preferredDisplayMode = .allVisible
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            splitViewController.viewControllers = [navigationController, detailNavigationController]
+            splitViewController.preferredDisplayMode = .allVisible
+            self.navigationController = detailNavigationController
+        } else {
+            splitViewController.viewControllers = [navigationController]
+            self.navigationController = navigationController
+        }
         splitViewController.view.backgroundColor = .white
-        splitViewController.viewControllers = [navigationController, detailNavigationController]
         rootVC.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         
         // Setup window

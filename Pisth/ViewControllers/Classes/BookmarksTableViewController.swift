@@ -255,8 +255,13 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
                             } else {
-                                dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
+                                if UIDevice.current.userInterfaceIdiom == .pad {
+                                    dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
+                                } else {
+                                    AppDelegate.shared.navigationController.pushViewController(dirVC, animated: true)
+                                }
+                                
                             }
                         })
                     } else {
@@ -272,8 +277,13 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
                             } else {
-                                termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                                if UIDevice.current.userInterfaceIdiom == .pad {
+                                    termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                                } else {
+                                    AppDelegate.shared.navigationController.pushViewController(termVC, animated: true)
+                                }
+                                
                             }
                         })
                     }
@@ -337,9 +347,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-            
-            AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+            } else {
+                AppDelegate.shared.navigationController.pushViewController(termVC, animated: true)
+            }
             
             _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                 self.mcNearbyServiceBrowser.invitePeer(self.devices[indexPath.row], to: termVC.mcSession, withContext: nil, timeout: 10)
