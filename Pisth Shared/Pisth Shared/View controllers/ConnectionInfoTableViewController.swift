@@ -46,7 +46,6 @@ public class ConnectionInformationTableViewController: UITableViewController {
             field?.autocorrectionType = .no
             
             let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
-            toolbar.barStyle = .black
             toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), UIBarButtonItem(title: "Done", style: .done, target: field, action: #selector(field?.resignFirstResponder))]
             field?.inputAccessoryView = toolbar
         }
