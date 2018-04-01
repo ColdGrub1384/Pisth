@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -603,6 +602,7 @@
                                                     <blurEffect style="light"/>
                                                 </visualEffectView>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="JGx-pf-mye" firstAttribute="leading" secondItem="qal-zt-zMZ" secondAttribute="leading" id="7WK-7H-KGj"/>
                                                 <constraint firstItem="JGx-pf-mye" firstAttribute="top" secondItem="qal-zt-zMZ" secondAttribute="top" id="Hzr-4F-jQa"/>
