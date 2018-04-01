@@ -608,6 +608,11 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
         
         func openFile() {
+            
+            guard let vc = UIApplication.shared.keyWindow?.rootViewController else {
+                return
+            }
+            
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
                 var editTextVC: EditTextViewController! {
                     let editTextViewController = UIViewController.codeEditor
@@ -623,26 +628,26 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         let webVC = UIViewController.webViewController
                         webVC.file = file
                         
-                        navigationController?.pushViewController(webVC, animated: true)
+                        vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
                     }))
                     
                     alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
-                        navigationController?.pushViewController(editTextVC, animated: true)
+                        vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                     }))
                     
                     if viewController == nil {
-                        navigationController?.present(alert, animated: true, completion: nil)
+                        vc.present(alert, animated: true, completion: nil)
                     } else {
-                        viewController?.dismiss(animated: true, completion: {
+                        vc.dismiss(animated: true, completion: {
                             navigationController?.present(alert, animated: true, completion: nil)
                         })
                     }
                 } else {
                     if viewController == nil {
-                        navigationController?.pushViewController(editTextVC!, animated: true)
+                        vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                     } else {
                         viewController?.dismiss(animated: true, completion: {
-                            navigationController?.pushViewController(editTextVC, animated: true)
+                            vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                         })
                     }
                 }
@@ -661,19 +666,19 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 playerVC.player = player
                 
                 if viewController == nil {
-                    navigationController?.pushViewController(playerVC, animated: true)
+                    vc.present(UINavigationController(rootViewController: playerVC), animated: true, completion: nil)
                 } else {
                     viewController?.dismiss(animated: true, completion: {
-                        navigationController?.pushViewController(playerVC, animated: true)
+                        vc.present(UINavigationController(rootViewController: playerVC), animated: true, completion: nil)
                     })
                 }
             } else { // Preview
                 let vc = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
                 if viewController == nil {
-                    navigationController?.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                    vc.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
                 } else {
                     viewController?.dismiss(animated: true, completion: {
-                        navigationController?.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                        vc.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
                     })
                 }
             }

@@ -12,6 +12,10 @@ import WebKit
 /// View controller displaying web content.
 open class WebViewController: UIViewController, WKNavigationDelegate  {
     
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /// Web view used to display content.
     open var webView: WKWebView!
     

@@ -280,7 +280,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Go back and show error.
     func showError() {
         
-        guard let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else { return }
+        let navVC = AppDelegate.shared.navigationController
         
         guard navVC.visibleViewController == self else {
             return
@@ -300,20 +300,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         if alert != nil {
             
-            let visibleVC = navVC.visibleViewController
-            navVC.popToRootViewController(animated: true, completion: {
-                
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    guard let visibleVC = visibleVC else {
-                        return
-                    }
-                    
-                    if (navVC.viewControllers.contains(visibleVC)) {
-                        navVC.pushViewController(visibleVC, animated: true)
-                    }
-                }))
-                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-            })
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                let vc = UIViewController()
+                vc.view.backgroundColor = .white
+                vc.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                self.navigationController?.setViewControllers([vc], animated: false)
+            }))
+            
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }
     

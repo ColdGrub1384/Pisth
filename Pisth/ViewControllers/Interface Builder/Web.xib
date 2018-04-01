@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="hSt-J3-Rx5">
+                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSt-J3-Rx5">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <items>
                             <barButtonItem enabled="NO" image="back" id="B1d-QW-Qmm">
@@ -33,7 +33,7 @@
                         </items>
                     </toolbar>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="hSt-J3-Rx5" firstAttribute="leading" secondItem="3Xa-s9-4OL" secondAttribute="leading" id="U8K-Qc-01G"/>
                     <constraint firstAttribute="trailing" secondItem="hSt-J3-Rx5" secondAttribute="trailing" id="ljq-1a-ti3"/>
@@ -41,6 +41,14 @@
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="YV8-Br-wnD"/>
             </view>
+            <navigationItem key="navigationItem" id="tJY-zy-6RN">
+                <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="EZK-V3-HTU">
+                    <connections>
+                        <action selector="close:" destination="fn7-1e-mZK" id="gLD-s0-X2q"/>
+                    </connections>
+                </barButtonItem>
+            </navigationItem>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <connections>
                 <outlet property="goBackButton" destination="B1d-QW-Qmm" id="8NB-jd-LlO"/>
                 <outlet property="goForwardButton" destination="ShT-me-1aS" id="D0v-7q-WPU"/>

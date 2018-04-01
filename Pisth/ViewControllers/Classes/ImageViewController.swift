@@ -10,6 +10,14 @@ import UIKit
 /// View controller used to view an image.
 class ImageViewController: UIViewController, UIScrollViewDelegate {
     
+    /// Dismiss this View controller.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /// Scroll view used to zoom image.
     @IBOutlet weak var scrollView: UIScrollView!
     

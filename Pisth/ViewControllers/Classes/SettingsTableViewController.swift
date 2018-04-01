@@ -238,7 +238,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         vc.modalPresentationStyle = .overCurrentContext
         
-        present(vc, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true, completion: nil)
     }
     
     /// Restore themes iap.
@@ -286,13 +286,13 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.beta {
             
             // Send beta test request
-            present(UIViewController.beta, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(UIViewController.beta, animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else if indexPath == IndexPaths.sourceCode {
                 
             // View the source code
-            present(UIViewController.contribute, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(UIViewController.contribute, animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else {

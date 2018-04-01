@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -51,6 +50,11 @@
                 <viewLayoutGuide key="safeArea" id="hXu-Eu-Umg"/>
             </view>
             <navigationItem key="navigationItem" id="McR-tR-6oZ">
+                <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="FzX-Wm-lHf">
+                    <connections>
+                        <action selector="close:" destination="8Xd-vQ-p0D" id="875-sg-S70"/>
+                    </connections>
+                </barButtonItem>
                 <rightBarButtonItems>
                     <barButtonItem title="Language" id="gIL-p8-cQK">
                         <connections>

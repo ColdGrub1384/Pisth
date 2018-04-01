@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// The shared Navigation controller used in the app.
     var navigationController = UINavigationController()
     
+    /// The shared Split view controller used in the app.
+    var splitViewController = UISplitViewController()
+    
     /// An instance of DirectoryTableViewController to be used to upload files from the share menu.
     var directoryTableViewController: DirectoryTableViewController?
     
@@ -118,15 +121,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         DataManager.shared.saveCompletion = update3DTouchShortucts
         
         AppDelegate.shared = self
-        
-        // Setup Navigation Controller
+
+        // Setup Navigation Controllers
         let bookmarksVC = BookmarksTableViewController()
-        navigationController = UINavigationController(rootViewController: bookmarksVC)
+        bookmarksVC.modalPresentationStyle = .overCurrentContext
+        bookmarksVC.view.backgroundColor = .clear
+        bookmarksVC.tableView.backgroundColor = .clear
+        bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let navigationController = UINavigationController(rootViewController: bookmarksVC)
         navigationController.navigationBar.prefersLargeTitles = true
+        
+        let rootVC = UIViewController()
+        rootVC.view.backgroundColor = .white
+        let detailNavigationController = UINavigationController(rootViewController: rootVC)
+        self.navigationController = detailNavigationController
+        
+        // Setup Split view controller
+        splitViewController = UISplitViewController()
+        splitViewController.preferredDisplayMode = .allVisible
+        splitViewController.view.backgroundColor = .white
+        splitViewController.viewControllers = [navigationController, detailNavigationController]
+        rootVC.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = splitViewController
         window?.tintColor = UIColor(named: "Purple")
         UISwitch.appearance().onTintColor = UIColor(named: "Purple")
         window?.makeKeyAndVisible()

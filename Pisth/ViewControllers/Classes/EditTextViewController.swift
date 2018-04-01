@@ -14,6 +14,14 @@ import Pisth_Shared
 /// View controller used to edit text files.
 class EditTextViewController: UIViewController, UITextViewDelegate {
     
+    /// Dismiss this View controller.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /// View created from IB managing size of `textView`.
     @IBOutlet weak var placeholderView: UIView!
     
@@ -140,7 +148,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         } catch let error {
             let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
             errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             }))
             self.present(errorAlert, animated: true, completion: nil)
         }
@@ -175,8 +183,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             close()
         }))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
-            if let navVC = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController {
-                navVC.pushViewController(self, animated: true, completion: {
+            if let vc = UIApplication.shared.keyWindow?.rootViewController {
+                vc.present(self, animated: true, completion: {
                     self.save(true)
                     if ConnectionManager.shared.saveFile?.localFile == self.file.path {
                         try? FileManager.default.removeItem(at: self.file)
@@ -221,7 +229,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                             activityVC.dismiss(animated: true, completion: {
                                 if let close = sender as? Bool {
                                     if close {
-                                        self.navigationController?.popViewController(animated: true)
+                                        self.dismiss(animated: true, completion: nil)
                                     }
                                 }
                             })
@@ -229,7 +237,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                     } else {
                         if let close = sender as? Bool {
                             if close {
-                                self.navigationController?.popViewController(animated: true)
+                                self.dismiss(animated: true, completion: nil)
                             }
                         }
                     }
@@ -237,7 +245,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 } else {
                     if let close = sender as? Bool {
                         if close {
-                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                 }
@@ -245,7 +253,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             } catch let error {
                 let errorAlert = UIAlertController(title: "Error saving file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                    self.navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 }))
                 self.present(errorAlert, animated: true, completion: nil)
             }

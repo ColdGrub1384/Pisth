@@ -104,33 +104,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         mcNearbyServiceBrowser.startBrowsingForPeers()
     }
     
-    /// Close opened connections did back here.
+    /// Reload data.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Close session when coming back here
-        
-        if let session = ConnectionManager.shared.session {
-            if session.isConnected {
-                session.disconnect()
-            }
-        }
-        
-        if let session = ConnectionManager.shared.filesSession {
-            if session.isConnected {
-                session.disconnect()
-            }
-        }
-        
         tableView.reloadData()
-        
-        ConnectionManager.shared.session = nil
-        ConnectionManager.shared.filesSession = nil
-        ConnectionManager.shared.result = .notConnected
-        if let task = ConnectionManager.shared.backgroundTask {
-            UIApplication.shared.endBackgroundTask(task)
-            ConnectionManager.shared.backgroundTask = nil
-        }
     }
     
     
@@ -277,7 +255,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
                             } else {
-                                self.navigationController?.pushViewController(dirVC, animated: true)
+                                dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
                             }
                         })
                     } else {
@@ -293,7 +272,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
                             } else {
-                                self.navigationController?.pushViewController(termVC, animated: true)
+                                termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
                             }
                         })
                     }
@@ -357,7 +337,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            self.navigationController?.pushViewController(termVC, animated: true, completion: {
+            termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+            
+            AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                 self.mcNearbyServiceBrowser.invitePeer(self.devices[indexPath.row], to: termVC.mcSession, withContext: nil, timeout: 10)
             })
         }
@@ -433,7 +417,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Display found peer.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
-        if !devices.contains(peerID) {
+        if !devices.contains(peerID) && peerID.displayName != self.peerID.displayName {
             devices.append(peerID)
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath(row: devices.count-1, section: 1)], with: .automatic)
@@ -443,6 +427,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// Hide lost peer.
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        
+        guard peerID.displayName != self.peerID.displayName else {
+            return
+        }
         
         if let i = devices.index(of: peerID) {
             devices.remove(at: i)
