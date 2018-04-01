@@ -503,7 +503,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.trailingBarButtonGroups = []
         
         let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()
-        view.backgroundColor = theme.backgroundColor
         navigationController?.navigationBar.barStyle = theme.toolbarStyle
         
         // Resize webView
