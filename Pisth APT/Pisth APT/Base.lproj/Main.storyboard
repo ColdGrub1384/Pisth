@@ -369,7 +369,13 @@
                             <outlet property="delegate" destination="hoe-Zn-kSm" id="Heo-Qg-pC6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Installed" id="yzI-MM-g71"/>
+                    <navigationItem key="navigationItem" title="Installed" id="yzI-MM-g71">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MGG-gO-rw2">
+                            <connections>
+                                <action selector="install:" destination="hoe-Zn-kSm" id="2Go-0z-qQc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFf-YK-8V4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

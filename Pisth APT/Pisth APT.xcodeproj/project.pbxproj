@@ -16,6 +16,8 @@
 		3A61DEB82066A8FF0002353B /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A6C51172067ED9700034753 /* Terminal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51162067ED9700034753 /* Terminal.xib */; };
 		3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7532CD2066DF8000CF85D3 /* TabBarController.swift */; };
+		3A8034E020703E8800F541F7 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8034DF20703E8800F541F7 /* Pisth_API.framework */; };
+		3A8034E120703E8800F541F7 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8034DF20703E8800F541F7 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A862DDF2067FFE500090160 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A862DDE2067FFE500090160 /* TerminalWebView.swift */; };
 		3A9B210C206846F100FAA9DF /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B210B206846F100FAA9DF /* ErrorViewController.swift */; };
 		3AA3FA052067D4FB00FBF00A /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */; };
@@ -64,6 +66,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3A8034E120703E8800F541F7 /* Pisth_API.framework in Embed Frameworks */,
 				3A61DEB82066A8FF0002353B /* Pisth_Shared.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -81,6 +84,7 @@
 		3A6C51162067ED9700034753 /* Terminal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Terminal.xib; sourceTree = "<group>"; };
 		3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		3A7532CD2066DF8000CF85D3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3A8034DF20703E8800F541F7 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A862DDE2067FFE500090160 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A9B210B206846F100FAA9DF /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8034E020703E8800F541F7 /* Pisth_API.framework in Frameworks */,
 				3A61DEB72066A8FF0002353B /* Pisth_Shared.framework in Frameworks */,
 				D1B65A4FA557546ADBC80216 /* Pods_Pisth_APT.framework in Frameworks */,
 			);
@@ -136,6 +141,7 @@
 		3ACDC3D12065AEBD0049034F = {
 			isa = PBXGroup;
 			children = (
+				3A8034DF20703E8800F541F7 /* Pisth_API.framework */,
 				3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */,
 				3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */,
 				3ACDC3DC2065AEBD0049034F /* Pisth APT */,

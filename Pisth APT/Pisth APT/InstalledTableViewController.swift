@@ -7,9 +7,11 @@
 
 import UIKit
 import Pisth_Shared
+import Pisth_API
+import StoreKit
 
 /// Table view controller for listing installed packages.
-class InstalledTableViewController: UITableViewController, UISearchBarDelegate {
+class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate {
     
     /// Refresh.
     ///
@@ -26,6 +28,42 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
     }
+    
+    /// Install DEB package.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender object.
+    @IBAction func install(_ sender: Any) {
+        let alert = UIAlertController(title: "Install DEB package", message: "Select where import a DEB package", preferredStyle: .actionSheet)
+        
+        // Import from Pisth
+        alert.addAction(UIAlertAction(title: "Import from Pisth", style: .default, handler: { (_) in
+            if pisth.canOpen {
+                pisth.importFile()
+            } else {
+                let appStore = SKStoreProductViewController()
+                appStore.delegate = self
+                appStore.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: "1331070425"], completionBlock: nil)
+                self.present(appStore, animated: true, completion: nil)
+            }
+        }))
+        
+        // Import from Files
+        alert.addAction(UIAlertAction(title: "Import from Files", style: .default, handler: { (_) in
+            let browser = UIDocumentPickerViewController(documentTypes: ["ch.marcela.ada.Pisth.APT.deb"], in: .import)
+            browser.delegate = self
+            self.present(browser, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let button = sender as? UIBarButtonItem {
+            alert.popoverPresentationController?.barButtonItem = button
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     
     /// Search controller used to search.
     var searchController: UISearchController!
@@ -128,4 +166,41 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate {
         })
     }
     
+    // MARK: - Document picker delegate
+    
+    /// Upload and install Debian package.
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        let activityVC = ActivityViewController(message: "Uploading...")
+        
+        present(activityVC, animated: true, completion: {
+            AppDelegate.shared.session?.channel.uploadFile(url.path, to: "~/\(url.lastPathComponent)")
+            
+            activityVC.dismiss(animated: true, completion: nil)
+        })
+        
+        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+            return
+        }
+        
+        termVC.command = "clear; dpkg -i ~/\(url.lastPathComponent); rm ~/\(url.lastPathComponent); echo -e \"\\033[CLOSE\""
+        termVC.title = "Installing packages..."
+        
+        let navVC = UINavigationController(rootViewController: termVC)
+        navVC.view.backgroundColor = .clear
+        navVC.modalPresentationStyle = .overCurrentContext
+        
+        present(navVC, animated: true, completion: nil)
+    }
+    
+    /// Dismiss.
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Store product view controller delegate
+    
+    /// Dismiss.
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
 }
