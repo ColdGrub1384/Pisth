@@ -70,7 +70,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     /// Setup textView.
     func setupTextView() {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: view.bounds.width, height: 50))
-        toolbar.barStyle = .black
         
         let dismissKeyboard = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard(_:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
