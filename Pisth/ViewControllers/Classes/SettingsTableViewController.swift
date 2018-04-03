@@ -275,7 +275,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             // Open Licenses
             let webVC = UIViewController.webViewController
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
-            navigationController?.pushViewController(webVC, animated: true)
+            UIApplication.shared.keyWindow?.rootViewController?.present(webVC, animated: true, completion: nil)
 
         } else if indexPath == IndexPaths.plugins {
             
