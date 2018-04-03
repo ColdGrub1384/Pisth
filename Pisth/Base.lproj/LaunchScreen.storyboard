@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ggL-7E-hqZ">
-    <device id="ipad12_9" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,26 +14,28 @@
             <objects>
                 <viewController id="ggL-7E-hqZ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1W4-q3-ZHN">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="LrP-Dv-aj3">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                <rect key="frame" x="87.666666666666686" y="306" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="KzU-Gz-eTi"/>
+                                    <constraint firstAttribute="height" constant="200" id="oF1-YP-omd"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="LrP-Dv-aj3" secondAttribute="trailing" id="DSy-SZ-Fow"/>
-                            <constraint firstItem="LrP-Dv-aj3" firstAttribute="bottom" secondItem="SgP-bA-Qmh" secondAttribute="bottom" id="mE3-Vx-rMA"/>
-                            <constraint firstItem="LrP-Dv-aj3" firstAttribute="leading" secondItem="1W4-q3-ZHN" secondAttribute="leading" id="o0h-x4-eSU"/>
-                            <constraint firstItem="LrP-Dv-aj3" firstAttribute="top" secondItem="1W4-q3-ZHN" secondAttribute="top" id="s1a-VX-XbO"/>
+                            <constraint firstItem="LrP-Dv-aj3" firstAttribute="centerX" secondItem="1W4-q3-ZHN" secondAttribute="centerX" id="3wj-76-uTQ"/>
+                            <constraint firstItem="LrP-Dv-aj3" firstAttribute="centerY" secondItem="1W4-q3-ZHN" secondAttribute="centerY" id="5s6-nP-opa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SgP-bA-Qmh"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMU-yX-fA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="797.60000000000002" y="244.22788605697153"/>
+            <point key="canvasLocation" x="797.60000000000002" y="243.8423645320197"/>
         </scene>
     </scenes>
     <resources>
