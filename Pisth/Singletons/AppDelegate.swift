@@ -450,7 +450,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 
                 if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
                     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-                    let imageView = UIImageView(image: backgroundImage)
+                    let imageView = ImageView(image: backgroundImage)
                     let containerView = UIView()
                     containerView.addSubview(imageView)
                     containerView.addSubview(blurView)

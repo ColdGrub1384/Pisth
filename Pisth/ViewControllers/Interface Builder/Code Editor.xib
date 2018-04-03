@@ -19,6 +19,9 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzc-EE-asO">
                         <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5p-ov-Il9">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>

@@ -19,7 +19,7 @@
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NA-cV-11k">
                         <rect key="frame" x="0.0" y="96" width="375" height="682"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLq-DB-ksq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLq-DB-ksq" customClass="ImageView" customModule="Pisth" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="682"/>
                             </imageView>
                         </subviews>
