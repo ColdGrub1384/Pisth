@@ -525,6 +525,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let config = WKWebViewConfiguration()
         config.mediaTypesRequiringUserActionForPlayback = .video
         webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
+        webView.accessibilityIgnoresInvertColors = true
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
         view.addSubview(webView)
