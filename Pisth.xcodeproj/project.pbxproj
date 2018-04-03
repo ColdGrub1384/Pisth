@@ -41,8 +41,6 @@
 		3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */; };
 		3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BF2037793D00B750D9 /* UIButton.swift */; };
 		3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */; };
-		3A964E2620743192003FFAEE /* UIView+ignoresInvertColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A964E2520743192003FFAEE /* UIView+ignoresInvertColors.swift */; };
-		3A964E28207431E4003FFAEE /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A964E27207431E4003FFAEE /* ImageView.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
@@ -52,6 +50,7 @@
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
+		3ABEEF182074420F00697D4E /* UIView+ignoresInvertColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */; };
 		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
 		3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC0204079A9006C3218 /* AppAction.swift */; };
 		3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */; };
@@ -161,8 +160,6 @@
 		3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Terminal Toolbar-Black.xib"; sourceTree = "<group>"; };
 		3A89B5BF2037793D00B750D9 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsLocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
-		3A964E2520743192003FFAEE /* UIView+ignoresInvertColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ignoresInvertColors.swift"; sourceTree = "<group>"; };
-		3A964E27207431E4003FFAEE /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
@@ -172,6 +169,7 @@
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleManager.swift; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
+		3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ignoresInvertColors.swift"; sourceTree = "<group>"; };
 		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9AC0204079A9006C3218 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerStaticDelegate.swift; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 				3A5888B0205C62540002F9E1 /* UIViewController.swift */,
 				3A5888B2205C64CB0002F9E1 /* UIView.swift */,
 				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
-				3A964E2520743192003FFAEE /* UIView+ignoresInvertColors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -354,7 +351,7 @@
 				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
 				3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
-				3A964E27207431E4003FFAEE /* ImageView.swift */,
+				3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -695,10 +692,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
-				3A964E2620743192003FFAEE /* UIView+ignoresInvertColors.swift in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
+				3ABEEF182074420F00697D4E /* UIView+ignoresInvertColors.swift in Sources */,
 				3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
@@ -706,7 +703,6 @@
 				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
-				3A964E28207431E4003FFAEE /* ImageView.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,

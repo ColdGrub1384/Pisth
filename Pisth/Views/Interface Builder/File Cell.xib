@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="595" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="File icons/file" translatesAutoresizingMaskIntoConstraints="NO" id="XnO-Fc-bEb" customClass="ImageView" customModule="Pisth" customModuleProvider="target">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="File icons/file" translatesAutoresizingMaskIntoConstraints="NO" id="XnO-Fc-bEb">
                         <rect key="frame" x="0.0" y="-2" width="88" height="53.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="88" id="JJC-0o-Gbd"/>
