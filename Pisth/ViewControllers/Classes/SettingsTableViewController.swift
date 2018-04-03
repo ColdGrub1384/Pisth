@@ -323,11 +323,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             cell.viewWithTag(2)?.isHidden = true
         }
         
-        if indexPath == IndexPaths.beta && UIApplication.shared.isBeta {
-            title.alpha = 0.5
-            cell.isUserInteractionEnabled = false
-        }
-        
         return cell
     }
     
