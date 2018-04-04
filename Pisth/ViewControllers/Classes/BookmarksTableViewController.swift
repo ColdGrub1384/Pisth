@@ -176,6 +176,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             cell.textLabel?.text = connection.name
             cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
             if let os = connection.os?.lowercased() {
+                cell.imageView?.ignoresInvertColors = true
                 cell.imageView?.image = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: ""))
             }
             
