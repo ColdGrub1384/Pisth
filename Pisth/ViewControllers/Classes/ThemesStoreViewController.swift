@@ -113,6 +113,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
             
             webView.loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
             webView.isUserInteractionEnabled = false
+            webView.ignoresInvertColors = true
             
             i += 1
         }
