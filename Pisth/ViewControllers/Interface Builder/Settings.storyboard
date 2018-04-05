@@ -692,7 +692,7 @@
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -707,7 +707,14 @@
                             <outlet property="delegate" destination="zJU-Xt-wUr" id="aMi-YU-DFL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rWu-fD-V4I"/>
+                    <navigationItem key="navigationItem" title="Settings" id="O15-L5-bTT">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="fuq-9z-Lzn">
+                            <connections>
+                                <action selector="close" destination="zJU-Xt-wUr" id="OI6-2q-EbA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
                         <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>

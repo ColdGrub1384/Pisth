@@ -47,6 +47,11 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         static let licenses = IndexPath(row: 1, section: 5)
     }
     
+    /// Close this view controller.
+    @IBAction func close() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /// MARK: - View controller
     
     /// Display current settings.
@@ -275,7 +280,8 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             // Open Licenses
             let webVC = UIViewController.webViewController
             webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
-            UIApplication.shared.keyWindow?.rootViewController?.present(webVC, animated: true, completion: nil)
+            webVC.navigationItem.leftBarButtonItem = nil
+            navigationController?.pushViewController(webVC, animated: true)
 
         } else if indexPath == IndexPaths.plugins {
             
@@ -286,13 +292,13 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.beta {
             
             // Send beta test request
-            UIApplication.shared.keyWindow?.rootViewController?.present(UIViewController.beta, animated: true, completion: nil)
+            present(UIViewController.beta, animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else if indexPath == IndexPaths.sourceCode {
                 
             // View the source code
-            UIApplication.shared.keyWindow?.rootViewController?.present(UIViewController.contribute, animated: true, completion: nil)
+            present(UIViewController.contribute, animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else {

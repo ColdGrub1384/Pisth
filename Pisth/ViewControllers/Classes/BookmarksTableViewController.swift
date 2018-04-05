@@ -33,7 +33,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// Open app's settings.
     @objc func openSettings() {
-        navigationController?.pushViewController(UIViewController.settings, animated: true)
+        let navVC = UINavigationController(rootViewController: UIViewController.settings)
+        navVC.modalPresentationStyle = .formSheet
+        
+        UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
     }
     
     /// Open local documents.
