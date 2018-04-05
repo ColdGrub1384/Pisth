@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,6 +81,9 @@
                 </barButtonItem>
             </items>
             <color key="barTintColor" red="0.87058823529411766" green="0.87450980392156863" blue="0.90196078431372551" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="58" y="-143"/>
         </toolbar>
         <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" id="B0G-cJ-lAH">
@@ -205,6 +207,9 @@
                 </barButtonItem>
             </items>
             <color key="barTintColor" red="0.87058823529999996" green="0.87450980389999999" blue="0.90196078430000004" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="58" y="-33"/>
         </toolbar>
     </objects>
