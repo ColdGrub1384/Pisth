@@ -243,7 +243,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         vc.modalPresentationStyle = .overCurrentContext
         
-        UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
     
     /// Restore themes iap.
