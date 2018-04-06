@@ -14,7 +14,7 @@ import MultipeerConnectivity
 import Pisth_Shared
 
 /// `TableViewController` used to list, connections.
-class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate, MCNearbyServiceBrowserDelegate {
+class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, GADInterstitialDelegate {
     
     /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
@@ -246,6 +246,12 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         if indexPath.section == 0 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
             
+            let interstitial = GADInterstitial(adUnitID: "ca-app-pub-9214899206650515/9370519681")
+            if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+                interstitial.load(GADRequest())
+                interstitial.delegate = self
+            }
+            
             /// Open connection.
             func connect() {
                 let activityVC = ActivityViewController(message: "Connecting")
@@ -259,6 +265,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
                             } else {
+                                
+                                if interstitial.isReady {
+                                    interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
+                                }
+                                
                                 if UIDevice.current.userInterfaceIdiom == .pad {
                                     dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                     AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
@@ -281,6 +292,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
                             } else {
+                                
+                                if interstitial.isReady {
+                                    interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
+                                }
+                                
                                 if UIDevice.current.userInterfaceIdiom == .pad {
                                     termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                     AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
@@ -455,6 +471,18 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.beginUpdates()
             tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
             tableView.endUpdates()
+        }
+    }
+    
+    // MARK: - Interstitial delegate
+    
+    /// Make the terminal first responder.
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        
+        if let termVC = AppDelegate.shared.navigationController.visibleViewController as? TerminalViewController {
+            
+            termVC.becomeFirstResponder()
+            
         }
     }
 }
