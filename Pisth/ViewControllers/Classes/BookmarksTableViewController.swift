@@ -270,7 +270,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                                     interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
                                 }
                                 
-                                if UIDevice.current.userInterfaceIdiom == .pad {
+                                if AppDelegate.shared.splitViewController.displayMode == .allVisible {
                                     dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                     AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
                                 } else {
@@ -297,7 +297,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                                     interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
                                 }
                                 
-                                if UIDevice.current.userInterfaceIdiom == .pad {
+                                if AppDelegate.shared.splitViewController.displayMode == .allVisible {
                                     termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                     AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
                                 } else {

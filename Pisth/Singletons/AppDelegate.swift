@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         // Setup Split view controller
         splitViewController = UISplitViewController()
-        if UIDevice.current.userInterfaceIdiom == .pad {
+        if AppDelegate.shared.splitViewController.displayMode != .primaryHidden {
             splitViewController.viewControllers = [navigationController, detailNavigationController]
             splitViewController.preferredDisplayMode = .allVisible
             self.navigationController = detailNavigationController
