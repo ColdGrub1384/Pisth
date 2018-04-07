@@ -136,6 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if let allPackages = (try? session.channel.execute("apt-cache search .").components(separatedBy: "\n")) {
                     self.allPackages = allPackages
+                    self.allPackages.removeLast()
                     
                     if let tableView = ((TabBarController.shared.viewControllers?[0] as? UINavigationController)?.topViewController as? PackagesTableViewController)?.tableView {
                         tableView.reloadData()
