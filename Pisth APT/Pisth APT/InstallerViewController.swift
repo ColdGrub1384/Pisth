@@ -56,8 +56,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         termVC.title = title
         
         let navVC = UINavigationController(rootViewController: termVC)
-        navVC.view.backgroundColor = .clear
-        navVC.modalPresentationStyle = .overCurrentContext
+        navVC.modalPresentationStyle = .formSheet
         
         present(navVC, animated: true, completion: nil)
     }
@@ -183,7 +182,10 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     static func forPackage(_ package: String) -> UINavigationController {
         let vc = (UIStoryboard(name: "Installer", bundle: Bundle.main).instantiateInitialViewController() as? InstallerViewController) ?? InstallerViewController()
         vc.package = package
-                
-        return UINavigationController(rootViewController: vc)
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .formSheet
+        
+        return navVC
     }
 }

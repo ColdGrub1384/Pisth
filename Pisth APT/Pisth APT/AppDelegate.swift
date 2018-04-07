@@ -196,8 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         termVC.title = "Installing packages..."
                         
                         let navVC = UINavigationController(rootViewController: termVC)
-                        navVC.view.backgroundColor = .clear
-                        navVC.modalPresentationStyle = .overCurrentContext
+                        navVC.modalPresentationStyle = .formSheet
                         
                         vc.present(navVC, animated: true, completion: nil)
                     } else {

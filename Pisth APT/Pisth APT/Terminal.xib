@@ -46,6 +46,7 @@
                         <blurEffect style="dark"/>
                     </visualEffectView>
                 </subviews>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="sOR-8k-bN5" firstAttribute="leading" secondItem="QS1-hx-uGq" secondAttribute="leading" id="9zp-CX-cuC"/>
                     <constraint firstAttribute="bottom" secondItem="sOR-8k-bN5" secondAttribute="bottom" id="QIl-KX-qeh"/>

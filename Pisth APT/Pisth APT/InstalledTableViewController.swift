@@ -186,8 +186,7 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         termVC.title = "Installing packages..."
         
         let navVC = UINavigationController(rootViewController: termVC)
-        navVC.view.backgroundColor = .clear
-        navVC.modalPresentationStyle = .overCurrentContext
+        navVC.modalPresentationStyle = .formSheet
         
         present(navVC, animated: true, completion: nil)
     }

@@ -40,8 +40,7 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
         termVC.title = title
         
         let navVC = UINavigationController(rootViewController: termVC)
-        navVC.view.backgroundColor = .clear
-        navVC.modalPresentationStyle = .overCurrentContext
+        navVC.modalPresentationStyle = .formSheet
         
         UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
     }
