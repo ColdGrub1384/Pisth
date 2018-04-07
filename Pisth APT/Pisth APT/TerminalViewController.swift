@@ -138,9 +138,24 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
         webView.scrollView.backgroundColor = .clear
         webView.backgroundColor = .clear
         
-        AppDelegate.shared.shellSession?.channel.closeShell()
-        try? AppDelegate.shared.shellSession?.channel.startShell()
-        AppDelegate.shared.shellSession?.channel.delegate = self
+        guard let session = AppDelegate.shared.shellSession else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+
+         session.channel.closeShell()
+        
+        do {
+            try session.channel.startShell()
+            session.channel.delegate = self
+        } catch {
+            let alert = UIAlertController(title: "Cannot initialize the shell!", message: "Check for your internet connection and the your selected connection information.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            
+            present(alert, animated: true, completion: nil)
+        }
         
         if let terminal = Bundle.terminal.url(forResource: "terminal", withExtension: "html") {
             webView.navigationDelegate = self
