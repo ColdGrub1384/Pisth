@@ -18,16 +18,44 @@ Why use Pisth:
 • The Shell supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
 ```
 
-[![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
 ![status](https://img.shields.io/badge/status-stable-green.svg)
-![Swift](https://img.shields.io/badge/swift-4.0-orange.svg)
 ![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
 [![Build status](https://build.appcenter.ms/v0.1/apps/3ba4cc7e-7510-4345-b79e-e09b8b046f38/branches/master/badge)](https://appcenter.ms)
 
 ## Screenshots
 ![Screenshots](https://pisth.github.io/screenshots.png)
 
-## Project hierarchy
+![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20APT/Pisth%20APT/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
+
+# Pisth APT
+
+```
+From the developer of Pisth! Pisth APT allows you to manage your packages on Debian based Linux distro from your iPhone or iPad using SSH.
+
+Why use Pisth APT:
+
+• Pisth APT is free (but there are ads).
+• You can easily browse, install, uninstall and update pakages.
+```
+
+![status](https://img.shields.io/badge/status-in%20developement-green.svg)
+![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
+
+## Screenshots
+![Screenshots](https://pisth.github.io/apt/screenshots.png)
+
+# Pisth Viewer
+
+![screenshot](https://github.com/Pisth/pisth.github.io/raw/master/PisthViewer/screenshot.png)
+
+Pisth Viewer allows you to share a terminal opened with Pisth in iOS from your Mac.
+
+## How it works?
+
+Just open a terminal in [Pisth](https://pisth.github.io), and your iOS device will appear in Pisth Viewer if both Mac and iOS device are connected to the same network. You can also write from the macOS app.
+
+
+# Project hierarchy
 
 - [Pisth Shared/](Pisth%20Shared/): Shared sources between targets.
 - [Pisth Terminal/](Pisth%20Terminal/): HTML page for displaying the terminal.
@@ -36,17 +64,19 @@ Why use Pisth:
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
 
-## API
+# API
+
+[![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
 
 Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth.
 
 More information at https://pisth.github.io/docs/getting-started.html.
 
-## Projects
+# Projects
 
 - [Pisth/pisth.github.io](https://github.com/Pisth/pisth.github.io): Page for this project.
 - [Pisth/docs](https://github.com/Pisth/docs): Documentation for the API.
 - [Pisth/meta](https://github.com/Pisth/meta): Metadata for iTunes Connect.
 
-## Acknowledgements
+# Acknowledgements
 See licenses [here](http://htmlpreview.github.io/?https://github.com/ColdGrub1384/Pisth/blob/master/Pisth/Licenses.html).
