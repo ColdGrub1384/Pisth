@@ -178,25 +178,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     let activityVC = ActivityViewController(message: "Uploading...")
                     
+                    var success = false
+                    
                     vc.present(activityVC, animated: true, completion: {
                         self.session?.sftp.connect()
-                        self.session?.sftp.writeContents(data, toFileAtPath: "~/\(filename)")
+                        success = self.session?.sftp.writeContents(data, toFileAtPath: "~/\(filename)") ?? false
                         
                         activityVC.dismiss(animated: true, completion: nil)
                     })
                     
-                    guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
-                        return false
+                    if success {
+                        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+                            return false
+                        }
+                        
+                        termVC.command = "clear; dpkg -i ~/\(filename); rm ~/\(filename); echo -e \"\\033[CLOSE\""
+                        termVC.title = "Installing packages..."
+                        
+                        let navVC = UINavigationController(rootViewController: termVC)
+                        navVC.view.backgroundColor = .clear
+                        navVC.modalPresentationStyle = .overCurrentContext
+                        
+                        vc.present(navVC, animated: true, completion: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Cannot upload file!", message: "Make sure SFTP is enabled and the file is not empty.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        
+                        vc.present(alert, animated: true, completion: nil)
                     }
-                    
-                    termVC.command = "clear; dpkg -i ~/\(filename); rm ~/\(filename); echo -e \"\\033[CLOSE\""
-                    termVC.title = "Installing packages..."
-                    
-                    let navVC = UINavigationController(rootViewController: termVC)
-                    navVC.view.backgroundColor = .clear
-                    navVC.modalPresentationStyle = .overCurrentContext
-                    
-                    vc.present(navVC, animated: true, completion: nil)
                     
                     return true
                 } else {
