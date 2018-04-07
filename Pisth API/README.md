@@ -1,3 +1,3 @@
 # Pisth API
 
- Pisth API allows you to import files with Pisth from your own iOS app without extension!
+Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth without extension!

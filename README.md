@@ -21,7 +21,7 @@ Why use Pisth:
 [![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![Swift](https://img.shields.io/badge/swift-4.0-orange.svg)
-![iOS](https://img.shields.io/badge/iOS-10.0%2B-green.svg)
+![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
 [![Build status](https://build.appcenter.ms/v0.1/apps/3ba4cc7e-7510-4345-b79e-e09b8b046f38/branches/master/badge)](https://appcenter.ms)
 
 ## Screenshots
@@ -38,7 +38,7 @@ Why use Pisth:
 
 ## API
 
-Pisth has an API that allows you to import files from your own apps with Pisth.
+Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth.
 
 More information at https://pisth.github.io/docs/getting-started.html.
 
