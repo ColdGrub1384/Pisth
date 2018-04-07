@@ -23,7 +23,7 @@ class SettingsTableViewController: UITableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             
             // Open licenses
-            if let webVC = Bundle(for: WebViewController.self).loadNibNamed("Web", owner: nil, options: nil)?[0] as? WebViewController {
+            if let webVC = Bundle.main.loadNibNamed("Web", owner: nil, options: nil)?[0] as? WebViewController {
                 
                 let navVC = UINavigationController(rootViewController: webVC)
                 
