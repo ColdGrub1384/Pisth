@@ -5,8 +5,10 @@
 //
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
+#if os(iOS)
 import UIKit
-
+#endif
+    
 /// Pisth default theme for the terminal.
 open class PisthTheme: TerminalTheme {
     
