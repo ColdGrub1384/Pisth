@@ -99,7 +99,7 @@
 		3ACDC3E42065AEC00049034F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACDC3E72065AEC00049034F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACDC3E92065AEC20049034F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
+		3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatesTableViewController.swift; path = ../UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3AD2F69B20713FEE0017F2EB /* Web.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
@@ -140,6 +140,79 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3AA2450D20791A690096CCF6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3AA2451120791A760096CCF6 /* Classes */,
+				3AA2451220791AA40096CCF6 /* Interface Builder */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3AA2451120791A760096CCF6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				3A7532CD2066DF8000CF85D3 /* TabBarController.swift */,
+				3A9B210B206846F100FAA9DF /* ErrorViewController.swift */,
+				3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */,
+				3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */,
+				3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */,
+				3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */,
+				3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */,
+				3A5F983F2066FFB900E43793 /* InstallerViewController.swift */,
+				3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3AA2451220791AA40096CCF6 /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				3ACDC3E12065AEBE0049034F /* Main.storyboard */,
+				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
+				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
+				3A6C51162067ED9700034753 /* Terminal.xib */,
+				3AD2F69B20713FEE0017F2EB /* Web.xib */,
+			);
+			path = "Interface Builder";
+			sourceTree = "<group>";
+		};
+		3AA2451420791AC70096CCF6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3AA2451520791ACE0096CCF6 /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3AA2451520791ACE0096CCF6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3AA2451620791ADD0096CCF6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A862DDE2067FFE500090160 /* TerminalWebView.swift */,
+				3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3AA2451720791AF90096CCF6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
+				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
+				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
+				3ACDC3E92065AEC20049034F /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		3ACDC3D12065AEBD0049034F = {
 			isa = PBXGroup;
 			children = (
@@ -165,28 +238,11 @@
 			isa = PBXGroup;
 			children = (
 				3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */,
-				3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */,
-				3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */,
-				3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */,
-				3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */,
-				3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */,
-				3A5F983F2066FFB900E43793 /* InstallerViewController.swift */,
-				3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */,
-				3A7532CD2066DF8000CF85D3 /* TabBarController.swift */,
-				3A862DDE2067FFE500090160 /* TerminalWebView.swift */,
-				3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */,
-				3A9B210B206846F100FAA9DF /* ErrorViewController.swift */,
-				3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */,
-				3ACDC3E12065AEBE0049034F /* Main.storyboard */,
-				3A61DEAF2066998B0002353B /* Connection Info.storyboard */,
-				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
-				3A6C51162067ED9700034753 /* Terminal.xib */,
-				3AD2F69B20713FEE0017F2EB /* Web.xib */,
-				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
-				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
-				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
+				3AA2451420791AC70096CCF6 /* Helpers */,
+				3AA2450D20791A690096CCF6 /* ViewControllers */,
+				3AA2451620791ADD0096CCF6 /* Views */,
+				3AA2451720791AF90096CCF6 /* Resources */,
 				3A61DE9220668D450002353B /* Pisth.xcdatamodeld */,
-				3ACDC3E92065AEC20049034F /* Info.plist */,
 			);
 			path = "Pisth APT";
 			sourceTree = "<group>";
