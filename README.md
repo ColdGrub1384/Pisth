@@ -38,7 +38,7 @@ Why use Pisth APT:
 • You can easily browse, install, uninstall and update pakages.
 ```
 
-![status](https://img.shields.io/badge/status-in%20developement-green.svg)
+![status](https://img.shields.io/badge/status-in%20developement-orange.svg)
 ![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
 
 ## Screenshots
@@ -54,6 +54,13 @@ Pisth Viewer allows you to share a terminal opened with Pisth in iOS from your M
 
 Just open a terminal in [Pisth](https://pisth.github.io), and your iOS device will appear in Pisth Viewer if both Mac and iOS device are connected to the same network. You can also write from the macOS app.
 
+# API
+
+[![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
+
+Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth.
+
+More information at https://pisth.github.io/docs/getting-started.html.
 
 # Project hierarchy
 
@@ -63,14 +70,6 @@ Just open a terminal in [Pisth](https://pisth.github.io), and your iOS device wi
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
-
-# API
-
-[![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
-
-Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth.
-
-More information at https://pisth.github.io/docs/getting-started.html.
 
 # Projects
 
