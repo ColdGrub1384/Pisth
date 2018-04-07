@@ -10,4 +10,5 @@ target 'Pisth APT' do
   # Pods for Pisth APT
   pod "NMSSH"
   pod "BiometricAuthentication"
+  pod "Google-Mobile-Ads-SDK"
 end

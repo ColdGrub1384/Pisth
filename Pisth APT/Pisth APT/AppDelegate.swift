@@ -9,6 +9,7 @@ import UIKit
 import NMSSH
 import Pisth_Shared
 import Pisth_API
+import GoogleMobileAds
 
 let pisth = Pisth(message: "Import DEB package", urlScheme: URL(string:"dpkgPisthInstall://")!)
 
@@ -150,6 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.shared = self
     
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+    
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~6828541853")
         
         connect()
         

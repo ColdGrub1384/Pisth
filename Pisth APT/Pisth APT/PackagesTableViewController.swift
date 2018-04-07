@@ -7,9 +7,10 @@
 
 import UIKit
 import Pisth_Shared
+import GoogleMobileAds
 
 /// View controller containing packages.
-class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
+class PackagesTableViewController: UITableViewController, UISearchBarDelegate, GADBannerViewDelegate {
     
     /// Refresh.
     ///
@@ -69,6 +70,13 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         }
+        
+        // Ads
+        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/5188157128"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
     }
     
     // MARK: - Table view data source
@@ -148,5 +156,12 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()
         })
+    }
+    
+    // MARK: - Banner view delegate
+    
+    /// Show ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        tableView.tableHeaderView = bannerView
     }
 }

@@ -7,43 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09DE75B190EE5892D92F929F2BABFAD8 /* NMSSHSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BD370F54CBA2A212A5DB049598B85C2E /* NMSSHSession.m */; };
-		1CD220C0C5CB0A23E19C2C2B0B7F41E9 /* NMSSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A05D68CBC065AEAD3276873B9E395841 /* NMSSHChannel.m */; };
-		21BB009BD854FE3D760FE0449F95DC5D /* NMSSHChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6D9D7BCD4BECD732FE2D7A9E90C9BF /* NMSSHChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23AFC33C07D45CFB47B03D13F4BE8A6F /* BiometricAuthentication-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD172F8C1CD5FB9FD88BC359ED11A5B /* BiometricAuthentication-dummy.m */; };
-		2773911979B38F916EAF9755B9237273 /* libssh2.h in Headers */ = {isa = PBXBuildFile; fileRef = 4102AD54258BE7F54EBF92DF74C6E9C5 /* libssh2.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2CFC9885B7E0952E7DE87F6500290481 /* NMSFTP.h in Headers */ = {isa = PBXBuildFile; fileRef = A7C677E9AE3D72A7070958C7585B92E9 /* NMSFTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		09DE75B190EE5892D92F929F2BABFAD8 /* NMSSHSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3916C78084726E80A55D233391046571 /* NMSSHSession.m */; };
+		1CD220C0C5CB0A23E19C2C2B0B7F41E9 /* NMSSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6955F686859C81C2D63D5E496ACABA1 /* NMSSHChannel.m */; };
+		21BB009BD854FE3D760FE0449F95DC5D /* NMSSHChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = EFA441716D6098036770106040212986 /* NMSSHChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23AFC33C07D45CFB47B03D13F4BE8A6F /* BiometricAuthentication-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9E0B95FB4FFAB8637C5F0373967615 /* BiometricAuthentication-dummy.m */; };
+		2773911979B38F916EAF9755B9237273 /* libssh2.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D2555BAD362F26209F51C2C60EAE082 /* libssh2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CFC9885B7E0952E7DE87F6500290481 /* NMSFTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DF36D726624D7BA00198CD18F48A6B /* NMSFTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D7EC307ECAF88C873154D24C7D5ED98 /* Pods-Pisth APT-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D729E13BB6D910B83F26A992A1770E4 /* Pods-Pisth APT-dummy.m */; };
-		36B93F2A2C4145C1C82A8E0B9CC30632 /* NMSFTPFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D67D5E12CBA42B7D45DCBFDF9F0073C /* NMSFTPFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		381DCF0B2F439F677F1AB441CFC08AC2 /* NMSFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C134C999DBCE0B1E90235DF1030E5C /* NMSFTPFile.m */; };
-		38C23F80C08B3D94A304DA24E9E15DEA /* libssh2_publickey.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B251DBEF0D310D20BC28334DE25C3AC /* libssh2_publickey.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3CCF20DCB88F20DD59966E0BEDAA14E9 /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C41D62319C8B3D71E203205907837D /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		36B93F2A2C4145C1C82A8E0B9CC30632 /* NMSFTPFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 19DD4AAF932853C70D111BDF5076D56A /* NMSFTPFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		381DCF0B2F439F677F1AB441CFC08AC2 /* NMSFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2AF4913D879DCE3EF8FDB407959D54 /* NMSFTPFile.m */; };
+		38C23F80C08B3D94A304DA24E9E15DEA /* libssh2_publickey.h in Headers */ = {isa = PBXBuildFile; fileRef = F034DA02787FF2D61981D7D86CD6B9D9 /* libssh2_publickey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CCF20DCB88F20DD59966E0BEDAA14E9 /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6657BBE8D0390F2D17034214136085 /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FE27D22EADE6AD730DF29FE7B6486E0 /* Pods-Pisth APT-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F055960268AAE68191B56D8D9F2720 /* Pods-Pisth APT-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 303D9374C4DB581BB3E52B4AB59808BE /* NMSSH-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BFE34936B673E3800863193391DF092 /* socket_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = E6705A975203A57BF5EB2DB9DA3F97B7 /* socket_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		646577B03E696CBE3F414CA9B717ECDE /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DEEA6295DC6881424046C42C736426F /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		647185EE96E0B4F08A9925C90C371F23 /* NMSSHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 635F298EE0BD7390025A0935B4968687 /* NMSSHConfig.m */; };
+		502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CF62554163C929694C139B711CDB5B84 /* NMSSH-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BFE34936B673E3800863193391DF092 /* socket_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 52ECF12A29BB3562C7E094FF26A47BDE /* socket_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		646577B03E696CBE3F414CA9B717ECDE /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E87730E55222FDC94304A79173431F4 /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		647185EE96E0B4F08A9925C90C371F23 /* NMSSHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7B3A920E5BC1AC92612D6831CE2A6A /* NMSSHConfig.m */; };
 		6C7EBC945B821EB7727634033D6DF3C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
-		6E979220FD7F4202CC8665708B831C11 /* NMSSH+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = AA552BB07EBD59538C44752D1BCD418A /* NMSSH+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6E979220FD7F4202CC8665708B831C11 /* NMSSH+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B75F47645A65DE7A6F5C7188A7EF319 /* NMSSH+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6F7BAFBCEE0933C40A76E1ABB7BA3E8A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA5794656CD6EAD5432F6E93991FC63 /* CFNetwork.framework */; };
-		74CDCC6E9AE244DC50DE93FA111DE384 /* NMSFTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E6D3047F8F3FC4AEA85ED255EB49BE /* NMSFTP.m */; };
-		7640505CDB0CD0F37B5A51DF7B865EFF /* NMSSHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 661B22D2E2BF46EA3BCFD11ADA9E8A74 /* NMSSHLogger.m */; };
-		861C4DA1383172332A4A43B4AFEFDC10 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022AC78CF086D57AE02CC2673A99AEB5 /* AuthenticationErrors.swift */; };
-		8B1D2B08674E7AB076E540A5230F12CC /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5377C12CFC4D0AE85AD991F37D9EAB /* BioMetricAuthenticator.swift */; };
-		8F91F2B443813BBC44B4A805F04A39C4 /* NMSSHHostConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E08BBC854A81E0DE761F6CC6D3D3F3 /* NMSSHHostConfig.m */; };
-		922868FC8545055AF825BCB9BC287432 /* NMSSHConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9170E3DED03791EA25F84CB660FEB3 /* NMSSHConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AF766E616C7548F74C8E8AA48CE8F501 /* NMSSHChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 534EABCDC76039B6E5E57A9B17838CED /* NMSSHChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B40C5DFF7E01C15D738FBFB1641F683E /* socket_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B7BABE1F3BEC62EAB229769620B34 /* socket_helper.m */; };
+		74CDCC6E9AE244DC50DE93FA111DE384 /* NMSFTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8A272997482C9E634CCC56E2B5CC18 /* NMSFTP.m */; };
+		7640505CDB0CD0F37B5A51DF7B865EFF /* NMSSHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DBCCB41B77852847F9AE47538618E1 /* NMSSHLogger.m */; };
+		861C4DA1383172332A4A43B4AFEFDC10 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA861C46B59365AB1949012BE6A9D154 /* AuthenticationErrors.swift */; };
+		8B1D2B08674E7AB076E540A5230F12CC /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95298F7D8ED4FD2B90041825F6C23995 /* BioMetricAuthenticator.swift */; };
+		8F91F2B443813BBC44B4A805F04A39C4 /* NMSSHHostConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902B2D0F3D819FADCFA9356C526679B /* NMSSHHostConfig.m */; };
+		922868FC8545055AF825BCB9BC287432 /* NMSSHConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 13EE31EDD582384E5015393C7DA332AA /* NMSSHConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AF766E616C7548F74C8E8AA48CE8F501 /* NMSSHChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 40286D61C264C3D2708CE99806FE33A1 /* NMSSHChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B40C5DFF7E01C15D738FBFB1641F683E /* socket_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97156E271E14E4E82CBE5160A6AA8084 /* socket_helper.m */; };
 		BD068A28231EB9F45523FD0706F021EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
-		C09348A6D17868C5B278A576C6C21EE9 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC93AE9A8F2570E40161F6095A7B36E /* BiometricAuthenticationConstants.swift */; };
-		D0103D2E66D03C0BA07BE4BD53DECAEF /* NMSSHSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B2E4F7AEFD61B7A2F91E662EC12CFED /* NMSSHSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA85BB3FC6D0E25EAE9AABACEDEA2A40 /* NMSSHLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A88C1A47E93339C05FBF91F3C5245196 /* NMSSHLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E325B473256B452B23D808FAE16ED00B /* NMSSHHostConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E0C5D0BF89F2E41DD33247C78C0C84DB /* NMSSHHostConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E492F9301A28A6F0E197558C25C8493D /* NMSSH-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FB998BB0935CA3097014B1C304F0FBA8 /* NMSSH-dummy.m */; };
-		E6EE41D578F5A21CD9A56815D447E5CA /* BiometricAuthentication-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AC4AF0D25CCFD6CA11868F0A71230736 /* BiometricAuthentication-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C09348A6D17868C5B278A576C6C21EE9 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F288B479F86615190B6B572401D3B13D /* BiometricAuthenticationConstants.swift */; };
+		D0103D2E66D03C0BA07BE4BD53DECAEF /* NMSSHSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FCA254E9DF28C8C44D17C9486A8CA506 /* NMSSHSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA85BB3FC6D0E25EAE9AABACEDEA2A40 /* NMSSHLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C344985E0DA27CD3E7CAEE53CCC4F31 /* NMSSHLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E325B473256B452B23D808FAE16ED00B /* NMSSHHostConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 59669796D295714BC5B75F3135C64233 /* NMSSHHostConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E492F9301A28A6F0E197558C25C8493D /* NMSSH-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2F130845315691550D51133B7CC564 /* NMSSH-dummy.m */; };
+		E6EE41D578F5A21CD9A56815D447E5CA /* BiometricAuthentication-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 57196CF9E96E737A269C9E2151909A0C /* BiometricAuthentication-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E771078EBAA22A6E00637B2D70831395 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
-		F45E543EA311E6D1F1926F2F645D736D /* libssh2_sftp.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBDA6E7D76EC148DF012EBC28F73CA7 /* libssh2_sftp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC4041E14EC85D5FF3060D606C31E5CA /* NMSSHSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E86937D7EC537500D635ABEFF7F2225B /* NMSSHSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F45E543EA311E6D1F1926F2F645D736D /* libssh2_sftp.h in Headers */ = {isa = PBXBuildFile; fileRef = 15995DA5B2B62A51FF94AA58BFE8E06A /* libssh2_sftp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC4041E14EC85D5FF3060D606C31E5CA /* NMSSHSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BF32555D374E6F1DE3456DC5BAB87A49 /* NMSSHSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,64 +64,65 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		020D4E1DCB57A4854F7789706CAEAF59 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		022AC78CF086D57AE02CC2673A99AEB5 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationErrors.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/AuthenticationErrors.swift; sourceTree = "<group>"; };
-		02C134C999DBCE0B1E90235DF1030E5C /* NMSFTPFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTPFile.m; path = NMSSH/NMSFTPFile.m; sourceTree = "<group>"; };
-		0350E1CB20FA601FFF863942DDB0036A /* NMSSH.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = NMSSH.modulemap; sourceTree = "<group>"; };
-		0B1AE3CD5B3E46461EFBA4DFF321899A /* libcrypto.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcrypto.a; path = "NMSSH-iOS/Libraries/lib/libcrypto.a"; sourceTree = "<group>"; };
-		0B251DBEF0D310D20BC28334DE25C3AC /* libssh2_publickey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_publickey.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_publickey.h"; sourceTree = "<group>"; };
-		0B3BFF078A60703010E6DCE281E99E9C /* NMSSH-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-prefix.pch"; sourceTree = "<group>"; };
-		15AC911F8E10CF9CBE14D75A0090D7AD /* BiometricAuthentication.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BiometricAuthentication.xcconfig; sourceTree = "<group>"; };
-		16E08BBC854A81E0DE761F6CC6D3D3F3 /* NMSSHHostConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHHostConfig.m; path = NMSSH/NMSSHHostConfig.m; sourceTree = "<group>"; };
+		07377AE1E345256445026B0D0F593B96 /* NMSSH-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-prefix.pch"; sourceTree = "<group>"; };
+		0902B2D0F3D819FADCFA9356C526679B /* NMSSHHostConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHHostConfig.m; path = NMSSH/NMSSHHostConfig.m; sourceTree = "<group>"; };
+		13EE31EDD582384E5015393C7DA332AA /* NMSSHConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHConfig.h; path = NMSSH/NMSSHConfig.h; sourceTree = "<group>"; };
+		15995DA5B2B62A51FF94AA58BFE8E06A /* libssh2_sftp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_sftp.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_sftp.h"; sourceTree = "<group>"; };
+		19DD4AAF932853C70D111BDF5076D56A /* NMSFTPFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTPFile.h; path = NMSSH/NMSFTPFile.h; sourceTree = "<group>"; };
+		1C2AF4913D879DCE3EF8FDB407959D54 /* NMSFTPFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTPFile.m; path = NMSSH/NMSFTPFile.m; sourceTree = "<group>"; };
 		1CB3780C1A101C3F6B6F8E78416DDCC1 /* Pods-Pisth APT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.release.xcconfig"; sourceTree = "<group>"; };
-		1DD172F8C1CD5FB9FD88BC359ED11A5B /* BiometricAuthentication-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BiometricAuthentication-dummy.m"; sourceTree = "<group>"; };
 		1FA61711F73C5A5465ABF105F1173B4A /* Pods_Pisth_APT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Pisth_APT.framework; path = "Pods-Pisth APT.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		23E6D3047F8F3FC4AEA85ED255EB49BE /* NMSFTP.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTP.m; path = NMSSH/NMSFTP.m; sourceTree = "<group>"; };
+		2283266F8ECCA1EF6D331C5975226356 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		2802433BB7AE87BF569091EBFB0FA4C5 /* BiometricAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BiometricAuthentication.framework; path = BiometricAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B2E4F7AEFD61B7A2F91E662EC12CFED /* NMSSHSessionDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSessionDelegate.h; path = NMSSH/Protocols/NMSSHSessionDelegate.h; sourceTree = "<group>"; };
-		303D9374C4DB581BB3E52B4AB59808BE /* NMSSH-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-umbrella.h"; sourceTree = "<group>"; };
-		4102AD54258BE7F54EBF92DF74C6E9C5 /* libssh2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2.h"; sourceTree = "<group>"; };
-		51D3FF7156927D146B7ACD56BC279CB7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		534EABCDC76039B6E5E57A9B17838CED /* NMSSHChannelDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannelDelegate.h; path = NMSSH/Protocols/NMSSHChannelDelegate.h; sourceTree = "<group>"; };
-		5A9B7BABE1F3BEC62EAB229769620B34 /* socket_helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = socket_helper.m; path = NMSSH/Config/socket_helper.m; sourceTree = "<group>"; };
+		2A5FDDC87BBEDE6E1CE87FA0C66C1DEF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3916C78084726E80A55D233391046571 /* NMSSHSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHSession.m; path = NMSSH/NMSSHSession.m; sourceTree = "<group>"; };
+		3C2F130845315691550D51133B7CC564 /* NMSSH-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMSSH-dummy.m"; sourceTree = "<group>"; };
+		3E87730E55222FDC94304A79173431F4 /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = NMSSH/NMSSH.h; sourceTree = "<group>"; };
+		40286D61C264C3D2708CE99806FE33A1 /* NMSSHChannelDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannelDelegate.h; path = NMSSH/Protocols/NMSSHChannelDelegate.h; sourceTree = "<group>"; };
+		49DBCCB41B77852847F9AE47538618E1 /* NMSSHLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHLogger.m; path = NMSSH/Config/NMSSHLogger.m; sourceTree = "<group>"; };
+		52ECF12A29BB3562C7E094FF26A47BDE /* socket_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = socket_helper.h; path = NMSSH/Config/socket_helper.h; sourceTree = "<group>"; };
+		57196CF9E96E737A269C9E2151909A0C /* BiometricAuthentication-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-umbrella.h"; sourceTree = "<group>"; };
+		59669796D295714BC5B75F3135C64233 /* NMSSHHostConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHHostConfig.h; path = NMSSH/NMSSHHostConfig.h; sourceTree = "<group>"; };
 		5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5C6D9D7BCD4BECD732FE2D7A9E90C9BF /* NMSSHChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannel.h; path = NMSSH/NMSSHChannel.h; sourceTree = "<group>"; };
+		5C6657BBE8D0390F2D17034214136085 /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = "NMSSH-iOS/NMSSH.h"; sourceTree = "<group>"; };
+		5D2555BAD362F26209F51C2C60EAE082 /* libssh2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2.h"; sourceTree = "<group>"; };
 		5DC632A11E6ED2732F386B8C31764004 /* Pods-Pisth APT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Pisth APT.modulemap"; sourceTree = "<group>"; };
+		5DD4B1F62D19BA349A7D1897D3DF1B69 /* libcrypto.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcrypto.a; path = "NMSSH-iOS/Libraries/lib/libcrypto.a"; sourceTree = "<group>"; };
 		632D87BF2629B14B3A4146D9B55316F7 /* Pods-Pisth APT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.debug.xcconfig"; sourceTree = "<group>"; };
-		635F298EE0BD7390025A0935B4968687 /* NMSSHConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHConfig.m; path = NMSSH/NMSSHConfig.m; sourceTree = "<group>"; };
-		661B22D2E2BF46EA3BCFD11ADA9E8A74 /* NMSSHLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHLogger.m; path = NMSSH/Config/NMSSHLogger.m; sourceTree = "<group>"; };
+		66146ACFB54BC4E035F958944AF4E64F /* NMSSH.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMSSH.xcconfig; sourceTree = "<group>"; };
 		6693D3F3A79FD0937FD7E89991EAE5C3 /* Pods-Pisth APT-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-resources.sh"; sourceTree = "<group>"; };
-		7566C6D7B60574FC8AE0766368AEC4A1 /* BiometricAuthentication-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-prefix.pch"; sourceTree = "<group>"; };
-		7DEEA6295DC6881424046C42C736426F /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = NMSSH/NMSSH.h; sourceTree = "<group>"; };
-		85C41D62319C8B3D71E203205907837D /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = "NMSSH-iOS/NMSSH.h"; sourceTree = "<group>"; };
+		6A7B3A920E5BC1AC92612D6831CE2A6A /* NMSSHConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHConfig.m; path = NMSSH/NMSSHConfig.m; sourceTree = "<group>"; };
+		700E24F4ABBF5649D282163A2441123F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C344985E0DA27CD3E7CAEE53CCC4F31 /* NMSSHLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHLogger.h; path = NMSSH/Config/NMSSHLogger.h; sourceTree = "<group>"; };
+		86DF36D726624D7BA00198CD18F48A6B /* NMSFTP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTP.h; path = NMSSH/NMSFTP.h; sourceTree = "<group>"; };
+		8B75F47645A65DE7A6F5C7188A7EF319 /* NMSSH+Protected.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NMSSH+Protected.h"; path = "NMSSH/Config/NMSSH+Protected.h"; sourceTree = "<group>"; };
 		8D729E13BB6D910B83F26A992A1770E4 /* Pods-Pisth APT-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pisth APT-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9D67D5E12CBA42B7D45DCBFDF9F0073C /* NMSFTPFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTPFile.h; path = NMSSH/NMSFTPFile.h; sourceTree = "<group>"; };
-		9EC93AE9A8F2570E40161F6095A7B36E /* BiometricAuthenticationConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BiometricAuthenticationConstants.swift; path = BiometricAuthentication/BiometricAuthentication/Constants/BiometricAuthenticationConstants.swift; sourceTree = "<group>"; };
-		A05D68CBC065AEAD3276873B9E395841 /* NMSSHChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHChannel.m; path = NMSSH/NMSSHChannel.m; sourceTree = "<group>"; };
-		A7C677E9AE3D72A7070958C7585B92E9 /* NMSFTP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTP.h; path = NMSSH/NMSFTP.h; sourceTree = "<group>"; };
-		A88C1A47E93339C05FBF91F3C5245196 /* NMSSHLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHLogger.h; path = NMSSH/Config/NMSSHLogger.h; sourceTree = "<group>"; };
-		AA552BB07EBD59538C44752D1BCD418A /* NMSSH+Protected.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NMSSH+Protected.h"; path = "NMSSH/Config/NMSSH+Protected.h"; sourceTree = "<group>"; };
-		AC4AF0D25CCFD6CA11868F0A71230736 /* BiometricAuthentication-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-umbrella.h"; sourceTree = "<group>"; };
-		BD370F54CBA2A212A5DB049598B85C2E /* NMSSHSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHSession.m; path = NMSSH/NMSSHSession.m; sourceTree = "<group>"; };
-		BF9170E3DED03791EA25F84CB660FEB3 /* NMSSHConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHConfig.h; path = NMSSH/NMSSHConfig.h; sourceTree = "<group>"; };
+		95298F7D8ED4FD2B90041825F6C23995 /* BioMetricAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BioMetricAuthenticator.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/BioMetricAuthenticator.swift; sourceTree = "<group>"; };
+		97156E271E14E4E82CBE5160A6AA8084 /* socket_helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = socket_helper.m; path = NMSSH/Config/socket_helper.m; sourceTree = "<group>"; };
+		9F8A272997482C9E634CCC56E2B5CC18 /* NMSFTP.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTP.m; path = NMSSH/NMSFTP.m; sourceTree = "<group>"; };
+		A4897BFCE4EBA61FDD71665BDDC8B418 /* NMSSH.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = NMSSH.modulemap; sourceTree = "<group>"; };
+		A8FB07B2D29776B93818C1C0898C742B /* BiometricAuthentication.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = BiometricAuthentication.modulemap; sourceTree = "<group>"; };
+		AA861C46B59365AB1949012BE6A9D154 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationErrors.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/AuthenticationErrors.swift; sourceTree = "<group>"; };
+		AC91FBDFDFC54A2CB75C8231D70192F7 /* BiometricAuthentication-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-prefix.pch"; sourceTree = "<group>"; };
+		AD2FDEF3D8CBF14309956700B0931DBE /* BiometricAuthentication.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BiometricAuthentication.xcconfig; sourceTree = "<group>"; };
+		BF32555D374E6F1DE3456DC5BAB87A49 /* NMSSHSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSession.h; path = NMSSH/NMSSHSession.h; sourceTree = "<group>"; };
+		C5F2BB5735FF312FE3D968C45F4E4882 /* libssh2.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssh2.a; path = "NMSSH-iOS/Libraries/lib/libssh2.a"; sourceTree = "<group>"; };
+		CC9E0B95FB4FFAB8637C5F0373967615 /* BiometricAuthentication-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BiometricAuthentication-dummy.m"; sourceTree = "<group>"; };
+		CF62554163C929694C139B711CDB5B84 /* NMSSH-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-umbrella.h"; sourceTree = "<group>"; };
 		D0DB44FEB9CC65267D23FAEC7FA4098D /* Pods-Pisth APT-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Pisth APT-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D4BA82E33A33788FB8EAB558E2834143 /* NMSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NMSSH.framework; path = NMSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4E1239D4C98C02AD24178AC6833698F /* libssh2.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssh2.a; path = "NMSSH-iOS/Libraries/lib/libssh2.a"; sourceTree = "<group>"; };
 		D562C5D2CDDAF4A8D57205284BEDEDCB /* Pods-Pisth APT-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pisth APT-acknowledgements.plist"; sourceTree = "<group>"; };
 		DBA5794656CD6EAD5432F6E93991FC63 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		DFBDA6E7D76EC148DF012EBC28F73CA7 /* libssh2_sftp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_sftp.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_sftp.h"; sourceTree = "<group>"; };
-		E0C5D0BF89F2E41DD33247C78C0C84DB /* NMSSHHostConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHHostConfig.h; path = NMSSH/NMSSHHostConfig.h; sourceTree = "<group>"; };
-		E423A1B949C485689875934372E7ADF6 /* BiometricAuthentication.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = BiometricAuthentication.modulemap; sourceTree = "<group>"; };
-		E6705A975203A57BF5EB2DB9DA3F97B7 /* socket_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = socket_helper.h; path = NMSSH/Config/socket_helper.h; sourceTree = "<group>"; };
-		E86937D7EC537500D635ABEFF7F2225B /* NMSSHSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSession.h; path = NMSSH/NMSSHSession.h; sourceTree = "<group>"; };
+		E1743B7336BAA4B08E95EA4D4BEDB291 /* libssl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssl.a; path = "NMSSH-iOS/Libraries/lib/libssl.a"; sourceTree = "<group>"; };
 		E89E123B30122E0C60D744113366C015 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA09C9A97A2E34F7815950F6B73B0C3D /* NMSSH.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMSSH.xcconfig; sourceTree = "<group>"; };
-		ED3C816FEF7DDCF4B0D5D375ED97C446 /* libssl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssl.a; path = "NMSSH-iOS/Libraries/lib/libssl.a"; sourceTree = "<group>"; };
-		EE5377C12CFC4D0AE85AD991F37D9EAB /* BioMetricAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BioMetricAuthenticator.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/BioMetricAuthenticator.swift; sourceTree = "<group>"; };
+		EFA441716D6098036770106040212986 /* NMSSHChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannel.h; path = NMSSH/NMSSHChannel.h; sourceTree = "<group>"; };
 		EFBDCE4507DF143B6861E6951D5AFEF2 /* Pods-Pisth APT-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-frameworks.sh"; sourceTree = "<group>"; };
+		F034DA02787FF2D61981D7D86CD6B9D9 /* libssh2_publickey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_publickey.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_publickey.h"; sourceTree = "<group>"; };
+		F288B479F86615190B6B572401D3B13D /* BiometricAuthenticationConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BiometricAuthenticationConstants.swift; path = BiometricAuthentication/BiometricAuthentication/Constants/BiometricAuthenticationConstants.swift; sourceTree = "<group>"; };
+		F6955F686859C81C2D63D5E496ACABA1 /* NMSSHChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHChannel.m; path = NMSSH/NMSSHChannel.m; sourceTree = "<group>"; };
 		F7F055960268AAE68191B56D8D9F2720 /* Pods-Pisth APT-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Pisth APT-umbrella.h"; sourceTree = "<group>"; };
-		FB998BB0935CA3097014B1C304F0FBA8 /* NMSSH-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMSSH-dummy.m"; sourceTree = "<group>"; };
+		FCA254E9DF28C8C44D17C9486A8CA506 /* NMSSHSessionDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSessionDelegate.h; path = NMSSH/Protocols/NMSSHSessionDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,70 +163,28 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		0D705C9C6DACCDA1C073A9F39BBB6FC5 /* BiometricAuthentication */ = {
+		1FDD60EBDD3537B1BFAA13A81BC59B54 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				022AC78CF086D57AE02CC2673A99AEB5 /* AuthenticationErrors.swift */,
-				9EC93AE9A8F2570E40161F6095A7B36E /* BiometricAuthenticationConstants.swift */,
-				EE5377C12CFC4D0AE85AD991F37D9EAB /* BioMetricAuthenticator.swift */,
-				D5AD4B793276E1615999347D55A317F1 /* Support Files */,
+				5DD4B1F62D19BA349A7D1897D3DF1B69 /* libcrypto.a */,
+				C5F2BB5735FF312FE3D968C45F4E4882 /* libssh2.a */,
+				E1743B7336BAA4B08E95EA4D4BEDB291 /* libssl.a */,
 			);
-			name = BiometricAuthentication;
-			path = BiometricAuthentication;
-			sourceTree = "<group>";
-		};
-		19E80697EA52460938E78296C1D1AF71 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				51D3FF7156927D146B7ACD56BC279CB7 /* Info.plist */,
-				0350E1CB20FA601FFF863942DDB0036A /* NMSSH.modulemap */,
-				EA09C9A97A2E34F7815950F6B73B0C3D /* NMSSH.xcconfig */,
-				FB998BB0935CA3097014B1C304F0FBA8 /* NMSSH-dummy.m */,
-				0B3BFF078A60703010E6DCE281E99E9C /* NMSSH-prefix.pch */,
-				303D9374C4DB581BB3E52B4AB59808BE /* NMSSH-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/NMSSH";
-			sourceTree = "<group>";
-		};
-		3E611B51E4B2F13491562F47931C6431 /* NMSSH */ = {
-			isa = PBXGroup;
-			children = (
-				4102AD54258BE7F54EBF92DF74C6E9C5 /* libssh2.h */,
-				0B251DBEF0D310D20BC28334DE25C3AC /* libssh2_publickey.h */,
-				DFBDA6E7D76EC148DF012EBC28F73CA7 /* libssh2_sftp.h */,
-				A7C677E9AE3D72A7070958C7585B92E9 /* NMSFTP.h */,
-				23E6D3047F8F3FC4AEA85ED255EB49BE /* NMSFTP.m */,
-				9D67D5E12CBA42B7D45DCBFDF9F0073C /* NMSFTPFile.h */,
-				02C134C999DBCE0B1E90235DF1030E5C /* NMSFTPFile.m */,
-				7DEEA6295DC6881424046C42C736426F /* NMSSH.h */,
-				85C41D62319C8B3D71E203205907837D /* NMSSH.h */,
-				AA552BB07EBD59538C44752D1BCD418A /* NMSSH+Protected.h */,
-				5C6D9D7BCD4BECD732FE2D7A9E90C9BF /* NMSSHChannel.h */,
-				A05D68CBC065AEAD3276873B9E395841 /* NMSSHChannel.m */,
-				534EABCDC76039B6E5E57A9B17838CED /* NMSSHChannelDelegate.h */,
-				BF9170E3DED03791EA25F84CB660FEB3 /* NMSSHConfig.h */,
-				635F298EE0BD7390025A0935B4968687 /* NMSSHConfig.m */,
-				E0C5D0BF89F2E41DD33247C78C0C84DB /* NMSSHHostConfig.h */,
-				16E08BBC854A81E0DE761F6CC6D3D3F3 /* NMSSHHostConfig.m */,
-				A88C1A47E93339C05FBF91F3C5245196 /* NMSSHLogger.h */,
-				661B22D2E2BF46EA3BCFD11ADA9E8A74 /* NMSSHLogger.m */,
-				E86937D7EC537500D635ABEFF7F2225B /* NMSSHSession.h */,
-				BD370F54CBA2A212A5DB049598B85C2E /* NMSSHSession.m */,
-				2B2E4F7AEFD61B7A2F91E662EC12CFED /* NMSSHSessionDelegate.h */,
-				E6705A975203A57BF5EB2DB9DA3F97B7 /* socket_helper.h */,
-				5A9B7BABE1F3BEC62EAB229769620B34 /* socket_helper.m */,
-				82557DA021AA6044455C5C7A1E005920 /* Frameworks */,
-				19E80697EA52460938E78296C1D1AF71 /* Support Files */,
-			);
-			name = NMSSH;
-			path = NMSSH;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				07B963F066CF1C907024B787F3D5186F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D1392E61D171B17FCFBDB471E22505B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2283266F8ECCA1EF6D331C5975226356 /* GoogleMobileAds.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,25 +199,38 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5467928DF50DECE6EF3485794EC2F90A /* Google-Mobile-Ads-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				4D1392E61D171B17FCFBDB471E22505B /* Frameworks */,
+			);
+			name = "Google-Mobile-Ads-SDK";
+			path = "Google-Mobile-Ads-SDK";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				A3B8DE0856DDD7E2A14F8BEC1D8DD3F1 /* Pods */,
+				E6017B09CA65EF220E7C4290E8FB7DC6 /* Pods */,
 				51D18F10E86A67E09F16619405DB623A /* Products */,
 				8BCFA4E566F2CD95CB62E400ADB70BBE /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		82557DA021AA6044455C5C7A1E005920 /* Frameworks */ = {
+		827BCD5473AE00001D81AC7B120AA07B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0B1AE3CD5B3E46461EFBA4DFF321899A /* libcrypto.a */,
-				D4E1239D4C98C02AD24178AC6833698F /* libssh2.a */,
-				ED3C816FEF7DDCF4B0D5D375ED97C446 /* libssl.a */,
+				A8FB07B2D29776B93818C1C0898C742B /* BiometricAuthentication.modulemap */,
+				AD2FDEF3D8CBF14309956700B0931DBE /* BiometricAuthentication.xcconfig */,
+				CC9E0B95FB4FFAB8637C5F0373967615 /* BiometricAuthentication-dummy.m */,
+				AC91FBDFDFC54A2CB75C8231D70192F7 /* BiometricAuthentication-prefix.pch */,
+				57196CF9E96E737A269C9E2151909A0C /* BiometricAuthentication-umbrella.h */,
+				2A5FDDC87BBEDE6E1CE87FA0C66C1DEF /* Info.plist */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/BiometricAuthentication";
 			sourceTree = "<group>";
 		};
 		8BCFA4E566F2CD95CB62E400ADB70BBE /* Targets Support Files */ = {
@@ -269,13 +241,38 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		A3B8DE0856DDD7E2A14F8BEC1D8DD3F1 /* Pods */ = {
+		B3092199E92F821C3D1EF924DE140608 /* NMSSH */ = {
 			isa = PBXGroup;
 			children = (
-				0D705C9C6DACCDA1C073A9F39BBB6FC5 /* BiometricAuthentication */,
-				3E611B51E4B2F13491562F47931C6431 /* NMSSH */,
+				5D2555BAD362F26209F51C2C60EAE082 /* libssh2.h */,
+				F034DA02787FF2D61981D7D86CD6B9D9 /* libssh2_publickey.h */,
+				15995DA5B2B62A51FF94AA58BFE8E06A /* libssh2_sftp.h */,
+				86DF36D726624D7BA00198CD18F48A6B /* NMSFTP.h */,
+				9F8A272997482C9E634CCC56E2B5CC18 /* NMSFTP.m */,
+				19DD4AAF932853C70D111BDF5076D56A /* NMSFTPFile.h */,
+				1C2AF4913D879DCE3EF8FDB407959D54 /* NMSFTPFile.m */,
+				3E87730E55222FDC94304A79173431F4 /* NMSSH.h */,
+				5C6657BBE8D0390F2D17034214136085 /* NMSSH.h */,
+				8B75F47645A65DE7A6F5C7188A7EF319 /* NMSSH+Protected.h */,
+				EFA441716D6098036770106040212986 /* NMSSHChannel.h */,
+				F6955F686859C81C2D63D5E496ACABA1 /* NMSSHChannel.m */,
+				40286D61C264C3D2708CE99806FE33A1 /* NMSSHChannelDelegate.h */,
+				13EE31EDD582384E5015393C7DA332AA /* NMSSHConfig.h */,
+				6A7B3A920E5BC1AC92612D6831CE2A6A /* NMSSHConfig.m */,
+				59669796D295714BC5B75F3135C64233 /* NMSSHHostConfig.h */,
+				0902B2D0F3D819FADCFA9356C526679B /* NMSSHHostConfig.m */,
+				7C344985E0DA27CD3E7CAEE53CCC4F31 /* NMSSHLogger.h */,
+				49DBCCB41B77852847F9AE47538618E1 /* NMSSHLogger.m */,
+				BF32555D374E6F1DE3456DC5BAB87A49 /* NMSSHSession.h */,
+				3916C78084726E80A55D233391046571 /* NMSSHSession.m */,
+				FCA254E9DF28C8C44D17C9486A8CA506 /* NMSSHSessionDelegate.h */,
+				52ECF12A29BB3562C7E094FF26A47BDE /* socket_helper.h */,
+				97156E271E14E4E82CBE5160A6AA8084 /* socket_helper.m */,
+				1FDD60EBDD3537B1BFAA13A81BC59B54 /* Frameworks */,
+				CCA4284F2F4AB6E786EF739BBDC85660 /* Support Files */,
 			);
-			name = Pods;
+			name = NMSSH;
+			path = NMSSH;
 			sourceTree = "<group>";
 		};
 		B314C348A036555F0E9C4AFC140DD780 /* Pods-Pisth APT */ = {
@@ -296,18 +293,40 @@
 			path = "Target Support Files/Pods-Pisth APT";
 			sourceTree = "<group>";
 		};
-		D5AD4B793276E1615999347D55A317F1 /* Support Files */ = {
+		CCA4284F2F4AB6E786EF739BBDC85660 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E423A1B949C485689875934372E7ADF6 /* BiometricAuthentication.modulemap */,
-				15AC911F8E10CF9CBE14D75A0090D7AD /* BiometricAuthentication.xcconfig */,
-				1DD172F8C1CD5FB9FD88BC359ED11A5B /* BiometricAuthentication-dummy.m */,
-				7566C6D7B60574FC8AE0766368AEC4A1 /* BiometricAuthentication-prefix.pch */,
-				AC4AF0D25CCFD6CA11868F0A71230736 /* BiometricAuthentication-umbrella.h */,
-				020D4E1DCB57A4854F7789706CAEAF59 /* Info.plist */,
+				700E24F4ABBF5649D282163A2441123F /* Info.plist */,
+				A4897BFCE4EBA61FDD71665BDDC8B418 /* NMSSH.modulemap */,
+				66146ACFB54BC4E035F958944AF4E64F /* NMSSH.xcconfig */,
+				3C2F130845315691550D51133B7CC564 /* NMSSH-dummy.m */,
+				07377AE1E345256445026B0D0F593B96 /* NMSSH-prefix.pch */,
+				CF62554163C929694C139B711CDB5B84 /* NMSSH-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/BiometricAuthentication";
+			path = "../Target Support Files/NMSSH";
+			sourceTree = "<group>";
+		};
+		DDF480E33C7857DFB271D9DB8A55FB04 /* BiometricAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				AA861C46B59365AB1949012BE6A9D154 /* AuthenticationErrors.swift */,
+				F288B479F86615190B6B572401D3B13D /* BiometricAuthenticationConstants.swift */,
+				95298F7D8ED4FD2B90041825F6C23995 /* BioMetricAuthenticator.swift */,
+				827BCD5473AE00001D81AC7B120AA07B /* Support Files */,
+			);
+			name = BiometricAuthentication;
+			path = BiometricAuthentication;
+			sourceTree = "<group>";
+		};
+		E6017B09CA65EF220E7C4290E8FB7DC6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DDF480E33C7857DFB271D9DB8A55FB04 /* BiometricAuthentication */,
+				5467928DF50DECE6EF3485794EC2F90A /* Google-Mobile-Ads-SDK */,
+				B3092199E92F821C3D1EF924DE140608 /* NMSSH */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,7 +512,7 @@
 /* Begin XCBuildConfiguration section */
 		0F32B0CD5D416A9C0C6D881B9FD4D8F4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15AC911F8E10CF9CBE14D75A0090D7AD /* BiometricAuthentication.xcconfig */;
+			baseConfigurationReference = AD2FDEF3D8CBF14309956700B0931DBE /* BiometricAuthentication.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -525,7 +544,7 @@
 		};
 		4A47021B849AA91DA0F38D015B968520 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15AC911F8E10CF9CBE14D75A0090D7AD /* BiometricAuthentication.xcconfig */;
+			baseConfigurationReference = AD2FDEF3D8CBF14309956700B0931DBE /* BiometricAuthentication.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -594,7 +613,7 @@
 		};
 		657EA49120DD0D9EEDB809D6BFF2509D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA09C9A97A2E34F7815950F6B73B0C3D /* NMSSH.xcconfig */;
+			baseConfigurationReference = 66146ACFB54BC4E035F958944AF4E64F /* NMSSH.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -666,7 +685,7 @@
 		};
 		BD11387C024584094A8936BA86279754 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA09C9A97A2E34F7815950F6B73B0C3D /* NMSSH.xcconfig */;
+			baseConfigurationReference = 66146ACFB54BC4E035F958944AF4E64F /* NMSSH.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

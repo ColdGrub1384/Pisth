@@ -9,9 +9,10 @@ import UIKit
 import Pisth_Shared
 import Pisth_API
 import StoreKit
+import GoogleMobileAds
 
 /// Table view controller for listing installed packages.
-class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate {
+class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate, GADBannerViewDelegate {
     
     /// Refresh.
     ///
@@ -89,6 +90,13 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         }
+        
+        // Ads
+        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/5188157128"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.load(GADRequest())
     }
     
     // MARK: - Table view data source
@@ -201,5 +209,12 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Dismiss.
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Banner view delegate
+    
+    /// Show ad.
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        tableView.tableHeaderView = bannerView
     }
 }

@@ -1,15 +1,18 @@
 PODS:
   - BiometricAuthentication (1.0.5)
+  - Google-Mobile-Ads-SDK (7.29.0)
   - NMSSH (2.2.8)
 
 DEPENDENCIES:
   - BiometricAuthentication
+  - Google-Mobile-Ads-SDK
   - NMSSH
 
 SPEC CHECKSUMS:
   BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
+  Google-Mobile-Ads-SDK: 375bbb821b3df2106c37b74f6b0a97576ddc5f6b
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
 
-PODFILE CHECKSUM: ba7893ecd00cac8300508c9d5edc9a1cae54758c
+PODFILE CHECKSUM: 88dddc1cbb88389ec74c8e1a15e3eefbd3ca5267
 
 COCOAPODS: 1.1.1
