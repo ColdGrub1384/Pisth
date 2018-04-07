@@ -192,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             return false
                         }
                         
-                        termVC.command = "clear; dpkg -i ~/\(filename); rm ~/\(filename); echo -e \"\\033[CLOSE\""
+                        termVC.command = "clear; sudo dpkg -i ~/\(filename); rm ~/\(filename); echo -e \"\\033[CLOSE\""
                         termVC.title = "Installing packages..."
                         
                         let navVC = UINavigationController(rootViewController: termVC)
