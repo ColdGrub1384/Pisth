@@ -138,12 +138,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         // Setup Split view controller
         splitViewController = UISplitViewController()
         splitViewController.view.backgroundColor = .white
+        splitViewController.viewControllers = [navigationController, detailNavigationController]
+        splitViewController.preferredDisplayMode = .allVisible
+        self.navigationController = detailNavigationController
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            if !AppDelegate.shared.splitViewController.isCollapsed {
-                self.splitViewController.viewControllers = [navigationController, detailNavigationController]
-                self.splitViewController.preferredDisplayMode = .allVisible
-                self.navigationController = detailNavigationController
-            } else {
+            if AppDelegate.shared.splitViewController.isCollapsed {
                 self.splitViewController.viewControllers = [navigationController]
                 self.navigationController = navigationController
             }
