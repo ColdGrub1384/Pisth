@@ -180,23 +180,33 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         let activityVC = ActivityViewController(message: "Uploading...")
         
+        var success = false
+        
         present(activityVC, animated: true, completion: {
-            AppDelegate.shared.session?.channel.uploadFile(url.path, to: "~/\(url.lastPathComponent)")
+            success = AppDelegate.shared.session?.channel.uploadFile(url.path, to: "\(AppDelegate.shared.homeDirectory ?? "")/PisthDEBInstall.deb") ?? false
             
-            activityVC.dismiss(animated: true, completion: nil)
+            activityVC.dismiss(animated: true, completion: {
+                
+                if success {
+                    guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+                        return
+                    }
+                    
+                    termVC.command = "clear; dpkg -i ~/PisthDEBInstall.deb; rm ~/PisthDEBInstall.deb; echo -e \"\\033[CLOSE\""
+                    termVC.title = "Installing packages..."
+                    
+                    let navVC = UINavigationController(rootViewController: termVC)
+                    navVC.modalPresentationStyle = .formSheet
+                    
+                    self.present(navVC, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Error uploading file!", message: "Make sure the file is not empty.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
         })
-        
-        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
-            return
-        }
-        
-        termVC.command = "clear; dpkg -i ~/\(url.lastPathComponent); rm ~/\(url.lastPathComponent); echo -e \"\\033[CLOSE\""
-        termVC.title = "Installing packages..."
-        
-        let navVC = UINavigationController(rootViewController: termVC)
-        navVC.modalPresentationStyle = .formSheet
-        
-        present(navVC, animated: true, completion: nil)
     }
     
     /// Dismiss.

@@ -38,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Session used for the shell
     var shellSession: NMSSHSession?
     
+    /// The user's home directory.
+    var homeDirectory: String?
+    
     /// Open the session.
     func connect() {
         // Connect
@@ -107,8 +110,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Search for updates
         if let session = session {
             if session.isConnected && session.isAuthorized {
+                
+                if let homeDirectory = (try? session.channel.execute("echo $HOME"))?.replacingOccurrences(of: "\n", with: "") {
+                    self.homeDirectory = homeDirectory
+                }
+                
                 if let packages = (try? session.channel.execute("aptitude -F%p --disable-columns search ~U").components(separatedBy: "\n")) {
                     self.updates = packages
+                    self.updates.removeLast()
                     
                     if TabBarController.shared != nil {
                         DispatchQueue.main.async {
@@ -126,6 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if let installed = (try? session.channel.execute("apt-mark showmanual").components(separatedBy: "\n")) {
                     self.installed = installed
+                    self.installed.removeLast()
                     
                     DispatchQueue.main.async {
                         if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
@@ -184,31 +194,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     var success = false
                     
-                    vc.present(activityVC, animated: true, completion: {
-                        self.session?.sftp.connect()
-                        success = self.session?.sftp.writeContents(data, toFileAtPath: "~/\(filename)") ?? false
-                        
-                        activityVC.dismiss(animated: true, completion: nil)
-                    })
+                    let localFilePath = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("PisthDEBInstall.deb").path
                     
-                    if success {
-                        guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
-                            return false
-                        }
+                    vc.present(activityVC, animated: true, completion: {
                         
-                        termVC.command = "clear; sudo dpkg -i ~/\(filename); rm ~/\(filename); echo -e \"\\033[CLOSE\""
-                        termVC.title = "Installing packages..."
+                        FileManager.default.createFile(atPath: localFilePath, contents: data, attributes: nil)
+                        print("\(self.homeDirectory ?? "")/PisthDEBInstall.deb")
+                        success = self.session?.channel.uploadFile(localFilePath, to: "\(self.homeDirectory ?? "")/PisthDEBInstall.deb") ?? false
                         
-                        let navVC = UINavigationController(rootViewController: termVC)
-                        navVC.modalPresentationStyle = .formSheet
+                        try? FileManager.default.removeItem(atPath: localFilePath)
                         
-                        vc.present(navVC, animated: true, completion: nil)
-                    } else {
-                        let alert = UIAlertController(title: "Cannot upload file!", message: "Make sure SFTP is enabled and the file is not empty.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        
-                        vc.present(alert, animated: true, completion: nil)
-                    }
+                        activityVC.dismiss(animated: true, completion: {
+                            
+                            if success {
+                                guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+                                    return
+                                }
+                                
+                                termVC.command = "clear; sudo dpkg -i ~/PisthDEBInstall.deb; rm ~/PisthDEBInstall.deb; echo -e \"\\033[CLOSE\""
+                                termVC.title = "Installing packages..."
+                                
+                                let navVC = UINavigationController(rootViewController: termVC)
+                                navVC.modalPresentationStyle = .formSheet
+                                
+                                vc.present(navVC, animated: true, completion: nil)
+                            } else {
+                                let alert = UIAlertController(title: "Cannot upload file!", message: "Make sure the file is not empty.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                
+                                vc.present(alert, animated: true, completion: nil)
+                            }
+                            
+                        })
+                    })
                     
                     return true
                 } else {
