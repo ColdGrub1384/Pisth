@@ -65,6 +65,7 @@
 		3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; };
 		3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3AD2917A207ADE7B0082306D /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29179207ADE7B0082306D /* SplitViewController.swift */; };
 		3AD2F69A20713FC10017F2EB /* Web.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD2F69920713FC10017F2EB /* Web.xib */; };
 		3AD7E0572049E8CC00834D59 /* amzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E0302049E12F00834D59 /* amzn.png */; };
 		3AD7E0582049E8CD00834D59 /* arch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD7E02F2049E12F00834D59 /* arch.png */; };
@@ -183,6 +184,7 @@
 		3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B792041BB5B006C3218 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD29179207ADE7B0082306D /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		3AD2F69920713FC10017F2EB /* Web.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Web.xib; sourceTree = "<group>"; };
 		3AD7E02D2049E12E00834D59 /* fedora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fedora.png; sourceTree = "<group>"; };
 		3AD7E02E2049E12F00834D59 /* debian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debian.png; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
+				3AD29179207ADE7B0082306D /* SplitViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
 				3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */,
@@ -696,6 +699,7 @@
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
 				3ABEEF182074420F00697D4E /* UIView+ignoresInvertColors.swift in Sources */,
+				3AD2917A207ADE7B0082306D /* SplitViewController.swift in Sources */,
 				3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */,
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,

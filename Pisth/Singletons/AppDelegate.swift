@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     var navigationController = UINavigationController()
     
     /// The shared Split view controller used in the app.
-    var splitViewController = UISplitViewController()
+    var splitViewController = SplitViewController()
     
     /// An instance of DirectoryTableViewController to be used to upload files from the share menu.
     var directoryTableViewController: DirectoryTableViewController?
@@ -115,12 +115,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Initialize app's window, and setup / repair saved data.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        AppDelegate.shared = self
+        
         UIMenuController.shared.menuItems = [UIMenuItem(title: "Move", action: #selector(FileTableViewCell.moveFile(_:))), UIMenuItem(title: "Rename", action: #selector(FileTableViewCell.renameFile(_:)))]
         UIMenuController.shared.update()
         
         DataManager.shared.saveCompletion = update3DTouchShortucts
-        
-        AppDelegate.shared = self
 
         // Setup Navigation Controllers
         let bookmarksVC = BookmarksTableViewController()
@@ -135,25 +135,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         rootVC.view.backgroundColor = .white
         let detailNavigationController = UINavigationController(rootViewController: rootVC)
         
+        let launchScreen = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()
+        
         // Setup Split view controller
-        splitViewController = UISplitViewController()
+        splitViewController = SplitViewController()
+        splitViewController.navigationController_ = navigationController
+        splitViewController.detailNavigationController = detailNavigationController
+        splitViewController.viewControllers = [launchScreen ?? UIViewController()]
         splitViewController.view.backgroundColor = .white
-        splitViewController.viewControllers = [navigationController, detailNavigationController]
-        splitViewController.preferredDisplayMode = .allVisible
         splitViewController.delegate = self
-        self.navigationController = detailNavigationController
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            if AppDelegate.shared.splitViewController.isCollapsed {
-                self.splitViewController.viewControllers = [navigationController]
-                self.navigationController = navigationController
-            }
-        })
         
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = splitViewController
         window?.tintColor = UIColor(named: "Purple")
+        window?.backgroundColor = .white
         UISwitch.appearance().onTintColor = UIColor(named: "Purple")
+        window?.rootViewController = self.splitViewController
         window?.makeKeyAndVisible()
         
         // Initialize the Google Mobile Ads SDK.
