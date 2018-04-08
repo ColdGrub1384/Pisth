@@ -449,7 +449,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 let bookmarksVC = BookmarksTableViewController()
                 
                 if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
-                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
                     let imageView = UIImageView(image: backgroundImage)
                     imageView.ignoresInvertColors = true
                     let containerView = UIView()
@@ -528,7 +528,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         if action == .upload {
             directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
         } else if action == .apiImport {
-            directoryTableViewController.navigationItem.prompt = "Select file to import"
+            directoryTableViewController.navigationItem.prompt = importReason ?? "Select file to import"
         }
         directoryTableViewController.delegate = self
         directoryTableViewController.closeAfterSending = true
