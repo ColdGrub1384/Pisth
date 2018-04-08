@@ -15,6 +15,7 @@
 		3A61DEB72066A8FF0002353B /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */; };
 		3A61DEB82066A8FF0002353B /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A6C51172067ED9700034753 /* Terminal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51162067ED9700034753 /* Terminal.xib */; };
+		3A6E6FDE207A7AE900050AE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6E6FDC207A7AE800050AE3 /* GoogleService-Info.plist */; };
 		3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7532CD2066DF8000CF85D3 /* TabBarController.swift */; };
 		3A8034E020703E8800F541F7 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8034DF20703E8800F541F7 /* Pisth_API.framework */; };
 		3A8034E120703E8800F541F7 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8034DF20703E8800F541F7 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -25,11 +26,11 @@
 		3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */; };
 		3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9BC88206821AE004AF281 /* Installer.storyboard */; };
 		3AA9BC8B20682330004AF281 /* PackagePropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */; };
+		3AB0432B207A9CD4007FC713 /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0432A207A9CD2007FC713 /* UpdatesTableViewController.swift */; };
 		3ACDC3DE2065AEBD0049034F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */; };
 		3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E12065AEBE0049034F /* Main.storyboard */; };
 		3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E42065AEC00049034F /* Assets.xcassets */; };
 		3ACDC3E82065AEC00049034F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */; };
-		3ACDC3F22065D2450049034F /* UpdatesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */; };
 		3ACDC3F42065D2610049034F /* PackagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */; };
 		3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */; };
 		3AD14BD5207921980075A7EE /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD14BD4207921980075A7EE /* Pisth_Terminal.framework */; };
@@ -60,6 +61,20 @@
 			remoteGlobalIDString = 2802433BB7AE87BF569091EBFB0FA4C5;
 			remoteInfo = BiometricAuthentication;
 		};
+		3AECA8AE207A7762001F3FF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92B13382B88D1598438C25AD017756D9;
+			remoteInfo = GoogleToolboxForMac;
+		};
+		3AECA8B0207A7762001F3FF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0355E2F7AFDD42DBF1043692059E01D8;
+			remoteInfo = nanopb;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +101,7 @@
 		3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsTableViewController.swift; sourceTree = "<group>"; };
 		3A61DEB62066A8FF0002353B /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6C51162067ED9700034753 /* Terminal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Terminal.xib; sourceTree = "<group>"; };
+		3A6E6FDC207A7AE800050AE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A7532C42066CD2300CF85D3 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		3A7532CD2066DF8000CF85D3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3A8034DF20703E8800F541F7 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,13 +112,13 @@
 		3AA9BC83206817B0004AF281 /* UIWindow+topViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+topViewController.swift"; sourceTree = "<group>"; };
 		3AA9BC88206821AE004AF281 /* Installer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Installer.storyboard; sourceTree = "<group>"; };
 		3AA9BC8A20682330004AF281 /* PackagePropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagePropertyTableViewCell.swift; sourceTree = "<group>"; };
+		3AB0432A207A9CD2007FC713 /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3DA2065AEBD0049034F /* Pisth APT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth APT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACDC3DD2065AEBD0049034F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACDC3E22065AEBE0049034F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3ACDC3E42065AEC00049034F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ACDC3E72065AEC00049034F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ACDC3E92065AEC20049034F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdatesTableViewController.swift; path = ../UpdatesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewController.swift; sourceTree = "<group>"; };
 		3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3AD14BD4207921980075A7EE /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				3A862DE42067FFE600090160 /* BiometricAuthentication.framework */,
+				3AECA8AF207A7762001F3FF1 /* GoogleToolboxForMac.framework */,
+				3AECA8B1207A7762001F3FF1 /* nanopb.framework */,
 				3A7532CA2066CD2600CF85D3 /* NMSSH.framework */,
 				3A7532CC2066CD2600CF85D3 /* Pods_Pisth_APT.framework */,
 			);
@@ -161,7 +179,7 @@
 				3A9B210B206846F100FAA9DF /* ErrorViewController.swift */,
 				3ACDC3F32065D2610049034F /* PackagesTableViewController.swift */,
 				3AA3FA082067DD4300FBF00A /* InstalledTableViewController.swift */,
-				3ACDC3F12065D2450049034F /* UpdatesTableViewController.swift */,
+				3AB0432A207A9CD2007FC713 /* UpdatesTableViewController.swift */,
 				3ACDC3F52065D2960049034F /* SettingsTableViewController.swift */,
 				3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */,
 				3A5F983F2066FFB900E43793 /* InstallerViewController.swift */,
@@ -214,6 +232,7 @@
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
 				3ACDC3E92065AEC20049034F /* Info.plist */,
+				3A6E6FDC207A7AE800050AE3 /* GoogleService-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -353,6 +372,20 @@
 			remoteRef = 3A862DE32067FFE600090160 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		3AECA8AF207A7762001F3FF1 /* GoogleToolboxForMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleToolboxForMac.framework;
+			remoteRef = 3AECA8AE207A7762001F3FF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AECA8B1207A7762001F3FF1 /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = 3AECA8B0207A7762001F3FF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -366,6 +399,7 @@
 				3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */,
 				3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */,
 				3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */,
+				3A6E6FDE207A7AE900050AE3 /* GoogleService-Info.plist in Resources */,
 				3AD2F69F20713FEF0017F2EB /* Web.xib in Resources */,
 				3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */,
 			);
@@ -432,6 +466,7 @@
 				3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */,
 				3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */,
 				3ACDC3F42065D2610049034F /* PackagesTableViewController.swift in Sources */,
+				3AB0432B207A9CD4007FC713 /* UpdatesTableViewController.swift in Sources */,
 				3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */,
 				3A9B210C206846F100FAA9DF /* ErrorViewController.swift in Sources */,
 				3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */,
@@ -439,7 +474,6 @@
 				3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */,
 				3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */,
 				3AA9BC8B20682330004AF281 /* PackagePropertyTableViewCell.swift in Sources */,
-				3ACDC3F22065D2450049034F /* UpdatesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +611,7 @@
 			baseConfigurationReference = C4645E0208D03FCCC0AA820B /* Pods-Pisth APT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth APT/Info.plist";
@@ -584,6 +619,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-APT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -594,6 +630,7 @@
 			baseConfigurationReference = 612B074A4DE12A21D7587FCA /* Pods-Pisth APT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth APT/Info.plist";
@@ -601,6 +638,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-APT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

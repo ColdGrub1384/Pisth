@@ -395,7 +395,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     // MARK: - Banner view delegate
     
-    /// Show ad did it's received.
+    /// Show ad when it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         tableView.tableHeaderView = bannerView
     }

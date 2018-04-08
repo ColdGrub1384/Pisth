@@ -93,10 +93,13 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         
         // Ads
         let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.adUnitID = "ca-app-pub-9214899206650515/5188157128"
-        bannerView.rootViewController = self
         bannerView.delegate = self
-        bannerView.load(GADRequest())
+        bannerView.rootViewController = self
+        bannerView.adUnitID = "ca-app-pub-9214899206650515/5188157128"
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        tableView.addSubview(bannerView)
+        bannerView.load(request)
     }
     
     // MARK: - Table view data source
@@ -223,8 +226,14 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Banner view delegate
     
+    /// Print error.
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Error receiving ad: \(error.localizedDescription)")
+    }
+    
     /// Show ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         tableView.tableHeaderView = bannerView
     }
+
 }
