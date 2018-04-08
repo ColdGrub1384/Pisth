@@ -582,6 +582,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Directory table view controller static delegate
     
+    /// Export file with API.
     func didOpenFile(_ file: URL, withData data: Data) {
         
         if action == .apiImport {
@@ -601,6 +602,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Split view controller delegate
     
+    /// Resize terminal.
     func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode) {
         if let termVC = navigationController.visibleViewController as? TerminalViewController {
             _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
