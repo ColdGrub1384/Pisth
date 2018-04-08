@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         splitViewController.viewControllers = [navigationController, detailNavigationController]
         splitViewController.preferredDisplayMode = .allVisible
         self.navigationController = detailNavigationController
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             if AppDelegate.shared.splitViewController.isCollapsed {
                 self.splitViewController.viewControllers = [navigationController]
                 self.navigationController = navigationController
