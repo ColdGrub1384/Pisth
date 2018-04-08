@@ -449,7 +449,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 let bookmarksVC = BookmarksTableViewController()
                 
                 if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
-                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+                    blurView.alpha = 0.95
                     let imageView = UIImageView(image: backgroundImage)
                     imageView.ignoresInvertColors = true
                     let containerView = UIView()
