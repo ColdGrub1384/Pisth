@@ -446,8 +446,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Resize `webView`, dismiss and open keyboard (to resize terminal).
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
+    func resizeView(withSize size: CGSize) {
         let wasFirstResponder = isFirstResponder
         
         if isFirstResponder {
@@ -468,6 +467,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.reload()
             }
         })
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        resizeView(withSize: size)
     }
     
     /// Returns arrow keys, esc keys and ctrl keys from `A` to `_`.

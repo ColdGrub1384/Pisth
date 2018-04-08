@@ -15,7 +15,7 @@ import Firebase
 
 /// The app's delegate.
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryTableViewControllerStaticDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryTableViewControllerStaticDelegate, UISplitViewControllerDelegate {
     
     /// The window used with app.
     var window: UIWindow?
@@ -140,6 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         splitViewController.view.backgroundColor = .white
         splitViewController.viewControllers = [navigationController, detailNavigationController]
         splitViewController.preferredDisplayMode = .allVisible
+        splitViewController.delegate = self
         self.navigationController = detailNavigationController
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             if AppDelegate.shared.splitViewController.isCollapsed {
@@ -596,6 +597,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             })
         }
         
+    }
+    
+    // MARK: - Split view controller delegate
+    
+    func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode) {
+        if let termVC = navigationController.visibleViewController as? TerminalViewController {
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                termVC.resizeView(withSize: termVC.view.frame.size)
+            })
+        }
     }
     
     // MARK: - Static
