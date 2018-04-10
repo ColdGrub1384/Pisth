@@ -297,14 +297,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         default:
             alert = UIAlertController(title: "Connection was closed!", message: "An error with the connection occurred.", preferredStyle: .alert)
         }
-        
+                
         if alert != nil {
             
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                let vc = UIViewController()
-                vc.view.backgroundColor = .white
-                vc.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                self.navigationController?.setViewControllers([vc], animated: false)
+                self.navigationController?.popToRootViewController(animated: true)
             }))
             
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
