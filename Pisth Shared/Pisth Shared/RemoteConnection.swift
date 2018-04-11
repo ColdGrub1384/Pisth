@@ -15,7 +15,7 @@ import Foundation
 ///     - name: Name that appears in bookmarks.
 ///     - path: Path where start.
 ///     - port: Port used to connect.
-public struct RemoteConnection {
+public class RemoteConnection: NSObject, NSCoding {
     
     /// Hostname or IP address used to connect.
     public var host: String
@@ -51,6 +51,56 @@ public struct RemoteConnection {
         self.port = port
         self.useSFTP = useSFTP
         self.os = os
+    }
+    
+    // MARK: - Coding
+    
+    /// Encode this object.
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(host, forKey: "Host")
+        aCoder.encode(username, forKey: "Username")
+        aCoder.encode(password, forKey: "Password")
+        aCoder.encode(name, forKey: "Name")
+        aCoder.encode(path, forKey: "Path")
+        aCoder.encode(port, forKey: "Port")
+        aCoder.encode(useSFTP, forKey: "Use SFTP")
+        aCoder.encode(os, forKey: "OS")
+    }
+    
+    /// Decode this object.
+    public required init?(coder aDecoder: NSCoder) {
+        guard let host = aDecoder.decodeObject(forKey: "Host") as? String else {
+            return nil
+        }
+        
+        guard let username = aDecoder.decodeObject(forKey: "Username") as? String else {
+            return nil
+        }
+        
+        guard let password = aDecoder.decodeObject(forKey: "Password") as? String else {
+            return nil
+        }
+        
+        guard let name = aDecoder.decodeObject(forKey: "Name") as? String else {
+            return nil
+        }
+        
+        guard let path = aDecoder.decodeObject(forKey: "Path") as? String else {
+            return nil
+        }
+        
+        guard let port = aDecoder.decodeObject(forKey: "Port") as? UInt64 else {
+            return nil
+        }
+        
+        self.host = host
+        self.username = username
+        self.password = password
+        self.name = name
+        self.path = path
+        self.port = port
+        useSFTP = aDecoder.decodeBool(forKey: "Use SFTP")
+        os = aDecoder.decodeObject(forKey: "OS") as? String
     }
 }
 

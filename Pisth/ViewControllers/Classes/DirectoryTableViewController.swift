@@ -11,9 +11,11 @@ import NMSSH
 import Pisth_Shared
 import Firebase
 import CoreData
+import Pisth_API
+import StoreKit
 
 /// Table view controller to manage remote files.
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -32,6 +34,23 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Ad banner view displayed at top of table view.
     var bannerView: GADBannerView!
+    
+    /// Open this connection in Pisth APT.
+    @objc func openAPTManager() {
+        guard let connection = ConnectionManager.shared.connection else {
+            return
+        }
+        
+        let apt = PisthAPT(urlScheme: URL(string: "pisth://")!)
+        if apt.canOpen {
+            apt.open(connection: connection)
+        } else {
+            let appStore = SKStoreProductViewController()
+            appStore.delegate = self
+            appStore.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: "1369552277"], completionBlock: nil)
+            present(appStore, animated: true, completion: nil)
+        }
+    }
     
     /// Resume closed session.
     @objc func resume() {
@@ -191,15 +210,30 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
         let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
+        let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(openAPTManager))
         var buttons: [UIBarButtonItem] {
             guard files != nil else { return [uploadFile, terminal] }
             guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
+            
+            // Check for GIT
             guard let result = try? session.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
             let allFiles = result.components(separatedBy: "\n")
+            
+            // Check for Aptitude
+            guard let resultAPT = try? session.channel.execute("command -v apt-get").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n") else { return [] }
+            
             if allFiles.contains(".git") {
-                return [uploadFile, git, terminal]
+                if resultAPT.isEmpty {
+                    return [uploadFile, git, terminal]
+                } else {
+                    return [uploadFile, apt, git, terminal]
+                }
             } else {
-                return [uploadFile, terminal]
+                if resultAPT.isEmpty {
+                    return [uploadFile, terminal]
+                } else {
+                    return [uploadFile, apt, terminal]
+                }
             }
         }
         navigationItem.setRightBarButtonItems(buttons, animated: true)
@@ -1485,6 +1519,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         return false
+    }
+    
+    // MARK: - Store product view controller delegate
+    
+    /// Dismiss.
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Static

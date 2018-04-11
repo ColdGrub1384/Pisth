@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import Pisth_Shared
 
 /// Main tab controller.
 class TabBarController: UITabBarController {
@@ -13,9 +14,14 @@ class TabBarController: UITabBarController {
     /// Main instance.
     static var shared: TabBarController!
     
+    /// Custom connection to use.
+    var customConnection: RemoteConnection?
+    
+    // MARK: - View controller
+    
     /// Set singleton.
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         TabBarController.shared = self
     }

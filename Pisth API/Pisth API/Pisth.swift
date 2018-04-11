@@ -7,10 +7,10 @@
 
 import UIKit
 
-/// The class for interacting with the API.
+let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
+
+/// The class for interacting with Pisth.
 open class Pisth {
-    
-    let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
     
     var pisthURLScheme: URL {
         var string = "pisth-import://?scheme=\(urlScheme.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")"

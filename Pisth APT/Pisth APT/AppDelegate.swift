@@ -40,14 +40,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Session used for the shell
     var shellSession: NMSSHSession?
     
+    /// Connection opened.
+    var connection: RemoteConnection?
+    
     /// The user's home directory.
     var homeDirectory: String?
     
+    /// Reason to open the app.
+    var openReason = OpenReason.default
+    
+    /// URL of app that opened this app with the API.
+    var apiURL: URL?
+    
+    /// Close connection opened with the API.
+    @objc func goToPreviousApp() {
+        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: {
+            if let url = self.apiURL {
+                UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
+                    if success {
+                        exit(0)
+                    }
+                })
+            }
+        })
+    }
+    
     /// Open the session.
     func connect() {
+        
         // Connect
-        if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) {
-            let connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+        if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) || openReason == .openConnection {
+            
+            let connection = TabBarController.shared?.customConnection ?? DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+            self.connection = connection
             
             let errorTitle = "Error opening the session!"
             var error: String?
@@ -69,13 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             if error != nil {
-                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                    if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
-                        UIApplication.shared.keyWindow?.rootViewController = vc
-                        vc.errorLabel.text = error
-                        vc.errorTitleLabel.text = errorTitle
-                    }
-                })
+                if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
+                    UIApplication.shared.keyWindow?.rootViewController = vc
+                    vc.errorLabel.text = error
+                    vc.errorTitleLabel.text = errorTitle
+                }
             }
             
             if let session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username) {
@@ -158,6 +181,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: - Application delegate
+    
     /// Open the session.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -171,25 +196,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         connect()
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            // Search for updates
-            let activityVC = ActivityViewController(message: "Loading...")
-            UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
-                self.searchForUpdates()
-                activityVC.dismiss(animated: true, completion: nil)
+            if self.openReason != .openConnection {
+                // Search for updates
+                let activityVC = ActivityViewController(message: "Loading...")
+                UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
+                    self.searchForUpdates()
+                    activityVC.dismiss(animated: true, completion: nil)
+                }
             }
         })
         
         return true
     }
     
-    /// Install Deb.
+    /// Install Deb or open connection with the API..
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         guard let vc = UIApplication.shared.keyWindow?.rootViewController else {
             return false
         }
         
-        if let data = pisth.dataReceived {
+        if url.absoluteString.hasPrefix("pisthapt:") { // Open connection from the API
+            
+            openReason = .openConnection
+            
+            if let scheme = url.queryParameters?["scheme"]?.removingPercentEncoding {
+                apiURL = URL(string: scheme)
+            }
+            
+            guard let viewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as? TabBarController else {
+                return false
+            }
+            
+            viewController.modalTransitionStyle = .crossDissolve
+            
+            TabBarController.shared = viewController
+            
+            if let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true) {
+                if let data = pasteboard.data(forPasteboardType: "public.data") {
+                    if let connection = NSKeyedUnarchiver.unarchiveObject(with: data) as? RemoteConnection {
+                        
+                        guard connection != self.connection else {
+                            return true
+                        }
+                        
+                        viewController.customConnection = connection
+                        
+                        guard let connectingVC = Bundle.main.loadNibNamed("Connecting", owner: nil, options: nil)?[0] as? ConnectingViewController else {
+                            return false
+                        }
+                        
+                        connectingVC.connection = connection
+                        
+                        UIApplication.shared.keyWindow?.topViewController()?.present(connectingVC, animated: true, completion: {
+                            
+                            self.connect()
+                            
+                            if let session = self.session, session.isConnected {
+                                self.searchForUpdates()
+                                
+                                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                                    if let tintColor = url.queryParameters?["tintColor"]?.removingPercentEncoding {
+                                        if let color = UIColor(hexString: tintColor) {
+                                            UIApplication.shared.keyWindow?.tintColor = color
+                                        }
+                                    }
+                                    
+                                    connectingVC.present(viewController, animated: true, completion: {
+                                        for vc in viewController.viewControllers ?? [] {
+                                            (vc as? UINavigationController)?.visibleViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))
+                                        }
+                                    })
+                                })
+                            }
+                        })
+                    }
+                }
+            }
+        } else if let data = pisth.dataReceived { // Import file with the API
+            
+            openReason = .installDeb
+            
             if let filename = pisth.filename(fromURL: url) {
                 if filename.lowercased().hasSuffix(".deb") {
                     

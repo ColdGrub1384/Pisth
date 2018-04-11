@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A15A9D8206E88BF007A8E7D /* Licenses.html */; };
 		3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F983F2066FFB900E43793 /* InstallerViewController.swift */; };
+		3A610C6F207E98C80026E627 /* amzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C5D207E98C40026E627 /* amzn.png */; };
+		3A610C70207E98C80026E627 /* arch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C5E207E98C40026E627 /* arch.png */; };
+		3A610C71207E98C80026E627 /* centos.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C5F207E98C40026E627 /* centos.png */; };
+		3A610C72207E98C80026E627 /* darwin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C60207E98C40026E627 /* darwin.png */; };
+		3A610C73207E98C80026E627 /* debian.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C61207E98C40026E627 /* debian.png */; };
+		3A610C74207E98C80026E627 /* fedora.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C62207E98C40026E627 /* fedora.png */; };
+		3A610C75207E98C80026E627 /* linux.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C63207E98C40026E627 /* linux.png */; };
+		3A610C76207E98C80026E627 /* opensuse.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C64207E98C40026E627 /* opensuse.png */; };
+		3A610C77207E98C80026E627 /* raspbian.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C65207E98C40026E627 /* raspbian.png */; };
+		3A610C78207E98C80026E627 /* rhel.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C66207E98C40026E627 /* rhel.png */; };
+		3A610C79207E98C80026E627 /* slackware.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C67207E98C40026E627 /* slackware.png */; };
+		3A610C7A207E98C80026E627 /* sles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C68207E98C40026E627 /* sles.png */; };
+		3A610C7B207E98C80026E627 /* ubuntu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C69207E98C40026E627 /* ubuntu.png */; };
+		3A610C7D207E99890026E627 /* Connecting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C7C207E99890026E627 /* Connecting.xib */; };
+		3A610C7F207E9B560026E627 /* ConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610C7E207E9B560026E627 /* ConnectingViewController.swift */; };
+		3A610C81207EAFD20026E627 /* OpenReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A610C80207EAFD20026E627 /* OpenReason.swift */; };
 		3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9220668D450002353B /* Pisth.xcdatamodeld */; };
 		3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEAF2066998B0002353B /* Connection Info.storyboard */; };
 		3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */; };
@@ -96,6 +112,22 @@
 /* Begin PBXFileReference section */
 		3A15A9D8206E88BF007A8E7D /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3A5F983F2066FFB900E43793 /* InstallerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerViewController.swift; sourceTree = "<group>"; };
+		3A610C5D207E98C40026E627 /* amzn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amzn.png; sourceTree = "<group>"; };
+		3A610C5E207E98C40026E627 /* arch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arch.png; sourceTree = "<group>"; };
+		3A610C5F207E98C40026E627 /* centos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = centos.png; sourceTree = "<group>"; };
+		3A610C60207E98C40026E627 /* darwin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darwin.png; sourceTree = "<group>"; };
+		3A610C61207E98C40026E627 /* debian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debian.png; sourceTree = "<group>"; };
+		3A610C62207E98C40026E627 /* fedora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fedora.png; sourceTree = "<group>"; };
+		3A610C63207E98C40026E627 /* linux.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linux.png; sourceTree = "<group>"; };
+		3A610C64207E98C40026E627 /* opensuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opensuse.png; sourceTree = "<group>"; };
+		3A610C65207E98C40026E627 /* raspbian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = raspbian.png; sourceTree = "<group>"; };
+		3A610C66207E98C40026E627 /* rhel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rhel.png; sourceTree = "<group>"; };
+		3A610C67207E98C40026E627 /* slackware.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slackware.png; sourceTree = "<group>"; };
+		3A610C68207E98C40026E627 /* sles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sles.png; sourceTree = "<group>"; };
+		3A610C69207E98C40026E627 /* ubuntu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ubuntu.png; sourceTree = "<group>"; };
+		3A610C7C207E99890026E627 /* Connecting.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Connecting.xib; sourceTree = "<group>"; };
+		3A610C7E207E9B560026E627 /* ConnectingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectingViewController.swift; sourceTree = "<group>"; };
+		3A610C80207EAFD20026E627 /* OpenReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenReason.swift; sourceTree = "<group>"; };
 		3A61DE9320668D450002353B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		3A61DEAF2066998B0002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
 		3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsTableViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +175,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A610C5C207E98C40026E627 /* OS */ = {
+			isa = PBXGroup;
+			children = (
+				3A610C5D207E98C40026E627 /* amzn.png */,
+				3A610C5E207E98C40026E627 /* arch.png */,
+				3A610C5F207E98C40026E627 /* centos.png */,
+				3A610C60207E98C40026E627 /* darwin.png */,
+				3A610C61207E98C40026E627 /* debian.png */,
+				3A610C62207E98C40026E627 /* fedora.png */,
+				3A610C63207E98C40026E627 /* linux.png */,
+				3A610C64207E98C40026E627 /* opensuse.png */,
+				3A610C65207E98C40026E627 /* raspbian.png */,
+				3A610C66207E98C40026E627 /* rhel.png */,
+				3A610C67207E98C40026E627 /* slackware.png */,
+				3A610C68207E98C40026E627 /* sles.png */,
+				3A610C69207E98C40026E627 /* ubuntu.png */,
+			);
+			name = OS;
+			path = ../../Pisth/OS;
+			sourceTree = "<group>";
+		};
 		3A61DEB32066A85D0002353B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +237,7 @@
 				3A61DEB120669AB40002353B /* ConnectionsTableViewController.swift */,
 				3A5F983F2066FFB900E43793 /* InstallerViewController.swift */,
 				3AA3FA042067D4FB00FBF00A /* TerminalViewController.swift */,
+				3A610C7E207E9B560026E627 /* ConnectingViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -196,6 +250,7 @@
 				3AA9BC88206821AE004AF281 /* Installer.storyboard */,
 				3A6C51162067ED9700034753 /* Terminal.xib */,
 				3AD2F69B20713FEE0017F2EB /* Web.xib */,
+				3A610C7C207E99890026E627 /* Connecting.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -204,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				3AA2451520791ACE0096CCF6 /* Extensions */,
+				3A610C80207EAFD20026E627 /* OpenReason.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -228,6 +284,7 @@
 		3AA2451720791AF90096CCF6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A610C5C207E98C40026E627 /* OS */,
 				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
@@ -393,14 +450,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A610C72207E98C80026E627 /* darwin.png in Resources */,
+				3A610C79207E98C80026E627 /* slackware.png in Resources */,
+				3A610C7A207E98C80026E627 /* sles.png in Resources */,
 				3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */,
+				3A610C71207E98C80026E627 /* centos.png in Resources */,
+				3A610C77207E98C80026E627 /* raspbian.png in Resources */,
+				3A610C70207E98C80026E627 /* arch.png in Resources */,
+				3A610C6F207E98C80026E627 /* amzn.png in Resources */,
 				3A6C51172067ED9700034753 /* Terminal.xib in Resources */,
+				3A610C73207E98C80026E627 /* debian.png in Resources */,
+				3A610C76207E98C80026E627 /* opensuse.png in Resources */,
 				3ACDC3E82065AEC00049034F /* LaunchScreen.storyboard in Resources */,
 				3A61DEB02066998B0002353B /* Connection Info.storyboard in Resources */,
 				3AA9BC89206821AE004AF281 /* Installer.storyboard in Resources */,
+				3A610C78207E98C80026E627 /* rhel.png in Resources */,
+				3A610C7D207E99890026E627 /* Connecting.xib in Resources */,
 				3ACDC3E52065AEC00049034F /* Assets.xcassets in Resources */,
 				3A6E6FDE207A7AE900050AE3 /* GoogleService-Info.plist in Resources */,
+				3A610C75207E98C80026E627 /* linux.png in Resources */,
+				3A610C7B207E98C80026E627 /* ubuntu.png in Resources */,
 				3AD2F69F20713FEF0017F2EB /* Web.xib in Resources */,
+				3A610C74207E98C80026E627 /* fedora.png in Resources */,
 				3ACDC3E32065AEBE0049034F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +536,7 @@
 				3AA3FA092067DD4300FBF00A /* InstalledTableViewController.swift in Sources */,
 				3A7532CE2066DF8000CF85D3 /* TabBarController.swift in Sources */,
 				3AA9BC84206817B0004AF281 /* UIWindow+topViewController.swift in Sources */,
+				3A610C81207EAFD20026E627 /* OpenReason.swift in Sources */,
 				3ACDC3F42065D2610049034F /* PackagesTableViewController.swift in Sources */,
 				3AB0432B207A9CD4007FC713 /* UpdatesTableViewController.swift in Sources */,
 				3A61DE9420668D450002353B /* Pisth.xcdatamodeld in Sources */,
@@ -474,6 +546,7 @@
 				3A61DEB220669AB40002353B /* ConnectionsTableViewController.swift in Sources */,
 				3ACDC3F62065D2960049034F /* SettingsTableViewController.swift in Sources */,
 				3AA9BC8B20682330004AF281 /* PackagePropertyTableViewCell.swift in Sources */,
+				3A610C7F207E9B560026E627 /* ConnectingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

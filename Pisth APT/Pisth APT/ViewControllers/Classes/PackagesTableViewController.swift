@@ -43,7 +43,7 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate, G
         let navVC = UINavigationController(rootViewController: termVC)
         navVC.modalPresentationStyle = .formSheet
         
-        UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
+        present(navVC, animated: true, completion: nil)
     }
     
     /// Search controller used to search.

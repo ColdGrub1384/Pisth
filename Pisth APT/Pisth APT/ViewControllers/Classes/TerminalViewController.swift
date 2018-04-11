@@ -84,7 +84,9 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
     /// Send the user password.
     func sendPassword() {
         
-        let connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+        guard let connection = AppDelegate.shared.connection else {
+            return
+        }
         
         BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to send '\(connection.username)' password.", fallbackTitle: "Enter password", cancelTitle: "Cancel", success: {
             
