@@ -7,14 +7,24 @@
 
 import UIKit
 import Pisth_API
+import Pisth_Shared
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var pisthAPTButton: UIButton!
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var filename: UILabel!
     
     var data: Data?
+    
+    @IBAction func openPisthAPT(_ sender: Any) {
+        
+        // Open connection in Pisth APT
+        if pisthAPT.canOpen {
+            pisthAPT.open(connection: RemoteConnection(host: "coldg.ddns.net", username: "pisthtest", password: "pisth", name: "Pisth Test", path: "~", port: 22, useSFTP: false, os: "Raspbian") /* Connection to open */)
+        }
+    }
     
     @IBAction func share(_ sender: Any) {
         
@@ -39,6 +49,9 @@ class ViewController: UIViewController {
         
         // Enable button only if app can import file from Pisth
         importButton.isEnabled = pisth.canOpen
+        
+        // Enable button only if Pisth APT is installed
+        pisthAPTButton.isEnabled = pisthAPT.canOpen
     }
 
 }

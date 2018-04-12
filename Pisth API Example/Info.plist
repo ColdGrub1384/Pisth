@@ -31,6 +31,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>pisthapt</string>
 		<string>pisth-import</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

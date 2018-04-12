@@ -45,6 +45,9 @@
               <li class="nav-group-task">
                 <a href="Classes/Pisth.html">Pisth</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Classes/PisthAPT.html">PisthAPT</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -54,6 +57,7 @@
           <section class="section">
             
             <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pisth</span><span class="p">:</span> <span class="kt">Pisth</span><span class="o">!</span>
+<span class="k">var</span> <span class="nv">pisthAPT</span><span class="p">:</span> <span class="kt">PisthAPT</span><span class="o">!</span>
 </code></pre>
 <h1 id='appdelegate' class='heading'>AppDelegate</h1>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">UIKit</span>
@@ -68,6 +72,7 @@
 
         <span class="c1">// Setup Pisth API</span>
         <span class="n">pisth</span> <span class="o">=</span> <span class="nf">Pisth</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kc">nil</span> <span class="cm">/* Default message */</span><span class="p">,</span> <span class="nv">urlScheme</span><span class="p">:</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app URL scheme */</span><span class="p">)</span>
+        <span class="n">pisthAPT</span> <span class="o">=</span> <span class="nf">PisthAPT</span><span class="p">(</span><span class="nv">urlScheme</span><span class="p">:</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app's URL Scheme */</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="kc">true</span>
     <span class="p">}</span>
@@ -95,9 +100,11 @@
 <h1 id='viewcontroller' class='heading'>ViewController</h1>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">UIKit</span>
 <span class="kd">import</span> <span class="kt">Pisth_API</span>
+<span class="kd">import</span> <span class="kt">Pisth_Shared</span>
 
 <span class="kd">class</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="nf">UIViewController</span> <span class="p">{</span>
 
+    <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">pisthAPTButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
     <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">importButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
     <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">imageView</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="o">!</span>
     <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">UILabel</span><span class="o">!</span>
@@ -114,6 +121,14 @@
         <span class="k">let</span> <span class="nv">activityVC</span> <span class="o">=</span> <span class="nf">UIActivityViewController</span><span class="p">(</span><span class="nv">activityItems</span><span class="p">:</span> <span class="p">[</span><span class="n">fileURL</span><span class="p">],</span> <span class="nv">applicationActivities</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
         <span class="n">activityVC</span><span class="o">.</span><span class="n">popoverPresentationController</span><span class="p">?</span><span class="o">.</span><span class="n">sourceView</span> <span class="o">=</span> <span class="n">sender</span> <span class="k">as?</span> <span class="kt">UIView</span>
         <span class="k">self</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="n">activityVC</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">openPisthAPT</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// Open connection in Pisth APT</span>
+        <span class="k">if</span> <span class="n">pisthAPT</span><span class="o">.</span><span class="nf">canOpen</span> <span class="p">{</span>
+            <span class="n">pisthAPT</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="nv">connection</span><span class="p">:</span> <span class="nf">RemoteConnection</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="s">"coldg.ddns.net"</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="s">"pisthtest"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"pisth"</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Pisth Test"</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="s">"~"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="nv">useSFTP</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">os</span><span class="p">:</span> <span class="s">"Raspbian"</span><span class="p">)</span> <span class="cm">/* Connection to open */</span><span class="p">)</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 
     <span class="kd">@IBAction</span> <span class="kd">func</span> <span class="nf">importFromPisth</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">Any</span><span class="p">)</span> <span class="p">{</span>
@@ -136,7 +151,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-31)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

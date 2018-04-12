@@ -30,6 +30,8 @@
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
 		3A61DEBB2066AE760002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEBA2066AE760002353B /* Connection Info.storyboard */; };
+		3A625BEF208011F7008D647C /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; };
+		3A625BF0208011F7008D647C /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */; };
 		3A729778205D58B100F94BA7 /* Beta.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A729777205D58B100F94BA7 /* Beta.xib */; };
 		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
@@ -107,6 +109,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3A625BF0208011F7008D647C /* Pisth_Shared.framework in Embed Frameworks */,
 				3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -150,6 +153,7 @@
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A61DEBA2066AE760002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
+		3A625BEE208011F7008D647C /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Terminal Toolbar-White.xib"; sourceTree = "<group>"; };
 		3A729777205D58B100F94BA7 /* Beta.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Beta.xib; sourceTree = "<group>"; };
 		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A625BEF208011F7008D647C /* Pisth_Shared.framework in Frameworks */,
 				3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +453,7 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
+				3A625BEE208011F7008D647C /* Pisth_Shared.framework */,
 				3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */,
 				3ACF9B792041BB5B006C3218 /* Pisth_API.framework */,
 				3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */,

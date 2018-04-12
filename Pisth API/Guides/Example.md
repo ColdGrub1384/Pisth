@@ -1,5 +1,6 @@
 ```swift
 var pisth: Pisth!
+var pisthAPT: PisthAPT!
 ```
 
 # AppDelegate
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Setup Pisth API
         pisth = Pisth(message: nil /* Default message */, urlScheme: URL(string: "pisth-api://")! /* This app URL scheme */)
+        pisthAPT = PisthAPT(urlScheme: URL(string: "pisth-api://")! /* This app's URL Scheme */)
 
         return true
     }
@@ -47,9 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```swift
 import UIKit
 import Pisth_API
+import Pisth_Shared
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var pisthAPTButton: UIButton!
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var filename: UILabel!
@@ -66,6 +70,14 @@ class ViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = sender as? UIView
         self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func openPisthAPT(_ sender: Any) {
+    
+        // Open connection in Pisth APT
+        if pisthAPT.canOpen {
+            pisthAPT.open(connection: RemoteConnection(host: "coldg.ddns.net", username: "pisthtest", password: "pisth", name: "Pisth Test", path: "~", port: 22, useSFTP: false, os: "Raspbian") /* Connection to open */)
+        }
     }
 
     @IBAction func importFromPisth(_ sender: Any) {
