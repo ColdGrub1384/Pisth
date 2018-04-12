@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
+import Pisth_Shared
 
 let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
 
@@ -71,15 +72,6 @@ open class Pisth {
     /// Get filename from opened URL.
     open func filename(fromURL url: URL) -> String? {
         
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true), let queryItems = components.queryItems else {
-            return nil
-        }
-        
-        var parameters = [String: String]()
-        for item in queryItems {
-            parameters[item.name] = item.value
-        }
-        
-        return parameters["filename"]?.removingPercentEncoding
+        return url.queryParameters?["filename"]?.removingPercentEncoding
     }
 }
