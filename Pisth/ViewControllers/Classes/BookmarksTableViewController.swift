@@ -119,6 +119,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
 
     /// - Returns: `2`.
     override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if delegate is AppDelegate {
+            return 1
+        }
+        
         return 2
     }
     
@@ -169,6 +174,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             cell.accessoryType = .detailButton
             
             var connection = DataManager.shared.connections[indexPath.row]
+            
+            if delegate is AppDelegate && !connection.useSFTP {
+                cell.contentView.alpha = 0.5
+            }
             
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 connection = fetchedConnections[indexPath.row]
