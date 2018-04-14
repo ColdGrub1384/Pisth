@@ -32,9 +32,14 @@ class ConnectionsTableViewController: UITableViewController {
     
     /// Add new connection
     @IBAction func add(_ sender: Any) {
-        if let vc = UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() {
+        if let vc = UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController {
+            vc.rootTableView = tableView
+            
+            let navVC = UINavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .formSheet
+            
             wasConnectionInformationTableViewControllerPushed = true
-            navigationController?.pushViewController(vc, animated: true)
+            present(navVC, animated: true, completion: nil)
         }
     }
     
@@ -119,9 +124,13 @@ class ConnectionsTableViewController: UITableViewController {
             if let vc = UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController {
                 vc.index = indexPath.row
                 vc.connection = DataManager.shared.connections[indexPath.row]
+                vc.rootTableView = tableView
+                
+                let navVC = UINavigationController(rootViewController: vc)
+                navVC.modalPresentationStyle = .formSheet
                 
                 self.wasConnectionInformationTableViewControllerPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.present(navVC, animated: true, completion: nil)
             }
         }
         

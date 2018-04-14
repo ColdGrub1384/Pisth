@@ -14,6 +14,12 @@ import GoogleMobileAds
 /// Table view controller for listing installed packages.
 class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate, GADBannerViewDelegate {
     
+    /// Header view containg `adBanner`.
+    @IBOutlet weak var header: UIView!
+    
+    /// Admob banner.
+    @IBOutlet weak var adBanner: GADBannerView!
+    
     /// Refresh.
     ///
     /// - Parameters:
@@ -91,15 +97,7 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
             navigationItem.searchController = searchController
         }
         
-        // Ads
-        let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        bannerView.delegate = self
-        bannerView.rootViewController = self
-        bannerView.adUnitID = "ca-app-pub-9214899206650515/5188157128"
-        let request = GADRequest()
-        request.testDevices = [kGADSimulatorID]
-        tableView.addSubview(bannerView)
-        bannerView.load(request)
+        adBanner.adSize = kGADAdSizeBanner
     }
     
     // MARK: - Table view data source
@@ -226,14 +224,8 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Banner view delegate
     
-    /// Print error.
+    /// Hide ad.
     func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        print("Error receiving ad: \(error.localizedDescription)")
+        tableView.tableHeaderView = nil
     }
-    
-    /// Show ad.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        tableView.tableHeaderView = bannerView
-    }
-
 }
