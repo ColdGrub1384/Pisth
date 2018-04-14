@@ -12,6 +12,9 @@ import CoreData
 /// Table view controller containing information about a connection.
 public class ConnectionInformationTableViewController: UITableViewController {
     
+    /// Table view to reload after making changes.
+    open var rootTableView: UITableView?
+    
     /// Init with given style.
     ///
     /// - Parameters:
@@ -123,17 +126,24 @@ public class ConnectionInformationTableViewController: UITableViewController {
                         print("Error retrieving connections: \(error.localizedDescription)")
                     }
                     
-                    navigationController?.popViewController(animated: true)
+                    cancel(self)
                 } else {
                     DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
                     
-                    navigationController?.popViewController(animated: true)
+                    cancel(self)
                 }
                 
             } else {
                 self.port?.backgroundColor = .red
             }
         }
+    }
+    
+    /// Dismiss without saving changes.
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: {
+            self.rootTableView?.reloadData()
+        })
     }
     
     // MARK: - Fields

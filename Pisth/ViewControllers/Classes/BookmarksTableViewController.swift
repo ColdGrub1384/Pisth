@@ -58,13 +58,17 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     func showInfoAlert(editInfoAt index: Int? = nil) {
         
         let editConnectionVC = UIViewController.connectionInfo
+        editConnectionVC.rootTableView = tableView
         
         if let index = index {
             editConnectionVC.connection = DataManager.shared.connections[index]
             editConnectionVC.index = index
         }
         
-        navigationController?.pushViewController(editConnectionVC, animated: true)
+        let navVC = UINavigationController(rootViewController: editConnectionVC)
+        navVC.modalPresentationStyle = .formSheet
+        
+        present(navVC, animated: true, completion: nil)
     }
     
     
@@ -106,14 +110,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         mcNearbyServiceBrowser.delegate = self
         mcNearbyServiceBrowser.startBrowsingForPeers()
     }
-    
-    /// Reload data.
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        tableView.reloadData()
-    }
-    
     
     // MARK: - Table view data source
 
