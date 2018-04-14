@@ -500,6 +500,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Terminal", AnalyticsParameterItemName : "Terminal"])
         
+        navigationController?.navigationBar.isTranslucent = false
+        
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))]
         
         inputAssistantItem.leadingBarButtonGroups = []
@@ -578,6 +580,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isTranslucent = true
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
