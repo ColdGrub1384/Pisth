@@ -651,6 +651,17 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         })
                     }
                 }
+            } else if isFilePDF(file) {
+                let webVC = UIViewController.webViewController
+                webVC.file = file
+                
+                if viewController == nil {
+                    vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
+                    })
+                }
             } else if let unziped = try? Zip.quickUnzipFile(file) {
                 let newFolderVC = LocalDirectoryTableViewController(directory: unziped)
                 if viewController == nil {
@@ -672,13 +683,14 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         vc.present(UINavigationController(rootViewController: playerVC), animated: true, completion: nil)
                     })
                 }
-            } else { // Preview
-                let vc = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+            } else if let image = UIImage(contentsOfFile: file.path) { // Image
+                let imageViewer = UIViewController.imageViewer
+                imageViewer.image = image
                 if viewController == nil {
-                    vc.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                    vc.present(UINavigationController(rootViewController: imageViewer), animated: true, completion: nil)
                 } else {
                     viewController?.dismiss(animated: true, completion: {
-                        vc.present(vc.previewFile(atIndex: vc.files.index(of: file) ?? 0), animated: true, completion: nil)
+                        vc.present(UINavigationController(rootViewController: imageViewer), animated: true, completion: nil)
                     })
                 }
             }
