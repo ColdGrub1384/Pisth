@@ -2,13 +2,13 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Pisth APT/Pisth APT.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pisth Terminal/Pisth Terminal.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pisth Shared/Pisth Shared.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pisth.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pisth Viewer/Pisth Viewer.xcodeproj">
@@ -17,7 +17,7 @@
       location = "group:Pisth API/Pisth API.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pisth.xcodeproj">
+      location = "group:Pisth APT/Pisth APT.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
