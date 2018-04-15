@@ -265,7 +265,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         let dirVC = DirectoryTableViewController(connection: connection)
                         
                         activityVC.dismiss(animated: true, completion: {
-                            tableView.deselectRow(at: indexPath, animated: true)
                             
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
@@ -292,7 +291,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         termVC.pureMode = true
                         
                         activityVC.dismiss(animated: true, completion: {
-                            tableView.deselectRow(at: indexPath, animated: true)
                             
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
@@ -369,9 +367,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             termVC.pureMode = true
             termVC.viewer = true
             termVC.peerID = peerID
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
+                        
             if UIDevice.current.userInterfaceIdiom == .pad {
                 termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                 AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
