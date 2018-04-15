@@ -95,8 +95,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if ConnectionManager.shared.result == .connectedAndAuthorized {
             
             // Get absolute path from "~"
-            if let path = try? ConnectionManager.shared.filesSession!.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
-                self.directory = self.directory.replacingOccurrences(of: "~", with: path)
+            if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
+                self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
             }
             
             let files = ConnectionManager.shared.files(inDirectory: self.directory)
@@ -335,7 +335,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if alert != nil {
             
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
-                self.navigationController?.popToRootViewController(animated: true)
+                AppDelegate.shared.splitViewController.navigationController_.popToRootViewController(animated: true)
+                AppDelegate.shared.splitViewController.detailNavigationController.popToRootViewController(animated: true)
             }))
             
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)

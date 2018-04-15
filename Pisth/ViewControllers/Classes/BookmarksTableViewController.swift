@@ -248,6 +248,10 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Connect to selected connection.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        AppDelegate.shared.navigationController.setNavigationBarHidden(false, animated: true)
+        AppDelegate.shared.navigationController.navigationBar.barStyle = .default
+        AppDelegate.shared.navigationController.navigationBar.isTranslucent = true
+        
         if indexPath.section == 0 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
             
@@ -261,7 +265,13 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             func connect() {
                 let activityVC = ActivityViewController(message: "Connecting")
                 self.present(activityVC, animated: true) {
+                    
+                    ConnectionManager.shared.session = nil
+                    ConnectionManager.shared.filesSession = nil
+                    ConnectionManager.shared.result = .notConnected
+                    
                     if DataManager.shared.connections[indexPath.row].useSFTP {
+                        
                         let dirVC = DirectoryTableViewController(connection: connection)
                         
                         activityVC.dismiss(animated: true, completion: {

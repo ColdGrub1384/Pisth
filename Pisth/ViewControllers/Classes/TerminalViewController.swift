@@ -17,7 +17,7 @@ import AVFoundation
 import CoreData
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate {
     
     /// Terminal size in this format: `"0,0"`.
     private var terminalSize: String?
@@ -539,6 +539,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
         webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
+        view.addInteraction(UIDropInteraction(delegate: self))
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
         tapGesture.delegate = self
@@ -583,6 +584,32 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationController?.navigationBar.isTranslucent = true
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
+    }
+    
+    /// Open a `DirectoryTableViewController` at the side
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !AppDelegate.shared.splitViewController.isCollapsed && navigationController != AppDelegate.shared.splitViewController.navigationController_ {
+            
+            if let i = navigationController?.viewControllers.index(of: self) {
+                guard let vcs = navigationController?.viewControllers else {
+                    return
+                }
+                
+                guard vcs.indices.contains(i-1) else {
+                    return
+                }
+                
+                guard let dirVC = vcs[i-1] as? DirectoryTableViewController else {
+                    return
+                }
+                
+                if (AppDelegate.shared.splitViewController.navigationController_.visibleViewController as? DirectoryTableViewController)?.directory != dirVC.directory {
+                    AppDelegate.shared.splitViewController.navigationController_.pushViewController(DirectoryTableViewController(connection: dirVC.connection, directory: dirVC.directory), animated: true)
+                }                
+            }
+        }
     }
     
     /// - Returns: `true`.
@@ -1138,6 +1165,43 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Returns: `true`.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+    
+    // MARK: - Drop interaction delegate
+    
+    /// Drop a file.
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        for item in session.items {
+            if let file = item.localObject as? NMSFTPFile {
+                guard let vcs = navigationController?.viewControllers else {
+                    return
+                }
+                
+                guard let i = vcs.index(of: self) else {
+                    return
+                }
+                
+                guard vcs.indices.contains(i-1) else {
+                    return
+                }
+                
+                guard let dirVC = vcs[i-1] as? DirectoryTableViewController else {
+                    return
+                }
+                
+                try? ConnectionManager.shared.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
+            }
+        }
+    }
+    
+    /// Allow dragging a `NMSFTPFile`.
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return (session.localDragSession?.items.first?.localObject is NMSFTPFile)
+    }
+    
+    /// - Returns: `UIDropProposal(operation: .copy)`.
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
     }
     
     // MARK: - Static
