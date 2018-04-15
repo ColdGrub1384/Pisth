@@ -1403,32 +1403,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                             self.present(errorAlert, animated: true, completion: nil)
                         }
                     } else { // Upload file and rename it
-                        self.present(self.upload(file: file, uploadHandler: {
-                            guard let files = self.files else {
-                                return
-                            }
-                            
-                            for sftpFile in files {
-                                if sftpFile.filename == file.lastPathComponent {
-                                    // Rename file
-                                    
-                                    guard let fileName = fileName else {
-                                        return
-                                    }
-                                    
-                                    if sftp.moveItem(atPath: self.directory.nsString.appendingPathComponent(sftpFile.filename), toPath: self.directory.nsString.appendingPathComponent(fileName)) {
-                                        
-                                        self.reload()
-                                        
-                                    } else {
-                                        let errorAlert = UIAlertController(title: "Error renaming file!", message: "Error changing file's default name!", preferredStyle: .alert)
-                                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                                        self.present(errorAlert, animated: true, completion: nil)
-                                    }
-                                    break
-                                }
-                            }
-                        }), animated: true, completion: nil)
+                        self.present(self.upload(file: file, uploadHandler: nil), animated: true, completion: nil)
                     }
                 }
             })
