@@ -34,6 +34,7 @@ class ConnectionsTableViewController: UITableViewController {
     @IBAction func add(_ sender: Any) {
         if let vc = UIStoryboard(name: "Connection Info", bundle: Bundle.main).instantiateInitialViewController() as? ConnectionInformationTableViewController {
             vc.rootTableView = tableView
+            vc.rootViewController = self
             
             let navVC = UINavigationController(rootViewController: vc)
             navVC.modalPresentationStyle = .formSheet
@@ -125,6 +126,7 @@ class ConnectionsTableViewController: UITableViewController {
                 vc.index = indexPath.row
                 vc.connection = DataManager.shared.connections[indexPath.row]
                 vc.rootTableView = tableView
+                vc.rootViewController = self
                 
                 let navVC = UINavigationController(rootViewController: vc)
                 navVC.modalPresentationStyle = .formSheet

@@ -15,6 +15,9 @@ public class ConnectionInformationTableViewController: UITableViewController {
     /// Table view to reload after making changes.
     open var rootTableView: UITableView?
     
+    /// Root view controller.
+    open var rootViewController: UIViewController?
+    
     /// Init with given style.
     ///
     /// - Parameters:
@@ -142,6 +145,7 @@ public class ConnectionInformationTableViewController: UITableViewController {
     /// Dismiss without saving changes.
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: {
+            self.rootViewController?.viewDidAppear(true)
             self.rootTableView?.reloadData()
         })
     }
