@@ -21,7 +21,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Terminal size in this format: `"0,0"`.
     private var terminalSize: String?
-    
+        
     /// If the terminal is in viewer mode.
     var viewer = false
     
@@ -1171,6 +1171,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Drop a file.
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        
         for item in session.items {
             if let file = item.localObject as? NMSFTPFile {
                 guard let vcs = navigationController?.viewControllers else {
@@ -1192,6 +1193,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 try? ConnectionManager.shared.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
             }
         }
+        
+       becomeFirstResponder()
     }
     
     /// Allow dragging a `NMSFTPFile`.
