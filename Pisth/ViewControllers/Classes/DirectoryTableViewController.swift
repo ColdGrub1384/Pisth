@@ -1339,74 +1339,103 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             return
         }
         
-        if let file = coordinator.items.first?.dragItem.localObject as? NMSFTPFile {
-            // Move file
-            
-            guard let indexPath = coordinator.destinationIndexPath else {
-                return
-            }
-            
-            guard let files = files else {
-                return
-            }
-            
-            guard files[indexPath.row].isDirectory else {
-                return
-            }
-            
-            guard file != files[indexPath.row] else {
-                return
-            }
-            
-            let target = directory.nsString.appendingPathComponent(file.filename)
-            let destination: String
-            
-            if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
-                destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
-            } else {
-                destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
-            }
-            
-            if sftp.moveItem(atPath: target, toPath: destination) {
+        for item in coordinator.items {
+            if let file = item.dragItem.localObject as? NMSFTPFile {
+                // Move file
                 
-                reload()
+                guard let indexPath = coordinator.destinationIndexPath else {
+                    return
+                }
                 
-            } else {
-                let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                present(errorAlert, animated: true, completion: nil)
-            }
-        } else {
-            let item = coordinator.items[0]
-            
-            let fileName = item.dragItem.itemProvider.suggestedName
-            
-            item.dragItem.itemProvider.loadInPlaceFileRepresentation(forTypeIdentifier: item.dragItem.itemProvider.registeredTypeIdentifiers[0], completionHandler: { (file, inPlace, error) in
+                guard let files = files else {
+                    return
+                }
                 
-                if let error = error {
-                    let errorAlert = UIAlertController(title: "Error uploading file!", message: error.localizedDescription, preferredStyle: .alert)
+                guard files[indexPath.row].isDirectory else {
+                    return
+                }
+                
+                guard file != files[indexPath.row] else {
+                    return
+                }
+                
+                let target = directory.nsString.appendingPathComponent(file.filename)
+                let destination: String
+                
+                if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
+                    destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
+                } else {
+                    destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+                }
+                
+                if sftp.moveItem(atPath: target, toPath: destination) {
+                    
+                    reload()
+                    
+                } else {
+                    let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    self.present(errorAlert, animated: true, completion: nil)
+                    present(errorAlert, animated: true, completion: nil)
                 }
+            } else if item.dragItem.itemProvider.hasItemConformingToTypeIdentifier(item.dragItem.itemProvider.registeredTypeIdentifiers[0]) {
+                let item = coordinator.items[0]
                 
-                if let file = file {
-                    if !inPlace { // Copy file and upload it
-                        do {
-                            let newFile = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(fileName ?? file.lastPathComponent)
-                            try FileManager.default.copyItem(at: file, to: newFile)
-                            self.present(self.upload(file: newFile, uploadHandler: {
-                                try? FileManager.default.removeItem(at: newFile)
-                            }), animated: true, completion: nil)
-                        } catch {
-                            let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
-                            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                            self.present(errorAlert, animated: true, completion: nil)
+                let fileName = item.dragItem.itemProvider.suggestedName
+                
+                item.dragItem.itemProvider.loadInPlaceFileRepresentation(forTypeIdentifier: item.dragItem.itemProvider.registeredTypeIdentifiers[0], completionHandler: { (file, inPlace, error) in
+                    
+                    var destination: String
+                    if let indexPath = coordinator.destinationIndexPath {
+                        if let files = self.files {
+                            destination = self.directory.nsString.appendingPathComponent(files[indexPath.row].filename)
+                        } else {
+                            destination = self.directory
                         }
-                    } else { // Upload file and rename it
-                        self.present(self.upload(file: file, uploadHandler: nil), animated: true, completion: nil)
+                    } else {
+                        destination = self.directory
                     }
-                }
-            })
+                    
+                    if let error = error {
+                        let errorAlert = UIAlertController(title: "Error uploading file!", message: error.localizedDescription, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        self.present(errorAlert, animated: true, completion: nil)
+                    }
+                    
+                    if let file = file {
+                        if !inPlace { // Copy file and upload it
+                            do {
+                                let newFile = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(fileName ?? file.lastPathComponent)
+                                try FileManager.default.copyItem(at: file, to: newFile)
+                                DispatchQueue.main.async {
+                                    self.sendFile(file: newFile, toDirectory: destination, uploadHandler: {
+                                        self.reload()
+                                        try? FileManager.default.removeItem(at: newFile)
+                                    }, errorHandler: {
+                                        let alert = UIAlertController(title: "Error uploading file!", message: "Error uploading \(file.lastPathComponent) to \(destination).", preferredStyle: .alert)
+                                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                        self.present(alert, animated: true, completion: nil)
+                                        try? FileManager.default.removeItem(at: newFile)
+                                    }, showAlert: false)
+                                }
+                            } catch {
+                                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                self.present(errorAlert, animated: true, completion: nil)
+                            }
+                        } else { // Upload file and rename it
+                            DispatchQueue.main.async {
+                                self.sendFile(file: file, toDirectory: destination, uploadHandler: {
+                                    self.reload()
+                                }, errorHandler: {
+                                    let alert = UIAlertController(title: "Error uploading file!", message: "Error uploading \(file.lastPathComponent) to \(destination).", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                    self.present(alert, animated: true, completion: nil)
+                                }, showAlert: false)
+                            }
+                        }
+                    }
+                })
+            }
         }
     }
     
@@ -1484,14 +1513,24 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             return false
         }
         
-        guard let file = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
+        var hasSFTPFiles = false
+        var sftpFiles = [NMSFTPFile]()
+        
+        for item in session.localDragSession?.items ?? [] {
+            if let file = item.localObject as? NMSFTPFile {
+                sftpFiles.append(file)
+                hasSFTPFiles = true
+            }
+        }
+        
+        guard hasSFTPFiles else {
             return (session.hasItemsConforming(toTypeIdentifiers: ["public.item"]))
         }
         
         if directory.removingUnnecessariesSlashes == "/" {
             return true
-        } else if file != files.last {
-            return true
+        } else if let lastFile = files.last {
+            return !sftpFiles.contains(lastFile)
         }
         
         return false
