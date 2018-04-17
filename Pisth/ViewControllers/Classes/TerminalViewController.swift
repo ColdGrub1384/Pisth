@@ -605,7 +605,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     return
                 }
                 
-                if (AppDelegate.shared.splitViewController.navigationController_.visibleViewController as? DirectoryTableViewController)?.directory != dirVC.directory {
+                if (AppDelegate.shared.splitViewController.navigationController_.visibleViewController as? DirectoryTableViewController)?.directory != dirVC.directory && AppDelegate.shared.splitViewController.displayMode == .allVisible {
                     AppDelegate.shared.splitViewController.navigationController_.pushViewController(DirectoryTableViewController(connection: dirVC.connection, directory: dirVC.directory), animated: true)
                 }                
             }
