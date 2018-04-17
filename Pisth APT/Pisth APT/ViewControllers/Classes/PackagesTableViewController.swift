@@ -7,16 +7,9 @@
 
 import UIKit
 import Pisth_Shared
-import GoogleMobileAds
 
 /// View controller containing packages.
-class PackagesTableViewController: UITableViewController, UISearchBarDelegate, GADBannerViewDelegate {
-    
-    /// Header view containing `adBanner`.
-    @IBOutlet weak var header: UIView!
-    
-    /// Ad banner.
-    @IBOutlet weak var adBanner: GADBannerView!
+class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
     
     /// Refresh.
     ///
@@ -76,8 +69,6 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate, G
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         }
-        
-        adBanner.adSize = kGADAdSizeBanner
     }
     
     // MARK: - Table view data source
@@ -157,12 +148,5 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate, G
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()
         })
-    }
-    
-    // MARK: - Banner view delegate
-    
-    /// Hide ad.
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        tableView.tableHeaderView = nil
     }
 }

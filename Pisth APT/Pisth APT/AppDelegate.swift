@@ -17,7 +17,7 @@ let pisth = Pisth(message: "Import DEB package", urlScheme: URL(string:"dpkgPist
 
 /// The app delegate.
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
 
     /// Shared and unique instance.
     static var shared: AppDelegate!
@@ -51,6 +51,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// URL of app that opened this app with the API.
     var apiURL: URL?
+    
+    /// Interstitial ad.
+    var interstitialAd: GADInterstitial!
+    
+    /// Present interstitial ad.
+    func presentInterstitialAd() {
+        if interstitialAd.isReady, let rootVC = UIApplication.shared.keyWindow?.topViewController() {
+            interstitialAd.present(fromRootViewController: rootVC)
+        }
+    }
+    
+    /// Returns a ready to use interstitial ad.
+    var createAndLoadAd: GADInterstitial {
+        let ad = GADInterstitial(adUnitID: "ca-app-pub-9214899206650515/4961139411")
+        ad.delegate = self
+        ad.load(GADRequest())
+        
+        return ad
+    }
     
     /// Close connection opened with the API.
     @objc func goToPreviousApp() {
@@ -131,7 +150,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Search for updates
-    func searchForUpdates() {
+    ///
+    /// - Parameters:
+    ///     - completion: Optional block to execute after updating data.
+    func searchForUpdates(completion: (() -> ())? = nil) {
         // Search for updates
         if let session = session {
             if session.isConnected && session.isAuthorized {
@@ -179,6 +201,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+        
+        completion?()
     }
     
     // MARK: - Application delegate
@@ -192,6 +216,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~6828541853")
+        interstitialAd = createAndLoadAd
         
         connect()
         
@@ -253,6 +278,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             self.connect()
                             
                             if let session = self.session, session.isConnected {
+                                
                                 self.searchForUpdates()
                                 
                                 _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
@@ -263,6 +289,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     }
                                     
                                     connectingVC.present(viewController, animated: true, completion: {
+                                        self.presentInterstitialAd()
                                         for vc in viewController.viewControllers ?? [] {
                                             (vc as? UINavigationController)?.visibleViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))
                                         }
@@ -331,5 +358,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
 
+    // MARK: - Interstitial
+    
+    /// Reload ad.
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitialAd = createAndLoadAd
+    }
+    
+    /// Print error.
+    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Error receiving ad: \(error.localizedDescription)")
+    }
 }
 

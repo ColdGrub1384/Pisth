@@ -9,16 +9,9 @@ import UIKit
 import Pisth_Shared
 import Pisth_API
 import StoreKit
-import GoogleMobileAds
 
 /// Table view controller for listing installed packages.
-class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate, GADBannerViewDelegate {
-    
-    /// Header view containg `adBanner`.
-    @IBOutlet weak var header: UIView!
-    
-    /// Admob banner.
-    @IBOutlet weak var adBanner: GADBannerView!
+class InstalledTableViewController: UITableViewController, UISearchBarDelegate, UIDocumentPickerDelegate, SKStoreProductViewControllerDelegate {
     
     /// Refresh.
     ///
@@ -96,8 +89,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         }
-        
-        adBanner.adSize = kGADAdSizeBanner
     }
     
     // MARK: - Table view data source
@@ -220,12 +211,5 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Dismiss.
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Banner view delegate
-    
-    /// Hide ad.
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
-        tableView.tableHeaderView = nil
     }
 }
