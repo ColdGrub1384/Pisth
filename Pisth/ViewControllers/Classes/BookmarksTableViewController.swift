@@ -111,6 +111,15 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         mcNearbyServiceBrowser.startBrowsingForPeers()
     }
     
+    /// Clear selection on collapsed Split view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if AppDelegate.shared.splitViewController.isCollapsed, let selected = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selected, animated: true)
+        }
+    }
+    
     // MARK: - Table view data source
 
     /// - Returns: `2`.
