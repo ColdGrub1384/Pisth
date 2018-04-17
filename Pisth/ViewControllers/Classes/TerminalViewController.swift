@@ -590,6 +590,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        navigationController?.setToolbarHidden(true, animated: true)
+        
         if !AppDelegate.shared.splitViewController.isCollapsed && navigationController != AppDelegate.shared.splitViewController.navigationController_ {
             
             if let i = navigationController?.viewControllers.index(of: self) {
