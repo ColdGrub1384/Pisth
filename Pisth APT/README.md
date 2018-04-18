@@ -2,6 +2,9 @@
 
 # Pisth APT
 
+[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8)
+
+
 ```
 From the developer of Pisth! Pisth APT allows you to manage your packages on Debian based Linux distro from your iPhone or iPad using SSH.
 
@@ -11,7 +14,7 @@ Why use Pisth APT:
 • You can easily browse, install, uninstall and update pakages.
 ```
 
-![status](https://img.shields.io/badge/status-in%20developement-green.svg)
+![status](https://img.shields.io/badge/status-stable-green.svg)
 ![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
 
 ## Screenshots
