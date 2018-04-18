@@ -2,7 +2,7 @@
 
 # Pisth APT
 
-[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://itunes.apple.com/us/app/pisth/id1331070425?ls=1&mt=8)
+[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://itunes.apple.com/us/app/pisth-apt/id1369552277?ls=1&mt=8)
 
 
 ```
