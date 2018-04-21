@@ -77,7 +77,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
             if let url = self.apiURL {
                 UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
                     if success {
-                        exit(0)
+                        UIApplication.shared.keyWindow?.tintColor = UIView().tintColor
+                        
+                        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                            let activityVC = ActivityViewController(message: "Loading...")
+                            UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
+                                self.connect()
+                                self.searchForUpdates(completion: {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        self.presentInterstitialAd()
+                                    })
+                                })
+                            })
+                        })
                     }
                 })
             }
