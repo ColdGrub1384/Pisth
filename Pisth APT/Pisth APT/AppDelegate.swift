@@ -266,6 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
             }
             
             viewController.modalTransitionStyle = .crossDissolve
+            viewController.viewControllers?.removeLast()
             
             TabBarController.shared = viewController
             
