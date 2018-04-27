@@ -417,6 +417,30 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Resize `webView`, dismiss and open keyboard (to resize terminal).
+    func resizeView(withSize size: CGSize) {
+        let wasFirstResponder = isFirstResponder
+        
+        if isFirstResponder {
+            resignFirstResponder()
+        }
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            if wasFirstResponder {
+                self.becomeFirstResponder()
+            }
+        })
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            self.webView.frame = newFrame
+            self.selectionTextView.frame = newFrame
+            if !wasFirstResponder {
+                self.reload()
+            }
+        })
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -445,30 +469,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return accessoryView
     }
     
-    /// Resize `webView`, dismiss and open keyboard (to resize terminal).
-    func resizeView(withSize size: CGSize) {
-        let wasFirstResponder = isFirstResponder
-        
-        if isFirstResponder {
-            resignFirstResponder()
-        }
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            if wasFirstResponder {
-                self.becomeFirstResponder()
-            }
-        })
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            self.webView.frame = newFrame
-            self.selectionTextView.frame = newFrame
-            if !wasFirstResponder {
-                self.reload()
-            }
-        })
-    }
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         resizeView(withSize: size)
     }
@@ -492,6 +492,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         return commands
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+        resizeView(withSize: view.frame.size)
     }
     
     /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
@@ -631,11 +636,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
-        
-        let newHeight = toolbarFrame.origin.y
-        if webView.frame.height != newHeight {
-            webView.frame.size.height = newHeight
+        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size {
+            let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
+            
+            let newHeight = toolbarFrame.origin.y
+            if webView.frame.height != newHeight {
+                webView.frame.size.height = newHeight
+                reload()
+            }
+        } else if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            webView.frame = keyboardFrame
+            webView.frame.size.height -= 10
             reload()
         }
         
