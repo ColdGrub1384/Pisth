@@ -645,8 +645,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 reload()
             }
         } else if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            webView.frame = keyboardFrame
-            webView.frame.size.height -= 10
+            webView.frame.size = CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height)
             reload()
         }
         
