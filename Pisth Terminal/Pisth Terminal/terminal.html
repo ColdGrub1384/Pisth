@@ -17,8 +17,9 @@
     
     <script type="text/javascript">
         
-        // Create terminal
+        var console = "";
         
+        // Create terminal
         var term = new Terminal();
         term.open(document.getElementById('terminal'));
         
@@ -38,5 +39,10 @@
                 alert("bell");
             })
         }, 1000);
+        
+        function writeToTerm(text) {
+            console = console+text;
+            term.write(text);
+        }
     </script>
 </body>
