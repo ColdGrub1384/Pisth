@@ -132,6 +132,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         navigationController.navigationBar.prefersLargeTitles = true
         
         let rootVC = UIViewController()
+        let label = UILabel(frame: rootVC.view.frame)
+        label.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        label.textColor = .black
+        label.text = "To create a connection, tap \"+\"."
+        label.textAlignment = .center
+        rootVC.view.addSubview(label)
         rootVC.view.backgroundColor = .white
         let detailNavigationController = UINavigationController(rootViewController: rootVC)
         
