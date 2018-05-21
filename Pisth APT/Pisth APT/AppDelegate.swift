@@ -78,6 +78,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
                 UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
                     if success {
                         UIApplication.shared.keyWindow?.tintColor = UIView().tintColor
+                        self.openReason = .default
+                        TabBarController.shared.customConnection = nil
+                        self.session?.disconnect()
+                        self.shellSession?.disconnect()
+                        self.session = nil
+                        self.shellSession = nil
+                        self.allPackages = []
+                        self.installed = []
+                        self.updates = []
                         
                         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                             let activityVC = ActivityViewController(message: "Loading...")
@@ -99,10 +108,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
     /// Open the session.
     func connect() {
         
+        func noConnection() {
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
+                    UIApplication.shared.keyWindow?.rootViewController = vc
+                    vc.errorTitleLabel.text = "No connection"
+                    vc.errorLabel.text = "Setup an SSH connection in settings."
+                    vc.errorView.backgroundColor = .orange
+                    vc.retryButton.isHidden = true
+                }
+            })
+        }
+        
         // Connect
         if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) || openReason == .openConnection {
             
-            let connection = TabBarController.shared?.customConnection ?? DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+            var connection: RemoteConnection!
+            
+            if TabBarController.shared?.customConnection != nil && openReason == .openConnection {
+                connection = TabBarController.shared?.customConnection
+            } else if DataManager.shared.connections.indices.contains(UserDefaults.standard.integer(forKey: "connection")) {
+                connection = DataManager.shared.connections[UserDefaults.standard.integer(forKey: "connection")]
+            } else {
+                noConnection()
+                return
+            }
+            
             self.connection = connection
             
             let errorTitle = "Error opening the session!"
@@ -148,16 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
             
         } else {
             // No connection
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
-                    UIApplication.shared.keyWindow?.rootViewController = vc
-                    vc.errorTitleLabel.text = "No connection"
-                    vc.errorLabel.text = "Setup an SSH connection in settings."
-                    vc.errorView.backgroundColor = .orange
-                    vc.retryButton.isHidden = true
-                }
-            })
+            noConnection()
         }
     }
     
