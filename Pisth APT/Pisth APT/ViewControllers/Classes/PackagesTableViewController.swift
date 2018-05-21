@@ -36,7 +36,7 @@ class PackagesTableViewController: UITableViewController, UISearchBarDelegate {
             return
         }
         
-        termVC.command = "clear; sudo apt-get update; echo -e \"\\033[CLOSE\""
+        termVC.command = "clear; sudo apt-get -y update; echo -e \"\\033[CLOSE\""
         termVC.title = title
         
         let navVC = UINavigationController(rootViewController: termVC)
