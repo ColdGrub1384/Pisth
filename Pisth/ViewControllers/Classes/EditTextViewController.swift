@@ -182,21 +182,19 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             close()
         }))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
-            if let vc = UIApplication.shared.keyWindow?.rootViewController {
-                vc.present(self, animated: true, completion: {
-                    self.save(true)
-                    if ConnectionManager.shared.saveFile?.localFile == self.file.path {
-                        try? FileManager.default.removeItem(at: self.file)
-                    }
-                })
-            }
+            AppDelegate.shared.navigationController.visibleViewController?.present(self, animated: true, completion: {
+                self.save(true)
+                if ConnectionManager.shared.saveFile?.localFile == self.file.path {
+                    try? FileManager.default.removeItem(at: self.file)
+                }
+            })
         }))
         
         do {
             // Check if file was modified
             let fileContent = try String.init(contentsOf: file)
             if textView.text != fileContent {
-               UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+               AppDelegate.shared.navigationController.visibleViewController?.present(alert, animated: true, completion: nil)
             } else {
                 if ConnectionManager.shared.saveFile?.localFile == file.path {
                     try? FileManager.default.removeItem(at: file)
