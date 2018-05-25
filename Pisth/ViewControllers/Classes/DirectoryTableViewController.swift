@@ -902,7 +902,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     }
                 })
                 
-                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+                if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
                     dirVC.reload()
                 }
                 
@@ -928,7 +928,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
                 
-            if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+            if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
                 dirVC.reload()
             }
             
