@@ -609,7 +609,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         func openFile() {
             
-            guard let vc = UIApplication.shared.keyWindow?.rootViewController else {
+            guard let vc = viewController ?? navigationController ?? UIApplication.shared.keyWindow?.rootViewController else {
                 return
             }
             
