@@ -209,8 +209,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                                - Use the `term` variable to modify the terminal. See more at https://xtermjs.org/docs/api/terminal/.
                                - Call `alert("bell")` to vibrate device.
                                - Call `alert("changeTitle<New title>")` to change the terminal title. NOTE: If it doesn't work, it's because the title was changed before by the shell, so don't call it at begining.
+                               - Call `send("<Text>")` to write to the terminal.
                                - You can put resources in the plugin folder, access with the `bundlePath` constant: `bundlePath+"/<File name>"`.
-                               - You can't write to the session!
 
                                # Options
 
@@ -246,8 +246,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                                 - 'useFlowControl': Boolean
                             */
                             
+                            /// Path of the plugin.
                             const bundlePath = document.currentScript.bundlePath;
-
                             
                             """.data(using: .utf8), attributes: nil) {
                             
