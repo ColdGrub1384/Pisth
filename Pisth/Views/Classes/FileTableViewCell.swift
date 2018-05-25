@@ -54,7 +54,7 @@ class FileTableViewCell: UITableViewCell {
     @objc func renameFile(_ sender: Any) {
         
         // Rename remote file
-        if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+        if let directoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
             
             directoryTableViewController.checkForConnectionError(errorHandler: {
                 directoryTableViewController.showError()
@@ -87,7 +87,7 @@ class FileTableViewCell: UITableViewCell {
             directoryTableViewController.present(renameAlert, animated: true, completion: nil)
             
         // Rename local file
-        } else if let localDirectoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+        } else if let localDirectoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? LocalDirectoryTableViewController {
             
             let fileToRename = localDirectoryTableViewController.files[localDirectoryTableViewController.tableView.indexPath(for: self)!.row]
             
@@ -118,7 +118,7 @@ class FileTableViewCell: UITableViewCell {
     @objc func moveFile(_ sender: Any) {
         
         // Move remote file
-        if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+        if let directoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
             
             directoryTableViewController.checkForConnectionError(errorHandler: {
                 directoryTableViewController.showError()
@@ -138,7 +138,7 @@ class FileTableViewCell: UITableViewCell {
             })
             
         // Move local file
-        } else if let localDirectoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController  {
+        } else if let localDirectoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? LocalDirectoryTableViewController {
             
             Pasteboard.local.localFilePath = localDirectoryTableViewController.directory.appendingPathComponent(localDirectoryTableViewController.files[localDirectoryTableViewController.tableView.indexPath(for: self)!.row].lastPathComponent).path
             
