@@ -157,9 +157,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
             
             if error != nil {
                 if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
-                    UIApplication.shared.keyWindow?.rootViewController = vc
-                    vc.errorLabel.text = error
-                    vc.errorTitleLabel.text = errorTitle
+                    _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                        UIApplication.shared.keyWindow?.rootViewController = vc
+                        vc.errorLabel?.text = error
+                        vc.errorTitleLabel?.text = errorTitle
+                    })
                 }
             }
             
