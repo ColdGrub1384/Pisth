@@ -15,13 +15,14 @@ import Pisth_Terminal
 import Firebase
 import AVFoundation
 import CoreData
+import PanelKit
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate {
     
     /// Terminal size in this format: `"0,0"`.
     private var terminalSize: String?
-        
+    
     /// If the terminal is in viewer mode.
     var viewer = false
     
@@ -48,6 +49,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Send Ctrl key.
     private var ctrl_ = false
+    
+    /// The button for becoming or resigning first responder.
+    var keyboardButton: UIBarButtonItem!
     
     /// Send Ctrl key.
     var ctrl: Bool {
@@ -185,8 +189,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             switch item.tag {
             case ItemsTag.back.rawValue:
-                item.target = navigationController
-                item.action = #selector(navigationController?.popViewController(animated:))
+                item.target = (panelNavigationController ?? self)
+                item.action = #selector(close)
             case ItemsTag.more.rawValue:
                 (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleSecondToolbar(_:)), for: .touchUpInside)
             case ItemsTag.finger.rawValue:
@@ -300,13 +304,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             reload()
             selectText = true
             
-            resignFirstResponder()
+            _ = resignFirstResponder()
         } else {
             
             toolbar.items![1].tintColor = toolbar.tintColor
             toolbarItems![1].tintColor = view.tintColor
             
-            becomeFirstResponder()
+            _ = becomeFirstResponder()
         }
     }
     
@@ -348,7 +352,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             actions.append(UIAlertAction(title: "Insert mode", style: .default, handler: { (_) in
                 self.selectionTextView.isHidden = true
                 
-                self.becomeFirstResponder()
+                _ = self.becomeFirstResponder()
             }))
         } else {
             actions.append(UIAlertAction(title: "Selection mode", style: .default, handler: { (_) in
@@ -356,7 +360,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 self.selectText = true
                 
-                self.resignFirstResponder()
+                _ = self.resignFirstResponder()
             }))
         }
         
@@ -381,10 +385,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     ///     - sender: Sende bar button item.
     @objc func toggleKeyboard(_ sender: UIBarButtonItem) {
         if isFirstResponder {
-            resignFirstResponder()
+            _ = resignFirstResponder()
             sender.image = #imageLiteral(resourceName: "show-keyboard")
         } else {
-            becomeFirstResponder()
+            _ = becomeFirstResponder()
             sender.image = #imageLiteral(resourceName: "hide-keyboard")
         }
     }
@@ -419,15 +423,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Resize `webView`, dismiss and open keyboard (to resize terminal).
     func resizeView(withSize size: CGSize) {
+        
+        guard toolbar != nil else {
+            return
+        }
+        
         let wasFirstResponder = isFirstResponder
         
         if isFirstResponder {
-            resignFirstResponder()
+            _ = resignFirstResponder()
         }
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             if wasFirstResponder {
-                self.becomeFirstResponder()
+                _ = self.becomeFirstResponder()
             }
         })
         
@@ -440,6 +449,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         })
     }
+    
+    /// Close this View controller.
+    @objc func close() {
+        if panelNavigationController != nil {
+            panelNavigationController?.dismiss(animated: true, completion: nil)
+        } else if navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    
     
     // MARK: - View controller
     
@@ -459,7 +478,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// `UIViewController`'s `inputAccessoryView` variable.
     ///
-    /// Returns `toolbar`.
+    /// Returns `accessoryView`.
     override var inputAccessoryView: UIView? {
         
         if !isFirstResponder {
@@ -469,8 +488,24 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return accessoryView
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        resizeView(withSize: size)
+    /// Update keyboard icon.
+    ///
+    /// - Returns: `true`.
+    override func resignFirstResponder() -> Bool {
+        super.resignFirstResponder()
+        
+        keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
+        return true
+    }
+    
+    /// Update keyboard icon.
+    ///
+    /// - Returns: `true`.
+    override func becomeFirstResponder() -> Bool {
+        super.becomeFirstResponder()
+        
+        keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
+        return true
     }
     
     /// Returns arrow keys, esc keys and ctrl keys from `A` to `_`.
@@ -494,6 +529,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return commands
     }
     
+    /// Resize `webView`.
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
         resizeView(withSize: view.frame.size)
@@ -505,15 +541,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Terminal", AnalyticsParameterItemName : "Terminal"])
         
-        navigationController?.navigationBar.isTranslucent = false
-        
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))]
-        
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
         let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()
-        navigationController?.navigationBar.barStyle = theme.toolbarStyle
+        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
         
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -527,9 +559,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         mcSession.delegate = self
         mcNearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "terminal")
         mcNearbyServiceAdvertiser.delegate = self
-        if !viewer {
-            mcNearbyServiceAdvertiser.startAdvertisingPeer()
-        }
         
         // Create WebView
         let config = WKWebViewConfiguration()
@@ -548,7 +577,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
         tapGesture.delegate = self
-        webView.addGestureRecognizer(tapGesture)
+        if !isPresentedAsPopover {
+            webView.addGestureRecognizer(tapGesture)
+        }
         
         // Create selection Textview
         selectionTextView = UITextView(frame: webView.frame)
@@ -560,12 +591,32 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if readOnly {
             toolbarItems?.remove(at: 1)
         }
+        
+        var viewSize = view.frame.size
+        _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timer) in
+            if self.view.window == nil {
+                timer.invalidate()
+                return
+            }
+            
+            if self.view.frame.size != viewSize {
+                viewSize = self.view.frame.size
+                self.resizeView(withSize: viewSize)
+            }
+        })
+        
+        navigationItem.rightBarButtonItems = rightBarButtonItems
     }
     
-    /// Close and open shell, add `toolbar` to keyboard and configure `navigationController`.
-    override func viewWillAppear(_ animated: Bool) {
+    /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         edgesForExtendedLayout = []
+        
+        if !viewer {
+            mcNearbyServiceAdvertiser.startAdvertisingPeer()
+        }
         
         if console.isEmpty {
             
@@ -573,55 +624,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 ConnectionManager.shared.session?.channel.closeShell()
                 try? ConnectionManager.shared.session?.channel.startShell()
             }
-            
-            navigationItem.largeTitleDisplayMode = .never
-            
-            addToolbar()
+        }
+        
+        navigationItem.largeTitleDisplayMode = .never
+        addToolbar()
+        
+        _ = becomeFirstResponder()
+        
+        if !isPresentedAsPopover {
+            showNavBar()
         }
     }
     
-    /// Undo changes made to `navigationController`, dismiss `ArrowsViewController` if it's presented and stop multipeer connectivity session.
+    /// Stop advertising peer.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.isTranslucent = true
-        
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
-    }
-    
-    /// Open a `DirectoryTableViewController` at the side
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        navigationController?.setToolbarHidden(true, animated: true)
-        
-        if !AppDelegate.shared.splitViewController.isCollapsed && navigationController != AppDelegate.shared.splitViewController.navigationController_ {
-            
-            if let i = navigationController?.viewControllers.index(of: self) {
-                guard let vcs = navigationController?.viewControllers else {
-                    return
-                }
-                
-                guard vcs.indices.contains(i-1) else {
-                    return
-                }
-                
-                guard let dirVC = vcs[i-1] as? DirectoryTableViewController else {
-                    return
-                }
-                
-                if (AppDelegate.shared.splitViewController.navigationController_.visibleViewController as? DirectoryTableViewController)?.directory != dirVC.directory && AppDelegate.shared.splitViewController.displayMode == .allVisible {
-                    AppDelegate.shared.splitViewController.navigationController_.pushViewController(DirectoryTableViewController(connection: dirVC.connection, directory: dirVC.directory), animated: true)
-                }                
-            }
-        }
-    }
-    
-    /// - Returns: `true`.
-    override var prefersStatusBarHidden: Bool {
-        return navigationController?.isNavigationBarHidden ?? true
     }
     
     // MARK: - Keyboard
@@ -633,6 +652,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let i = ignoredNotifications.index(of: notification.name) {
                 ignoredNotifications.remove(at: i)
             }
+            return
+        }
+        
+        guard !isPresentedAsPopover else {
+            webView.reload()
             return
         }
         
@@ -666,6 +690,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
+        guard !isPresentedAsPopover else {
+            webView.reload()
+            return
+        }
+        
         webView.frame = view.bounds
         reload()
         
@@ -688,7 +717,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
-            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
+//            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
             
             sender.tintColor = .lightGray
         } else {
@@ -807,7 +836,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             if self.console.contains(TerminalViewController.close) { // Close shell
                 self.console = self.console.replacingOccurrences(of: TerminalViewController.close, with: "")
-                self.resignFirstResponder()
+                _ = self.resignFirstResponder()
                 self.readOnly = true
                 if self.toolbarItems?.count == 2 {
                     self.toolbarItems?.remove(at: 1)
@@ -834,15 +863,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Undo changes made to `navigationController` and pop to Root view controller.
+    /// Dismiss.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
             if self.isFirstResponder {
-                self.resignFirstResponder()
+                _ = self.resignFirstResponder()
             }
-            self.navigationController?.setToolbarHidden(true, animated: true)
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.popToRootViewController(animated: true)
+            self.close()
         }
     }
     
@@ -953,14 +980,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             // Session
             guard let session = ConnectionManager.shared.session else {
-                navigationController?.popViewController(animated: true)
+                self.close()
                 return
             }
             
             if !session.isConnected {
                 let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
-                resignFirstResponder()
+                _ = resignFirstResponder()
                 navigationItem.rightBarButtonItems = []
                 return
             }
@@ -968,7 +995,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !session.isAuthorized {
                 let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
-                resignFirstResponder()
+                _ = resignFirstResponder()
                 navigationItem.rightBarButtonItems = []
                 return
             }
@@ -1030,7 +1057,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             } catch {}
             
             _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                self.showNavBar()
+                //self.showNavBar()
             })
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
@@ -1188,19 +1215,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         for item in session.items {
             if let file = item.localObject as? NMSFTPFile {
-                guard let vcs = navigationController?.viewControllers else {
-                    return
-                }
-                
-                guard let i = vcs.index(of: self) else {
-                    return
-                }
-                
-                guard vcs.indices.contains(i-1) else {
-                    return
-                }
-                
-                guard let dirVC = vcs[i-1] as? DirectoryTableViewController else {
+                guard let dirVC = AppDelegate.shared.splitViewController.detailNavigationController.visibleViewController as? DirectoryTableViewController else {
                     return
                 }
                 
@@ -1208,7 +1223,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         }
         
-       becomeFirstResponder()
+       _ = becomeFirstResponder()
     }
     
     /// Allow dragging a `NMSFTPFile`.
@@ -1219,6 +1234,50 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Returns: `UIDropProposal(operation: .copy)`.
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
+    }
+    
+    // MARK: - Panel content delegate
+    
+    /// Returns `CGSize(width: 320, height: 500)`.
+    var preferredPanelContentSize: CGSize {
+        return CGSize(width: 500, height: 500)
+    }
+    
+    /// Returns `CGSize(width: 240, height: 260)`.
+    var minimumPanelContentSize: CGSize {
+        return CGSize(width: 240, height: 260)
+    }
+    
+    /// Returns `CGSize(width: 320, height: 500)`.
+    var maximumPanelContentSize: CGSize {
+        return CGSize(width: 500, height: 500)
+    }
+    
+    /// Returns: `500`.
+    var preferredPanelPinnedHeight: CGFloat {
+        return 500
+    }
+    
+    /// Returns: `500`.
+    var preferredPanelPinnedWidth: CGFloat {
+        return 500
+    }
+    
+    /// The keyboard and action button.
+    var rightBarButtonItems: [UIBarButtonItem] {
+        if keyboardButton == nil {
+            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))
+        }
+        let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
+        for item in items {
+            item?.tintColor = UIColor(named: "Purple")
+        }
+        return (items as? [UIBarButtonItem]) ?? []
+    }
+    
+    /// Returns `isFirstResponder`.
+    var shouldAdjustForKeyboard: Bool {
+        return isFirstResponder
     }
     
     // MARK: - Static

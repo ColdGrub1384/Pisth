@@ -411,7 +411,6 @@
 		};
 		3ACF9B382041B417006C3218 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31EAD1E96392A3682184F4E0 /* Pods-Pisth Shared.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -438,7 +437,6 @@
 		};
 		3ACF9B392041B417006C3218 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20A395E5A737F56B93B4B88F /* Pods-Pisth Shared.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;

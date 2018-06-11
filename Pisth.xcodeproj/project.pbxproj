@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0964F220CC209F006D5B4C /* Content.storyboard */; };
+		3A0964F520CC2417006D5B4C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0964F420CC2416006D5B4C /* NavigationController.swift */; };
+		3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
@@ -133,6 +136,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A0964F220CC209F006D5B4C /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
+		3A0964F420CC2416006D5B4C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -435,6 +441,8 @@
 				3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */,
 				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
 				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
+				3A0964F420CC2416006D5B4C /* NavigationController.swift */,
+				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -451,6 +459,7 @@
 				3A5888B4205C6BCD0002F9E1 /* Contribute.xib */,
 				3A729777205D58B100F94BA7 /* Beta.xib */,
 				3AD2F69920713FC10017F2EB /* Web.xib */,
+				3A0964F220CC209F006D5B4C /* Content.storyboard */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -622,6 +631,7 @@
 				3AD7E0572049E8CC00834D59 /* amzn.png in Resources */,
 				3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */,
 				3AD7E0582049E8CD00834D59 /* arch.png in Resources */,
+				3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */,
 				3AD7E0592049E8CF00834D59 /* centos.png in Resources */,
 				3AD7E05D2049E8D500834D59 /* linux.png in Resources */,
 				3AD7E05B2049E8D200834D59 /* debian.png in Resources */,
@@ -657,7 +667,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C359C90E836AEDA0878550B8 /* [CP] Copy Pods Resources */ = {
@@ -720,7 +730,9 @@
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
+				3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
+				3A0964F520CC2417006D5B4C /* NavigationController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,

@@ -64,4 +64,9 @@ extension UIViewController {
     static var beta: BetaViewController {
         return (Bundle.main.loadNibNamed("Beta", owner: nil, options: nil)?[0] as? BetaViewController) ?? BetaViewController()
     }
+    
+    /// Returns the main View controller.
+    static var content: UIViewController {
+        return (UIStoryboard(name: "Content", bundle: Bundle.main).instantiateInitialViewController()) ?? UIViewController()
+    }
 }

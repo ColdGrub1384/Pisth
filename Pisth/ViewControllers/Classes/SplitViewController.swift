@@ -16,6 +16,9 @@ class SplitViewController: UISplitViewController {
     /// App Detail Navigation view controller.
     var detailNavigationController: UINavigationController!
     
+    /// A detail view controller. If it's set, you must set `detailNavigationController`. This View controller will be displayed and `detailNavigationController` will be passed to `AppDelegate.shared`.
+    var detailViewController: UIViewController?
+    
     /// Setup view controllers.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -25,7 +28,11 @@ class SplitViewController: UISplitViewController {
             AppDelegate.shared.navigationController = navigationController_
         } else {
             preferredDisplayMode = .allVisible
-            viewControllers = [navigationController_, detailNavigationController]
+            if let detailViewController = detailViewController {
+                viewControllers = [navigationController_, detailViewController]
+            } else {
+                viewControllers = [navigationController_, detailNavigationController]
+            }
             AppDelegate.shared.navigationController = detailNavigationController
         }
     }

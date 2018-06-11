@@ -14,7 +14,7 @@ open class Keys {
     ///
     /// - Parameters:
     ///     - dec: Decimal number from wich return unicode character.
-    open static func unicode(dec: Int) -> String {
+    public static func unicode(dec: Int) -> String {
         return String(describing: UnicodeScalar(dec)!)
     }
     
@@ -23,164 +23,164 @@ open class Keys {
     // MARK: - Random keys
     
     /// ESC Key.
-    open static let esc = unicode(dec: 27)
+    public static let esc = unicode(dec: 27)
     
     /// Delete Key.
-    open static let delete = unicode(dec: 127)
+    public static let delete = unicode(dec: 127)
     
     // MARK: - Function keys
     
     /// F1
-    open static let f1 = esc+"OP"
+    public static let f1 = esc+"OP"
     
     /// F2
-    open static let f2 = esc+"OQ"
+    public static let f2 = esc+"OQ"
     
     /// F3
-    open static let f3 = esc+"OR"
+    public static let f3 = esc+"OR"
     
     /// F4
-    open static let f4 = esc+"OS"
+    public static let f4 = esc+"OS"
     
     /// F5
-    open static let f5 = esc+"[15~"
+    public static let f5 = esc+"[15~"
     
     /// F6
-    open static let f6 = esc+"[17~"
+    public static let f6 = esc+"[17~"
     
     /// F7
-    open static let f7 = esc+"[18~"
+    public static let f7 = esc+"[18~"
     
     /// F8
-    open static let f8 = esc+"[19~"
+    public static let f8 = esc+"[19~"
     
     /// F9
-    open static let f9 = esc+"[20~"
+    public static let f9 = esc+"[20~"
     
     /// F10
-    open static let f10 = esc+"[21~"
+    public static let f10 = esc+"[21~"
     
     /// F11
-    open static let f11 = esc+"[23~"
+    public static let f11 = esc+"[23~"
     
     /// F12
-    open static let f12 = esc+"[24~"
+    public static let f12 = esc+"[24~"
     
     // MARK: - Arrow keys
     
     /// Up Arrow Key.
-    open static let arrowUp = esc+"[A"
+    public static let arrowUp = esc+"[A"
     
     /// Down Arrow Key.
-    open static let arrowDown = esc+"[B"
+    public static let arrowDown = esc+"[B"
     
     /// Right Arrow Key.
-    open static let arrowRight = esc+"[C"
+    public static let arrowRight = esc+"[C"
     
     /// Left Arrow Key.
-    open static let arrowLeft = esc+"[D"
+    public static let arrowLeft = esc+"[D"
     
     
     // MARK: - Control keys
     
     /// ^@
-    open static let ctrlAt = unicode(dec: 0)
+    public static let ctrlAt = unicode(dec: 0)
     
     /// ^A
-    open static let ctrlA = unicode(dec: 1)
+    public static let ctrlA = unicode(dec: 1)
     
     /// ^B
-    open static let ctrlB = unicode(dec: 2)
+    public static let ctrlB = unicode(dec: 2)
     
     /// ^C
-    open static let ctrlC = unicode(dec: 3)
+    public static let ctrlC = unicode(dec: 3)
     
     /// ^D
-    open static let ctrlD = unicode(dec: 4)
+    public static let ctrlD = unicode(dec: 4)
     
     /// ^E
-    open static let ctrlE = unicode(dec: 5)
+    public static let ctrlE = unicode(dec: 5)
     
     /// ^F
-    open static let ctrlF = unicode(dec: 6)
+    public static let ctrlF = unicode(dec: 6)
     
     /// ^G
-    open static let ctrlG = unicode(dec: 7)
+    public static let ctrlG = unicode(dec: 7)
     
     /// ^H
-    open static let ctrlH = unicode(dec: 8)
+    public static let ctrlH = unicode(dec: 8)
     
     /// ^I
-    open static let ctrlI = unicode(dec: 9)
+    public static let ctrlI = unicode(dec: 9)
     
     /// ^J
-    open static let ctrlJ = unicode(dec: 10)
+    public static let ctrlJ = unicode(dec: 10)
     
     /// ^K
-    open static let ctrlK = unicode(dec: 11)
+    public static let ctrlK = unicode(dec: 11)
     
     /// ^L
-    open static let ctrlL = unicode(dec: 12)
+    public static let ctrlL = unicode(dec: 12)
     
     /// ^M
-    open static let ctrlM = unicode(dec: 13)
+    public static let ctrlM = unicode(dec: 13)
     
     /// ^N
-    open static let ctrlN = unicode(dec: 14)
+    public static let ctrlN = unicode(dec: 14)
     
     /// ^O
-    open static let ctrlO = unicode(dec: 15)
+    public static let ctrlO = unicode(dec: 15)
     
     /// ^P
-    open static let ctrlP = unicode(dec: 16)
+    public static let ctrlP = unicode(dec: 16)
     
     /// ^Q
-    open static let ctrlQ = unicode(dec: 17)
+    public static let ctrlQ = unicode(dec: 17)
     
     /// ^R
-    open static let ctrlR = unicode(dec: 18)
+    public static let ctrlR = unicode(dec: 18)
     
     /// ^S
-    open static let ctrlS = unicode(dec: 19)
+    public static let ctrlS = unicode(dec: 19)
     
     /// ^T
-    open static let ctrlT = unicode(dec: 20)
+    public static let ctrlT = unicode(dec: 20)
     
     /// ^U
-    open static let ctrlU = unicode(dec: 21)
+    public static let ctrlU = unicode(dec: 21)
     
     /// ^V
-    open static let ctrlV = unicode(dec: 22)
+    public static let ctrlV = unicode(dec: 22)
     
     /// ^W
-    open static let ctrlW = unicode(dec: 23)
+    public static let ctrlW = unicode(dec: 23)
     
     /// ^X
-    open static let ctrlX = unicode(dec: 24)
+    public static let ctrlX = unicode(dec: 24)
     
     /// ^Y
-    open static let ctrlY = unicode(dec: 25)
+    public static let ctrlY = unicode(dec: 25)
     
     /// ^Z
-    open static let ctrlZ = unicode(dec: 26)
+    public static let ctrlZ = unicode(dec: 26)
     
     /// ^\
-    open static let ctrlBackslash = unicode(dec: 28)
+    public static let ctrlBackslash = unicode(dec: 28)
     
     /// ^]
-    open static let ctrlCloseBracket = unicode(dec: 29)
+    public static let ctrlCloseBracket = unicode(dec: 29)
     
     /// ^^
-    open static let ctrlCtrl = unicode(dec: 30)
+    public static let ctrlCtrl = unicode(dec: 30)
     
     /// ^_
-    open static let ctrl_ = unicode(dec: 31)
+    public static let ctrl_ = unicode(dec: 31)
     
     /// Returns Ctrl key from `String`.
     ///
     /// - Parameters:
     ///     - str: String from wich return the Ctrl key.
-    open static func ctrlKey(from str: String) -> String {
+    public static func ctrlKey(from str: String) -> String {
         switch str.lowercased() {
         case "a":
             return (Keys.ctrlA)

@@ -13,6 +13,7 @@ import Firebase
 import CoreData
 import Pisth_API
 import StoreKit
+import PanelKit
 
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate {
@@ -208,7 +209,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         // Bar buttons
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
-        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
+        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
         let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
         let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(openAPTManager))
         var buttons: [UIBarButtonItem] {
@@ -254,8 +255,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
+        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
+        
         // Toolbar
-        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome))], animated: true)
+        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), terminal], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
         
         // Connection errors
@@ -480,16 +483,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     /// Open shell in current directory.
-    @objc func openShell() {
+    ///
+    /// - Parameters:
+    ///     - sender: Sender `UIBarButtonItem`.
+    @objc func openShell(_ sender: UIBarButtonItem) {
         
         checkForConnectionError(errorHandler: {
             self.showError()
         })
         
-        let terminalVC = TerminalViewController()
-        terminalVC.pwd = directory
-        
-        navigationController?.pushViewController(terminalVC, animated: true)
+        ContentViewController.shared.presentTerminal(inDirectory: directory, from: sender)
     }
     
     /// Upload given file in current dircectory.
@@ -1542,7 +1545,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
-    
+        
     // MARK: - Static
     
     /// Action to do.

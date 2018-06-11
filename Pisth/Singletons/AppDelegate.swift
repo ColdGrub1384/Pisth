@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     /// Action to do when opening the app with an URL scheme.
     var action: AppAction?
-    
+        
     /// The shared Navigation controller used in the app.
     var navigationController = UINavigationController()
     
@@ -121,42 +121,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         UIMenuController.shared.update()
         
         DataManager.shared.saveCompletion = update3DTouchShortucts
-
-        // Setup Navigation Controllers
-        let bookmarksVC = BookmarksTableViewController()
-        bookmarksVC.modalPresentationStyle = .overCurrentContext
-        bookmarksVC.view.backgroundColor = .clear
-        bookmarksVC.tableView.backgroundColor = .clear
-        bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        let navigationController = UINavigationController(rootViewController: bookmarksVC)
-        navigationController.navigationBar.prefersLargeTitles = true
         
-        let rootVC = UIViewController()
-        let label = UILabel(frame: rootVC.view.frame)
-        label.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        label.textColor = .black
-        label.text = "To create a connection, tap \"+\"."
-        label.textAlignment = .center
-        rootVC.view.addSubview(label)
-        rootVC.view.backgroundColor = .white
-        let detailNavigationController = UINavigationController(rootViewController: rootVC)
-        
-        let launchScreen = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()
-        
-        // Setup Split view controller
-        splitViewController = SplitViewController()
-        splitViewController.navigationController_ = navigationController
-        splitViewController.detailNavigationController = detailNavigationController
-        splitViewController.viewControllers = [launchScreen ?? UIViewController()]
-        splitViewController.view.backgroundColor = .white
-        splitViewController.delegate = self
-        
-        // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.tintColor = UIColor(named: "Purple")
-        window?.backgroundColor = .white
-        UISwitch.appearance().onTintColor = UIColor(named: "Purple")
-        window?.rootViewController = self.splitViewController
+        window?.rootViewController = UIViewController.content
         window?.makeKeyAndVisible()
         
         // Initialize the Google Mobile Ads SDK.

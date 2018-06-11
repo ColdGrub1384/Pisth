@@ -24,6 +24,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - NMSSH (2.2.8)
+  - PanelKit (2.0.1)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyStoreKit (0.13.0)
   - Zip (1.1.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - Highlightr
   - NMSSH
+  - PanelKit
   - SwiftKeychainWrapper
   - SwiftyStoreKit
   - Zip
@@ -51,10 +53,11 @@ SPEC CHECKSUMS:
   Highlightr: e68a91ed9067ef0a787b920dd9becbd9935c2b79
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
+  PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyStoreKit: df6a58aba530128e1c5d5ae4fe7d191e5ac50d5d
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: b287f137d039a16af63b417902b0730aae830b1d
+PODFILE CHECKSUM: 03be5a7cbb4246a9e8cb97836a351baa52d8a6ac
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

@@ -16,4 +16,5 @@ target 'Pisth' do
   pod 'ActionSheetPicker-3.0'
   pod 'SwiftyStoreKit'
   pod 'Firebase/Core'
+  pod 'PanelKit'
 end
