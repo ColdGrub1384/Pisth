@@ -30,11 +30,11 @@ class FileTableViewCell: UITableViewCell {
     
     /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if let directoryTableViewController = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? DirectoryTableViewController {
+        if let directoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
             
             if directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)?.row ?? 0].isDirectory {
                 
-                return (action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)))
+                return (action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
             }
         }
         
@@ -153,6 +153,17 @@ class FileTableViewCell: UITableViewCell {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
+        }
+    }
+    
+    /// Open directory in new panel.
+    @objc func openInNewPanel(_ sender: Any) {
+        
+        if let directoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
+            
+            let dirToOpen = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
+            
+            ContentViewController.shared.presentBrowser(inDirectory: dirToOpen, from: self)
         }
     }
 }
