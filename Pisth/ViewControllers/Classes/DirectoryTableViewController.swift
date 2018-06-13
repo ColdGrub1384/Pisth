@@ -16,7 +16,7 @@ import StoreKit
 import PanelKit
 
 /// Table view controller to manage remote files.
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate {
+class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -255,10 +255,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
-        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
-        
         // Toolbar
-        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), terminal], animated: true)
+        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome))], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
         
         // Connection errors
@@ -1545,7 +1543,37 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
-        
+    
+    // MARK: - Panel content delegate
+    
+    /// Returns `CGSize(width: 320, height: 400)`.
+    let preferredPanelContentSize = CGSize(width: 320, height: 400)
+    
+    /// Returns `CGSize(width: 240, height: 260)`.
+    var minimumPanelContentSize: CGSize {
+        return CGSize(width: 240, height: 260)
+    }
+    
+    /// Returns `CGSize(width: 500, height: 500)`.
+    var maximumPanelContentSize: CGSize {
+        return CGSize(width: 500, height: 500)
+    }
+    
+    /// Returns: `320`.
+    var preferredPanelPinnedHeight: CGFloat {
+        return 400
+    }
+    
+    /// Returns: `400`.
+    var preferredPanelPinnedWidth: CGFloat {
+        return 400
+    }
+    
+    /// Returns `false`.
+    var shouldAdjustForKeyboard: Bool {
+        return false
+    }
+    
     // MARK: - Static
     
     /// Action to do.

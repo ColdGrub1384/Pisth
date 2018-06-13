@@ -631,7 +631,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         _ = becomeFirstResponder()
         
-        if !isPresentedAsPopover {
+        if panelNavigationController == nil {
             showNavBar()
         }
     }

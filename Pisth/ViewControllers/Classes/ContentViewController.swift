@@ -13,6 +13,8 @@ class ContentViewController: UIViewController, PanelManager {
     
     private var terminalPanel: PanelViewController!
     
+    private var directoryPanel: PanelViewController!
+    
     /// The wrapper view for using with `PanelKit`
     @IBOutlet weak var wrapperView: UIView!
     
@@ -31,6 +33,23 @@ class ContentViewController: UIViewController, PanelManager {
         terminalPanel.popoverPresentationController?.barButtonItem = sender
         
         present(terminalPanel, animated: true)
+    }
+    
+    /// Present the given remote directory. This view controller must be visible.
+    func presentBrowser(inDirectory directory: String, from sender: UIView?) {
+        
+        guard let connection = ConnectionManager.shared.connection else {
+            return
+        }
+        
+        let browser = DirectoryTableViewController(connection: connection, directory: directory)
+        
+        directoryPanel = PanelViewController(with: browser, in: self)
+        directoryPanel.modalPresentationStyle = .popover
+        directoryPanel.popoverPresentationController?.sourceView = sender
+        directoryPanel.popoverPresentationController?.sourceRect = sender?.frame ?? CGRect.zero
+        
+        present(directoryPanel, animated: true)
     }
     
     // MARK: - View controller
@@ -56,10 +75,17 @@ class ContentViewController: UIViewController, PanelManager {
     
     /// Returns `[terminal]`.
     var panels: [PanelViewController] {
+        var panels_ = [PanelViewController]()
+        
         if let terminalPanel = terminalPanel {
-            return [terminalPanel]
+            panels_.append(terminalPanel)
         }
-        return []
+        
+        if let directoryPanel = directoryPanel {
+            panels_.append(directoryPanel)
+        }
+        
+        return panels_
     }
     
     /// Returns `2`.
