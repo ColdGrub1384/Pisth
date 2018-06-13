@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00C66BFAB15B3EF63290F102B7E4F278 /* parser3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 6F4E62CBA33582447BA1875827BCD373 /* parser3.min.js */; };
-		043E0FE9B766CAEEC3FEDD3267FB5A24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		04D26F0C22F2D5ED618CEFF7E92ADB80 /* agate.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 90EA3BD045090C8ACA2227E67B70DF49 /* agate.min.css */; };
-		05B1F02560378D28FEBD4E8F6D293216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		065A24442B156F9DFD7EAB40A1CCB602 /* irpf90.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FFE1FFCCF1EEC2C90BEFF448BF501CC8 /* irpf90.min.js */; };
 		080F3AF0AFCEC92D64C71555407DECC9 /* java.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5E4A8AC5C67BC16CE6426709C574552E /* java.min.js */; };
 		083970D17FB78428689AB09BEEB03862 /* github-gist.min.css in Resources */ = {isa = PBXBuildFile; fileRef = E516F801B3675E62E05A39A9DFD67F79 /* github-gist.min.css */; };
@@ -27,10 +25,10 @@
 		0E3BFC96C6A7CCADAF3DA6C3C80F35EC /* SWActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B24F281A91D07DD2304B8ECADCC060 /* SWActionSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E965E23804B28A14B5A1AF1376AE000 /* accesslog.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 54778E9198FC8235624369165B2485DA /* accesslog.min.js */; };
 		0EC558A3A573CC82DC844B5AD6DCA326 /* css.min.js in Resources */ = {isa = PBXBuildFile; fileRef = EECE32B02E4A5C60381053C70DED3711 /* css.min.js */; };
-		0F850C133F6F9412546FB4603F512F6D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB22CD2AAE4F062A7CDA2E213C68442 /* CFNetwork.framework */; };
 		1032FB5EC0044C138B43AF7F8E2B1AD3 /* dockerfile.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E8081507CE71A7E11E148A7DD7E3600D /* dockerfile.min.js */; };
 		106639016F1201A262B361F366E55993 /* InAppReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83087FF4D7FDE4889A910DBFF851086 /* InAppReceipt.swift */; };
 		120B8296954BCE1E53D7B594095C8845 /* InAppProductQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15458837F14194EBCA2FCF43B9A8D7B9 /* InAppProductQueryRequest.swift */; };
+		13343F10B7E760DB7D080C61822C0B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		1342DE3D7946076D99480EB620A8D7CD /* PanelStateCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B552D629DDF6492CB8976ACE0E3CA40 /* PanelStateCoder.swift */; };
 		139FFBDDA2AD387BDA0AD3C46D9F5915 /* PanelContentDelegate+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEDCCEC830DF3F4B30A34BDF20A1E1 /* PanelContentDelegate+Navigation.swift */; };
 		152181D831C4579214868E9FA85C96ED /* prolog.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4ECBF1D251208A434CCF7054FF5CF52F /* prolog.min.js */; };
@@ -51,7 +49,6 @@
 		1F44E7E27FAF355868CA0D9C5CADD8B1 /* vs2015.min.css in Resources */ = {isa = PBXBuildFile; fileRef = C5EC6111EF16EA373FA57EA0D9F79B1C /* vs2015.min.css */; };
 		203CA9F2701EB9E086E290B3D37D90E6 /* scala.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E2E927542C8E1D8FF549178FDF38A73B /* scala.min.js */; };
 		20B34DA493E2CCB696BA172762C7FD7B /* elm.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B42ECA53F465436620033D22BE13B6CD /* elm.min.js */; };
-		20B6A1E52DF290942B2C73C485C383D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		213C22B8D6AEF1C3331E5F1372D08502 /* SKProduct+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78383967DCF48A85C4BC507659E3E56C /* SKProduct+LocalizedPrice.swift */; };
 		21BB009BD854FE3D760FE0449F95DC5D /* NMSSHChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = C051109ABEBE55339DEA7036E10800E6 /* NMSSHChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		21BE4AD9BABB0BD9B21F940D29E1355D /* atelier-lakeside-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 0E6F69382104B22042626DE9869B7FA9 /* atelier-lakeside-light.min.css */; };
@@ -62,7 +59,6 @@
 		25A3979A2013143A4DF847676CECD594 /* UIViewController+Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2CCC0BCC217289DAA04C62D40EF224 /* UIViewController+Popover.swift */; };
 		262A11C92B59D63AF11087746B3392C5 /* CGRect+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C1E7CE55AB38D9D45C7E2CDDBC891C /* CGRect+Center.swift */; };
 		2680FB2A9AAFE79796C23A20390CEF45 /* AbstractActionSheetPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = AF84880A37DD7B878871415FFF42729B /* AbstractActionSheetPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26B11CFD4D5BCE6E22A1CC664E5764BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		26C7E7A028C6D91DBA2F625B48B79A33 /* magula.min.css in Resources */ = {isa = PBXBuildFile; fileRef = E9C82F683A9BD8037B40524E9E036A30 /* magula.min.css */; };
 		26EBBB58AC877E3BA492095AD0DBC294 /* clojure-repl.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 84BF343A294BD8B0B78126F1D9678A8E /* clojure-repl.min.js */; };
 		2773911979B38F916EAF9755B9237273 /* libssh2.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9C03EB9E44B534413E9A82E2292E99 /* libssh2.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -124,12 +120,11 @@
 		4211D5CFC895FC6CCF006CBD28638721 /* QuickZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEB6E9946082087312B46F69A5B7E40 /* QuickZip.swift */; };
 		4240026B24C8FA35289E295F60414746 /* scilab.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 21A3A0EFFC1F8810B50BD601C3A5EFDE /* scilab.min.js */; };
 		428C0C35A2F8061B15C6833DAA6850F3 /* mathematica.min.js in Resources */ = {isa = PBXBuildFile; fileRef = F23B4D21C313238AFF829DCB40C939BB /* mathematica.min.js */; };
-		4293773A04AA1241A4D87CD41AA3A4D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
+		42AEF26ED0998840598586269F32683C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		42E3354C79AE8CF0F0EB695B58548AF7 /* scheme.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 31E86E64ED09CE5797089A03D6ABF653 /* scheme.min.js */; };
 		430E0A46B42F47FF79AE16168D1613E9 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF741F9703A701E33C5D2E0FF234F15 /* ActionSheetLocalePicker.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		43834ED231669C9532BD0406A32C8F40 /* xcode.min.css in Resources */ = {isa = PBXBuildFile; fileRef = EEF3A286B4FB5E103AC161A954B115FB /* xcode.min.css */; };
 		43F232C88D20724E4EEAC99880EDB39C /* atelier-heath-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = CD9C0C3E4508648D2F51C3CFA6A48D93 /* atelier-heath-light.min.css */; };
-		442A7B4EF448F321028FFF9DEE47B7A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		44E2231712A893D97B65756F07C3239E /* PanelViewController+Offscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961C3A7BCD884AEAB626F55248C6D167 /* PanelViewController+Offscreen.swift */; };
 		45857130BEEAA60880006A6C13B94BB2 /* PanelManager+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741ED34DD62F61B508444C117BB1CB2C /* PanelManager+Default.swift */; };
 		459383CDF69791A87F9B482F83E52A74 /* BlockBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECFE9F59B9650AA11D6A21CDCCA5BF3 /* BlockBarButtonItem.swift */; };
@@ -141,6 +136,7 @@
 		502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B20E62B66FBB53E2D4C2F1C02DD69B /* NMSSH-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		510FF18566EA4D5F26302F2D9FD9F7FA /* PanelPinSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215543B30710C8423EFEA8A37CAB971D /* PanelPinSide.swift */; };
 		51257351C29ACCA219F2965A12063134 /* CodeAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436D7F03E95013F37A0013D21159A984 /* CodeAttributedString.swift */; };
+		52F333DF6E858B07AEBCB2DBF2A99976 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		5303C9717AAF8B3418365F42A2554350 /* obsidian.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 971821552A0043DC7FE36EF004FFCF9A /* obsidian.min.css */; };
 		531D241DCD41652FD62441DF2E375374 /* Highlightr-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E54D91367F0E7F56FCFC751AC9ECA0 /* Highlightr-dummy.m */; };
 		541C5362289CC44D4F067D097F231250 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = F6BF6FF53E042DF7FA31BE2AECC04346 /* GTMDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,6 +147,7 @@
 		556BED35EA711DCF8590236269ED3509 /* zephir.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 45FD55CCAB3BA83B43A75E41162E083A /* zephir.min.js */; };
 		55D8D5D912CFD2F3584E4553C2EAD734 /* pb_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = AD5855E9B567776A12BF7295DB03173B /* pb_encode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
 		563244776550460BE1B8DA5835D36536 /* llvm.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B36F2F2AB4E327D83D771DCA2B659646 /* llvm.min.js */; };
+		56B2BF4EEADFE3B22FB44EF216D98475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC9399F1404670F5D6065EDC78C55A4 /* UIKit.framework */; };
 		5741D95F157097FB590A32C09CF979CA /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5C6CBDECFA7D2FC5ED3D95A09A24C3 /* Zip.swift */; };
 		58099907C24A5179A08E77ED92B78D23 /* xquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = DF9BEA625C24A087D21961E1018E7AE5 /* xquery.min.js */; };
 		58D56A9447C75D951D4646694AB26E2B /* dust.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D193B1AEDD4A4839F8FC3918EB6E338E /* dust.min.js */; };
@@ -192,16 +189,17 @@
 		7121E49977E1942B68A773B1F794F31A /* PaymentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D819E05AD7F2F9D102B3639B20AE99 /* PaymentsController.swift */; };
 		71516FEEDB7B90B8E7C973A5AF0051DA /* vs.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FC6D05AD6A37FB74567F379580F72F34 /* vs.min.css */; };
 		71FB0F034838FE200BE59556D901F79E /* default.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4B732F4A80A3B1BADA4956728B7A46F8 /* default.min.css */; };
+		72EEF051DD740C716816EBD3121B89DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC9399F1404670F5D6065EDC78C55A4 /* UIKit.framework */; };
 		730451CB731F6BEDDBBFA4757C6E7588 /* Highlightr.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FC2EE3C32EBE08C8E9DCA7B884A84 /* Highlightr.swift */; };
 		748795D7A0B68A3A6C552AF9DC3688CD /* javascript.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B4101BAA84B19152C2BB7CA24B2BED8 /* javascript.min.js */; };
 		74CDCC6E9AE244DC50DE93FA111DE384 /* NMSFTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F881A6D3C3BADE157F9603BD8CE0A1 /* NMSFTP.m */; };
-		761405C9BD2AFEEA335205716AFF68D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		7640505CDB0CD0F37B5A51DF7B865EFF /* NMSSHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 099E34F143AA48BAF8B357FE63D820C7 /* NMSSHLogger.m */; };
 		77F44A2ADF9D9879E0ABC8D68C843350 /* apache.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C6C91BE362EFE1F4A27A342A03F740E /* apache.min.js */; };
 		7A42B71061F023388860CA004C52E291 /* applescript.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED8B08C8D2FCD726B80156C2865EDA96 /* applescript.min.js */; };
 		7AA2475460DE311F75C3548C531F6418 /* verilog.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E2781F775A48A252E94B0F55BE086E3 /* verilog.min.js */; };
 		7B11FB776CEA8B48BF543878B26534DA /* excel.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 3A8661E53DA82D2DEAD81F83D919274B /* excel.min.js */; };
 		7B19A043AE1DFD2A0FFA462828559384 /* atelier-cave-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FBB55DBC535ABD1784FCC1C8B4A90B5A /* atelier-cave-dark.min.css */; };
+		7B3C09A25152A2DA5DEBA53292BF98DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		7D31B1EC3E5A8CE58446C3E6EE660B5B /* vbscript-html.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 1951DAD0A24DEE9CCE10F8B1DE4D23C5 /* vbscript-html.min.js */; };
 		7D7F11E305EE2AB0F9ADD8104D891F9A /* thrift.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 315AA28FB4DCC738B08C8A0172114E1F /* thrift.min.js */; };
 		7DDCEA50502A47EC08BD5D1378391DED /* atom-one-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D73A8D0822ADCA3A3F5AE02C9ED01059 /* atom-one-light.min.css */; };
@@ -228,6 +226,7 @@
 		88E168C32A41701D35721B06012FE6C2 /* autohotkey.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A2D7A60C07D7DD6FE88D334AA03DF410 /* autohotkey.min.js */; };
 		88F25AFE344C5812A211D2F9AF8BD903 /* livecodeserver.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B13F6EFC7031F9539F18BF7A0C4D93D3 /* livecodeserver.min.js */; };
 		8A02CA55BD3CFF62D8A11991D13C51C9 /* docco.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 93C936D586A72958699411B309D1DCA9 /* docco.min.css */; };
+		8AD701E849E43D44911C0DD22E31AE41 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		8B1D2B08674E7AB076E540A5230F12CC /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566BA9E284D1F9F14B141839AFA6296A /* BioMetricAuthenticator.swift */; };
 		8B58B51B008F97B25D3A43E394CA213D /* ZipUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFF3C9C3ED5AD80E0F5232B7864C6F /* ZipUtilities.swift */; };
 		8D308AB0F6971A9A669DCD1FFE215B06 /* gcode.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 919CEBD117A5BCC668E913D461D1B9AE /* gcode.min.js */; };
@@ -243,12 +242,12 @@
 		926340E92DD4EE295CC05E0E45612C13 /* sml.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 1BCC2980EE0EB91BF099AA0C4381D63A /* sml.min.js */; };
 		93595D1A99E8B53D9659F6A98BA4C0CC /* foundation.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 55DFD50CED7B3BE31FBA5A08DCDE0C6D /* foundation.min.css */; };
 		936A7E94E11006D03B2F8C1C609C1457 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = AE4683890C5448C0C4DACB8A48232E22 /* zip.c */; };
-		93D51748565CFEB9490FBA7DA993C5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		94508FF4DF5E9D0EDC051CFD07D0967C /* atelier-savanna-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 19874A411BAD8B3A8BC0CB2E2D741544 /* atelier-savanna-light.min.css */; };
 		94BD2FDC9246713CD3BF611655FF5DB1 /* sqf.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F78FC22330ADC65FDAEF2E50B837E39 /* sqf.min.js */; };
 		95D41B4FCD152845ABC5BBCF5F6655AE /* PanelManager+Expose.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E05777281B7926C41AAA0E977E030 /* PanelManager+Expose.swift */; };
 		962739327A30A3855C1EF13C12EEEC14 /* awk.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 6A5B7197282181C8554CF93E8BD8E6F6 /* awk.min.js */; };
 		97763BF26EE808E086A6CD9539B19630 /* lasso.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 921424596BE55D50004555ADA7138147 /* lasso.min.js */; };
+		983ED97ED0443F142B2317F55C1A2054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		9876C505F95767039A21B002CFD8F75D /* stan.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B8FA3834BD275CD6F26DEAF3337A574A /* stan.min.js */; };
 		9ACB90052184A3BD137992ED86D96F38 /* InAppReceiptVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1465D6D5902A93416E8F32661032AD /* InAppReceiptVerificator.swift */; };
 		9B2B8491E6B1B8EA1C9ACD37341C726B /* ActionSheetPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B097D9E80B15DAC23EFA2454FAC2747 /* ActionSheetPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -263,7 +262,7 @@
 		9F56B8F7A6E24F497AAAC8C4D9DA09FF /* flix.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 6CCD94DBF522ADF9F4DDA34CAAC22CBE /* flix.min.js */; };
 		9FCDF0C6EE1311596F1BBA1EF2AE5509 /* Zip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C9D84FD34B87C360D8B9246E7B3D43 /* Zip-dummy.m */; };
 		A0D2780AA25EC84F625FD68A6B25FA82 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899F9721C65D4357DA7E81328FD8ECE2 /* PanelViewController.swift */; };
-		A2F74AC56E76F01E7A69BB8D3A7E3DB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321DA4FBF5721A7FB806D2982ED127C8 /* UIKit.framework */; };
+		A13757CFEA17760BA48272E1A1A265A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		A4910833F7F46BB571374CC13FC9B5B5 /* dart.min.js in Resources */ = {isa = PBXBuildFile; fileRef = DFB5EA29A6CF9F0511D7427E0FF067C0 /* dart.min.js */; };
 		A5271611857461F8C7905CADAAF39BFB /* PanelManager+Closing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2E1D836040632C162ABF2F28C5055 /* PanelManager+Closing.swift */; };
 		A565959AE08283D7B853EAC6CBBA9CB6 /* PanelKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 489569270253513BB38111903F435E0B /* PanelKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -308,6 +307,7 @@
 		BCBFEE5A4986FF9A2DA8CE4E8164BB1F /* atelier-estuary-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4E55A121AE20E71431D4B2649819C718 /* atelier-estuary-light.min.css */; };
 		BDBFA441010D34FB51DC32F28314AD8D /* ActionSheetStringPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 459CDA309DA199E379D01D3066F5B1C8 /* ActionSheetStringPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE861534616CF8A9AA4F99A03ABC1DB8 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 0442515688CEC9E49BD20639BADDE253 /* unzip.c */; };
+		BEF183C3929850CF4CC4D04C60080C5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		BFC5BA37EADFDAA9D0E5631147033731 /* atelier-plateau-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 23C38B3DAE7ECA43FD7F24F97DE0779A /* atelier-plateau-light.min.css */; };
 		BFDF7CB7BB8B807BFD6029833FB69700 /* armasm.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 0851837CA18B81AC3E7EC7E61CF77070 /* armasm.min.js */; };
 		C09348A6D17868C5B278A576C6C21EE9 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2BD701325ECA4E19E978E4A0D6449 /* BiometricAuthenticationConstants.swift */; };
@@ -332,18 +332,16 @@
 		CA190AE961B17013F0A486A427DB0EFD /* grayscale.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 80F599B489147B08DDCF894E27DAC8D6 /* grayscale.min.css */; };
 		CB2ED2811F7D0713E98C584A39F6C214 /* nix.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2A49DB97AD499CFC0D48C40C5A9BD757 /* nix.min.js */; };
 		CC376F4F6F81A9855C6841DEF511DAFE /* cos.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A0250FF8FC3FC6EA58B6FE6D1FAA3918 /* cos.min.js */; };
-		CC838339C0E4BB6BB1B5E03D21CB3893 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		CD4C6BFB1CDAE3F9946AE8C518C94E25 /* csp.min.js in Resources */ = {isa = PBXBuildFile; fileRef = F20B9B3B54DB5B15CB85C76F704E8E3C /* csp.min.js */; };
 		CF010D6A8EB068AC910852846DF16712 /* yaml.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 34F42A4FE45691DDD40D43AE7E2EC607 /* yaml.min.js */; };
-		CFD165DECCBA87D0A801744CEB788A21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		D0103D2E66D03C0BA07BE4BD53DECAEF /* NMSSHSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 99FE5B9510503A12C1AD5660AB556D12 /* NMSSHSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D035DAE309FAD95032720D8A67AF8D07 /* r.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 65655A78A09964EA10B66A572A0DDDDC /* r.min.js */; };
 		D05688C72D6CB22E22A739AC52797EFB /* jboss-cli.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 98A253B30CB8032D9AC4BADDE209B903 /* jboss-cli.min.js */; };
 		D088034CC3CFFBC73C43A3D0B9244AAF /* RestorePurchasesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D03BCFC89775FE3536B96EF975E2A9A /* RestorePurchasesController.swift */; };
+		D0A38E6F50A64B0C79E75316393853C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		D12ACBBA7BE8438E75983CAE99AECCBC /* dracula.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 11C507B0E68C2DCBFCE6D20ADC9ECE82 /* dracula.min.css */; };
 		D1828F3D3C65EDEFEB5CE65D35131661 /* atelier-dune-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = FE920889FD03A9197A6FA9A82E418414 /* atelier-dune-dark.min.css */; };
 		D26B055B00E036BBA77EC253D8B74CDA /* hybrid.min.css in Resources */ = {isa = PBXBuildFile; fileRef = BC3C21BC4AA3C754FADEADEAC613E86B /* hybrid.min.css */; };
-		D31A9B352FE816399C0C1C4889DCB16F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		D31B967270F8B0F2131BF8A66D3E371B /* perl.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D067140088A488181D35260C70624A58 /* perl.min.js */; };
 		D36BFEB9543070E90DC26B3B3C8C4044 /* moonscript.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B20824BF24D92B15C86A876F4DC0E867 /* moonscript.min.js */; };
 		D3F2D828A83DAD065E9C5517503AA59C /* atelier-lakeside-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = F515F6783F17B940C8644C4815D32155 /* atelier-lakeside-dark.min.css */; };
@@ -359,7 +357,6 @@
 		DA85BB3FC6D0E25EAE9AABACEDEA2A40 /* NMSSHLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C35BCD5E7D7BF6AC3236B345EA80C6 /* NMSSHLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA9E8B415FE6B398022B894AA7F21DAC /* AppleReceiptValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7982DDC3729BCCBF3F93EB25E4DF756C /* AppleReceiptValidator.swift */; };
 		DACF4A738261135C7C5395A4FA20B9F9 /* Pods-Pisth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3220A2048CE16BAB2D195BDE5249A05E /* Pods-Pisth-dummy.m */; };
-		DB1F663A522BCBE44090850ABF7B146E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321DA4FBF5721A7FB806D2982ED127C8 /* UIKit.framework */; };
 		DB47EEC6995F7AC40D89C6A752389824 /* julia-repl.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8138841BDBFDC989DD5A3E666CFBA503 /* julia-repl.min.js */; };
 		DBFECCB0BBE3F11CC41A3C1A8C4879D3 /* GTMNSData+zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 7939ACD5C3976806FB56DECAFD6C7767 /* GTMNSData+zlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD1B9291D4F9FF9605B0E63539AEEAF3 /* atelier-sulphurpool-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 23AF6EA265EF36668D5AAC0065868224 /* atelier-sulphurpool-dark.min.css */; };
@@ -381,6 +378,7 @@
 		E492F9301A28A6F0E197558C25C8493D /* NMSSH-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A25FDD72C7D2174B81C437E4EE1AFE /* NMSSH-dummy.m */; };
 		E4F9F4CF348191BC2C7E6AEFED156DF5 /* x86asm.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 64D7BA80C816FA141DDA03882475B3EB /* x86asm.min.js */; };
 		E521D108F8BA1366A2FAD646ADC80CEF /* tcl.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B01118D48357400E1C62A5EF91963510 /* tcl.min.js */; };
+		E52FAF01E4928A0A2226BF5B1EBC5587 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBBF4598A7C2F4F25C4A23D3B97162FF /* CFNetwork.framework */; };
 		E5FEE26F2DB46C8B221FB5FECAE27350 /* shell.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 3ABD69B31661A5895F47D2628EF2330B /* shell.min.js */; };
 		E61ED7FAF083B75902728EB20AC4BD92 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F1748A3C66A0AF0476DE3D311C04EA48 /* ActionSheetCustomPicker.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		E6A53B25EEFC02E7B0AC705BE598953A /* markdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8AF9DCAD44646605E7EE6E3641DC3B1A /* markdown.min.js */; };
@@ -403,6 +401,7 @@
 		EEB1031CC65DD763D8B0766F5693A264 /* cs.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 97954023ACAF9A636B81E40BB02B3510 /* cs.min.js */; };
 		EEEBCF0AD49A9D03CA75E7FE2297DAF5 /* atelier-heath-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D41F137F46A3C357CEC6E856A0BC22A8 /* atelier-heath-dark.min.css */; };
 		EFC542F528FB36083D97343994E43C7A /* dts.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 77713BB433B264672AF31D9A3DDB9284 /* dts.min.js */; };
+		EFF7CE44C7A72FAFC63519AADD823E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		F204661F1DC188FC99BEC7DCC414D895 /* androidstudio.min.css in Resources */ = {isa = PBXBuildFile; fileRef = F66AA976C0866729E189CF18B99CAFA0 /* androidstudio.min.css */; };
 		F220D218BFB2B45B289C24435BCF33EF /* atelier-savanna-dark.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 064FAB088A017E5A5E4352138A2E77B7 /* atelier-savanna-dark.min.css */; };
 		F24C36DEFE983DAAEAF66E2D37B28F20 /* rainbow.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 6868AA660173F754F8678410852E1262 /* rainbow.min.css */; };
@@ -411,6 +410,7 @@
 		F4493640B970680BEF69BFE1AF123C7B /* monkey.min.js in Resources */ = {isa = PBXBuildFile; fileRef = CF5C8AA6D53D271A800AE6A7ED1CA527 /* monkey.min.js */; };
 		F45E543EA311E6D1F1926F2F645D736D /* libssh2_sftp.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F787F591FA4E7812FEC41336E6574E6 /* libssh2_sftp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4A73B293AF8CEB646CAFC142AC6E001 /* rust.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 919A9945434C1660C102C0CF49B3DE1C /* rust.min.js */; };
+		F4E01F254F4793F09C750D1E2F8215B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB6D132DFC2376C792570201509E48F /* Foundation.framework */; };
 		F50765B214E0B74D167D37D7B20C6BBA /* delphi.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2DA42841CEFB6166E7C12ADAAA378118 /* delphi.min.js */; };
 		F554BC34B76DF27E7FE13EFF584A67ED /* PanelFloatingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6C313B4939C9872C71E731D9D235D /* PanelFloatingState.swift */; };
 		F75BEBE67E3E6AEDDA14A1A8A2DB54DD /* vbscript.min.js in Resources */ = {isa = PBXBuildFile; fileRef = CEE51362D517A483F624E8D1444F682D /* vbscript.min.js */; };
@@ -597,7 +597,6 @@
 		319FD2120153FB7DBFDE3934E0041D0F /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetLocalePicker.h; path = Pickers/ActionSheetLocalePicker.h; sourceTree = "<group>"; };
 		31C8481B0C9641FCCF150E3C0EC620D0 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationErrors.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/AuthenticationErrors.swift; sourceTree = "<group>"; };
 		31E86E64ED09CE5797089A03D6ABF653 /* scheme.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = scheme.min.js; path = Pod/Assets/Highlighter/languages/scheme.min.js; sourceTree = "<group>"; };
-		321DA4FBF5721A7FB806D2982ED127C8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3220A2048CE16BAB2D195BDE5249A05E /* Pods-Pisth-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pisth-dummy.m"; sourceTree = "<group>"; };
 		323940153A324A8B696C938A2F248E48 /* lua.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = lua.min.js; path = Pod/Assets/Highlighter/languages/lua.min.js; sourceTree = "<group>"; };
 		331F834D8292D78FBDA4802212F77AE2 /* PanelManager+Dragging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PanelManager+Dragging.swift"; path = "PanelKit/PanelManager/PanelManager+Dragging.swift"; sourceTree = "<group>"; };
@@ -619,6 +618,7 @@
 		3B9344ACB757B5C42982E1F09DD5B061 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
 		3BC02628CBD00E140DC1FB7EFEDC9F47 /* nsis.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = nsis.min.js; path = Pod/Assets/Highlighter/languages/nsis.min.js; sourceTree = "<group>"; };
 		3C1B44C863D7BF9E0476C573C250A665 /* PanelViewController+Dragging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PanelViewController+Dragging.swift"; path = "PanelKit/Controller/PanelViewController+Dragging.swift"; sourceTree = "<group>"; };
+		3DC9399F1404670F5D6065EDC78C55A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DDFF3C9C3ED5AD80E0F5232B7864C6F /* ZipUtilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZipUtilities.swift; path = Zip/ZipUtilities.swift; sourceTree = "<group>"; };
 		3E742931E603BB2DFAE1C8E9F57931AD /* CompleteTransactionsController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompleteTransactionsController.swift; path = SwiftyStoreKit/CompleteTransactionsController.swift; sourceTree = "<group>"; };
 		3FC5FCBDDBB4452024FC7C641951EBD6 /* Zip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Zip.framework; path = Zip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -671,6 +671,7 @@
 		59C5C5BFA5CC43A456B03BC0D58CBC8D /* purebasic.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = purebasic.min.css; path = Pod/Assets/styles/purebasic.min.css; sourceTree = "<group>"; };
 		59F2E63C816D84D5F7D1C602574A8422 /* NMSSH.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NMSSH.modulemap; sourceTree = "<group>"; };
 		5BCC2AF4FFEB469CB059807B9B0668F0 /* BiometricAuthentication-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-umbrella.h"; sourceTree = "<group>"; };
+		5CB6D132DFC2376C792570201509E48F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5CE9E30A093177B13A5BA55FAFB1F0E3 /* DistancePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DistancePickerView.h; path = Pickers/DistancePickerView.h; sourceTree = "<group>"; };
 		5D63FDD92715318B6D240CAD46E470D9 /* gruvbox-light.min.css */ = {isa = PBXFileReference; includeInIndex = 1; name = "gruvbox-light.min.css"; path = "Pod/Assets/styles/gruvbox-light.min.css"; sourceTree = "<group>"; };
 		5E4A8AC5C67BC16CE6426709C574552E /* java.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = java.min.js; path = Pod/Assets/Highlighter/languages/java.min.js; sourceTree = "<group>"; };
@@ -698,7 +699,6 @@
 		6A672C32D6EFC347EF724F69B776255F /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ActionSheetDatePicker.m; path = Pickers/ActionSheetDatePicker.m; sourceTree = "<group>"; };
 		6AD817682A87E890D257F8946D6BF444 /* SwiftyStoreKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyStoreKit.xcconfig; sourceTree = "<group>"; };
 		6BAD2E603A48C286D853149E0F76EFE2 /* PanelManager+Offscreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PanelManager+Offscreen.swift"; path = "PanelKit/PanelManager/PanelManager+Offscreen.swift"; sourceTree = "<group>"; };
-		6BB22CD2AAE4F062A7CDA2E213C68442 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		6C7FBC3791B620CCC0D5485037030E44 /* julia.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = julia.min.js; path = Pod/Assets/Highlighter/languages/julia.min.js; sourceTree = "<group>"; };
 		6CCD94DBF522ADF9F4DDA34CAAC22CBE /* flix.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = flix.min.js; path = Pod/Assets/Highlighter/languages/flix.min.js; sourceTree = "<group>"; };
 		6D310A9B5B8AA8EA4BE6CF1488BE6218 /* smali.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = smali.min.js; path = Pod/Assets/Highlighter/languages/smali.min.js; sourceTree = "<group>"; };
@@ -934,8 +934,8 @@
 		EABF27D3E90EEBDADA36E8FC86FA0AC9 /* PanelViewController+Keyboard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "PanelViewController+Keyboard.swift"; path = "PanelKit/Controller/PanelViewController+Keyboard.swift"; sourceTree = "<group>"; };
 		EB62917F074A617CE6C7A1D64C8B0EE7 /* cal.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = cal.min.js; path = Pod/Assets/Highlighter/languages/cal.min.js; sourceTree = "<group>"; };
 		EB929553273D7D61D22CC3A932521A56 /* gams.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = gams.min.js; path = Pod/Assets/Highlighter/languages/gams.min.js; sourceTree = "<group>"; };
+		EBBF4598A7C2F4F25C4A23D3B97162FF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		ED8B08C8D2FCD726B80156C2865EDA96 /* applescript.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = applescript.min.js; path = Pod/Assets/Highlighter/languages/applescript.min.js; sourceTree = "<group>"; };
-		EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		EE3633533034477D5C4C354C7883E54A /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ActionSheetDatePicker.h; path = Pickers/ActionSheetDatePicker.h; sourceTree = "<group>"; };
 		EEB9C76AC1F9DE46AA280C6D68190E31 /* SwiftyStoreKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyStoreKit.swift; path = SwiftyStoreKit/SwiftyStoreKit.swift; sourceTree = "<group>"; };
 		EECE32B02E4A5C60381053C70DED3711 /* css.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = css.min.js; path = Pod/Assets/Highlighter/languages/css.min.js; sourceTree = "<group>"; };
@@ -985,7 +985,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFD165DECCBA87D0A801744CEB788A21 /* Foundation.framework in Frameworks */,
+				D0A38E6F50A64B0C79E75316393853C1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,7 +993,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D31A9B352FE816399C0C1C4889DCB16F /* Foundation.framework in Frameworks */,
+				F4E01F254F4793F09C750D1E2F8215B1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,7 +1001,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4293773A04AA1241A4D87CD41AA3A4D6 /* Foundation.framework in Frameworks */,
+				7B3C09A25152A2DA5DEBA53292BF98DF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,7 +1009,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				761405C9BD2AFEEA335205716AFF68D6 /* Foundation.framework in Frameworks */,
+				8AD701E849E43D44911C0DD22E31AE41 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,8 +1017,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC838339C0E4BB6BB1B5E03D21CB3893 /* Foundation.framework in Frameworks */,
-				A2F74AC56E76F01E7A69BB8D3A7E3DB8 /* UIKit.framework in Frameworks */,
+				EFF7CE44C7A72FAFC63519AADD823E4B /* Foundation.framework in Frameworks */,
+				72EEF051DD740C716816EBD3121B89DD /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1026,8 +1026,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26B11CFD4D5BCE6E22A1CC664E5764BF /* Foundation.framework in Frameworks */,
-				DB1F663A522BCBE44090850ABF7B146E /* UIKit.framework in Frameworks */,
+				983ED97ED0443F142B2317F55C1A2054 /* Foundation.framework in Frameworks */,
+				56B2BF4EEADFE3B22FB44EF216D98475 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,7 +1035,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B1F02560378D28FEBD4E8F6D293216 /* Foundation.framework in Frameworks */,
+				52F333DF6E858B07AEBCB2DBF2A99976 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,7 +1043,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20B6A1E52DF290942B2C73C485C383D0 /* Foundation.framework in Frameworks */,
+				A13757CFEA17760BA48272E1A1A265A9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,8 +1051,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F850C133F6F9412546FB4603F512F6D /* CFNetwork.framework in Frameworks */,
-				442A7B4EF448F321028FFF9DEE47B7A0 /* Foundation.framework in Frameworks */,
+				E52FAF01E4928A0A2226BF5B1EBC5587 /* CFNetwork.framework in Frameworks */,
+				13343F10B7E760DB7D080C61822C0B76 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,7 +1060,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				043E0FE9B766CAEEC3FEDD3267FB5A24 /* Foundation.framework in Frameworks */,
+				42AEF26ED0998840598586269F32683C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,7 +1068,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93D51748565CFEB9490FBA7DA993C5C0 /* Foundation.framework in Frameworks */,
+				BEF183C3929850CF4CC4D04C60080C5D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1125,7 +1125,7 @@
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D3DC5782D19BF047DFAEB491A596E0F0 /* iOS */,
+				CE49ED124281705B1321BAEED438CAA6 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1867,12 +1867,12 @@
 			path = GoogleToolboxForMac;
 			sourceTree = "<group>";
 		};
-		D3DC5782D19BF047DFAEB491A596E0F0 /* iOS */ = {
+		CE49ED124281705B1321BAEED438CAA6 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				6BB22CD2AAE4F062A7CDA2E213C68442 /* CFNetwork.framework */,
-				EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */,
-				321DA4FBF5721A7FB806D2982ED127C8 /* UIKit.framework */,
+				EBBF4598A7C2F4F25C4A23D3B97162FF /* CFNetwork.framework */,
+				5CB6D132DFC2376C792570201509E48F /* Foundation.framework */,
+				3DC9399F1404670F5D6065EDC78C55A4 /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -2795,382 +2795,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02656996640B1672E8DA9FD768FF1795 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57A1DF1B64A3F422F0A6B107F55BBE49 /* NMSSH.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
-				PRODUCT_NAME = NMSSH;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		0E9E79FB94780D93B57D4052C65E6911 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EBF67C3D13A0B932F654394FBB1FE1C /* PanelKit.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PanelKit/PanelKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PanelKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PanelKit/PanelKit.modulemap";
-				PRODUCT_NAME = PanelKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		2C14841A7B794CB3EEDDAB8802141423 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1307EB42251BA9FBBFDC2B2C302CF5E /* Pods-Pisth.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Pisth/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Pisth/Pods-Pisth.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Pisth;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2F0B842DA6787346C247CD18C83C0E29 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C270584ACA475AE36832E2D25F3A3755 /* SwiftKeychainWrapper.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftKeychainWrapper/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper.modulemap";
-				PRODUCT_NAME = SwiftKeychainWrapper;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		34A0852C39F886BC17E4C5B186671865 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2832BE39522A7F1C40BC65B10F26152C /* GoogleToolboxForMac.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
-				PRODUCT_NAME = GoogleToolboxForMac;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		45F82628F11ECD369A6B88841EB84050 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49C15AF833FEF86B17D322CCE503A5FC /* Highlightr.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Highlightr/Highlightr-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Highlightr/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Highlightr/Highlightr.modulemap";
-				PRODUCT_NAME = Highlightr;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		4CA1CC0353AF25942E1BCB06B35FECB9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AD817682A87E890D257F8946D6BF444 /* SwiftyStoreKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyStoreKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit.modulemap";
-				PRODUCT_NAME = SwiftyStoreKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		4E0DCBA2F64954C61C4F210077422BC7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6AD817682A87E890D257F8946D6BF444 /* SwiftyStoreKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyStoreKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit.modulemap";
-				PRODUCT_NAME = SwiftyStoreKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4F2F1369AAB962E20DFE1460105D1425 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57A1DF1B64A3F422F0A6B107F55BBE49 /* NMSSH.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
-				PRODUCT_NAME = NMSSH;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		65A0F7A550B535AAA488E066BEF6963E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2832BE39522A7F1C40BC65B10F26152C /* GoogleToolboxForMac.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
-				PRODUCT_NAME = GoogleToolboxForMac;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7601600A15681E2588BD252D16104AA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 578BE1D3176955D0DB68A696346C86C9 /* Pods-Pisth.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Pisth/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Pisth/Pods-Pisth.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Pisth;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		87BA8A9C68E77343DEA102CF5383C167 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C270584ACA475AE36832E2D25F3A3755 /* SwiftKeychainWrapper.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftKeychainWrapper/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper.modulemap";
-				PRODUCT_NAME = SwiftKeychainWrapper;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8E8333274F4AB64785B04AB5B2A37231 /* Release */ = {
+		08638A96A528B1EC32DE62F8A728389D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3202,6 +2827,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3222,44 +2848,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		92937DF5246A00F2D7C7C0E82BB5F08F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5C88185538458D3620AA9508E2BFC5A /* Zip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
-				PRODUCT_NAME = Zip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9A5E9550EFA7E55963B08064FEE6807D /* Debug */ = {
+		08DCEECB267ABEEE7E382A779F100D91 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39E83E4F3C5896811A2AA58A2BA780A4 /* nanopb.xcconfig */;
 			buildSettings = {
@@ -3278,9 +2872,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
+				PRODUCT_MODULE_NAME = nanopb;
 				PRODUCT_NAME = nanopb;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3288,9 +2884,9 @@
 			};
 			name = Debug;
 		};
-		9A88C7B3C01BB06ADD6826DD411BA771 /* Release */ = {
+		1137D3E1E561324FD0281C828AF01BFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6259A25ADE8170BA785EF9DEF9FC144 /* BiometricAuthentication.xcconfig */;
+			baseConfigurationReference = 57A1DF1B64A3F422F0A6B107F55BBE49 /* NMSSH.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3301,16 +2897,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
-				PRODUCT_NAME = BiometricAuthentication;
+				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
+				PRODUCT_MODULE_NAME = NMSSH;
+				PRODUCT_NAME = NMSSH;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3319,67 +2916,7 @@
 			};
 			name = Release;
 		};
-		BAEAD2D6C20D554615A8C77E429E8C53 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F6622595075929E86EBED53BE57D47F /* ActionSheetPicker-3.0.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ActionSheetPicker-3.0/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.modulemap";
-				PRODUCT_NAME = ActionSheetPicker_3_0;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BAF5843F493360DB1E211B54C78EF8F2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5C88185538458D3620AA9508E2BFC5A /* Zip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
-				PRODUCT_NAME = Zip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BE3FB0EB895BD9A0CB9992B37535C17A /* Release */ = {
+		2CF29167C5CA78088CD25FE03F15FC2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49C15AF833FEF86B17D322CCE503A5FC /* Highlightr.xcconfig */;
 			buildSettings = {
@@ -3398,9 +2935,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Highlightr/Highlightr.modulemap";
+				PRODUCT_MODULE_NAME = Highlightr;
 				PRODUCT_NAME = Highlightr;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3410,7 +2949,402 @@
 			};
 			name = Release;
 		};
-		BF132C52898979782679C01A1C47BAD3 /* Debug */ = {
+		3084739C33DCBDEA309EBF4C32414E78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C15AF833FEF86B17D322CCE503A5FC /* Highlightr.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Highlightr/Highlightr-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Highlightr/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Highlightr/Highlightr.modulemap";
+				PRODUCT_MODULE_NAME = Highlightr;
+				PRODUCT_NAME = Highlightr;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3A3A72CAEB0D9F64C6F21ECC72F42A19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6259A25ADE8170BA785EF9DEF9FC144 /* BiometricAuthentication.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
+				PRODUCT_MODULE_NAME = BiometricAuthentication;
+				PRODUCT_NAME = BiometricAuthentication;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		43EE99C2DDFD342B9C8246A21361DFFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57A1DF1B64A3F422F0A6B107F55BBE49 /* NMSSH.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
+				PRODUCT_MODULE_NAME = NMSSH;
+				PRODUCT_NAME = NMSSH;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		450F86CC2D755FAFCFAD24D9C7B2DDA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39E83E4F3C5896811A2AA58A2BA780A4 /* nanopb.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
+				PRODUCT_MODULE_NAME = nanopb;
+				PRODUCT_NAME = nanopb;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		477B684D8C0688710BCF1BF81DA0B5F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EBF67C3D13A0B932F654394FBB1FE1C /* PanelKit.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PanelKit/PanelKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PanelKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PanelKit/PanelKit.modulemap";
+				PRODUCT_MODULE_NAME = PanelKit;
+				PRODUCT_NAME = PanelKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		50A973BB5059B599335B98354D72034E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2832BE39522A7F1C40BC65B10F26152C /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5495B3D47502F86FE1512497BCBC4F33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5C88185538458D3620AA9508E2BFC5A /* Zip.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
+				PRODUCT_MODULE_NAME = Zip;
+				PRODUCT_NAME = Zip;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		616BE507F3A130D35FF038D8EAFA1302 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 578BE1D3176955D0DB68A696346C86C9 /* Pods-Pisth.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Pisth/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Pisth/Pods-Pisth.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		66383CFA2AB988516C8DCE7EC211B10A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C270584ACA475AE36832E2D25F3A3755 /* SwiftKeychainWrapper.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftKeychainWrapper/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper.modulemap";
+				PRODUCT_MODULE_NAME = SwiftKeychainWrapper;
+				PRODUCT_NAME = SwiftKeychainWrapper;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		69AB844B74A811E1BA3A3BD95A236162 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F6622595075929E86EBED53BE57D47F /* ActionSheetPicker-3.0.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ActionSheetPicker-3.0/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.modulemap";
+				PRODUCT_MODULE_NAME = ActionSheetPicker_3_0;
+				PRODUCT_NAME = ActionSheetPicker_3_0;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6C9552E9914C3E49C9B0F0D9B8000395 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1307EB42251BA9FBBFDC2B2C302CF5E /* Pods-Pisth.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Pisth/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Pisth/Pods-Pisth.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6D94CCDB5779E6A3113282B183199B73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EBF67C3D13A0B932F654394FBB1FE1C /* PanelKit.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PanelKit/PanelKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PanelKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PanelKit/PanelKit.modulemap";
+				PRODUCT_MODULE_NAME = PanelKit;
+				PRODUCT_NAME = PanelKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3442,6 +3376,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3466,15 +3401,15 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		D353A71AA981BC9FBA0666DF696645AD /* Debug */ = {
+		A8A0629C95BD546A1028898B36FBA28D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6259A25ADE8170BA785EF9DEF9FC144 /* BiometricAuthentication.xcconfig */;
+			baseConfigurationReference = E5C88185538458D3620AA9508E2BFC5A /* Zip.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3485,17 +3420,50 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
-				PRODUCT_NAME = BiometricAuthentication;
+				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
+				PRODUCT_MODULE_NAME = Zip;
+				PRODUCT_NAME = Zip;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B799A6DC3BB927577A9FB3F82B751313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2832BE39522A7F1C40BC65B10F26152C /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3503,7 +3471,7 @@
 			};
 			name = Debug;
 		};
-		E0C65682A16D0739615F0990FC2955A9 /* Release */ = {
+		C73FCD9D3E537EF6C2C6CC956D872A5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F6622595075929E86EBED53BE57D47F /* ActionSheetPicker-3.0.xcconfig */;
 			buildSettings = {
@@ -3522,9 +3490,43 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.modulemap";
+				PRODUCT_MODULE_NAME = ActionSheetPicker_3_0;
 				PRODUCT_NAME = ActionSheetPicker_3_0;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D0FFA691489D97373C58FB2449A9B024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C270584ACA475AE36832E2D25F3A3755 /* SwiftKeychainWrapper.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftKeychainWrapper/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftKeychainWrapper/SwiftKeychainWrapper.modulemap";
+				PRODUCT_MODULE_NAME = SwiftKeychainWrapper;
+				PRODUCT_NAME = SwiftKeychainWrapper;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3533,11 +3535,10 @@
 			};
 			name = Release;
 		};
-		F51B8E4F3BC4623BC2A3AF9445A05B37 /* Debug */ = {
+		DAE280A319778D7DB0C69E75C464FAAF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EBF67C3D13A0B932F654394FBB1FE1C /* PanelKit.xcconfig */;
+			baseConfigurationReference = F6259A25ADE8170BA785EF9DEF9FC144 /* BiometricAuthentication.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3547,16 +3548,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PanelKit/PanelKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PanelKit/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PanelKit/PanelKit.modulemap";
-				PRODUCT_NAME = PanelKit;
+				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
+				PRODUCT_MODULE_NAME = BiometricAuthentication;
+				PRODUCT_NAME = BiometricAuthentication;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3565,9 +3567,9 @@
 			};
 			name = Debug;
 		};
-		F981E074BC5D6BCA2BDF479E0D1DA038 /* Release */ = {
+		EDE847A6B2DE0EB14A889012A9950E83 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39E83E4F3C5896811A2AA58A2BA780A4 /* nanopb.xcconfig */;
+			baseConfigurationReference = 6AD817682A87E890D257F8946D6BF444 /* SwiftyStoreKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3578,15 +3580,50 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyStoreKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
-				PRODUCT_NAME = nanopb;
+				MODULEMAP_FILE = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyStoreKit;
+				PRODUCT_NAME = SwiftyStoreKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F2656D69EE5FA81715EDEF69FC1A23E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AD817682A87E890D257F8946D6BF444 /* SwiftyStoreKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyStoreKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyStoreKit/SwiftyStoreKit.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyStoreKit;
+				PRODUCT_NAME = SwiftyStoreKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3601,8 +3638,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BF132C52898979782679C01A1C47BAD3 /* Debug */,
-				8E8333274F4AB64785B04AB5B2A37231 /* Release */,
+				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
+				08638A96A528B1EC32DE62F8A728389D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3610,8 +3647,8 @@
 		6583E3B2A93FED33714BF7BEAA614E6A /* Build configuration list for PBXNativeTarget "SwiftyStoreKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4CA1CC0353AF25942E1BCB06B35FECB9 /* Debug */,
-				4E0DCBA2F64954C61C4F210077422BC7 /* Release */,
+				EDE847A6B2DE0EB14A889012A9950E83 /* Debug */,
+				F2656D69EE5FA81715EDEF69FC1A23E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3619,8 +3656,8 @@
 		66B8460A886A9B347818531FAEA4F521 /* Build configuration list for PBXNativeTarget "Pods-Pisth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2C14841A7B794CB3EEDDAB8802141423 /* Debug */,
-				7601600A15681E2588BD252D16104AA7 /* Release */,
+				6C9552E9914C3E49C9B0F0D9B8000395 /* Debug */,
+				616BE507F3A130D35FF038D8EAFA1302 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3628,8 +3665,8 @@
 		7CC43F3FF4D35C524C5B15A77F4DEC5E /* Build configuration list for PBXNativeTarget "BiometricAuthentication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D353A71AA981BC9FBA0666DF696645AD /* Debug */,
-				9A88C7B3C01BB06ADD6826DD411BA771 /* Release */,
+				DAE280A319778D7DB0C69E75C464FAAF /* Debug */,
+				3A3A72CAEB0D9F64C6F21ECC72F42A19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3637,8 +3674,8 @@
 		7E127E32D0465A08437982F8B2A3077E /* Build configuration list for PBXNativeTarget "ActionSheetPicker-3.0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BAEAD2D6C20D554615A8C77E429E8C53 /* Debug */,
-				E0C65682A16D0739615F0990FC2955A9 /* Release */,
+				C73FCD9D3E537EF6C2C6CC956D872A5A /* Debug */,
+				69AB844B74A811E1BA3A3BD95A236162 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3646,8 +3683,8 @@
 		B1436B4069DE679E888EE23FF7254F10 /* Build configuration list for PBXNativeTarget "Highlightr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				45F82628F11ECD369A6B88841EB84050 /* Debug */,
-				BE3FB0EB895BD9A0CB9992B37535C17A /* Release */,
+				3084739C33DCBDEA309EBF4C32414E78 /* Debug */,
+				2CF29167C5CA78088CD25FE03F15FC2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3655,8 +3692,8 @@
 		BA04873DCFDC68CB2258FD64302D2F49 /* Build configuration list for PBXNativeTarget "Zip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BAF5843F493360DB1E211B54C78EF8F2 /* Debug */,
-				92937DF5246A00F2D7C7C0E82BB5F08F /* Release */,
+				5495B3D47502F86FE1512497BCBC4F33 /* Debug */,
+				A8A0629C95BD546A1028898B36FBA28D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3664,8 +3701,8 @@
 		C43D9CA5106C6CCEF973B7EDF833947B /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				34A0852C39F886BC17E4C5B186671865 /* Debug */,
-				65A0F7A550B535AAA488E066BEF6963E /* Release */,
+				B799A6DC3BB927577A9FB3F82B751313 /* Debug */,
+				50A973BB5059B599335B98354D72034E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3673,8 +3710,8 @@
 		DADA8A63460EDF7A9F989652D6AED71D /* Build configuration list for PBXNativeTarget "NMSSH" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02656996640B1672E8DA9FD768FF1795 /* Debug */,
-				4F2F1369AAB962E20DFE1460105D1425 /* Release */,
+				43EE99C2DDFD342B9C8246A21361DFFE /* Debug */,
+				1137D3E1E561324FD0281C828AF01BFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3682,8 +3719,8 @@
 		E12AA3831F8C7FC21ADAA96A9E000F81 /* Build configuration list for PBXNativeTarget "PanelKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F51B8E4F3BC4623BC2A3AF9445A05B37 /* Debug */,
-				0E9E79FB94780D93B57D4052C65E6911 /* Release */,
+				477B684D8C0688710BCF1BF81DA0B5F8 /* Debug */,
+				6D94CCDB5779E6A3113282B183199B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3691,8 +3728,8 @@
 		F118B0FA84AC9116AB2E480C302C3999 /* Build configuration list for PBXNativeTarget "nanopb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9A5E9550EFA7E55963B08064FEE6807D /* Debug */,
-				F981E074BC5D6BCA2BDF479E0D1DA038 /* Release */,
+				08DCEECB267ABEEE7E382A779F100D91 /* Debug */,
+				450F86CC2D755FAFCFAD24D9C7B2DDA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3700,8 +3737,8 @@
 		FB6667A00791687A171A18EB9B28A53E /* Build configuration list for PBXNativeTarget "SwiftKeychainWrapper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2F0B842DA6787346C247CD18C83C0E29 /* Debug */,
-				87BA8A9C68E77343DEA102CF5383C167 /* Release */,
+				66383CFA2AB988516C8DCE7EC211B10A /* Debug */,
+				D0FFA691489D97373C58FB2449A9B024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
