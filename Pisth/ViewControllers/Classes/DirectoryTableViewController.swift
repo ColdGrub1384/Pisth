@@ -1360,19 +1360,31 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     return
                 }
                 
-                let target = directory.nsString.appendingPathComponent(file.filename)
+                guard let dirVC = item.dragItem.sourceViewController as? DirectoryTableViewController else {
+                    return
+                }
+                
+                let target = dirVC.directory.nsString.appendingPathComponent(file.filename)
                 let destination: String
                 
-                if directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
-                    destination = directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
-                } else {
+                if dirVC.directory.removingUnnecessariesSlashes != "/" && files[indexPath.row] == files.last {
+                    destination = dirVC.directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
+                } else if dirVC == self {
                     destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+                } else {
+                    
+                    if coordinator.proposal.intent == .insertIntoDestinationIndexPath {
+                        destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+                    } else {
+                        destination = directory.nsString.appendingPathComponent(file.filename)
+                    }
                 }
                 
                 if sftp.moveItem(atPath: target, toPath: destination) {
-                    
                     reload()
-                    
+                    if dirVC != self {
+                        dirVC.reload()
+                    }
                 } else {
                     let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -1468,6 +1480,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         }
         
+        if session.items.first?.sourceViewController != self {
+            return UITableViewDropProposal(operation: .move, intent: .automatic)
+        }
+        
         return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
     }
     
@@ -1492,6 +1508,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         let item = UIDragItem(itemProvider: NSItemProvider(item: nil, typeIdentifier: "remote"))
         item.localObject = file
+        item.sourceViewController = self
         item.previewProvider = {
             
             guard let iconView = cell.iconView else {
