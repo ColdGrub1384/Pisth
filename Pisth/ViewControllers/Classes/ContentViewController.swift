@@ -32,7 +32,9 @@ class ContentViewController: UIViewController, PanelManager {
         terminalPanel.modalPresentationStyle = .popover
         terminalPanel.popoverPresentationController?.barButtonItem = sender
         
-        present(terminalPanel, animated: true)
+        present(terminalPanel, animated: true) {
+            terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+        }
     }
     
     /// Present the given remote directory. This view controller must be visible.
@@ -49,7 +51,9 @@ class ContentViewController: UIViewController, PanelManager {
         directoryPanel.popoverPresentationController?.sourceView = sender
         directoryPanel.popoverPresentationController?.sourceRect = sender?.frame ?? CGRect.zero
         
-        present(directoryPanel, animated: true)
+        present(directoryPanel, animated: true) {
+            browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+        }
     }
     
     // MARK: - View controller
