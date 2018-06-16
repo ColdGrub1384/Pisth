@@ -1035,6 +1035,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     fi;
                     """)
                     
+                    ConnectionManager.shared.connection?.os = os ?? nil
+                    
                     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
                     request.returnsObjectsAsFaults = false
                     

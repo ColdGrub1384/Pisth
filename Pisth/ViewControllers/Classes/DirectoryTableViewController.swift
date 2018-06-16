@@ -132,6 +132,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             exit;
             """)
             
+            connection.os = os ?? nil
+            
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
             request.returnsObjectsAsFaults = false
             
