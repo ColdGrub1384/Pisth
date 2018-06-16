@@ -23,6 +23,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Terminal size in this format: `"0,0"`.
     private var terminalSize: String?
     
+    /// Returns `false` if the terminal is presented as a panel on iPad.
+    var isPresentedInFullscreen: Bool {
+        guard let panel = panelNavigationController?.panelViewController else {
+            return true
+        }
+        
+        return (!panel.isPresentedAsPopover && !panel.isFloating && !panel.isPinned)
+    }
+    
     /// If the terminal is in viewer mode.
     var viewer = false
     
@@ -432,13 +441,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if isFirstResponder {
             _ = resignFirstResponder()
+            _ = becomeFirstResponder()
         }
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            if wasFirstResponder {
-                _ = self.becomeFirstResponder()
-            }
-        })
         
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -575,12 +579,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
         view.addInteraction(UIDropInteraction(delegate: self))
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
-        tapGesture.delegate = self
-        if !isPresentedAsPopover {
-            webView.addGestureRecognizer(tapGesture)
-        }
-        
         // Create selection Textview
         selectionTextView = UITextView(frame: webView.frame)
         selectionTextView.isHidden = true
@@ -611,6 +609,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
+        tapGesture.delegate = self
+        if !isPresentedAsPopover {
+            webView.addGestureRecognizer(tapGesture)
+        }
         
         edgesForExtendedLayout = []
         
@@ -643,6 +647,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
     
+    /// Reize `webView`.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if webView.frame.size != view.frame.size && !webView.isLoading {
+            resizeView(withSize: view.frame.size)
+        }
+    }
+    
     // MARK: - Keyboard
     
     /// Resize `webView` when keyboard is shown.
@@ -655,12 +668,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        guard !isPresentedAsPopover else {
-            webView.reload()
-            return
-        }
-        
-        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size {
+        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size && isPresentedInFullscreen {
             let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
             
             let newHeight = toolbarFrame.origin.y
@@ -687,11 +695,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let i = ignoredNotifications.index(of: notification.name) {
                 ignoredNotifications.remove(at: i)
             }
-            return
-        }
-        
-        guard !isPresentedAsPopover else {
-            webView.reload()
             return
         }
         
