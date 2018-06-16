@@ -319,18 +319,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     })
                 }
                 
-                alert.addTextField(configurationHandler: { (textField) in
-                    textField.placeholder = "Password"
-                    textField.isSecureTextEntry = true
-                })
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
-                    
+                func connect(withPassword password: String) {
                     let activityVC = ActivityViewController(message: "Loading...")
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
-                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField!.text!, name: "", path: "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         
                         if !connection.useSFTP { // SSH
                             
@@ -340,20 +333,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                             activityVC.dismiss(animated: true, completion: {
                                 let terminalVC = TerminalViewController()
                                 terminalVC.pureMode = true
+                                terminalVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                 
-                                self.navigationController.pushViewController(terminalVC, animated: true)
+                                self.navigationController.setViewControllers([terminalVC], animated: true)
                             })
                         } else {
                             let dirVC = DirectoryTableViewController(connection: connection)
+                            dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                             
                             activityVC.dismiss(animated: true, completion: {
-                                self.navigationController.pushViewController(dirVC, animated: true)
+                                self.navigationController.setViewControllers([dirVC], animated: true)
                             })
                         }
-                    })                    
-                }))
+                    })
+                }
                 
-                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                if let password = options[.init("password")] as? String {
+                    connect(withPassword: password)
+                } else {
+                    alert.addTextField(configurationHandler: { (textField) in
+                        textField.placeholder = "Password"
+                        textField.isSecureTextEntry = true
+                    })
+                    
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                        connect(withPassword: passwordTextField?.text ?? "")
+                    }))
+                    
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                }
             } else if url.absoluteString.hasPrefix("file:") { // Upload file or import plugin or theme.
                 
                 if url.pathExtension.lowercased() == "termplugin" { // Import plugin
@@ -489,6 +498,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             
             bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 0))
         }
+    }
+    
+    /// Open connection from user activity.
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        if userActivity.activityType == "openDirectory" {
+                        
+            guard let username = userActivity.userInfo?["username"] as? String else {
+                return false
+            }
+            
+            guard let host = userActivity.userInfo?["host"] as? String else {
+                return false
+            }
+            
+            guard let password = userActivity.userInfo?["password"] as? String else {
+                return false
+            }
+            
+            guard let port = userActivity.userInfo?["port"] as? UInt64 else {
+                return false
+            }
+            
+            guard let path = userActivity.userInfo?["directory"] as? String else {
+                return false
+            }
+            
+            guard let url = URL(string: "sftp://\(username)@\(host):\(port)") else {
+                return false
+            }
+            
+            return self.application(application, open: url, options: [.init("path"):path, .init("password"):password])
+        }
+        
+        return false
     }
     
     // MARK: - Directory table view controller delegate

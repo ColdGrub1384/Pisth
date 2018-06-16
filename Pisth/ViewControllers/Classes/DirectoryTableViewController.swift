@@ -14,6 +14,7 @@ import CoreData
 import Pisth_API
 import StoreKit
 import PanelKit
+import CoreSpotlight
 
 /// Table view controller to manage remote files.
 class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
@@ -247,6 +248,29 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             bannerView.delegate = self
             bannerView.load(GADRequest())
         }
+        
+        // Siri Shortcuts
+        
+        let activity = NSUserActivity(activityType: "openDirectory")
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = true
+            //                    activity.suggestedInvocationPhrase = connection.name
+        }
+        activity.isEligibleForSearch = true
+        activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "sftp"]
+        activity.title = connection.name
+        
+        let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+        if let os = connection.os?.lowercased() {
+            if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                attributes.thumbnailData = UIImagePNGRepresentation(logo)
+            }
+        }
+        attributes.addedDate = Date()
+        attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)/\(connection.path)"
+        activity.contentAttributeSet = attributes
+        
+        self.userActivity = activity
     }
     
     /// Show errors if there are and setup Notification center to call this function when Application becomes active.
@@ -263,15 +287,20 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         showErrorIfThereIsOne()
     }
 
-	 /// Hides toolbar.
-	 override func viewDidDisappear(_ animated: Bool) {
+    /// Hides toolbar.
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.setToolbarHidden(true, animated: true)
         NotificationCenter.default.removeObserver(self)
-	 }
-
-
+    }
+    
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        super.updateUserActivityState(activity)
+        
+        activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
+    }
+    
     // MARK: - Connection errors handling
     
     /// Show error if there is one.
