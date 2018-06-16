@@ -657,6 +657,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Set user info.
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         

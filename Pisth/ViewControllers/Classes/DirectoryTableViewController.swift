@@ -297,6 +297,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         NotificationCenter.default.removeObserver(self)
     }
     
+    /// Set user info.
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         
