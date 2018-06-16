@@ -16,6 +16,7 @@ import Firebase
 import AVFoundation
 import CoreData
 import PanelKit
+import CoreSpotlight
 
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate {
@@ -656,6 +657,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    override func updateUserActivityState(_ activity: NSUserActivity) {
+        super.updateUserActivityState(activity)
+        
+        guard let connection = ConnectionManager.shared.connection else {
+            return
+        }
+        
+        activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "port":connection.port]
+    }
+    
     // MARK: - Keyboard
     
     /// Resize `webView` when keyboard is shown.
@@ -1058,6 +1069,33 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     
                     session.channel.delegate = self
                     try session.channel.startShell()
+                    
+                    // Siri Shortcuts
+                    
+                    guard let connection = ConnectionManager.shared.connection else {
+                        return
+                    }
+                    
+                    let activity = NSUserActivity(activityType: "openTerminal")
+                    if #available(iOS 12.0, *) {
+                        activity.isEligibleForPrediction = true
+                        //                    activity.suggestedInvocationPhrase = connection.name
+                    }
+                    activity.isEligibleForSearch = true
+                    activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
+                    activity.title = connection.name
+                    
+                    let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+                    if let os = connection.os?.lowercased() {
+                        if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                            attributes.thumbnailData = UIImagePNGRepresentation(logo)
+                        }
+                    }
+                    attributes.addedDate = Date()
+                    attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
+                    activity.contentAttributeSet = attributes
+                    
+                    self.userActivity = activity
                 }
             } catch {}
             
