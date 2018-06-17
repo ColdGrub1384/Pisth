@@ -112,6 +112,7 @@
 		C9B205BA20D6CBCB00045F20 /* NMSSH.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9B205B720D6CBBF00045F20 /* NMSSH.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9B205BB20D6CC0E00045F20 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C020D70CD400045F20 /* FileObserver.swift */; };
+		C9B205C520D71A8600045F20 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9B205C420D71A8600045F20 /* Info.plist */; };
 		C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */; };
 		C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */; };
 		C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9CB27E520D5BB9800290DBE /* Assets.xcassets */; };
@@ -272,12 +273,12 @@
 		C9B205BC20D6CD9300045F20 /* Pisth Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pisth Mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		C9B205BF20D6E26B00045F20 /* Pisth Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Pisth Mac.entitlements"; sourceTree = "<group>"; };
 		C9B205C020D70CD400045F20 /* FileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileObserver.swift; sourceTree = "<group>"; };
+		C9B205C420D71A8600045F20 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9CB27DC20D5BB9500290DBE /* Pisth Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		C9CB27E520D5BB9800290DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9CB27E820D5BB9800290DBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C9CB27EA20D5BB9800290DBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -598,7 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				C9CB27E520D5BB9800290DBE /* Assets.xcassets */,
-				C9CB27EA20D5BB9800290DBE /* Info.plist */,
+				C9B205C420D71A8600045F20 /* Info.plist */,
 				C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */,
 				C9B205BF20D6E26B00045F20 /* Pisth Mac.entitlements */,
 			);
@@ -827,6 +828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9B205C520D71A8600045F20 /* Info.plist in Resources */,
 				C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */,
 				C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */,
 				C9CB27E920D5BB9800290DBE /* Main.storyboard in Resources */,
