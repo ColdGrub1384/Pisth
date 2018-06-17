@@ -40,7 +40,11 @@ public class DataManager {
         // The password in database is a random string, a password is saved to the keychain with key the random string
         let key = String.random(length: 100)
         newConnection.setValue(key, forKey: "password")
+        #if os(iOS)
         KeychainWrapper.standard.set(connection.password, forKey: key)
+        #else
+        KeychainSwift().set(connection.password, forKey: key)
+        #endif
         
         saveContext()
     }
@@ -56,7 +60,11 @@ public class DataManager {
         do {
             let results = try coreDataContext.fetch(request) as! [NSManagedObject]
             if let passKey = results[index].value(forKey: "password") as? String {
+                #if os(iOS)
                 KeychainWrapper.standard.removeObject(forKey: passKey)
+                #else
+                KeychainSwift().delete(passKey)
+                #endif
             }
             coreDataContext.delete(results[index])
             saveContext()
@@ -73,7 +81,11 @@ public class DataManager {
         do {
             try coreDataContext.execute(deleteRequest)
             saveContext()
+            #if os(iOS)
             _ = KeychainWrapper.standard.removeAllKeys()
+            #else
+            KeychainSwift().clear()
+            #endif
         } catch let error {
             print("Error removing all: \(error.localizedDescription)")
         }
@@ -98,7 +110,11 @@ public class DataManager {
                 guard let name = result.value(forKey: "name") as? String else { return fetchedConnections }
                 guard let port = result.value(forKey: "port") as? UInt64 else { return fetchedConnections }
                 guard let path = result.value(forKey: "path") as? String else { return fetchedConnections }
+                #if os(iOS)
                 guard let password = KeychainWrapper.standard.string(forKey: passKey) else { return fetchedConnections }
+                #else
+                guard let password = KeychainSwift().get(passKey) else { return fetchedConnections }
+                #endif
                 guard let useSFTP = result.value(forKey: "sftp") as? Bool else { return fetchedConnections }
                 
                 fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: result.value(forKey: "os") as? String))

@@ -11,9 +11,6 @@
 		3A5BEF00206E949600B2BE1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5BEEFF206E949600B2BE1D /* Assets.xcassets */; };
 		3A61DE9820668FE90002353B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9720668FE80002353B /* DataManager.swift */; };
 		3A61DE9F2066921B0002353B /* RemoteConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DE9E2066921A0002353B /* RemoteConnection.swift */; };
-		3A61DEA4206692B80002353B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEA1206692B70002353B /* KeychainItemAccessibility.swift */; };
-		3A61DEA5206692B80002353B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEA2206692B70002353B /* KeychainWrapper.swift */; };
-		3A61DEA6206692B80002353B /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A61DEA3206692B70002353B /* SwiftKeychainWrapper.h */; };
 		3A61DEA8206697C30002353B /* ConnectionInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */; };
 		3ACD8CCB2066E90900184947 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD8CCA2066E90900184947 /* ActivityViewController.swift */; };
 		3ACF9B3B2041B475006C3218 /* TerminalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3A2041B475006C3218 /* TerminalInfo.swift */; };
@@ -33,6 +30,10 @@
 		3ACF9B742041B912006C3218 /* URL+queryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3F2041B484006C3218 /* URL+queryParameters.swift */; };
 		3ACF9B752041B914006C3218 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3E2041B484006C3218 /* String.swift */; };
 		3AF6027F207139B300347BFC /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6027E207139B300347BFC /* Pisth.swift */; };
+		C9985A9C20D6B54F00389A7B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */; };
+		C9985A9D20D6B54F00389A7B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */; };
+		C9985A9E20D6B54F00389A7B /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */; };
+		C9985AA020D6B55E00389A7B /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9F20D6B55D00389A7B /* KeychainSwiftDistrib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,9 +45,6 @@
 		3A61DE9B2066903A0002353B /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A61DE9D206690500002353B /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A61DE9E2066921A0002353B /* RemoteConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteConnection.swift; sourceTree = "<group>"; };
-		3A61DEA1206692B70002353B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
-		3A61DEA2206692B70002353B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
-		3A61DEA3206692B70002353B /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		3A61DEA7206697C20002353B /* ConnectionInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionInfoTableViewController.swift; sourceTree = "<group>"; };
 		3ACD8CCA2066E90900184947 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		3ACF9B2F2041B417006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +67,10 @@
 		3ACF9B672041B8C6006C3218 /* Ubuntu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ubuntu.swift; sourceTree = "<group>"; };
 		3AF6027E207139B300347BFC /* Pisth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pisth.swift; sourceTree = "<group>"; };
 		5F420224BB8A5D277DF7B7F0 /* Pods_Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		C9985A9F20D6B55D00389A7B /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,21 +113,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3A61DEA0206692B70002353B /* SwiftKeychainWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				3A61DEA1206692B70002353B /* KeychainItemAccessibility.swift */,
-				3A61DEA2206692B70002353B /* KeychainWrapper.swift */,
-				3A61DEA3206692B70002353B /* SwiftKeychainWrapper.h */,
-			);
-			name = SwiftKeychainWrapper;
-			path = ../Pods/SwiftKeychainWrapper/SwiftKeychainWrapper;
-			sourceTree = "<group>";
-		};
 		3ACF9B252041B417006C3218 = {
 			isa = PBXGroup;
 			children = (
-				3A61DEA0206692B70002353B /* SwiftKeychainWrapper */,
+				C9985A9F20D6B55D00389A7B /* KeychainSwiftDistrib.swift */,
+				C9985A9820D6B53200389A7B /* SwiftKeychainWrapper */,
 				3ACF9B312041B417006C3218 /* Pisth Shared */,
 				3ACF9B302041B417006C3218 /* Products */,
 				3A61DE992066903A0002353B /* Frameworks */,
@@ -186,6 +178,16 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		C9985A9820D6B53200389A7B /* SwiftKeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */,
+				C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */,
+				C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */,
+			);
+			path = SwiftKeychainWrapper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -193,7 +195,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A61DEA6206692B80002353B /* SwiftKeychainWrapper.h in Headers */,
+				C9985A9E20D6B54F00389A7B /* SwiftKeychainWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,12 +273,13 @@
 				3ACF9B6A2041B8C6006C3218 /* Homebrew.swift in Sources */,
 				3ACF9B682041B8C6006C3218 /* Basic.swift in Sources */,
 				3ACF9B722041B8C6006C3218 /* Ubuntu.swift in Sources */,
+				C9985A9D20D6B54F00389A7B /* KeychainItemAccessibility.swift in Sources */,
 				3ACF9B6E2041B8C6006C3218 /* Pro.swift in Sources */,
 				3ACF9B702041B8C6006C3218 /* SilverAerogel.swift in Sources */,
 				3ACF9B6B2041B8C6006C3218 /* ManPage.swift in Sources */,
 				3ACF9B6F2041B8C6006C3218 /* RedSands.swift in Sources */,
+				C9985AA020D6B55E00389A7B /* KeychainSwiftDistrib.swift in Sources */,
 				3A61DEA8206697C30002353B /* ConnectionInfoTableViewController.swift in Sources */,
-				3A61DEA5206692B80002353B /* KeychainWrapper.swift in Sources */,
 				3A61DE9F2066921B0002353B /* RemoteConnection.swift in Sources */,
 				3A61DE9820668FE90002353B /* DataManager.swift in Sources */,
 				3ACF9B732041B90A006C3218 /* Color.swift in Sources */,
@@ -286,10 +289,10 @@
 				3ACF9B692041B8C6006C3218 /* Grass.swift in Sources */,
 				3ACF9B3D2041B47D006C3218 /* Keys.swift in Sources */,
 				3ACF9B6C2041B8C6006C3218 /* Novel.swift in Sources */,
-				3A61DEA4206692B80002353B /* KeychainItemAccessibility.swift in Sources */,
 				3ACF9B752041B914006C3218 /* String.swift in Sources */,
 				3ACF9B742041B912006C3218 /* URL+queryParameters.swift in Sources */,
 				3ACD8CCB2066E90900184947 /* ActivityViewController.swift in Sources */,
+				C9985A9C20D6B54F00389A7B /* KeychainWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
