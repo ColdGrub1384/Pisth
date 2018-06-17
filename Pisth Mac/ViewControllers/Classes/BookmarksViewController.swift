@@ -16,13 +16,15 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - View controller
     
-    /// Update `outlineView` when saving CoreData context.
+    /// Update `outlineView` when saving CoreData context and set `outlineView` double click action.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         DataManager.shared.saveCompletion = {
             self.outlineView.reloadData()
         }
+        
+        outlineView.doubleAction = #selector(openConnection(_:))
     }
     
     // MARK: - Outline view data source
@@ -45,6 +47,13 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         }
         
         return DataManager.shared.connections[index-1]
+    }
+    
+    // MARK: - Outline view delegate
+    
+    /// - Returns: `true` if the item is a `RemoteConnection`.
+    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+        return (item is RemoteConnection)
     }
     
     /// Setup view.
@@ -79,13 +88,6 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         return nil
     }
     
-    // MARK: - Outline view delegate
-    
-    /// - Returns: `true` if the item is a `RemoteConnection`.
-    func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
-        return (item is RemoteConnection)
-    }
-    
     // MARK: - Menu delegate
     
     /// Enable items if the clicked row is a `RemoteConnection`.
@@ -98,7 +100,18 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     // MARK: - Menu actions
     
     /// Open the connection represented by the clicked row.
-    @IBAction func openConnection(_ sender: Any) {
+    @objc @IBAction func openConnection(_ sender: Any) {
+        
+        guard let connection = outlineView.item(atRow: outlineView.clickedRow) as? RemoteConnection else {
+            return
+        }
+        
+        do {
+            let controller = try ConnectionController(connection: connection)
+            controller.presentBrowser(atPath: connection.path)
+        } catch {
+            NSApp.presentError(error)
+        }
     }
     
     /// Edit the connection represented by the clicked row.

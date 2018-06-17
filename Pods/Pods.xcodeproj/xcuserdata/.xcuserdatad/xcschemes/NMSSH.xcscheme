@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '215D3232F1F6549F2E898A121973AED8'
-               BlueprintName = 'NMSSH'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'NMSSH.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "215D3232F1F6549F2E898A121973AED8"
+               BlueprintName = "NMSSH"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "NMSSH.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

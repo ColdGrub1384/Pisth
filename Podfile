@@ -18,3 +18,12 @@ target 'Pisth' do
   pod 'Firebase/Core'
   pod 'PanelKit'
 end
+
+target 'Pisth Mac' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Pisth Mac
+
+  pod 'SwiftSH'
+end

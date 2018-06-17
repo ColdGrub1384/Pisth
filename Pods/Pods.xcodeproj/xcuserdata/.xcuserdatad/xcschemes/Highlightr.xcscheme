@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AB7F938A826D513F63868C4E1BC00EEB'
-               BlueprintName = 'Highlightr'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Highlightr.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AB7F938A826D513F63868C4E1BC00EEB"
+               BlueprintName = "Highlightr"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Highlightr.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

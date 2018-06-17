@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '856B14EDCE3AFFFAC56A03042D3BC031'
-               BlueprintName = 'Pods-Pisth'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods-Pisth.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F1375FF5C582FB0520827C081CD9A827"
+               BlueprintName = "Pods-Pisth"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Pods-Pisth.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
