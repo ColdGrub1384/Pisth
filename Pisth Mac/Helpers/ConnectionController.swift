@@ -19,7 +19,7 @@ class ConnectionController {
     /// - Parameters:
     ///     - path: CWD.
     func presentTerminal(path: String? = nil) {
-        
+        // TODO: Present the terminal at given path
     }
     
     /// Present the given directory.

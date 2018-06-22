@@ -8,7 +8,7 @@
 import Cocoa
 
 /// A View controller showing the content of a remote directory.
-class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate {
+class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, NSDraggingDestination {
     
     /// Directory to show. Default value is `"/"`.
     var directory = "/"
@@ -31,28 +31,173 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     }
     
     /// The `outlineView` showing the directory content.
-    @IBOutlet weak var outlineView: NSOutlineView!
+    @IBOutlet weak var outlineView: FilesOutlineView!
     
     /// Upload local file to given path.
     ///
     /// - Parameters:
     ///     - file: Local file to upload.
     ///     - path: Remote path.
-    func upload(_ file: String, to path: String) {
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: file)) else {
-            return
+    ///     - completionHandler: Code to execute after uploading file. The passed parameter if a `Bool` indicating if the file was uploaded. This block is executed in a background thread.
+    func upload(_ file: String, to path: String, completionHandler: ((Bool) -> Void)? = nil) {
+        
+        let alert = NSAlert()
+        alert.messageText = "Uploading \(file.nsString.lastPathComponent)..."
+        
+        func dismissAlert() {
+            alert.buttons[0].performClick(alert)
         }
         
-        DispatchQueue.global(qos: .background).async {
-            if !self.controller.session.sftp!.writeContents(data, toFileAtPath: path) {
-                DispatchQueue.main.async {
-                    NSApp.presentError(NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot upload file."]))
+        var isDir: ObjCBool = false
+        if FileManager.default.fileExists(atPath: file, isDirectory: &isDir) && isDir.boolValue {
+            
+            var success = true
+            var continue_ = true
+            
+            DispatchQueue.main.async {
+                alert.addButton(withTitle: "Cancel")
+                if let window = self.window {
+                    alert.beginSheetModal(for: window, completionHandler: { response in
+                        if response == .alertFirstButtonReturn {
+                            continue_ = false
+                        }
+                    })
                 }
-            } else {
+            }
+            
+            func isItemDirectory(_ item: URL) -> Bool {
+                var isDir: ObjCBool = false
+                if FileManager.default.fileExists(atPath: item.path, isDirectory: &isDir) {
+                    return isDir.boolValue
+                } else {
+                    return false
+                }
+            }
+            
+            func filesIn(directory: URL) -> [URL] {
+                return (try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)) ?? []
+            }
+            
+            var uploaded = 0
+            var size = 0
+            func countFiles(inside directory: URL) {
+                for file in filesIn(directory: directory) {
+                    size += 1
+                    if isItemDirectory(file) {
+                        countFiles(inside: file)
+                    }
+                }
+            }
+            countFiles(inside: URL(fileURLWithPath: file))
+            
+            func uploadFilesInDirectory(_ directory: URL, toPath path: String) {
+                
+                guard continue_ else {
+                    return
+                }
+                
+                for url in filesIn(directory: directory) {
+                    
+                    if isItemDirectory(url) {
+                        success = controller.session.sftp!.createDirectory(atPath: path.nsString.appendingPathComponent(url.lastPathComponent))
+                        if success {
+                            uploaded += 1
+                        }
+                        uploadFilesInDirectory(url, toPath: path.nsString.appendingPathComponent(url.lastPathComponent))
+                    } else {
+                        if let data = try? Data(contentsOf: url) {
+                            success = controller.session.sftp!.writeContents(data, toFileAtPath: path.nsString.appendingPathComponent(url.lastPathComponent), progress: { (_) -> Bool in
+                                return continue_
+                            })
+                            if success {
+                                uploaded += 1
+                            }
+                        }
+                    }
+                }
+            }
+            
+            var finished = false
+            
+            controller.session.sftp!.createDirectory(atPath: path)
+            
+            DispatchQueue.global(qos: .background).async {
+                uploadFilesInDirectory(URL(fileURLWithPath: file), toPath: self.directory.nsString.appendingPathComponent(file.nsString.lastPathComponent))
+                finished = true
+                DispatchQueue.main.async {
+                    self.go(to: self.directory)
+                }
+            }
+            
+            completionHandler?(success)
+            
+            if success {
                 let success = NSUserNotification()
                 success.title = "Upload finished!"
                 success.subtitle = path
                 NSUserNotificationCenter.default.deliver(success)
+            } else {
+                let success = NSUserNotification()
+                success.title = "Upload failed!"
+                success.subtitle = path
+                NSUserNotificationCenter.default.deliver(success)
+            }
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (timer) in
+                if finished {
+                    dismissAlert()
+                    timer.invalidate()
+                } else {
+                    alert.informativeText = "\(uploaded) / \(size) items"
+                }
+            })
+            
+            return
+        }
+        
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: file)) else {
+            return
+        }
+        
+        var continue_ = true
+        
+        DispatchQueue.main.async {
+            alert.addButton(withTitle: "Cancel")
+            if let window = self.window {
+                alert.beginSheetModal(for: window, completionHandler: { response in
+                    if response == .alertFirstButtonReturn {
+                        continue_ = false
+                    }
+                })
+            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            if !self.controller.session.sftp!.writeContents(data, toFileAtPath: path, progress: { (written) -> Bool in
+                let writtenFormatted = ByteCountFormatter().string(fromByteCount: Int64(written))
+                let totalFormatted = ByteCountFormatter().string(fromByteCount: Int64(data.count))
+                
+                DispatchQueue.main.async {
+                    alert.informativeText = "\(writtenFormatted) / \(totalFormatted)"
+                }
+                return continue_
+            }) {
+                DispatchQueue.main.async {
+                    dismissAlert()
+                    NSApp.presentError(NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot upload file."]))
+                }
+                completionHandler?(false)
+            } else {
+                DispatchQueue.main.async {
+                    self.go(to: self.directory)
+                    dismissAlert()
+                }
+                let success = NSUserNotification()
+                success.title = "Upload finished!"
+                success.subtitle = path
+                NSUserNotificationCenter.default.deliver(success)
+                completionHandler?(true)
             }
         }
     }
@@ -164,7 +309,11 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     override func viewDidAppear() {
         super.viewDidAppear()
         
+        window?.registerForDraggedTypes([.fileURL, .fileContents])
+        
+        outlineView.directoryViewController = self
         outlineView.doubleAction = #selector(openFile)
+        outlineView.registerForDraggedTypes([.fileURL, .fileContents])
         
         directoryContents = (controller.session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile]) ?? []
         outlineView.reloadData()
@@ -222,5 +371,35 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         }
         
         return nil
+    }
+    
+    // MARK: - Dragging destination
+    
+    /// - Returns: `.copy`.
+    func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+        return .copy
+    }
+    
+    /// Upload files.
+    func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+        
+        let dirVC = self
+        
+        if let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: nil) as? [URL] {
+            for url in urls {
+                let alert = NSAlert()
+                alert.messageText = "Uploading \(url.lastPathComponent)..."
+                
+                dirVC.upload(url.path, to: dirVC.directory.nsString.appendingPathComponent(url.lastPathComponent), completionHandler: { success in
+                    DispatchQueue.main.async {
+                        alert.buttons[0].performClick(alert)
+                    }
+                })
+                
+                alert.runModal()
+            }
+            return true
+        }
+        return false
     }
 }
