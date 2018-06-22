@@ -52,7 +52,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Connection" autoenablesItems="NO" id="DR4-as-22g">
                                     <items>
-                                        <menuItem title="Open" keyEquivalent="o" id="KVm-Q7-AVK">
+                                        <menuItem title="Open" keyEquivalent="O" id="KVm-Q7-AVK">
                                             <connections>
                                                 <action selector="openConnection:" target="Voe-Tx-rLC" id="CWT-AE-Y0x"/>
                                             </connections>
@@ -66,6 +66,7 @@
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="deleteConnection:" target="Voe-Tx-rLC" id="Gcn-wY-pPJ"/>
                                             </connections>
@@ -73,6 +74,52 @@ CA
                                     </items>
                                     <connections>
                                         <outlet property="delegate" destination="Voe-Tx-rLC" id="dMi-dN-vmf"/>
+                                    </connections>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="File" id="U4B-Ih-F6h">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="File" autoenablesItems="NO" id="Pwp-KM-gJH">
+                                    <items>
+                                        <menuItem title="Show hidden files" alternate="YES" id="I4Y-pT-xZL">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="toggleShowingHiddenFiles:" target="fJv-iG-GIr" id="P6x-TY-6qd"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Refresh" keyEquivalent="r" id="QpX-ZS-bRU">
+                                            <connections>
+                                                <action selector="refresh:" target="fJv-iG-GIr" id="vkB-DI-f7v"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="l54-P6-oLA"/>
+                                        <menuItem title="Remove" id="Ux2-SR-GMy">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <connections>
+                                                <action selector="removeFile:" target="fJv-iG-GIr" id="C1C-1T-FMP"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="gKb-eN-Zkj"/>
+                                        <menuItem title="Download" keyEquivalent="d" id="s9I-9R-o5h">
+                                            <connections>
+                                                <action selector="downloadFile:" target="fJv-iG-GIr" id="ZUt-dw-7jU"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Upload" keyEquivalent="u" id="48f-6h-T6b">
+                                            <connections>
+                                                <action selector="uploadFile:" target="fJv-iG-GIr" id="skn-gb-v4T"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open" keyEquivalent="o" id="HY6-Od-O9N">
+                                            <connections>
+                                                <action selector="openFile:" target="fJv-iG-GIr" id="aZ8-9y-qHm"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                    <connections>
+                                        <outlet property="delegate" destination="fJv-iG-GIr" id="yOg-ga-pAf"/>
                                     </connections>
                                 </menu>
                             </menuItem>
@@ -84,6 +131,7 @@ CA
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="fJv-iG-GIr" customClass="FileMenuDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>

@@ -16,8 +16,32 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// Local path were files will be downloaded.
     var localPath: String?
     
-    /// The contents of the directory set in `viewDidAppear`.
-    var directoryContents = [NMSFTPFile]()
+    private var directoryContents_ = [NMSFTPFile]()
+    
+    /// The contents of the directory set in `viewDidAppear` excluding hidden files if `ConnectionController.showHiddenFiles` is `false`.
+    var directoryContents: [NMSFTPFile] {
+        set {
+            directoryContents_ = newValue
+        }
+        
+        get {
+            if ConnectionController.showHiddenFiles {
+                return directoryContents_
+            } else {
+                var contents = directoryContents_
+                var i = 0
+                for file in contents {
+                    if file.filename.hasPrefix(".") {
+                        contents.remove(at: i)
+                    } else {
+                        i += 1
+                    }
+                }
+                
+                return contents
+            }
+        }
+    }
     
     /// The `ConnectionController` that controls the connection for this directory.
     var controller: ConnectionController!
@@ -203,8 +227,11 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     }
     
     /// Open clicked file or directory.
-    @objc func openFile() {
-        guard let file = outlineView.item(atRow: outlineView.clickedRow) as? NMSFTPFile else {
+    ///
+    /// - Parameters:
+    ///     - showInFinder: Show file in Finder.
+    @objc func openFile(showInFinder: Bool = false) {
+        guard let file = outlineView.item(atRow: outlineView.clickedRow) as? NMSFTPFile ?? outlineView.item(atRow: outlineView.selectedRow) as? NMSFTPFile else {
             return
         }
         
@@ -254,13 +281,23 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
                             return
                         }
                         
-                        try? FileObserver(file: URL(fileURLWithPath: filePath)).start { // Upload file
-                            DispatchQueue.main.async {
-                                self.upload(filePath, to: self.directory.nsString.appendingPathComponent(file.filename))
+                        if !showInFinder { // Open file
+                            try? FileObserver(file: URL(fileURLWithPath: filePath)).start { // Upload file
+                                DispatchQueue.main.async {
+                                    self.upload(filePath, to: self.directory.nsString.appendingPathComponent(file.filename))
+                                }
+                            }
+                            
+                            NSWorkspace.shared.openFile(filePath)
+                        } else { // Show file in Finder
+                            do {
+                                let downloads = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+                                try FileManager.default.moveItem(at: URL(fileURLWithPath: filePath), to: downloads.appendingPathComponent(filePath.nsString.lastPathComponent))
+                                NSWorkspace.shared.selectFile(downloads.appendingPathComponent(filePath.nsString.lastPathComponent).path, inFileViewerRootedAtPath: "")
+                            } catch {
+                                NSApp.presentError(error)
                             }
                         }
-                        
-                        NSWorkspace.shared.openFile(filePath)
                     } catch {
                         NSApp.presentError(error)
                     }
@@ -315,8 +352,7 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         outlineView.doubleAction = #selector(openFile)
         outlineView.registerForDraggedTypes([.fileURL, .fileContents])
         
-        directoryContents = (controller.session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile]) ?? []
-        outlineView.reloadData()
+        go(to: directory)
     }
     
     // MARK: - Outline view data source

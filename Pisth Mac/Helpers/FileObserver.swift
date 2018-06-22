@@ -13,6 +13,8 @@ class FileObserver {
     private var continue_ = true
     private var lastData: Data!
     
+    private static var currentObserver: FileObserver?
+    
     /// Initialize for observing with given file.
     ///
     /// - Parameters:
@@ -26,6 +28,8 @@ class FileObserver {
     /// - Parameters:
     ///     - closure: Code to execute when a change is observed.
     func start(closure: @escaping () -> Void) throws {
+        FileObserver.currentObserver?.stop()
+        FileObserver.currentObserver = self
         continue_ = true
         do {
             lastData = try Data(contentsOf: file)

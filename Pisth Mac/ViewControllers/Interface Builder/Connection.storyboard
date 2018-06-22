@@ -42,12 +42,27 @@
                                         </buttonCell>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="CEF4B8FC-8024-4269-A0F8-B09FB75B3C25" explicitItemIdentifier="refresh" label="Refresh" paletteLabel="Refresh" image="NSRefreshTemplate" sizingBehavior="auto" id="WCk-R1-oYc">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="rft-xs-7HR">
+                                        <rect key="frame" x="0.0" y="14" width="53" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6ig-iZ-4sv">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="refresh:" target="zbE-l5-llS" id="t6d-gs-0MP"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="P0w-ef-fPB"/>
                                 <toolbarItem reference="7S1-VM-3aH"/>
                                 <toolbarItem reference="mJ0-YW-vaO"/>
                                 <toolbarItem reference="7S1-VM-3aH"/>
+                                <toolbarItem reference="WCk-R1-oYc"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -59,6 +74,7 @@
                     </connections>
                 </windowController>
                 <customObject id="ajC-N5-Jk1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="zbE-l5-llS" customClass="FileMenuDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="52" y="92"/>
         </scene>
@@ -185,5 +201,6 @@
     <resources>
         <image name="NSFolder" width="32" height="32"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
     </resources>
 </document>

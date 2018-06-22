@@ -10,6 +10,18 @@ import Pisth_Shared
 
 /// A class for representing actibe remote sessions.
 class ConnectionController {
+        
+    /// Show hidden files.
+    static var showHiddenFiles: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "showHiddenFiles")
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "showHiddenFiles")
+            UserDefaults.standard.synchronize()
+        }
+    }
     
     /// Session used for interacting with the server.
     let session: NMSSHSession
