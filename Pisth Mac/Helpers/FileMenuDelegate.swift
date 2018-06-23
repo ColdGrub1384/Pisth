@@ -12,6 +12,15 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     
     // MARK: - Actions
     
+    /// Open selected directory in new tab.
+    @IBAction func newTab(_ sender: Any) {
+        guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController, let file = dirVC.outlineView.item(atRow: dirVC.outlineView.selectedRow) as? NMSFTPFile else {
+            return
+        }
+        
+        dirVC.controller.presentBrowser(atPath: dirVC.directory.nsString.appendingPathComponent(file.filename))
+    }
+    
     /// Show bookmarks.
     @IBAction func openBookmarks(_ sender: Any) {
         var alreadyShown = false
@@ -226,6 +235,8 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         for item in menu.items {
             if item.title == "Remove" || item.title == "Download" || item.title == "Open" {
                 item.isEnabled = dirVC.outlineView.isRowSelected(dirVC.outlineView.selectedRow)
+            } else if item.title == "New Tab" || item.title == "New Window" {
+                item.isEnabled = dirVC.directoryContents[dirVC.outlineView.selectedRow].isDirectory
             } else {
                 item.isEnabled = true
             }

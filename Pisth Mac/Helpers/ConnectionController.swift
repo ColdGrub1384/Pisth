@@ -34,6 +34,8 @@ class ConnectionController {
         // TODO: Present the terminal at given path
     }
     
+    private var firstTimeOpeningBrowser = true
+    
     /// Present the given directory.
     ///
     /// - Parameters:
@@ -68,7 +70,14 @@ class ConnectionController {
         
         try? FileManager.default.createDirectory(atPath: dirVC.localPath!, withIntermediateDirectories: true, attributes: nil)
         wc.window?.setTitleWithRepresentedFilename(dirVC.localPath!)
+        
+        if firstTimeOpeningBrowser {
+            wc.window?.tabbingMode = .automatic
+        }
+        
         wc.showWindow(nil)
+        
+        firstTimeOpeningBrowser = false
     }
     
     /// Initialize from given remote connection.

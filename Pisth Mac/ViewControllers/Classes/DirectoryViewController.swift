@@ -316,6 +316,8 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     ///     - directory: Directory's full path.
     func go(to directory: String) {
         self.directory = directory
+        window?.tab.title = "\(controller.session.username!)@\(controller.session.host!) - \(directory)"
+        window?.tab.toolTip = directory
         directoryContents = (controller.session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile]) ?? []
         outlineView.reloadData()
         

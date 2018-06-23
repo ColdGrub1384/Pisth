@@ -88,6 +88,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" autoenablesItems="NO" id="Pwp-KM-gJH">
                                     <items>
+                                        <menuItem title="New Tab" keyEquivalent="t" id="a80-eD-H3H">
+                                            <connections>
+                                                <action selector="newTab:" target="fJv-iG-GIr" id="1xE-V9-EAi"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="fnc-Mc-wdD"/>
                                         <menuItem title="Show hidden files" alternate="YES" id="I4Y-pT-xZL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
