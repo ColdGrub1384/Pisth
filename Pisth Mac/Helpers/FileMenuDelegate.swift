@@ -12,6 +12,26 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     
     // MARK: - Actions
     
+    /// Show bookmarks.
+    @IBAction func openBookmarks(_ sender: Any) {
+        var alreadyShown = false
+        for window in NSApp.windows {
+            if window.contentViewController is BookmarksViewController && (window.isVisible || window.isMiniaturized) {
+                window.setIsMiniaturized(false)
+                window.makeKey()
+                window.makeMain()
+                alreadyShown = true
+            }
+        }
+        
+        if !alreadyShown {
+            guard let window = NSStoryboard(name: "Main", bundle: Bundle.main).instantiateController(withIdentifier: "bookmarks") as? NSWindowController else {
+                return
+            }
+            window.showWindow(nil)
+        }
+    }
+    
     /// Upload file.
     @IBAction func uploadFile(_ sender: Any) {
         guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
