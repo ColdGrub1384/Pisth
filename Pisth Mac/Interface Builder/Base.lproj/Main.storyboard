@@ -364,7 +364,7 @@ CA
                                                 <action selector="openConnection:" target="Voe-Tx-rLC" id="CWT-AE-Y0x"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Edit" keyEquivalent="e" id="Jsy-aH-8Pj">
+                                        <menuItem title="Edit" keyEquivalent="E" id="Jsy-aH-8Pj">
                                             <connections>
                                                 <action selector="editConnection:" target="Voe-Tx-rLC" id="PpJ-vn-CjQ"/>
                                             </connections>
@@ -541,7 +541,7 @@ CA
                                 <action selector="openConnection:" target="XfG-lQ-9wD" id="c0v-fJ-YKw"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Edit" keyEquivalent="e" id="jD7-KV-9oi">
+                        <menuItem title="Edit" keyEquivalent="E" id="jD7-KV-9oi">
                             <connections>
                                 <action selector="editConnection:" target="XfG-lQ-9wD" id="lqg-pp-gL5"/>
                             </connections>
