@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3ACF9BDE2041BF6E006C3218 /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BD92041BF6D006C3218 /* xterm.js */; };
-		3ACF9BDF2041BF6E006C3218 /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BDA2041BF6E006C3218 /* xterm.css */; };
-		3ACF9BE02041BF6E006C3218 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BDB2041BF6E006C3218 /* fit.js */; };
-		3ACF9BE12041BF6E006C3218 /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BDC2041BF6E006C3218 /* terminal.html */; };
 		3ACF9BE32041BF93006C3218 /* Bundle+terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9BE22041BF93006C3218 /* Bundle+terminal.swift */; };
+		C9A7155D20DF1F0600A903E0 /* terminal.html in Resources */ = {isa = PBXBuildFile; fileRef = C9A7155C20DF1F0600A903E0 /* terminal.html */; };
+		C9A7156020DF252200A903E0 /* fit.js in Resources */ = {isa = PBXBuildFile; fileRef = C9A7155E20DF252200A903E0 /* fit.js */; };
+		C9A7156120DF252200A903E0 /* xterm.js in Resources */ = {isa = PBXBuildFile; fileRef = C9A7155F20DF252200A903E0 /* xterm.js */; };
+		C9A7156420DF252C00A903E0 /* xterm.css in Resources */ = {isa = PBXBuildFile; fileRef = C9A7156320DF252C00A903E0 /* xterm.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3ACF9BC52041BF18006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BC92041BF18006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ACF9BD92041BF6D006C3218 /* xterm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = xterm.js; sourceTree = "<group>"; };
-		3ACF9BDA2041BF6E006C3218 /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
-		3ACF9BDB2041BF6E006C3218 /* fit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = fit.js; sourceTree = "<group>"; };
-		3ACF9BDC2041BF6E006C3218 /* terminal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terminal.html; sourceTree = "<group>"; };
-		3ACF9BDD2041BF6E006C3218 /* xterm.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = xterm.js.map; sourceTree = "<group>"; };
 		3ACF9BE22041BF93006C3218 /* Bundle+terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+terminal.swift"; sourceTree = "<group>"; };
+		C9A7155C20DF1F0600A903E0 /* terminal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terminal.html; sourceTree = "<group>"; };
+		C9A7155E20DF252200A903E0 /* fit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = fit.js; sourceTree = "<group>"; };
+		C9A7155F20DF252200A903E0 /* xterm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = xterm.js; sourceTree = "<group>"; };
+		C9A7156220DF252C00A903E0 /* xterm.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = xterm.js.map; sourceTree = "<group>"; };
+		C9A7156320DF252C00A903E0 /* xterm.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xterm.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +56,11 @@
 			isa = PBXGroup;
 			children = (
 				3ACF9BC92041BF18006C3218 /* Info.plist */,
-				3ACF9BDB2041BF6E006C3218 /* fit.js */,
-				3ACF9BDC2041BF6E006C3218 /* terminal.html */,
-				3ACF9BDA2041BF6E006C3218 /* xterm.css */,
-				3ACF9BD92041BF6D006C3218 /* xterm.js */,
-				3ACF9BDD2041BF6E006C3218 /* xterm.js.map */,
+				C9A7155C20DF1F0600A903E0 /* terminal.html */,
+				C9A7155E20DF252200A903E0 /* fit.js */,
+				C9A7155F20DF252200A903E0 /* xterm.js */,
+				C9A7156320DF252C00A903E0 /* xterm.css */,
+				C9A7156220DF252C00A903E0 /* xterm.js.map */,
 				3ACF9BE22041BF93006C3218 /* Bundle+terminal.swift */,
 			);
 			path = "Pisth Terminal";
@@ -135,10 +135,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ACF9BE12041BF6E006C3218 /* terminal.html in Resources */,
-				3ACF9BDF2041BF6E006C3218 /* xterm.css in Resources */,
-				3ACF9BE02041BF6E006C3218 /* fit.js in Resources */,
-				3ACF9BDE2041BF6E006C3218 /* xterm.js in Resources */,
+				C9A7156420DF252C00A903E0 /* xterm.css in Resources */,
+				C9A7156020DF252200A903E0 /* fit.js in Resources */,
+				C9A7156120DF252200A903E0 /* xterm.js in Resources */,
+				C9A7155D20DF1F0600A903E0 /* terminal.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

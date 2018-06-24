@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="iJN-Bh-ju8">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -196,6 +197,50 @@
                 <customObject id="Wtb-yi-BO4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52" y="533"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="MZx-et-IKK">
+            <objects>
+                <windowController storyboardIdentifier="terminal" id="uT6-f5-jQL" sceneMemberID="viewController">
+                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="dfA-hO-KGm">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <rect key="contentRect" x="108" y="1008" width="592" height="332"/>
+                        <rect key="screenRect" x="-121" y="768" width="1600" height="877"/>
+                        <connections>
+                            <outlet property="delegate" destination="uT6-f5-jQL" id="obg-H1-Pth"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="5z2-6k-klc" kind="relationship" relationship="window.shadowedContentViewController" id="7yB-0F-O9Q"/>
+                    </connections>
+                </windowController>
+                <customObject id="ktd-Gh-4rd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="92"/>
+        </scene>
+        <!--Terminal View Controller-->
+        <scene sceneID="jaI-GF-K8k">
+            <objects>
+                <viewController id="5z2-6k-klc" customClass="TerminalViewController" customModule="Pisth_Mac" customModuleProvider="target" sceneMemberID="viewController">
+                    <wkWebView key="view" wantsLayer="YES" id="MLQ-7z-7fp">
+                        <rect key="frame" x="0.0" y="0.0" width="592" height="355"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                        <connections>
+                            <outlet property="UIDelegate" destination="5z2-6k-klc" id="V62-p7-Pxs"/>
+                            <outlet property="navigationDelegate" destination="5z2-6k-klc" id="Pj7-ar-q6b"/>
+                        </connections>
+                    </wkWebView>
+                    <connections>
+                        <outlet property="webView" destination="MLQ-7z-7fp" id="bws-ud-V0s"/>
+                    </connections>
+                </viewController>
+                <customObject id="t7p-k0-GRx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="534"/>
         </scene>
     </scenes>
     <resources>

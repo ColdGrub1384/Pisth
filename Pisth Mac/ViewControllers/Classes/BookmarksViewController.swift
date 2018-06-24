@@ -109,6 +109,7 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         do {
             let controller = try ConnectionController(connection: connection)
             controller.presentBrowser(atPath: connection.path)
+            controller.presentTerminal()
         } catch {
             NSApp.presentError(error)
         }

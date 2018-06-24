@@ -31,7 +31,14 @@ class ConnectionController {
     /// - Parameters:
     ///     - path: CWD.
     func presentTerminal(path: String? = nil) {
-        // TODO: Present the terminal at given path
+        guard let wc = NSStoryboard(name: "Connection", bundle: Bundle.main).instantiateController(withIdentifier: "terminal") as? NSWindowController else {
+            return
+        }
+        
+        (wc.contentViewController as? TerminalViewController)?.controller = self
+        (wc.contentViewController as? TerminalViewController)?.window = wc.window
+        
+        wc.showWindow(nil)
     }
     
     private var firstTimeOpeningBrowser = true

@@ -9,7 +9,11 @@
     import UIKit
 #endif
 
-/// Basic theme for the terminal.
+#if os(macOS)
+    import Cocoa
+#endif
+
+/// Basic theme for the terminal. A dark theme for macOS dark mode.
 open class BasicTheme: TerminalTheme {
     
     #if os(iOS)
@@ -24,19 +28,47 @@ open class BasicTheme: TerminalTheme {
         }
     #endif
     
-    /// Returns light blue.
+    /// Returns light blue or system selection color.
     open override var selectionColor: Color? {
-        return Color(red: 164/255, green: 205/255, blue: 255/255, alpha: 0.5)
+        #if os(macOS)
+            return Color.selectedControlColor
+        #else
+            return Color(red: 164/255, green: 205/255, blue: 255/255, alpha: 0.5)
+        #endif
     }
     
-    /// Returns white.
+    /// Returns white or a kind of black for macOS dark mode.
     open override var backgroundColor: Color? {
-        return .white
+        #if os(macOS)
+            if #available(OSX 10.14, *) {
+                if NSAppearance.current.name == .darkAqua || NSAppearance.current.name == .accessibilityHighContrastDarkAqua {
+                    return Color(red: 30/255, green: 30/255, blue: 30/255, alpha: 1)
+                } else {
+                    return .white
+                }
+            } else {
+                return .white
+            }
+        #else
+            return .white
+        #endif
     }
     
-    /// Returns black.
+    /// Returns black or white for macOS dark mode.
     open override var foregroundColor: Color? {
-        return .black
+        #if os(macOS)
+            if #available(OSX 10.14, *) {
+                if NSAppearance.current.name == .darkAqua || NSAppearance.current.name == .accessibilityHighContrastDarkAqua {
+                    return .white
+                } else {
+                    return .black
+                }
+            } else {
+                return .black
+            }
+        #else
+            return .black
+        #endif
     }
     
     /// Returns gray.
