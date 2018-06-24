@@ -108,8 +108,10 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         
         do {
             let controller = try ConnectionController(connection: connection)
-            controller.presentBrowser(atPath: connection.path)
             controller.presentTerminal()
+            if connection.useSFTP {
+                controller.presentBrowser(atPath: connection.path)
+            }
         } catch {
             NSApp.presentError(error)
         }

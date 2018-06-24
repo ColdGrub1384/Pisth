@@ -92,28 +92,50 @@ class ConnectionController {
     
     /// Initialize from given remote connection.
     init(connection: RemoteConnection) throws {
-        session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
+        if connection.useSFTP {
+            session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
+        } else {
+            session = NMSSHSession(host: connection.host, port: Int(connection.port), andUsername: connection.username)
+        }
         shellSession = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
-        if session.isConnected {
-            session.authenticate(byPassword: connection.password)
-            if session.isAuthorized {
-                session.sftp.connect()
-                if shellSession.isConnected {
-                    shellSession.authenticate(byPassword: connection.password)
-                    if shellSession.isAuthorized {
-                        shellSession.channel.requestPty = true
-                        shellSession.channel.ptyTerminalType = .xterm
-                    } else {
-                        throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
-                    }
+        
+        func openShell() throws {
+            if shellSession.isConnected {
+                shellSession.authenticate(byPassword: connection.password)
+                if shellSession.isAuthorized {
+                    shellSession.channel.requestPty = true
+                    shellSession.channel.ptyTerminalType = .xterm
                 } else {
                     throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
                 }
             } else {
-                throw NSError(domain:"", code:2, userInfo:[ NSLocalizedDescriptionKey: "Cannot authenticate. Check for the username and the password."])
+                throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
+            }
+        }
+        
+        if connection.useSFTP {
+            if session.isConnected {
+                session.authenticate(byPassword: connection.password)
+                if session.isAuthorized {
+                    session.sftp.connect()
+                    
+                    do {
+                        try openShell()
+                    } catch {
+                        throw error
+                    }
+                } else {
+                    throw NSError(domain:"", code:2, userInfo:[ NSLocalizedDescriptionKey: "Cannot authenticate. Check for the username and the password."])
+                }
+            } else {
+                throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
             }
         } else {
-            throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
+            do {
+                try openShell()
+            } catch {
+                throw error
+            }
         }
     }
 }
