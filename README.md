@@ -25,6 +25,13 @@ Why use Pisth:
 ## Screenshots
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
 
+# Pisth Mac
+
+![status](https://img.shields.io/badge/status-In%20development-red.svg)
+![macOS](https://img.shields.io/badge/macOS-10.14%2B-green.svg)
+
+## Screenshots
+![Screenshots](https://pisth.github.io/mac/screenshots.png)
 
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20APT/Pisth%20APT/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
 
@@ -70,7 +77,7 @@ More information at https://pisth.github.io/docs/getting-started.html.
 
 - [Pisth Shared/](Pisth%20Shared/): Shared sources between targets.
 - [Pisth Terminal/](Pisth%20Terminal/): HTML page for displaying the terminal.
-- [Pisth/](Pisth): iOS Application.
+- [Pisth/](Pisth): iOS and macOS Applications.
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
