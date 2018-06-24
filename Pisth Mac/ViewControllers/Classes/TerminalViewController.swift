@@ -60,7 +60,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
             guard let rows = rows_ as? UInt else { return }
             terminalCols = cols
             terminalRows = rows
-            controller.session.channel.requestSizeWidth(cols, height: rows)
+            controller.shellSession.channel.requestSizeWidth(cols, height: rows)
         }
         
         // Get and set columns
@@ -148,7 +148,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
             }
             
             if event.modifierFlags.rawValue != 1048840 {
-                try? self.controller.session.channel.write(character)
+                try? self.controller.shellSession.channel.write(character)
             }
             
             return event
@@ -189,7 +189,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
         webView.evaluateJavaScript("fit(term)") { (_, _) in
             if self.console == "" {
 
-                let channel = self.controller.session.channel
+                let channel = self.controller.shellSession.channel
                 
                 do {
                     try channel?.startShell()

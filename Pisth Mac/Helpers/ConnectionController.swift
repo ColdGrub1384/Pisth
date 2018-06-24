@@ -23,8 +23,11 @@ class ConnectionController {
         }
     }
     
-    /// Session used for interacting with the server.
+    /// Session used for SFTP.
     let session: NMSSHSession
+    
+    /// Session used for the shell.
+    let shellSession: NMSSHSession
     
     /// Present the terminal.
     ///
@@ -90,12 +93,22 @@ class ConnectionController {
     /// Initialize from given remote connection.
     init(connection: RemoteConnection) throws {
         session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
+        shellSession = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
         if session.isConnected {
             session.authenticate(byPassword: connection.password)
             if session.isAuthorized {
                 session.sftp.connect()
-                session.channel.requestPty = true
-                session.channel.ptyTerminalType = .xterm
+                if shellSession.isConnected {
+                    shellSession.authenticate(byPassword: connection.password)
+                    if shellSession.isAuthorized {
+                        shellSession.channel.requestPty = true
+                        shellSession.channel.ptyTerminalType = .xterm
+                    } else {
+                        throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
+                    }
+                } else {
+                    throw NSError(domain:"", code:1, userInfo:[ NSLocalizedDescriptionKey: "Cannot connect to the session. Check for the hostname and, the port and the username."])
+                }
             } else {
                 throw NSError(domain:"", code:2, userInfo:[ NSLocalizedDescriptionKey: "Cannot authenticate. Check for the username and the password."])
             }
