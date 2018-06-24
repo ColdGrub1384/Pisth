@@ -32,7 +32,12 @@ class ContentViewController: UIViewController, PanelManager {
         terminalPanel.modalPresentationStyle = .popover
         terminalPanel.popoverPresentationController?.barButtonItem = sender
         
-        present(terminalPanel, animated: true) {
+        var vc: UIViewController? = self
+        if view.window == nil {
+            vc = UIApplication.shared.keyWindow?.rootViewController
+        }
+        
+        vc?.present(terminalPanel, animated: true) {
             terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
         }
     }
@@ -51,7 +56,12 @@ class ContentViewController: UIViewController, PanelManager {
         directoryPanel.popoverPresentationController?.sourceView = sender
         directoryPanel.popoverPresentationController?.sourceRect = sender?.frame ?? CGRect.zero
         
-        present(directoryPanel, animated: true) {
+        var vc: UIViewController? = self
+        if view.window == nil {
+            vc = UIApplication.shared.keyWindow?.rootViewController
+        }
+        
+        vc?.present(directoryPanel, animated: true) {
             browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
         }
     }
