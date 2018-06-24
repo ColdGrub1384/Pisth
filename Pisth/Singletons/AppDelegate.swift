@@ -333,16 +333,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                             activityVC.dismiss(animated: true, completion: {
                                 let terminalVC = TerminalViewController()
                                 terminalVC.pureMode = true
-                                terminalVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                                 
-                                self.navigationController.setViewControllers([terminalVC], animated: true)
+                                if !AppDelegate.shared.splitViewController.isCollapsed {
+                                    terminalVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    self.navigationController.setViewControllers([terminalVC], animated: true)
+                                } else {
+                                    AppDelegate.shared.navigationController.pushViewController(terminalVC, animated: true)
+                                }
                             })
                         } else {
                             let dirVC = DirectoryTableViewController(connection: connection)
-                            dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
                             
                             activityVC.dismiss(animated: true, completion: {
-                                self.navigationController.setViewControllers([dirVC], animated: true)
+                                if !AppDelegate.shared.splitViewController.isCollapsed {
+                                    dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    self.navigationController.setViewControllers([dirVC], animated: true)
+                                } else {
+                                    AppDelegate.shared.navigationController.pushViewController(dirVC, animated: true)
+                                }
                             })
                         }
                     })
