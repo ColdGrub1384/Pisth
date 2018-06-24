@@ -346,7 +346,6 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// - Parameters:
     ///     - directory: Directory's full path.
     func go(to directory: String) {
-        self.directory = directory
         window?.tab.title = "\(controller.session.username!)@\(controller.session.host!) - \(directory)"
         window?.tab.toolTip = directory
         directoryContents = (controller.session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile]) ?? []
@@ -370,11 +369,21 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
             path = path.nsString.appendingPathComponent(component)
             items.append(.init(title: component, value: path))
         }
-        if sidebar.items.count < items.count {
+        
+        var containsSelf = false
+        for item in sidebar.items {
+            if item.value.removingUnnecessariesSlashes == directory.removingUnnecessariesSlashes {
+                containsSelf = true
+            }
+        }
+        if sidebar.items.count < items.count || !containsSelf {
             sidebar.items = items.reversed()
             sidebar.reloadData()
+            sidebar.ignoreSelection = true
             sidebar.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
         }
+        
+        self.directory = directory
     }
     
     // MARK: - View controller
