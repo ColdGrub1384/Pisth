@@ -25,6 +25,9 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     /// The text received from the server.
     var console = ""
     
+    /// Directory to open with the shell.
+    var pwd: String?
+    
     /// The Web view showing the terminal.
     @IBOutlet weak var webView: WKWebView!
     
@@ -194,6 +197,9 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
                 do {
                     try channel?.startShell()
                     channel?.delegate = self
+                    if let pwd = self.pwd {
+                        try channel?.write("cd '\(pwd)'; clear; history -d $(history 1)\n")
+                    }
                 } catch {
                     NSApp.presentError(error)
                 }

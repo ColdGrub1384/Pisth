@@ -40,14 +40,17 @@ class ConnectionController {
     /// - Parameters:
     ///     - path: CWD.
     func presentTerminal(path: String? = nil) {
-        guard let wc = NSStoryboard(name: "Connection", bundle: Bundle.main).instantiateController(withIdentifier: "terminal") as? NSWindowController else {
+        guard let wc = NSStoryboard(name: "Connection", bundle: Bundle.main).instantiateController(withIdentifier: "terminal") as? NSWindowController, let termVC = wc.contentViewController as? TerminalViewController else {
             return
         }
         
+        shellSession.channel.closeShell()
+        
         wc.window?.title = connection.username+"@"+connection.host
         
-        (wc.contentViewController as? TerminalViewController)?.controller = self
-        (wc.contentViewController as? TerminalViewController)?.window = wc.window
+        termVC.pwd = path
+        termVC.controller = self
+        termVC.window = wc.window
         
         wc.showWindow(nil)
     }
@@ -103,7 +106,7 @@ class ConnectionController {
             if shellSession.isConnected {
                 shellSession.authenticate(byPassword: connection.password)
                 if shellSession.isAuthorized {
-                    home = try? session.channel.execute("echo ~").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
+                    home = try? shellSession.channel.execute("echo ~").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                     shellSession.channel.requestPty = true
                     shellSession.channel.ptyTerminalType = .xterm
                 } else {

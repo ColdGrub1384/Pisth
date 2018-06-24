@@ -26,6 +26,26 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     
     // MARK: - Actions
     
+    /// Open directory in Shell.
+    @IBAction func openInShell(_ sender: Any) {
+        guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
+            return
+        }
+        
+        for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+            let file = dirVC.directoryContents[i]
+            
+            do {
+                let connection = dirVC.controller.connection
+                connection.useSFTP = false
+                let controller = try ConnectionController(connection: connection)
+                controller.presentTerminal(path: dirVC.directory.nsString.appendingPathComponent(file.filename))
+            } catch {
+                NSApp.presentError(error)
+            }
+        }
+    }
+    
     /// Open selected directory in new tab or a new terminal.
     @IBAction func newTab(_ sender: Any) {
         if let termVC = NSApp.keyWindow?.contentViewController as? TerminalViewController {
@@ -280,7 +300,7 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         for item in menu.items {
             if item.title == "Remove" || item.title == "Download" || item.title == "Open" {
                 item.isEnabled = (highlightedRows(forOutlineView: dirVC.outlineView).count > 0)
-            } else if item.title == "New Tab" || item.title == "New Window" {
+            } else if item.title == "New Tab" || item.title == "New Window" || item.title == "Open in shell" {
                 item.isEnabled = true
                 for row in highlightedRows(forOutlineView: dirVC.outlineView) {
                     if !dirVC.directoryContents[row].isDirectory {

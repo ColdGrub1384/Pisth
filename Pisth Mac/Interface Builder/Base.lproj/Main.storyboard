@@ -93,6 +93,11 @@
                                                 <action selector="newTab:" target="fJv-iG-GIr" id="1xE-V9-EAi"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Open in Shell" keyEquivalent="T" id="dqN-cc-ANb">
+                                            <connections>
+                                                <action selector="openInShell:" target="fJv-iG-GIr" id="0r1-zh-Wk3"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="fnc-Mc-wdD"/>
                                         <menuItem title="Show hidden files" alternate="YES" id="I4Y-pT-xZL">
                                             <modifierMask key="keyEquivalentModifierMask"/>
