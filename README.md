@@ -25,6 +25,8 @@ Why use Pisth:
 ## Screenshots
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
 
+![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
+
 # Pisth Mac
 
 ![status](https://img.shields.io/badge/status-In%20development-red.svg)
