@@ -104,6 +104,7 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
+		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9985AA920D6C1DE00389A7B /* Connection.storyboard */; };
 		C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */; };
 		C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAE20D6C4F500389A7B /* ConnectionController.swift */; };
@@ -268,6 +269,7 @@
 		3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C9985AA920D6C1DE00389A7B /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 		C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		C9985AAE20D6C4F500389A7B /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 				C9985AAE20D6C4F500389A7B /* ConnectionController.swift */,
 				C9B205C020D70CD400045F20 /* FileObserver.swift */,
 				C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */,
+				C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */,
 				C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */,
 				C9CB27F020D5C12700290DBE /* Pisth.xcdatamodel in Sources */,
+				C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */,
 				C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */,
 				C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */,
 				C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */,

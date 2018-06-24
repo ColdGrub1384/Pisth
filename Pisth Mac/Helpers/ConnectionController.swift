@@ -32,6 +32,9 @@ class ConnectionController {
     /// Session used for the shell.
     let shellSession: NMSSHSession
     
+    /// Home of the current user.
+    var home: String?
+    
     /// Present the terminal.
     ///
     /// - Parameters:
@@ -55,7 +58,6 @@ class ConnectionController {
     ///     - path: Directory to open.
     func presentBrowser(atPath path: String) {
         
-        let home = try? session.channel.execute("echo ~").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
         let parsedPath = path.replacingFirstOccurrence(of: "~", with: home ?? "~")
         
         guard let wc = NSStoryboard(name: "Connection", bundle: Bundle.main).instantiateController(withIdentifier: "directory") as? NSWindowController else {
@@ -101,6 +103,7 @@ class ConnectionController {
             if shellSession.isConnected {
                 shellSession.authenticate(byPassword: connection.password)
                 if shellSession.isAuthorized {
+                    home = try? session.channel.execute("echo ~").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                     shellSession.channel.requestPty = true
                     shellSession.channel.ptyTerminalType = .xterm
                 } else {

@@ -65,6 +65,9 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     /// The `outlineView` showing the directory content.
     @IBOutlet weak var outlineView: FilesOutlineView!
+
+    /// Sidebar.
+    @IBOutlet weak var sidebar: BrowserSidebarOutlineView!
     
     /// Upload local file to given path.
     ///
@@ -360,6 +363,15 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
                 toolbarItem.isEnabled = (directory != "/")
             }
         }
+        
+        var items = [BrowserSidebarOutlineView.Item]()
+        var path = "/"
+        for component in directory.nsString.pathComponents {
+            path = path.nsString.appendingPathComponent(component)
+            items.append(.init(title: component, value: path))
+        }
+        sidebar.items = items.reversed()
+        sidebar.reloadData()
     }
     
     // MARK: - View controller
