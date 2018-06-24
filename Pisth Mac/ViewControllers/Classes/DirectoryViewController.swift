@@ -370,8 +370,11 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
             path = path.nsString.appendingPathComponent(component)
             items.append(.init(title: component, value: path))
         }
-        sidebar.items = items.reversed()
-        sidebar.reloadData()
+        if sidebar.items.count < items.count {
+            sidebar.items = items.reversed()
+            sidebar.reloadData()
+            sidebar.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        }
     }
     
     // MARK: - View controller
