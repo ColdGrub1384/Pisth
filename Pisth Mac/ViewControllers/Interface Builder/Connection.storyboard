@@ -87,20 +87,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="67" horizontalPageScroll="10" verticalLineScroll="67" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifM-Av-jVK">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="67" horizontalPageScroll="10" verticalLineScroll="67" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifM-Av-jVK">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <clipView key="contentView" drawsBackground="NO" id="0ag-4Z-G3A">
-                                    <rect key="frame" x="1" y="1" width="478" height="268"/>
+                                <clipView key="contentView" id="0ag-4Z-G3A">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="65" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="bRv-WC-Rgw" id="aU7-qv-qKv" customClass="FilesOutlineView" customModule="Pisth_Mac" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="478" height="268"/>
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="65" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="bRv-WC-Rgw" id="aU7-qv-qKv" customClass="FilesOutlineView" customModule="Pisth_Mac" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="475" minWidth="16" maxWidth="1000" id="bRv-WC-Rgw">
+                                                <tableColumn width="477" minWidth="16" maxWidth="1000" id="bRv-WC-Rgw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -114,7 +114,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DataCell" id="nZ3-qD-9OR">
-                                                            <rect key="frame" x="1" y="1" width="475" height="65"/>
+                                                            <rect key="frame" x="1" y="1" width="477" height="65"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="36T-w7-UcT">
@@ -125,7 +125,7 @@
                                                                     <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" image="NSFolder" id="PaL-VF-dhH"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="sSv-pI-zaG">
-                                                                    <rect key="frame" x="71" y="27" width="403" height="35"/>
+                                                                    <rect key="frame" x="71" y="27" width="405" height="35"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="35" id="5Pg-T3-7aA"/>
                                                                     </constraints>
@@ -136,7 +136,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="wT7-Z7-40D">
-                                                                    <rect key="frame" x="71" y="0.0" width="403" height="35"/>
+                                                                    <rect key="frame" x="71" y="0.0" width="405" height="35"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="File permissions" id="zxN-id-miH">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -171,7 +171,7 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
-                                    <nil key="backgroundColor"/>
+                                    <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1ki-tp-oY1">
                                     <rect key="frame" x="1" y="119" width="238" height="15"/>
@@ -196,7 +196,7 @@
                 </viewController>
                 <customObject id="Wtb-yi-BO4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="533"/>
+            <point key="canvasLocation" x="52" y="560"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="MZx-et-IKK">

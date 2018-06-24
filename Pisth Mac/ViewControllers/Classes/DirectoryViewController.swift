@@ -347,7 +347,7 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// Fetch files and setup `outlineView`.
     override func viewDidAppear() {
         super.viewDidAppear()
-        
+                
         window?.registerForDraggedTypes([.fileURL, .fileContents])
         
         outlineView.directoryViewController = self
