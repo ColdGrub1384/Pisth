@@ -12,6 +12,9 @@ import Pisth_Shared
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
+    /// The "File" menu.
+    @IBOutlet weak var fileMenu: NSMenu!
+    
     // MARK: - "Connection" menu
     
     // MARK: - Menu delegate

@@ -390,7 +390,11 @@ CA
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Pisth_Mac" customModuleProvider="target">
+                    <connections>
+                        <outlet property="fileMenu" destination="Pwp-KM-gJH" id="OdJ-nA-H8e"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="fJv-iG-GIr" customClass="FileMenuDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

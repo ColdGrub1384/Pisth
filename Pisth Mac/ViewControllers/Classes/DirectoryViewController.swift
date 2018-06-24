@@ -18,6 +18,15 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     private var directoryContents_ = [NMSFTPFile]()
     
+    /// Selected or clicked rows in `outlineView`.
+    var highlightedRows: IndexSet {
+        if outlineView.clickedRow != -1 {
+            return IndexSet(integer: outlineView.clickedRow)
+        } else {
+            return outlineView.selectedRowIndexes
+        }
+    }
+    
     /// The contents of the directory set in `viewDidAppear` excluding hidden files if `ConnectionController.showHiddenFiles` is `false`.
     var directoryContents: [NMSFTPFile] {
         set {
@@ -226,86 +235,105 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         }
     }
     
-    /// Open clicked file or directory.
+    /// Custom selected files to open with `openFile(showInFinder:)`.
+    var selectedFiles: [NMSFTPFile]?
+    
+    @objc private func openFile_() {
+        openFile()
+    }
+    
+    /// Open selected files.
     ///
     /// - Parameters:
     ///     - showInFinder: Show file in Finder.
     @objc func openFile(showInFinder: Bool = false) {
-        guard let file = outlineView.item(atRow: outlineView.clickedRow) as? NMSFTPFile ?? outlineView.item(atRow: outlineView.selectedRow) as? NMSFTPFile else {
-            return
+        
+        var files = [NMSFTPFile]()
+        if let files_ = selectedFiles {
+            files = files_
+        } else {
+            for i in highlightedRows {
+                files.append(directoryContents[i])
+            }
         }
         
-        if file.isDirectory { // Open directory
-            go(to: directory.nsString.appendingPathComponent(file.filename))
-        } else { // Download file
-            
-            guard let localPath = localPath else {
-                return
-            }
-            
-            let alert = NSAlert()
-            alert.messageText = "Downloading \(file.filename!)..."
-            alert.alertStyle = .informational
-            alert.addButton(withTitle: "Cancel")
-            
-            var continueDownload = true
-            
-            DispatchQueue.global(qos: .background).async {
-                let data = self.controller.session.sftp!.contents(atPath: self.directory.nsString.appendingPathComponent(file.filename), progress: { (downloaded, total) -> Bool in
-                    let downloadedFormatted = ByteCountFormatter().string(fromByteCount: Int64(downloaded))
-                    let totalFormatted = ByteCountFormatter().string(fromByteCount: Int64(total))
-                    
-                    DispatchQueue.main.async {
-                        alert.informativeText = "\(downloadedFormatted) / \(totalFormatted)"
-                    }
-                    
-                    return continueDownload
-                })
+        for file in files {
+            if file.isDirectory { // Open directory
+                if files.count == 1 {
+                    go(to: directory.nsString.appendingPathComponent(file.filename))
+                } else {
+                    controller.presentBrowser(atPath: directory.nsString.appendingPathComponent(file.filename))
+                }
+            } else { // Download file
                 
-                guard continueDownload else {
+                guard let localPath = localPath else {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    alert.buttons[0].performClick(alert)
+                let alert = NSAlert()
+                alert.messageText = "Downloading \(file.filename!)..."
+                alert.alertStyle = .informational
+                alert.addButton(withTitle: "Cancel")
+                
+                var continueDownload = true
+                
+                DispatchQueue.global(qos: .background).async {
+                    let data = self.controller.session.sftp!.contents(atPath: self.directory.nsString.appendingPathComponent(file.filename), progress: { (downloaded, total) -> Bool in
+                        let downloadedFormatted = ByteCountFormatter().string(fromByteCount: Int64(downloaded))
+                        let totalFormatted = ByteCountFormatter().string(fromByteCount: Int64(total))
+                        
+                        DispatchQueue.main.async {
+                            alert.informativeText = "\(downloadedFormatted) / \(totalFormatted)"
+                        }
+                        
+                        return continueDownload
+                    })
                     
-                    do { // Open file
-                        let filePath = localPath.nsString.appendingPathComponent(file.filename)
+                    guard continueDownload else {
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        alert.buttons[0].performClick(alert)
                         
-                        if FileManager.default.fileExists(atPath: filePath) {
-                            try FileManager.default.removeItem(atPath: filePath)
-                        }
-                        
-                        if !FileManager.default.createFile(atPath: filePath, contents: data, attributes: nil) {
-                            NSApp.presentError(NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey:"Error creating file!"]))
-                            return
-                        }
-                        
-                        if !showInFinder { // Open file
-                            try? FileObserver(file: URL(fileURLWithPath: filePath)).start { // Upload file
-                                DispatchQueue.main.async {
-                                    self.upload(filePath, to: self.directory.nsString.appendingPathComponent(file.filename))
-                                }
+                        do { // Open file
+                            let filePath = localPath.nsString.appendingPathComponent(file.filename)
+                            
+                            if FileManager.default.fileExists(atPath: filePath) {
+                                try FileManager.default.removeItem(atPath: filePath)
                             }
                             
-                            NSWorkspace.shared.openFile(filePath)
-                        } else { // Show file in Finder
-                            do {
-                                let downloads = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
-                                try FileManager.default.moveItem(at: URL(fileURLWithPath: filePath), to: downloads.appendingPathComponent(filePath.nsString.lastPathComponent))
-                                NSWorkspace.shared.selectFile(downloads.appendingPathComponent(filePath.nsString.lastPathComponent).path, inFileViewerRootedAtPath: "")
-                            } catch {
-                                NSApp.presentError(error)
+                            if !FileManager.default.createFile(atPath: filePath, contents: data, attributes: nil) {
+                                NSApp.presentError(NSError(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey:"Error creating file!"]))
+                                return
                             }
+                            
+                            if !showInFinder { // Open file
+                                try? FileObserver(file: URL(fileURLWithPath: filePath)).start { // Upload file
+                                    DispatchQueue.main.async {
+                                        self.upload(filePath, to: self.directory.nsString.appendingPathComponent(file.filename))
+                                    }
+                                }
+                                
+                                NSWorkspace.shared.openFile(filePath)
+                            } else { // Show file in Finder
+                                do {
+                                    let downloads = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+                                    try FileManager.default.moveItem(at: URL(fileURLWithPath: filePath), to: downloads.appendingPathComponent(filePath.nsString.lastPathComponent))
+                                    NSWorkspace.shared.selectFile(downloads.appendingPathComponent(filePath.nsString.lastPathComponent).path, inFileViewerRootedAtPath: "")
+                                } catch {
+                                    NSApp.presentError(error)
+                                }
+                            }
+                        } catch {
+                            NSApp.presentError(error)
                         }
-                    } catch {
-                        NSApp.presentError(error)
                     }
                 }
-            }
-            
-            if alert.runModal() == .alertFirstButtonReturn {
-                continueDownload = false
+                
+                if alert.runModal() == .alertFirstButtonReturn {
+                    continueDownload = false
+                }
             }
         }
     }
@@ -347,11 +375,13 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// Fetch files and setup `outlineView`.
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+        outlineView.menu = (NSApp.delegate as? AppDelegate)?.fileMenu
                 
         window?.registerForDraggedTypes([.fileURL, .fileContents])
         
         outlineView.directoryViewController = self
-        outlineView.doubleAction = #selector(openFile)
+        outlineView.doubleAction = #selector(openFile_)
         outlineView.registerForDraggedTypes([.fileURL, .fileContents])
         
         go(to: directory)
