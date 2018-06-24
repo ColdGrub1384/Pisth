@@ -23,6 +23,9 @@ class ConnectionController {
         }
     }
     
+    /// Info for the current connection.
+    let connection: RemoteConnection
+    
     /// Session used for SFTP.
     let session: NMSSHSession
     
@@ -38,13 +41,13 @@ class ConnectionController {
             return
         }
         
+        wc.window?.title = connection.username+"@"+connection.host
+        
         (wc.contentViewController as? TerminalViewController)?.controller = self
         (wc.contentViewController as? TerminalViewController)?.window = wc.window
         
         wc.showWindow(nil)
     }
-    
-    private var firstTimeOpeningBrowser = true
     
     /// Present the given directory.
     ///
@@ -81,17 +84,12 @@ class ConnectionController {
         try? FileManager.default.createDirectory(atPath: dirVC.localPath!, withIntermediateDirectories: true, attributes: nil)
         wc.window?.setTitleWithRepresentedFilename(dirVC.localPath!)
         
-        if firstTimeOpeningBrowser {
-            wc.window?.tabbingMode = .automatic
-        }
-        
         wc.showWindow(nil)
-        
-        firstTimeOpeningBrowser = false
     }
     
     /// Initialize from given remote connection.
     init(connection: RemoteConnection) throws {
+        self.connection = connection
         if connection.useSFTP {
             session = NMSSHSession.connect(toHost: connection.host, port: Int(connection.port), withUsername: connection.username)
         } else {

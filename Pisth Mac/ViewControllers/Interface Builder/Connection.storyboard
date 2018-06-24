@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="iJN-Bh-ju8">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.12"/>
@@ -89,7 +89,7 @@
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="67" horizontalPageScroll="10" verticalLineScroll="67" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifM-Av-jVK">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <clipView key="contentView" id="0ag-4Z-G3A">
+                                <clipView key="contentView" drawsBackground="NO" id="0ag-4Z-G3A">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -171,7 +171,7 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
-                                    <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1ki-tp-oY1">
                                     <rect key="frame" x="1" y="119" width="238" height="15"/>
@@ -202,7 +202,7 @@
         <scene sceneID="MZx-et-IKK">
             <objects>
                 <windowController storyboardIdentifier="terminal" id="uT6-f5-jQL" sceneMemberID="viewController">
-                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="dfA-hO-KGm">
+                    <window key="window" title="Terminal" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="preferred" id="dfA-hO-KGm">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="108" y="1008" width="592" height="332"/>
                         <rect key="screenRect" x="-121" y="768" width="1600" height="877"/>

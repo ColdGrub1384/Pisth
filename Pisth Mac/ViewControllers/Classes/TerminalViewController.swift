@@ -147,7 +147,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
                 break
             }
             
-            if event.modifierFlags.rawValue != 1048840 {
+            if event.modifierFlags.rawValue != 1048840 && event.window == self.window {
                 try? self.controller.shellSession.channel.write(character)
             }
             

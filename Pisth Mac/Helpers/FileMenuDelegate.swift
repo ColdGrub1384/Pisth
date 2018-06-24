@@ -26,14 +26,21 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     
     // MARK: - Actions
     
-    /// Open selected directory in new tab.
+    /// Open selected directory in new tab or a new terminal.
     @IBAction func newTab(_ sender: Any) {
-        guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
-            return
-        }
-        
-        for i in highlightedRows(forOutlineView: dirVC.outlineView) {
-            dirVC.controller.presentBrowser(atPath: dirVC.directory.nsString.appendingPathComponent(dirVC.directoryContents[i].filename))
+        if let termVC = NSApp.keyWindow?.contentViewController as? TerminalViewController {
+            do {
+                let connection = termVC.controller.connection
+                connection.useSFTP = false
+                let controller = try ConnectionController(connection: connection)
+                controller.presentTerminal()
+            } catch {
+                NSApp.presentError(error)
+            }
+        } else if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
+            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+                dirVC.controller.presentBrowser(atPath: dirVC.directory.nsString.appendingPathComponent(dirVC.directoryContents[i].filename))
+            }
         }
     }
     
@@ -261,7 +268,11 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
             for item in menu.items {
-                item.isEnabled = false
+                if item.title != "New Tab" {
+                    item.isEnabled = false
+                } else {
+                    item.isEnabled = (NSApp.keyWindow?.contentViewController is TerminalViewController)
+                }
             }
             return
         }
