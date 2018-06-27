@@ -324,7 +324,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     let activityVC = ActivityViewController(message: "Loading...")
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
-                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         
                         if !connection.useSFTP { // SSH
                             
@@ -512,33 +512,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Open connection from user activity.
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
+        guard let username = userActivity.userInfo?["username"] as? String else {
+            return false
+        }
+        
+        guard let host = userActivity.userInfo?["host"] as? String else {
+            return false
+        }
+        
+        guard let password = userActivity.userInfo?["password"] as? String else {
+            return false
+        }
+        
+        guard let port = userActivity.userInfo?["port"] as? UInt64 else {
+            return false
+        }
+        
+        guard let path = userActivity.userInfo?["directory"] as? String else {
+            return false
+        }
+        
+        var options = [.init("path"):path, .init("password"):password] as [UIApplicationOpenURLOptionsKey : String]
+        if let pubKey = userActivity.userInfo?["publicKey"] as? String {
+            options[.init("publicKey")] = pubKey
+        }
+        if let privKey = userActivity.userInfo?["privateKey"] as? String {
+            options[.init("privateKey")] = privKey
+        }
+        
         if userActivity.activityType == "openDirectory" {
-                        
-            guard let username = userActivity.userInfo?["username"] as? String else {
-                return false
-            }
-            
-            guard let host = userActivity.userInfo?["host"] as? String else {
-                return false
-            }
-            
-            guard let password = userActivity.userInfo?["password"] as? String else {
-                return false
-            }
-            
-            guard let port = userActivity.userInfo?["port"] as? UInt64 else {
-                return false
-            }
-            
-            guard let path = userActivity.userInfo?["directory"] as? String else {
-                return false
-            }
             
             guard let url = URL(string: "sftp://\(username)@\(host):\(port)") else {
                 return false
             }
             
-            return self.application(application, open: url, options: [.init("path"):path, .init("password"):password])
+            return self.application(application, open: url, options: options)
+        } else if userActivity.activityType == "openTerminal" {
+            
+            guard let url = URL(string: "ssh://\(username)@\(host):\(port)") else {
+                return false
+            }
+            
+            return self.application(application, open: url, options: options)
         }
         
         return false

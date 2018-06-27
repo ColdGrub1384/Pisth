@@ -666,6 +666,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "port":connection.port]
+        
+        if let pubKey = connection.publicKey {
+            activity.userInfo!["publicKey"] = pubKey
+        }
+        
+        if let privKey = connection.privateKey {
+            activity.userInfo!["privateKey"] = privKey
+        }
     }
     
     // MARK: - Keyboard
@@ -1085,6 +1093,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     activity.isEligibleForSearch = true
                     activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
                     activity.title = connection.name
+                    activity.requiredUserInfoKeys = ["username", "host", "password", "publicKey", "privateKey", "port", "directory"]
                     
                     let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
                     if let os = connection.os?.lowercased() {
