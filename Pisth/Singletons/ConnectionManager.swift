@@ -72,7 +72,11 @@ class ConnectionManager {
         session?.connect()
         if session!.isConnected {
             result = .connected
-            session?.authenticate(byPassword: connection.password)
+            if let privKey = connection.privateKey {
+                session?.authenticateBy(inMemoryPublicKey: connection.publicKey, privateKey: privKey, andPassword: connection.password)
+            } else {
+                session?.authenticate(byPassword: connection.password)
+            }
         } else {
             result = .notConnected
             return
@@ -95,7 +99,11 @@ class ConnectionManager {
             filesSession?.connect()
             if filesSession!.isConnected {
                 result = .connected
-                filesSession?.authenticate(byPassword: connection.password)
+                if let privKey = connection.privateKey {
+                    filesSession?.authenticateBy(inMemoryPublicKey: connection.publicKey, privateKey: privKey, andPassword: connection.password)
+                } else {
+                    filesSession?.authenticate(byPassword: connection.password)
+                }
             } else {
                 result = .notConnected
                 return

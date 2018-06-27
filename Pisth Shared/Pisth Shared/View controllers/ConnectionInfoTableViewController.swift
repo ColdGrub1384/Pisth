@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 /// Table view controller containing information about a connection.
-public class ConnectionInformationTableViewController: UITableViewController {
+open class ConnectionInformationTableViewController: UITableViewController {
     
     /// Table view to reload after making changes.
     open var rootTableView: UITableView?
@@ -41,9 +41,15 @@ public class ConnectionInformationTableViewController: UITableViewController {
     /// Index of connection to edit.
     public var index: Int?
     
+    /// Content of the public key.
+    public var publicKey: String?
+    
+    /// Content of the private key.
+    public var privateKey: String?
+    
     // MARK: - View controller
     
-    override public func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         textFields = [name, host, port, username, password, path]
@@ -64,6 +70,8 @@ public class ConnectionInformationTableViewController: UITableViewController {
             password?.text = connection.password
             useSFTP?.isOn = connection.useSFTP
             path?.text = connection.path
+            publicKey = connection.publicKey
+            privateKey = connection.privateKey
         }
         
         if #available(iOS 11.0, *) {
@@ -75,7 +83,7 @@ public class ConnectionInformationTableViewController: UITableViewController {
     ///
     /// - Parameters:
     ///     - sender: Sender object.
-    @IBAction func save(_ sender: Any) {
+    @IBAction open func save(_ sender: Any) {
         let name = self.name?.text ?? ""
         let host = self.host?.text ?? ""
         var port = self.port?.text ?? ""
@@ -122,6 +130,8 @@ public class ConnectionInformationTableViewController: UITableViewController {
                         result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
                         result.setValue(useSFTP, forKey: "sftp")
+                        result.setValue(publicKey, forKey: "publicKey")
+                        result.setValue(privateKey, forKey: "privateKey")
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
                         DataManager.shared.saveContext()
@@ -131,7 +141,7 @@ public class ConnectionInformationTableViewController: UITableViewController {
                     
                     cancel(self)
                 } else {
-                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, publicKey: publicKey, privateKey: privateKey, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
                     
                     cancel(self)
                 }
@@ -153,25 +163,25 @@ public class ConnectionInformationTableViewController: UITableViewController {
     // MARK: - Fields
     
     /// Name field.
-    @IBOutlet weak var name: UITextField?
+    @IBOutlet weak public var name: UITextField?
     
     /// Host field.
-    @IBOutlet weak var host: UITextField?
+    @IBOutlet weak public var host: UITextField?
     
     /// Port field.
-    @IBOutlet weak var port: UITextField?
+    @IBOutlet weak public var port: UITextField?
     
     /// Username field.
-    @IBOutlet weak var username: UITextField?
+    @IBOutlet weak public var username: UITextField?
     
     /// Password field.
-    @IBOutlet weak var password: UITextField?
+    @IBOutlet weak public var password: UITextField?
     
     /// Use SFTP field.
-    @IBOutlet weak var useSFTP: UISwitch?
+    @IBOutlet weak public var useSFTP: UISwitch?
     
     /// Path field.
-    @IBOutlet weak var path: UITextField?
+    @IBOutlet weak public var path: UITextField?
     
     /// All text fields
     var textFields: [UITextField?]!

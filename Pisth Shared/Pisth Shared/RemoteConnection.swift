@@ -23,8 +23,14 @@ public class RemoteConnection: NSObject, NSCoding {
     /// Username used to login.
     public var username: String
     
-    /// Password used to authenticate.
+    /// Password used to authenticate or for private key.
     public var password: String
+    
+    /// Public key.
+    public var publicKey: String?
+    
+    /// Private key.
+    public var privateKey: String?
     
     /// Name that appears in bookmarks.
     public var name: String
@@ -42,7 +48,7 @@ public class RemoteConnection: NSObject, NSCoding {
     public var os: String?
     
     /// Init from given info.
-    public init(host: String, username: String, password: String, name: String, path: String, port: UInt64, useSFTP: Bool, os: String?) {
+    public init(host: String, username: String, password: String, publicKey: String? = nil, privateKey: String? = nil, name: String, path: String, port: UInt64, useSFTP: Bool, os: String?) {
         self.host = host
         self.username = username
         self.password = password
@@ -51,6 +57,8 @@ public class RemoteConnection: NSObject, NSCoding {
         self.port = port
         self.useSFTP = useSFTP
         self.os = os
+        self.publicKey = publicKey
+        self.privateKey = privateKey
     }
     
     // MARK: - Coding

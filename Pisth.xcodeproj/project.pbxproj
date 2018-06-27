@@ -105,6 +105,7 @@
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
+		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9985AA920D6C1DE00389A7B /* Connection.storyboard */; };
 		C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */; };
 		C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAE20D6C4F500389A7B /* ConnectionController.swift */; };
@@ -270,6 +271,7 @@
 		6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
+		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C9985AA920D6C1DE00389A7B /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 		C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		C9985AAE20D6C4F500389A7B /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
 				3A0964F420CC2416006D5B4C /* NavigationController.swift */,
 				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
+				C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -963,6 +966,7 @@
 				3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
+				C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
 				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
