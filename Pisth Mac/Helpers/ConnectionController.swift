@@ -10,7 +10,15 @@ import Pisth_Shared
 
 /// A class for representing actibe remote sessions.
 class ConnectionController {
-        
+    
+    private func closeMainScreen() {
+        for window in NSApp.windows {
+            if window.contentViewController is BookmarksViewController {
+                window.close()
+            }
+        }
+    }
+    
     /// Show hidden files.
     static var showHiddenFiles: Bool {
         get {
@@ -53,6 +61,7 @@ class ConnectionController {
         termVC.window = wc.window
         
         wc.showWindow(nil)
+        closeMainScreen()
     }
     
     /// Present the given directory.
@@ -90,6 +99,7 @@ class ConnectionController {
         wc.window?.setTitleWithRepresentedFilename(dirVC.localPath!)
         
         wc.showWindow(nil)
+        closeMainScreen()
     }
     
     /// Initialize from given remote connection.
