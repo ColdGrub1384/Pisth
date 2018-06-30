@@ -442,10 +442,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if isFirstResponder {
             _ = resignFirstResponder()
-            _ = becomeFirstResponder()
+            _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+                _ = self.becomeFirstResponder()
+            })
         }
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { (_) in
             let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             self.webView.frame = newFrame
             self.selectionTextView.frame = newFrame
@@ -549,9 +551,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
-        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()
-        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
-        
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
@@ -569,7 +568,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let config = WKWebViewConfiguration()
         config.mediaTypesRequiringUserActionForPlayback = .video
         webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
-        webView.accessibilityIgnoresInvertColors = true
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
         view.addSubview(webView)
@@ -605,6 +603,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         })
         
         navigationItem.rightBarButtonItems = rightBarButtonItems
+        
+        view.ignoresInvertColors = true
+        (panelNavigationController ?? navigationController)?.view.ignoresInvertColors = true
     }
     
     /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
@@ -674,6 +675,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let privKey = connection.privateKey {
             activity.userInfo!["privateKey"] = privKey
         }
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!], theme.toolbarStyle == .black {
+            return .lightContent
+        }
+        
+        return .default
     }
     
     // MARK: - Keyboard
@@ -947,8 +956,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Text input traits
     
-    /// `UIKeyboardAppearance.dark`
-    var keyboardAppearance: UIKeyboardAppearance = ((TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] ?? PisthTheme()).keyboardAppearance)
+    /// `.default`.
+    var keyboardAppearance: UIKeyboardAppearance = .default
     
     /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
@@ -970,8 +979,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         let themeName = UserDefaults.standard.string(forKey: "terminalTheme")!
         if let theme = TerminalTheme.themes[themeName] {
+            (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+            keyboardAppearance = theme.keyboardAppearance
             webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
             webView.backgroundColor = theme.backgroundColor
+            view.backgroundColor = theme.backgroundColor
+            (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
             selectionTextView.backgroundColor = theme.backgroundColor
             selectionTextView.textColor = theme.foregroundColor
         }
