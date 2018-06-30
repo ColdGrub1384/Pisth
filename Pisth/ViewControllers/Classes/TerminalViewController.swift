@@ -1156,7 +1156,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else if message.hasPrefix("changeTitle") { // Change title
             title = message.replacingFirstOccurrence(of: "changeTitle", with: "")
         } else if message.hasPrefix("runCommand") { // Run command
-            title = message.replacingFirstOccurrence(of: "runCommand", with: "")
+            try? ConnectionManager.shared.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
         }
         completionHandler()
     }
