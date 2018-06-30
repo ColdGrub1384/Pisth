@@ -16,17 +16,14 @@ class FilesOutlineView: NSOutlineView {
     
     // MARK: - Dragging destination
     
-    /// - Returns: `.copy`.
+    /// - Returns: The sender's operation.
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        return .copy
+        return sender.draggingSourceOperationMask
     }
     
+    /// - Returns: The sender's operation.
     override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-        return .copy
-    }
-    
-    override func draggingExited(_ sender: NSDraggingInfo?) {
-        
+        return sender.draggingSourceOperationMask
     }
     
     /// Upload files.
@@ -40,8 +37,21 @@ class FilesOutlineView: NSOutlineView {
             for url in urls {
                 dirVC.upload(url.path, to: dirVC.directory.nsString.appendingPathComponent(url.lastPathComponent))
             }
+        }
+        
+        if let paths = sender.draggingPasteboard.readObjects(forClasses: [NSString.self], options: nil) as? [NSString] {
+            for path in paths {
+                dirVC.controller.session.sftp.moveItem(atPath: path as String, toPath: dirVC.directory.nsString.appendingPathComponent(path.lastPathComponent))
+                
+                dirVC.go(to: dirVC.directory)
+                
+                if let sourceDirVC = (sender.draggingSource as? NSOutlineView)?.window?.contentViewController as? DirectoryViewController {
+                    sourceDirVC.go(to: sourceDirVC.directory)
+                }
+            }
             return true
         }
+        
         return false
     }
 }

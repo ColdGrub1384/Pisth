@@ -406,7 +406,7 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         
         outlineView.directoryViewController = self
         outlineView.doubleAction = #selector(openFile_)
-        outlineView.registerForDraggedTypes([.fileURL, .fileContents])
+        outlineView.registerForDraggedTypes([.fileURL, .string])
         
         go(to: directory)
     }
@@ -434,6 +434,17 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     }
     
     // MARK: - Outline view delegate
+    
+    func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+        return .move
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+        if let file = item as? NMSFTPFile {
+            return directory.nsString.appendingPathComponent(file.filename) as NSPasteboardWriting
+        }
+        return nil
+    }
     
     /// Setup view.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
