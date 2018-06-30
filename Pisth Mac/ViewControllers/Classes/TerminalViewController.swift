@@ -150,7 +150,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
                 break
             }
             
-            if event.modifierFlags.rawValue != 1048840 && event.window == self.window {
+            if !event.modifierFlags.contains(.command) && event.window == self.window {
                 try? self.controller.shellSession.channel.write(character)
             }
             
@@ -185,6 +185,19 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
         
         window.delegate = self
         
+        webView.evaluateJavaScript("""
+        var textarea = document.getElementsByClassName("xterm-helper-textarea")[0];
+        textarea.onpaste = function(e) {
+            var pastedText = undefined;
+            if (window.clipboardData && window.clipboardData.getData) { // IE
+                pastedText = window.clipboardData.getData('Text');
+            } else if (e.clipboardData && e.clipboardData.getData) {
+                pastedText = e.clipboardData.getData('text/plain');
+            }
+            alert("sendCommand"+pastedText);
+            return false;
+        };
+        """, completionHandler: nil)
         webView.evaluateJavaScript("term.write(\(console.javaScriptEscapedString))", completionHandler: nil)
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
         webView.evaluateJavaScript("document.body.style.backgroundColor = document.getElementsByClassName('xterm-viewport')[0].style.backgroundColor", completionHandler: nil)
@@ -218,6 +231,8 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
         
         if message.hasPrefix("changeTitle") {
             setTitle(message.replacingFirstOccurrence(of: "changeTitle", with: ""))
+        } else if message.hasPrefix("sendCommand") {
+            try? controller.shellSession.channel.write(message.replacingFirstOccurrence(of: "sendCommand", with: ""))
         }
         
         completionHandler()
