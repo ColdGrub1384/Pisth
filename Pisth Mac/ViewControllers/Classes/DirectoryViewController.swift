@@ -341,6 +341,11 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         }
     }
     
+    /// Refresh the contents of directory.
+    @objc func refresh() {
+        go(to: directory)
+    }
+    
     /// Go to the given directory.
     ///
     /// - Parameters:

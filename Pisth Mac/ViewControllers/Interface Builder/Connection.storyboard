@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +17,6 @@
                         <rect key="screenRect" x="-121" y="768" width="1600" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="C38F7FD4-30AC-4B6F-8C33-301B23C4F17E" centeredItem="mJ0-YW-vaO" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="CeH-SA-KJ0">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="yTO-nR-0gk"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Qis-c7-26S"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7S1-VM-3aH"/>
                                 <toolbarItem implicitItemIdentifier="968B1177-DBEE-4626-B541-19675D947562" explicitItemIdentifier="path" label="Full path" paletteLabel="Full path" sizingBehavior="auto" id="mJ0-YW-vaO">
@@ -53,9 +52,6 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <connections>
-                                        <action selector="refresh:" target="zbE-l5-llS" id="t6d-gs-0MP"/>
-                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -75,7 +71,6 @@
                     </connections>
                 </windowController>
                 <customObject id="ajC-N5-Jk1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="zbE-l5-llS" customClass="FileMenuDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="52" y="92"/>
         </scene>

@@ -43,7 +43,7 @@ class FilesOutlineView: NSOutlineView {
             for path in paths {
                 dirVC.controller.session.sftp.moveItem(atPath: path as String, toPath: dirVC.directory.nsString.appendingPathComponent(path.lastPathComponent))
                 
-                dirVC.go(to: dirVC.directory)
+                dirVC.refresh()
                 
                 if let sourceDirVC = (sender.draggingSource as? NSOutlineView)?.window?.contentViewController as? DirectoryViewController {
                     sourceDirVC.go(to: sourceDirVC.directory)

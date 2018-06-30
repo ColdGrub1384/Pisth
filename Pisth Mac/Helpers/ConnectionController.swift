@@ -95,6 +95,8 @@ class ConnectionController {
             } else if toolbarItem.itemIdentifier.rawValue == "goBack" {
                 toolbarItem.action = #selector(dirVC.goBack)
                 toolbarItem.isEnabled = (parsedPath != "/")
+            } else if toolbarItem.itemIdentifier.rawValue == "refresh" {
+                toolbarItem.action = #selector(dirVC.refresh)
             }
         }
         

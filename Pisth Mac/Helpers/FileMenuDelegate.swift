@@ -93,7 +93,7 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         ConnectionController.showHiddenFiles = !ConnectionController.showHiddenFiles
         for window in NSApp.windows {
             if let dirVC = window.contentViewController as? DirectoryViewController {
-                dirVC.go(to: dirVC.directory)
+                dirVC.refresh()
             }
         }
     }
@@ -214,7 +214,7 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
                 }
             }
             
-            dirVC.go(to: dirVC.directory)
+            dirVC.refresh()
         }
     }
     
