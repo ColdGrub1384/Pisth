@@ -204,7 +204,9 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
                     NSApp.presentError(error)
                 }
             }
-            self.changeSize(completion: nil)
+            self.changeSize(completion: {
+                self.setTitle("\(self.controller.session.username!)@\(self.controller.session.host!)")
+            })
         }
     }
     
