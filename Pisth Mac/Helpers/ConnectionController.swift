@@ -43,6 +43,9 @@ class ConnectionController {
     /// Home of the current user.
     var home: String?
     
+    /// Copied file paths for this connection.
+    var selectedFilePaths = [String]()
+    
     /// Present the terminal.
     ///
     /// - Parameters:

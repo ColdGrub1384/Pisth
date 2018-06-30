@@ -283,7 +283,7 @@
 		C9B205C020D70CD400045F20 /* FileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileObserver.swift; sourceTree = "<group>"; };
 		C9B205C420D71A8600045F20 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9B205C820D72FE300045F20 /* FilesOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesOutlineView.swift; sourceTree = "<group>"; };
-		C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuDelegate.swift; sourceTree = "<group>"; };
+		C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		C9CB27DC20D5BB9500290DBE /* Pisth Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };

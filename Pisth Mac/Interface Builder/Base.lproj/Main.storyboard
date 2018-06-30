@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -111,6 +111,16 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="l54-P6-oLA"/>
+                                        <menuItem title="Copy" keyEquivalent="C" id="TiZ-sb-WhX">
+                                            <connections>
+                                                <action selector="copyFile:" target="fJv-iG-GIr" id="Q1X-iL-sb7"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="P" id="iPp-OZ-D61">
+                                            <connections>
+                                                <action selector="pasteFile:" target="fJv-iG-GIr" id="pt0-j5-pCX"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Remove" id="Ux2-SR-GMy">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CA

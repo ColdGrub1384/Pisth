@@ -24,45 +24,7 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         }
     }
     
-    // MARK: - Actions
-    
-    /// Open directory in Shell.
-    @IBAction func openInShell(_ sender: Any) {
-        guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
-            return
-        }
-        
-        for i in highlightedRows(forOutlineView: dirVC.outlineView) {
-            let file = dirVC.directoryContents[i]
-            
-            do {
-                let connection = dirVC.controller.connection
-                connection.useSFTP = false
-                let controller = try ConnectionController(connection: connection)
-                controller.presentTerminal(path: dirVC.directory.nsString.appendingPathComponent(file.filename))
-            } catch {
-                NSApp.presentError(error)
-            }
-        }
-    }
-    
-    /// Open selected directory in new tab or a new terminal.
-    @IBAction func newTab(_ sender: Any) {
-        if let termVC = NSApp.keyWindow?.contentViewController as? TerminalViewController {
-            do {
-                let connection = termVC.controller.connection
-                connection.useSFTP = false
-                let controller = try ConnectionController(connection: connection)
-                controller.presentTerminal()
-            } catch {
-                NSApp.presentError(error)
-            }
-        } else if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
-            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
-                dirVC.controller.presentBrowser(atPath: dirVC.directory.nsString.appendingPathComponent(dirVC.directoryContents[i].filename))
-            }
-        }
-    }
+    // MARK: - Window
     
     /// Show bookmarks.
     @IBAction func openBookmarks(_ sender: Any) {
@@ -84,33 +46,212 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         }
     }
     
-    /// Upload file.
-    @IBAction func uploadFile(_ sender: Any) {
+    // MARK: - File
+    
+    /// Open selected directory in new tab or a new terminal.
+    @IBAction func newTab(_ sender: Any) {
+        if let termVC = NSApp.keyWindow?.contentViewController as? TerminalViewController {
+            do {
+                let connection = termVC.controller.connection
+                connection.useSFTP = false
+                let controller = try ConnectionController(connection: connection)
+                controller.presentTerminal()
+            } catch {
+                NSApp.presentError(error)
+            }
+        } else if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
+            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+                dirVC.controller.presentBrowser(atPath: dirVC.directory.nsString.appendingPathComponent(dirVC.directoryContents[i].filename))
+            }
+        }
+    }
+    
+    /// Open directory in Shell.
+    @IBAction func openInShell(_ sender: Any) {
         guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
             return
         }
         
-        let picker = NSOpenPanel()
-        picker.allowsMultipleSelection = true
-        picker.canChooseDirectories = true
-        picker.canCreateDirectories = true
-        picker.allowedFileTypes = ["public.item"]
-        if let window = dirVC.window {
-            picker.beginSheetModal(for: window) { (_) in
-                for file in picker.urls {
-                    
-                    let semaphore = DispatchSemaphore(value: 0)
-                    
-                    dirVC.upload(file.path, to: dirVC.directory.nsString.appendingPathComponent(file.lastPathComponent), completionHandler: { _ in
-                        
-                        semaphore.signal()
-                    })
-                    
-                    semaphore.wait()
-                }
+        for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+            let file = dirVC.directoryContents[i]
+            
+            do {
+                let connection = dirVC.controller.connection
+                connection.useSFTP = false
+                let controller = try ConnectionController(connection: connection)
+                controller.presentTerminal(path: dirVC.directory.nsString.appendingPathComponent(file.filename))
+            } catch {
+                NSApp.presentError(error)
             }
         }
     }
+    
+    // MARK:
+    
+    /// Show or hide hidden files.
+    @IBAction func toggleShowingHiddenFiles(_ sender: Any) {
+        ConnectionController.showHiddenFiles = !ConnectionController.showHiddenFiles
+        for window in NSApp.windows {
+            if let dirVC = window.contentViewController as? DirectoryViewController {
+                dirVC.go(to: dirVC.directory)
+            }
+        }
+    }
+    
+    /// Refresh directory.
+    @IBAction func refresh(_ sender: Any) {
+        (NSApp.keyWindow?.contentViewController as? DirectoryViewController)?.go(to: (NSApp.keyWindow?.contentViewController as? DirectoryViewController)?.directory ?? "/")
+    }
+    
+    // MARK:
+    
+    /// Copy selected file path.
+    @IBAction func copyFile(_ sender: Any) {
+        if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
+            dirVC.controller.selectedFilePaths = []
+            
+            var paths = [String]()
+            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+                let file = dirVC.directoryContents[i]
+                let path = dirVC.directory.nsString.appendingPathComponent(file.filename)
+                dirVC.controller.selectedFilePaths.append(path)
+                paths.append(path)
+            }
+            
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(paths.joined(separator: " "), forType: .string)
+        }
+    }
+    
+    /// Paste selected files with `copyFile(_:)` to the current directory.
+    @IBAction func pasteFile(_ sender: Any) {
+        if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
+            for file in dirVC.controller.selectedFilePaths {
+                
+                guard let info = dirVC.controller.session.sftp.infoForFile(atPath: file) else {
+                    continue
+                }
+                
+                if !info.isDirectory { // Is file
+                    let alert = NSAlert()
+                    alert.messageText = "Copying \(file.nsString.lastPathComponent)..."
+                    alert.addButton(withTitle: "Cancel")
+                    var continue_ = true
+                
+                    alert.beginSheetModal(for: dirVC.window!) { (response) in
+                        if response == .alertFirstButtonReturn {
+                            continue_ = false
+                        }
+                    }
+                
+                    dirVC.controller.session.sftp?.copyContents(ofPath: file, toFileAtPath: dirVC.directory.nsString.appendingPathComponent(file.nsString.lastPathComponent), progress: { (written, total) -> Bool in
+                    
+                        let writtenFormatted = ByteCountFormatter().string(fromByteCount: Int64(written))
+                        let totalFormatted = ByteCountFormatter().string(fromByteCount: Int64(total))
+                        alert.informativeText = "\(writtenFormatted) / \(totalFormatted)"
+                        return continue_
+                    })
+                    alert.buttons[0].performClick(alert)
+                } else { // Is directory
+                    
+                    var continue_ = true
+                    let alert = NSAlert()
+                    alert.messageText = "Copying \(file.nsString.lastPathComponent)..."
+                    alert.addButton(withTitle: "Cancel")
+                    alert.beginSheetModal(for: dirVC.window!) { (response) in
+                        if response == .alertFirstButtonReturn {
+                            continue_ = false
+                        }
+                    }
+                    
+                    func contents(atPath path: String) -> [NMSFTPFile] {
+                        return (dirVC.controller.session.sftp.contentsOfDirectory(atPath: path) as? [NMSFTPFile]) ?? []
+                    }
+                    
+                    var copied = 0
+                    var size = 0
+                    func countFiles(inside directory: String) {
+                        for file in contents(atPath: directory) {
+                            size += 1
+                            if file.isDirectory {
+                                countFiles(inside: directory.nsString.appendingPathComponent(file.filename))
+                            }
+                        }
+                    }
+                    countFiles(inside: file)
+                    
+                    func copy(fileAtPath path: String, to newPath: String) {
+                        dirVC.controller.session.sftp.copyContents(ofPath: path, toFileAtPath: newPath, progress: { _, _ in
+                            return continue_
+                        })
+                    }
+                    
+                    func copyDirectory(atPath path: String, to directory: String) {
+                        
+                        guard continue_ else {
+                            return
+                        }
+                        
+                        
+                        for file in contents(atPath: path) {
+                            let newPath = directory.nsString.appendingPathComponent(path.nsString.lastPathComponent).nsString.appendingPathComponent(file.filename)
+                            if file.isDirectory {
+                                copied += 1
+                                dirVC.controller.session.sftp.createDirectory(atPath: newPath)
+                                copyDirectory(atPath: path.nsString.appendingPathComponent(file.filename), to: newPath.nsString.deletingLastPathComponent)
+                            } else {
+                                copy(fileAtPath: path.nsString.appendingPathComponent(file.filename), to: newPath)
+                            }
+                        }
+                    }
+                    
+                    dirVC.controller.session.sftp.createDirectory(atPath:dirVC.directory.nsString.appendingPathComponent(file.nsString.lastPathComponent))
+                    copyDirectory(atPath: file, to: dirVC.directory)
+                    DispatchQueue.main.async {
+                        alert.buttons[0].performClick(alert)
+                            
+                    }
+                }
+            }
+            
+            dirVC.go(to: dirVC.directory)
+        }
+    }
+    
+    /// Remove selected file.
+    @IBAction func removeFile(_ sender: Any) {
+        if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
+            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
+                let file = dirVC.directoryContents[i]
+                
+                if file.isDirectory {
+                    func removeContents(of path: String) {
+                        guard let contents = dirVC.controller.session.sftp!.contentsOfDirectory(atPath: path) as? [NMSFTPFile] else {
+                            return
+                        }
+                        
+                        for file in contents {
+                            if file.isDirectory {
+                                removeContents(of: path.nsString.appendingPathComponent(file.filename))
+                                dirVC.controller.session.sftp!.removeDirectory(atPath: path.nsString.appendingPathComponent(file.filename))
+                            } else {
+                                dirVC.controller.session.sftp!.removeFile(atPath: path.nsString.appendingPathComponent(file.filename))
+                            }
+                        }
+                    }
+                    
+                    removeContents(of: dirVC.directory.nsString.appendingPathComponent(file.filename))
+                    dirVC.controller.session.sftp!.removeDirectory(atPath: dirVC.directory.nsString.appendingPathComponent(file.filename))
+                } else {
+                    dirVC.controller.session.sftp!.removeFile(atPath: dirVC.directory.nsString.appendingPathComponent(file.filename))
+                }
+                
+                refresh(sender)
+            }
+        }
+    }
+    
+    // MARK:
     
     /// Download selected file.
     @IBAction func downloadFile(_ sender: Any) {
@@ -213,6 +354,34 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         }
     }
     
+    /// Upload file.
+    @IBAction func uploadFile(_ sender: Any) {
+        guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
+            return
+        }
+        
+        let picker = NSOpenPanel()
+        picker.allowsMultipleSelection = true
+        picker.canChooseDirectories = true
+        picker.canCreateDirectories = true
+        picker.allowedFileTypes = ["public.item"]
+        if let window = dirVC.window {
+            picker.beginSheetModal(for: window) { (_) in
+                for file in picker.urls {
+                    
+                    let semaphore = DispatchSemaphore(value: 0)
+                    
+                    dirVC.upload(file.path, to: dirVC.directory.nsString.appendingPathComponent(file.lastPathComponent), completionHandler: { _ in
+                        
+                        semaphore.signal()
+                    })
+                    
+                    semaphore.wait()
+                }
+            }
+        }
+    }
+    
     /// Open selected file.
     @IBAction func openFile(_ sender: Any) {
         guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
@@ -234,54 +403,6 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         }
     }
     
-    /// Remove selected file.
-    @IBAction func removeFile(_ sender: Any) {
-        if let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController {
-            for i in highlightedRows(forOutlineView: dirVC.outlineView) {
-                let file = dirVC.directoryContents[i]
-                
-                if file.isDirectory {
-                    func removeContents(of path: String) {
-                        guard let contents = dirVC.controller.session.sftp!.contentsOfDirectory(atPath: path) as? [NMSFTPFile] else {
-                            return
-                        }
-                        
-                        for file in contents {
-                            if file.isDirectory {
-                                removeContents(of: path.nsString.appendingPathComponent(file.filename))
-                                dirVC.controller.session.sftp!.removeDirectory(atPath: path.nsString.appendingPathComponent(file.filename))
-                            } else {
-                                dirVC.controller.session.sftp!.removeFile(atPath: path.nsString.appendingPathComponent(file.filename))
-                            }
-                        }
-                    }
-                    
-                    removeContents(of: dirVC.directory.nsString.appendingPathComponent(file.filename))
-                    dirVC.controller.session.sftp!.removeDirectory(atPath: dirVC.directory.nsString.appendingPathComponent(file.filename))
-                } else {
-                    dirVC.controller.session.sftp!.removeFile(atPath: dirVC.directory.nsString.appendingPathComponent(file.filename))
-                }
-                
-                refresh(sender)
-            }
-        }
-    }
-    
-    /// Refresh directory.
-    @IBAction func refresh(_ sender: Any) {
-        (NSApp.keyWindow?.contentViewController as? DirectoryViewController)?.go(to: (NSApp.keyWindow?.contentViewController as? DirectoryViewController)?.directory ?? "/")
-    }
-    
-    /// Show or hide hidden files.
-    @IBAction func toggleShowingHiddenFiles(_ sender: Any) {
-        ConnectionController.showHiddenFiles = !ConnectionController.showHiddenFiles
-        for window in NSApp.windows {
-            if let dirVC = window.contentViewController as? DirectoryViewController {
-                dirVC.go(to: dirVC.directory)
-            }
-        }
-    }
-    
     // MARK: - Menu delegate
     
     /// Enable or disable items.
@@ -298,7 +419,7 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
         }
         
         for item in menu.items {
-            if item.title == "Remove" || item.title == "Download" || item.title == "Open" {
+            if item.title == "Remove" || item.title == "Download" || item.title == "Open" || item.title == "Copy" {
                 item.isEnabled = (highlightedRows(forOutlineView: dirVC.outlineView).count > 0)
             } else if item.title == "New Tab" || item.title == "New Window" || item.title == "Open in shell" {
                 item.isEnabled = true
@@ -307,6 +428,8 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
                         item.isEnabled = false
                     }
                 }
+            } else if item.title == "Paste" {
+                item.isEnabled = (dirVC.controller.selectedFilePaths.count > 0)
             } else {
                 item.isEnabled = true
             }
