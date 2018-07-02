@@ -30,7 +30,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return true
         }
         
-        return (!panel.isPresentedAsPopover && !panel.isFloating && !panel.isPinned)
+        return (!panel.isPresentedAsPopover && !panel.isFloating)
     }
     
     /// If the terminal is in viewer mode.
@@ -222,6 +222,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         self.accessoryView = toolbar
         self.toolbar = toolbar
+        reloadInputViews()
     }
     
     /// Show or hide the first toolbar of the keyboard.
@@ -431,30 +432,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Resize `webView`, dismiss and open keyboard (to resize terminal).
+    /// Resize `webView` and other views, dismiss and open keyboard (to resize terminal).
     func resizeView(withSize size: CGSize) {
         
         guard toolbar != nil else {
             return
         }
         
-        let wasFirstResponder = isFirstResponder
-        
-        if isFirstResponder {
-            _ = resignFirstResponder()
-            _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-                _ = self.becomeFirstResponder()
-            })
+        webView.frame.size = size
+        webView.frame.origin = CGPoint(x: 0, y: 0)
+        selectionTextView.frame = webView.frame
+        if let arrowsVC = ArrowsViewController.current {
+            arrowsVC.view.frame = webView.frame
         }
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { (_) in
-            let newFrame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            self.webView.frame = newFrame
-            self.selectionTextView.frame = newFrame
-            if !wasFirstResponder {
-                self.reload()
-            }
-        })
+        reload()
     }
     
     /// Close this View controller.
@@ -466,6 +457,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    deinit {
+        removeObserver(self, forKeyPath: #keyPath(view.frame))
+    }
     
     // MARK: - View controller
     
@@ -536,12 +530,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return commands
     }
     
-    /// Resize `webView`.
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        
-        resizeView(withSize: view.frame.size)
-    }
-    
     /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -571,11 +559,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
         view.addSubview(webView)
+        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
         webView.backgroundColor = .clear
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
-        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
         view.addInteraction(UIDropInteraction(delegate: self))
         
         // Create selection Textview
@@ -589,23 +577,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             toolbarItems?.remove(at: 1)
         }
         
-        var viewSize = view.frame.size
-        _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timer) in
-            if self.view.window == nil {
-                timer.invalidate()
-                return
-            }
-            
-            if self.view.frame.size != viewSize {
-                viewSize = self.view.frame.size
-                self.resizeView(withSize: viewSize)
-            }
-        })
-        
         navigationItem.rightBarButtonItems = rightBarButtonItems
         
         view.ignoresInvertColors = true
         (panelNavigationController ?? navigationController)?.view.ignoresInvertColors = true
+        
+        keyboardAppearance = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!.keyboardAppearance
     }
     
     /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
@@ -635,11 +612,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationItem.largeTitleDisplayMode = .never
         addToolbar()
         
-        _ = becomeFirstResponder()
-        
         if panelNavigationController == nil {
             showNavBar()
         }
+        
+        addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
     }
     
     /// Stop advertising peer.
@@ -649,13 +626,30 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
     }
     
-    /// Reize `webView`.
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private var isResizing = false
+    
+    /// Resize `webView`.
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if webView.frame.size != view.frame.size && !webView.isLoading {
-            resizeView(withSize: view.frame.size)
+        guard !isResizing else {
+            return
         }
+        
+        isResizing = true
+        
+        if self.isPresentedInFullscreen && self.isFirstResponder {
+            _ = self.resignFirstResponder()
+            
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                _ = self.becomeFirstResponder()
+            })
+        } else {
+            self.resizeView(withSize: self.view.frame.size)
+        }
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (_) in
+            self.isResizing = false
+        })
     }
     
     /// Set user info.
@@ -697,17 +691,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size && isPresentedInFullscreen {
-            let toolbarFrame = toolbar.convert(toolbar.frame, to: view)
+        guard isPresentedInFullscreen else {
+            return
+        }
+        
+        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size, let toolbarFrame = toolbar?.convert(toolbar.frame, to: view), toolbarFrame.origin.y >= 0 {
             
-            let newHeight = toolbarFrame.origin.y
-            if webView.frame.height != newHeight {
-                webView.frame.size.height = newHeight
-                reload()
-            }
+            resizeView(withSize: CGSize(width: view.frame.width, height: toolbarFrame.origin.y))
         } else if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            webView.frame.size = CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height)
-            reload()
+            resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
         }
         
         if let arrowsVC = ArrowsViewController.current {
@@ -980,7 +972,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let themeName = UserDefaults.standard.string(forKey: "terminalTheme")!
         if let theme = TerminalTheme.themes[themeName] {
             (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
-            keyboardAppearance = theme.keyboardAppearance
             webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
             webView.backgroundColor = theme.backgroundColor
             view.backgroundColor = theme.backgroundColor
@@ -1122,9 +1113,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
             
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                //self.showNavBar()
-            })
+            _ = becomeFirstResponder()
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
                 if self.selectText {
