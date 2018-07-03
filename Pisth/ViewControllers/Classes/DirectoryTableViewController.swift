@@ -253,7 +253,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         // Siri Shortcuts
         
-        let activity = NSUserActivity(activityType: "openDirectory")
+        let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openDirectory")
         if #available(iOS 12.0, *) {
             activity.isEligibleForPrediction = true
             //                    activity.suggestedInvocationPhrase = connection.name
@@ -261,8 +261,18 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         activity.isEligibleForSearch = true
         activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "sftp"]
         activity.title = connection.name
-        activity.requiredUserInfoKeys = ["username", "host", "password", "publicKey", "privateKey", "port", "directory"]
+        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
         
+        if let pubKey = connection.publicKey {
+            userInfo["publicKey"] = pubKey
+        }
+        
+        if let privKey = connection.privateKey {
+            userInfo["privateKey"] = privKey
+        }
+        
+        activity.userInfo = userInfo
+
         let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
         if let os = connection.os?.lowercased() {
             if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
@@ -272,16 +282,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         attributes.addedDate = Date()
         attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)/\(connection.path)"
         activity.contentAttributeSet = attributes
-        
-        activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
-        
-        if let pubKey = connection.publicKey {
-            activity.userInfo!["publicKey"] = pubKey
-        }
-        
-        if let privKey = connection.privateKey {
-            activity.userInfo!["privateKey"] = privKey
-        }
         
         self.userActivity = activity
     }

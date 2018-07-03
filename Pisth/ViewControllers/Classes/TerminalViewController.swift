@@ -1092,7 +1092,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         return
                     }
                     
-                    let activity = NSUserActivity(activityType: "openTerminal")
+                    let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openTerminal")
                     if #available(iOS 12.0, *) {
                         activity.isEligibleForPrediction = true
                         //                    activity.suggestedInvocationPhrase = connection.name
@@ -1100,7 +1100,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     activity.isEligibleForSearch = true
                     activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
                     activity.title = connection.name
-                    activity.requiredUserInfoKeys = ["username", "host", "password", "publicKey", "privateKey", "port", "directory"]
+                    var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
+                    
+                    if let pubKey = connection.publicKey {
+                        userInfo["publicKey"] = pubKey
+                    }
+                    
+                    if let privKey = connection.privateKey {
+                        userInfo["privateKey"] = privKey
+                    }
+                    
+                    activity.userInfo = userInfo
                     
                     let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
                     if let os = connection.os?.lowercased() {
@@ -1111,16 +1121,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     attributes.addedDate = Date()
                     attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
                     activity.contentAttributeSet = attributes
-                    
-                    activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
-                    
-                    if let pubKey = connection.publicKey {
-                        activity.userInfo!["publicKey"] = pubKey
-                    }
-                    
-                    if let privKey = connection.privateKey {
-                        activity.userInfo!["privateKey"] = privKey
-                    }
                     
                     self.userActivity = activity
                 }

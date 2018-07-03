@@ -512,6 +512,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// Open connection from user activity.
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         
+        print(userActivity.webpageURL)
+        
         guard let username = userActivity.userInfo?["username"] as? String else {
             return false
         }
@@ -540,14 +542,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             options[.init("privateKey")] = privKey
         }
         
-        if userActivity.activityType == "openDirectory" {
+        if userActivity.activityType == "ch.marcela.ada.Pisth.openDirectory" {
             
             guard let url = URL(string: "sftp://\(username)@\(host):\(port)") else {
                 return false
             }
             
             return self.application(application, open: url, options: options)
-        } else if userActivity.activityType == "openTerminal" {
+        } else if userActivity.activityType == "ch.marcela.ada.Pisth.openTerminal" {
             
             guard let url = URL(string: "ssh://\(username)@\(host):\(port)") else {
                 return false

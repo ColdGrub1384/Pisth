@@ -111,8 +111,8 @@
 	<string>This app requires Face ID permission to authenticate using Face recognition.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>openDirectory</string>
-		<string>openTerminal</string>
+		<string>ch.marcela.ada.Pisth.openDirectory</string>
+		<string>ch.marcela.ada.Pisth.openTerminal</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
