@@ -241,6 +241,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             }
         }
         
+        // Unlock Terminal Themes with the `--iap` or `-i` argument
+        if CommandLine.arguments.contains("--iap") || CommandLine.arguments.contains("-i") {
+            UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
+            UserDefaults.standard.synchronize()
+        }
+        
         // Buy themes from App Store
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
             return (product.productIdentifier == ProductsID.themes.rawValue && !UserDefaults.standard.bool(forKey: "terminalThemesPurchased"))
@@ -511,9 +517,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     /// Open connection from user activity.
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        
-        print(userActivity.webpageURL)
-        
+                
         guard let username = userActivity.userInfo?["username"] as? String else {
             return false
         }
