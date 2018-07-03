@@ -616,12 +616,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             showNavBar()
         }
         
-        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!
-        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
-        if isPresentedInFullscreen, let statusBar = (UIApplication.shared.value(forKey: "statusBarWindow") as? UIView)?.value(forKey: "statusBar") as? UIView {
-                statusBar.backgroundColor = theme.foregroundColor
-        }
-        
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
     }
     
@@ -1117,6 +1111,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     attributes.addedDate = Date()
                     attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
                     activity.contentAttributeSet = attributes
+                    
+                    activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
+                    
+                    if let pubKey = connection.publicKey {
+                        activity.userInfo!["publicKey"] = pubKey
+                    }
+                    
+                    if let privKey = connection.privateKey {
+                        activity.userInfo!["privateKey"] = privKey
+                    }
                     
                     self.userActivity = activity
                 }

@@ -273,6 +273,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)/\(connection.path)"
         activity.contentAttributeSet = attributes
         
+        activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
+        
+        if let pubKey = connection.publicKey {
+            activity.userInfo!["publicKey"] = pubKey
+        }
+        
+        if let privKey = connection.privateKey {
+            activity.userInfo!["privateKey"] = privKey
+        }
+        
         self.userActivity = activity
     }
     
