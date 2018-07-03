@@ -616,14 +616,31 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             showNavBar()
         }
         
+        let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!
+        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+        if isPresentedInFullscreen, let statusBar = (UIApplication.shared.value(forKey: "statusBarWindow") as? UIView)?.value(forKey: "statusBar") as? UIView {
+                statusBar.backgroundColor = theme.foregroundColor
+        }
+        
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
     }
     
-    /// Stop advertising peer.
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    /// Reset appearance and stop advertising peer.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
+        AppDelegate.shared.navigationController.navigationBar.barStyle = .default
+        AppDelegate.shared.navigationController.view.backgroundColor = .white
+    }
+    
+    /// Returns `.lightContent` for dark themes.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!], theme.toolbarStyle == .black {
+            return .lightContent
+        }
+        
+        return .default
     }
     
     private var isResizing = false
@@ -669,14 +686,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let privKey = connection.privateKey {
             activity.userInfo!["privateKey"] = privKey
         }
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!], theme.toolbarStyle == .black {
-            return .lightContent
-        }
-        
-        return .default
     }
     
     // MARK: - Keyboard
@@ -741,7 +750,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
-//            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
+            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
             
             sender.tintColor = .lightGray
         } else {

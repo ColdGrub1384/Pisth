@@ -37,4 +37,8 @@ class SplitViewController: UISplitViewController {
         }
     }
     
+    /// Search for the `preferredStatusBarStyle` for the visible view controller or returns `.default`.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
+    }
 }
