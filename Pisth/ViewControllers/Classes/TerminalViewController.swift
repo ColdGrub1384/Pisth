@@ -1318,7 +1318,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Returns `CGSize(width: 320, height: 500)`.
     var maximumPanelContentSize: CGSize {
-        return CGSize(width: 500, height: 500)
+        return UIScreen.main.bounds.size
     }
     
     /// Returns: `500`.
