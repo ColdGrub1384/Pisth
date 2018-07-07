@@ -20,4 +20,50 @@ extension UIImage {
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
+    
+    // MARK: - Getting icon for file
+    
+    // https://indiestack.com/2018/05/icon-for-file-with-uikit/
+    
+    /// Size for generated icon.
+    public enum FileIconSize {
+        case smallest
+        case largest
+    }
+    
+    /// Get icon for local file.
+    ///
+    /// - Parameters:
+    ///     - fileURL: Local file URL.
+    ///     - preferredSize: Preferred generated icon size.
+    public class func icon(forFileURL fileURL: URL, preferredSize: FileIconSize = .smallest) -> UIImage {
+        let myInteractionController = UIDocumentInteractionController(url: fileURL)
+        let allIcons = myInteractionController.icons
+        
+        // allIcons is guaranteed to have at least one image
+        switch preferredSize {
+        case .smallest: return allIcons.first!
+        case .largest: return allIcons.last!
+        }
+    }
+    
+    /// Get icon for file name.
+    ///
+    /// - Parameters:
+    ///     - fileName: Local file URL.
+    ///     - preferredSize: Preferred generated icon size.
+    public class func icon(forFileNamed fileName: String, preferredSize: FileIconSize = .smallest) -> UIImage {
+        return icon(forFileURL: URL(fileURLWithPath: fileName), preferredSize: preferredSize)
+    }
+    
+    /// Get icon for path extension.
+    ///
+    /// - Parameters:
+    ///     - pathExtension: Local file URL.
+    ///     - preferredSize: Preferred generated icon size.
+    public class func icon(forPathExtension pathExtension: String, preferredSize: FileIconSize = .smallest) -> UIImage {
+        let baseName = "Generic"
+        let fileName = (baseName as NSString).appendingPathExtension(pathExtension) ?? baseName
+        return icon(forFileNamed: fileName, preferredSize: preferredSize)
+    }
 }

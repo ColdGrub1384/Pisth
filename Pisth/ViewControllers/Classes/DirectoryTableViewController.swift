@@ -996,7 +996,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     // MARK: - Table view data source
     
-    /// - Returns: `50`.
+    /// - Returns: `60`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -1029,7 +1029,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if files[indexPath.row].isDirectory {
             cell.iconView.image = #imageLiteral(resourceName: "File icons/folder")
         } else {
-            cell.iconView.image = fileIcon(forExtension: files[indexPath.row].filename.nsString.pathExtension)
+            cell.iconView.image = UIImage.icon(forPathExtension: files[indexPath.row].filename.nsString.pathExtension, preferredSize: .smallest)
         }
         
         if files[indexPath.row].filename.nsString.lastPathComponent.hasPrefix(".") {

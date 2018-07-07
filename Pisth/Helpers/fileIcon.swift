@@ -13,6 +13,7 @@ import UIKit
 ///     - forExtension: Extension used to retrieve file icon.
 ///
 /// - Returns: The file icon associated with the given extension, or the default file icon.
+@available(*, deprecated, message: "Use UIImage.icon(forPathExtension:preferredSize:) instead.")
 func fileIcon(forExtension extension_: String) -> UIImage {
     
     if let defaultIcon = UIImage(named: "File icons/"+extension_.lowercased()) {

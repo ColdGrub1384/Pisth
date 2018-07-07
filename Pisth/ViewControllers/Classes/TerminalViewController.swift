@@ -1277,13 +1277,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Drop a file.
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         
-        for item in session.items {
-            if let file = item.localObject as? NMSFTPFile {
-                guard let dirVC = AppDelegate.shared.splitViewController.detailNavigationController.visibleViewController as? DirectoryTableViewController else {
-                    return
+        if session.localDragSession?.items.first?.localObject is NMSFTPFile {
+            for item in session.items {
+                if let file = item.localObject as? NMSFTPFile {
+                    guard let dirVC = AppDelegate.shared.splitViewController.detailNavigationController.visibleViewController as? DirectoryTableViewController else {
+                        return
+                    }
+                    
+                    try? ConnectionManager.shared.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
                 }
-                
-                try? ConnectionManager.shared.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
+            }
+        } else if session.canLoadObjects(ofClass: String.self) {
+            _ = session.loadObjects(ofClass: String.self) { (strings) in
+                for string in strings {
+                    try? ConnectionManager.shared.session?.channel.write(string+" ")
+                }
             }
         }
         
@@ -1292,7 +1300,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Allow dragging a `NMSFTPFile`.
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        return (session.localDragSession?.items.first?.localObject is NMSFTPFile)
+        return (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
     }
     
     /// - Returns: `UIDropProposal(operation: .copy)`.

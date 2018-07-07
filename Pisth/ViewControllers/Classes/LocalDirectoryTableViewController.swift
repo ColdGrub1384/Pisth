@@ -414,7 +414,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             if isDir.boolValue { // Is directory
                 cell.iconView.image = #imageLiteral(resourceName: "File icons/folder")
             } else { // Is file
-                cell.iconView.image = fileIcon(forExtension: files[indexPath.row].pathExtension)
+                cell.iconView.image = UIImage.icon(forFileURL: files[indexPath.row], preferredSize: .smallest)
             }
         }
         
