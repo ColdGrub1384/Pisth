@@ -457,10 +457,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    deinit {
-        removeObserver(self, forKeyPath: #keyPath(view.frame))
-    }
-    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.

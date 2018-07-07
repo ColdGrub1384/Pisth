@@ -24,21 +24,28 @@ class ContentViewController: UIViewController, PanelManager {
     /// Present the terminal in given directory from given sender. This view controller must be visible.
     func presentTerminal(inDirectory directory: String, from sender: UIBarButtonItem?) {
         
-        let terminal = TerminalViewController()
-        terminal.pwd = directory
-        terminal.console = ""
-        
-        terminalPanel = PanelViewController(with: terminal, in: self)
-        terminalPanel.modalPresentationStyle = .popover
-        terminalPanel.popoverPresentationController?.barButtonItem = sender
-        
-        var vc: UIViewController? = self
-        if view.window == nil {
-            vc = UIApplication.shared.keyWindow?.rootViewController
-        }
-        
-        vc?.present(terminalPanel, animated: true) {
-            terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+        if let terminal = terminalPanel?.contentViewController as? TerminalViewController, terminal.view.window != nil {
+            terminal.console = ""
+            terminal.pwd = directory
+            terminal.reload()
+        } else {
+            
+            let terminal = TerminalViewController()
+            terminal.pwd = directory
+            terminal.console = ""
+            
+            terminalPanel = PanelViewController(with: terminal, in: self)
+            terminalPanel.modalPresentationStyle = .popover
+            terminalPanel.popoverPresentationController?.barButtonItem = sender
+            
+            var vc: UIViewController? = self
+            if view.window == nil {
+                vc = UIApplication.shared.keyWindow?.rootViewController
+            }
+            
+            vc?.present(terminalPanel, animated: true) {
+                terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+            }
         }
     }
     
