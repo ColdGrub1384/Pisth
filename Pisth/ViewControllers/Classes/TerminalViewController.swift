@@ -613,10 +613,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationItem.largeTitleDisplayMode = .never
         addToolbar()
         
-        if panelNavigationController == nil {
-            showNavBar()
-        }
-        
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
     }
     
