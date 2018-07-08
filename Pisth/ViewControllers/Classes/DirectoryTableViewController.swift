@@ -22,6 +22,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Directory used to list files.
     var directory: String
     
+    /// The connection's home directory.
+    var homeDirectory = "/"
+    
     /// Connection to open if is not.
     var connection: RemoteConnection
     
@@ -115,6 +118,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             // Get absolute path from "~"
             if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
                 self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
+                self.homeDirectory = path ?? "/"
             }
             
             let files = ConnectionManager.shared.files(inDirectory: self.directory)
@@ -275,9 +279,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             //                    activity.suggestedInvocationPhrase = connection.name
         }
         activity.isEligibleForSearch = true
-        activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "sftp"]
-        activity.title = connection.name
-        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
+        activity.keywords = [connection.name, connection.username, connection.host, directory.nsString.lastPathComponent, "ssh", "sftp"]
+        if directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
+            activity.title = connection.name
+        } else {
+            activity.title = directory.nsString.lastPathComponent
+        }
+        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":directory, "port":connection.port] as [String : Any]
         
         if let pubKey = connection.publicKey {
             userInfo["publicKey"] = pubKey
@@ -290,13 +298,15 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         activity.userInfo = userInfo
 
         let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
-        if let os = connection.os?.lowercased() {
+        if let os = connection.os?.lowercased(), directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
             if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
                 attributes.thumbnailData = UIImagePNGRepresentation(logo)
             }
+        } else {
+            attributes.thumbnailData = UIImagePNGRepresentation(#imageLiteral(resourceName: "File icons/folder"))
         }
         attributes.addedDate = Date()
-        attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)/\(connection.path)"
+        attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)\(directory)"
         activity.contentAttributeSet = attributes
         
         self.userActivity = activity
@@ -328,15 +338,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         
-        activity.userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port]
+        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":directory, "port":connection.port] as [String : Any]
         
         if let pubKey = connection.publicKey {
-            activity.userInfo!["publicKey"] = pubKey
+            userInfo["publicKey"] = pubKey
         }
         
         if let privKey = connection.privateKey {
-            activity.userInfo!["privateKey"] = privKey
+            userInfo["privateKey"] = privKey
         }
+        
+        activity.userInfo = userInfo
     }
     
     // MARK: - Connection errors handling
