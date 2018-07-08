@@ -435,19 +435,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Resize `webView` and other views, dismiss and open keyboard (to resize terminal).
+    /// Resize and reload `webView`.
     func resizeView(withSize size: CGSize) {
         
         guard toolbar != nil else {
             return
         }
-        
+                
         webView.frame.size = size
         webView.frame.origin = CGPoint(x: 0, y: 0)
         selectionTextView.frame = webView.frame
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
         }
+        
         reload()
     }
     
@@ -645,18 +646,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         isResizing = true
         
-        if self.isPresentedInFullscreen && self.isFirstResponder {
-            _ = self.resignFirstResponder()
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            if self.isPresentedInFullscreen && self.isFirstResponder {
+                _ = self.resignFirstResponder()
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                    _ = self.becomeFirstResponder()
+                })
+            } else {
+                self.resizeView(withSize: self.view.frame.size)
+            }
             
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                _ = self.becomeFirstResponder()
+            _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (_) in
+                self.isResizing = false
             })
-        } else {
-            self.resizeView(withSize: self.view.frame.size)
-        }
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (_) in
-            self.isResizing = false
         })
     }
     
@@ -719,8 +722,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        webView.frame = view.bounds
-        reload()
+        if webView.frame.size != view.bounds.size {
+            webView.frame = view.bounds
+            reload()
+        }
         
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
