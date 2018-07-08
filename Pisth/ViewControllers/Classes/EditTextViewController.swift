@@ -103,9 +103,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     ///
     /// - Parameters:
     ///     - sender: Sender object.
-    @IBAction func share(_ sender: Any) {
-        let activityVC = UIActivityViewController(activityItems: [file], applicationActivities: nil)
-        present(activityVC, animated: true, completion: nil)
+    @IBAction func share(_ sender: UIBarButtonItem) {
+        let document = UIDocumentInteractionController(url: file)
+        document.presentOpenInMenu(from: sender, animated: true)
     }
     
     

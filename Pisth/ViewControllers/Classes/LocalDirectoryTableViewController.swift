@@ -15,7 +15,7 @@ import Firebase
 import QuickLook
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource {
+class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -35,14 +35,14 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     /// Ad banner view displayed as header of Table view.
     var bannerView: GADBannerView!
     
-    /// Share file with an `UIActivityViewController`.
+    /// Share file with an `UIDocumentInteractionController`.
     ///
     /// - Parameters:
-    ///     - sender: Button that sends the action, where point the `UIActivityViewController` and in wich the `tag` will be used as index of file in `files` array.
+    ///     - sender: `sender.tag` will be used as index of file in `files` array.
     @objc func shareFile(_ sender: UIButton) {
-        let shareVC = UIActivityViewController(activityItems: [files[sender.tag]], applicationActivities: nil)
-        shareVC.popoverPresentationController?.sourceView = sender
-        present(shareVC, animated: true, completion: nil)
+        let document = UIDocumentInteractionController(url: files[sender.tag])
+        document.delegate = self
+        document.presentOpenInMenu(from: sender.bounds, in: sender, animated: true)
     }
     
     /// Preview file with a `QLPreviewController`.
@@ -581,6 +581,13 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         return files[index] as QLPreviewItem
     }
     
+    // MARK: - Document interaction controller delegate
+    
+    /// - Returns: `self`.
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+    
     // MARK: - Static
     
     /// Global delegate.
@@ -593,11 +600,12 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     ///
     /// - Parameters:
     ///     - file: File to be opened.
+    ///     - wasJustDownloaded: If `true`, will show the file in the browser.
     ///     - frame: Frame where point an `UIActivityController` if the file will be saved.
     ///     - view: View from wich share the file.
     ///     - navigationController: Navigation controller in wich push editor or viewer.
     ///     - viewController: viewController in wich show loading alert.
-    static func openFile(_ file: URL, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
+    static func openFile(_ file: URL, wasJustDownloaded: Bool = false, from frame: CGRect, `in` view: UIView, navigationController: UINavigationController?, showActivityViewControllerInside viewController: UIViewController?) {
         
         if let delegate = delegate {
             guard let data = try? Data(contentsOf: file) else {
@@ -635,6 +643,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                     }))
                     
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    
                     if viewController == nil {
                         vc.present(alert, animated: true, completion: nil)
                     } else {
@@ -651,7 +661,35 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         })
                     }
                 }
-            } else if isFilePDF(file) {
+            } else if wasJustDownloaded {
+                let dirVC = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+                
+                guard let i = dirVC.files.firstIndex(of: file) else {
+                    return
+                }
+                
+                func show() {
+                    (AppDelegate.shared.splitViewController.viewControllers[0] as? UINavigationController)?.pushViewController(dirVC, animated: true) {
+                        dirVC.tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .middle)
+                        
+                        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                            dirVC.tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: true)
+                        })
+                    }
+                }
+                
+                if viewController == nil {
+                    show()
+                } else {
+                    viewController?.dismiss(animated: true, completion: {
+                        show()
+                    })
+                }
+                
+                return
+            }
+            
+            if isFilePDF(file) {
                 let webVC = UIViewController.webViewController
                 webVC.file = file
                 

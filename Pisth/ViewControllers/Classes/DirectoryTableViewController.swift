@@ -1301,7 +1301,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                                     
                                     activityVC.dismiss(animated: true, completion: {
                                         ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: path)
-                                        LocalDirectoryTableViewController.openFile(newFile, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
+                                        LocalDirectoryTableViewController.openFile(newFile, wasJustDownloaded: true, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                                     })
                                 } catch let error {
                                     activityVC.dismiss(animated: true, completion: {
