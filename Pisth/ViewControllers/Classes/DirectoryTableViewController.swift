@@ -78,9 +78,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     ///     - sender: Sender button. It's `tag` is the index of the file to inspect.
     @objc func showInfo(sender: UIButton) {
         
+        guard let files = files else {
+            return
+        }
+        
         let fileInfoVC = UIViewController.fileInfo
-        fileInfoVC.file = files?[sender.tag]
-        fileInfoVC.parentDirectory = directory
+        fileInfoVC.file = files[sender.tag]
+        if sender.tag != files.count-1 {
+            fileInfoVC.parentDirectory = directory
+        } else {
+            fileInfoVC.parentDirectory = directory.nsString.deletingLastPathComponent.nsString.deletingLastPathComponent
+        }
         fileInfoVC.modalPresentationStyle = .popover
         fileInfoVC.popoverPresentationController?.sourceView = sender
             fileInfoVC.popoverPresentationController?.delegate = fileInfoVC
@@ -770,7 +778,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             
             /// - Parameters:
             ///     - directory: Local directory URL.
-            /// - Returns: Files in given directory..
+            /// - Returns: Files in given directory.
             func filesIn(directory: URL) -> [URL] {
                 if let files = try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil) {
                     return files
@@ -1069,7 +1077,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
         
         if indexPath.row == files.count-1 && directory.removingUnnecessariesSlashes != "/" {
-            cell.filename.text = ".."
+            cell.filename.text = "../"
         }
         
         cell.permssions.text = files[indexPath.row].permissions
@@ -1230,7 +1238,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         var path = self.directory.nsString.appendingPathComponent(files[indexPath.row].filename)
         
         if let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
-            if cell.filename.text == ".." {
+            if cell.filename.text == "../" {
                 path = self.directory.nsString.deletingLastPathComponent
             }
         }
