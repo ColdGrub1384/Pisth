@@ -37,13 +37,25 @@ extension UIImage {
     ///     - fileURL: Local file URL.
     ///     - preferredSize: Preferred generated icon size.
     public class func icon(forFileURL fileURL: URL, preferredSize: FileIconSize = .smallest) -> UIImage {
-        let myInteractionController = UIDocumentInteractionController(url: fileURL)
+        
+        var url = fileURL
+        
+        if !FileManager.default.fileExists(atPath: url.path) {
+            url = URL(fileURLWithPath: NSTemporaryDirectory().nsString.appendingPathComponent(fileURL.lastPathComponent))
+            FileManager.default.createFile(atPath: url.path, contents: nil, attributes: nil)
+        }
+        
+        let myInteractionController = UIDocumentInteractionController(url: url)
         let allIcons = myInteractionController.icons
         
         // allIcons is guaranteed to have at least one image
         switch preferredSize {
-        case .smallest: return allIcons.first!
-        case .largest: return allIcons.last!
+        case .smallest: return allIcons.first ?? #imageLiteral(resourceName: "File icons/file")
+        case .largest: return allIcons.last ?? #imageLiteral(resourceName: "File icons/file")
+        }
+        
+        if url != fileURL {
+            try? FileManager.default.removeItem(at: url)
         }
     }
     
