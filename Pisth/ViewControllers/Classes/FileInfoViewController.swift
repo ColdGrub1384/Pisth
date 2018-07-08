@@ -56,20 +56,16 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         
         title = "Info"
         
-        iconView.image = nil
-        filenameLabel.text = nil
-        parentDirectoryLabel.text = nil
-        fileTypeLabel.text = nil
-        permissionsLabel.text = nil
-        sizeLabel.text = nil
-        modificationLabel.text = nil
+        view.isHidden = true
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(close))
     }
     
     /// Fill info.
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.isHidden = false
         
         let pathExtension = file.filename.nsString.pathExtension
         
@@ -91,12 +87,12 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
             sizeLabel.text = "--"
         } else if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(), let description = UTTypeCopyDescription(uti)?.takeRetainedValue() as String? {
             if description.isEmpty {
-                fileTypeLabel.text = pathExtension.capitalized+" file"
+                fileTypeLabel.text = pathExtension.uppercased()+" file"
             } else {
                 fileTypeLabel.text = description
             }
         } else {
-            fileTypeLabel.text = pathExtension.capitalized+" file"
+            fileTypeLabel.text = pathExtension.uppercased()+" file"
         }
         permissionsLabel.text = file.permissions
         modificationLabel.text = DateFormatter().string(from: file.modificationDate)
