@@ -105,6 +105,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Variable used to delay a long press of the arrow keys.
     private var arrowsLongPressDelay = 2
     
+    /// Navigation controller to reset at `viewDidDisappear(_:)`.
+    var navigationController_: UINavigationController?
+    
     /// Show commands history.
     ///
     /// - Parameters:
@@ -585,6 +588,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        navigationController_ = navigationController
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
         tapGesture.delegate = self
         if !isPresentedAsPopover {
@@ -620,8 +625,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewDidDisappear(animated)
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
-        AppDelegate.shared.navigationController.navigationBar.barStyle = .default
-        AppDelegate.shared.navigationController.view.backgroundColor = .white
+        navigationController_?.navigationBar.barStyle = .default
+        navigationController_?.view.backgroundColor = .white
     }
     
     /// Returns `.lightContent` for dark themes.
