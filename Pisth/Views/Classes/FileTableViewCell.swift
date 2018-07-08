@@ -161,7 +161,16 @@ class FileTableViewCell: UITableViewCell {
         
         if let directoryTableViewController = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
             
-            let dirToOpen = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename)
+            let filename = directoryTableViewController.files![directoryTableViewController.tableView.indexPath(for: self)!.row].filename
+            let dir = directoryTableViewController.directory.nsString
+            
+            let dirToOpen: String
+            
+            if self.filename.text == ".." || self.filename.text == "../" {
+                dirToOpen = dir.deletingLastPathComponent
+            } else {
+                dirToOpen = dir.appendingPathComponent(filename!)
+            }
             
             ContentViewController.shared.presentBrowser(inDirectory: dirToOpen, from: self)
         }
