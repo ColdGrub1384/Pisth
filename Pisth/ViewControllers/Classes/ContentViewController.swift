@@ -44,7 +44,9 @@ class ContentViewController: UIViewController, PanelManager {
             }
             
             vc?.present(terminalPanel, animated: true) {
-                self.toggleFloatStatus(for: self.terminalPanel)
+                if self.terminalPanel.canFloat {
+                    self.toggleFloatStatus(for: self.terminalPanel)
+                }
                 terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
             }
         }
@@ -72,7 +74,9 @@ class ContentViewController: UIViewController, PanelManager {
         }
         
         vc?.present(directoryPanel, animated: true) {
-            self.toggleFloatStatus(for: directoryPanel)
+            if directoryPanel.canFloat {
+                self.toggleFloatStatus(for: directoryPanel)
+            }
             browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
         }
     }
