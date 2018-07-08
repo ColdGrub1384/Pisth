@@ -31,6 +31,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Fetched files.
     var files: [NMSFTPFile]?
     
+    /// All files including hidden files.
+    var allFiles: [NMSFTPFile]?
+    
     /// Delegate used.
     var delegate: DirectoryTableViewControllerDelegate?
     
@@ -123,13 +126,24 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         if ConnectionManager.shared.result == .connectedAndAuthorized {
             
-            // Get absolute path from "~"
-            if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
-                self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
-                self.homeDirectory = path ?? "/"
+            if self.directory.contains("~") {
+                // Get absolute path from "~"
+                if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
+                    self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
+                    self.homeDirectory = path ?? "/"
+                }
             }
             
-            let files = ConnectionManager.shared.files(inDirectory: self.directory)
+            var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+            self.allFiles = files
+            if !UserDefaults.standard.bool(forKey: "hidden") {
+                for file in files ?? [] {
+                    if file.filename.hasPrefix(".") {
+                        guard let i = files?.index(of: file) else { break }
+                        files?.remove(at: i)
+                    }
+                }
+            }
             self.files = files
             
             guard self.files != nil else {
@@ -248,13 +262,17 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
             
             // Check for GIT
-            guard let result = try? session.channel.execute("ls -1a '\(directory)'").replacingOccurrences(of: "\r", with: "") else { return [] }
-            let allFiles = result.components(separatedBy: "\n")
+            var isGitRepo = false
+            for file in allFiles ?? [] {
+                if file.filename == ".git" || file.filename == ".git/" {
+                    isGitRepo = true
+                }
+            }
             
             // Check for Aptitude
             guard let resultAPT = try? session.channel.execute("command -v apt-get").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n") else { return [] }
             
-            if allFiles.contains(".git") {
+            if isGitRepo {
                 if resultAPT.isEmpty {
                     return [uploadFile, git, terminal]
                 } else {
@@ -530,7 +548,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
         
         guard ConnectionManager.shared.filesSession != nil else { return }
-        let files = ConnectionManager.shared.files(inDirectory: self.directory)
+        var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+        self.allFiles = files
+        if !UserDefaults.standard.bool(forKey: "hidden") {
+            for file in files ?? [] {
+                if file.filename.hasPrefix(".") {
+                    guard let i = files?.index(of: file) else { break }
+                    files?.remove(at: i)
+                }
+            }
+        }
         self.files = files
             
         if self.directory.removingUnnecessariesSlashes != "/" {
@@ -1071,9 +1098,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if files[indexPath.row].filename.nsString.lastPathComponent.hasPrefix(".") {
             cell.filename.isEnabled = false
             cell.iconView.alpha = 0.5
+            cell.permssions.alpha = 0.5
         } else {
             cell.filename.isEnabled = true
             cell.iconView.alpha = 1
+            cell.permssions.alpha = 1
         }
         
         if indexPath.row == files.count-1 && directory.removingUnnecessariesSlashes != "/" {

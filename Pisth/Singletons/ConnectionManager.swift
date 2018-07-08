@@ -40,14 +40,14 @@ class ConnectionManager {
     /// - Parameters:
     ///     - directory: Directory where list files.
     /// - Returns: Files listed, nil in case of error.
-    func files(inDirectory directory: String) -> [NMSFTPFile]?  {
+    func files(inDirectory directory: String, showHiddenFiles: Bool = false) -> [NMSFTPFile]?  {
         guard let session = filesSession else { return [] }
         
         guard var files = session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else {
             return nil
         }
         
-        if !UserDefaults.standard.bool(forKey: "hidden") { // Remove hidden files if is necessary
+        if !showHiddenFiles { // Remove hidden files if is necessary
             for file in files {
                 if file.filename.hasPrefix(".") {
                     guard let i = files.index(of: file) else { break }
