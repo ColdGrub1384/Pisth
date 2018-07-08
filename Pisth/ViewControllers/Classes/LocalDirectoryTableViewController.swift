@@ -693,6 +693,17 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                         vc.present(UINavigationController(rootViewController: imageViewer), animated: true, completion: nil)
                     })
                 }
+            } else {
+                let dirVC = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+                if let i = dirVC.files.firstIndex(of: file) {
+                    if viewController == nil {
+                        vc.present(dirVC.previewFile(atIndex: i), animated: true, completion: nil)
+                    } else {
+                        viewController?.dismiss(animated: true, completion: {
+                            vc.present(dirVC.previewFile(atIndex: i), animated: true, completion: nil)
+                        })
+                    }
+                }
             }
         }
         
