@@ -1286,7 +1286,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if session.localDragSession?.items.first?.localObject is NMSFTPFile {
             for item in session.items {
                 if let file = item.localObject as? NMSFTPFile {
-                    guard let dirVC = AppDelegate.shared.splitViewController.detailNavigationController.visibleViewController as? DirectoryTableViewController else {
+                    guard let dirVC = item.sourceViewController as? DirectoryTableViewController else {
                         return
                     }
                     
