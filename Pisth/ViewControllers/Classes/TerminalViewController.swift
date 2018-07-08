@@ -646,7 +646,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         isResizing = true
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             if self.isPresentedInFullscreen && self.isFirstResponder {
                 _ = self.resignFirstResponder()
                 
