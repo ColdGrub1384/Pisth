@@ -13,7 +13,7 @@ class ContentViewController: UIViewController, PanelManager {
     
     private var terminalPanel: PanelViewController!
     
-    private var directoryPanel: PanelViewController!
+    private var directoryPanels = [PanelViewController]()
     
     /// The wrapper view for using with `PanelKit`
     @IBOutlet weak var wrapperView: UIView!
@@ -44,6 +44,7 @@ class ContentViewController: UIViewController, PanelManager {
             }
             
             vc?.present(terminalPanel, animated: true) {
+                self.toggleFloatStatus(for: self.terminalPanel)
                 terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
             }
         }
@@ -58,10 +59,12 @@ class ContentViewController: UIViewController, PanelManager {
         
         let browser = DirectoryTableViewController(connection: connection, directory: directory)
         
-        directoryPanel = PanelViewController(with: browser, in: self)
+        let directoryPanel = PanelViewController(with: browser, in: self)
         directoryPanel.modalPresentationStyle = .popover
         directoryPanel.popoverPresentationController?.sourceView = sender
         directoryPanel.popoverPresentationController?.sourceRect = sender?.frame ?? CGRect.zero
+        
+        directoryPanels.append(directoryPanel)
         
         var vc: UIViewController? = self
         if view.window == nil {
@@ -69,6 +72,7 @@ class ContentViewController: UIViewController, PanelManager {
         }
         
         vc?.present(directoryPanel, animated: true) {
+            self.toggleFloatStatus(for: directoryPanel)
             browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
         }
     }
@@ -94,18 +98,12 @@ class ContentViewController: UIViewController, PanelManager {
         return contentView
     }
     
-    /// Returns `[terminal]`.
+    /// Returns terminal panel and directory panels.
     var panels: [PanelViewController] {
-        var panels_ = [PanelViewController]()
-        
-        if let terminalPanel = terminalPanel {
-            panels_.append(terminalPanel)
+        var panels_ = directoryPanels
+        if let term = terminalPanel {
+            panels_.append(term)
         }
-        
-        if let directoryPanel = directoryPanel {
-            panels_.append(directoryPanel)
-        }
-        
         return panels_
     }
     
