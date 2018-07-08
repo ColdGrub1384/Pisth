@@ -69,6 +69,22 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
     }
     
+    /// Show file info.
+    ///
+    /// - Parameters:
+    ///     - sender: Sender button. It's `tag` is the index of the file to inspect.
+    @objc func showInfo(sender: UIButton) {
+        
+        let fileInfoVC = UIViewController.fileInfo
+        fileInfoVC.file = files?[sender.tag]
+        fileInfoVC.parentDirectory = directory
+        fileInfoVC.modalPresentationStyle = .popover
+        fileInfoVC.popoverPresentationController?.sourceView = sender
+            fileInfoVC.popoverPresentationController?.delegate = fileInfoVC
+        
+        present(fileInfoVC, animated: true)
+    }
+    
     /// Init with given connection and directory.
     ///
     /// - Parameters:
@@ -1046,6 +1062,11 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         cell.permssions.text = files[indexPath.row].permissions
         cell.permssions.isHidden = false
+                
+        let info = UIButton(type: .detailDisclosure)
+        cell.accessoryView = info
+        info.tag = indexPath.row
+        info.addTarget(self, action: #selector(showInfo(sender:)), for: .touchUpInside)
         
         return cell
     }

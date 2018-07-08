@@ -69,4 +69,9 @@ extension UIViewController {
     static var content: UIViewController {
         return (UIStoryboard(name: "Content", bundle: Bundle.main).instantiateInitialViewController()) ?? UIViewController()
     }
+    
+    /// Returns the File info view controller initialised from nib.
+    static var fileInfo: FileInfoViewController {
+        return (Bundle.main.loadNibNamed("File Info", owner: nil, options: nil)?[0] as? FileInfoViewController) ?? FileInfoViewController()
+    }
 }
