@@ -286,7 +286,7 @@
 		C9B205C420D71A8600045F20 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9B205C820D72FE300045F20 /* FilesOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesOutlineView.swift; sourceTree = "<group>"; };
 		C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
-		C9CB27DC20D5BB9500290DBE /* Pisth Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9CB27DC20D5BB9500290DBE /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		C9CB27E520D5BB9800290DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -565,7 +565,7 @@
 			children = (
 				3AFDD9011FF140FE0061677B /* Pisth.app */,
 				3ACF9ADC20409446006C3218 /* Pisth API Example.app */,
-				C9CB27DC20D5BB9500290DBE /* Pisth Mac.app */,
+				C9CB27DC20D5BB9500290DBE /* Pisth.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -747,7 +747,7 @@
 			);
 			name = "Pisth Mac";
 			productName = "Pisth Mac";
-			productReference = C9CB27DC20D5BB9500290DBE /* Pisth Mac.app */;
+			productReference = C9CB27DC20D5BB9500290DBE /* Pisth.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1256,7 +1256,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pisth;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1284,7 +1284,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pisth;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

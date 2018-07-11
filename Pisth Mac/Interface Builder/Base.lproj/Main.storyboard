@@ -145,6 +145,13 @@ CA
                                                 <action selector="openFile:" target="fJv-iG-GIr" id="aZ8-9y-qHm"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Open with" id="aXU-w9-Y8X">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" id="UIh-Eg-HlV"/>
+                                            <connections>
+                                                <action selector="openFile:" target="fJv-iG-GIr" id="E1w-oT-twQ"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                     <connections>
                                         <outlet property="delegate" destination="fJv-iG-GIr" id="yOg-ga-pAf"/>
