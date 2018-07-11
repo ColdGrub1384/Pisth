@@ -656,7 +656,6 @@
 				C9985AAE20D6C4F500389A7B /* ConnectionController.swift */,
 				C9B205C020D70CD400045F20 /* FileObserver.swift */,
 				C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */,
-				C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -673,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				C9B205C820D72FE300045F20 /* FilesOutlineView.swift */,
+				C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
