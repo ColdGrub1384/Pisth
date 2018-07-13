@@ -71,7 +71,7 @@ Just open a terminal in [Pisth](https://pisth.github.io), and your iOS device wi
 
 [![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
 
-Pisth has an API that allows iOS apps signed with the same team ID of Pisth to import file from Pisth.
+Pisth has an API that allows iOS apps to import files from Pisth.
 
 More information at https://pisth.github.io/docs/getting-started.html.
 
