@@ -29,17 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let viewController = (UIApplication.shared.keyWindow?.rootViewController as? ViewController)
         
-        if let data = pisth.dataReceived {
-            viewController?.data = data
-            if let image = UIImage(data: data) {
+        if let file = pisth.receivedFile {
+            viewController?.data = file.data
+            if let image = UIImage(data: file.data) {
                 viewController?.imageView.image = image
             }
+            viewController?.filename.text = file.filename
         }
-        
-        if let filename = pisth.filename(fromURL: url) {
-            viewController?.filename.text = filename
-        }
-        
         return true
     }
 

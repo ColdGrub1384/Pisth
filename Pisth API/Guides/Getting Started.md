@@ -1,7 +1,5 @@
 # Getting started
 
-Both Pisth and the app using the API have to be signed with the same team ID! So this API is mostly private, but you can experiment it signing Pisth with your team ID.
-
  - Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it's very important! Don't use URL schemes like "pisth-import", try to include the name of your app, for example: "myApp-pisth-import".
  - Include the Pisth_API framework and Pisth_Shared: Drag the `Pisth API` and `Pisth Shared` projects to your workspace and add them to your app's embedded binary.
  - Add this to your `info.plist`:
@@ -47,10 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
         // Getting data received
-        pisth.dataReceived
+        pisth.receivedFile?.data
 
         // Getting received file name
-        pisth.filename(fromURL: url)
+        pisth.receivedFile.filename
 
     }
 }

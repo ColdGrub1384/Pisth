@@ -10,6 +10,7 @@
 		3A625BEC208010A7008D647C /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BED208010A7008D647C /* Pisth_Shared.framework */; };
 		3ACF9B212041B356006C3218 /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B202041B356006C3218 /* Pisth.swift */; };
 		3AD29181207C13B10082306D /* PisthAPT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29180207C13B10082306D /* PisthAPT.swift */; };
+		C9E8859920F9254800F02EA0 /* PisthFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E8859820F9254800F02EA0 /* PisthFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		3ACF9B202041B356006C3218 /* Pisth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pisth.swift; sourceTree = "<group>"; };
 		3ACF9BF520420AB7006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AD29180207C13B10082306D /* PisthAPT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthAPT.swift; sourceTree = "<group>"; };
+		C9E8859820F9254800F02EA0 /* PisthFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				3ACF9B202041B356006C3218 /* Pisth.swift */,
 				3AD29180207C13B10082306D /* PisthAPT.swift */,
+				C9E8859820F9254800F02EA0 /* PisthFile.swift */,
 				3ACF9B192041B342006C3218 /* Info.plist */,
 			);
 			path = "Pisth API";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD29181207C13B10082306D /* PisthAPT.swift in Sources */,
+				C9E8859920F9254800F02EA0 /* PisthFile.swift in Sources */,
 				3ACF9B212041B356006C3218 /* Pisth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

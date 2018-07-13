@@ -47,7 +47,7 @@ open class PisthAPT {
     /// - Parameters:
     ///     - connection: Connection to open.
     open func open(connection: RemoteConnection) {
-        pasteboard?.setData(NSKeyedArchiver.archivedData(withRootObject: connection), forPasteboardType: "public.data")
+        UIPasteboard.general.setData(NSKeyedArchiver.archivedData(withRootObject: connection), forPasteboardType: "public.data")
         UIApplication.shared.open(pisthAPTurlScheme, options: [:], completionHandler: nil)
     }
     

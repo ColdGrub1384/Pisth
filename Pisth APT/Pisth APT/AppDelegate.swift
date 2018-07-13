@@ -294,101 +294,98 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
             
             TabBarController.shared = viewController
             
-            if let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true) {
-                if let data = pasteboard.data(forPasteboardType: "public.data") {
-                    if let connection = NSKeyedUnarchiver.unarchiveObject(with: data) as? RemoteConnection {
-                        
-                        guard connection != self.connection else {
-                            return true
-                        }
-                        
-                        viewController.customConnection = connection
-                        
-                        guard let connectingVC = Bundle.main.loadNibNamed("Connecting", owner: nil, options: nil)?[0] as? ConnectingViewController else {
-                            return false
-                        }
-                        
-                        connectingVC.connection = connection
-                        
-                        UIApplication.shared.keyWindow?.topViewController()?.present(connectingVC, animated: true, completion: {
-                            
-                            self.connect()
-                            
-                            if let session = self.session, session.isConnected {
-                                
-                                self.searchForUpdates()
-                                
-                                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                                    if let tintColor = url.queryParameters?["tintColor"]?.removingPercentEncoding {
-                                        if let color = UIColor(hexString: tintColor) {
-                                            UIApplication.shared.keyWindow?.tintColor = color
-                                        }
-                                    }
-                                    
-                                    connectingVC.present(viewController, animated: true, completion: {
-                                        self.presentInterstitialAd()
-                                        for vc in viewController.viewControllers ?? [] {
-                                            (vc as? UINavigationController)?.visibleViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))
-                                        }
-                                    })
-                                })
-                            }
-                        })
+            if let data = UIPasteboard.general.data(forPasteboardType: "public.data") {
+                if let connection = NSKeyedUnarchiver.unarchiveObject(with: data) as? RemoteConnection {
+                    
+                    guard connection != self.connection else {
+                        return true
                     }
+                    
+                    viewController.customConnection = connection
+                    
+                    guard let connectingVC = Bundle.main.loadNibNamed("Connecting", owner: nil, options: nil)?[0] as? ConnectingViewController else {
+                        return false
+                    }
+                    
+                    connectingVC.connection = connection
+                    
+                    UIApplication.shared.keyWindow?.topViewController()?.present(connectingVC, animated: true, completion: {
+                        
+                        self.connect()
+                        
+                        if let session = self.session, session.isConnected {
+                            
+                            self.searchForUpdates()
+                            
+                            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                                if let tintColor = url.queryParameters?["tintColor"]?.removingPercentEncoding {
+                                    if let color = UIColor(hexString: tintColor) {
+                                        UIApplication.shared.keyWindow?.tintColor = color
+                                    }
+                                }
+                                
+                                connectingVC.present(viewController, animated: true, completion: {
+                                    self.presentInterstitialAd()
+                                    for vc in viewController.viewControllers ?? [] {
+                                        (vc as? UINavigationController)?.visibleViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))
+                                    }
+                                })
+                            })
+                        }
+                    })
                 }
             }
-        } else if let data = pisth.dataReceived { // Import file with the API
+        } else if let file = pisth.receivedFile { // Import file with the API
             
             openReason = .installDeb
             
-            if let filename = pisth.filename(fromURL: url) {
-                if filename.lowercased().hasSuffix(".deb") {
+            let filename = file.filename
+            if filename.lowercased().hasSuffix(".deb") {
+                
+                let activityVC = ActivityViewController(message: "Uploading...")
+                
+                var success = false
+                
+                let localFilePath = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("PisthDEBInstall.deb").path
+                
+                vc.present(activityVC, animated: true, completion: {
                     
-                    let activityVC = ActivityViewController(message: "Uploading...")
+                    FileManager.default.createFile(atPath: localFilePath, contents: file.data, attributes: nil)
+                    print("\(self.homeDirectory ?? "")/PisthDEBInstall.deb")
+                    success = self.session?.channel.uploadFile(localFilePath, to: "\(self.homeDirectory ?? "")/PisthDEBInstall.deb") ?? false
                     
-                    var success = false
+                    try? FileManager.default.removeItem(atPath: localFilePath)
                     
-                    let localFilePath = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("PisthDEBInstall.deb").path
-                    
-                    vc.present(activityVC, animated: true, completion: {
+                    activityVC.dismiss(animated: true, completion: {
                         
-                        FileManager.default.createFile(atPath: localFilePath, contents: data, attributes: nil)
-                        print("\(self.homeDirectory ?? "")/PisthDEBInstall.deb")
-                        success = self.session?.channel.uploadFile(localFilePath, to: "\(self.homeDirectory ?? "")/PisthDEBInstall.deb") ?? false
-                        
-                        try? FileManager.default.removeItem(atPath: localFilePath)
-                        
-                        activityVC.dismiss(animated: true, completion: {
-                            
-                            if success {
-                                guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
-                                    return
-                                }
-                                
-                                termVC.command = "clear; sudo dpkg -i ~/PisthDEBInstall.deb; rm ~/PisthDEBInstall.deb; echo -e \"\\033[CLOSE\""
-                                termVC.title = "Installing packages..."
-                                
-                                let navVC = UINavigationController(rootViewController: termVC)
-                                navVC.modalPresentationStyle = .formSheet
-                                
-                                vc.present(navVC, animated: true, completion: nil)
-                            } else {
-                                let alert = UIAlertController(title: "Cannot upload file!", message: "Make sure the file is not empty.", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                                
-                                vc.present(alert, animated: true, completion: nil)
+                        if success {
+                            guard let termVC = Bundle.main.loadNibNamed("Terminal", owner: nil, options: nil)?[0] as? TerminalViewController else {
+                                return
                             }
                             
-                        })
+                            termVC.command = "clear; sudo dpkg -i ~/PisthDEBInstall.deb; rm ~/PisthDEBInstall.deb; echo -e \"\\033[CLOSE\""
+                            termVC.title = "Installing packages..."
+                            
+                            let navVC = UINavigationController(rootViewController: termVC)
+                            navVC.modalPresentationStyle = .formSheet
+                            
+                            vc.present(navVC, animated: true, completion: nil)
+                        } else {
+                            let alert = UIAlertController(title: "Cannot upload file!", message: "Make sure the file is not empty.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            
+                            vc.present(alert, animated: true, completion: nil)
+                        }
+                        
                     })
-                    
-                    return true
-                } else {
-                    let alert = UIAlertController(title: "Invalid file!", message: "Please select a \"Deb\" file.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    
-                    vc.present(alert, animated: true, completion: nil)
-                }
+                })
+                
+                return true
+            } else {
+                let alert = UIAlertController(title: "Invalid file!", message: "Please select a \"Deb\" file.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                
+                vc.present(alert, animated: true, completion: nil)
             }
         }
         

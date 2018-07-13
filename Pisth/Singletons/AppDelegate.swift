@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 import SwiftyStoreKit
 import Pisth_Shared
 import Firebase
+import Pisth_API
 
 /// The app's delegate.
 @UIApplicationMain
@@ -444,7 +445,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 
                 let bookmarksVC = BookmarksTableViewController()
                 
-                if let backgroundImage = UIPasteboard(name: .init("pisth-import"), create: false)?.image {
+                if let backgroundImage = UIPasteboard.general.image {
                     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
                     let imageView = UIImageView(image: backgroundImage)
                     imageView.ignoresInvertColors = true
@@ -633,11 +634,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             try? FileManager.default.removeItem(at: file)
             LocalDirectoryTableViewController.delegate = nil
             
-            UIPasteboard(name: .init("pisth-import"), create: true)?.setData(data, forPasteboardType: "public.data")
+            UIPasteboard.general.setData(NSKeyedArchiver.archivedData(withRootObject: PisthFile(data: data, filename: file.lastPathComponent)), forPasteboardType: "public.data")
             
             navigationController.dismiss(animated: true, completion: {
                 if let dataReceiverAppURLScheme = self.dataReceiverAppURLScheme {
-                    UIApplication.shared.open(URL(string: dataReceiverAppURLScheme.absoluteString+"?filename=\(file.lastPathComponent.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")!, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(dataReceiverAppURLScheme, options: [:], completionHandler: nil)
                 }
             })
         }

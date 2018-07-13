@@ -8,8 +8,6 @@
 import UIKit
 import Pisth_Shared
 
-let pasteboard = UIPasteboard(name: .init("pisth-import"), create: true)
-
 /// The class for interacting with Pisth.
 open class Pisth {
     
@@ -33,9 +31,12 @@ open class Pisth {
         self.urlScheme = urlScheme
     }
     
-    /// Imported file data.
-    open var dataReceived: Data? {
-        return pasteboard?.data(forPasteboardType: "public.data")
+    /// Imported file.
+    open var receivedFile: PisthFile? {
+        guard let data = UIPasteboard.general.data(forPasteboardType: "public.data") else {
+            return nil
+        }
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? PisthFile
     }
     
     /// Message to show in the Pisth navigation bar.
@@ -63,15 +64,9 @@ open class Pisth {
                 window.drawHierarchy(in: window.bounds, afterScreenUpdates: true)
             })
             
-            pasteboard?.image = screenshot
+            UIPasteboard.general.image = screenshot
         }
         
         UIApplication.shared.open(pisthURLScheme, options: [:], completionHandler: nil)
-    }
-    
-    /// Get filename from opened URL.
-    open func filename(fromURL url: URL) -> String? {
-        
-        return url.queryParameters?["filename"]?.removingPercentEncoding
     }
 }
