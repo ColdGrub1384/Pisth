@@ -32,9 +32,6 @@
             <a href="Guides.html">Guides</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="example.html">Example</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="getting-started.html">Getting Started</a>
               </li>
             </ul>
@@ -48,6 +45,9 @@
               <li class="nav-group-task">
                 <a href="Classes/PisthAPT.html">PisthAPT</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Classes/PisthFile.html">PisthFile</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -57,8 +57,6 @@
           <section class="section">
             
             <h1 id='getting-started' class='heading'>Getting started</h1>
-
-<p>Both Pisth and the app using the API have to be signed with the same team ID! So this API is mostly private, but you can experiment it signing Pisth with your team ID.</p>
 
 <ul>
 <li>Declare an URL scheme for your app, preferably just for importing files. Use an unique URL scheme, it&rsquo;s very important! Don&rsquo;t use URL schemes like <q>pisth-import</q>, try to include the name of your app, for example: <q>myApp-pisth-import</q>.</li>
@@ -76,13 +74,13 @@
 <ul>
 <li>Configure the <code><a href="Classes/PisthAPT.html">PisthAPT</a></code> instance:</li>
 </ul>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">pisthAPT</span> <span class="o">=</span> <span class="nf">PisthAPT</span><span class="p">(</span><span class="nv">urlScheme</span><span class="p">:</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app's URL Scheme */</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">pisthAPT</span> <span class="o">=</span> <span class="kt">PisthAPT</span><span class="p">(</span><span class="nv">urlScheme</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app's URL Scheme */</span><span class="p">)</span>
 </code></pre>
 
 <ul>
 <li>Setup the connection:</li>
 </ul>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">connection</span> <span class="o">=</span> <span class="nf">RemoteConnection</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="s">"coldg.ddns.net"</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="s">"pisthtest"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"pisth"</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Pisth Test"</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="s">"~"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="nv">useSFTP</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">os</span><span class="p">:</span> <span class="s">"Raspbian"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">connection</span> <span class="o">=</span> <span class="kt">RemoteConnection</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="s">"coldg.ddns.net"</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="s">"pisthtest"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"pisth"</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Pisth Test"</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="s">"~"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="nv">useSFTP</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">os</span><span class="p">:</span> <span class="s">"Raspbian"</span><span class="p">)</span>
 </code></pre>
 
 <ul>
@@ -93,7 +91,7 @@
 <ul>
 <li>Configure the <code><a href="Classes/Pisth.html">Pisth</a></code> instance:</li>
 </ul>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">pisth</span> <span class="o">=</span> <span class="nf">Pisth</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kc">nil</span> <span class="cm">/* Default message */</span><span class="p">,</span> <span class="nv">urlScheme</span><span class="p">:</span> <span class="nf">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app URL scheme */</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">pisth</span> <span class="o">=</span> <span class="kt">Pisth</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="kc">nil</span> <span class="cm">/* Default message */</span><span class="p">,</span> <span class="nv">urlScheme</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"pisth-api://"</span><span class="p">)</span><span class="o">!</span> <span class="cm">/* This app URL scheme */</span><span class="p">)</span>
 </code></pre>
 
 <ul>
@@ -102,15 +100,15 @@
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Pisth_API</span>
 
 <span class="kd">@UIApplicationMain</span>
-<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="nf">UIApplicationDelegate</span> <span class="p">{</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span>
 
-    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="kd">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
 
         <span class="c1">// Getting data received</span>
-        <span class="n">pisth</span><span class="o">.</span><span class="n">dataReceived</span>
+        <span class="n">pisth</span><span class="o">.</span><span class="n">receivedFile</span><span class="p">?</span><span class="o">.</span><span class="n">data</span>
 
         <span class="c1">// Getting received file name</span>
-        <span class="n">pisth</span><span class="o">.</span><span class="nf">filename</span><span class="p">(</span><span class="nv">fromURL</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+        <span class="n">pisth</span><span class="o">.</span><span class="n">receivedFile</span><span class="p">?</span><span class="o">.</span><span class="n">filename</span>
 
     <span class="p">}</span>
 <span class="p">}</span>
@@ -123,8 +121,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-07-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

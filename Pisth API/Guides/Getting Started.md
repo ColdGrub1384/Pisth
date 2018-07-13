@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pisth.receivedFile?.data
 
         // Getting received file name
-        pisth.receivedFile.filename
+        pisth.receivedFile?.filename
 
     }
 }
