@@ -114,7 +114,12 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
             
             webView.loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
             webView.isUserInteractionEnabled = false
-            webView.ignoresInvertColors = true
+            
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activityIndicator.frame.origin = webView.center
+            activityIndicator.frame.size = CGSize(width: 20, height: 20)
+            activityIndicator.startAnimating()
+            webView.addSubview(activityIndicator)
             
             i += 1
         }
@@ -124,6 +129,12 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
     
     /// Display theme preview.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        for view in webView.subviews {
+            if view is UIActivityIndicatorView {
+                view.removeFromSuperview()
+            }
+        }
         
         guard let theme = themes[webView] else {
             return
