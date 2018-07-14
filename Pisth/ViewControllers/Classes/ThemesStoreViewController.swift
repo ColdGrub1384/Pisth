@@ -96,6 +96,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         var i = 0
         for (name, theme) in TerminalTheme.themes {
             let webView = WKWebView(frame: scrollView.frame)
+            webView.ignoresInvertColors = true
             
             scrollView.addSubview(webView)
             
