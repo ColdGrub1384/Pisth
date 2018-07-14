@@ -78,7 +78,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Show file info.
     ///
     /// - Parameters:
-    ///     - sender: Sender button. It's `tag` is the index of the file to inspect.
+    ///     - sender: Sender button. Its `tag` is the index of the file to inspect.
     @objc func showInfo(sender: UIButton) {
         
         guard let files = files else {
