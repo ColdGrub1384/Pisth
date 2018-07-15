@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     var openedFile: URL?
     
     /// URL scheme of app that is using Pisth API and opened the URL scheme.
-    var dataReceiverAppURLScheme: URL?
+    var dataReceiverAppURLScheme: URL!
     
     /// Go back to app that opened the URL scheme.
     @objc func goToPreviousApp() {

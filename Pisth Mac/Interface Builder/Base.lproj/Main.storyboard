@@ -377,6 +377,21 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Terminal" id="3pD-vd-HYV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Terminal" autoenablesItems="NO" id="XIi-Fi-bSy">
+                                    <items>
+                                        <menuItem title="Theme" id="NZC-jX-TFh">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" id="Bzx-6g-neI"/>
+                                        </menuItem>
+                                        <menuItem title="Text size" id="YZz-i9-Jgz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" id="Uc4-GH-479"/>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Connection" id="ZyE-zI-dBH">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Connection" autoenablesItems="NO" id="DR4-as-22g">
@@ -412,13 +427,15 @@ CA
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Pisth_Mac" customModuleProvider="target">
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Pisth" customModuleProvider="target">
                     <connections>
                         <outlet property="fileMenu" destination="Pwp-KM-gJH" id="OdJ-nA-H8e"/>
+                        <outlet property="textSizeMenu" destination="Uc4-GH-479" id="qrO-vw-fFZ"/>
+                        <outlet property="themesMenu" destination="Bzx-6g-neI" id="rd7-Qx-9Yc"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-                <customObject id="fJv-iG-GIr" customClass="FileMenuDelegate" customModule="Pisth_Mac" customModuleProvider="target"/>
+                <customObject id="fJv-iG-GIr" customClass="FileMenuDelegate" customModule="Pisth" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -447,7 +464,7 @@ CA
         <!--Bookmarks View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="BookmarksViewController" customModule="Pisth_Mac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="BookmarksViewController" customModule="Pisth" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="ey0-8i-TTN">
                         <rect key="frame" x="0.0" y="0.0" width="590" height="357"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -612,7 +629,7 @@ CA
         <!--Connection Info View Controller-->
         <scene sceneID="Tvs-Mm-tJp">
             <objects>
-                <viewController storyboardIdentifier="connectionInfo" id="UQI-KD-6ew" customClass="ConnectionInfoViewController" customModule="Pisth_Mac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="connectionInfo" id="UQI-KD-6ew" customClass="ConnectionInfoViewController" customModule="Pisth" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="G9q-LK-fYQ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

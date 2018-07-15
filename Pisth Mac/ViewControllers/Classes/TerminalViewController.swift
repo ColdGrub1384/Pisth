@@ -20,7 +20,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     var window: NSWindow!
     
     /// Theme used by the terminal.
-    var theme = TerminalTheme.themes["Basic"]!
+    var theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "theme") ?? "Basic"]!
     
     /// The text received from the server.
     var console = ""
@@ -201,7 +201,7 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
         webView.evaluateJavaScript("term.write(\(console.javaScriptEscapedString))", completionHandler: nil)
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
         webView.evaluateJavaScript("document.body.style.backgroundColor = document.getElementsByClassName('xterm-viewport')[0].style.backgroundColor", completionHandler: nil)
-        webView.evaluateJavaScript("term.setOption('fontSize', 12)", completionHandler: nil)
+        webView.evaluateJavaScript("term.setOption('fontSize', \(UserDefaults.standard.integer(forKey: "textSize")))", completionHandler: nil)
         webView.evaluateJavaScript("fit(term)") { (_, _) in
             if self.console == "" {
 
