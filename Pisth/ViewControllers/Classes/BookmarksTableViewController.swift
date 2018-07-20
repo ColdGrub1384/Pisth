@@ -279,6 +279,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     ConnectionManager.shared.filesSession = nil
                     ConnectionManager.shared.result = .notConnected
                     
+                    ContentViewController.shared.closeAllPinnedPanels()
+                    ContentViewController.shared.closeAllFloatingPanels()
+                    
                     if DataManager.shared.connections[indexPath.row].useSFTP {
                         
                         let dirVC = DirectoryTableViewController(connection: connection)
