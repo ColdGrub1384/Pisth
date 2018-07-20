@@ -15,7 +15,7 @@ import Firebase
 import QuickLook
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate {
+class LocalDirectoryTableViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -404,6 +404,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
         collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
         collectionView?.backgroundColor = .white
         clearsSelectionOnViewWillAppear = false
+        collectionView?.dragDelegate = self
         
         // Header
         let header = UIView.browserHeader
@@ -852,6 +853,29 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
         } else {
             openFile()
         }
+    }
+    
+    // MARK: - Collection view drag delegate
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let file = files[indexPath.row]
+        
+        let item = UIDragItem(itemProvider: NSItemProvider(item: file as NSSecureCoding, typeIdentifier: "public.item"))
+        item.sourceViewController = self
+        item.previewProvider = {
+            
+            guard let iconView = (collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell)?.iconView else {
+                return nil
+            }
+            
+            let dragPreview = UIDragPreview(view: iconView)
+            dragPreview.parameters.backgroundColor = .clear
+            
+            return dragPreview
+        }
+        
+        return [item]
     }
     
     // MARK: - Static

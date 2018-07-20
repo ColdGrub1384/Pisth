@@ -1546,32 +1546,24 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                 }
                 
                 if sftp.moveItem(atPath: target, toPath: destination) {
-                    reload()
-                    if dirVC != self {
-                        dirVC.reload()
-                    }
+                    _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                        self.reload()
+                        if dirVC != self {
+                            dirVC.reload()
+                        }
+                    })
                 } else {
                     let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                     present(errorAlert, animated: true, completion: nil)
                 }
             } else if item.dragItem.itemProvider.hasItemConformingToTypeIdentifier(item.dragItem.itemProvider.registeredTypeIdentifiers[0]) {
-                let item = coordinator.items[0]
                 
                 let fileName = item.dragItem.itemProvider.suggestedName
                 
                 item.dragItem.itemProvider.loadInPlaceFileRepresentation(forTypeIdentifier: item.dragItem.itemProvider.registeredTypeIdentifiers[0], completionHandler: { (file, inPlace, error) in
                     
-                    var destination: String
-                    if let indexPath = coordinator.destinationIndexPath {
-                        if let files = self.files {
-                            destination = self.directory.nsString.appendingPathComponent(files[indexPath.row].filename)
-                        } else {
-                            destination = self.directory
-                        }
-                    } else {
-                        destination = self.directory
-                    }
+                    let destination = self.directory
                     
                     if let error = error {
                         let errorAlert = UIAlertController(title: "Error uploading file!", message: error.localizedDescription, preferredStyle: .alert)
@@ -1586,7 +1578,9 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                                 try FileManager.default.copyItem(at: file, to: newFile)
                                 DispatchQueue.main.async {
                                     self.sendFile(file: newFile, toDirectory: destination, uploadHandler: {
-                                        self.reload()
+                                        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                                            self.reload()
+                                        })
                                         try? FileManager.default.removeItem(at: newFile)
                                     }, errorHandler: {
                                         let alert = UIAlertController(title: "Error uploading file!", message: "Error uploading \(file.lastPathComponent) to \(destination).", preferredStyle: .alert)
