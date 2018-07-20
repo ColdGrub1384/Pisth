@@ -1324,13 +1324,18 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                 })
             } else { // Download file
                 
-                let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
+                let activityVC = UIAlertController(title: "Downloading...", message: "\n\n", preferredStyle: .alert)
                 activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
                     continueDownload = false
                     collectionView.deselectItem(at: indexPath, animated: true)
                 }))
                 
                 self.present(activityVC, animated: true, completion: {
+                    
+                    //  Add the progress bar
+                    let progressView = UIProgressView(frame: CGRect(x: 8, y: 72, width: activityVC.view.frame.width - 8 * 2, height: 2))
+                    progressView.tintColor = UIApplication.shared.keyWindow?.tintColor
+                    activityVC.view.addSubview(progressView)
                     
                     let newFile = FileManager.default.documents.appendingPathComponent(path.nsString.lastPathComponent)
                     
@@ -1343,7 +1348,8 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                             let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
                             
                             DispatchQueue.main.async {
-                                activityVC.message = "\(received) / \(toBeReceived)"
+                                activityVC.message = "\(received) / \(toBeReceived)\n"
+                                progressView.setProgress(Float(receivedBytes)/Float(bytesToBeReceived), animated: true)
                             }
                             
                             return continueDownload
