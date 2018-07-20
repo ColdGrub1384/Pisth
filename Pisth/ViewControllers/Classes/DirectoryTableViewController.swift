@@ -16,7 +16,7 @@ import StoreKit
 import PanelKit
 import CoreSpotlight
 
-/// Table view controller to manage remote files.
+/// Collection view controller to manage remote files.
 class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
     
     /// Directory used to list files.

@@ -14,7 +14,7 @@ import Pisth_Shared
 import Firebase
 import QuickLook
 
-/// Table view controller used to manage local files.
+/// Collection view controller used to manage local files.
 class LocalDirectoryTableViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
     
     /// Directory where retrieve files.
