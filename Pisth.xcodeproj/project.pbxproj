@@ -52,8 +52,8 @@
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
 		3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F61FF4281E007BB84A /* fileIcon.swift */; };
-		3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */; };
-		3AA3FDBE2027549900C07C7A /* File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* File Cell.xib */; };
+		3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileCollectionViewCell.swift */; };
+		3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */; };
 		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
@@ -106,6 +106,9 @@
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
+		C98D6CB32101303E00B3052E /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB22101303E00B3052E /* Header.xib */; };
+		C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */; };
+		C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB62101522C00B3052E /* List File Cell.xib */; };
 		C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9985AA920D6C1DE00389A7B /* Connection.storyboard */; };
 		C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */; };
 		C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAE20D6C4F500389A7B /* ConnectionController.swift */; };
@@ -217,8 +220,8 @@
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
-		3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
-		3AA3FDBC2027549800C07C7A /* File Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "File Cell.xib"; sourceTree = "<group>"; };
+		3AA3FDBB2027549700C07C7A /* FileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionViewCell.swift; sourceTree = "<group>"; };
+		3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Grid File Cell.xib"; sourceTree = "<group>"; };
 		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleManager.swift; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +277,9 @@
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
+		C98D6CB22101303E00B3052E /* Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Header.xib; sourceTree = "<group>"; };
+		C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderToolbar.swift; sourceTree = "<group>"; };
+		C98D6CB62101522C00B3052E /* List File Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "List File Cell.xib"; sourceTree = "<group>"; };
 		C9985AA920D6C1DE00389A7B /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 		C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		C9985AAE20D6C4F500389A7B /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
@@ -398,8 +404,9 @@
 		3AA3FDBF202754AB00C07C7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3FDBB2027549700C07C7A /* FileTableViewCell.swift */,
+				3AA3FDBB2027549700C07C7A /* FileCollectionViewCell.swift */,
 				3A60970B203B1F5600CB0776 /* TerminalWebView.swift */,
+				C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -407,10 +414,12 @@
 		3AA3FDC0202754BE00C07C7A /* Interface Builder */ = {
 			isa = PBXGroup;
 			children = (
-				3AA3FDBC2027549800C07C7A /* File Cell.xib */,
+				3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */,
+				C98D6CB62101522C00B3052E /* List File Cell.xib */,
 				3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */,
 				3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */,
 				3A41BA9020445A0300589627 /* Disconnected.xib */,
+				C98D6CB22101303E00B3052E /* Header.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -831,15 +840,17 @@
 				3A41BA9120445A0300589627 /* Disconnected.xib in Resources */,
 				3AF9AEA81FF5461300840E8A /* Settings.storyboard in Resources */,
 				3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */,
+				C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */,
 				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
-				3AA3FDBE2027549900C07C7A /* File Cell.xib in Resources */,
+				3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
 				3A729778205D58B100F94BA7 /* Beta.xib in Resources */,
 				3AE8359F1FF2DCB30073D06E /* Code Editor.xib in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
 				3AD7E0572049E8CC00834D59 /* amzn.png in Resources */,
 				3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */,
+				C98D6CB32101303E00B3052E /* Header.xib in Resources */,
 				3AD7E0582049E8CD00834D59 /* arch.png in Resources */,
 				3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */,
 				3AD7E0592049E8CF00834D59 /* centos.png in Resources */,
@@ -957,7 +968,7 @@
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */,
 				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
-				3AA3FDBD2027549900C07C7A /* FileTableViewCell.swift in Sources */,
+				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
@@ -981,6 +992,7 @@
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,
 				C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */,
+				C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */,
 				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
 				3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */,
 				3A5888B1205C62540002F9E1 /* UIViewController.swift in Sources */,

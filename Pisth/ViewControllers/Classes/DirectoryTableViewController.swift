@@ -17,7 +17,7 @@ import PanelKit
 import CoreSpotlight
 
 /// Table view controller to manage remote files.
-class DirectoryTableViewController: UITableViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UITableViewDragDelegate, UITableViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
+class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -43,6 +43,60 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Ad banner view displayed at top of table view.
     var bannerView: GADBannerView!
     
+    private var headerView_: UIView?
+    
+    /// `collectionView` header.
+    var headerView: UIView? {
+        get {
+            return headerView_
+        }
+        
+        set {
+            headerView_ = newValue
+            for view in headerSuperview?.subviews ?? [] {
+                view.removeFromSuperview()
+            }
+            if let view = newValue {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = view.frame.size
+                view.frame = headerSuperview?.frame ?? view.frame
+                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                headerSuperview?.addSubview(view)
+            } else {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize.zero
+            }
+        }
+    }
+    
+    /// `headerView` superview.
+    var headerSuperview: UIView?
+    
+    private var footerView_: UIView?
+    
+    /// `collectionView` footer.
+    var footerView: UIView? {
+        get {
+            return footerView_
+        }
+        
+        set {
+            footerView_ = newValue
+            for view in footerSuperview?.subviews ?? [] {
+                view.removeFromSuperview()
+            }
+            if let view = newValue {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize = view.frame.size
+                view.frame = headerSuperview?.frame ?? view.frame
+                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                footerSuperview?.addSubview(view)
+            } else {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize = CGSize.zero
+            }
+        }
+    }
+    
+    /// `footerView` superview.
+    var footerSuperview: UIView?
+    
     /// Open this connection in Pisth APT.
     @objc func openAPTManager() {
         guard let connection = ConnectionManager.shared.connection else {
@@ -63,7 +117,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     /// Resume closed session.
     @objc func resume() {
         
-        tableView.tableHeaderView = bannerView
+        footerView = bannerView
         
         let activityVC = ActivityViewController(message: "Loading...")
         present(activityVC, animated: true) {
@@ -79,6 +133,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     ///
     /// - Parameters:
     ///     - sender: Sender button. Its `tag` is the index of the file to inspect.
+    @available(*, deprecated, message: "Use `FileCollectionViewCell.showFileInfo(_:)`")
     @objc func showInfo(sender: UIButton) {
         
         guard let files = files else {
@@ -99,6 +154,22 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         present(fileInfoVC, animated: true)
     }
     
+    /// Set layout selected by the user.
+    func loadLayout() {
+        var layout: UICollectionViewFlowLayout
+        if UserDefaults.standard.bool(forKey: "list") {
+            layout = DirectoryTableViewController.listLayout(forView: view)
+        } else {
+            layout = DirectoryTableViewController.gridLayout
+        }
+        if let currentLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.footerReferenceSize = currentLayout.footerReferenceSize
+            layout.headerReferenceSize = currentLayout.headerReferenceSize
+        }
+        collectionView?.reloadData()
+        collectionView?.setCollectionViewLayout(layout, animated: true)
+    }
+        
     /// Init with given connection and directory.
     ///
     /// - Parameters:
@@ -147,14 +218,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             self.files = files
             
             guard self.files != nil else {
-                super.init(style: .plain)
+                super.init(collectionViewLayout: UICollectionViewFlowLayout())
                 return
             }
                 
             if self.directory.removingUnnecessariesSlashes != "/" {
                 // Append parent directory
                 guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
-                    super.init(style: .plain)
+                    super.init(collectionViewLayout: UICollectionViewLayout())
                     return
                 }
                 self.files!.append(parent)
@@ -216,13 +287,12 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }*/
         }
         
-        super.init(style: .plain)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - View controller
     
@@ -241,16 +311,48 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         navigationItem.largeTitleDisplayMode = .never
         
         // TableView cells
-        tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
+        collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
+        collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
         clearsSelectionOnViewWillAppear = false
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        tableView.dropDelegate = self
-        tableView.dragDelegate = self
-        tableView.dragInteractionEnabled = true
+        collectionView?.dropDelegate = self
+        collectionView?.dragDelegate = self
+        collectionView?.dragInteractionEnabled = true
+        collectionView?.backgroundColor = .white
+        
+        // Header
+        let header = UIView.browserHeader
+        headerView = header
+        header.createNewFolder = { _ in // Create folder
+            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New folder name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
+                
+                if !result {
+                    let errorAlert = UIAlertController(title: "Error creating directory!", message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                self.reload()
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+        }
+        header.switchLayout = { _ in // Switch layout
+            self.loadLayout()
+        }
+        
+        loadLayout()
         
         // Initialize the refresh control.
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+        collectionView?.refreshControl = UIRefreshControl()
+        collectionView?.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
         
         // Bar buttons
         let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
@@ -360,6 +462,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         NotificationCenter.default.removeObserver(self)
     }
     
+    /// Resize layout.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize.width == view.frame.width {
+            layout.itemSize.width = size.width
+        }
+    }
+    
     /// Set user info.
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
@@ -412,9 +522,9 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         (view.viewWithTag(1) as? UIButton)?.addTarget(self, action: #selector(resume), for: .touchUpInside)
         (view.viewWithTag(2) as? UIButton)?.addTarget(navigationController, action: #selector(navigationController?.popToRootViewController(animated:)), for: .touchUpInside)
         
-        tableView.tableHeaderView = view
+        headerView = view
         
-        tableView.setContentOffset(CGPoint(x: 0, y: 0-view.frame.height), animated: true)
+        collectionView?.setContentOffset(CGPoint(x: 0, y: 0-view.frame.height), animated: true)
     }
     
     /// Go back and show error.
@@ -590,8 +700,8 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
             }
         }*/
         
-        tableView.reloadData()
-        refreshControl?.endRefreshing()
+        collectionView?.reloadData()
+        collectionView?.refreshControl?.endRefreshing()
     }
     
     /// Open shell in current directory.
@@ -1057,20 +1167,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         })
     }
     
-    // MARK: - Table view data source
-    
-    /// - Returns: `60`.
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
-    /// - Returns: `1`.
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    // MARK: - Collection view data source
     
     /// - Returns: count of `files`.
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if let files = files {
             return files.count
@@ -1079,9 +1179,16 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         return 0
     }
     
-    /// - Returns: An `UITableViewCell` with title as current file name, with icon for current file, and permissions for current file.
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
+    /// - Returns: A `FileCollectionViewCell` with title as current file name and with icon for current file.
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        var cell: FileCollectionViewCell
+        if UserDefaults.standard.bool(forKey: "list") {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileList", for: indexPath) as! FileCollectionViewCell
+        } else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell
+        }
+        cell.directoryTableViewController = self
         
         // Configure the cell...
         
@@ -1098,133 +1205,23 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         if files[indexPath.row].filename.nsString.lastPathComponent.hasPrefix(".") {
             cell.filename.isEnabled = false
             cell.iconView.alpha = 0.5
-            cell.permssions.alpha = 0.5
         } else {
             cell.filename.isEnabled = true
             cell.iconView.alpha = 1
-            cell.permssions.alpha = 1
         }
         
         if indexPath.row == files.count-1 && directory.removingUnnecessariesSlashes != "/" {
             cell.filename.text = "../"
         }
         
-        cell.permssions.text = files[indexPath.row].permissions
-        cell.permssions.isHidden = false
-                
-        let info = UIButton(type: .detailDisclosure)
-        cell.accessoryView = info
-        info.tag = indexPath.row
-        info.addTarget(self, action: #selector(showInfo(sender:)), for: .touchUpInside)
+        cell.more?.isHidden = false
+        cell.more?.text = files[indexPath.row].permissions
         
         return cell
     }
     
-    /// - Returns: `true`.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    /// Remove selected file or directory.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            checkForConnectionError(errorHandler: {
-                self.showError()
-            }, successHandler: {
-                
-                let activityVC = ActivityViewController(message: "Removing...")
-                
-                self.present(activityVC, animated: true, completion: {
-                    // Remove directory
-                    if self.files![indexPath.row].isDirectory {
-                        
-                        guard let sftp = ConnectionManager.shared.filesSession?.sftp else { return }
-                        
-                        func remove(directoryRecursively directory: String) -> Bool? {
-                            while true {
-                                guard let files = sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else { return nil }
-                                
-                                if files.count > 0 {
-                                    for file in files {
-                                        if !file.isDirectory {
-                                            if !sftp.removeFile(atPath: directory.nsString.appendingPathComponent(file.filename)) {
-                                                
-                                                return false
-                                            }
-                                        } else if files.count > 0 {
-                                            let result = remove(directoryRecursively: directory.nsString.appendingPathComponent(file.filename))
-                                            
-                                            if result != nil && !result! {
-                                                return false
-                                            }
-                                            
-                                            if result == nil {
-                                                return nil
-                                            }
-                                        } else {
-                                            if !sftp.removeDirectory(atPath: directory.nsString.appendingPathComponent(file.filename)) {
-                                                
-                                                return false
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    return sftp.removeDirectory(atPath: directory)
-                                }
-                                
-                            }
-                        }
-                        
-                        guard let result = remove(directoryRecursively: self.directory.nsString.appendingPathComponent(self.files![indexPath.row].filename)) else {
-                            
-                            activityVC.dismiss(animated: true, completion: {
-                                self.showError()
-                            })
-                            
-                            return
-                        }
-                        
-                        if !result {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                self.present(errorAlert, animated: true, completion: nil)
-                            })
-                        } else {
-                            activityVC.dismiss(animated: true, completion: {
-                                self.reload()
-                            })
-                        }
-                    } else { // Remove file
-                        guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: self.directory.nsString.appendingPathComponent(self.files![indexPath.row].filename)) else {
-                            activityVC.dismiss(animated: true, completion: {
-                                self.showError()
-                            })
-                            return
-                        }
-                        
-                        if !result {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                self.present(errorAlert, animated: true, completion: nil)
-                            })
-                        } else {
-                            activityVC.dismiss(animated: true, completion: {
-                                self.reload()
-                            })
-                        }
-                    }
-                })
-                
-            })
-
-        }
-    }
-    
     /// - Returns: Enable copying for files but not directories.
-    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         
         if files![indexPath.row].isDirectory {
             return false
@@ -1234,12 +1231,13 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     /// - Returns: `true`.
-    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     /// Copy selected file.
-    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
         if action == #selector(copy(_:)) { // Copy file
             
             Pasteboard.local.filePath = directory.nsString.appendingPathComponent(files![indexPath.row].filename)
@@ -1258,15 +1256,41 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         }
     }
     
-    // MARK: - Table view delegate
+    /// - Returns: An header view containing `headerView`.
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
+            
+            headerSuperview = view
+            
+            let header = headerView
+            headerView = nil
+            headerView = header
+            
+            return view
+        } else {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath)
+            
+            footerSuperview = view
+            
+            let footer = footerView
+            footerView = nil
+            footerView = footer
+            
+            return view
+        }
+    }
+    
+    // MARK: - Collection view delegate
     
     /// Open selected file or directory.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let files = files else { return }
         var path = self.directory.nsString.appendingPathComponent(files[indexPath.row].filename)
         
-        if let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell {
             if cell.filename.text == "../" {
                 path = self.directory.nsString.deletingLastPathComponent
             }
@@ -1274,7 +1298,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         
         var continueDownload = true
         
-        self.checkForConnectionError(errorHandler: { 
+        self.checkForConnectionError(errorHandler: {
             self.showError()
         }) {
             if files[indexPath.row].isDirectory { // Open folder
@@ -1287,14 +1311,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                             
                             delegate.directoryTableViewController(dirVC, didOpenDirectory: path)
                             
-                            tableView.deselectRow(at: indexPath, animated: true)
+                            collectionView.deselectItem(at: indexPath, animated: true)
                         })
                     } else {
                         activityVC.dismiss(animated: true, completion: {
                             
                             self.navigationController?.pushViewController(dirVC, animated: true)
                             
-                            tableView.deselectRow(at: indexPath, animated: true)
+                            collectionView.deselectItem(at: indexPath, animated: true)
                         })
                     }
                 })
@@ -1303,7 +1327,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 let activityVC = UIAlertController(title: "Downloading...", message: "", preferredStyle: .alert)
                 activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
                     continueDownload = false
-                    tableView.deselectRow(at: indexPath, animated: true)
+                    collectionView.deselectItem(at: indexPath, animated: true)
                 }))
                 
                 self.present(activityVC, animated: true, completion: {
@@ -1330,7 +1354,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                                     
                                     activityVC.dismiss(animated: true, completion: {
                                         ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: path)
-                                        LocalDirectoryTableViewController.openFile(newFile, wasJustDownloaded: true, from: tableView.cellForRow(at: indexPath)!.frame, in: tableView, navigationController: self.navigationController, showActivityViewControllerInside: self)
+                                        LocalDirectoryTableViewController.openFile(newFile, wasJustDownloaded: true, from: collectionView.cellForItem(at: indexPath)!.frame, in: collectionView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                                     })
                                 } catch let error {
                                     activityVC.dismiss(animated: true, completion: {
@@ -1340,7 +1364,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                                     })
                                 }
                                 
-                                tableView.deselectRow(at: indexPath, animated: true)
+                                collectionView.deselectItem(at: indexPath, animated: true)
                             }
                         } else {
                             DispatchQueue.main.async {
@@ -1348,7 +1372,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                                     let alert = UIAlertController(title: "Error downloading file!", message: "Check for permissions.", preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-                                    tableView.deselectRow(at: indexPath, animated: true)
+                                    collectionView.deselectItem(at: indexPath, animated: true)
                                 })
                             }
                         }
@@ -1356,7 +1380,6 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                 })
             }
         }
-        
     }
 
     // MARK: - Local directory table view controller delegate
@@ -1406,8 +1429,7 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Show ad when it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        // Show ad only when it received
-        tableView.tableHeaderView = bannerView
+        footerView = bannerView
     }
     
     // MARK: - Document picker delegate
@@ -1452,10 +1474,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
         present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Table view drop delegate
+    // MARK: - Collection view drop delegate
         
     /// Move dropped file to destination folder.
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         
         guard let sftp = ConnectionManager.shared.filesSession?.sftp else {
             return
@@ -1473,12 +1495,14 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     return
                 }
                 
-                guard files[indexPath.row].isDirectory else {
-                    return
-                }
-                
-                guard file != files[indexPath.row] else {
-                    return
+                if coordinator.proposal.intent != .insertAtDestinationIndexPath {
+                    guard files[indexPath.row].isDirectory || item.dragItem.sourceViewController != self else {
+                        return
+                    }
+                    
+                    guard file != files[indexPath.row] else {
+                        return
+                    }
                 }
                 
                 guard let dirVC = item.dragItem.sourceViewController as? DirectoryTableViewController else {
@@ -1492,13 +1516,10 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
                     destination = dirVC.directory.nsString.deletingLastPathComponent.nsString.appendingPathComponent(file.filename)
                 } else if dirVC == self {
                     destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
+                } else if coordinator.proposal.intent == .insertIntoDestinationIndexPath {
+                    destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
                 } else {
-                    
-                    if coordinator.proposal.intent == .insertIntoDestinationIndexPath {
-                        destination = directory.nsString.appendingPathComponent(files[indexPath.row].filename).nsString.appendingPathComponent(file.filename)
-                    } else {
-                        destination = directory.nsString.appendingPathComponent(file.filename)
-                    }
+                    destination = directory.nsString.appendingPathComponent(file.filename)
                 }
                 
                 if sftp.moveItem(atPath: target, toPath: destination) {
@@ -1574,79 +1595,79 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     }
     
     /// Set animation for moving files into a directory.
-    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         
         guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
             
             guard let indexPath = destinationIndexPath else {
-                return UITableViewDropProposal(operation: .copy, intent: .insertIntoDestinationIndexPath)
+                return UICollectionViewDropProposal(operation: .copy, intent: .insertIntoDestinationIndexPath)
             }
             
-            if let _ = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
-                if !self.files![indexPath.row].isDirectory {
-                    return UITableViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
+            if let _ = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell {
+                if !self.files![indexPath.row].isDirectory && session.items.first?.sourceViewController == self {
+                    return UICollectionViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
                 }
             }
             
-            return UITableViewDropProposal(operation: .copy, intent: .automatic)
+            return UICollectionViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
         }
         
         guard let indexPath = destinationIndexPath else {
-            return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
-        }
-        
-        if let _ = tableView.cellForRow(at: indexPath) as? FileTableViewCell {
-            if !self.files![indexPath.row].isDirectory {
-                return UITableViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
-            }
+            return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
         }
         
         if session.items.first?.sourceViewController != self {
-            return UITableViewDropProposal(operation: .move, intent: .automatic)
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
         
-        return UITableViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
+        if let _ = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell {
+            if !self.files![indexPath.row].isDirectory {
+                return UICollectionViewDropProposal(operation: .forbidden, intent: .insertIntoDestinationIndexPath)
+            }
+        }
+        
+        return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
     }
     
-    // MARK: - Table view drag delegate
+    // MARK: - Collection view drag delegate
     
     /// Start dragging file.
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else {
             return []
         }
-        
+         
         guard let files = files else {
             return []
         }
-        
+         
         guard files.indices.contains(indexPath.row) else {
             return []
         }
-        
+         
         let file = files[indexPath.row]
-        
+         
         let item = UIDragItem(itemProvider: NSItemProvider(item: nil, typeIdentifier: "remote"))
         item.localObject = file
         item.sourceViewController = self
         item.previewProvider = {
-            
+         
             guard let iconView = cell.iconView else {
                 return nil
             }
-            
+         
             let dragPreview = UIDragPreview(view: iconView)
             dragPreview.parameters.backgroundColor = .clear
-            
+         
             return dragPreview
         }
-        
+         
         return [item]
     }
     
     /// Allow dragging only if the selected file is not the parent directory.
-    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         
         guard let files = files else {
             return false
@@ -1716,5 +1737,19 @@ class DirectoryTableViewController: UITableViewController, LocalDirectoryTableVi
     
     /// Action to do.
     static var action = DirectoryAction.none
+    
+    /// Grid layout.
+    static var gridLayout: UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 120)
+        return layout
+    }
+    
+    /// List layout.
+    static func listLayout(forView view: UIView) -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        return layout
+    }
 }
 

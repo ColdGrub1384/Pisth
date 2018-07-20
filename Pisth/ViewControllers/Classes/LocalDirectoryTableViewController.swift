@@ -15,7 +15,7 @@ import Firebase
 import QuickLook
 
 /// Table view controller used to manage local files.
-class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate {
+class LocalDirectoryTableViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -34,6 +34,60 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     /// Ad banner view displayed as header of Table view.
     var bannerView: GADBannerView!
+    
+    private var headerView_: UIView?
+    
+    /// `collectionView` header.
+    var headerView: UIView? {
+        get {
+            return headerView_
+        }
+        
+        set {
+            headerView_ = newValue
+            for view in headerSuperview?.subviews ?? [] {
+                view.removeFromSuperview()
+            }
+            if let view = newValue {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = view.frame.size
+                view.frame = headerSuperview?.frame ?? view.frame
+                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                headerSuperview?.addSubview(view)
+            } else {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.headerReferenceSize = CGSize.zero
+            }
+        }
+    }
+    
+    /// `headerView` superview.
+    var headerSuperview: UIView?
+    
+    private var footerView_: UIView?
+    
+    /// `collectionView` footer.
+    var footerView: UIView? {
+        get {
+            return footerView_
+        }
+        
+        set {
+            footerView_ = newValue
+            for view in footerSuperview?.subviews ?? [] {
+                view.removeFromSuperview()
+            }
+            if let view = newValue {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize = view.frame.size
+                view.frame = headerSuperview?.frame ?? view.frame
+                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                footerSuperview?.addSubview(view)
+            } else {
+                (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize = CGSize.zero
+            }
+        }
+    }
+    
+    /// `footerView` superview.
+    var footerSuperview: UIView?
     
     /// Share file with an `UIDocumentInteractionController`.
     ///
@@ -284,10 +338,26 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 self.files.append(directory.appendingPathComponent(file))
             }
             
-            tableView.reloadData()
+            collectionView?.reloadData()
         } catch {}
         
-        refreshControl?.endRefreshing()
+        collectionView?.refreshControl?.endRefreshing()
+    }
+    
+    /// Set layout selected by the user.
+    func loadLayout() {
+        var layout: UICollectionViewFlowLayout
+        if UserDefaults.standard.bool(forKey: "list") {
+            layout = LocalDirectoryTableViewController.listLayout(forView: view)
+        } else {
+            layout = LocalDirectoryTableViewController.gridLayout
+        }
+        if let currentLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.footerReferenceSize = currentLayout.footerReferenceSize
+            layout.headerReferenceSize = currentLayout.headerReferenceSize
+        }
+        collectionView?.reloadData()
+        collectionView?.setCollectionViewLayout(layout, animated: true)
     }
     
     /// Init with given directory.
@@ -308,7 +378,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             self.error = error
         }
         
-        super.init(style: .plain)
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -328,12 +398,45 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         
         navigationItem.largeTitleDisplayMode = .never
         
-        tableView.register(UINib(nibName: "File Cell", bundle: Bundle.main), forCellReuseIdentifier: "file")
+        collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
+        collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+        collectionView?.backgroundColor = .white
         clearsSelectionOnViewWillAppear = false
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-     
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+        
+        // Header
+        let header = UIView.browserHeader
+        headerView = header
+        header.createNewFolder = { _ in // Create folder
+            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            chooseName.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "New folder name"
+            })
+            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                
+                do {
+                    try FileManager.default.createDirectory(at: self.directory.appendingPathComponent(chooseName.textFields![0].text!), withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    let errorAlert = UIAlertController(title: "Error creating directory!", message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                }
+                
+                self.reload()
+            }))
+            
+            self.present(chooseName, animated: true, completion: nil)
+        }
+        header.switchLayout = { _ in // Switch layout
+            self.loadLayout()
+        }
+        
+        loadLayout()
+        
+        collectionView?.refreshControl = UIRefreshControl()
+        collectionView?.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
         
         // Navigation bar items
         let createFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(create(_:)))
@@ -367,8 +470,8 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             guard let index = files.index(of: openFile) else { return }
             let indexPath = IndexPath(row: index, section: 0)
             
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-            tableView(tableView, didSelectRowAt: indexPath)
+            collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+            collectionView(collectionView!, didSelectItemAt: indexPath)
             
             self.openFile = nil
         }
@@ -385,28 +488,29 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     // MARK: - Table view data source
     
-    /// - Returns: `50`.
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
     /// - Returns: `1`.
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     /// - Returns: count of `files`.
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return files.count
     }
     
-    /// - Returns: An `UITableViewCell` with title as the current filename and file icon for current file.
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "file") as! FileTableViewCell
+    /// - Returns: A `UICollectionViewCell` with title as the current filename and file icon for current file.
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        var cell: FileCollectionViewCell
+        if UserDefaults.standard.bool(forKey: "list") {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileList", for: indexPath) as! FileCollectionViewCell
+        } else {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell
+        }
+        cell.localDirectoryTableViewController = self
+         
         // Configure the cell...
-        
+         
         cell.filename.text = files[indexPath.row].lastPathComponent
         
         var isDir: ObjCBool = false
@@ -417,52 +521,23 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 cell.iconView.image = UIImage.icon(forFileURL: files[indexPath.row], preferredSize: .smallest)
             }
         }
-        
-        let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        shareButton.setImage(#imageLiteral(resourceName: "share"), for: .normal)
-        shareButton.tag = indexPath.row
-        shareButton.addTarget(self, action: #selector(shareFile(_:)), for: .touchUpInside)
-        shareButton.backgroundColor = .clear
-        cell.accessoryView = shareButton
-                
+         
         return cell
     }
     
-    /// - Returns: `true`.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    /// Remove selected file.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            do {
-                try FileManager.default.removeItem(at: files[indexPath.row])
-                
-                files.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            } catch let error {
-                let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(errorAlert, animated: true, completion: nil)
-                tableView.reloadData()
-            }
-        }
-    }
-    
     /// - Returns: Enable copying files.
-    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
     }
     
     /// - Returns: `true`.
-    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     /// Copy selected file.
-    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        
         if action == #selector(copy(_:)) { // Copy file
             
             Pasteboard.local.localFilePath = directory.appendingPathComponent(files[indexPath.row].lastPathComponent).path
@@ -471,7 +546,6 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
             dirVC.navigationItem.prompt = "Select a directory where copy file"
             dirVC.delegate = dirVC
             LocalDirectoryTableViewController.action = .copyFile
-            
             
             let navVC = UINavigationController(rootViewController: dirVC)
             navVC.navigationBar.barStyle = .black
@@ -483,14 +557,40 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         }
     }
     
+    /// - Returns: An header view containing `headerView`.
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
+            
+            headerSuperview = view
+            
+            let header = headerView
+            headerView = nil
+            headerView = header
+            
+            return view
+        } else {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath)
+            
+            footerSuperview = view
+            
+            let footer = footerView
+            footerView = nil
+            footerView = footer
+            
+            return view
+        }
+    }
+    
     // MARK: - Table view delegate
     
     /// Open selected file or directory.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else { return }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
         if cell.iconView.image == #imageLiteral(resourceName: "File icons/folder") { // Open folder
             let dirVC = LocalDirectoryTableViewController(directory: self.files[indexPath.row])
             
@@ -513,8 +613,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     /// Show ad when it's received.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        // Show ad only when it received
-        tableView.tableHeaderView = bannerView
+        footerView = bannerView
     }
     
     // MARK: - Document picker delegate
@@ -566,7 +665,7 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
     
     /// Call defailt handler.
     func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
-        LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.tableView.cellForRow(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
+        LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.collectionView!.cellForItem(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
     }
     
     // MARK: - Preview controller data source
@@ -670,10 +769,10 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
                 
                 func show() {
                     (AppDelegate.shared.splitViewController.viewControllers[0] as? UINavigationController)?.pushViewController(dirVC, animated: true) {
-                        dirVC.tableView.selectRow(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .middle)
+                        dirVC.collectionView?.selectItem(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .centeredHorizontally)
                         
                         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                            dirVC.tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: true)
+                            dirVC.collectionView?.deselectItem(at: IndexPath(row: i, section: 0), animated: true)
                         })
                     }
                 }
@@ -753,6 +852,22 @@ class LocalDirectoryTableViewController: UITableViewController, GADBannerViewDel
         } else {
             openFile()
         }
+    }
+    
+    // MARK: - Static
+    
+    /// Grid layout.
+    static var gridLayout: UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 120)
+        return layout
+    }
+    
+    /// List layout.
+    static func listLayout(forView view: UIView) -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        return layout
     }
 }
 

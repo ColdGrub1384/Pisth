@@ -29,14 +29,20 @@ class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewControlle
     // MARK: - Table view data source
     
     /// Disable files that are not plugins.
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
         
         var isDir: ObjCBool = false
         if FileManager.default.fileExists(atPath: files[indexPath.row].path, isDirectory: &isDir) {
             if !isDir.boolValue || files[indexPath.row].pathExtension.lowercased() != "termplugin" {
-                (cell as? FileTableViewCell)?.iconView.alpha = 0.5
-                (cell as? FileTableViewCell)?.filename.alpha = 0.5
+                (cell as? FileCollectionViewCell)?.iconView.alpha = 0.5
+                (cell as? FileCollectionViewCell)?.filename.alpha = 0.5
+                (cell as? FileCollectionViewCell)?.more?.alpha = 0.5
+            } else {
+                (cell as? FileCollectionViewCell)?.iconView.alpha = 1
+                (cell as? FileCollectionViewCell)?.filename.alpha = 1
+                (cell as? FileCollectionViewCell)?.more?.alpha = 1
             }
         }
         
@@ -46,15 +52,16 @@ class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewControlle
     // MARK: - Table view delegate
     
     /// Do nothing if the selected file is not a plugin.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         var isDir: ObjCBool = false
         if FileManager.default.fileExists(atPath: files[indexPath.row].path, isDirectory: &isDir) {
             if isDir.boolValue && files[indexPath.row].pathExtension.lowercased() == "termplugin" {
-                super.tableView(tableView, didSelectRowAt: indexPath)
+                super.collectionView(collectionView, didSelectItemAt: indexPath)
             }
         }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
 }

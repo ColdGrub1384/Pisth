@@ -10,8 +10,13 @@ import UIKit
 extension UIView {
     
     /// Returns the cell used for displaying files from nib.
-    static var filesTableViewCell: FileTableViewCell {
-        return (Bundle.main.loadNibNamed("File Cell", owner: nil, options: nil)?[0] as? FileTableViewCell) ?? FileTableViewCell()
+    static var filesGridCollectionViewCell: FileCollectionViewCell {
+        return (Bundle.main.loadNibNamed("Grid File Cell", owner: nil, options: nil)?[0] as? FileCollectionViewCell) ?? FileCollectionViewCell()
+    }
+    
+    /// Returns the cell used for displaying files from nib from list layout.
+    static var filesListCollectionViewCell: FileCollectionViewCell {
+        return (Bundle.main.loadNibNamed("List File Cell", owner: nil, options: nil)?[1] as? FileCollectionViewCell) ?? FileCollectionViewCell()
     }
     
     /// Returns the white toolbar used with the terminal from nib.
@@ -37,5 +42,10 @@ extension UIView {
     /// Returns the view used to resume a connection.
     static var disconnected: UIView {
         return (Bundle.main.loadNibNamed("Disconnected", owner: nil, options: nil)?[0] as? UIView) ?? UIView()
+    }
+    
+    /// Returns browser header.
+    static var browserHeader: HeaderToolbar {
+        return (Bundle.main.loadNibNamed("Header", owner: nil, options: nil)?[0] as? HeaderToolbar) ?? HeaderToolbar()
     }
 }

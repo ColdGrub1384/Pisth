@@ -118,7 +118,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         AppDelegate.shared = self
         
-        UIMenuController.shared.menuItems = [UIMenuItem(title: "Move", action: #selector(FileTableViewCell.moveFile(_:))), UIMenuItem(title: "Rename", action: #selector(FileTableViewCell.renameFile(_:))), UIMenuItem(title: "Open in new panel", action: #selector(FileTableViewCell.openInNewPanel(_:)))]
+        UIMenuController.shared.menuItems = [
+            .init(title: "Delete", action: #selector(FileCollectionViewCell.deleteFile(_:))),
+            .init(title: "Move", action: #selector(FileCollectionViewCell.moveFile(_:))),
+            .init(title: "Rename", action: #selector(FileCollectionViewCell.renameFile(_:))),
+            .init(title: "Info", action: #selector(FileCollectionViewCell.showFileInfo(_:))),
+            .init(title: "Share", action: #selector(FileCollectionViewCell.shareFile(_:))),
+            .init(title: "Open in new panel", action: #selector(FileCollectionViewCell.openInNewPanel(_:)))
+        ]
         UIMenuController.shared.update()
         
         DataManager.shared.saveCompletion = update3DTouchShortucts
