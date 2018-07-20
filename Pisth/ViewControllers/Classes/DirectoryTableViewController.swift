@@ -1101,37 +1101,52 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                 self.showError()
             })
             
-            let progress = UIAlertController(title: "Copying...", message: "", preferredStyle: .alert)
+            let progress = UIAlertController(title: "Copying...", message: "\n\n", preferredStyle: .alert)
+            
+            var continue_ = true
+            
+            progress.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                continue_ = false
+            }))
             
             UIApplication.shared.keyWindow?.rootViewController?.present(progress, animated: true, completion: {
-                guard let result = ConnectionManager.shared.filesSession?.sftp.copyContents(ofPath: Pasteboard.local.filePath!, toFileAtPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent), progress: { (receivedBytes, bytesToBeReceived) -> Bool in
-                    
-                    let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
-                    let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
-                    
-                    DispatchQueue.main.async {
-                        progress.message = "\(received) / \(toBeReceived)"
+                
+                //  Add the progress bar
+                let progressView = UIProgressView(frame: CGRect(x: 8, y: 72, width: progress.view.frame.width - 8 * 2, height: 2))
+                progressView.tintColor = UIApplication.shared.keyWindow?.tintColor
+                progress.view.addSubview(progressView)
+                
+                DispatchQueue.global(qos: .background).async {
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.copyContents(ofPath: Pasteboard.local.filePath!, toFileAtPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent), progress: { (receivedBytes, bytesToBeReceived) -> Bool in
+                        
+                        let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
+                        let toBeReceived = ByteCountFormatter().string(fromByteCount: Int64(bytesToBeReceived))
+                        
+                        DispatchQueue.main.async {
+                            progress.message = "\(received) / \(toBeReceived)\n"
+                            progressView.setProgress(Float(receivedBytes)/Float((bytesToBeReceived)), animated: true)
+                        }
+                        
+                        return continue_
+                    }) else {
+                        progress.dismiss(animated: true, completion: nil)
+                        return
                     }
                     
-                    return true
-                }) else {
-                    progress.dismiss(animated: true, completion: nil)
-                    return
-                }
-                
-                progress.dismiss(animated: true, completion: {
-                    if !result {
-                        let errorAlert = UIAlertController(title: "Error copying file!", message: nil, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                        UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    progress.dismiss(animated: true, completion: {
+                        if !result && continue_ {
+                            let errorAlert = UIAlertController(title: "Error copying file!", message: nil, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                        }
+                    })
+                    
+                    if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
+                        dirVC.reload()
                     }
-                })
-                
-                if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
-                    dirVC.reload()
+                    
+                    Pasteboard.local.filePath = nil
                 }
-                
-                Pasteboard.local.filePath = nil
             })
             
         })
