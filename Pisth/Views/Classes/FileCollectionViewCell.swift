@@ -40,6 +40,8 @@ class FileCollectionViewCell: UICollectionViewCell {
             if directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
                 
                 return (action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
+            } else {
+                return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
             }
         }
         
