@@ -700,8 +700,10 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
             }
         }*/
         
-        collectionView?.reloadData()
-        collectionView?.refreshControl?.endRefreshing()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.collectionView?.refreshControl?.endRefreshing()
+        }
     }
     
     /// Open shell in current directory.
