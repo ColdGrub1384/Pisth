@@ -15,4 +15,13 @@ class TerminalWebView: WKWebView {
     @objc func paste(_ sender: Any) {
         try? (window?.contentViewController as? TerminalViewController)?.controller.shellSession.channel.write(NSPasteboard.general.string(forType: .string) ?? "")
     }
+    
+    /// Copy selected text.
+    @objc func copy(_ sender: Any) {
+        evaluateJavaScript("term.selectionManager.selectionText") { (result, _) in
+            if let result = result as? String {
+                NSPasteboard.general.setString(result, forType: .string)
+            }
+        }
+    }
 }
