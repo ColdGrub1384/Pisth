@@ -33,6 +33,26 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Collection view cell
     
+    /// Setup selection view.
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        
+        let view = UIView()
+        view.backgroundColor = window?.tintColor
+        selectedBackgroundView = view
+    }
+    
+    /// Change text color when it's set.
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                filename.textColor = .white
+            } else {
+                filename.textColor = .black
+            }
+        }
+    }
+    
     /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryTableViewController = directoryTableViewController {
