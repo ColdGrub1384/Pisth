@@ -22,7 +22,11 @@ class SplitViewController: UISplitViewController {
     /// Show given view controllers and pass them to `AppDelegate.shared`.
     func load() {
         preferredDisplayMode = .primaryHidden
-        viewControllers = [navigationController_, detailNavigationController]
+        if let detailViewController = detailViewController {
+            viewControllers = [navigationController_, detailViewController]
+        } else {
+            viewControllers = [navigationController_, detailNavigationController]
+        }
     }
     
     /// Set display mode for opening a connection.
