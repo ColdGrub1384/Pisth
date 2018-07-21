@@ -294,7 +294,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         if self.directory.removingUnnecessariesSlashes != "/" {
             // Append parent directory
-            guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
+            guard let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
                 return
             }
             self.files!.append(parent)
