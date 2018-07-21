@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Enumeration of actions to do in a `DirectoryTableViewController` or `LocalDirectoryTableViewController`.
+/// Enumeration of actions to do in a `DirectoryCollectionViewController` or `LocalDirectoryCollectionViewController`.
 enum DirectoryAction {
     
     /// Copy file at current path.

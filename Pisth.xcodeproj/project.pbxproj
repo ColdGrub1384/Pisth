@@ -22,7 +22,7 @@
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
 		3A41BA9120445A0300589627 /* Disconnected.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A41BA9020445A0300589627 /* Disconnected.xib */; };
 		3A42FE232033B0300061A38B /* Themes Store.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42FE222033B0300061A38B /* Themes Store.xib */; };
-		3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */; };
+		3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE71FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift */; };
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
 		3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */; };
 		3A5733C31FFFDA02004F4973 /* Git.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5733C21FFFDA02004F4973 /* Git.storyboard */; };
@@ -31,7 +31,7 @@
 		3A5888B5205C6BCD0002F9E1 /* Contribute.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5888B4205C6BCD0002F9E1 /* Contribute.xib */; };
 		3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
-		3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */; };
+		3A5A60E71FF1BB9F00E94579 /* DirectoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */; };
 		3A5C41A420346EDB00E89C74 /* ThemesStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
 		3A61DEBB2066AE760002353B /* Connection Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A61DEBA2066AE760002353B /* Connection Info.storyboard */; };
@@ -48,19 +48,19 @@
 		3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */; };
 		3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BF2037793D00B750D9 /* UIButton.swift */; };
 		3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */; };
-		3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */; };
+		3AA117F11FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift */; };
 		3AA117F31FF417BF007BB84A /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F21FF417BF007BB84A /* UINavigationController.swift */; };
 		3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F41FF4257A007BB84A /* SaveFile.swift */; };
 		3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F61FF4281E007BB84A /* fileIcon.swift */; };
 		3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBB2027549700C07C7A /* FileCollectionViewCell.swift */; };
 		3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */; };
-		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */; };
+		3AAF00E91FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00E81FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift */; };
 		3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */; };
 		3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */; };
 		3ABEEF182074420F00697D4E /* UIView+ignoresInvertColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */; };
 		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
 		3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC0204079A9006C3218 /* AppAction.swift */; };
-		3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */; };
+		3ACF9AC320408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC220408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift */; };
 		3ACF9ADF20409446006C3218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9ADE20409446006C3218 /* AppDelegate.swift */; };
 		3ACF9AE120409446006C3218 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE020409446006C3218 /* ViewController.swift */; };
 		3ACF9AE420409446006C3218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE220409446006C3218 /* Main.storyboard */; };
@@ -192,7 +192,7 @@
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
 		3A41BA9020445A0300589627 /* Disconnected.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Disconnected.xib; sourceTree = "<group>"; };
 		3A42FE222033B0300061A38B /* Themes Store.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Themes Store.xib"; sourceTree = "<group>"; };
-		3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		3A487CE71FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
 		3A5733C21FFFDA02004F4973 /* Git.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Git.storyboard; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		3A5888B4205C6BCD0002F9E1 /* Contribute.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Contribute.xib; sourceTree = "<group>"; };
 		3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributeViewController.swift; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
-		3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
+		3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewController.swift; sourceTree = "<group>"; };
 		3A5C41A320346EDB00E89C74 /* ThemesStoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesStoreViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A61DEBA2066AE760002353B /* Connection Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Connection Info.storyboard"; sourceTree = "<group>"; };
@@ -217,19 +217,19 @@
 		3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Terminal Toolbar-Black.xib"; sourceTree = "<group>"; };
 		3A89B5BF2037793D00B750D9 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsLocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
-		3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		3AA117F01FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryCollectionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3AA117F21FF417BF007BB84A /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		3AA117F41FF4257A007BB84A /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		3AA117F61FF4281E007BB84A /* fileIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIcon.swift; sourceTree = "<group>"; };
 		3AA3FDBB2027549700C07C7A /* FileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Grid File Cell.xib"; sourceTree = "<group>"; };
-		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
+		3AAF00E81FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryCollectionViewController.swift; sourceTree = "<group>"; };
 		3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIleManager.swift; sourceTree = "<group>"; };
 		3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ignoresInvertColors.swift"; sourceTree = "<group>"; };
 		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9AC0204079A9006C3218 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
-		3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryTableViewControllerStaticDelegate.swift; sourceTree = "<group>"; };
+		3ACF9AC220408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryCollectionViewControllerStaticDelegate.swift; sourceTree = "<group>"; };
 		3ACF9ADC20409446006C3218 /* Pisth API Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth API Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9ADE20409446006C3218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ACF9AE020409446006C3218 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -366,9 +366,9 @@
 		3A665F2D202751210098C482 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				3A487CE71FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift */,
-				3AA117F01FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift */,
-				3ACF9AC220408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift */,
+				3A487CE71FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift */,
+				3AA117F01FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift */,
+				3ACF9AC220408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift */,
 				3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */,
 			);
 			path = Protocols;
@@ -513,8 +513,8 @@
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */,
 				3AD29179207ADE7B0082306D /* SplitViewController.swift */,
-				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
-				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
+				3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */,
+				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift */,
 				3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */,
 				3AAF00EE1FF2DBE500ECCA6F /* EditTextViewController.swift */,
 				3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */,
@@ -981,9 +981,9 @@
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
-				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift in Sources */,
+				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift in Sources */,
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
-				3A487CE81FF99B4600552B93 /* DirectoryTableViewControllerDelegate.swift in Sources */,
+				3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3A38DC432035DD480093A091 /* PurchaseHelper.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
@@ -993,7 +993,7 @@
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
-				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
+				3AA117F11FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,
 				C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */,
 				C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */,
@@ -1002,9 +1002,9 @@
 				3A5888B1205C62540002F9E1 /* UIViewController.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */,
 				3A5888B3205C64CB0002F9E1 /* UIView.swift in Sources */,
-				3ACF9AC320408A9C006C3218 /* LocalDirectoryTableViewControllerStaticDelegate.swift in Sources */,
+				3ACF9AC320408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift in Sources */,
 				3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */,
-				3A5A60E71FF1BB9F00E94579 /* DirectoryTableViewController.swift in Sources */,
+				3A5A60E71FF1BB9F00E94579 /* DirectoryCollectionViewController.swift in Sources */,
 				3AF9AEAE1FF5511A00840E8A /* isFilePDF.swift in Sources */,
 				3A89B5BC2037760D00B750D9 /* UIImage.swift in Sources */,
 				3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */,

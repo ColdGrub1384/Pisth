@@ -286,7 +286,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.plugins {
             
             // Manage plugins
-            let pluginsVC = PluginsLocalDirectoryTableViewController()
+            let pluginsVC = PluginsLocalDirectoryCollectionViewController()
             navigationController?.pushViewController(pluginsVC, animated: true)
             
         } else if indexPath == IndexPaths.beta {

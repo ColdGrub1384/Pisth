@@ -13,17 +13,17 @@ protocol BookmarksTableViewControllerDelegate {
     
     /// Called did opening a connection with SFTP enabled from `BookmarksTableViewController`.
     /// # Note
-    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryTableViewController` manually.
+    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryCollectionViewController` manually.
     ///
     /// - Parameters:
     ///     - bookmarksTableViewController: Source `BookmarksTableViewController`.
     ///     - connection: Representation of connection to be opened.
-    ///     - directoryTableViewController: `DirectoryTableViewController` to be opened.
-    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController)
+    ///     - directoryCollectionViewController: `DirectoryCollectionViewController` to be opened.
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryCollectionViewController directoryCollectionViewController: DirectoryCollectionViewController)
     
     /// Called did opening a connection with SFTP disabled from `BookmarksTableViewController`.
     /// # Note
-    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryTableViewController` manually.
+    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryCollectionViewController` manually.
     ///
     /// - Parameters:
     ///     - bookmarksTableViewController: Source `BookmarksTableViewController`.

@@ -25,11 +25,11 @@ class FileCollectionViewCell: UICollectionViewCell {
     /// More file information. Hidden by default.
     @IBOutlet weak var more: UILabel?
     
-    /// `DirectoryTableViewController` showing this cell.
-    var directoryTableViewController: DirectoryTableViewController!
+    /// `DirectoryCollectionViewController` showing this cell.
+    var directoryCollectionViewController: DirectoryCollectionViewController!
     
-    /// `LocalDirectoryTableViewController` showing this cell.
-    var localDirectoryTableViewController: LocalDirectoryTableViewController!
+    /// `LocalDirectoryCollectionViewController` showing this cell.
+    var localDirectoryCollectionViewController: LocalDirectoryCollectionViewController!
     
     // MARK: - Collection view cell
     
@@ -55,9 +55,9 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             
-            if directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
+            if directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
                 
                 return (action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
             } else {
@@ -80,21 +80,21 @@ class FileCollectionViewCell: UICollectionViewCell {
     /// Remove the file represented by the cell.
     @objc func deleteFile(_ sender: Any) {
         // Remove remote file
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             
-            directoryTableViewController.checkForConnectionError(errorHandler: {
-                directoryTableViewController.showError()
+            directoryCollectionViewController.checkForConnectionError(errorHandler: {
+                directoryCollectionViewController.showError()
             })
             
-            let fileToRemove = directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)!.row]
+            let fileToRemove = directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
             
-            directoryTableViewController.checkForConnectionError(errorHandler: {
-                directoryTableViewController.showError()
+            directoryCollectionViewController.checkForConnectionError(errorHandler: {
+                directoryCollectionViewController.showError()
             }, successHandler: {
                 
                 let activityVC = ActivityViewController(message: "Removing...")
                 
-                directoryTableViewController.present(activityVC, animated: true, completion: {
+                directoryCollectionViewController.present(activityVC, animated: true, completion: {
                     // Remove directory
                     if fileToRemove.isDirectory {
                         
@@ -135,10 +135,10 @@ class FileCollectionViewCell: UICollectionViewCell {
                             }
                         }
                         
-                        guard let result = remove(directoryRecursively: directoryTableViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
+                        guard let result = remove(directoryRecursively: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
                             
                             activityVC.dismiss(animated: true, completion: {
-                                directoryTableViewController.showError()
+                                directoryCollectionViewController.showError()
                             })
                             
                             return
@@ -148,17 +148,17 @@ class FileCollectionViewCell: UICollectionViewCell {
                             activityVC.dismiss(animated: true, completion: {
                                 let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
                                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                directoryTableViewController.present(errorAlert, animated: true, completion: nil)
+                                directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                             })
                         } else {
                             activityVC.dismiss(animated: true, completion: {
-                                directoryTableViewController.reload()
+                                directoryCollectionViewController.reload()
                             })
                         }
                     } else { // Remove file
-                        guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directoryTableViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
+                        guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
                             activityVC.dismiss(animated: true, completion: {
-                                directoryTableViewController.showError()
+                                directoryCollectionViewController.showError()
                             })
                             return
                         }
@@ -167,11 +167,11 @@ class FileCollectionViewCell: UICollectionViewCell {
                             activityVC.dismiss(animated: true, completion: {
                                 let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
                                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                                directoryTableViewController.present(errorAlert, animated: true, completion: nil)
+                                directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                             })
                         } else {
                             activityVC.dismiss(animated: true, completion: {
-                                directoryTableViewController.reload()
+                                directoryCollectionViewController.reload()
                             })
                         }
                     }
@@ -180,17 +180,17 @@ class FileCollectionViewCell: UICollectionViewCell {
             })
             
             // Remove local file
-        } else if let localDirectoryTableViewController = localDirectoryTableViewController {
+        } else if let localDirectoryCollectionViewController = localDirectoryCollectionViewController {
             
-            let fileToRename = localDirectoryTableViewController.files[localDirectoryTableViewController.collectionView!.indexPath(for: self)!.row]
+            let fileToRename = localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
              
             do {
                 try FileManager.default.removeItem(at: fileToRename)
-                localDirectoryTableViewController.reload()
+                localDirectoryCollectionViewController.reload()
             } catch {
                 let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                directoryTableViewController.present(errorAlert, animated: true, completion: nil)
+                localDirectoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
             }
         }
     }
@@ -199,13 +199,13 @@ class FileCollectionViewCell: UICollectionViewCell {
     @objc func renameFile(_ sender: Any) {
         
         // Rename remote file
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             
-            directoryTableViewController.checkForConnectionError(errorHandler: {
-                directoryTableViewController.showError()
+            directoryCollectionViewController.checkForConnectionError(errorHandler: {
+                directoryCollectionViewController.showError()
             })
             
-            let fileToRename = directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)!.row]
+            let fileToRename = directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
             
             let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.filename!).", preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
@@ -217,24 +217,24 @@ class FileCollectionViewCell: UICollectionViewCell {
                 guard let newFileName = renameAlert.textFields?[0].text else { return }
                 guard let session = ConnectionManager.shared.filesSession else { return }
                 
-                if session.sftp.moveItem(atPath: directoryTableViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryTableViewController.directory.nsString.appendingPathComponent(newFileName)) {
+                if session.sftp.moveItem(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(newFileName)) {
                    
-                    directoryTableViewController.reload()
+                    directoryCollectionViewController.reload()
                 } else {
                     let errorAlert = UIAlertController(title: "Error renaming file!", message: nil, preferredStyle: .alert)
                     errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    directoryTableViewController.present(errorAlert, animated: true, completion: nil)
+                    directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                 }
             }))
             
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
-            directoryTableViewController.present(renameAlert, animated: true, completion: nil)
+            directoryCollectionViewController.present(renameAlert, animated: true, completion: nil)
             
         // Rename local file
-        } else if let localDirectoryTableViewController = localDirectoryTableViewController {
+        } else if let localDirectoryCollectionViewController = localDirectoryCollectionViewController {
             
-            let fileToRename = localDirectoryTableViewController.files[localDirectoryTableViewController.collectionView!.indexPath(for: self)!.row]
+            let fileToRename = localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
             
             let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.lastPathComponent).", preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
@@ -245,17 +245,17 @@ class FileCollectionViewCell: UICollectionViewCell {
             renameAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
                 do {
                     try FileManager.default.moveItem(at: fileToRename, to: fileToRename.deletingLastPathComponent().appendingPathComponent(renameAlert.textFields![0].text!))
-                    localDirectoryTableViewController.reload()
+                    localDirectoryCollectionViewController.reload()
                 } catch {
                     let alert = UIAlertController(title: "Error renaming file!", message: error.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    localDirectoryTableViewController.present(alert, animated: true, completion: nil)
+                    localDirectoryCollectionViewController.present(alert, animated: true, completion: nil)
                 }
             }))
             
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
-            localDirectoryTableViewController.present(renameAlert, animated: true, completion: nil)
+            localDirectoryCollectionViewController.present(renameAlert, animated: true, completion: nil)
         }
     }
     
@@ -263,38 +263,38 @@ class FileCollectionViewCell: UICollectionViewCell {
     @objc func moveFile(_ sender: Any) {
         
         // Move remote file
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             
-            directoryTableViewController.checkForConnectionError(errorHandler: {
-                directoryTableViewController.showError()
+            directoryCollectionViewController.checkForConnectionError(errorHandler: {
+                directoryCollectionViewController.showError()
             })
             
-            Pasteboard.local.filePath = directoryTableViewController.directory.nsString.appendingPathComponent(directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)!.row].filename)
+            Pasteboard.local.filePath = directoryCollectionViewController.directory.nsString.appendingPathComponent(directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row].filename)
             
-            let dirVC = DirectoryTableViewController(connection: directoryTableViewController.connection, directory: directoryTableViewController.directory)
+            let dirVC = DirectoryCollectionViewController(connection: directoryCollectionViewController.connection, directory: directoryCollectionViewController.directory)
             dirVC.navigationItem.prompt = "Select a directory where move file"
             dirVC.delegate = dirVC
-            DirectoryTableViewController.action = .moveFile
+            DirectoryCollectionViewController.action = .moveFile
             
             let navVC = UINavigationController(rootViewController: dirVC)
-            directoryTableViewController.present(navVC, animated: true, completion: {
+            directoryCollectionViewController.present(navVC, animated: true, completion: {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
             
         // Move local file
-        } else if let localDirectoryTableViewController = localDirectoryTableViewController {
+        } else if let localDirectoryCollectionViewController = localDirectoryCollectionViewController {
             
-            Pasteboard.local.localFilePath = localDirectoryTableViewController.directory.appendingPathComponent(localDirectoryTableViewController.files[localDirectoryTableViewController.collectionView!.indexPath(for: self)!.row].lastPathComponent).path
+            Pasteboard.local.localFilePath = localDirectoryCollectionViewController.directory.appendingPathComponent(localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row].lastPathComponent).path
             
-            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            let dirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
             dirVC.navigationItem.prompt = "Select a directory where move file"
             dirVC.delegate = dirVC
             
-            LocalDirectoryTableViewController.action = .moveFile
+            LocalDirectoryCollectionViewController.action = .moveFile
             
             let navVC = UINavigationController(rootViewController: dirVC)
-            localDirectoryTableViewController.present(navVC, animated: true, completion: {
+            localDirectoryCollectionViewController.present(navVC, animated: true, completion: {
                 dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
                 dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
@@ -304,10 +304,10 @@ class FileCollectionViewCell: UICollectionViewCell {
     /// Open directory in new panel.
     @objc func openInNewPanel(_ sender: Any) {
         
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             
-            let filename = directoryTableViewController.files![directoryTableViewController.collectionView!.indexPath(for: self)!.row].filename
-            let dir = directoryTableViewController.directory.nsString
+            let filename = directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row].filename
+            let dir = directoryCollectionViewController.directory.nsString
             
             let dirToOpen: String
             
@@ -323,37 +323,37 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     /// Show file info.
     @objc func showFileInfo(_ sender: Any) {
-        guard let directoryTableViewController = directoryTableViewController else {
+        guard let directoryCollectionViewController = directoryCollectionViewController else {
             return
         }
         
-        guard directoryTableViewController.files != nil else {
+        guard directoryCollectionViewController.files != nil else {
             return
         }
         
-        guard let i = directoryTableViewController.collectionView?.indexPath(for: self)?.row else {
+        guard let i = directoryCollectionViewController.collectionView?.indexPath(for: self)?.row else {
             return
         }
         
         let fileInfoVC = UIViewController.fileInfo
-        fileInfoVC.file = directoryTableViewController.files?[i]
-        if i != directoryTableViewController.files!.count-1 {
-            fileInfoVC.parentDirectory = directoryTableViewController.directory
+        fileInfoVC.file = directoryCollectionViewController.files?[i]
+        if i != directoryCollectionViewController.files!.count-1 {
+            fileInfoVC.parentDirectory = directoryCollectionViewController.directory
         } else {
-            fileInfoVC.parentDirectory = directoryTableViewController.directory.nsString.deletingLastPathComponent.nsString.deletingLastPathComponent
+            fileInfoVC.parentDirectory = directoryCollectionViewController.directory.nsString.deletingLastPathComponent.nsString.deletingLastPathComponent
         }
         fileInfoVC.modalPresentationStyle = .popover
         fileInfoVC.popoverPresentationController?.sourceView = self
         fileInfoVC.popoverPresentationController?.sourceRect = bounds
         fileInfoVC.popoverPresentationController?.delegate = fileInfoVC
         
-        directoryTableViewController.present(fileInfoVC, animated: true)
+        directoryCollectionViewController.present(fileInfoVC, animated: true)
     }
     
     /// Share local file.
     @objc func shareFile(_ sender: Any) {
-        if let localDirectoryTableViewController = localDirectoryTableViewController {
-            let controller = UIDocumentInteractionController(url: localDirectoryTableViewController.files[localDirectoryTableViewController.collectionView!.indexPath(for: self)!.row])
+        if let localDirectoryCollectionViewController = localDirectoryCollectionViewController {
+            let controller = UIDocumentInteractionController(url: localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
             controller.presentOpenInMenu(from: bounds, in: self, animated: true)
         }
     }

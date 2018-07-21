@@ -15,7 +15,7 @@ import Firebase
 import QuickLook
 
 /// Collection view controller used to manage local files.
-class LocalDirectoryTableViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryTableViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
+class LocalDirectoryCollectionViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryCollectionViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -30,7 +30,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
     var openFile: URL?
     
     /// Delegate used.
-    var delegate: LocalDirectoryTableViewControllerDelegate?
+    var delegate: LocalDirectoryCollectionViewControllerDelegate?
     
     /// Ad banner view displayed as header of Table view.
     var bannerView: GADBannerView!
@@ -129,7 +129,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
             try FileManager.default.moveItem(atPath: filePath, toPath: directory.appendingPathComponent(filePath.nsString.lastPathComponent).path)
             
             navigationController?.dismiss(animated: true, completion: {
-                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryCollectionViewController {
                     dirVC.reload()
                 }
             })
@@ -158,7 +158,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
             try FileManager.default.copyItem(atPath: filePath, toPath: directory.appendingPathComponent(filePath.nsString.lastPathComponent).path)
             
             navigationController?.dismiss(animated: true, completion: {
-                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryTableViewController {
+                if let dirVC = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.visibleViewController as? LocalDirectoryCollectionViewController {
                     dirVC.reload()
                 }
             })
@@ -242,7 +242,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
             self.present(chooseName, animated: true, completion: nil)
         }))
         
-        if self is PluginsLocalDirectoryTableViewController {
+        if self is PluginsLocalDirectoryCollectionViewController {
             chooseAlert.addAction(UIAlertAction(title: "Create terminal plugin", style: .default, handler: { (_) in // Create plugin
                 let chooseName = UIAlertController(title: "Create plugin", message: "Choose new plugin name", preferredStyle: .alert)
                 chooseName.addTextField(configurationHandler: { (textField) in
@@ -348,9 +348,9 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
     func loadLayout() {
         var layout: UICollectionViewFlowLayout
         if UserDefaults.standard.bool(forKey: "list") {
-            layout = LocalDirectoryTableViewController.listLayout(forView: view)
+            layout = LocalDirectoryCollectionViewController.listLayout(forView: view)
         } else {
-            layout = LocalDirectoryTableViewController.gridLayout
+            layout = LocalDirectoryCollectionViewController.gridLayout
         }
         if let currentLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.footerReferenceSize = currentLayout.footerReferenceSize
@@ -508,7 +508,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell
         }
-        cell.localDirectoryTableViewController = self
+        cell.localDirectoryCollectionViewController = self
          
         // Configure the cell...
          
@@ -543,10 +543,10 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
             
             Pasteboard.local.localFilePath = directory.appendingPathComponent(files[indexPath.row].lastPathComponent).path
             
-            let dirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            let dirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
             dirVC.navigationItem.prompt = "Select a directory where copy file"
             dirVC.delegate = dirVC
-            LocalDirectoryTableViewController.action = .copyFile
+            LocalDirectoryCollectionViewController.action = .copyFile
             
             let navVC = UINavigationController(rootViewController: dirVC)
             navVC.navigationBar.barStyle = .black
@@ -593,19 +593,19 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
         
         collectionView.deselectItem(at: indexPath, animated: true)
         if cell.iconView.image == #imageLiteral(resourceName: "File icons/folder") { // Open folder
-            let dirVC = LocalDirectoryTableViewController(directory: self.files[indexPath.row])
+            let dirVC = LocalDirectoryCollectionViewController(directory: self.files[indexPath.row])
             
             if let delegate = delegate {
-                delegate.localDirectoryTableViewController(dirVC, didOpenDirectory: self.files[indexPath.row])
+                delegate.localDirectoryCollectionViewController(dirVC, didOpenDirectory: self.files[indexPath.row])
             } else {
                 dirVC.delegate = delegate
                 self.navigationController?.pushViewController(dirVC, animated: true)
             }
         } else {
             if let delegate = delegate { // Handle the file with delegate
-                delegate.localDirectoryTableViewController(self, didOpenFile: self.files[indexPath.row])
+                delegate.localDirectoryCollectionViewController(self, didOpenFile: self.files[indexPath.row])
             } else { // Default handler
-                LocalDirectoryTableViewController.openFile(files[indexPath.row], from: cell.frame, in: view, navigationController: navigationController, showActivityViewControllerInside: self)
+                LocalDirectoryCollectionViewController.openFile(files[indexPath.row], from: cell.frame, in: view, navigationController: navigationController, showActivityViewControllerInside: self)
             }
         }
     }
@@ -638,35 +638,35 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
         }
     }
     
-    // MARK: - Local directory table view controller
+    // MARK: - Local directory collection view controller
     
     /// Copy or move file.
-    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL) {
-        localDirectoryTableViewController.delegate = localDirectoryTableViewController
+    func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenDirectory directory: URL) {
+        localDirectoryCollectionViewController.delegate = localDirectoryCollectionViewController
         
-        if LocalDirectoryTableViewController.action == .copyFile {
-            localDirectoryTableViewController.navigationItem.prompt = "Select a directory where copy file"
+        if LocalDirectoryCollectionViewController.action == .copyFile {
+            localDirectoryCollectionViewController.navigationItem.prompt = "Select a directory where copy file"
         }
         
-        if LocalDirectoryTableViewController.action == .moveFile {
-            localDirectoryTableViewController.navigationItem.prompt = "Select a directory where move file"
+        if LocalDirectoryCollectionViewController.action == .moveFile {
+            localDirectoryCollectionViewController.navigationItem.prompt = "Select a directory where move file"
         }
         
-        navigationController?.pushViewController(localDirectoryTableViewController, animated: true, completion: {
-            if LocalDirectoryTableViewController.action == .copyFile {
-                localDirectoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: localDirectoryTableViewController, action: #selector(localDirectoryTableViewController.copyFile))], animated: true)
+        navigationController?.pushViewController(localDirectoryCollectionViewController, animated: true, completion: {
+            if LocalDirectoryCollectionViewController.action == .copyFile {
+                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.copyFile))], animated: true)
             }
             
-            if LocalDirectoryTableViewController.action == .moveFile {
-                localDirectoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: localDirectoryTableViewController, action: #selector(localDirectoryTableViewController.moveFile))], animated: true)
+            if LocalDirectoryCollectionViewController.action == .moveFile {
+                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.moveFile))], animated: true)
             }
         })
         
     }
     
     /// Call defailt handler.
-    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
-        LocalDirectoryTableViewController.openFile(file, from: localDirectoryTableViewController.collectionView!.cellForItem(at: IndexPath(row: localDirectoryTableViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryTableViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryTableViewController)
+    func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenFile file: URL) {
+        LocalDirectoryCollectionViewController.openFile(file, from: localDirectoryCollectionViewController.collectionView!.cellForItem(at: IndexPath(row: localDirectoryCollectionViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryCollectionViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryCollectionViewController)
     }
     
     // MARK: - Preview controller data source
@@ -691,7 +691,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
     // MARK: - Static
     
     /// Global delegate.
-    static var delegate: LocalDirectoryTableViewControllerStaticDelegate?
+    static var delegate: LocalDirectoryCollectionViewControllerStaticDelegate?
     
     /// Action to do.
     static var action = DirectoryAction.none
@@ -762,7 +762,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
                     }
                 }
             } else if wasJustDownloaded {
-                let dirVC = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+                let dirVC = LocalDirectoryCollectionViewController(directory: file.deletingLastPathComponent())
                 
                 guard let i = dirVC.files.firstIndex(of: file) else {
                     return
@@ -801,7 +801,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
                     })
                 }
             } else if let unziped = try? Zip.quickUnzipFile(file) {
-                let newFolderVC = LocalDirectoryTableViewController(directory: unziped)
+                let newFolderVC = LocalDirectoryCollectionViewController(directory: unziped)
                 if viewController == nil {
                     navigationController?.pushViewController(newFolderVC, animated: true)
                 } else {
@@ -832,7 +832,7 @@ class LocalDirectoryTableViewController: UICollectionViewController, GADBannerVi
                     })
                 }
             } else {
-                let dirVC = LocalDirectoryTableViewController(directory: file.deletingLastPathComponent())
+                let dirVC = LocalDirectoryCollectionViewController(directory: file.deletingLastPathComponent())
                 if let i = dirVC.files.firstIndex(of: file) {
                     if viewController == nil {
                         vc.present(dirVC.previewFile(atIndex: i), animated: true, completion: nil)

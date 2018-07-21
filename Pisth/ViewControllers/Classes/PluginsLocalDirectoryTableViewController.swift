@@ -9,10 +9,10 @@
 import UIKit
 
 /// Local directory table view controller for managing terminal plugins.
-class PluginsLocalDirectoryTableViewController: LocalDirectoryTableViewController {
+class PluginsLocalDirectoryCollectionViewController: LocalDirectoryCollectionViewController {
     
     /// Not supported.
-    @available(*, unavailable, message:"PluginsLocalDirectoryTableViewController cannot init from given directory, it init from default plugins directory.")
+    @available(*, unavailable, message:"PluginsLocalDirectoryCollectionViewController cannot init from given directory, it init from default plugins directory.")
     override init(directory: URL) {
         super.init(directory: directory)
     }

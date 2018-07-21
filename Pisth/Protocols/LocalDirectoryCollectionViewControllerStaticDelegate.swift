@@ -7,9 +7,9 @@
 
 import Foundation
 
-/// Static delegate for `LocalDirectoryTableViewController`.
-protocol LocalDirectoryTableViewControllerStaticDelegate {
+/// Static delegate for `LocalDirectoryCollectionViewController`.
+protocol LocalDirectoryCollectionViewControllerStaticDelegate {
     
-    /// Called when opening a file from static `LocalDirectoryTableViewController.openFile(_:, from:, in:, navigationController:, showActivityViewControllerInside:)` function.
+    /// Called when opening a file from static `LocalDirectoryCollectionViewController.openFile(_:, from:, in:, navigationController:, showActivityViewControllerInside:)` function.
     func didOpenFile(_ file: URL, withData data: Data)
 }

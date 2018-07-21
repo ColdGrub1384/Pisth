@@ -59,7 +59,7 @@ class ContentViewController: UIViewController, PanelManager {
             return
         }
         
-        let browser = DirectoryTableViewController(connection: connection, directory: directory)
+        let browser = DirectoryCollectionViewController(connection: connection, directory: directory)
         
         let directoryPanel = PanelViewController(with: browser, in: self)
         directoryPanel.modalPresentationStyle = .popover

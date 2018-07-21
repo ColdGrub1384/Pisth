@@ -17,7 +17,7 @@ import PanelKit
 import CoreSpotlight
 
 /// Collection view controller to manage remote files.
-class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTableViewControllerDelegate, DirectoryTableViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
+class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -35,7 +35,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
     var allFiles: [NMSFTPFile]?
     
     /// Delegate used.
-    var delegate: DirectoryTableViewControllerDelegate?
+    var delegate: DirectoryCollectionViewControllerDelegate?
     
     /// Close after sending file.
     var closeAfterSending = false
@@ -121,7 +121,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
         
         let activityVC = ActivityViewController(message: "Loading...")
         present(activityVC, animated: true) {
-            let dirVC = DirectoryTableViewController(connection: self.connection, directory: self.directory)
+            let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: self.directory)
 
             activityVC.dismiss(animated: true) {
                 self.navigationController?.pushViewController(dirVC, animated: true)
@@ -158,9 +158,9 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
     func loadLayout() {
         var layout: UICollectionViewFlowLayout
         if UserDefaults.standard.bool(forKey: "list") {
-            layout = DirectoryTableViewController.listLayout(forView: view)
+            layout = DirectoryCollectionViewController.listLayout(forView: view)
         } else {
-            layout = DirectoryTableViewController.gridLayout
+            layout = DirectoryCollectionViewController.gridLayout
         }
         if let currentLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.footerReferenceSize = currentLayout.footerReferenceSize
@@ -604,11 +604,11 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
             
             let activityVC = ActivityViewController(message: "Loading")
             self.present(activityVC, animated: true, completion: {
-                let dirVC = DirectoryTableViewController(connection: self.connection, directory: directory)
+                let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: directory)
                 if let delegate = self.delegate {
                     activityVC.dismiss(animated: true, completion: {
                         
-                        delegate.directoryTableViewController(dirVC, didOpenDirectory: directory)
+                        delegate.directoryCollectionViewController(dirVC, didOpenDirectory: directory)
                     })
                 } else {
                     activityVC.dismiss(animated: true, completion: {
@@ -1032,7 +1032,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
         }))
         
         chooseAlert.addAction(UIAlertAction(title: "Import from Pisth", style: .default, handler: { (_) in // Upload file from Pisth
-            let localDirVC = LocalDirectoryTableViewController(directory: FileManager.default.documents)
+            let localDirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
             localDirVC.delegate = self
             
             self.navigationController?.pushViewController(localDirVC, animated: true)
@@ -1094,7 +1094,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
     
     /// Copy file in current directory
     @objc func copyFile() {
-        DirectoryTableViewController.action = .none
+        DirectoryCollectionViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             
             self.checkForConnectionError(errorHandler: {
@@ -1141,7 +1141,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                         }
                     })
                     
-                    if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
+                    if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
                         dirVC.reload()
                     }
                     
@@ -1159,7 +1159,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
             self.showError()
         })
         
-        DirectoryTableViewController.action = .none
+        DirectoryCollectionViewController.action = .none
         navigationController?.dismiss(animated: true, completion: {
             
             self.checkForConnectionError(errorHandler: {
@@ -1168,7 +1168,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
             
             guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
                 
-            if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryTableViewController {
+            if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
                 dirVC.reload()
             }
             
@@ -1203,7 +1203,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell
         }
-        cell.directoryTableViewController = self
+        cell.directoryCollectionViewController = self
         
         // Configure the cell...
         
@@ -1257,10 +1257,10 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
             
             Pasteboard.local.filePath = directory.nsString.appendingPathComponent(files![indexPath.row].filename)
             
-            let dirVC = DirectoryTableViewController(connection: connection, directory: directory)
+            let dirVC = DirectoryCollectionViewController(connection: connection, directory: directory)
             dirVC.navigationItem.prompt = "Select a directory where copy file"
             dirVC.delegate = dirVC
-            DirectoryTableViewController.action = .copyFile
+            DirectoryCollectionViewController.action = .copyFile
             
             
             let navVC = UINavigationController(rootViewController: dirVC)
@@ -1320,11 +1320,11 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                 
                 let activityVC = ActivityViewController(message: "Loading")
                 self.present(activityVC, animated: true, completion: {
-                    let dirVC = DirectoryTableViewController(connection: self.connection, directory: path)
+                    let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: path)
                     if let delegate = self.delegate {
                         activityVC.dismiss(animated: true, completion: {
                             
-                            delegate.directoryTableViewController(dirVC, didOpenDirectory: path)
+                            delegate.directoryCollectionViewController(dirVC, didOpenDirectory: path)
                             
                             collectionView.deselectItem(at: indexPath, animated: true)
                         })
@@ -1375,7 +1375,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                                     
                                     activityVC.dismiss(animated: true, completion: {
                                         ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: path)
-                                        LocalDirectoryTableViewController.openFile(newFile, wasJustDownloaded: true, from: collectionView.cellForItem(at: indexPath)!.frame, in: collectionView, navigationController: self.navigationController, showActivityViewControllerInside: self)
+                                        LocalDirectoryCollectionViewController.openFile(newFile, wasJustDownloaded: true, from: collectionView.cellForItem(at: indexPath)!.frame, in: collectionView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                                     })
                                 } catch let error {
                                     activityVC.dismiss(animated: true, completion: {
@@ -1403,10 +1403,10 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
         }
     }
 
-    // MARK: - Local directory table view controller delegate
+    // MARK: - Local directory collection view controller delegate
     
     /// Upload local file.
-    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenFile file: URL) {
+    func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenFile file: URL) {
         
         // Go back here
         navigationController?.popToViewController(self, animated: true, completion: {
@@ -1415,33 +1415,31 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
     }
     
     /// Open directory.
-    func localDirectoryTableViewController(_ localDirectoryTableViewController: LocalDirectoryTableViewController, didOpenDirectory directory: URL) {
-        
-        localDirectoryTableViewController.navigationController?.pushViewController(localDirectoryTableViewController, animated: true)
-        
+    func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenDirectory directory: URL) {
+    localDirectoryCollectionViewController.navigationController?.pushViewController(localDirectoryCollectionViewController, animated: true)
     }
     
     // MARK: - Directory table view controller delegate
     
     /// Copy or move remote file.
-    func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
-        directoryTableViewController.delegate = directoryTableViewController
+    func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
+        directoryCollectionViewController.delegate = directoryCollectionViewController
         
-        if DirectoryTableViewController.action == .copyFile {
-            directoryTableViewController.navigationItem.prompt = "Select a directory where copy file"
+        if DirectoryCollectionViewController.action == .copyFile {
+            directoryCollectionViewController.navigationItem.prompt = "Select a directory where copy file"
         }
         
-        if DirectoryTableViewController.action == .moveFile {
-            directoryTableViewController.navigationItem.prompt = "Select a directory where move file"
+        if DirectoryCollectionViewController.action == .moveFile {
+            directoryCollectionViewController.navigationItem.prompt = "Select a directory where move file"
         }
         
-        navigationController?.pushViewController(directoryTableViewController, animated: true, completion: {
-            if DirectoryTableViewController.action == .copyFile {
-                directoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: directoryTableViewController, action: #selector(directoryTableViewController.copyFile))], animated: true)
+        navigationController?.pushViewController(directoryCollectionViewController, animated: true, completion: {
+            if DirectoryCollectionViewController.action == .copyFile {
+                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.copyFile))], animated: true)
             }
             
-            if DirectoryTableViewController.action == .moveFile {
-                directoryTableViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryTableViewController, action: #selector(directoryTableViewController.moveFile))], animated: true)
+            if DirectoryCollectionViewController.action == .moveFile {
+                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.moveFile))], animated: true)
             }
         })
     }
@@ -1526,7 +1524,7 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                     }
                 }
                 
-                guard let dirVC = item.dragItem.sourceViewController as? DirectoryTableViewController else {
+                guard let dirVC = item.dragItem.sourceViewController as? DirectoryCollectionViewController else {
                     return
                 }
                 

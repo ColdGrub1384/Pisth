@@ -41,7 +41,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     
     /// Open local documents.
     @objc func openDocuments() {
-        navigationController?.pushViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), animated: true)
+        navigationController?.pushViewController(LocalDirectoryCollectionViewController(directory: FileManager.default.documents), animated: true)
     }
     
     /// Add connection.
@@ -283,14 +283,14 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                     
                     if DataManager.shared.connections[indexPath.row].useSFTP {
                         
-                        let dirVC = DirectoryTableViewController(connection: connection)
+                        let dirVC = DirectoryCollectionViewController(connection: connection)
                         
                         activityVC.dismiss(animated: true, completion: {
                             
                             AppDelegate.shared.splitViewController.setDisplayMode()
                             
                             if let delegate = self.delegate {
-                                delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
+                                delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryCollectionViewController: dirVC)
                             } else {
                                 
                                 if interstitial.isReady {

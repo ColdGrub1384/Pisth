@@ -16,7 +16,7 @@ import Pisth_API
 
 /// The app's delegate.
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryTableViewControllerStaticDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryCollectionViewControllerStaticDelegate, UISplitViewControllerDelegate {
     
     /// The window used with app.
     var window: UIWindow?
@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     /// The shared Split view controller used in the app.
     var splitViewController = SplitViewController()
     
-    /// An instance of DirectoryTableViewController to be used to upload files from the share menu.
-    var directoryTableViewController: DirectoryTableViewController?
+    /// An instance of DirectoryCollectionViewController to be used to upload files from the share menu.
+    var directoryCollectionViewController: DirectoryCollectionViewController?
     
     /// The file opened from share menu.
     var openedFile: URL?
@@ -52,11 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         })
     }
     
-    /// Upload file at directory opened in `directoryTableViewController`.
+    /// Upload file at directory opened in `directoryCollectionViewController`.
     @objc func uploadFile() {
-        if let directoryTableViewController = directoryTableViewController {
+        if let directoryCollectionViewController = directoryCollectionViewController {
             if let file = openedFile {
-                directoryTableViewController.localDirectoryTableViewController(LocalDirectoryTableViewController(directory: FileManager.default.documents), didOpenFile: file)
+                directoryCollectionViewController.localDirectoryCollectionViewController(LocalDirectoryCollectionViewController(directory: FileManager.default.documents), didOpenFile: file)
             }
         }
     }
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
             rootVC.dismiss(animated: true, completion: {
                 self.openedFile = nil
-                self.directoryTableViewController = nil
+                self.directoryCollectionViewController = nil
             })
         }
     }
@@ -379,7 +379,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                             })
                         } else {
                             
-                            let dirVC = DirectoryTableViewController(connection: connection)
+                            let dirVC = DirectoryCollectionViewController(connection: connection)
                             
                             activityVC.dismiss(animated: true, completion: {
                                 
@@ -458,7 +458,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                 })
             } else if url.absoluteString.hasPrefix("pisth-import:") { // Export file with the API
                 
-                LocalDirectoryTableViewController.delegate = self
+                LocalDirectoryCollectionViewController.delegate = self
                 
                 action = .apiImport
                 
@@ -593,24 +593,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     // MARK: - Directory table view controller delegate
     
-    /// `DirectoryTableViewControllerDelegate`'s` `directoryTableViewController(_:, didOpenDirectory:)``function.
+    /// `DirectoryCollectionViewControllerDelegate`'s` `directoryCollectionViewController(_:, didOpenDirectory:)``function.
     ///
     /// Upload file at selected directory.
-    func directoryTableViewController(_ directoryTableViewController: DirectoryTableViewController, didOpenDirectory directory: String) {
+    func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
         if action == .upload {
-            directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
+            directoryCollectionViewController.navigationItem.prompt = "Select folder where upload file"
         } else if action == .apiImport {
-            directoryTableViewController.navigationItem.prompt = importReason ?? "Select file to import"
+            directoryCollectionViewController.navigationItem.prompt = importReason ?? "Select file to import"
         }
-        directoryTableViewController.delegate = self
-        directoryTableViewController.closeAfterSending = true
-        self.directoryTableViewController = directoryTableViewController
+        directoryCollectionViewController.delegate = self
+        directoryCollectionViewController.closeAfterSending = true
+        self.directoryCollectionViewController = directoryCollectionViewController
         
-        (navigationController.presentedViewController as? UINavigationController)?.pushViewController(directoryTableViewController, animated: true) {
+        (navigationController.presentedViewController as? UINavigationController)?.pushViewController(directoryCollectionViewController, animated: true) {
             if self.action == .upload {
-                directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+                directoryCollectionViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
             } else {
-                directoryTableViewController.navigationItem.rightBarButtonItems = []
+                directoryCollectionViewController.navigationItem.rightBarButtonItems = []
             }
             
         }
@@ -619,23 +619,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     // MARK: - Bookmarks table view controller delegate
     
     /// Upload file at selected connection.
-    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryTableViewController directoryTableViewController: DirectoryTableViewController) {
+    func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryCollectionViewController directoryCollectionViewController: DirectoryCollectionViewController) {
         
         if action == .upload {
-            directoryTableViewController.navigationItem.prompt = "Select folder where upload file"
-            directoryTableViewController.closeAfterSending = true
+            directoryCollectionViewController.navigationItem.prompt = "Select folder where upload file"
+            directoryCollectionViewController.closeAfterSending = true
         } else if action == .apiImport {
-            directoryTableViewController.navigationItem.prompt = importReason ?? "Select file to import"
+            directoryCollectionViewController.navigationItem.prompt = importReason ?? "Select file to import"
         }
-        directoryTableViewController.delegate = self
+        directoryCollectionViewController.delegate = self
         
-        self.directoryTableViewController = directoryTableViewController
-        bookmarksTableViewController.navigationController?.pushViewController(directoryTableViewController, animated: true) {
+        self.directoryCollectionViewController = directoryCollectionViewController
+        bookmarksTableViewController.navigationController?.pushViewController(directoryCollectionViewController, animated: true) {
             
             if self.action == .upload {
-                directoryTableViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
+                directoryCollectionViewController.navigationItem.rightBarButtonItems = [UIBarButtonItem(image: #imageLiteral(resourceName: "cloud-upload"), style: .done, target: self, action: #selector(self.uploadFile))]
             } else {
-                directoryTableViewController.navigationItem.rightBarButtonItems = []
+                directoryCollectionViewController.navigationItem.rightBarButtonItems = []
             }
         }
     }
@@ -657,7 +657,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         
         if action == .apiImport {
             try? FileManager.default.removeItem(at: file)
-            LocalDirectoryTableViewController.delegate = nil
+            LocalDirectoryCollectionViewController.delegate = nil
             
             UIPasteboard.general.setData(NSKeyedArchiver.archivedData(withRootObject: PisthFile(data: data, filename: file.lastPathComponent)), forPasteboardType: "public.data")
             
