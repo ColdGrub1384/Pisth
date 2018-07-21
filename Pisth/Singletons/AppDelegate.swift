@@ -359,21 +359,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
                         let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         
+                        ConnectionManager.shared.session = nil
+                        ConnectionManager.shared.filesSession = nil
+                        ConnectionManager.shared.result = .notConnected
+                        
                         if !connection.useSFTP { // SSH
                             
                             ConnectionManager.shared.connection = connection
                             ConnectionManager.shared.connect()
                             
+                            let terminalVC = TerminalViewController()
+                            terminalVC.pureMode = true
+                            
                             activityVC.dismiss(animated: true, completion: {
                                 
                                 self.splitViewController.setDisplayMode()
                                 
-                                let terminalVC = TerminalViewController()
-                                terminalVC.pureMode = true
-                                
                                 self.navigationController.setViewControllers([terminalVC], animated: true)
                             })
                         } else {
+                            
                             let dirVC = DirectoryTableViewController(connection: connection)
                             
                             activityVC.dismiss(animated: true, completion: {
@@ -557,9 +562,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
             return false
         }
         
-        guard let path = userActivity.userInfo?["directory"] as? String else {
-            return false
-        }
+        let path = userActivity.userInfo?["directory"] as? String ?? "~"
         
         var options = [.init("path"):path, .init("password"):password] as [UIApplicationOpenURLOptionsKey : String]
         if let pubKey = userActivity.userInfo?["publicKey"] as? String {
@@ -679,6 +682,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         })
     }
     
+    /// Change display mode and View controllers.
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         splitViewController.viewControllers = [secondaryViewController]
         if splitViewController.preferredDisplayMode == .primaryOverlay {
@@ -688,6 +692,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         return true
     }
     
+    /// Change display mode.
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
         splitViewController.viewControllers = [navigationController, self.splitViewController.detailNavigationController]
         

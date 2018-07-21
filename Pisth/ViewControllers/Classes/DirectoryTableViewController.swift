@@ -205,32 +205,6 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
                 }
             }
             
-            var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
-            self.allFiles = files
-            if !UserDefaults.standard.bool(forKey: "hidden") {
-                for file in files ?? [] {
-                    if file.filename.hasPrefix(".") {
-                        guard let i = files?.index(of: file) else { break }
-                        files?.remove(at: i)
-                    }
-                }
-            }
-            self.files = files
-            
-            guard self.files != nil else {
-                super.init(collectionViewLayout: UICollectionViewFlowLayout())
-                return
-            }
-                
-            if self.directory.removingUnnecessariesSlashes != "/" {
-                // Append parent directory
-                guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
-                    super.init(collectionViewLayout: UICollectionViewLayout())
-                    return
-                }
-                self.files!.append(parent)
-            }
-            
             // Sorry Termius ;-(
             let os = try? ConnectionManager.shared.filesSession?.channel.execute("""
             SA_OS_TYPE="Linux"
@@ -301,6 +275,30 @@ class DirectoryTableViewController: UICollectionViewController, LocalDirectoryTa
         super.viewDidLoad()
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-RemoteFileBrowser", AnalyticsParameterItemName : "Remote File Browser"])
+        
+        var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+        self.allFiles = files
+        if !UserDefaults.standard.bool(forKey: "hidden") {
+            for file in files ?? [] {
+                if file.filename.hasPrefix(".") {
+                    guard let i = files?.index(of: file) else { break }
+                    files?.remove(at: i)
+                }
+            }
+        }
+        self.files = files
+        
+        guard self.files != nil else {
+            return
+        }
+        
+        if self.directory.removingUnnecessariesSlashes != "/" {
+            // Append parent directory
+            guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
+                return
+            }
+            self.files!.append(parent)
+        }
         
         let titleComponents = directory.components(separatedBy: "/")
         title = titleComponents.last
