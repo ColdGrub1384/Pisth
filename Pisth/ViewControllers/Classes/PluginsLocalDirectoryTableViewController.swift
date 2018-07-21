@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Local directory table view controller for managing terminal plugins.
+/// Local directory collection view controller for managing terminal plugins.
 class PluginsLocalDirectoryCollectionViewController: LocalDirectoryCollectionViewController {
     
     /// Not supported.

@@ -27,12 +27,10 @@ class SplitViewController: UISplitViewController {
     
     /// Set display mode for opening a connection.
     func setDisplayMode() {
-        if AppDelegate.shared.splitViewController.isCollapsed {
-            AppDelegate.shared.splitViewController.preferredDisplayMode = .primaryHidden
+        if isCollapsed {
+            preferredDisplayMode = .primaryHidden
         } else {
-            AppDelegate.shared.splitViewController.preferredDisplayMode = .primaryOverlay
-            let button = AppDelegate.shared.splitViewController.displayModeButtonItem
-            _ = button.target?.perform(button.action)
+            preferredDisplayMode = .primaryOverlay
         }
     }
     
