@@ -591,7 +591,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         return false
     }
     
-    // MARK: - Directory table view controller delegate
+    // MARK: - Directory collection view controller delegate
     
     /// `DirectoryCollectionViewControllerDelegate`'s` `directoryCollectionViewController(_:, didOpenDirectory:)``function.
     ///
@@ -650,7 +650,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         bookmarksTableViewController.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Directory table view controller static delegate
+    // MARK: - Directory collection view controller static delegate
     
     /// Export file with API.
     func didOpenFile(_ file: URL, withData data: Data) {

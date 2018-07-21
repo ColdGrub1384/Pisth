@@ -176,7 +176,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     ///     - connection: Connection to be opened if is not.
     ///     - directory: Directory to open, by default, is `connection`'s default path.
     ///
-    /// - Returns: A Directory table view controller at given directory.
+    /// - Returns: A Directory collection view controller at given directory.
     init(connection: RemoteConnection, directory: String? = nil) {
         self.connection = connection
         ConnectionManager.shared.connection = connection
@@ -1419,7 +1419,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     localDirectoryCollectionViewController.navigationController?.pushViewController(localDirectoryCollectionViewController, animated: true)
     }
     
-    // MARK: - Directory table view controller delegate
+    // MARK: - Directory collection view controller delegate
     
     /// Copy or move remote file.
     func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
