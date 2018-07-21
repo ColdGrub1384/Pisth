@@ -1,3 +1,6 @@
+![mockup](https://pisth.github.io/mockup.png)
+
+
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
 
 # Pisth
