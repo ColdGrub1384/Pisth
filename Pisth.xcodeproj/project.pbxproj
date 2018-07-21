@@ -112,6 +112,7 @@
 		C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9985AA920D6C1DE00389A7B /* Connection.storyboard */; };
 		C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */; };
 		C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAE20D6C4F500389A7B /* ConnectionController.swift */; };
+		C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */; };
 		C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */; };
 		C9A9585B20DDD3DF00BF6C03 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9585A20DDD3DF00BF6C03 /* TerminalViewController.swift */; };
 		C9B205B820D6CBBF00045F20 /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B205B720D6CBBF00045F20 /* NMSSH.framework */; };
@@ -283,6 +284,7 @@
 		C9985AA920D6C1DE00389A7B /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
 		C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		C9985AAE20D6C4F500389A7B /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
+		C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactBookmarksTableViewController.swift; sourceTree = "<group>"; };
 		C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDragItem+sourceViewController.swift"; sourceTree = "<group>"; };
 		C9A9585A20DDD3DF00BF6C03 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		C9B205B720D6CBBF00045F20 /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NMSSH.framework; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
+				C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */,
 				3AD29179207ADE7B0082306D /* SplitViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryTableViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryTableViewController.swift */,
@@ -988,6 +991,7 @@
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
 				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
+				C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryTableViewControllerDelegate.swift in Sources */,
 				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,

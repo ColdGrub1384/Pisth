@@ -110,5 +110,11 @@ public class RemoteConnection: NSObject, NSCoding {
         useSFTP = aDecoder.decodeBool(forKey: "Use SFTP")
         os = aDecoder.decodeObject(forKey: "OS") as? String
     }
+    
+    // MARK: - Static
+    
+    public static func ==(lhs: RemoteConnection, rhs: RemoteConnection) -> Bool {
+        return (lhs.host == rhs.host && lhs.username == rhs.username && lhs.password == rhs.password && lhs.name == rhs.name && lhs.path == rhs.path && lhs.port == rhs.port && lhs.useSFTP == rhs.useSFTP)
+    }
 }
 

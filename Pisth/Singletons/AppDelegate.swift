@@ -72,6 +72,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
         }
     }
     
+    /// Show a `CompactBookmarksTableViewController` from compact window or show it from the left.
+    @objc func showBookmarks() {
+        
+        if !splitViewController.isCollapsed {
+            let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+            _ = button.target?.perform(button.action)
+        } else {
+            let navVC = UINavigationController(rootViewController: CompactBookmarksTableViewController())
+            navVC.navigationBar.barStyle = .black
+            navVC.modalPresentationStyle = .overCurrentContext
+            navVC.view.backgroundColor = .clear
+            navVC.modalTransitionStyle = .crossDissolve
+            UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
+        }
+    }
+    
+    /// A Bar button item to show bookmarks from an active connection.
+    let showBookmarksBarButtonItem = UIBarButtonItem(title: "Bookmarks", style: .done, target: self, action: #selector(showBookmarks))
+    
     /// Update 3D touch shortucts from connections.
     func update3DTouchShortucts() {
         
@@ -346,26 +365,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
                             ConnectionManager.shared.connect()
                             
                             activityVC.dismiss(animated: true, completion: {
+                                
+                                self.splitViewController.setDisplayMode()
+                                
                                 let terminalVC = TerminalViewController()
                                 terminalVC.pureMode = true
                                 
-                                if !AppDelegate.shared.splitViewController.isCollapsed {
-                                    terminalVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                    self.navigationController.setViewControllers([terminalVC], animated: true)
-                                } else {
-                                    AppDelegate.shared.navigationController.pushViewController(terminalVC, animated: true)
-                                }
+                                self.navigationController.setViewControllers([terminalVC], animated: true)
                             })
                         } else {
                             let dirVC = DirectoryTableViewController(connection: connection)
                             
                             activityVC.dismiss(animated: true, completion: {
-                                if !AppDelegate.shared.splitViewController.isCollapsed {
-                                    dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                    self.navigationController.setViewControllers([dirVC], animated: true)
-                                } else {
-                                    AppDelegate.shared.navigationController.pushViewController(dirVC, animated: true)
-                                }
+                                
+                                self.splitViewController.setDisplayMode()
+                                
+                                self.navigationController.setViewControllers([dirVC], animated: true)
                             })
                         }
                     })
@@ -656,16 +671,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryTableViewControl
     
     /// Resize terminal.
     func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode) {
-        if let termVC = navigationController.visibleViewController as? TerminalViewController {
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            if let termVC = self.navigationController.visibleViewController as? TerminalViewController {
                 termVC.resizeView(withSize: termVC.view.frame.size)
+            }
+        })
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        splitViewController.viewControllers = [secondaryViewController]
+        if splitViewController.preferredDisplayMode == .primaryOverlay {
+            splitViewController.preferredDisplayMode = .primaryHidden
+        }
+        
+        return true
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
+        splitViewController.viewControllers = [navigationController, self.splitViewController.detailNavigationController]
+        
+        if splitViewController.preferredDisplayMode == .primaryHidden && !(self.splitViewController.detailNavigationController.visibleViewController is BookmarksTableViewController) {
+            splitViewController.preferredDisplayMode = .primaryOverlay
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                let button = splitViewController.displayModeButtonItem
+                _ = button.target?.perform(button.action)
             })
         }
+        
+        return navigationController
     }
     
     // MARK: - Static
     
-    /// The shared instance of the app's delegate set in `application(_: , didFinishLaunchingWithOptions:)`.
+    /// The shared instance of the app's delegate set in `application(_:didFinishLaunchingWithOptions:)`.
     static var shared: AppDelegate!
 }
 

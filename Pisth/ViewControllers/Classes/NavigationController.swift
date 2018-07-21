@@ -10,7 +10,7 @@ import UIKit
 /// The main `UINavigationController`.
 class NavigationController: UINavigationController {
     
-    var isSet = false
+    private var isSet = false
     
     /// Setup app window.
     override func viewDidAppear(_ animated: Bool) {
@@ -35,10 +35,12 @@ class NavigationController: UINavigationController {
         
         // Setup Split view controller
         let splitViewController = SplitViewController()
+        splitViewController.preferredDisplayMode = .primaryHidden
         splitViewController.navigationController_ = navigationController
-        splitViewController.detailNavigationController = self
         splitViewController.detailViewController = ContentViewController.shared
-        splitViewController.viewControllers = [UIViewController()]
+        splitViewController.detailNavigationController = self
+        AppDelegate.shared.window?.rootViewController = UIViewController()
+        splitViewController.load()
         splitViewController.view.backgroundColor = .white
         splitViewController.delegate = AppDelegate.shared
         AppDelegate.shared.splitViewController = splitViewController

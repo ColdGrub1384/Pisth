@@ -13,7 +13,7 @@ protocol BookmarksTableViewControllerDelegate {
     
     /// Called did opening a connection with SFTP enabled from `BookmarksTableViewController`.
     /// # Note
-    /// If the delegate is set for `BookmarksTableViewController`, this you need to present the `directoryTableViewController` manually.
+    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryTableViewController` manually.
     ///
     /// - Parameters:
     ///     - bookmarksTableViewController: Source `BookmarksTableViewController`.
@@ -23,7 +23,7 @@ protocol BookmarksTableViewControllerDelegate {
     
     /// Called did opening a connection with SFTP disabled from `BookmarksTableViewController`.
     /// # Note
-    /// If the delegate is set for `BookmarksTableViewController`, this you need to present the `directoryTableViewController` manually.
+    /// If the delegate is set for `BookmarksTableViewController`, you need to present the `directoryTableViewController` manually.
     ///
     /// - Parameters:
     ///     - bookmarksTableViewController: Source `BookmarksTableViewController`.

@@ -36,7 +36,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         let navVC = UINavigationController(rootViewController: UIViewController.settings)
         navVC.modalPresentationStyle = .formSheet
         
-        UIApplication.shared.keyWindow?.rootViewController?.present(navVC, animated: true, completion: nil)
+        present(navVC, animated: true, completion: nil)
     }
     
     /// Open local documents.
@@ -132,7 +132,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return 2
     }
     
-    /// - Returns: ``"Connections"` or `"Nearby Devices"` if there are nearby devices.
+    /// - Returns: `"Connections"` or `"Nearby Devices"` if there are nearby devices.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard (devices.count > 0) else {
@@ -251,7 +251,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         return (indexPath.section == 0)
     }
     
-    
     // MARK: - Table view delegate
     
     /// Connect to selected connection.
@@ -273,7 +272,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             /// Open connection.
             func connect() {
                 let activityVC = ActivityViewController(message: "Connecting")
-                self.present(activityVC, animated: true) {
+                UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true) {
                     
                     ConnectionManager.shared.session = nil
                     ConnectionManager.shared.filesSession = nil
@@ -288,6 +287,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         
                         activityVC.dismiss(animated: true, completion: {
                             
+                            AppDelegate.shared.splitViewController.setDisplayMode()
+                            
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryTableViewController: dirVC)
                             } else {
@@ -296,12 +297,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                                     interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
                                 }
                                 
-                                if !AppDelegate.shared.splitViewController.isCollapsed {
-                                    dirVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                    AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
-                                } else {
-                                    AppDelegate.shared.navigationController.pushViewController(dirVC, animated: true)
-                                }
+                                AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
                                 
                             }
                         })
@@ -314,6 +310,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                         
                         activityVC.dismiss(animated: true, completion: {
                             
+                            AppDelegate.shared.splitViewController.setDisplayMode()
+                            
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
                             } else {
@@ -322,12 +320,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                                     interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
                                 }
                                 
-                                if !AppDelegate.shared.splitViewController.isCollapsed {
-                                    termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                                    AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
-                                } else {
-                                    AppDelegate.shared.navigationController.pushViewController(termVC, animated: true)
-                                }
+                                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
                                 
                             }
                         })
@@ -389,13 +382,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             termVC.pureMode = true
             termVC.viewer = true
             termVC.peerID = peerID
-                        
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                termVC.navigationItem.leftBarButtonItem = AppDelegate.shared.splitViewController.displayModeButtonItem
-                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
-            } else {
-                AppDelegate.shared.navigationController.pushViewController(termVC, animated: true)
-            }
+            
+            AppDelegate.shared.splitViewController.setDisplayMode()
+            AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
             
             _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                 self.mcNearbyServiceBrowser.invitePeer(self.devices[indexPath.row], to: termVC.mcSession, withContext: nil, timeout: 10)
@@ -504,7 +493,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         
         if let termVC = AppDelegate.shared.navigationController.visibleViewController as? TerminalViewController {
             
-            termVC.becomeFirstResponder()
+            _ = termVC.becomeFirstResponder()
             
         }
     }

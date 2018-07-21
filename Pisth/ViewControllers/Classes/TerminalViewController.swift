@@ -611,6 +611,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
         }
         
+        navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
         navigationItem.largeTitleDisplayMode = .never
         addToolbar()
         

@@ -19,25 +19,33 @@ class SplitViewController: UISplitViewController {
     /// A detail view controller. If it's set, you must set `detailNavigationController`. This View controller will be displayed and `detailNavigationController` will be passed to `AppDelegate.shared`.
     var detailViewController: UIViewController?
     
-    /// Setup view controllers.
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if isCollapsed {
-            viewControllers = [navigationController_]
-            AppDelegate.shared.navigationController = navigationController_
+    /// Show given view controllers and pass them to `AppDelegate.shared`.
+    func load() {
+        preferredDisplayMode = .primaryHidden
+        viewControllers = [navigationController_, detailNavigationController]
+    }
+    
+    /// Set display mode for opening a connection.
+    func setDisplayMode() {
+        if AppDelegate.shared.splitViewController.isCollapsed {
+            AppDelegate.shared.splitViewController.preferredDisplayMode = .primaryHidden
         } else {
-            preferredDisplayMode = .allVisible
-            if let detailViewController = detailViewController {
-                viewControllers = [navigationController_, detailViewController]
-            } else {
-                viewControllers = [navigationController_, detailNavigationController]
-            }
-            AppDelegate.shared.navigationController = detailNavigationController
+            AppDelegate.shared.splitViewController.preferredDisplayMode = .primaryOverlay
+            let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+            _ = button.target?.perform(button.action)
         }
     }
     
-    /// Search for the `preferredStatusBarStyle` for the visible view controller or returns `.default`.
+    /// Set preferred display mode.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        preferredDisplayMode = .primaryHidden
+    }
+    
+    // MARK: - Split view controller
+    
+    /// Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
     }
