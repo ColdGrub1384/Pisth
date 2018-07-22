@@ -688,7 +688,44 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
         return self
     }
     
+    // MARK: - Collection view drag delegate
+    
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let file = files[indexPath.row]
+        
+        let item = UIDragItem(itemProvider: NSItemProvider(item: file as NSSecureCoding, typeIdentifier: "public.item"))
+        item.sourceViewController = self
+        item.previewProvider = {
+            
+            guard let iconView = (collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell)?.iconView else {
+                return nil
+            }
+            
+            let dragPreview = UIDragPreview(view: iconView)
+            dragPreview.parameters.backgroundColor = .clear
+            
+            return dragPreview
+        }
+        
+        return [item]
+    }
+    
     // MARK: - Static
+    
+    /// Grid layout.
+    static var gridLayout: UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 120)
+        return layout
+    }
+    
+    /// List layout.
+    static func listLayout(forView view: UIView) -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        return layout
+    }
     
     /// Global delegate.
     static var delegate: LocalDirectoryCollectionViewControllerStaticDelegate?
@@ -769,7 +806,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
                 }
                 
                 func show() {
-                    (AppDelegate.shared.splitViewController.viewControllers[0] as? UINavigationController)?.pushViewController(dirVC, animated: true) {
+                    AppDelegate.shared.navigationController.pushViewController(dirVC, animated: true) {
                         dirVC.collectionView?.selectItem(at: IndexPath(row: i, section: 0), animated: true, scrollPosition: .centeredHorizontally)
                         
                         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
@@ -853,45 +890,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
         } else {
             openFile()
         }
-    }
-    
-    // MARK: - Collection view drag delegate
-    
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        
-        let file = files[indexPath.row]
-        
-        let item = UIDragItem(itemProvider: NSItemProvider(item: file as NSSecureCoding, typeIdentifier: "public.item"))
-        item.sourceViewController = self
-        item.previewProvider = {
-            
-            guard let iconView = (collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell)?.iconView else {
-                return nil
-            }
-            
-            let dragPreview = UIDragPreview(view: iconView)
-            dragPreview.parameters.backgroundColor = .clear
-            
-            return dragPreview
-        }
-        
-        return [item]
-    }
-    
-    // MARK: - Static
-    
-    /// Grid layout.
-    static var gridLayout: UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 120)
-        return layout
-    }
-    
-    /// List layout.
-    static func listLayout(forView view: UIView) -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 50)
-        return layout
     }
 }
 
