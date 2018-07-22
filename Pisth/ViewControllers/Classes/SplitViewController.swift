@@ -36,7 +36,6 @@ class SplitViewController: UISplitViewController {
         } else {
             preferredDisplayMode = .primaryOverlay
         }
-        toggleMasterView()
     }
     
     /// Toggle the master view.
