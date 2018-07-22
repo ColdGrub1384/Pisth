@@ -13,7 +13,7 @@ class BlockGestureRecognizer: NSObject {
 
 	let closure: () -> Void
 
-	init(view: UIView, recognizer: UIGestureRecognizer, closure: @escaping () -> Void) {
+    init(view: UIView, recognizer: UIGestureRecognizer, closure: @escaping () -> Void) {
 		self.closure = closure
 		super.init()
 		view.addGestureRecognizer(recognizer)

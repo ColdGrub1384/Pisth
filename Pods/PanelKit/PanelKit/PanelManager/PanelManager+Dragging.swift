@@ -122,7 +122,7 @@ extension PanelManager {
 
 	}
 
-	func didDrag(_ panel: PanelViewController, toEdgeOf side: PanelPinSide) {
+    func didDrag(_ panel: PanelViewController, toEdgeOf side: PanelPinSide) {
 
 		guard allowPanelPinning else {
 			return
@@ -176,7 +176,7 @@ extension PanelManager {
 		panel.panelPinnedPreviewView = previewView
 	}
 
-	func didEndDrag(_ panel: PanelViewController, toEdgeOf side: PanelPinSide) {
+    func didEndDrag(_ panel: PanelViewController, toEdgeOf side: PanelPinSide) {
 
 		let pinnedPreviewView = panel.panelPinnedPreviewView
 

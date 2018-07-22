@@ -120,6 +120,8 @@ extension PanelViewController {
 
 	@objc private func didTapCornerHandle(_ recognizer: UILongPressGestureRecognizer) {
 
+        _ = contentDelegate?.panelDragGestureRecognizer(recognizer, shouldReceive: UITouch())
+        
 		if recognizer.state == .began {
 
 			cornerHandleDidBecomeActive()
@@ -145,6 +147,10 @@ extension PanelViewController {
 		guard let viewToMove = self.view else {
 			return
 		}
+        
+        guard contentDelegate.panelDragGestureRecognizer(recognizer, shouldReceive: UITouch()) else {
+            return
+        }
 
 		if recognizer.state == .began {
 
