@@ -167,7 +167,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             layout.headerReferenceSize = currentLayout.headerReferenceSize
         }
         collectionView?.reloadData()
-        collectionView?.setCollectionViewLayout(layout, animated: true)
+        collectionView?.setCollectionViewLayout(layout, animated: false)
     }
         
     /// Init with given connection and directory.
