@@ -89,7 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     }
     
     /// A Bar button item to show bookmarks from an active connection.
-    let showBookmarksBarButtonItem = UIBarButtonItem(title: "Bookmarks", style: .done, target: self, action: #selector(showBookmarks))
+    ///
+    /// Returns each time a new instance.
+    var showBookmarksBarButtonItem: UIBarButtonItem {
+        return UIBarButtonItem(title: "Bookmarks", style: .done, target: self, action: #selector(showBookmarks))
+    }
     
     /// Update 3D touch shortucts from connections.
     func update3DTouchShortucts() {

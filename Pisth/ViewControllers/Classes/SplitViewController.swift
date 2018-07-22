@@ -36,6 +36,15 @@ class SplitViewController: UISplitViewController {
         } else {
             preferredDisplayMode = .primaryOverlay
         }
+        toggleMasterView()
+    }
+    
+    /// Toggle the master view.
+    func toggleMasterView() {
+        guard displayModeButtonItem.action != nil else {
+            return
+        }
+        UIApplication.shared.sendAction(displayModeButtonItem.action!, to: displayModeButtonItem.target, from: nil, for: nil)
     }
     
     /// Set preferred display mode.
