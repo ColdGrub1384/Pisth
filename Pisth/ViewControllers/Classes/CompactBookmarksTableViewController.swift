@@ -21,9 +21,7 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     /// Setup dark style.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.leftBarButtonItems?.removeLast()
-        
+                
         tableView.backgroundColor = .clear
         tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         view.backgroundColor = .clear
