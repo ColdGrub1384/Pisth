@@ -1361,22 +1361,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return isFirstResponder
     }
     
-    private var gestureRecognizerTimer: Timer?
-    
-    /// Disable `AppDelegate.shared.splitViewController`'s gesture while dragging.
-    func panelDragGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        AppDelegate.shared.splitViewController.presentsWithGesture = false
-        
-        gestureRecognizerTimer?.invalidate()
-        
-        gestureRecognizerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            AppDelegate.shared.splitViewController.presentsWithGesture = true
-        })
-        
-        return true
-    }
-    
     // MARK: - Static
     
     /// Print this to dismiss the keyboard (from SSH).
