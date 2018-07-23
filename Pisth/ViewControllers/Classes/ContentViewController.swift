@@ -126,6 +126,27 @@ class ContentViewController: UIViewController, PanelManager {
         return true
     }
     
+    /// Update `DirectoryCollectionViewController`s layouts.
+    func didUpdatePinnedPanels() {
+        var viewControllers = [DirectoryCollectionViewController]()
+        for panel in panels {
+            if let dirVC = panel.contentViewController as? DirectoryCollectionViewController {
+                viewControllers.append(dirVC)
+            }
+        }
+        for vc in AppDelegate.shared.navigationController.viewControllers {
+            if let dirVC = vc as? DirectoryCollectionViewController {
+                viewControllers.append(dirVC)
+            }
+        }
+        
+        for dirVC in viewControllers {
+            if let layout = dirVC.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
+                layout.itemSize.width = dirVC.view.frame.width
+            }
+        }
+    }
+    
     // MARK: - Static
     
     /// Last visible instance.

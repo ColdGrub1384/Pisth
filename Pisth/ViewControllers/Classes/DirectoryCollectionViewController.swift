@@ -462,9 +462,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Resize layout.
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize.width == view.frame.width {
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
             layout.itemSize.width = size.width
+        }
+    }
+    
+    /// Resize layout.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
+            layout.itemSize.width = view.frame.size.width
         }
     }
     

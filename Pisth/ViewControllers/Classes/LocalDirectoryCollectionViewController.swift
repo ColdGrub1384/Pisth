@@ -487,6 +487,23 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
         NotificationCenter.default.removeObserver(self)
     }
     
+    /// Update `collectionView`'s layout.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != LocalDirectoryCollectionViewController.gridLayout.itemSize {
+            layout.itemSize.width = size.width
+        }
+    }
+    
+    /// Resize layout.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != LocalDirectoryCollectionViewController.gridLayout.itemSize {
+            layout.itemSize.width = view.frame.size.width
+        }
+    }
+    
     // MARK: - Table view data source
     
     /// - Returns: `1`.
