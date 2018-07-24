@@ -102,8 +102,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
     private var ignoredNotifications = [Notification.Name]()
     
-    /// Variable used to delay a long press of the arrow keys.
     private var arrowsLongPressDelay = 2
+    
+    private var isViewSet = false
     
     /// Navigation controller to reset at `viewDidDisappear(_:)`.
     var navigationController_: UINavigationController?
@@ -638,32 +639,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return .default
     }
     
-    private var isResizing = false
-    
-    /// Resize `webView`.
+    /// Reload `webView`.
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        guard !isResizing else {
-            return
-        }
-        
-        isResizing = true
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-            if self.isPresentedInFullscreen && self.isFirstResponder {
-                _ = self.resignFirstResponder()
-                
-                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                    _ = self.becomeFirstResponder()
-                })
-            } else {
-                self.resizeView(withSize: self.view.frame.size)
-            }
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (_) in
-                self.isResizing = false
-            })
-        })
+        reload()
     }
     
     /// Set user info.
@@ -1131,7 +1110,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
             
-            _ = becomeFirstResponder()
+            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                if self.isPresentedInFullscreen && self.isFirstResponder {
+                    _ = self.resignFirstResponder()
+                    
+                    _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                        _ = self.becomeFirstResponder()
+                    })
+                } else {
+                    self.resizeView(withSize: self.view.frame.size)
+                }
+            })
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
                 if self.selectText {
