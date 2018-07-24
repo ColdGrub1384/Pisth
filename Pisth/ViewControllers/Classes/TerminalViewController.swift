@@ -305,28 +305,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Show plain output and allow selection.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender Bar button item
-    @objc func selectionMode(_ sender: UIBarButtonItem) {
-        selectionTextView.isHidden = selectionTextView.isHidden.inverted
-        
-        if !selectionTextView.isHidden {
-            
-            toolbar.items![1].tintColor = .white
-            toolbarItems![1].tintColor = .white
-            
-            reload()
-            selectText = true
-            
-            _ = resignFirstResponder()
-        } else {
-            
-            toolbar.items![1].tintColor = toolbar.tintColor
-            toolbarItems![1].tintColor = view.tintColor
-            
-            _ = becomeFirstResponder()
-        }
+    @objc func selectionMode() {
+        selectionTextView.isHidden = false
+        selectText = true
+        _ = resignFirstResponder()
+        reload()
+    }
+    
+    /// Hide plain output and disallow selection.
+    @objc func insertMode() {
+        selectionTextView.isHidden = true
+        _ = becomeFirstResponder()
     }
     
     /// Send clipboard.
@@ -462,6 +451,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Show the menu.
+    ///
+    /// - Parameters:
+    ///     - gesture: The `UILongPressGestureRecognizer` that triggered the action.
+    @objc func showMenu(_ gesture: UILongPressGestureRecognizer) {
+        UIMenuController.shared.setTargetRect(CGRect(origin: gesture.location(in: (webView as! TerminalWebView).interactionView), size: CGSize.zero), in: webView)
+        UIMenuController.shared.setMenuVisible(true, animated: true)
+    }
+    
     // MARK: - View controller
     
     /// `UIViewController`'s `canBecomeFirstResponder` variable.
@@ -565,6 +563,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
+        (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
+        
         view.addInteraction(UIDropInteraction(delegate: self))
         
         // Create selection Textview
@@ -592,12 +592,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController_ = navigationController
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showNavBar))
-        tapGesture.delegate = self
-        if !isPresentedAsPopover {
-            webView.addGestureRecognizer(tapGesture)
-        }
-        
         edgesForExtendedLayout = []
         
         if !viewer {
@@ -609,6 +603,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !pureMode {
                 ConnectionManager.shared.session?.channel.closeShell()
                 try? ConnectionManager.shared.session?.channel.startShell()
+            }
+            
+            if !isPresentedAsPopover {
+                showNavBar()
             }
         }
         
@@ -637,6 +635,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         return .default
+    }
+    
+    /// - Returns: `true` for pasting and enabling selection mode in insert mode.
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if selectionTextView.isHidden {
+            return (action == #selector(pasteText) || action == #selector(selectionMode) || action == #selector(showNavBar))
+        } else {
+            return (action == #selector(insertMode) || action == #selector(showNavBar))
+        }
     }
     
     /// Reload `webView`.

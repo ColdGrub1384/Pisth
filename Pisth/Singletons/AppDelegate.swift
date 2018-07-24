@@ -147,7 +147,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             .init(title: "Rename", action: #selector(FileCollectionViewCell.renameFile(_:))),
             .init(title: "Info", action: #selector(FileCollectionViewCell.showFileInfo(_:))),
             .init(title: "Share", action: #selector(FileCollectionViewCell.shareFile(_:))),
-            .init(title: "Open in new panel", action: #selector(FileCollectionViewCell.openInNewPanel(_:)))
+            .init(title: "Open in new panel", action: #selector(FileCollectionViewCell.openInNewPanel(_:))),
+            .init(title: "Selection mode", action: #selector(TerminalViewController.selectionMode)),
+            .init(title: "Insert mode", action: #selector(TerminalViewController.insertMode)),
+            .init(title: "Paste", action: #selector(TerminalViewController.pasteText)),
+            .init(title: "Toggle top bar", action: #selector(TerminalViewController.showNavBar))
         ]
         UIMenuController.shared.update()
         
