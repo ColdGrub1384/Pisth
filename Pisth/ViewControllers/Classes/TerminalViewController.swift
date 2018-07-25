@@ -325,6 +325,19 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Send text selected in `selectionTextView`.
+    @objc func pasteSelection() {
+        guard !selectionTextView.isHidden else {
+            return
+        }
+        
+        if let range = selectionTextView.selectedTextRange, let text = selectionTextView.text(in: range) {
+            insertText(text)
+        }
+        
+        insertMode()
+    }
+    
     /// Send user password.
     @objc func sendPassword() {
         if isFirstResponder {
@@ -638,12 +651,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return .default
     }
     
-    /// - Returns: `true` for pasting and enabling selection mode in insert mode.
+    /// - Returns: `true` for pasting, enabling selection mode and showing the navigation bar in insert mode.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if selectionTextView.isHidden {
             return (action == #selector(pasteText) || action == #selector(selectionMode) || action == #selector(showNavBar))
         } else {
-            return (action == #selector(insertMode) || action == #selector(showNavBar))
+            return (action == #selector(pasteSelection) || action == #selector(insertMode) || action == #selector(showNavBar))
         }
     }
     

@@ -151,7 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             .init(title: "Selection mode", action: #selector(TerminalViewController.selectionMode)),
             .init(title: "Insert mode", action: #selector(TerminalViewController.insertMode)),
             .init(title: "Paste", action: #selector(TerminalViewController.pasteText)),
-            .init(title: "Toggle top bar", action: #selector(TerminalViewController.showNavBar))
+            .init(title: "Toggle top bar", action: #selector(TerminalViewController.showNavBar)),
+            .init(title: "Paste selection", action: #selector(TerminalViewController.pasteSelection))
         ]
         UIMenuController.shared.update()
         
