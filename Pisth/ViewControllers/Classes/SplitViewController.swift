@@ -35,6 +35,9 @@ class SplitViewController: UISplitViewController {
             preferredDisplayMode = .primaryHidden
         } else {
             preferredDisplayMode = .primaryOverlay
+            if let action = displayModeButtonItem.action {
+                UIApplication.shared.sendAction(action, to: displayModeButtonItem.target, from: nil, for: nil)
+            }
         }
     }
     
