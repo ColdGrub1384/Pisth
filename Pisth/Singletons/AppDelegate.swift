@@ -680,16 +680,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Split view controller delegate
     
-    /// Resize terminal.
-    func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode) {
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            if let termVC = self.navigationController.visibleViewController as? TerminalViewController {
-                termVC.resizeView(withSize: termVC.view.frame.size)
-            }
-        })
-    }
-    
     /// Change display mode and View controllers.
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         splitViewController.viewControllers = [secondaryViewController]

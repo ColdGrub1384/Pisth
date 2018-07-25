@@ -439,7 +439,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             arrowsVC.view.frame = webView.frame
         }
         
-        reload()
+        if !isViewSet {
+            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
+        } else {
+            isViewSet = true
+            reload()
+        }
     }
     
     /// Close this View controller.
@@ -538,6 +543,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
+        addToolbar()
+        
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
@@ -558,7 +565,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
         view.addSubview(webView)
-        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
         webView.backgroundColor = .clear
         webView.navigationDelegate = self
         webView.uiDelegate = self
@@ -614,7 +620,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
         }
         navigationItem.largeTitleDisplayMode = .never
-        addToolbar()
         
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
     }
@@ -687,7 +692,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size, let toolbarFrame = toolbar?.convert(toolbar.frame, to: view), toolbarFrame.origin.y >= 0 {
+        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size, let toolbarFrame = toolbar?.convert(toolbar.frame, to: view), toolbarFrame.origin.y > 0 {
             
             resizeView(withSize: CGSize(width: view.frame.width, height: toolbarFrame.origin.y))
         } else if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -1116,18 +1121,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     self.userActivity = activity
                 }
             } catch {}
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                if self.isPresentedInFullscreen && self.isFirstResponder {
-                    _ = self.resignFirstResponder()
-                    
-                    _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                        _ = self.becomeFirstResponder()
-                    })
-                } else {
-                    self.resizeView(withSize: self.view.frame.size)
-                }
-            })
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
                 if self.selectText {
