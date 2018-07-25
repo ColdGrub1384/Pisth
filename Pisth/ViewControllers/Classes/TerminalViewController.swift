@@ -100,7 +100,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Ignored notifications name strings.
     /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
-    private var ignoredNotifications = [Notification.Name]()
+    var ignoredNotifications = [Notification.Name]()
     
     private var arrowsLongPressDelay = 2
     
@@ -384,16 +384,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Show or hide keyboard.
-    ///
-    /// - Parameters:
-    ///     - sender: Sende bar button item.
-    @objc func toggleKeyboard(_ sender: UIBarButtonItem) {
+    @objc func toggleKeyboard() {
         if isFirstResponder {
             _ = resignFirstResponder()
-            sender.image = #imageLiteral(resourceName: "show-keyboard")
         } else {
             _ = becomeFirstResponder()
-            sender.image = #imageLiteral(resourceName: "hide-keyboard")
         }
     }
     
@@ -570,6 +565,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
         (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
+        (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard)))
         
         view.addInteraction(UIDropInteraction(delegate: self))
         
@@ -740,7 +736,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
-            arrowsVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showNavBar)))
+            for gesture in (webView as? TerminalWebView)?.interactionView.gestureRecognizers ?? [] {
+                arrowsVC.view.addGestureRecognizer(gesture)
+            }
             
             sender.tintColor = .lightGray
         } else {
@@ -751,8 +749,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             ArrowsViewController.current?.helpLabel.alpha = 1
             ArrowsViewController.current?.helpLabel.text = "Scroll to\ngo down /\ngo up."
             
-            for recognizer in ArrowsViewController.current!.view.gestureRecognizers! {
-                recognizer.isEnabled = false
+            for gesture in ArrowsViewController.current!.view.gestureRecognizers! {
+                if gesture.name == "arrow" {
+                    gesture.isEnabled = false
+                } else {
+                    (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(gesture)
+                }
             }
             
             _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
@@ -1152,7 +1154,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
                 webView.evaluateJavaScript("var js = document.createElement('script'); js.type = 'text/javascript'; js.src = 'file://\(tmpPlugin.appendingPathComponent("index.js").path)'; js.bundlePath = '\(tmpPlugin.path)'; document.head.appendChild(js)", completionHandler: nil)
             }
-            
         }
     }
     
@@ -1336,7 +1337,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// The keyboard and action button.
     var rightBarButtonItems: [UIBarButtonItem] {
         if keyboardButton == nil {
-            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard(_:)))
+            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
         }
         let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
         for item in items {

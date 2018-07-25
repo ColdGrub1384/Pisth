@@ -129,6 +129,10 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         downSwipe.direction = .down
         view.addGestureRecognizer(downSwipe)
         
+        for gesture in view.gestureRecognizers ?? [] {
+            gesture.name = "arrowt"
+        }
+        
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
             self.helpLabel.alpha = 0
         }, completion: { _ in
