@@ -15,7 +15,7 @@ import Firebase
 import QuickLook
 
 /// Collection view controller used to manage local files.
-class LocalDirectoryCollectionViewController: UICollectionViewController, GADBannerViewDelegate, UIDocumentPickerDelegate, LocalDirectoryCollectionViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
+class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocumentPickerDelegate, LocalDirectoryCollectionViewControllerDelegate, QLPreviewControllerDataSource, UIDocumentInteractionControllerDelegate, UICollectionViewDragDelegate {
     
     /// Directory where retrieve files.
     var directory: URL
@@ -396,6 +396,14 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
         
         title = directory.lastPathComponent
         
+        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            // Banner ad
+            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerView.rootViewController = self
+            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+            bannerView.load(GADRequest())
+        }
+        
         navigationItem.largeTitleDisplayMode = .never
         
         collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
@@ -434,6 +442,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
             self.loadLayout()
         }
         
+        footerView = bannerView
+        
         loadLayout()
         
         collectionView?.refreshControl = UIRefreshControl()
@@ -442,15 +452,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
         // Navigation bar items
         let createFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(create(_:)))
         navigationItem.setRightBarButtonItems([createFile], animated: true)
-        
-        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-            // Banner ad
-            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerView.rootViewController = self
-            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-            bannerView.delegate = self
-            bannerView.load(GADRequest())
-        }
     }
     
     /// Show error if there are or open `openFile` file.
@@ -628,11 +629,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, GADBan
     }
     
     // MARK: - Banner view delegate
-    
-    /// Show ad when it's received.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        footerView = bannerView
-    }
     
     // MARK: - Document picker delegate
     
