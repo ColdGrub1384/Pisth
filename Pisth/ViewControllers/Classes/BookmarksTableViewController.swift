@@ -31,6 +31,11 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// Fetched nearby devices by `searchController` to display.
     var fetchedNearby = [MCPeerID]()
     
+    /// Returns `true` if the view saying that there is no bookmarks should be shown.
+    var shouldShowBackgroundView: Bool {
+        return (DataManager.shared.connections.count == 0 && devices.count == 0 || tableView.backgroundView is UIVisualEffectView)
+    }
+    
     /// Open app's settings.
     @objc func openSettings() {
         let navVC = UINavigationController(rootViewController: UIViewController.settings)
@@ -154,7 +159,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
+        tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         
         if section == 0 {
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
@@ -234,7 +239,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         if editingStyle == .delete {
             DataManager.shared.removeConnection(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
+            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         }
     }
 
@@ -474,7 +479,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath(row: devices.count-1, section: 1)], with: .automatic)
             tableView.endUpdates()
-            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
+            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         }
     }
     
@@ -491,7 +496,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.beginUpdates()
             tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
             tableView.endUpdates()
-            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
+            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         }
     }
     
