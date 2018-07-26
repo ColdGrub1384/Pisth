@@ -412,6 +412,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     alert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
                         connect(withPassword: passwordTextField?.text ?? "")
                     }))
+                    alert.addAction(UIAlertAction(title: "Connect and remember", style: .default, handler: { (_) in
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField?.text ?? "", publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
+                        DataManager.shared.addNew(connection: connection)
+                        connect(withPassword: connection.password)
+                    }))
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                 }
