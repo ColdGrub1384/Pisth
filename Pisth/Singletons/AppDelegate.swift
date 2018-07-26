@@ -372,6 +372,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                         ConnectionManager.shared.filesSession = nil
                         ConnectionManager.shared.result = .notConnected
                         
+                        ContentViewController.shared.closeAllPinnedPanels()
+                        ContentViewController.shared.closeAllFloatingPanels()
+                        
                         if !connection.useSFTP { // SSH
                             
                             ConnectionManager.shared.connection = connection
