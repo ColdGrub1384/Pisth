@@ -474,6 +474,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.beginUpdates()
             tableView.insertRows(at: [IndexPath(row: devices.count-1, section: 1)], with: .automatic)
             tableView.endUpdates()
+            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
         }
     }
     
@@ -490,6 +491,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.beginUpdates()
             tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
             tableView.endUpdates()
+            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
         }
     }
     
