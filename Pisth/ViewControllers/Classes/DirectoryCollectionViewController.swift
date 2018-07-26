@@ -17,7 +17,7 @@ import PanelKit
 import CoreSpotlight
 
 /// Collection view controller to manage remote files.
-class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, GADBannerViewDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
+class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -85,7 +85,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             }
             if let view = newValue {
                 (collectionViewLayout as? UICollectionViewFlowLayout)?.footerReferenceSize = view.frame.size
-                view.frame = headerSuperview?.frame ?? view.frame
+                view.frame.size = footerSuperview?.frame.size ?? view.frame.size
                 view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
                 footerSuperview?.addSubview(view)
             } else {
@@ -306,6 +306,14 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             title = titleComponents[titleComponents.count-2]
         }
         
+        // Banner ad
+        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+            bannerView.rootViewController = self
+            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
+            bannerView.load(GADRequest())
+        }
+        
         navigationItem.largeTitleDisplayMode = .never
         
         // TableView cells
@@ -345,6 +353,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         header.switchLayout = { _ in // Switch layout
             self.loadLayout()
         }
+        
+        footerView = bannerView
         
         loadLayout()
         
@@ -387,15 +397,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             }
         }
         navigationItem.setRightBarButtonItems(buttons, animated: true)
-        
-        // Banner ad
-        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerView.rootViewController = self
-            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-            bannerView.delegate = self
-            bannerView.load(GADRequest())
-        }
         
         // Siri Shortcuts
         
@@ -1281,7 +1282,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
-    /// - Returns: An header view containing `headerView`.
+    /// - Returns: An header view containing `headerView` or a footer containing `footerView`.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionElementKindSectionHeader {
@@ -1452,13 +1453,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.moveFile))], animated: true)
             }
         })
-    }
-    
-    // MARK: - Banner view delegate
-    
-    /// Show ad when it's received.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        footerView = bannerView
     }
     
     // MARK: - Document picker delegate
