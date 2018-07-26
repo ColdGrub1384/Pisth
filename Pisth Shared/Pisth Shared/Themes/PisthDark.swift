@@ -8,7 +8,7 @@
 import Foundation
 
 /// Dark version of `PisthTheme`.
-class PisthDarkTheme: ProTheme {
+open class PisthDarkTheme: ProTheme {
     
     /// Returns purple.
     open override var foregroundColor: Color? {

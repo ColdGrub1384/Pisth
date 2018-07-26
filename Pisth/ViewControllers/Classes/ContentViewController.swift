@@ -11,7 +11,8 @@ import PanelKit
 /// A View controller for showing connection content.
 class ContentViewController: UIViewController, PanelManager {
     
-    private var terminalPanel: PanelViewController!
+    /// The panel containing the current terminal.
+    var terminalPanel: PanelViewController!
     
     private var directoryPanels = [PanelViewController]()
     

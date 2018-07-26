@@ -78,6 +78,7 @@ public struct AnsiColors {
 /// # Default themes
 ///
 /// - `PisthTheme`
+/// - `PisthDark`
 /// - `BasicTheme`
 /// - `GrassTheme`
 /// - `HomebrewTheme`

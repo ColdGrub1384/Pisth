@@ -344,12 +344,17 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             return
         }
         
-        guard TerminalTheme.themes.keys.contains(title.text!) else {
+        guard let theme = TerminalTheme.themes[title.text!] else {
             return
         }
         
         UserDefaults.standard.set(title.text, forKey: "terminalTheme")
         UserDefaults.standard.synchronize()
+        
+        let termVC = (AppDelegate.shared.navigationController.visibleViewController as? TerminalViewController) ?? ContentViewController.shared?.terminalPanel?.contentViewController as? TerminalViewController
+        termVC?.keyboardAppearance = theme.keyboardAppearance
+        termVC?.toolbar.barStyle = theme.toolbarStyle
+        (termVC?.panelNavigationController ?? termVC?.navigationController)?.navigationBar.barStyle = theme.toolbarStyle
         
         collectionView.reloadData()
     }

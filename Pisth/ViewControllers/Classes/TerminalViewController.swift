@@ -98,6 +98,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Select text after loading terminal and put text in `selectionTextView`.
     var selectText = false
     
+    /// The theme currently used by the terminal.
+    var theme: TerminalTheme {
+        if UIAccessibilityIsInvertColorsEnabled() {
+            return ProTheme()
+        } else {
+            return TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!
+        }
+    }
+    
     /// Ignored notifications name strings.
     /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
     var ignoredNotifications = [Notification.Name]()
@@ -178,9 +187,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Add keyboard's toolbar.
     @objc func addToolbar() {
-        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"] else {
-            return
-        }
         
         var toolbar: UIToolbar
         
@@ -243,9 +249,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - sender: Sender button.
     @objc func toggleSecondToolbar(_ sender: UIButton) {
-        guard let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pro"] else {
-            return
-        }
         
         var toolbar: UIToolbar
         
@@ -577,6 +580,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
+        webView.ignoresInvertColors = true
         (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
         (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard)))
         
@@ -595,10 +599,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationItem.rightBarButtonItems = rightBarButtonItems
         
-        view.ignoresInvertColors = true
-        (panelNavigationController ?? navigationController)?.view.ignoresInvertColors = true
+        (panelNavigationController?.navigationController ?? navigationController)?.view.ignoresInvertColors = true
         
-        keyboardAppearance = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!.keyboardAppearance
+        keyboardAppearance = theme.keyboardAppearance
     }
     
     /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
@@ -983,16 +986,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.evaluateJavaScript("term.setOption('fontSize', \(UserDefaults.standard.integer(forKey: "terminalTextSize")))", completionHandler: nil)
         selectionTextView.font = selectionTextView.font?.withSize(CGFloat(UserDefaults.standard.integer(forKey: "terminalTextSize")))
         
-        let themeName = UserDefaults.standard.string(forKey: "terminalTheme")!
-        if let theme = TerminalTheme.themes[themeName] {
-            (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
-            webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
-            webView.backgroundColor = theme.backgroundColor
-            view.backgroundColor = theme.backgroundColor
-            (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
-            selectionTextView.backgroundColor = theme.backgroundColor
-            selectionTextView.textColor = theme.foregroundColor
-        }
+        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+        webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
+        webView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
+        (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
+        selectionTextView.backgroundColor = theme.backgroundColor
+        selectionTextView.textColor = theme.foregroundColor
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
             if !self.viewer {
