@@ -30,6 +30,7 @@
 		3ACF9B742041B912006C3218 /* URL+queryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3F2041B484006C3218 /* URL+queryParameters.swift */; };
 		3ACF9B752041B914006C3218 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3E2041B484006C3218 /* String.swift */; };
 		3AF6027F207139B300347BFC /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6027E207139B300347BFC /* Pisth.swift */; };
+		C909FF56210944DA00782E22 /* PisthDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C909FF55210944DA00782E22 /* PisthDark.swift */; };
 		C9985A9C20D6B54F00389A7B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */; };
 		C9985A9D20D6B54F00389A7B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */; };
 		C9985A9E20D6B54F00389A7B /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */; };
@@ -67,6 +68,7 @@
 		3ACF9B672041B8C6006C3218 /* Ubuntu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ubuntu.swift; sourceTree = "<group>"; };
 		3AF6027E207139B300347BFC /* Pisth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pisth.swift; sourceTree = "<group>"; };
 		5F420224BB8A5D277DF7B7F0 /* Pods_Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C909FF55210944DA00782E22 /* PisthDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthDark.swift; sourceTree = "<group>"; };
 		C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				3ACF9B662041B8C6006C3218 /* TerminalTheme.swift */,
 				3AF6027E207139B300347BFC /* Pisth.swift */,
+				C909FF55210944DA00782E22 /* PisthDark.swift */,
 				3ACF9B5D2041B8C6006C3218 /* Basic.swift */,
 				3ACF9B5E2041B8C6006C3218 /* Grass.swift */,
 				3ACF9B5F2041B8C6006C3218 /* Homebrew.swift */,
@@ -284,6 +287,7 @@
 				3A61DE9820668FE90002353B /* DataManager.swift in Sources */,
 				3ACF9B732041B90A006C3218 /* Color.swift in Sources */,
 				3AF6027F207139B300347BFC /* Pisth.swift in Sources */,
+				C909FF56210944DA00782E22 /* PisthDark.swift in Sources */,
 				3A15A9E0206E89EB007A8E7D /* WebViewController.swift in Sources */,
 				3ACF9B6D2041B8C6006C3218 /* Ocean.swift in Sources */,
 				3ACF9B692041B8C6006C3218 /* Grass.swift in Sources */,
