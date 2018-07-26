@@ -88,6 +88,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         navigationItem.rightBarButtonItem = editButtonItem
         navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
         
         // Banner ad
         if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
@@ -118,6 +119,8 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         if AppDelegate.shared.splitViewController.isCollapsed, let selected = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selected, animated: true)
         }
+        
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -150,6 +153,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
 
     /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
+        
         if section == 0 {
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 return fetchedConnections.count
@@ -228,6 +234,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         if editingStyle == .delete {
             DataManager.shared.removeConnection(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.backgroundView?.isHidden = (DataManager.shared.connections.count != 0 && devices.count != 0 && !(tableView.backgroundView is UIVisualEffectView))
         }
     }
 
