@@ -310,6 +310,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Show plain output and allow selection.
     @objc func selectionMode() {
         selectionTextView.isHidden = false
+        webView.isHidden = true
         selectText = true
         _ = resignFirstResponder()
         reload()
@@ -318,6 +319,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Hide plain output and disallow selection.
     @objc func insertMode() {
         selectionTextView.isHidden = true
+        webView.isHidden = false
         _ = becomeFirstResponder()
     }
     
@@ -371,12 +373,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if !selectionTextView.isHidden {
             actions.append(UIAlertAction(title: "Insert mode", style: .default, handler: { (_) in
                 self.selectionTextView.isHidden = true
+                self.webView.isHidden = false
                 
                 _ = self.becomeFirstResponder()
             }))
         } else {
             actions.append(UIAlertAction(title: "Selection mode", style: .default, handler: { (_) in
                 self.selectionTextView.isHidden = false
+                self.webView.isHidden = true
                 
                 self.selectText = true
                 
@@ -445,7 +449,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 
         webView.frame.size = size
         webView.frame.origin = CGPoint(x: 0, y: 0)
-        selectionTextView.frame = webView.frame
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
         }
@@ -587,11 +590,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         view.addInteraction(UIDropInteraction(delegate: self))
         
         // Create selection Textview
-        selectionTextView = UITextView(frame: webView.frame)
+        selectionTextView = UITextView(frame: view.frame)
         selectionTextView.isHidden = true
         selectionTextView.font = UIFont(name: "Courier", size: 15)
         selectionTextView.isEditable = false
+        selectionTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectionTextView)
+        NSLayoutConstraint.activate([
+            selectionTextView.leadingAnchor.constraint(equalTo: webView.layoutMarginsGuide.leadingAnchor),
+            selectionTextView.trailingAnchor.constraint(equalTo: webView.layoutMarginsGuide.trailingAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            selectionTextView.topAnchor.constraintEqualToSystemSpacingBelow(webView.layoutMarginsGuide.topAnchor, multiplier: 1.0),
+            webView.layoutMarginsGuide.bottomAnchor.constraintEqualToSystemSpacingBelow(selectionTextView.bottomAnchor, multiplier: 1.0)
+        ])
         
         if readOnly {
             toolbarItems?.remove(at: 1)
@@ -714,8 +726,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
         }
-            
-        selectionTextView.frame = webView.frame
     }
     
     /// Resize `webView` when keyboard is hidden.
@@ -736,8 +746,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
         }
-        
-        selectionTextView.frame = webView.frame
     }
     
     /// Enable or disable swiping to send arrow keys.
