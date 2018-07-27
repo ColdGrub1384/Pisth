@@ -569,7 +569,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locked" translatesAutoresizingMaskIntoConstraints="NO" id="Yte-jB-1wJ">
-                                                                <rect key="frame" x="0.0" y="-1" width="71" height="74"/>
+                                                                <rect key="frame" x="0.0" y="-1" width="71" height="73.666666666666671"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="71" id="IUk-fF-hEe"/>
                                                                 </constraints>
@@ -581,7 +581,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-tQ-VdP">
-                                                                <rect key="frame" x="79" y="43" width="85" height="30"/>
+                                                                <rect key="frame" x="79" y="42.666666666666664" width="85" height="29.999999999999993"/>
                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="85" id="kTL-70-fdY"/>
@@ -595,7 +595,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aV-zQ-tZJ">
-                                                                <rect key="frame" x="172" y="43" width="85" height="30"/>
+                                                                <rect key="frame" x="172" y="42.666666666666664" width="85" height="29.999999999999993"/>
                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="85" id="cCU-Lx-sLV"/>

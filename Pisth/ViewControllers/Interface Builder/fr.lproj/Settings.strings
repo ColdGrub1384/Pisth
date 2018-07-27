@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "Blink cursor"; ObjectID = "0T6-yU-XWe"; */
-"0T6-yU-XWe.text" = "Blink cursor";
+"0T6-yU-XWe.text" = "Clignoter cursor";
 
 /* Class = "UILabel"; text = "Source code"; ObjectID = "0oG-Pq-jub"; */
 "0oG-Pq-jub.text" = "Source code";
@@ -24,22 +24,22 @@
 "6TI-kj-HXW.text" = "Man Page";
 
 /* Class = "UILabel"; text = "Use biometric authentication"; ObjectID = "8CF-NU-bJ6"; */
-"8CF-NU-bJ6.text" = "Use biometric authentication";
+"8CF-NU-bJ6.text" = "Authentification biométrique";
 
 /* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "8WI-aT-pZH"; */
 "8WI-aT-pZH.normalTitle" = "Aa";
 
 /* Class = "UITableViewSection"; headerTitle = "File browsing"; ObjectID = "8XB-bA-Ckz"; */
-"8XB-bA-Ckz.headerTitle" = "File browsing";
+"8XB-bA-Ckz.headerTitle" = "Navigation";
 
 /* Class = "UIButton"; normalTitle = "Restore"; ObjectID = "9aV-zQ-tZJ"; */
-"9aV-zQ-tZJ.normalTitle" = "Restore";
+"9aV-zQ-tZJ.normalTitle" = "Restorer";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "9j9-jX-XG8"; */
-"9j9-jX-XG8.text" = "Current";
+"9j9-jX-XG8.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "Ac0-KX-Lkf"; */
-"Ac0-KX-Lkf.text" = "Current";
+"Ac0-KX-Lkf.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Pisth"; ObjectID = "BP6-qW-gAU"; */
 "BP6-qW-gAU.text" = "Pisth";
@@ -48,10 +48,10 @@
 "BkJ-Ht-xYc.normalTitle" = "Aa";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "FFB-vu-oYR"; */
-"FFB-vu-oYR.text" = "Current";
+"FFB-vu-oYR.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Text size"; ObjectID = "LUg-za-cZE"; */
-"LUg-za-cZE.text" = "Text size";
+"LUg-za-cZE.text" = "Taille du texte";
 
 /* Class = "UILabel"; text = "Pro"; ObjectID = "Lls-xP-5xT"; */
 "Lls-xP-5xT.text" = "Pro";
@@ -60,16 +60,16 @@
 "MrL-EH-fgs.normalTitle" = "Aa";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "Nju-Tv-QYS"; */
-"Nju-Tv-QYS.text" = "Current";
+"Nju-Tv-QYS.text" = "Actuel";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "O15-L5-bTT"; */
-"O15-L5-bTT.title" = "Settings";
+"O15-L5-bTT.title" = "Préférences";
 
 /* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "OJJ-tQ-VdP"; */
-"OJJ-tQ-VdP.normalTitle" = "Buy";
+"OJJ-tQ-VdP.normalTitle" = "Acheter";
 
 /* Class = "UILabel"; text = "Show hidden files"; ObjectID = "OZO-jw-V1c"; */
-"OZO-jw-V1c.text" = "Show hidden files";
+"OZO-jw-V1c.text" = "Afficher les fichiers cachés";
 
 /* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "PDa-4W-yBG"; */
 "PDa-4W-yBG.normalTitle" = "Aa";
@@ -81,19 +81,19 @@
 "SG7-bS-PUL.text" = "Beta";
 
 /* Class = "UILabel"; text = "Plugins"; ObjectID = "Um0-8K-vZK"; */
-"Um0-8K-vZK.text" = "Plugins";
+"Um0-8K-vZK.text" = "Extensions";
 
 /* Class = "UILabel"; text = "Themes"; ObjectID = "VaE-7R-e5x"; */
-"VaE-7R-e5x.text" = "Themes";
+"VaE-7R-e5x.text" = "Thèmes";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "WCF-Gi-L7F"; */
-"WCF-Gi-L7F.text" = "Current";
+"WCF-Gi-L7F.text" = "Actuel";
 
 /* Class = "UITableViewSection"; headerTitle = "Contributing"; ObjectID = "YES-C1-h9g"; */
-"YES-C1-h9g.headerTitle" = "Contributing";
+"YES-C1-h9g.headerTitle" = "Contribution";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "Z7h-br-ekg"; */
-"Z7h-br-ekg.text" = "Current";
+"Z7h-br-ekg.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Novel"; ObjectID = "f92-qp-CBW"; */
 "f92-qp-CBW.text" = "Novel";
@@ -105,10 +105,10 @@
 "gv5-cb-Poz.text" = "Ubuntu";
 
 /* Class = "UITextView"; text = "Pisth Viewer is a macOS app that allows you to view the content of a terminal opened with Pisth in iOS from your Mac.  To download it, open this link in your Mac: https://pisth.github.io/PisthViewer/"; ObjectID = "hIH-Zd-NmV"; */
-"hIH-Zd-NmV.text" = "Pisth Viewer is a macOS app that allows you to view the content of a terminal opened with Pisth in iOS from your Mac.  To download it, open this link in your Mac: https://pisth.github.io/PisthViewer/";
+"hIH-Zd-NmV.text" = "Pisth Viewer est une application pour maCOS qui vous permert de voir le contenu d'un terminal ouvert avec Pisth depuis votre Mac.\n\nPour le télécharger, Ouvrez ce lien dans votre Mac: \nhttps://pisth.github.io/PisthViewer/";
 
 /* Class = "UITableViewSection"; headerTitle = "Terminal theme"; ObjectID = "hqb-uF-Uyc"; */
-"hqb-uF-Uyc.headerTitle" = "Terminal theme";
+"hqb-uF-Uyc.headerTitle" = "Thème du terminal";
 
 /* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "iHM-6k-xSo"; */
 "iHM-6k-xSo.normalTitle" = "Aa";
@@ -117,19 +117,19 @@
 "kh4-eE-ElU.text" = "Pisth Dark";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "mOb-pz-2Hc"; */
-"mOb-pz-2Hc.text" = "Current";
+"mOb-pz-2Hc.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "me8-vp-r2d"; */
-"me8-vp-r2d.text" = "Current";
+"me8-vp-r2d.text" = "Actuel";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "on8-JP-1yY"; */
-"on8-JP-1yY.headerTitle" = "Other";
+"on8-JP-1yY.headerTitle" = "Autres";
 
 /* Class = "UILabel"; text = "Pisth Viewer"; ObjectID = "p2Y-ao-WgN"; */
 "p2Y-ao-WgN.text" = "Pisth Viewer";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "pLi-22-4LR"; */
-"pLi-22-4LR.text" = "Current";
+"pLi-22-4LR.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Grass"; ObjectID = "rXr-SX-aDg"; */
 "rXr-SX-aDg.text" = "Grass";
@@ -138,22 +138,22 @@
 "sYj-mt-MS3.text" = "Homebrew";
 
 /* Class = "UITableViewSection"; headerTitle = "Login"; ObjectID = "u2N-h6-2wh"; */
-"u2N-h6-2wh.headerTitle" = "Login";
+"u2N-h6-2wh.headerTitle" = "Connection";
 
 /* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "ube-lm-1LG"; */
 "ube-lm-1LG.normalTitle" = "Aa";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "vCR-uL-DIf"; */
-"vCR-uL-DIf.text" = "Current";
+"vCR-uL-DIf.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "xlh-QT-XHv"; */
-"xlh-QT-XHv.text" = "Current";
+"xlh-QT-XHv.text" = "Actuel";
 
 /* Class = "UILabel"; text = "Licenses"; ObjectID = "y7W-Pi-yRF"; */
 "y7W-Pi-yRF.text" = "Licenses";
 
 /* Class = "UILabel"; text = "Current"; ObjectID = "z44-nL-xwq"; */
-"z44-nL-xwq.text" = "Current";
+"z44-nL-xwq.text" = "Actuel";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "zJU-Xt-wUr"; */
-"zJU-Xt-wUr.title" = "Settings";
+"zJU-Xt-wUr.title" = "Paramètres";

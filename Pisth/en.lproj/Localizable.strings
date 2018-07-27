@@ -131,16 +131,16 @@
 "connect" = "Connect";
 
 /* Change private key. */
-"connection.changePrivKey" = "Change private key";
+"connection.changePrivKey" = "Change Private key";
 
 /* Change public key. */
-"connection.changePubKey" = "Change public key";
+"connection.changePubKey" = "Change Public key";
 
 /* Import private key. */
-"connection.importPrivKey" = "Import private key";
+"connection.importPrivKey" = "Import Private key";
 
 /* Import public key. */
-"connection.importPubKey" = "Import public key";
+"connection.importPubKey" = "Import Public key";
 
 /* Passphrase for key placeholder */
 "connection.passphrase" = "Passphrase for keys";

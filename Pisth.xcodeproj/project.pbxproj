@@ -453,6 +453,7 @@
 				3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */,
 				C9BD28A5210A3E6900244AAF /* Disconnected.xib */,
 				C98D6CB22101303E00B3052E /* Header.xib */,
+				C9BD289E210A3E5200244AAF /* No Connections.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -584,7 +585,6 @@
 				3AD2F69920713FC10017F2EB /* Web.xib */,
 				3A0964F220CC209F006D5B4C /* Content.storyboard */,
 				C9BD2897210A3E3D00244AAF /* File Info.xib */,
-				C9BD289E210A3E5200244AAF /* No Connections.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";

@@ -1,423 +1,423 @@
 /* Text displayed after enabling `ArrowsViewControllers`. */
-"arrows.helpTextArrows" = "Swipe to\nsend arrow\nkeys";
+"arrows.helpTextArrows" = "Glissez\npour les\nflèches.";
 
 /* Text displayed after disabling `ArrowsViewControllers`. */
-"arrows.helpTextScroll" = "Scroll to\ngo down /\ngo up.";
+"arrows.helpTextScroll" = "Glissez\npour\naviguer";
 
 /* Message of the alert shown when a session that is already active was clicked. */
-"bookmaks.sessionAlreadyActiveMessage" = "Would you like to resume the session, or restart it?";
+"bookmaks.sessionAlreadyActiveMessage" = "Voulez vous continuer la session ou la redémarrer?";
 
 /* Title of the alert shown when a session that is already active was clicked. */
-"bookmaks.sessionAlreadyActiveTitle" = "Session already active";
+"bookmaks.sessionAlreadyActiveTitle" = "Session déjà active";
 
 /* Authenticate with biometry to connect to the connection. */
-"bookmarks.authenticateToConnect" = "Authenticate to connect";
+"bookmarks.authenticateToConnect" = "Authentifiez-vous pour vous connecter";
 
 /* Title of the alert shown while connecting to a session. */
-"bookmarks.connecting" = "Connecting";
+"bookmarks.connecting" = "Connection";
 
 /* Connections title header. */
 "bookmarks.connections" = "Connections";
 
 /* Devices title header. */
-"bookmarks.devices" = "Nearby devices";
+"bookmarks.devices" = "Appareils proches";
 
 /* Enter password if biometry auth failed. */
-"bookmarks.enterPassword" = "Enter password";
+"bookmarks.enterPassword" = "Entrez le mot de passe";
 
 /* Message of the alert for asking the user for the password. Enter password for user <User>. */
-"bookmarks.enterPasswordMessage" = "Enter password for user %@.";
+"bookmarks.enterPasswordMessage" = "Entrez le mot de passe pour l'utilisateur '%@'.";
 
 /* Title of the alert for asking the user for the password. */
-"bookmarks.enterPasswordTitle" = "Enter password";
+"bookmarks.enterPasswordTitle" = "Entrez le mot de passe";
 
 /* Restart the session. */
-"bookmarks.restart" = "Restart";
+"bookmarks.restart" = "Redémarrer";
 
 /* Resume the session. */
-"bookmarks.resume" = "Resume";
+"bookmarks.resume" = "Continuer";
 
 /* Bookmarks title. */
-"bookmarks.title" = "Bookmarks";
+"bookmarks.title" = "Signets";
 
 /* Ask the user for typing the new folder's name. */
-"browsers.chooseNewFolderName" = "Choose new folder name";
+"browsers.chooseNewFolderName" = "Choisissez le nom du dossier";
 
 /* Copy file in selected directory. */
-"browsers.copyHere" = "Copy here";
+"browsers.copyHere" = "Copier ici";
 
 /* Create a folder. */
-"browsers.createFolder" = "browsers.createFolder";
+"browsers.createFolder" = "Créer un dossier";
 
 /* Message of the alert shown for creating a file. */
-"browsers.createMessage" = "Choose the new file name";
+"browsers.createMessage" = "Choisissez le nom du fichier";
 
 /* Title of the alert shown for creating a file. */
-"browsers.createTitle" = "Create blank file";
+"browsers.createTitle" = "Créer un fichier vide";
 
 /* Title of an alert shown when a file couldn't be copied. */
-"browsers.errorCopyingFile" = "Error copying file!";
+"browsers.errorCopyingFile" = "Erreur lors de la copie du fichier!";
 
 /* Title of the alert shown when there was an error creating a directory. */
-"browsers.errorCreatingDirectory" = "Error creating directory!";
+"browsers.errorCreatingDirectory" = "Erreur lors de la création du répertoire!";
 
 /* Title of the alert shown when there was an error creating a file. */
-"browsers.errorCreatingFile" = "Error creating file!";
+"browsers.errorCreatingFile" = "Erreur lors de la création du fichier!";
 
 /* Title of the alert shown when a file couldn't be imported. */
-"browsers.errorImporting" = "Error importing file!";
+"browsers.errorImporting" = "Erreur lors de l'importation du fichier!";
 
 /* Title of an alert shown when a file couldn't be moved. */
-"browsers.errorMovingFile" = "Error moving file!";
+"browsers.errorMovingFile" = "Erreur lors du déplacement du fichier!";
 
 /* Title of the alert shown when a directory couldn't be opened. */
-"browsers.errorOpeningDirectory" = "Error opening directory!";
+"browsers.errorOpeningDirectory" = "Erreur lors de l'ouverture du fichier!";
 
 /* Folder name placeholder. */
-"browsers.folderName" = "Folder name";
+"browsers.folderName" = "Nom du dossier";
 
 /* Import file. */
-"browsers.import" = "Import";
+"browsers.import" = "Importer";
 
 /* Move file in selected directory. */
-"browsers.moveHere" = "Move here";
+"browsers.moveHere" = "Déplacer ici";
 
 /* Message of the alert shown when a file couldn't be moved or copied because the pasteboard is empty. */
-"browsers.noFileInPasteboard" = "No file in the pasteboard";
+"browsers.noFileInPasteboard" = "Aucun fichier dans le presse papier";
 
 /* Ask where a file should be copied. */
-"browsers.selectDirectoryWhereCopyFile" = "Select directory where copy file";
+"browsers.selectDirectoryWhereCopyFile" = "Selectionnez un dossier où copier le fichier";
 
 /* Ask where a file should be moved. */
-"browsers.selectDirectoryWhereMoveFile" = "Select directory where move file";
+"browsers.selectDirectoryWhereMoveFile" = "Selectionnez un dossier où déplacer le fichier";
 
 /* Cancel */
-"cancel" = "Cancel";
+"cancel" = "Annuler";
 
 /* The title of the alert shown when a file couldn't be removed. */
-"cell.errorFile" = "Error removing file!";
+"cell.errorFile" = "Erreur lors de la suppression du fichier!";
 
 /* The title of the alert shown when a directory couldn't be removed. */
-"cell.errorRemovingDirectory" = "Error removing directory!";
+"cell.errorRemovingDirectory" = "Erreur lors de la suppression du dossier!";
 
 /* Title of the alert shown when a file couldn't be renamed. */
-"cell.errorRenaming" = "Error renaming file!";
+"cell.errorRenaming" = "Erreur lors de la modification du nom du fichier!";
 
 /* New file name placeholder. */
-"cell.newFileName" = "New file name";
+"cell.newFileName" = "Nouveau nom du fichier";
 
 /* Paste */
-"cell.paste" = "Paste";
+"cell.paste" = "Coller";
 
 /* Paste selection */
-"cell.pasteSelection" = "Paste selection";
+"cell.pasteSelection" = "Coller la séléction";
 
 /* Title of the alert shown while removing file. */
-"cell.removing" = "Removing";
+"cell.removing" = "Suppression";
 
 /* Rename file. */
-"cell.rename" = "Rename";
+"cell.rename" = "Renommer";
 
 /* The mesage of the alert for rename a file. Write new name for <fileToRename.filename>. */
-"cell.renameFileMessage" = "Write the new name for %@.";
+"cell.renameFileMessage" = "Entrez le nouveau nom pour %@";
 
 /* The title of the alert for rename a file */
-"cell.renameFileTitle" = "Rename file";
+"cell.renameFileTitle" = "Renommer le fichier";
 
 /* Toggle top bar */
-"cell.toggleTopBar" = "Toggle top bar";
+"cell.toggleTopBar" = "Basculer la barre";
 
 /* Connect */
-"connect" = "Connect";
+"connect" = "Se connecter";
 
 /* Change private key. */
-"connection.changePrivKey" = "Change private key";
+"connection.changePrivKey" = "Changer la Private key";
 
 /* Change public key. */
-"connection.changePubKey" = "Change public key";
+"connection.changePubKey" = "Changer la Public key";
 
 /* Import private key. */
-"connection.importPrivKey" = "Import private key";
+"connection.importPrivKey" = "Importer une Private key";
 
 /* Import public key. */
-"connection.importPubKey" = "Import public key";
+"connection.importPubKey" = "Importer une Public key";
 
 /* Passphrase for key placeholder */
-"connection.passphrase" = "Passphrase for keys";
+"connection.passphrase" = "Mot de passe pour les clées";
 
 /* Copying */
-"copying" = "Copying";
+"copying" = "Copie";
 
 /* Create */
-"create" = "Create";
+"create" = "Créer";
 
 /* Ask for the password. Authenticate as <User> user. */
-"delegate.authenticateAsUser" = "Authenticate as %@";
+"delegate.authenticateAsUser" = "Authentifier comme %@";
 
 /* Open the session */
-"delegate.connect" = "Connect";
+"delegate.connect" = "Se connecter";
 
 /* Open the session and save it */
-"delegate.connectAndRemember" = "Connect and remember";
+"delegate.connectAndRemember" = "Se connecter et retenir";
 
 /* Title for the alert shown for authenticating to the session opened by an URL. */
-"delegate.openSSHConnection" = "Open SSH Session";
+"delegate.openSSHConnection" = "Ouvrir la session SSH";
 
 /* Password placeholder. */
-"delegate.passwordPlaceholder" = "Password";
+"delegate.passwordPlaceholder" = "Mot de passe";
 
 /* Select connection to export file. */
-"delegate.selectConectionToExportFile" = "Select connection to export file";
+"delegate.selectConectionToExportFile" = "Selectionez une connection pour exporter un fichier";
 
 /* Select connection to upload file. */
-"delegate.selectConectionToUploadFile" = "Select connection to upload file";
+"delegate.selectConectionToUploadFile" = "Selectionez une connection pour envoyer le fichier";
 
 /* Select file to import. */
-"delegate.selectFileToImport" = "Select file to import";
+"delegate.selectFileToImport" = "Sélectionnez un fichier pour l'importer";
 
 /* Select directory to upload file. */
-"delegate.selectFolderWhereUploadFile" = "Select directory to upload file";
+"delegate.selectFolderWhereUploadFile" = "Selectionez un dossier où envoyer le fichier";
 
 /* Use plugin. */
 "delegate.usePlugin" = "Use Plugin";
 
 /* Message of the alert for importing a plugin. */
-"delegate.usePluginMessage" = "Do you want to use this terminal plugin? This plugin will have access to all the content of the terminal, I recommend to view the content of the plugin in the settings before using it. You can disable it from settings.";
+"delegate.usePluginMessage" = "Voulez vous utiliser cette extension pour le terminal? Le plugin aura accès à tout le contenu du terminal. Je vous recommande de voir le contenu de l'extension avant de l'utiliser.";
 
 /* Title of the alert for importing a plugin. */
-"delegate.usePluginTitle" = "Use Plugin?";
+"delegate.usePluginTitle" = "Activer l'extension?";
 
 /* Username placeholder. */
-"delegate.usernamePlaceholder" = "Username";
+"delegate.usernamePlaceholder" = "Utilisateur";
 
 /* Error shown when the SFTP session couldn't read a remote item. */
-"dir.checkForPermissions" = "Check for permissions.";
+"dir.checkForPermissions" = "Vérifiez les permissions.";
 
 /* Downloading... */
-"dir.downloading" = "Downloading...";
+"dir.downloading" = "Téléchargement...";
 
 /* Message of the alert shown when the client couldn't login to the server. */
-"dir.errorAuthenticating" = "Unable to authenticate, check for username and password.";
+"dir.errorAuthenticating" = "Erreur lors de l'authentification, vérifier l'utilisateur et le mot de passe.";
 
 /* Message of the alert shown when the client couldn't connect to the server. */
-"dir.errorConnecting" = "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.";
+"dir.errorConnecting" = "Errur lors de la connection, vérifiez votre connecion internet et l'IP ou le nom d'hôte du serveur.\nSi vous ne pouvez pas vous connecter avec l'IP, essayez avec le nom d'hôte.";
 
 /* Title of the alert shown after a download error. */
-"dir.errorDownloading" = "Error downloading file!";
+"dir.errorDownloading" = "Erreur lors du téléchargement du fichier!";
 
 /* Title of the alert shown when the session couldn't be opened. */
-"dir.errorOpeningSessionTitle" = "Error opening session!";
+"dir.errorOpeningSessionTitle" = "Erreur lors de l'ouverture de la session!";
 
 /* Title of the alert shown when the data of a local file couldn't be read. */
-"dir.errorReadingFile" = "Error reading file!";
+"dir.errorReadingFile" = "Erreur lors de la lecture du fichier!";
 
 /* Message of the alert shown when a file couldn't be uploaded. Error uploading <File> to <Destination>. */
-"dir.errorUploadingFileToDestination" = "Error uploading %@ to %@.";
+"dir.errorUploadingFileToDestination" = "Erreur lors du téléversement de %@ à %@.";
 
 /* Message of the alert shown when a file couldn't be uploaded. */
-"dir.errorUploadingMessage" = "An error occurred uploading file.";
+"dir.errorUploadingMessage" = "Une erreur a eu lieu lors du téléversement du fichier.";
 
 /* Title of the alert shown when a file couldn't be uploaded. */
-"dir.errorUploadingTitle" = "Error uploading file!";
+"dir.errorUploadingTitle" = "Erreur lors du téléversement du fichier!";
 
 /* Import file from the Pisth sandbox. */
-"dir.importFromPisth" = "Import from Pisth";
+"dir.importFromPisth" = "Importer depuis Pisth";
 
 /* Message of the alert asking for sending a file to the server. Do you want to send <File> to <Directory>? */
-"dir.sendFile" = "Do you want to send %@ to %@?";
+"dir.sendFile" = "Voulez vous envoyer %@ à %@?";
 
 /* Message of the alert shown when the session was closed. */
-"dir.sessionClosedMessage" = "An error with the connection occurred.";
+"dir.sessionClosedMessage" = "Une erreur avec la connection a eux lieu.";
 
 /* Title of the alert shown when the session was closed. */
-"dir.sessionClosedTitle" = "Connection was closed!";
+"dir.sessionClosedTitle" = "Connection fermée!";
 
 /* Message of the alert for asking the user for uploading files. Do you want to upload <Files count> files to <Destination>? */
-"dir.uploadFilesMessage" = "Do you want to upload %@ files to %@?";
+"dir.uploadFilesMessage" = "Voulez vous envoyer %@ fichiers à %@?";
 
 /* Title of the alert for asking the user for uploading files. Upload <Files count> files? */
-"dir.uploadFilesTitle" = "Upload %@ files?";
+"dir.uploadFilesTitle" = "Envoyer %@ fichiers?";
 
 /* Use default language */
-"editor.default" = "Default";
+"editor.default" = "Par défaut";
 
 /* Don't save. */
-"editor.dontSave" = "Don't save";
+"editor.dontSave" = "Ne pas sauvegarder";
 
 /* Title for the alert shown when there is an error reading the file. */
-"editor.errorOpeningFile" = "Error opening file!";
+"editor.errorOpeningFile" = "Erreur lors de l'ouverture du fichier!";
 
 /* No language selected. */
-"editor.none" = "None";
+"editor.none" = "Aucun";
 
 /* Save file. */
-"editor.save" = "Save";
+"editor.save" = "Sauvegarder";
 
 /* Ask for saving changes. Message of the alert. */
-"editor.saveChangesMessage" = "If you select Don't Save, all your changes will be erased!";
+"editor.saveChangesMessage" = "Si vous ne sauvegarder pas, tous les changements seront effacés.";
 
 /* Ask for saving changes. Title of the alert. */
-"editor.saveChangesTitle" = "Save changes?";
+"editor.saveChangesTitle" = "Sauvegarder les changements?";
 
 /* Ask for selecting a language for syntax highlighting. */
-"editor.selectLanguage" = "Select language";
+"editor.selectLanguage" = "Selectionner un language";
 
 /* Ask for selecting a theme for syntax highlighting. */
-"editor.selectTheme" = "Select theme";
+"editor.selectTheme" = "Selectionner un thème";
 
 /* Title for the alert shown when there is an error saving the file. */
-"errorSavingFile" = "Error saving file!";
+"errorSavingFile" = "Erreur lors de l'enregistrement du fichier!";
 
 /* Request a commit message to the user. */
-"git.commitMessage" = "Commit message:";
+"git.commitMessage" = "Message du commit:";
 
 /* Commits for <branch> */
-"git.commitsFor" = "Commits for %@";
+"git.commitsFor" = "Commits pour %@";
 
 /* Directory. */
-"info.directory" = "Directory";
+"info.directory" = "Répertoire";
 
 /* Describe file. */
-"info.fileWithExtension" = "%@ file";
+"info.fileWithExtension" = "Fichier %@";
 
 /* Symbolic link. */
-"info.symLink" = "Symbolic link";
+"info.symLink" = "Lien symbolique";
 
 /* Title of the View controller. */
-"info.title" = "Info";
+"info.title" = "Infos";
 
 /* Loading */
-"loading" = "Loading";
+"loading" = "Chargement";
 
 /* Message of the alert for creating a terminal plugin. */
-"local.createPluginMessage" = "Choose new plugin name";
+"local.createPluginMessage" = "Choisissez le nom de l'extension";
 
 /* Placeholder for the new plugin name. */
-"local.createPluginPlaceholder" = "New plugin name";
+"local.createPluginPlaceholder" = "Nouveau nom";
 
 /* Title of the alert for creating a terminal plugin. */
-"local.createPluginTitle" = "Create plugin";
+"local.createPluginTitle" = "Créer une extension";
 
 /* Create a plugin for the terminal. */
-"local.createTerminalPlugin" = "Create terminal plugin";
+"local.createTerminalPlugin" = "Créer un extension du terminal";
 
 /* Edit the code of an HTML file. */
-"local.editHTML" = "Edit HTML";
+"local.editHTML" = "Editer le fichier";
 
 /* Message of the alert shown when there was an error creating a plugin. */
-"local.errorCreatingPluginMessage" = "Error creating index.js.";
+"local.errorCreatingPluginMessage" = "Erreur lors de la création de index.js.";
 
 /* Title of the alert shown when there was an error creating a plugin. */
-"local.errorCreatingPluginTitle" = "Error creating plugin!";
+"local.errorCreatingPluginTitle" = "Erreur lors de la création de l'extension!";
 
 /* The message of an alert shown when an HTML file will be opened to ask how to open it. */
-"local.openFileMessage" = "View HTML page or edit?";
+"local.openFileMessage" = "Voir la page HTML ou l'editer?";
 
 /* The tilte of an alert shown when an HTML file will be opened to ask how to open it. */
-"local.openFileTitle" = "Open file";
+"local.openFileTitle" = "Ouvrir le fichier";
 
 /* View HTML page. */
-"local.viewHTML" = "View HTML";
+"local.viewHTML" = "Voir la page";
 
 /* Delete */
-"menu.delete" = "Delete";
+"menu.delete" = "Supprimer";
 
 /* Info */
-"menu.info" = "Info";
+"menu.info" = "Infos";
 
 /* Insert mode */
-"menu.insertMode" = "Insert Mode";
+"menu.insertMode" = "Mode insertion";
 
 /* Move */
-"menu.move" = "Move";
+"menu.move" = "Déplacer";
 
 /* Open in new panel */
-"menu.openInNewPanel" = "Open In New Panel";
+"menu.openInNewPanel" = "Ouvrir dans un nouveau panel";
 
 /* Rename */
-"menu.rename" = "Rename";
+"menu.rename" = "Renommer";
 
 /* Selection mode */
-"menu.selectionMode" = "Selection Mode";
+"menu.selectionMode" = "Mode séléction";
 
 /* Share */
-"menu.share" = "Share";
+"menu.share" = "Partager";
 
 /* No */
-"no" = "No";
+"no" = "Non";
 
 /* Ok */
 "ok" = "Ok";
 
 /* Authenticate To Turn Off Authentication. */
-"settings.authenticateToTurnOffAuthentication" = "Authenticate to turn off authentication";
+"settings.authenticateToTurnOffAuthentication" = "Authentifiez vous pour désactiver l'authentification.";
 
 /* Cannot turn off authentication. */
-"settings.cannotTurnOffAuthentication" = "Cannot turn off authentication";
+"settings.cannotTurnOffAuthentication" = "L'authentification n'a pas pu être désactivée.";
 
 /* Use Face ID. */
-"settings.useFaceID" = "Use Face ID";
+"settings.useFaceID" = "Face ID";
 
 /* Use Touch ID */
-"settings.useTouchID" = "Use Touch ID";
+"settings.useTouchID" = "Touch ID";
 
 /* Accept invitation from peer. */
-"terminal.accept" = "Accept";
+"terminal.accept" = "Accepter";
 
 /* Ask for accepting invitation from peer. */
-"terminal.acceptInvitation" = "Acept invitation from %@?";
+"terminal.acceptInvitation" = "Accepter l'invitation de %@?";
 
 /* Authenticate to send user's password. */
-"terminal.authenticateToSendPasswordFor" = "Authenticate to send %@ password";
+"terminal.authenticateToSendPasswordFor" = "Authentifiez vous pour envoyer le mot de passe de %@";
 
 /* Decline invitation from peer. */
-"terminal.decline" = "Decline";
+"terminal.decline" = "Refuser";
 
 /* Text printed after an authentication error. */
-"terminal.errorAuthenticating" = "Error authenticating! Check for username and password.";
+"terminal.errorAuthenticating" = "Erreur lors de l'authentification! Vérifiez l'utilisateur et le mot de passe.";
 
 /* Text printed after a connection error. */
-"terminal.errorConnecting" = "Error connecting! Check for connection's host and your internet connection.";
+"terminal.errorConnecting" = "Erreur lors de la connection! Vérifier le nom d'hôte ou l'IP du serveur.";
 
 /* Title of function keys popover. */
-"terminal.functionKey" = "Function keys";
+"terminal.functionKey" = "Touches fonction";
 
 /* Disable selection mode. */
-"terminal.insertMode" = "Insert Mode";
+"terminal.insertMode" = "Mode insertion";
 
 /* Paste text to the terminal. */
-"terminal.paste" = "Paste";
+"terminal.paste" = "Coller";
 
 /* Ask for accepting invitation from peer. */
-"terminal.peerWantsToSeeTheTerminal" = "%@ wants to see the terminal.";
+"terminal.peerWantsToSeeTheTerminal" = "%@ voudrais voir le terminal.";
 
 /* Title of an alert. */
-"terminal.selectAction" = "Select action";
+"terminal.selectAction" = "Selectionnez une action";
 
 /* Request a commit message to the user. */
-"terminal.selectionMode" = "Selection Mode";
+"terminal.selectionMode" = "Mode séléction";
 
 /* Key command description. */
-"terminal.sendCtrlKey" = "Send ^%@";
+"terminal.sendCtrlKey" = "Envoyer ^%@";
 
 /* Key command description. */
-"terminal.sendDownArrow" = "Send Down Arrow";
+"terminal.sendDownArrow" = "Envoyer une flèche haute";
 
 /* Key command description */
-"terminal.sendEscKey" = "Send Esc Key";
+"terminal.sendEscKey" = "Envoyer la touche Esc";
 
 /* Key command description. */
-"terminal.sendLeftArrow" = "Send Left Arrow";
+"terminal.sendLeftArrow" = "Envoyer une flèche gauche";
 
 /* Key command description. */
-"terminal.sendRightArrow" = "Send Right Arrow";
+"terminal.sendRightArrow" = "Envoyer une flèche droite";
 
 /* Key command description. */
-"terminal.sendUpArrow" = "Send Up Arrow";
+"terminal.sendUpArrow" = "Envoyer une flèche haute";
 
 /* Uploading */
-"uploading" = "Uploading";
+"uploading" = "Téléversement";
 
 /* Yes */
-"yes" = "Yes";
+"yes" = "Oui";
 

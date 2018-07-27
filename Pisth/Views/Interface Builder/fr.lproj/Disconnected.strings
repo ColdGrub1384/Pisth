@@ -1,9 +1,9 @@
 
 /* Class = "UIButton"; normalTitle = "Resume"; ObjectID = "7XM-3a-PC2"; */
-"7XM-3a-PC2.normalTitle" = "Resume";
+"7XM-3a-PC2.normalTitle" = "Continuer";
 
 /* Class = "UILabel"; text = "Session closed!"; ObjectID = "NoI-Bx-2ec"; */
-"NoI-Bx-2ec.text" = "Session closed!";
+"NoI-Bx-2ec.text" = "Session fermée!";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "whu-g3-3aN"; */
-"whu-g3-3aN.normalTitle" = "Close";
+"whu-g3-3aN.normalTitle" = "Fermer";

@@ -3,10 +3,10 @@
 "8jZ-2h-SAn.normalTitle" = "Source code (GitHub)";
 
 /* Class = "UILabel"; text = "Contribute to the project"; ObjectID = "mUf-xz-6e1"; */
-"mUf-xz-6e1.text" = "Contribute to the project";
+"mUf-xz-6e1.text" = "Contribuer au projet";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "sfR-S5-kBj"; */
-"sfR-S5-kBj.normalTitle" = "Cancel";
+"sfR-S5-kBj.normalTitle" = "Annuler";
 
 /* Class = "UITextView"; text = "https://github.com/ColdGrub1384/Pisth"; ObjectID = "vuE-CD-lzQ"; */
 "vuE-CD-lzQ.text" = "https://github.com/ColdGrub1384/Pisth";

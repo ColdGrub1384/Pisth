@@ -1,9 +1,9 @@
 
 /* Class = "UILabel"; text = "(current)"; ObjectID = "3BK-zN-Mi0"; */
-"3BK-zN-Mi0.text" = "(current)";
+"3BK-zN-Mi0.text" = "(actuel)";
 
 /* Class = "UILabel"; text = "(current)"; ObjectID = "3Jo-HN-nlK"; */
-"3Jo-HN-nlK.text" = "(current)";
+"3Jo-HN-nlK.text" = "(actuel)";
 
 /* Class = "UIBarButtonItem"; title = "Pull"; ObjectID = "5iF-LD-JFE"; */
 "5iF-LD-JFE.title" = "Pull";
@@ -21,19 +21,19 @@
 "U4j-YH-vlE.text" = "origin/master";
 
 /* Class = "UITableViewController"; title = "Remote Branches"; ObjectID = "WYX-4p-FkS"; */
-"WYX-4p-FkS.title" = "Remote Branches";
+"WYX-4p-FkS.title" = "Branches distantes";
 
 /* Class = "UINavigationItem"; title = "Branches"; ObjectID = "hHI-qq-Bta"; */
 "hHI-qq-Bta.title" = "Branches";
 
 /* Class = "UILabel"; text = "Remotes"; ObjectID = "jmc-9r-pnG"; */
-"jmc-9r-pnG.text" = "Remotes";
+"jmc-9r-pnG.text" = "Distantes";
 
 /* Class = "UINavigationItem"; title = "Source control"; ObjectID = "psI-be-9z7"; */
 "psI-be-9z7.title" = "Source control";
 
 /* Class = "UINavigationItem"; title = "Remote Branches"; ObjectID = "qZd-DB-KdZ"; */
-"qZd-DB-KdZ.title" = "Remote Branches";
+"qZd-DB-KdZ.title" = "Branches distantes";
 
 /* Class = "UIBarButtonItem"; title = "Push"; ObjectID = "uMp-KR-zoC"; */
 "uMp-KR-zoC.title" = "Push";
