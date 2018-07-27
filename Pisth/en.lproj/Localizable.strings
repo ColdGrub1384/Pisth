@@ -47,7 +47,7 @@
 "browsers.copyHere" = "Copy here";
 
 /* Create a folder. */
-"browsers.createFolder" = "browsers.createFolder";
+"browsers.createFolder" = "Create folder";
 
 /* Message of the alert shown for creating a file. */
 "browsers.createMessage" = "Choose the new file name";
