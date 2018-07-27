@@ -309,9 +309,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view data source
     
-    /// - Returns: `11`.
+    /// - Returns: `12`.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 11
+        return 12
     }
     
     /// - Returns: the cell corresponding to the index path.
