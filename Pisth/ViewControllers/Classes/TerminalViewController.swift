@@ -468,7 +468,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - gesture: The `UILongPressGestureRecognizer` that triggered the action.
     @objc func showMenu(_ gesture: UILongPressGestureRecognizer) {
-        UIMenuController.shared.setTargetRect(CGRect(origin: gesture.location(in: (webView as! TerminalWebView).interactionView), size: CGSize.zero), in: webView)
+        UIMenuController.shared.setTargetRect(CGRect(origin: gesture.location(in: webView), size: CGSize.zero), in: webView)
         UIMenuController.shared.setMenuVisible(true, animated: true)
     }
     
@@ -578,8 +578,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
         webView.ignoresInvertColors = true
-        (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
-        (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard)))
+        webView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
+        webView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard)))
         
         view.addInteraction(UIDropInteraction(delegate: self))
         
@@ -756,7 +756,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             view.addSubview(arrowsVC.view)
             arrowsVC.view.frame = webView.frame
             
-            for gesture in (webView as? TerminalWebView)?.interactionView.gestureRecognizers ?? [] {
+            for gesture in webView.gestureRecognizers ?? [] {
                 arrowsVC.view.addGestureRecognizer(gesture)
             }
             
@@ -773,7 +773,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 if gesture.name == "arrow" {
                     gesture.isEnabled = false
                 } else {
-                    (webView as? TerminalWebView)?.interactionView.addGestureRecognizer(gesture)
+                    webView.addGestureRecognizer(gesture)
                 }
             }
             
