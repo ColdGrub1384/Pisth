@@ -113,8 +113,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     private var arrowsLongPressDelay = 2
     
-    private var isViewSet = false
-    
     /// Navigation controller to reset at `viewDidDisappear(_:)`.
     var navigationController_: UINavigationController?
     
@@ -453,12 +451,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             arrowsVC.view.frame = webView.frame
         }
         
-        if !isViewSet {
-            webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
-        } else {
-            isViewSet = true
-            reload()
-        }
+        reload()
     }
     
     /// Close this View controller.
@@ -578,6 +571,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
+        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
         view.addSubview(webView)
         webView.backgroundColor = .clear
         webView.navigationDelegate = self
@@ -635,7 +629,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 try? ConnectionManager.shared.session?.channel.startShell()
             }
             
-            if !isPresentedAsPopover {
+            if isPresentedInFullscreen {
                 showNavBar()
             }
         }
@@ -646,6 +640,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationItem.largeTitleDisplayMode = .never
         
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
+        
+         _ = becomeFirstResponder()
     }
     
     /// Reset appearance and stop advertising peer.
