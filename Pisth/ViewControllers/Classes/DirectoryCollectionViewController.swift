@@ -531,9 +531,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         (view.viewWithTag(1) as? UIButton)?.addTarget(self, action: #selector(resume), for: .touchUpInside)
         (view.viewWithTag(2) as? UIButton)?.addTarget(navigationController, action: #selector(navigationController?.popToRootViewController(animated:)), for: .touchUpInside)
         
-        view.frame.size = CGSize(width: 320, height: 60)
+        view.frame.size = CGSize(width: 320, height: 70)
         
         headerView = view
+        
+        loadLayout()
         
         collectionView?.setContentOffset(CGPoint(x: 0, y: 0-view.frame.height), animated: true)
     }
