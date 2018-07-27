@@ -51,12 +51,12 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
         super.viewDidLoad()
         
         if publicKey != nil {
-            importPublicKeyBtn.setTitle("Change Public key", for: .normal)
+            importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.changePublicKey, for: .normal)
         }
         
         if privateKey != nil {
-            importPrivateKeyBtn.setTitle("Change Private key", for: .normal)
-            password?.placeholder = "Passphrase for keys"
+            importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.changePrivateKey, for: .normal)
+            password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
         }
     }
     
@@ -73,18 +73,18 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             importPrivateKeyBtn.tintColor = view.tintColor
         }
         
-        password?.placeholder = "Passphrase for keys"
+        password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
     }
     
     /// Reset values.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         if controller === publicKeyPicker {
             publicKey = nil
-            importPublicKeyBtn.setTitle("Import Public key", for: .normal)
+            importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPublicKey, for: .normal)
             importPrivateKeyBtn.tintColor = view.tintColor
         } else if controller === privateKeyPicker {
             privateKey = nil
-            importPrivateKeyBtn.setTitle("Import Private key", for: .normal)
+            importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPrivateKey, for: .normal)
         }
     }
 }

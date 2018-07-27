@@ -1,0 +1,18 @@
+
+/* Class = "UITextView"; text = "Unlock 9 new themes for the terminal and remove ads."; ObjectID = "1Fv-Ku-gig"; */
+"1Fv-Ku-gig.text" = "Unlock 9 new themes for the terminal and remove ads.";
+
+/* Class = "UIButton"; normalTitle = "GET"; ObjectID = "MK9-HI-OUw"; */
+"MK9-HI-OUw.normalTitle" = "GET";
+
+/* Class = "UILabel"; text = "Preview"; ObjectID = "SS8-0e-aV5"; */
+"SS8-0e-aV5.text" = "Preview";
+
+/* Class = "UILabel"; text = "Terminal themes"; ObjectID = "U2U-8P-x9k"; */
+"U2U-8P-x9k.text" = "Terminal themes";
+
+/* Class = "UIButton"; normalTitle = "Restore"; ObjectID = "VDn-9Y-TQk"; */
+"VDn-9Y-TQk.normalTitle" = "Restore";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "arU-Z2-gSA"; */
+"arU-Z2-gSA.normalTitle" = "Cancel";

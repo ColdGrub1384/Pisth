@@ -789,7 +789,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                         vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // View HTML
+                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // Edit HTML
                         vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                     }))
                     

@@ -1,0 +1,159 @@
+
+/* Class = "UILabel"; text = "Blink cursor"; ObjectID = "0T6-yU-XWe"; */
+"0T6-yU-XWe.text" = "Blink cursor";
+
+/* Class = "UILabel"; text = "Source code"; ObjectID = "0oG-Pq-jub"; */
+"0oG-Pq-jub.text" = "Source code";
+
+/* Class = "UILabel"; text = "Silver Aerogel"; ObjectID = "1oc-a8-DN8"; */
+"1oc-a8-DN8.text" = "Silver Aerogel";
+
+/* Class = "UILabel"; text = "Pisth Viewer"; ObjectID = "2Ar-EV-NTi"; */
+"2Ar-EV-NTi.text" = "Pisth Viewer";
+
+/* Class = "UILabel"; text = "Basic"; ObjectID = "2qP-kb-imN"; */
+"2qP-kb-imN.text" = "Basic";
+
+/* Class = "UILabel"; text = "Ocean"; ObjectID = "3Pf-V6-uMz"; */
+"3Pf-V6-uMz.text" = "Ocean";
+
+/* Class = "UITableViewSection"; headerTitle = "Terminal"; ObjectID = "4vF-6w-bcc"; */
+"4vF-6w-bcc.headerTitle" = "Terminal";
+
+/* Class = "UILabel"; text = "Man Page"; ObjectID = "6TI-kj-HXW"; */
+"6TI-kj-HXW.text" = "Man Page";
+
+/* Class = "UILabel"; text = "Use biometric authentication"; ObjectID = "8CF-NU-bJ6"; */
+"8CF-NU-bJ6.text" = "Use biometric authentication";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "8WI-aT-pZH"; */
+"8WI-aT-pZH.normalTitle" = "Aa";
+
+/* Class = "UITableViewSection"; headerTitle = "File browsing"; ObjectID = "8XB-bA-Ckz"; */
+"8XB-bA-Ckz.headerTitle" = "File browsing";
+
+/* Class = "UIButton"; normalTitle = "Restore"; ObjectID = "9aV-zQ-tZJ"; */
+"9aV-zQ-tZJ.normalTitle" = "Restore";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "9j9-jX-XG8"; */
+"9j9-jX-XG8.text" = "Current";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "Ac0-KX-Lkf"; */
+"Ac0-KX-Lkf.text" = "Current";
+
+/* Class = "UILabel"; text = "Pisth"; ObjectID = "BP6-qW-gAU"; */
+"BP6-qW-gAU.text" = "Pisth";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "BkJ-Ht-xYc"; */
+"BkJ-Ht-xYc.normalTitle" = "Aa";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "FFB-vu-oYR"; */
+"FFB-vu-oYR.text" = "Current";
+
+/* Class = "UILabel"; text = "Text size"; ObjectID = "LUg-za-cZE"; */
+"LUg-za-cZE.text" = "Text size";
+
+/* Class = "UILabel"; text = "Pro"; ObjectID = "Lls-xP-5xT"; */
+"Lls-xP-5xT.text" = "Pro";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "MrL-EH-fgs"; */
+"MrL-EH-fgs.normalTitle" = "Aa";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "Nju-Tv-QYS"; */
+"Nju-Tv-QYS.text" = "Current";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "O15-L5-bTT"; */
+"O15-L5-bTT.title" = "Settings";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "OJJ-tQ-VdP"; */
+"OJJ-tQ-VdP.normalTitle" = "Buy";
+
+/* Class = "UILabel"; text = "Show hidden files"; ObjectID = "OZO-jw-V1c"; */
+"OZO-jw-V1c.text" = "Show hidden files";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "PDa-4W-yBG"; */
+"PDa-4W-yBG.normalTitle" = "Aa";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "Pg7-DU-Q5J"; */
+"Pg7-DU-Q5J.normalTitle" = "Aa";
+
+/* Class = "UILabel"; text = "Beta"; ObjectID = "SG7-bS-PUL"; */
+"SG7-bS-PUL.text" = "Beta";
+
+/* Class = "UILabel"; text = "Plugins"; ObjectID = "Um0-8K-vZK"; */
+"Um0-8K-vZK.text" = "Plugins";
+
+/* Class = "UILabel"; text = "Themes"; ObjectID = "VaE-7R-e5x"; */
+"VaE-7R-e5x.text" = "Themes";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "WCF-Gi-L7F"; */
+"WCF-Gi-L7F.text" = "Current";
+
+/* Class = "UITableViewSection"; headerTitle = "Contributing"; ObjectID = "YES-C1-h9g"; */
+"YES-C1-h9g.headerTitle" = "Contributing";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "Z7h-br-ekg"; */
+"Z7h-br-ekg.text" = "Current";
+
+/* Class = "UILabel"; text = "Novel"; ObjectID = "f92-qp-CBW"; */
+"f92-qp-CBW.text" = "Novel";
+
+/* Class = "UILabel"; text = "Red Sands"; ObjectID = "gS4-jK-lsg"; */
+"gS4-jK-lsg.text" = "Red Sands";
+
+/* Class = "UILabel"; text = "Ubuntu"; ObjectID = "gv5-cb-Poz"; */
+"gv5-cb-Poz.text" = "Ubuntu";
+
+/* Class = "UITextView"; text = "Pisth Viewer is a macOS app that allows you to view the content of a terminal opened with Pisth in iOS from your Mac.  To download it, open this link in your Mac: https://pisth.github.io/PisthViewer/"; ObjectID = "hIH-Zd-NmV"; */
+"hIH-Zd-NmV.text" = "Pisth Viewer is a macOS app that allows you to view the content of a terminal opened with Pisth in iOS from your Mac.  To download it, open this link in your Mac: https://pisth.github.io/PisthViewer/";
+
+/* Class = "UITableViewSection"; headerTitle = "Terminal theme"; ObjectID = "hqb-uF-Uyc"; */
+"hqb-uF-Uyc.headerTitle" = "Terminal theme";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "iHM-6k-xSo"; */
+"iHM-6k-xSo.normalTitle" = "Aa";
+
+/* Class = "UILabel"; text = "Pisth Dark"; ObjectID = "kh4-eE-ElU"; */
+"kh4-eE-ElU.text" = "Pisth Dark";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "mOb-pz-2Hc"; */
+"mOb-pz-2Hc.text" = "Current";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "me8-vp-r2d"; */
+"me8-vp-r2d.text" = "Current";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "on8-JP-1yY"; */
+"on8-JP-1yY.headerTitle" = "Other";
+
+/* Class = "UILabel"; text = "Pisth Viewer"; ObjectID = "p2Y-ao-WgN"; */
+"p2Y-ao-WgN.text" = "Pisth Viewer";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "pLi-22-4LR"; */
+"pLi-22-4LR.text" = "Current";
+
+/* Class = "UILabel"; text = "Grass"; ObjectID = "rXr-SX-aDg"; */
+"rXr-SX-aDg.text" = "Grass";
+
+/* Class = "UILabel"; text = "Homebrew"; ObjectID = "sYj-mt-MS3"; */
+"sYj-mt-MS3.text" = "Homebrew";
+
+/* Class = "UITableViewSection"; headerTitle = "Login"; ObjectID = "u2N-h6-2wh"; */
+"u2N-h6-2wh.headerTitle" = "Login";
+
+/* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "ube-lm-1LG"; */
+"ube-lm-1LG.normalTitle" = "Aa";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "vCR-uL-DIf"; */
+"vCR-uL-DIf.text" = "Current";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "xlh-QT-XHv"; */
+"xlh-QT-XHv.text" = "Current";
+
+/* Class = "UILabel"; text = "Licenses"; ObjectID = "y7W-Pi-yRF"; */
+"y7W-Pi-yRF.text" = "Licenses";
+
+/* Class = "UILabel"; text = "Current"; ObjectID = "z44-nL-xwq"; */
+"z44-nL-xwq.text" = "Current";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "zJU-Xt-wUr"; */
+"zJU-Xt-wUr.title" = "Settings";

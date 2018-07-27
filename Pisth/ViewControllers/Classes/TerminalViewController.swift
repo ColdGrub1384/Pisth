@@ -771,7 +771,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             ArrowsViewController.current?.helpLabel.isHidden = false
             ArrowsViewController.current?.helpLabel.alpha = 1
-            ArrowsViewController.current?.helpLabel.text = "Scroll to\ngo down /\ngo up."
+            ArrowsViewController.current?.helpLabel.text = Localizable.ArrowsViewControllers.helpTextScroll
             
             for gesture in ArrowsViewController.current!.view.gestureRecognizers! {
                 if gesture.name == "arrow" {

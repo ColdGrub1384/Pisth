@@ -119,7 +119,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         footerView = bannerView
         
-        let activityVC = ActivityViewController(message: "Loading...")
+        let activityVC = ActivityViewController(message: Localizable.loading)
         present(activityVC, animated: true) {
             let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: self.directory)
 
@@ -331,17 +331,17 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         let header = UIView.browserHeader
         headerView = header
         header.createNewFolder = { _ in // Create folder
-            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New folder name"
+                textField.placeholder = Localizable.Browsers.folderName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
                 
                 if !result {
-                    let errorAlert = UIAlertController(title: "Error creating directory!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                     UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
                 
@@ -506,8 +506,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             if self.files == nil {
                 
                 self.navigationController?.popViewController(animated: true, completion: {
-                    let alert = UIAlertController(title: "Error opening directory!", message: "Check for permissions.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    let alert = UIAlertController(title: Localizable.Browsers.errorOpeningDirectory, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                 })
             }
@@ -550,16 +550,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         var alert: UIAlertController!
         switch result {
         case .notConnected:
-            alert = UIAlertController(title: "Error opening session!", message: "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.", preferredStyle: .alert)
+            alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorOpeningSessionTitle, message: Localizable.DirectoryCollectionViewController.errorConnecting, preferredStyle: .alert)
         case .connected:
-            alert = UIAlertController(title: "Error opening session!", message: "Unable to authenticate, check for username and password.", preferredStyle: .alert)
+            alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorOpeningSessionTitle, message: Localizable.DirectoryCollectionViewController.errorAuthenticating, preferredStyle: .alert)
         default:
-            alert = UIAlertController(title: "Connection was closed!", message: "An error with the connection occurred.", preferredStyle: .alert)
+            alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.sessionClosedTitle, message: Localizable.DirectoryCollectionViewController.sessionClosedMessage, preferredStyle: .alert)
         }
                 
         if alert != nil {
             
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+            alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: { (_) in
                 AppDelegate.shared.splitViewController.navigationController_.popToRootViewController(animated: true)
                 AppDelegate.shared.splitViewController.detailNavigationController.popToRootViewController(animated: true)
             }))
@@ -613,7 +613,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.showError()
         }) {
             
-            let activityVC = ActivityViewController(message: "Loading")
+            let activityVC = ActivityViewController(message: Localizable.loading)
             self.present(activityVC, animated: true, completion: {
                 let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: directory)
                 if let delegate = self.delegate {
@@ -747,7 +747,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             directory = path
         }
         
-        let activityVC = ActivityViewController(message: "Uploading")
+        let activityVC = ActivityViewController(message: Localizable.uploading)
         
         /// Upload file with given parameters of parent function.
         ///
@@ -761,7 +761,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     if let handler = errorHandler {
                         handler()
                     } else {
-                        let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
+                        let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
                             if let handler = errorHandler {
                                 handler()
@@ -812,8 +812,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         
                         /// Show error and call `close(alert:)` after clicking "Ok".
                         func showErrorAndCallClose() {
-                            let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                            let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (_) in
                                 close(alert: alert)
                             }))
                             self.present(alert, animated: true, completion: nil)
@@ -851,8 +851,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             } catch let error {
                 /// Show error reading file.
                 func showErrorReadingFile() {
-                    let errorAlert = UIAlertController(title: "Error reading file data!", message: error.localizedDescription, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+                    let errorAlert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorReadingFile, message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (action) in
                         
                         if let handler = uploadHandler {
                             handler()
@@ -900,9 +900,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         // Upload file
         
         // Ask user to send file
-        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: "Do you want to send \(file.lastPathComponent) to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
+        let confirmAlert = UIAlertController(title: file.lastPathComponent, message: Localizable.DirectoryCollectionViewController.send(file.lastPathComponent, to: directory.nsString.lastPathComponent), preferredStyle: .alert)
         
-        confirmAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+        confirmAlert.addAction(UIAlertAction(title: Localizable.no, style: .cancel, handler: { (action) in
             
             if let handler = uploadHandler {
                 handler()
@@ -910,7 +910,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
         }))
         
-        confirmAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        confirmAlert.addAction(UIAlertAction(title: Localizable.yes, style: .default, handler: { (action) in
             
             /// - Parameters:
             ///     - item: Local file or directory URL.
@@ -937,8 +937,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             /// Show upload error.
             func showError() {
-                let alert = UIAlertController(title: "Error uploading file!", message: "An error occurred uploading file.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (_) in
                     if let handler = uploadHandler {
                         handler()
                     }
@@ -948,7 +948,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             if isItemDirectory(file) { // Upload directory
                 
-                let activityVC = ActivityViewController(message: "Uploading")
+                let activityVC = ActivityViewController(message: Localizable.uploading)
                 
                 /// Upload files in given directory.
                 ///
@@ -1034,7 +1034,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.import, style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
             picker.allowsMultipleSelection = true
             picker.delegate = self
@@ -1042,29 +1042,29 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.present(picker, animated: true, completion: nil)
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Import from Pisth", style: .default, handler: { (_) in // Upload file from Pisth
+        chooseAlert.addAction(UIAlertAction(title: Localizable.DirectoryCollectionViewController.importFromPisth, style: .default, handler: { (_) in // Upload file from Pisth
             let localDirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
             localDirVC.delegate = self
             
             self.navigationController?.pushViewController(localDirVC, animated: true)
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Create blank file", style: .default, handler: { (_) in // Create file
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.createTitle, style: .default, handler: { (_) in // Create file
             
-            let chooseName = UIAlertController(title: "Create blank file", message: "Choose new file name", preferredStyle: .alert)
+            let chooseName = UIAlertController(title: Localizable.Browsers.createTitle, message: Localizable.Browsers.createMessage, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New file name"
+                textField.placeholder = Localizable.FileCollectionViewCell.newFileName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 
                 let newPath = self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)
                 
                 guard let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: Bundle.main.path(forResource: "empty", ofType: nil), toFileAtPath: newPath) else { return }
                 
                 if !result {
-                    let errorAlert = UIAlertController(title: "Error creating file!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingFile, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                     UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
                 
@@ -1075,18 +1075,18 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Create folder", style: .default, handler: { (_) in // Create folder
-            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.createFolder, style: .default, handler: { (_) in // Create folder
+            let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New folder name"
+                textField.placeholder = Localizable.Browsers.folderName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
                 
                 if !result {
-                    let errorAlert = UIAlertController(title: "Error creating directory!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                     UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                 }
                 
@@ -1096,7 +1096,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.present(chooseName, animated: true, completion: nil)
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        chooseAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
         
         chooseAlert.popoverPresentationController?.barButtonItem = sender
         
@@ -1112,11 +1112,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 self.showError()
             })
             
-            let progress = UIAlertController(title: "Copying...", message: "\n\n", preferredStyle: .alert)
+            let progress = UIAlertController(title: Localizable.copying, message: "\n\n", preferredStyle: .alert)
             
             var continue_ = true
             
-            progress.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            progress.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: { _ in
                 continue_ = false
             }))
             
@@ -1146,8 +1146,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     
                     progress.dismiss(animated: true, completion: {
                         if !result && continue_ {
-                            let errorAlert = UIAlertController(title: "Error copying file!", message: nil, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: nil, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                             UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
                         }
                     })
@@ -1184,8 +1184,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             }
             
             if !result {
-                let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                 UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
             }
                 
@@ -1269,15 +1269,15 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             Pasteboard.local.filePath = directory.nsString.appendingPathComponent(files![indexPath.row].filename)
             
             let dirVC = DirectoryCollectionViewController(connection: connection, directory: directory)
-            dirVC.navigationItem.prompt = "Select a directory where copy file"
+            dirVC.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereCopyFile
             dirVC.delegate = dirVC
             DirectoryCollectionViewController.action = .copyFile
             
             
             let navVC = UINavigationController(rootViewController: dirVC)
             present(navVC, animated: true, completion: {
-                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
-                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.copyHere, style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
         }
     }
@@ -1329,7 +1329,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }) {
             if files[indexPath.row].isDirectory { // Open folder
                 
-                let activityVC = ActivityViewController(message: "Loading")
+                let activityVC = ActivityViewController(message: Localizable.loading)
                 self.present(activityVC, animated: true, completion: {
                     let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: path)
                     if let delegate = self.delegate {
@@ -1350,8 +1350,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 })
             } else { // Download file
                 
-                let activityVC = UIAlertController(title: "Downloading...", message: "\n\n", preferredStyle: .alert)
-                activityVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                let activityVC = UIAlertController(title: Localizable.DirectoryCollectionViewController.downloading, message: "\n\n", preferredStyle: .alert)
+                activityVC.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: { (_) in
                     continueDownload = false
                     collectionView.deselectItem(at: indexPath, animated: true)
                 }))
@@ -1390,8 +1390,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                     })
                                 } catch let error {
                                     activityVC.dismiss(animated: true, completion: {
-                                        let errorAlert = UIAlertController(title: "Error saving file!", message: error.localizedDescription, preferredStyle: .alert)
-                                        errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                        let errorAlert = UIAlertController(title: Localizable.errorSavingFile, message: error.localizedDescription, preferredStyle: .alert)
+                                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                                         self.present(errorAlert, animated: true, completion: nil)
                                     })
                                 }
@@ -1401,8 +1401,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         } else {
                             DispatchQueue.main.async {
                                 activityVC.dismiss(animated: true, completion: {
-                                    let alert = UIAlertController(title: "Error downloading file!", message: "Check for permissions.", preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                    let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorDownloading, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                                     collectionView.deselectItem(at: indexPath, animated: true)
                                 })
@@ -1437,20 +1437,20 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         directoryCollectionViewController.delegate = directoryCollectionViewController
         
         if DirectoryCollectionViewController.action == .copyFile {
-            directoryCollectionViewController.navigationItem.prompt = "Select a directory where copy file"
+            directoryCollectionViewController.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereCopyFile
         }
         
         if DirectoryCollectionViewController.action == .moveFile {
-            directoryCollectionViewController.navigationItem.prompt = "Select a directory where move file"
+            directoryCollectionViewController.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereMoveFile
         }
         
         navigationController?.pushViewController(directoryCollectionViewController, animated: true, completion: {
             if DirectoryCollectionViewController.action == .copyFile {
-                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.copyFile))], animated: true)
+                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.copyHere, style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.copyFile))], animated: true)
             }
             
             if DirectoryCollectionViewController.action == .moveFile {
-                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.moveFile))], animated: true)
+                directoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.moveHere, style: .plain, target: directoryCollectionViewController, action: #selector(directoryCollectionViewController.moveFile))], animated: true)
             }
         })
     }
@@ -1475,9 +1475,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             return
         }
         
-        let alert = UIAlertController(title: "Upload \(urls.count) files?", message: "Do you want to upload \(urls.count) files to \(directory.nsString.lastPathComponent)?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (_) in
+        let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.uploadTitle(for: urls.count), message: Localizable.DirectoryCollectionViewController.uploadMessage(for: urls.count, destination: directory.nsString.lastPathComponent), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Localizable.no, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: Localizable.yes, style: .default, handler: { (_) in
             var i = 0
             
             /// Upload next file.
@@ -1553,8 +1553,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         }
                     })
                 } else {
-                    let errorAlert = UIAlertController(title: "Error moving file!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     present(errorAlert, animated: true, completion: nil)
                 }
             } else if item.dragItem.itemProvider.hasItemConformingToTypeIdentifier(item.dragItem.itemProvider.registeredTypeIdentifiers[0]) {
@@ -1566,7 +1566,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     let destination = self.directory
                     
                     if let error = error {
-                        let errorAlert = UIAlertController(title: "Error uploading file!", message: error.localizedDescription, preferredStyle: .alert)
+                        let errorAlert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: error.localizedDescription, preferredStyle: .alert)
                         errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                         self.present(errorAlert, animated: true, completion: nil)
                     }
@@ -1583,15 +1583,15 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                         })
                                         try? FileManager.default.removeItem(at: newFile)
                                     }, errorHandler: {
-                                        let alert = UIAlertController(title: "Error uploading file!", message: "Error uploading \(file.lastPathComponent) to \(destination).", preferredStyle: .alert)
-                                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                        let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploading(file: file.lastPathComponent, to: destination), preferredStyle: .alert)
+                                        alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                                         self.present(alert, animated: true, completion: nil)
                                         try? FileManager.default.removeItem(at: newFile)
                                     }, showAlert: false)
                                 }
                             } catch {
-                                let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: error.localizedDescription, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                                 self.present(errorAlert, animated: true, completion: nil)
                             }
                         } else { // Upload file and rename it
@@ -1599,8 +1599,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                 self.sendFile(file: file, toDirectory: destination, uploadHandler: {
                                     self.reload()
                                 }, errorHandler: {
-                                    let alert = UIAlertController(title: "Error uploading file!", message: "Error uploading \(file.lastPathComponent) to \(destination).", preferredStyle: .alert)
-                                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                                    let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploading(file: file.lastPathComponent, to: destination), preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                                     self.present(alert, animated: true, completion: nil)
                                 }, showAlert: false)
                             }

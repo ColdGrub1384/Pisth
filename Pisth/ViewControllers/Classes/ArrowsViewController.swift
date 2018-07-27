@@ -86,7 +86,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         
         helpLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         helpLabel.numberOfLines = 3
-        helpLabel.text = "Swipe to\n send\narrow keys"
+        helpLabel.text = Localizable.ArrowsViewControllers.helpTextArrows
         helpLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.heavy)
         helpLabel.textAlignment = .center
         helpLabel.textColor = .black
@@ -130,7 +130,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         view.addGestureRecognizer(downSwipe)
         
         for gesture in view.gestureRecognizers ?? [] {
-            gesture.name = "arrowt"
+            gesture.name = "arrow"
         }
         
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {

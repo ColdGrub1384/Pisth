@@ -83,7 +83,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Bookmarks"
+        title = Localizable.BookmarksTableViewController.bookmarksTitle
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
@@ -148,9 +148,9 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
         
         if section == 0 {
-            return "Connections"
+            return Localizable.BookmarksTableViewController.connectionsTitle
         } else if section == 1 {
-            return "Nearby Devices"
+            return Localizable.BookmarksTableViewController.devicesTitle
         }
         
         return nil
@@ -342,16 +342,16 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             /// Ask for password if biometric auth failed.
             func askForPassword() {
-                let passwordAlert = UIAlertController(title: "Enter Password", message: "Enter Password for user '\(connection.username)'", preferredStyle: .alert)
+                let passwordAlert = UIAlertController(title: Localizable.BookmarksTableViewController.enterPasswordTitle, message: Localizable.BookmarksTableViewController.enterPasswordMessage(for: connection.username), preferredStyle: .alert)
                 passwordAlert.addTextField(configurationHandler: { (textField) in
-                    textField.placeholder = "Password"
+                    textField.placeholder = Localizable.AppDelegate.passwordPlaceholder
                     textField.isSecureTextEntry = true
                 })
-                passwordAlert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                passwordAlert.addAction(UIAlertAction(title: Localizable.AppDelegate.connect, style: .default, handler: { (_) in
                     connection.password = passwordAlert.textFields![0].text!
                     connect()
                 }))
-                passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                passwordAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: { (_) in
                     tableView.deselectRow(at: indexPath, animated: true)
                 }))
                 self.present(passwordAlert, animated: true, completion: nil)
@@ -360,7 +360,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             /// Open connection or ask for biometric authentication.
             func open() {
                 if UserDefaults.standard.bool(forKey: "biometricAuth") {
-                    BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to connect", fallbackTitle: "Enter Password", cancelTitle: nil, success: {
+                    BioMetricAuthenticator.authenticateWithBioMetrics(reason: Localizable.BookmarksTableViewController.authenticateToConnect, fallbackTitle: Localizable.BookmarksTableViewController.enterPassword, cancelTitle: nil, success: {
                         connect()
                     }, failure: { (error) in
                         if error != .canceledByUser && error != .canceledBySystem {

@@ -1,0 +1,420 @@
+/* Text displayed after enabling `ArrowsViewControllers`. */
+"arrows.helpTextArrows" = "Swipe to\nsend arrow\nkeys";
+
+/* Text displayed after disabling `ArrowsViewControllers`. */
+"arrows.helpTextScroll" = "Scroll to\ngo down /\ngo up.";
+
+/* Message of the alert shown when a session that is already active was clicked. */
+"bookmaks.sessionAlreadyActiveMessage" = "Would you like to resume the session, or restart it?";
+
+/* Title of the alert shown when a session that is already active was clicked. */
+"bookmaks.sessionAlreadyActiveTitle" = "Session already active";
+
+/* Authenticate with biometry to connect to the connection. */
+"bookmarks.authenticateToConnect" = "Authenticate to connect";
+
+/* Title of the alert shown while connecting to a session. */
+"bookmarks.connecting" = "Connecting";
+
+/* Connections title header. */
+"bookmarks.connections" = "Connections";
+
+/* Devices title header. */
+"bookmarks.devices" = "Nearby devices";
+
+/* Enter password if biometry auth failed. */
+"bookmarks.enterPassword" = "bookmarks.enterPassword";
+
+/* Message of the alert for asking the user for the password. Enter password for user <User>. */
+"bookmarks.enterPasswordMessage" = "Enter password for user %@.";
+
+/* Title of the alert for asking the user for the password. */
+"bookmarks.enterPasswordTitle" = "Enter password";
+
+/* Restart the session. */
+"bookmarks.restart" = "Restart";
+
+/* Resume the session. */
+"bookmarks.resume" = "Resume";
+
+/* Bookmarks title. */
+"bookmarks.title" = "Bookmarks";
+
+/* Ask the user for typing the new folder's name. */
+"browsers.chooseNewFolderName" = "Choose new folder name";
+
+/* Copy file in selected directory. */
+"browsers.copyHere" = "Copy here";
+
+/* Create a folder. */
+"browsers.createFolder" = "browsers.createFolder";
+
+/* Message of the alert shown for creating a file. */
+"browsers.createMessage" = "Choose the new file name";
+
+/* Title of the alert shown for creating a file. */
+"browsers.createTitle" = "Create blank file";
+
+/* Title of an alert shown when a file couldn't be copied. */
+"browsers.errorCopyingFile" = "Error copying file!";
+
+/* Title of the alert shown when there was an error creating a directory. */
+"browsers.errorCreatingDirectory" = "Error creating directory!";
+
+/* Title of the alert shown when there was an error creating a file. */
+"browsers.errorCreatingFile" = "Error creating file!";
+
+/* Title of the alert shown when a file couldn't be imported. */
+"browsers.errorImporting" = "Error importing file!";
+
+/* Title of an alert shown when a file couldn't be moved. */
+"browsers.errorMovingFile" = "Error moving file!";
+
+/* Title of the alert shown when a directory couldn't be opened. */
+"browsers.errorOpeningDirectory" = "Error opening directory!";
+
+/* Folder name placeholder. */
+"browsers.folderName" = "Folder name";
+
+/* Import file. */
+"browsers.import" = "Import";
+
+/* Move file in selected directory. */
+"browsers.moveHere" = "Move here";
+
+/* Message of the alert shown when a file couldn't be moved or copied because the pasteboard is empty. */
+"browsers.noFileInPasteboard" = "No file in the pasteboard";
+
+/* Ask where a file should be copied. */
+"browsers.selectDirectoryWhereCopyFile" = "Select directory where copy file";
+
+/* Ask where a file should be moved. */
+"browsers.selectDirectoryWhereMoveFile" = "Select directory where move file";
+
+/* Cancel */
+"cancel" = "Cancel";
+
+/* The title of the alert shown when a file couldn't be removed. */
+"cell.errorFile" = "Error removing file!";
+
+/* The title of the alert shown when a directory couldn't be removed. */
+"cell.errorRemovingDirectory" = "Error removing directory!";
+
+/* Title of the alert shown when a file couldn't be renamed. */
+"cell.errorRenaming" = "Error renaming file!";
+
+/* New file name placeholder. */
+"cell.newFileName" = "New file name";
+
+/* Paste */
+"cell.paste" = "Paste";
+
+/* Paste selection */
+"cell.pasteSelection" = "Paste selection";
+
+/* Title of the alert shown while removing file. */
+"cell.removing" = "Removing";
+
+/* Rename file. */
+"cell.rename" = "Rename";
+
+/* The mesage of the alert for rename a file. Write new name for <fileToRename.filename>. */
+"cell.renameFileMessage" = "Write the new name for %@.";
+
+/* The title of the alert for rename a file */
+"cell.renameFileTitle" = "Rename file";
+
+/* Toggle top bar */
+"cell.toggleTopBar" = "Toggle top bar";
+
+/* Connect */
+"connect" = "Connect";
+
+/* Change private key. */
+"connection.changePrivKey" = "Change private key";
+
+/* Change public key. */
+"connection.changePubKey" = "Change public key";
+
+/* Import private key. */
+"connection.importPrivKey" = "Import private key";
+
+/* Import public key. */
+"connection.importPubKey" = "Import public key";
+
+/* Passphrase for key placeholder */
+"connection.passphrase" = "Passphrase for keys";
+
+/* Copying */
+"copying" = "Copying";
+
+/* Create */
+"create" = "Create";
+
+/* Ask for the password. Authenticate as <User> user. */
+"delegate.authenticateAsUser" = "delegate.authenticateAsUser";
+
+/* Open the session */
+"delegate.connect" = "Connect";
+
+/* Open the session and save it */
+"delegate.connectAndRemember" = "Connect and remember";
+
+/* Title for the alert shown for authenticating to the session opened by an URL. */
+"delegate.openSSHConnection" = "Open SSH Session";
+
+/* Password placeholder. */
+"delegate.passwordPlaceholder" = "Password";
+
+/* Select connection to export file. */
+"delegate.selectConectionToExportFile" = "Select connection to export file";
+
+/* Select connection to upload file. */
+"delegate.selectConectionToUploadFile" = "Select connection to upload file";
+
+/* Select file to import. */
+"delegate.selectFileToImport" = "Select file to import";
+
+/* Select directory to upload file. */
+"delegate.selectFolderWhereUploadFile" = "Select directory to upload file";
+
+/* Use plugin. */
+"delegate.usePlugin" = "delegate.usePlugin";
+
+/* Message of the alert for importing a plugin. */
+"delegate.usePluginMessage" = "delegate.usePluginMessage";
+
+/* Title of the alert for importing a plugin. */
+"delegate.usePluginTitle" = "delegate.usePluginTitle";
+
+/* Username placeholder. */
+"delegate.usernamePlaceholder" = "delegate.usernamePlaceholder";
+
+/* Error shown when the SFTP session couldn't read a remote item. */
+"dir.checkForPermissions" = "Check for permissions.";
+
+/* Downloading... */
+"dir.downloading" = "Downloading...";
+
+/* Message of the alert shown when the client couldn't login to the server. */
+"dir.errorAuthenticating" = "Unable to authenticate, check for username and password.";
+
+/* Message of the alert shown when the client couldn't connect to the server. */
+"dir.errorConnecting" = "Unable to connect, check for your internet connection and the IP address or hostname.\nIf you can't connect with the IP address, try with the hostname.";
+
+/* Title of the alert shown after a download error. */
+"dir.errorDownloading" = "Error downloading file!";
+
+/* Title of the alert shown when the session couldn't be opened. */
+"dir.errorOpeningSessionTitle" = "Error opening session!";
+
+/* Title of the alert shown when the data of a local file couldn't be read. */
+"dir.errorReadingFile" = "Error reading file!";
+
+/* Message of the alert shown when a file couldn't be uploaded. Error uploading <File> to <Destination>. */
+"dir.errorUploadingFileToDestination" = "Error uploading %@ to %@.";
+
+/* Message of the alert shown when a file couldn't be uploaded. */
+"dir.errorUploadingMessage" = "An error occurred uploading file.";
+
+/* Title of the alert shown when a file couldn't be uploaded. */
+"dir.errorUploadingTitle" = "Error uploading file!";
+
+/* Import file from the Pisth sandbox. */
+"dir.importFromPisth" = "Import from Pisth";
+
+/* Message of the alert asking for sending a file to the server. Do you want to send <File> to <Directory>? */
+"dir.sendFile" = "Do you want to send %@ to %@?";
+
+/* Message of the alert shown when the session was closed. */
+"dir.sessionClosedMessage" = "An error with the connection occurred.";
+
+/* Title of the alert shown when the session was closed. */
+"dir.sessionClosedTitle" = "Connection was closed!";
+
+/* Message of the alert for asking the user for uploading files. Do you want to upload <Files count> files to <Destination>? */
+"dir.uploadFilesMessage" = "Do you want to upload %@ files to %@?";
+
+/* Title of the alert for asking the user for uploading files. Upload <Files count> files? */
+"dir.uploadFilesTitle" = "Upload %@ files?";
+
+/* Use default language */
+"editor.default" = "Default";
+
+/* Don't save. */
+"editor.dontSave" = "Don't save";
+
+/* Title for the alert shown when there is an error reading the file. */
+"editor.errorOpeningFile" = "Error opening file!";
+
+/* No language selected. */
+"editor.none" = "None";
+
+/* Save file. */
+"editor.save" = "Save";
+
+/* Ask for saving changes. Message of the alert. */
+"editor.saveChangesMessage" = "editor.saveChangesMessage";
+
+/* Ask for saving changes. Title of the alert. */
+"editor.saveChangesTitle" = "editor.saveChangesTitle";
+
+/* Ask for selecting a language for syntax highlighting. */
+"editor.selectLanguage" = "editor.selectLanguage";
+
+/* Ask for selecting a theme for syntax highlighting. */
+"editor.selectTheme" = "editor.selectTheme";
+
+/* Title for the alert shown when there is an error saving the file. */
+"errorSavingFile" = "Error saving file!";
+
+/* Request a commit message to the user. */
+"git.commitMessage" = "git.commitMessage";
+
+/* Commits for <branch> */
+"git.commitsFor" = "git.commitsFor";
+
+/* Directory. */
+"info.directory" = "info.directory";
+
+/* Describe file. */
+"info.fileWithExtension" = "info.fileWithExtension";
+
+/* Symbolic link. */
+"info.symLink" = "info.symLink";
+
+/* Title of the View controller. */
+"info.title" = "info.title";
+
+/* Loading */
+"loading" = "Loading";
+
+/* Message of the alert for creating a terminal plugin. */
+"local.createPluginMessage" = "local.createPluginMessage";
+
+/* Placeholder for the new plugin name. */
+"local.createPluginPlaceholder" = "local.createPluginPlaceholder";
+
+/* Title of the alert for creating a terminal plugin. */
+"local.createPluginTitle" = "local.createPluginTitle";
+
+/* Create a plugin for the terminal. */
+"local.createTerminalPlugin" = "local.createTerminalPlugin";
+
+/* Edit the code of an HTML file. */
+"local.editHTML" = "local.editHTML";
+
+/* Message of the alert shown when there was an error creating a plugin. */
+"local.errorCreatingPluginMessage" = "local.errorCreatingPluginMessage";
+
+/* Title of the alert shown when there was an error creating a plugin. */
+"local.errorCreatingPluginTitle" = "local.errorCreatingPluginTitle";
+
+/* The message of an alert shown when an HTML file will be opened to ask how to open it. */
+"local.openFileMessage" = "local.openFileMessage";
+
+/* The tilte of an alert shown when an HTML file will be opened to ask how to open it. */
+"local.openFileTitle" = "local.openFileTitle";
+
+/* View HTML page. */
+"local.viewHTML" = "local.viewHTML";
+
+/* Delete */
+"menu.delete" = "menu.delete";
+
+/* Info */
+"menu.info" = "menu.info";
+
+/* Insert mode */
+"menu.insertMode" = "menu.insertMode";
+
+/* Move */
+"menu.move" = "menu.move";
+
+/* Open in new panel */
+"menu.openInNewPanel" = "menu.openInNewPanel";
+
+/* Rename */
+"menu.rename" = "menu.rename";
+
+/* Selection mode */
+"menu.selectionMode" = "menu.selectionMode";
+
+/* Share */
+"menu.share" = "menu.share";
+
+/* No */
+"no" = "no";
+
+/* Ok */
+"ok" = "ok";
+
+/* Authenticate To Turn Off Authentication. */
+"settings.authenticateToTurnOffAuthentication" = "settings.authenticateToTurnOffAuthentication";
+
+/* Cannot turn off authentication. */
+"settings.cannotTurnOffAuthentication" = "settings.cannotTurnOffAuthentication";
+
+/* Use Face ID. */
+"settings.useFaceID" = "settings.useFaceID";
+
+/* Use Touch ID */
+"settings.useTouchID" = "settings.useTouchID";
+
+/* Accept invitation from peer. */
+"terminal.accept" = "terminal.accept";
+
+/* Ask for accepting invitation from peer. */
+"terminal.acceptInvitation" = "terminal.acceptInvitation";
+
+/* Decline invitation from peer. */
+"terminal.decline" = "terminal.decline";
+
+/* Text printed after an authentication error. */
+"terminal.errorAuthenticating" = "terminal.errorAuthenticating";
+
+/* Text printed after a connection error. */
+"terminal.errorConnecting" = "terminal.errorConnecting";
+
+/* Title of function keys popover. */
+"terminal.functionKey" = "terminal.functionKey";
+
+/* Disable selection mode. */
+"terminal.insertMode" = "terminal.insertMode";
+
+/* Paste text to the terminal. */
+"terminal.paste" = "terminal.paste";
+
+/* Ask for accepting invitation from peer. */
+"terminal.peerWantsToSeeTheTerminal" = "terminal.peerWantsToSeeTheTerminal";
+
+/* Title of an alert. */
+"terminal.selectAction" = "terminal.selectAction";
+
+/* Request a commit message to the user. */
+"terminal.selectionMode" = "terminal.selectionMode";
+
+/* Key command description. */
+"terminal.sendCtrlKey" = "terminal.sendCtrlKey";
+
+/* Key command description. */
+"terminal.sendDownArrow" = "terminal.sendDownArrow";
+
+/* Key command description */
+"terminal.sendEscKey" = "terminal.sendEscKey";
+
+/* Key command description. */
+"terminal.sendLeftArrow" = "terminal.sendLeftArrow";
+
+/* Key command description. */
+"terminal.sendRightArrow" = "terminal.sendRightArrow";
+
+/* Key command description. */
+"terminal.sendUpArrow" = "terminal.sendUpArrow";
+
+/* Uploading */
+"uploading" = "uploading";
+
+/* Yes */
+"yes" = "yes";
+

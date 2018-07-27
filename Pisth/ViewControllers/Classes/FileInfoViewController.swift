@@ -58,7 +58,7 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         
         view.isHidden = true
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(close))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
     }
     
     /// Fill info.
@@ -81,18 +81,18 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         byteCountFormatter.includesActualByteCount = true
         sizeLabel.text = byteCountFormatter.string(fromByteCount: file.fileSize.int64Value)
         if file.permissions.hasPrefix("l") {
-            fileTypeLabel.text = "Symbolic link"
+            fileTypeLabel.text = Localizable.FileInfoViewController.symLink
         } else if file.isDirectory {
-            fileTypeLabel.text = "Directory"
+            fileTypeLabel.text = Localizable.FileInfoViewController.directory
             sizeLabel.text = "--"
         } else if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(), let description = UTTypeCopyDescription(uti)?.takeRetainedValue() as String? {
             if description.isEmpty {
-                fileTypeLabel.text = pathExtension.uppercased()+" file"
+                fileTypeLabel.text = Localizable.FileInfoViewController.file(withPathExtension: pathExtension.uppercased())
             } else {
                 fileTypeLabel.text = description
             }
         } else {
-            fileTypeLabel.text = pathExtension.uppercased()+" file"
+            fileTypeLabel.text = Localizable.FileInfoViewController.file(withPathExtension: pathExtension.uppercased())
         }
         permissionsLabel.text = file.permissions
         modificationLabel.text = DateFormatter().string(from: file.modificationDate)

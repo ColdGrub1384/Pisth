@@ -119,7 +119,7 @@ class GitBranchesTableViewController: UITableViewController {
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func commit(_ sender: Any) {
-        launch(command: "read -ep \"Commit message: \" msg; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m \"$msg\"", withTitle: "Commit")
+        launch(command: "read -ep \"\(Localizable.Git.commitMessage) \" msg; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m \"$msg\"", withTitle: "Commit")
     }
     
     /// Git push.
@@ -184,7 +184,7 @@ class GitBranchesTableViewController: UITableViewController {
             return
         }
         
-        launch(command: "git -C '\(repoPath!)' log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
+        launch(command: "git -C '\(repoPath!)' log --graph \(branches[indexPath.row])", withTitle: Localizable.Git.commits(for: branches[indexPath.row]))
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dg2-Kt-6uK"; */
+"Dg2-Kt-6uK.normalTitle" = "Cancel";
+
+/* Class = "UITextView"; text = "Send a request to get access to beta versions of this app via TestFlight."; ObjectID = "KPV-8H-jqH"; */
+"KPV-8H-jqH.text" = "Send a request to get access to beta versions of this app via TestFlight.";
+
+/* Class = "UIButton"; normalTitle = "Send request (Email)"; ObjectID = "UHg-Rt-Rtb"; */
+"UHg-Rt-Rtb.normalTitle" = "Send request (Email)";
+
+/* Class = "UILabel"; text = "Beta testing"; ObjectID = "r1O-5Q-ClC"; */
+"r1O-5Q-ClC.text" = "Beta testing";
