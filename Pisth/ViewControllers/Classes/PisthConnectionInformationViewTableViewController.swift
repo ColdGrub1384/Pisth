@@ -71,9 +71,9 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             privateKey = (try? String(contentsOf: urls[0]))
             importPrivateKeyBtn.setTitle(urls[0].lastPathComponent, for: .normal)
             importPrivateKeyBtn.tintColor = view.tintColor
+            
+            password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
         }
-        
-        password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
     }
     
     /// Reset values.
@@ -83,6 +83,7 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPublicKey, for: .normal)
             importPrivateKeyBtn.tintColor = view.tintColor
         } else if controller === privateKeyPicker {
+            password?.placeholder = ""
             privateKey = nil
             importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPrivateKey, for: .normal)
         }
