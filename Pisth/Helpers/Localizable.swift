@@ -423,7 +423,7 @@ class Localizable: Static {
         static let errorRemovingDirectory = NSLocalizedString("cell.errorRemovingDirectory", comment: "The title of the alert shown when a directory couldn't be removed.")
         
         /// The title of the alert shown when a file couldn't be removed.
-        static let errorRemovingFilee = NSLocalizedString("cell.errorFile", comment: "The title of the alert shown when a file couldn't be removed.")
+        static let errorRemovingFile = NSLocalizedString("cell.errorFile", comment: "The title of the alert shown when a file couldn't be removed.")
         
         /// The title of the alert for rename a file.
         static let renameFileTitle = NSLocalizedString("cell.renameFileTitle", comment: "The title of the alert for rename a file")

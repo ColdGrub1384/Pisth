@@ -92,7 +92,7 @@ class FileCollectionViewCell: UICollectionViewCell {
                 directoryCollectionViewController.showError()
             }, successHandler: {
                 
-                let activityVC = ActivityViewController(message: "Removing...")
+                let activityVC = ActivityViewController(message: Localizable.FileCollectionViewCell.removing)
                 
                 directoryCollectionViewController.present(activityVC, animated: true, completion: {
                     // Remove directory
@@ -146,8 +146,8 @@ class FileCollectionViewCell: UICollectionViewCell {
                         
                         if !result {
                             activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error removing directory!", message: "Check for permissions", preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                                 directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                             })
                         } else {
@@ -165,8 +165,8 @@ class FileCollectionViewCell: UICollectionViewCell {
                         
                         if !result {
                             activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: "Error removing file!", message: "Check for permissions", preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                                let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
                                 directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                             })
                         } else {
@@ -188,8 +188,8 @@ class FileCollectionViewCell: UICollectionViewCell {
                 try FileManager.default.removeItem(at: fileToRename)
                 localDirectoryCollectionViewController.reload()
             } catch {
-                let errorAlert = UIAlertController(title: "Error removing file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: nil))
                 localDirectoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
             }
         }
@@ -207,13 +207,13 @@ class FileCollectionViewCell: UICollectionViewCell {
             
             let fileToRename = directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
             
-            let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.filename!).", preferredStyle: .alert)
+            let renameAlert = UIAlertController(title: Localizable.FileCollectionViewCell.renameFileTitle, message: Localizable.FileCollectionViewCell.rename(file: fileToRename.filename), preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New file name"
+                textField.placeholder = Localizable.FileCollectionViewCell.newFileName
                 textField.text = fileToRename.filename
             })
             
-            renameAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
+            renameAlert.addAction(UIAlertAction(title: Localizable.FileCollectionViewCell.rename, style: .default, handler: { (_) in
                 guard let newFileName = renameAlert.textFields?[0].text else { return }
                 guard let session = ConnectionManager.shared.filesSession else { return }
                 
@@ -221,13 +221,13 @@ class FileCollectionViewCell: UICollectionViewCell {
                    
                     directoryCollectionViewController.reload()
                 } else {
-                    let errorAlert = UIAlertController(title: "Error renaming file!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRenaming, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: nil))
                     directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
                 }
             }))
             
-            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            renameAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             
             directoryCollectionViewController.present(renameAlert, animated: true, completion: nil)
             
@@ -236,24 +236,24 @@ class FileCollectionViewCell: UICollectionViewCell {
             
             let fileToRename = localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row]
             
-            let renameAlert = UIAlertController(title: "Write new file name", message: "Write new name for \(fileToRename.lastPathComponent).", preferredStyle: .alert)
+            let renameAlert = UIAlertController(title: Localizable.FileCollectionViewCell.renameFileTitle, message: Localizable.FileCollectionViewCell.rename(file: fileToRename.lastPathComponent), preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New file name"
+                textField.placeholder = Localizable.FileCollectionViewCell.newFileName
                 textField.text = fileToRename.lastPathComponent
             })
             
-            renameAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: { (_) in
+            renameAlert.addAction(UIAlertAction(title: Localizable.FileCollectionViewCell.rename, style: .default, handler: { (_) in
                 do {
                     try FileManager.default.moveItem(at: fileToRename, to: fileToRename.deletingLastPathComponent().appendingPathComponent(renameAlert.textFields![0].text!))
                     localDirectoryCollectionViewController.reload()
                 } catch {
-                    let alert = UIAlertController(title: "Error renaming file!", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    let alert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRenaming, message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     localDirectoryCollectionViewController.present(alert, animated: true, completion: nil)
                 }
             }))
             
-            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            renameAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             
             localDirectoryCollectionViewController.present(renameAlert, animated: true, completion: nil)
         }
@@ -272,14 +272,14 @@ class FileCollectionViewCell: UICollectionViewCell {
             Pasteboard.local.filePath = directoryCollectionViewController.directory.nsString.appendingPathComponent(directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)!.row].filename)
             
             let dirVC = DirectoryCollectionViewController(connection: directoryCollectionViewController.connection, directory: directoryCollectionViewController.directory)
-            dirVC.navigationItem.prompt = "Select a directory where move file"
+            dirVC.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereMoveFile
             dirVC.delegate = dirVC
             DirectoryCollectionViewController.action = .moveFile
             
             let navVC = UINavigationController(rootViewController: dirVC)
             directoryCollectionViewController.present(navVC, animated: true, completion: {
-                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
-                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.moveHere, style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
             
         // Move local file
@@ -288,15 +288,15 @@ class FileCollectionViewCell: UICollectionViewCell {
             Pasteboard.local.localFilePath = localDirectoryCollectionViewController.directory.appendingPathComponent(localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row].lastPathComponent).path
             
             let dirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
-            dirVC.navigationItem.prompt = "Select a directory where move file"
+            dirVC.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereMoveFile
             dirVC.delegate = dirVC
             
             LocalDirectoryCollectionViewController.action = .moveFile
             
             let navVC = UINavigationController(rootViewController: dirVC)
             localDirectoryCollectionViewController.present(navVC, animated: true, completion: {
-                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
-                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.moveHere, style: .plain, target: dirVC, action: #selector(dirVC.moveFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
         }
     }

@@ -283,7 +283,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             
             /// Open connection.
             func connect() {
-                let activityVC = ActivityViewController(message: "Connecting")
+                let activityVC = ActivityViewController(message: Localizable.BookmarksTableViewController.connecting)
                 UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true) {
                     
                     ConnectionManager.shared.session = nil
