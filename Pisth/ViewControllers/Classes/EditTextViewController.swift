@@ -182,7 +182,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             close()
         }))
         alert.addAction(UIAlertAction(title: Localizable.EditTextViewController.save, style: .default, handler: { (_) in
-            AppDelegate.shared.navigationController.visibleViewController?.present(navigationController ?? self, animated: true, completion: {
+            AppDelegate.shared.navigationController.visibleViewController?.present(self.navigationController ?? self, animated: true, completion: {
                 self.save(true)
                 if ConnectionManager.shared.saveFile?.localFile == self.file.path {
                     try? FileManager.default.removeItem(at: self.file)

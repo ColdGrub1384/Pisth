@@ -527,7 +527,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         var commands =  [
             UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: Localizable.TerminalViewController.paste),
             UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.downArrow),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendDownArrow),
             UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
             UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
             UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
@@ -1202,7 +1202,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Display an alert to accept or decline invitation.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
-        let alert = UIAlertController(title: Localizable.TerminalViewController.acceptInvitation(from: peer.displayName), message: Localizable.TerminalViewController.peerWantsToSeeTheTerminal(peer.displayName), preferredStyle: .alert)
+        let alert = UIAlertController(title: Localizable.TerminalViewController.acceptInvitation(from: peerID.displayName), message: Localizable.TerminalViewController.peerWantsToSeeTheTerminal(peerID.displayName), preferredStyle: .alert)
         
         let acceptAction: UIAlertAction = UIAlertAction(title: Localizable.TerminalViewController.accept, style: .default) { (alertAction) -> Void in
             invitationHandler(true, self.mcSession)

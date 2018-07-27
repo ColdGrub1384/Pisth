@@ -368,7 +368,7 @@
 "terminal.acceptInvitation" = "Acept invitation from %@?";
 
 /* Authenticate to send user's password. */
-"terminal.authenticateToSendPasswordFor" = "Authenticate to send %@ password"
+"terminal.authenticateToSendPasswordFor" = "Authenticate to send %@ password";
 
 /* Decline invitation from peer. */
 "terminal.decline" = "Decline";
