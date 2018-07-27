@@ -345,7 +345,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @objc func sendPassword() {
         if isFirstResponder {
             
-            BioMetricAuthenticator.authenticateWithBioMetrics(reason: "Authenticate to send '\(ConnectionManager.shared.connection?.username ?? "user")' password.", fallbackTitle: "", cancelTitle: nil, success: {
+            BioMetricAuthenticator.authenticateWithBioMetrics(reason: Localizable.TerminalViewController.authenticateToSendPassword(of: ConnectionManager.shared.connection?.username ?? "user"), fallbackTitle: "", cancelTitle: nil, success: {
                 
                 self.insertText(ConnectionManager.shared.connection?.password ?? "")
                 
@@ -369,14 +369,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         var actions = [UIAlertAction]()
         
         if !selectionTextView.isHidden {
-            actions.append(UIAlertAction(title: "Insert mode", style: .default, handler: { (_) in
+            actions.append(UIAlertAction(title: Localizable.TerminalViewController.insertMode, style: .default, handler: { (_) in
                 self.selectionTextView.isHidden = true
                 self.webView.isHidden = false
                 
                 _ = self.becomeFirstResponder()
             }))
         } else {
-            actions.append(UIAlertAction(title: "Selection mode", style: .default, handler: { (_) in
+            actions.append(UIAlertAction(title: Localizable.TerminalViewController.selectionMode, style: .default, handler: { (_) in
                 self.selectionTextView.isHidden = false
                 self.webView.isHidden = true
                 
@@ -386,13 +386,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }))
         }
         
-        actions.append(UIAlertAction(title: "Paste", style: .default, handler: { (_) in
+        actions.append(UIAlertAction(title: Localizable.TerminalViewController.paste, style: .default, handler: { (_) in
             self.insertText(UIPasteboard.general.string ?? "")
         }))
         
-        actions.append(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actions.append(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
         
-        let alert = UIAlertController(title: "Select action", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: Localizable.TerminalViewController.selectAction, message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = sender
         for action in actions {
             alert.addAction(action)
@@ -525,17 +525,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Bluetooth keyboard
         
         var commands =  [
-            UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: "Paste text"),
-            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Up Arrow"),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Down Arrow"),
-            UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Left Arrow"),
-            UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Right Arrow"),
-            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: "Send Esc key"),
+            UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: Localizable.TerminalViewController.paste),
+            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
+            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.downArrow),
+            UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
+            UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
+            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
         ]
         
         let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
         for ctrlKey in ctrlKeys {
-            commands.append(UIKeyCommand(input: ctrlKey, modifierFlags: .control, action: #selector(write(fromCommand:)), discoverabilityTitle: "Send ^\(ctrlKey)"))
+            commands.append(UIKeyCommand(input: ctrlKey, modifierFlags: .control, action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendCtrl(ctrlKey)))
         }
         
         return commands
@@ -1030,7 +1030,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             if !session.isConnected {
-                let errorMessage = "\(Keys.esc)[0;31mError connecting! Check for connection's host and your internet connection.\(Keys.esc)[0m".javaScriptEscapedString
+                let errorMessage = "\(Keys.esc)[0;31m\(Localizable.TerminalViewController.errorConnecting)\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 _ = resignFirstResponder()
                 navigationItem.rightBarButtonItems = []
@@ -1038,7 +1038,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             if !session.isAuthorized {
-                let errorMessage = "\(Keys.esc)[0;31mError authenticating! Check for username and password.\(Keys.esc)[0m".javaScriptEscapedString
+                let errorMessage = "\(Keys.esc)[0;31m\(Localizable.TerminalViewController.errorAuthenticating)\(Keys.esc)[0m".javaScriptEscapedString
                 webView.evaluateJavaScript("term.write(\(errorMessage))", completionHandler: nil)
                 _ = resignFirstResponder()
                 navigationItem.rightBarButtonItems = []
@@ -1202,13 +1202,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Display an alert to accept or decline invitation.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
-        let alert = UIAlertController(title: "Acept invitation from \(peerID.displayName)?", message: "\(peerID.displayName) wants to see the terminal.", preferredStyle: .alert)
+        let alert = UIAlertController(title: Localizable.TerminalViewController.acceptInvitation(from: peer.displayName), message: Localizable.TerminalViewController.peerWantsToSeeTheTerminal(peer.displayName), preferredStyle: .alert)
         
-        let acceptAction: UIAlertAction = UIAlertAction(title: "Accept", style: .default) { (alertAction) -> Void in
+        let acceptAction: UIAlertAction = UIAlertAction(title: Localizable.TerminalViewController.accept, style: .default) { (alertAction) -> Void in
             invitationHandler(true, self.mcSession)
         }
         
-        let declineAction = UIAlertAction(title: "Decline", style: .cancel) { (alertAction) -> Void in
+        let declineAction = UIAlertAction(title: Localizable.TerminalViewController.decline, style: .cancel) { (alertAction) -> Void in
             invitationHandler(false, nil)
         }
         

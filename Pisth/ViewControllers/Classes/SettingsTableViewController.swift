@@ -129,15 +129,15 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else { // If biometric auth is enabled, authenticate before setting
             sender.isOn = true
             
-            BioMetricAuthenticator.authenticateWithPasscode(reason: "Authenticate to turn off authentication", success: {
+            BioMetricAuthenticator.authenticateWithPasscode(reason: Localizable.Settings.authenticateToTurnOffAuthentication, success: {
                 UserDefaults.standard.set(false, forKey: "biometricAuth")
                 UserDefaults.standard.synchronize()
                 sender.isOn = false
             }, failure: { (error) in
                 
                 if error != .fallback && error != .canceledBySystem && error != .canceledByUser {
-                    let failureAlert = UIAlertController(title: "Cannot turn off authentication", message: error.message(), preferredStyle: .alert)
-                    failureAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    let failureAlert = UIAlertController(title: Localizable.Settings.cannotTurnOffAuthentication, message: error.message(), preferredStyle: .alert)
+                    failureAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .default, handler: nil))
                     self.present(failureAlert, animated: true, completion: nil)
                 }
                 
@@ -155,9 +155,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             biometricAuthLabel.isEnabled = false
         } else {
             if BioMetricAuthenticator.shared.faceIDAvailable() { // If is Face ID:
-                biometricAuthLabel.text = "Use Face ID"
+                biometricAuthLabel.text = Localizable.Settings.useFaceID
             } else { // If is Touch ID:
-                biometricAuthLabel.text = "Use Touch ID"
+                biometricAuthLabel.text = Localizable.Settings.useTouchID
             }
         }
     }

@@ -118,8 +118,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         guard let filePath = Pasteboard.local.localFilePath else {
             
-            let errorAlert = UIAlertController(title: "Error moving file!", message: "No file in pasteboard.", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: Localizable.Browsers.noFileInPasteboard, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             self.present(errorAlert, animated: true, completion: nil)
             
             return
@@ -134,8 +134,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 }
             })
         } catch {
-            let errorAlert = UIAlertController(title: "Error moving file!", message: error.localizedDescription, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             self.present(errorAlert, animated: true, completion: nil)
         }
         
@@ -147,8 +147,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         guard let filePath = Pasteboard.local.localFilePath else {
             
-            let errorAlert = UIAlertController(title: "Error copying file!", message: "No file in pasteboard.", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: Localizable.Browsers.noFileInPasteboard, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             self.present(errorAlert, animated: true, completion: nil)
             
             return
@@ -163,8 +163,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 }
             })
         } catch {
-            let errorAlert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             self.present(errorAlert, animated: true, completion: nil)
         }
         
@@ -183,7 +183,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     @objc func create(_ sender: UIBarButtonItem) {
         let chooseAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        chooseAlert.addAction(UIAlertAction(title: "Import", style: .default, handler: { (_) in // Upload file from browser
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.import, style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
             picker.allowsMultipleSelection = true
             picker.delegate = self
@@ -191,14 +191,14 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             self.present(picker, animated: true, completion: nil)
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Create blank file", style: .default, handler: { (_) in // Create file
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.createTitle, style: .default, handler: { (_) in // Create file
             
-            let chooseName = UIAlertController(title: "Create blank file", message: "Choose new file name", preferredStyle: .alert)
+            let chooseName = UIAlertController(title: Localizable.Browsers.createTitle, message: Localizable.Browsers.createMessage, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New file name"
+                textField.placeholder = Localizable.FileCollectionViewCell.newFileName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 
                 guard let filename = chooseName.textFields?[0].text else {
                     return
@@ -207,8 +207,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 if FileManager.default.createFile(atPath: self.directory.appendingPathComponent(filename).path, contents: nil, attributes: nil) {
                     self.reload()
                 } else {
-                    let errorAlert = UIAlertController(title: "Error creating file!", message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingFile, message: nil, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     self.present(errorAlert, animated: true, completion: nil)
                 }
             }))
@@ -217,13 +217,13 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: "Create folder", style: .default, handler: { (_) in // Create folder
-            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.createFolder, style: .default, handler: { (_) in // Create folder
+            let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New folder name"
+                textField.placeholder = Localizable.Browsers.folderName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 
                 guard let dirname = chooseName.textFields?[0].text else {
                     return
@@ -233,8 +233,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                     try FileManager.default.createDirectory(atPath: self.directory.appendingPathComponent(dirname).path, withIntermediateDirectories: true, attributes: nil)
                     self.reload()
                 } catch {
-                    let errorAlert = UIAlertController(title: "Error creating directory!", message: error.localizedDescription, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: error.localizedDescription, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     self.present(errorAlert, animated: true, completion: nil)
                 }
             }))
@@ -243,13 +243,13 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         }))
         
         if self is PluginsLocalDirectoryCollectionViewController {
-            chooseAlert.addAction(UIAlertAction(title: "Create terminal plugin", style: .default, handler: { (_) in // Create plugin
-                let chooseName = UIAlertController(title: "Create plugin", message: "Choose new plugin name", preferredStyle: .alert)
+            chooseAlert.addAction(UIAlertAction(title: Localizable.LocalDirectoryCollectionViewController.createTerminalPlugin, style: .default, handler: { (_) in // Create plugin
+                let chooseName = UIAlertController(title: Localizable.LocalDirectoryCollectionViewController.createPluginTitle, message: Localizable.LocalDirectoryCollectionViewController.createPluginMessage, preferredStyle: .alert)
                 chooseName.addTextField(configurationHandler: { (textField) in
-                    textField.placeholder = "New plugin name"
+                    textField.placeholder = Localizable.LocalDirectoryCollectionViewController.createPluginPlaceholder
                 })
-                chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+                chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                     
                     guard let dirname = chooseName.textFields?[0].text else {
                         return
@@ -305,15 +305,15 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                             
                             """.data(using: .utf8), attributes: nil) {
                             
-                            let errorAlert = UIAlertController(title: "Error creating plugin!", message: "Error creating index.js.", preferredStyle: .alert)
-                            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            let errorAlert = UIAlertController(title: Localizable.LocalDirectoryCollectionViewController.errorCreatingPluginTitle, message: Localizable.LocalDirectoryCollectionViewController.errorCreatingPluginMessage, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                             self.present(errorAlert, animated: true, completion: nil)
                             
                         }
                         self.reload()
                     } catch {
-                        let errorAlert = UIAlertController(title: "Error creating plugin!", message: error.localizedDescription, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        let errorAlert = UIAlertController(title: Localizable.LocalDirectoryCollectionViewController.errorCreatingPluginTitle, message: error.localizedDescription, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                         self.present(errorAlert, animated: true, completion: nil)
                     }
                 }))
@@ -322,7 +322,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             }))
         }
         
-        chooseAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        chooseAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
         
         chooseAlert.popoverPresentationController?.barButtonItem = sender
         
@@ -418,12 +418,12 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         let header = UIView.browserHeader
         headerView = header
         header.createNewFolder = { _ in // Create folder
-            let chooseName = UIAlertController(title: "Create folder", message: "Choose new folder name", preferredStyle: .alert)
+            let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
             chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = "New folder name"
+                textField.placeholder = Localizable.Browsers.folderName
             })
-            chooseName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: "Create", style: .default, handler: { (_) in
+            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
                 
                 do {
                     try FileManager.default.createDirectory(at: self.directory.appendingPathComponent(chooseName.textFields![0].text!), withIntermediateDirectories: true, attributes: nil)
@@ -461,8 +461,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .UIApplicationDidBecomeActive, object: nil)
         
         if let error = error {
-            let errorAlert = UIAlertController(title: "Error opening directory!", message: error.localizedDescription, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+            let errorAlert = UIAlertController(title: Localizable.Browsers.errorOpeningDirectory, message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .default, handler: { (_) in
                 self.navigationController?.popViewController(animated: true)
             }))
             self.present(errorAlert, animated: true, completion: nil)
@@ -562,7 +562,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             Pasteboard.local.localFilePath = directory.appendingPathComponent(files[indexPath.row].lastPathComponent).path
             
             let dirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
-            dirVC.navigationItem.prompt = "Select a directory where copy file"
+            dirVC.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereCopyFile
             dirVC.delegate = dirVC
             LocalDirectoryCollectionViewController.action = .copyFile
             
@@ -570,8 +570,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             navVC.navigationBar.barStyle = .black
             navVC.navigationBar.isTranslucent = true
             present(navVC, animated: true, completion: {
-                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
-                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(title: "Done", style: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
+                dirVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.copyHere, style: .plain, target: dirVC, action: #selector(dirVC.copyFile))], animated: true)
+                dirVC.navigationItem.setLeftBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: dirVC, action: #selector(dirVC.close))], animated: true)
             })
         }
     }
@@ -644,8 +644,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 try FileManager.default.copyItem(atPath: url.path, toPath: directory.appendingPathComponent(url.lastPathComponent).path)
                 reload()
             } catch {
-                let errorAlert = UIAlertController(title: "Error importing \(url.lastPathComponent)!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                let errorAlert = UIAlertController(title: Localizable.Browsers.errorImporting, message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                 self.present(errorAlert, animated: true, completion: nil)
             }
         }
@@ -658,20 +658,20 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         localDirectoryCollectionViewController.delegate = localDirectoryCollectionViewController
         
         if LocalDirectoryCollectionViewController.action == .copyFile {
-            localDirectoryCollectionViewController.navigationItem.prompt = "Select a directory where copy file"
+            localDirectoryCollectionViewController.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereCopyFile
         }
         
         if LocalDirectoryCollectionViewController.action == .moveFile {
-            localDirectoryCollectionViewController.navigationItem.prompt = "Select a directory where move file"
+            localDirectoryCollectionViewController.navigationItem.prompt = Localizable.Browsers.selectDirectoryWhereMoveFile
         }
         
         navigationController?.pushViewController(localDirectoryCollectionViewController, animated: true, completion: {
             if LocalDirectoryCollectionViewController.action == .copyFile {
-                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Copy here", style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.copyFile))], animated: true)
+                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.copyHere, style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.copyFile))], animated: true)
             }
             
             if LocalDirectoryCollectionViewController.action == .moveFile {
-                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: "Move here", style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.moveFile))], animated: true)
+                localDirectoryCollectionViewController.navigationItem.setRightBarButtonItems([UIBarButtonItem(title: Localizable.Browsers.moveHere, style: .plain, target: localDirectoryCollectionViewController, action: #selector(localDirectoryCollectionViewController.moveFile))], animated: true)
             }
         })
         
@@ -781,19 +781,19 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 }
                 
                 if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
-                    let alert = UIAlertController(title: "Open file", message: "View HTML page or edit?", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "View HTML", style: .default, handler: { (_) in // View HTML
+                    let alert = UIAlertController(title: Localizable.LocalDirectoryCollectionViewController.openFileTitle, message: Localizable.LocalDirectoryCollectionViewController.openFileMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: Localizable.LocalDirectoryCollectionViewController.viewHTML, style: .default, handler: { (_) in // View HTML
                         let webVC = UIViewController.webViewController
                         webVC.file = file
                         
                         vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Edit HTML", style: .default, handler: { (_) in // Edit HTML
+                    alert.addAction(UIAlertAction(title: Localizable.LocalDirectoryCollectionViewController.editHTML, style: .default, handler: { (_) in // Edit HTML
                         vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     
                     if viewController == nil {
                         vc.present(alert, animated: true, completion: nil)
@@ -895,7 +895,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             }
         }
         
-        let activityVC = ActivityViewController(message: "Loading...")
+        let activityVC = ActivityViewController(message: Localizable.loading)
         if let viewController = viewController {
             viewController.present(activityVC, animated: true, completion: {
                 openFile()

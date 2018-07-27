@@ -121,6 +121,12 @@ class Localizable: Static {
         /// Text printed after an authentication error.
         static let errorAuthenticating = NSLocalizedString("terminal.errorAuthenticating", comment: "Text printed after an authentication error.")
         
+        /// Authenticate to send user's password.
+        static func authenticateToSendPassword(of user: String) -> String {
+        
+            return NSString(format: NSLocalizedString("terminal.authenticateToSendPasswordFor", comment: "Authenticate to send user's password.") as NSString, user) as String
+        }
+        
         /// Ask for accepting invitation from peer.
         ///
         /// - Parameters:
@@ -442,7 +448,7 @@ class Localizable: Static {
         static let errorRenaming = NSLocalizedString("cell.errorRenaming", comment: "Title of the alert shown when a file couldn't be renamed.")
     }
     
-    class UIMenuItems: Static {
+    class UIMenuItem: Static {
         
         /// Delete
         static let delete = NSLocalizedString("menu.delete", comment: "Delete")

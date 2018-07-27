@@ -54,7 +54,7 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Info"
+        title = Localizable.FileInfoViewController.title
         
         view.isHidden = true
         

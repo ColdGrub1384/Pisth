@@ -142,17 +142,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         AppDelegate.shared = self
         
         UIMenuController.shared.menuItems = [
-            .init(title: "Delete", action: #selector(FileCollectionViewCell.deleteFile(_:))),
-            .init(title: "Move", action: #selector(FileCollectionViewCell.moveFile(_:))),
-            .init(title: "Rename", action: #selector(FileCollectionViewCell.renameFile(_:))),
-            .init(title: "Info", action: #selector(FileCollectionViewCell.showFileInfo(_:))),
-            .init(title: "Share", action: #selector(FileCollectionViewCell.shareFile(_:))),
-            .init(title: "Open in new panel", action: #selector(FileCollectionViewCell.openInNewPanel(_:))),
-            .init(title: "Selection mode", action: #selector(TerminalViewController.selectionMode)),
-            .init(title: "Insert mode", action: #selector(TerminalViewController.insertMode)),
-            .init(title: "Paste", action: #selector(TerminalViewController.pasteText)),
-            .init(title: "Toggle top bar", action: #selector(TerminalViewController.showNavBar)),
-            .init(title: "Paste selection", action: #selector(TerminalViewController.pasteSelection))
+            .init(title: Localizable.UIMenuItem.delete, action: #selector(FileCollectionViewCell.deleteFile(_:))),
+            .init(title: Localizable.UIMenuItem.move, action: #selector(FileCollectionViewCell.moveFile(_:))),
+            .init(title: Localizable.UIMenuItem.rename, action: #selector(FileCollectionViewCell.renameFile(_:))),
+            .init(title: Localizable.UIMenuItem.info, action: #selector(FileCollectionViewCell.showFileInfo(_:))),
+            .init(title: Localizable.UIMenuItem.share, action: #selector(FileCollectionViewCell.shareFile(_:))),
+            .init(title: Localizable.UIMenuItem.openInNewPanel, action: #selector(FileCollectionViewCell.openInNewPanel(_:))),
+            .init(title: Localizable.UIMenuItem.selectionMode, action: #selector(TerminalViewController.selectionMode)),
+            .init(title: Localizable.UIMenuItem.insertMode, action: #selector(TerminalViewController.insertMode)),
+            .init(title: Localizable.UIMenuItem.paste, action: #selector(TerminalViewController.pasteText)),
+            .init(title: Localizable.UIMenuItem.toggleTopBar, action: #selector(TerminalViewController.showNavBar)),
+            .init(title: Localizable.UIMenuItem.pasteSelection, action: #selector(TerminalViewController.pasteSelection))
         ]
         UIMenuController.shared.update()
         
@@ -338,7 +338,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     return ""
                 }
                 
-                let alert = UIAlertController(title: "Open SSH connection", message: "Authenticate as \(user) user.", preferredStyle: .alert)
+                let alert = UIAlertController(title: Localizable.AppDelegate.openSSHConnection, message: Localizable.AppDelegate.authenticate(as: user), preferredStyle: .alert)
                 
                 var userTextField: UITextField? {
                     if alert.textFields?.count == 2 {
@@ -358,12 +358,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 
                 if user.isEmpty {
                     alert.addTextField(configurationHandler: { (textField) in
-                        textField.placeholder = "Username"
+                        textField.placeholder = Localizable.AppDelegate.usernamePlaceholder
                     })
                 }
                 
                 func connect(withPassword password: String) {
-                    let activityVC = ActivityViewController(message: "Loading...")
+                    let activityVC = ActivityViewController(message: Localizable.loading)
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
                         let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
@@ -407,15 +407,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     connect(withPassword: password)
                 } else {
                     alert.addTextField(configurationHandler: { (textField) in
-                        textField.placeholder = "Password"
+                        textField.placeholder = Localizable.AppDelegate.passwordPlaceholder
                         textField.isSecureTextEntry = true
                     })
                     
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    alert.addAction(UIAlertAction(title: "Connect", style: .default, handler: { (_) in
+                    alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: Localizable.AppDelegate.connect, style: .default, handler: { (_) in
                         connect(withPassword: passwordTextField?.text ?? "")
                     }))
-                    alert.addAction(UIAlertAction(title: "Connect and remember", style: .default, handler: { (_) in
+                    alert.addAction(UIAlertAction(title: Localizable.AppDelegate.connectAndRemember, style: .default, handler: { (_) in
                         let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField?.text ?? "", publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         DataManager.shared.addNew(connection: connection)
                         connect(withPassword: connection.password)
@@ -427,9 +427,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 
                 if url.pathExtension.lowercased() == "termplugin" { // Import plugin
                     
-                    let alert = UIAlertController(title: "Use plugin?", message: "Do you want to use this terminal plugin? This plugin will have access to all the content of the terminal, I recommend to view the content of the plugin in the settings before using it. You can disable it from settings.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: Localizable.AppDelegate.usePluginTitle, message: Localizable.AppDelegate.usePluginMessage, preferredStyle: .alert)
                     
-                    alert.addAction(UIAlertAction(title: "Use plugin", style: .destructive, handler: { (_) in
+                    alert.addAction(UIAlertAction(title: Localizable.AppDelegate.usePlugin, style: .destructive, handler: { (_) in
                         var pluginURL = FileManager.default.library.appendingPathComponent("Plugins").appendingPathComponent(url.lastPathComponent)
                         
                         var i = 1
@@ -442,14 +442,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                         do {
                             try FileManager.default.copyItem(at: url, to: pluginURL)
                         } catch {
-                            let alert = UIAlertController(title: "Error copying file!", message: error.localizedDescription, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            let alert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: error.localizedDescription, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                             
                         }
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                     
@@ -471,7 +471,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     bookmarksVC.navigationItem.largeTitleDisplayMode = .never
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
-                    bookmarksVC.navigationItem.prompt = "Select connection where upload file"
+                    bookmarksVC.navigationItem.prompt = Localizable.AppDelegate.selectConnectionToUploadFile
                 })
             } else if url.absoluteString.hasPrefix("pisth-import:") { // Export file with the API
                 
@@ -514,7 +514,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     bookmarksVC.navigationItem.largeTitleDisplayMode = .never
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
-                    bookmarksVC.navigationItem.prompt = "Select connection to export file"
+                    bookmarksVC.navigationItem.prompt = Localizable.AppDelegate.selectConnectionToExportFile
                 })
             }
         }
@@ -615,9 +615,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     /// Upload file at selected directory.
     func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
         if action == .upload {
-            directoryCollectionViewController.navigationItem.prompt = "Select folder where upload file"
+            directoryCollectionViewController.navigationItem.prompt = Localizable.AppDelegate.selectFolderWhereUploadFile
         } else if action == .apiImport {
-            directoryCollectionViewController.navigationItem.prompt = importReason ?? "Select file to import"
+            directoryCollectionViewController.navigationItem.prompt = importReason ?? Localizable.AppDelegate.selectFiletoImport
         }
         directoryCollectionViewController.delegate = self
         directoryCollectionViewController.closeAfterSending = true
@@ -639,10 +639,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryCollectionViewController directoryCollectionViewController: DirectoryCollectionViewController) {
         
         if action == .upload {
-            directoryCollectionViewController.navigationItem.prompt = "Select folder where upload file"
+            directoryCollectionViewController.navigationItem.prompt = Localizable.AppDelegate.selectFolderWhereUploadFile
             directoryCollectionViewController.closeAfterSending = true
         } else if action == .apiImport {
-            directoryCollectionViewController.navigationItem.prompt = importReason ?? "Select file to import"
+            directoryCollectionViewController.navigationItem.prompt = importReason ?? Localizable.AppDelegate.selectFiletoImport
         }
         directoryCollectionViewController.delegate = self
         
@@ -657,14 +657,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         }
     }
     
-    /// Show alert saying a file cannot be uploaded with SFTP disabled.
+    /// Deselect row.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inTerminalViewController terminalViewController: TerminalViewController) {
         
-        bookmarksTableViewController.viewDidAppear(true)
+        if let indexPath = bookmarksTableViewController.tableView.indexPathForSelectedRow {
+            
+            bookmarksTableViewController.tableView.deselectRow(at: indexPath, animated: true)
+        }
         
-        let alert = UIAlertController(title: "Cannot upload file!", message: "SFTP must be enabled.\nIf you want to upload file here, press the \"info\" button and enable SFTP.", preferredStyle: .alert)
+        /*let alert = UIAlertController(title: "Cannot upload file!", message: "SFTP must be enabled.\nIf you want to upload file here, press the \"info\" button and enable SFTP.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        bookmarksTableViewController.present(alert, animated: true, completion: nil)
+        bookmarksTableViewController.present(alert, animated: true, completion: nil)*/ // SSH connections are disabled here
     }
     
     // MARK: - Directory collection view controller static delegate

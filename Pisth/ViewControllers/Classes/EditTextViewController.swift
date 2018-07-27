@@ -145,8 +145,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             textView.text = try String(contentsOfFile: file.path)
             textView.isScrollEnabled = true
         } catch let error {
-            let errorAlert = UIAlertController(title: "Error opening file!", message: error.localizedDescription, preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+            let errorAlert = UIAlertController(title: Localizable.EditTextViewController.errorOpeningFile, message: error.localizedDescription, preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: { (_) in
                 self.dismiss(animated: true, completion: nil)
             }))
             self.present(errorAlert, animated: true, completion: nil)
@@ -177,12 +177,12 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
         
         // Ask for save the file
-        let alert = UIAlertController(title: "Save changes?", message: "If you select Don't Save, all your changes will be erased!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Don't Save", style: .destructive, handler: { (_) in
+        let alert = UIAlertController(title: Localizable.EditTextViewController.saveChangesTitle, message:Localizable.EditTextViewController.saveChangesMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Localizable.EditTextViewController.dontSave, style: .destructive, handler: { (_) in
             close()
         }))
-        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
-            AppDelegate.shared.navigationController.visibleViewController?.present(self, animated: true, completion: {
+        alert.addAction(UIAlertAction(title: Localizable.EditTextViewController.save, style: .default, handler: { (_) in
+            AppDelegate.shared.navigationController.visibleViewController?.present(navigationController ?? self, animated: true, completion: {
                 self.save(true)
                 if ConnectionManager.shared.saveFile?.localFile == self.file.path {
                     try? FileManager.default.removeItem(at: self.file)
@@ -220,7 +220,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 if let saveFile = ConnectionManager.shared.saveFile {
                     
                     if saveFile.localFile == file.path {
-                        let activityVC = ActivityViewController(message: "Uploading")
+                        let activityVC = ActivityViewController(message: Localizable.uploading)
                         self.present(activityVC, animated: true, completion: {
                             ConnectionManager.shared.filesSession?.sftp.writeContents(data, toFileAtPath: saveFile.remoteFile)
                             activityVC.dismiss(animated: true, completion: {
@@ -248,8 +248,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
                 }
                 
             } catch let error {
-                let errorAlert = UIAlertController(title: "Error saving file!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                let errorAlert = UIAlertController(title: Localizable.errorSavingFile, message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: { (_) in
                     self.dismiss(animated: true, completion: nil)
                 }))
                 self.present(errorAlert, animated: true, completion: nil)
@@ -271,10 +271,10 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         textView.resignFirstResponder()
         
-        let languages = ["None"]+highlightr.supportedLanguages()
-        let initialSelection = languages.index(of: language ?? "None") ?? 0
+        let languages = [Localizable.EditTextViewController.none]+highlightr.supportedLanguages()
+        let initialSelection = languages.index(of: language ?? Localizable.EditTextViewController.none) ?? 0
         
-        let picker = ActionSheetStringPicker(title: "Select a language", rows: languages, initialSelection: initialSelection, doneBlock: { (picker, row, language) in
+        let picker = ActionSheetStringPicker(title: Localizable.EditTextViewController.selectALanguage, rows: languages, initialSelection: initialSelection, doneBlock: { (picker, row, language) in
             
             if let language = language as? String {
                 if language != "None" {
@@ -294,7 +294,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
             }
         }, origin: sender)
         
-        picker?.addCustomButton(withTitle: "Default", value: initialSelection)
+        picker?.addCustomButton(withTitle: Localizable.EditTextViewController.default, value: initialSelection)
         
         picker?.show()
     }
@@ -309,7 +309,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         textView.resignFirstResponder()
         
-        ActionSheetStringPicker.show(withTitle: "Select a theme", rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserDefaults.standard.string(forKey: "editorTheme")!) ?? 0, doneBlock: { (_, _, theme) in
+        ActionSheetStringPicker.show(withTitle: Localizable.EditTextViewController.selectATheme, rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserDefaults.standard.string(forKey: "editorTheme")!) ?? 0, doneBlock: { (_, _, theme) in
             
             if let theme = theme as? String {
                 self.textStorage.highlightr.setTheme(to: theme)
