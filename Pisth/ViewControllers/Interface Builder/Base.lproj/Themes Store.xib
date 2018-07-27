@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,7 +41,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Unlock 9 new themes for the terminal and remove ads." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1Fv-Ku-gig">
-                                    <rect key="frame" x="46" y="99" width="284" height="78"/>
+                                    <rect key="frame" x="46" y="99" width="283" height="78"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="78" id="pns-C3-18L"/>
                                     </constraints>
@@ -65,7 +64,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS8-0e-aV5">
-                                    <rect key="frame" x="46" y="185" width="284" height="26"/>
+                                    <rect key="frame" x="46" y="185" width="283" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="ZTc-GV-x0P"/>
                                     </constraints>
@@ -74,7 +73,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmA-eN-bN9">
-                                    <rect key="frame" x="46" y="219" width="284" height="507"/>
+                                    <rect key="frame" x="46" y="219" width="283" height="507"/>
                                     <color key="backgroundColor" red="0.1636064403553299" green="0.1636064403553299" blue="0.1636064403553299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </scrollView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDn-9Y-TQk">
@@ -128,6 +127,7 @@
             </view>
             <connections>
                 <outlet property="buyButton" destination="MK9-HI-OUw" id="VWo-zX-c2L"/>
+                <outlet property="descriptionTextView" destination="1Fv-Ku-gig" id="jCD-pZ-CdG"/>
                 <outlet property="restoreButton" destination="VDn-9Y-TQk" id="BVZ-A2-zgh"/>
                 <outlet property="scrollView" destination="bmA-eN-bN9" id="L0W-GZ-6OS"/>
             </connections>

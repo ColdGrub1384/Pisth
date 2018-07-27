@@ -282,7 +282,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
             UserDefaults.standard.synchronize()
         }
-        
+                
         // Buy themes from App Store
         SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
             return (product.productIdentifier == ProductsID.themes.rawValue && !UserDefaults.standard.bool(forKey: "terminalThemesPurchased"))

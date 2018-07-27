@@ -30,6 +30,9 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
     /// Button used to restore iaps.
     @IBOutlet weak var restoreButton: UIButton!
     
+    /// The Text view describing this iap.
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
     /// Buy iap.
     ///
     /// - Parameters:
@@ -80,6 +83,10 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    private var webViews = [WKWebView]()
+    
+    private var i = 0
+    
     // MARK: - View controller
     
     /// Setup previews.
@@ -87,7 +94,7 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-ThemesStore", AnalyticsParameterItemName : "Themes Store"])
-        
+                
         restoreButton.layer.cornerRadius = 16
         buyButton.layer.cornerRadius = 16
         buyButton.setTitle(Product.terminalThemes.price ?? "Buy", for: .normal)
@@ -112,29 +119,20 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
             themes[webView] = theme
             themesName[webView] = name
             
-            webView.loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
             webView.isUserInteractionEnabled = false
             
-            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            activityIndicator.frame.origin = webView.center
-            activityIndicator.frame.size = CGSize(width: 20, height: 20)
-            activityIndicator.startAnimating()
-            webView.addSubview(activityIndicator)
+            webViews.append(webView)
             
             i += 1
         }
+        
+        webViews.first?.loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
     }
     
     // MARK: - Web kit navigation delegate
     
     /// Display theme preview.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        for view in webView.subviews {
-            if view is UIActivityIndicatorView {
-                view.removeFromSuperview()
-            }
-        }
         
         guard let theme = themes[webView] else {
             return
@@ -151,6 +149,12 @@ class ThemesStoreViewController: UIViewController, WKNavigationDelegate {
         webView.evaluateJavaScript("term.writeln('')", completionHandler: nil)
         webView.evaluateJavaScript("term.write('Pisth:~ pisth$ ')", completionHandler: nil)
         webView.evaluateJavaScript("document.body.style.backgroundColor = '\(theme.backgroundColor?.hexString ?? "#000000")'", completionHandler: nil)
+        
+        i += 1
+        
+        if webViews.indices.contains(i) {
+            webViews[i].loadFileURL(Bundle.terminal.url(forResource: "terminal", withExtension: "html")!, allowingReadAccessTo: Bundle.main.bundleURL)
+        }
     }
     
 }
