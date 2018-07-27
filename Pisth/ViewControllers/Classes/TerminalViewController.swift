@@ -87,7 +87,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var readOnly = false
     
     /// Web view used to display content.
-    var webView: WKWebView!
+    var webView: TerminalWebView!
     
     /// Text view with plain output
     var selectionTextView: UITextView!
@@ -403,6 +403,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Show or hide keyboard.
     @objc func toggleKeyboard() {
+        
         if isFirstResponder {
             _ = resignFirstResponder()
         } else {
@@ -578,8 +579,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.uiDelegate = self
         webView.scrollView.isScrollEnabled = false
         webView.ignoresInvertColors = true
-        webView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(showMenu(_:))))
-        webView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard)))
+        webView.toggleKeyboard = toggleKeyboard
+        webView.showMenu = showMenu(_:)
         
         view.addInteraction(UIDropInteraction(delegate: self))
         

@@ -11,12 +11,37 @@ import WebKit
 /// Web view used to display the content for the terminal.
 class TerminalWebView: WKWebView, UIGestureRecognizerDelegate {
     
+    /// Show menu. Called from a gesture recognizer.
+    var showMenu: ((UILongPressGestureRecognizer) -> Void)?
+    
+    /// Toggle keyboard. Called from a gesture recognizer.
+    var toggleKeyboard: (() -> Void)?
+    
+    @objc private func showMenu_(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        showMenu?(gestureRecognizer)
+    }
+    
+    @objc private func toggleKeyboard_() {
+        toggleKeyboard?()
+    }
+    
+    private var longPress: UILongPressGestureRecognizer!
+    
+    private var tap: UITapGestureRecognizer!
+    
+    // MARK: - Web view
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override init(frame: CGRect, configuration: WKWebViewConfiguration) {
         super.init(frame: frame, configuration: configuration)
+        
+        longPress = UILongPressGestureRecognizer(target: self, action: #selector(showMenu_(_:)))
+        addGestureRecognizer(longPress)
+        tap = UITapGestureRecognizer(target: self, action: #selector(toggleKeyboard_))
+        addGestureRecognizer(tap)
     }
     
     /// Set `gestureRecognizer` delegate to this Web view.
@@ -37,8 +62,12 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate {
     
     // MARK: - Gesture recognizer delegate
     
-    /// - Returns: `true`.
+    /// - Returns: `true` if the gestures are not `longPress` and `tap`.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if (gestureRecognizer == tap && otherGestureRecognizer == longPress) || (gestureRecognizer == longPress && otherGestureRecognizer == tap) {
+            return false
+        }
         
         return true
     }
