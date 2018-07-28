@@ -182,7 +182,7 @@
 "delegate.usePlugin" = "Use Plugin";
 
 /* Message of the alert for importing a plugin. */
-"delegate.usePluginMessage" = "Voulez vous utiliser cette extension pour le terminal? Le plugin aura accès à tout le contenu du terminal. Je vous recommande de voir le contenu de l'extension avant de l'utiliser.";
+"delegate.usePluginMessage" = "Voulez vous utiliser cette extension pour le terminal? Le plugin aura accès à tout le contenu du terminal. Je vous recommande de voir le contenu de l'extension avant de l'utiliser. Vous pouvez la désactiver depuis les réglages.";
 
 /* Title of the alert for importing a plugin. */
 "delegate.usePluginTitle" = "Activer l'extension?";
@@ -248,7 +248,7 @@
 "editor.errorOpeningFile" = "Erreur lors de l'ouverture du fichier!";
 
 /* No language selected. */
-"editor.none" = "Aucun";
+"editor.none" = "Auc.";
 
 /* Save file. */
 "editor.save" = "Sauvegarder";
