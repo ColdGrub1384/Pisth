@@ -39,6 +39,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     /// Close after sending file.
     var closeAfterSending = false
     
+    private var isViewSet = false
+    
     private var headerView_: UIView?
     
     /// `collectionView` header.
@@ -264,168 +266,179 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - View controller
     
-    /// Setup views.
+    /// Firebase analystics and setup some things.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-RemoteFileBrowser", AnalyticsParameterItemName : "Remote File Browser"])
         
-        var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
-        self.allFiles = files
-        if !UserDefaults.standard.bool(forKey: "hidden") {
-            for file in files ?? [] {
-                if file.filename.hasPrefix(".") {
-                    guard let i = files?.index(of: file) else { break }
-                    files?.remove(at: i)
-                }
-            }
-        }
-        self.files = files
-        
-        guard self.files != nil else {
-            return
-        }
-        
-        if self.directory.removingUnnecessariesSlashes != "/" {
-            // Append parent directory
-            guard let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
-                return
-            }
-            self.files!.append(parent)
-        }
-        
-        let titleComponents = directory.components(separatedBy: "/")
-        title = titleComponents.last
-        if directory.hasSuffix("/") {
-            title = titleComponents[titleComponents.count-2]
-        }
-        
-        navigationItem.largeTitleDisplayMode = .never
-        
-        // TableView cells
-        collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
-        collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
-        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
-        clearsSelectionOnViewWillAppear = false
-        collectionView?.dropDelegate = self
-        collectionView?.dragDelegate = self
-        collectionView?.dragInteractionEnabled = true
         collectionView?.backgroundColor = .white
-        
-        // Header
-        let header = UIView.browserHeader
-        headerView = header
-        header.createNewFolder = { _ in // Create folder
-            let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
-            chooseName.addTextField(configurationHandler: { (textField) in
-                textField.placeholder = Localizable.Browsers.folderName
-            })
-            chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
-            chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
-                guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
-                
-                if !result {
-                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
-                }
-                
-                self.reload()
-            }))
-            
-            self.present(chooseName, animated: true, completion: nil)
-        }
-        header.switchLayout = { _ in // Switch layout
-            self.loadLayout()
-        }
-        
-        loadLayout()
-        
-        // Initialize the refresh control.
-        collectionView?.refreshControl = UIRefreshControl()
-        collectionView?.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
-        
-        // Bar buttons
-        let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
-        let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
-        let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
-        let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(openAPTManager))
-        var buttons: [UIBarButtonItem] {
-            guard files != nil else { return [uploadFile, terminal] }
-            guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
-            
-            // Check for GIT
-            var isGitRepo = false
-            for file in allFiles ?? [] {
-                if file.filename == ".git" || file.filename == ".git/" {
-                    isGitRepo = true
-                }
-            }
-            
-            // Check for Aptitude
-            guard let resultAPT = try? session.channel.execute("command -v apt-get").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n") else { return [] }
-            
-            if isGitRepo {
-                if resultAPT.isEmpty {
-                    return [uploadFile, git, terminal]
-                } else {
-                    return [uploadFile, apt, git, terminal]
-                }
-            } else {
-                if resultAPT.isEmpty {
-                    return [uploadFile, terminal]
-                } else {
-                    return [uploadFile, apt, terminal]
-                }
-            }
-        }
-        navigationItem.setRightBarButtonItems(buttons, animated: true)
-        
-        // Siri Shortcuts
-        
-        let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openDirectory")
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = true
-            //                    activity.suggestedInvocationPhrase = connection.name
-        }
-        activity.isEligibleForSearch = true
-        activity.keywords = [connection.name, connection.username, connection.host, directory.nsString.lastPathComponent, "ssh", "sftp"]
-        if directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
-            activity.title = connection.name
-        } else {
-            activity.title = directory.nsString.lastPathComponent
-        }
-        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":directory, "port":connection.port] as [String : Any]
-        
-        if let pubKey = connection.publicKey {
-            userInfo["publicKey"] = pubKey
-        }
-        
-        if let privKey = connection.privateKey {
-            userInfo["privateKey"] = privKey
-        }
-        
-        activity.userInfo = userInfo
-
-        let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
-        if let os = connection.os?.lowercased(), directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
-            if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                attributes.thumbnailData = UIImagePNGRepresentation(logo)
-            }
-        } else {
-            attributes.thumbnailData = UIImagePNGRepresentation(#imageLiteral(resourceName: "File icons/folder"))
-        }
-        attributes.addedDate = Date()
-        attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)\(directory)"
-        activity.contentAttributeSet = attributes
-        
-        self.userActivity = activity
+        collectionView?.backgroundView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        (collectionView?.backgroundView as? UIActivityIndicatorView)?.startAnimating()
     }
     
-    /// Show errors if there are and setup Notification center to call this function when Application becomes active.
+    /// Show errors if there are and setup Notification center to call this function when Application becomes active. Setups views and fetch files.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if !isViewSet {
+            
+            isViewSet = true
+            
+            var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+            self.allFiles = files
+            if !UserDefaults.standard.bool(forKey: "hidden") {
+                for file in files ?? [] {
+                    if file.filename.hasPrefix(".") {
+                        guard let i = files?.index(of: file) else { break }
+                        files?.remove(at: i)
+                    }
+                }
+            }
+            self.files = files
+            
+            collectionView?.refreshControl?.endRefreshing()
+            
+            guard self.files != nil else {
+                return
+            }
+            
+            if self.directory.removingUnnecessariesSlashes != "/" {
+                // Append parent directory
+                guard let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
+                    return
+                }
+                self.files!.append(parent)
+            }
+            
+            let titleComponents = directory.components(separatedBy: "/")
+            title = titleComponents.last
+            if directory.hasSuffix("/") {
+                title = titleComponents[titleComponents.count-2]
+            }
+            
+            navigationItem.largeTitleDisplayMode = .never
+            
+            // TableView cells
+            collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
+            collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+            collectionView?.refreshControl = UIRefreshControl()
+            collectionView?.backgroundView = nil
+            clearsSelectionOnViewWillAppear = false
+            collectionView?.dropDelegate = self
+            collectionView?.dragDelegate = self
+            collectionView?.dragInteractionEnabled = true
+            
+            // Header
+            let header = UIView.browserHeader
+            headerView = header
+            header.createNewFolder = { _ in // Create folder
+                let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
+                chooseName.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = Localizable.Browsers.folderName
+                })
+                chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
+                    
+                    if !result {
+                        let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                        UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    }
+                    
+                    self.reload()
+                }))
+                
+                self.present(chooseName, animated: true, completion: nil)
+            }
+            header.switchLayout = { _ in // Switch layout
+                self.loadLayout()
+            }
+            
+            loadLayout()
+            
+            // Initialize the refresh control.
+            collectionView?.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
+            
+            // Bar buttons
+            let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
+            let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
+            let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
+            let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(openAPTManager))
+            var buttons: [UIBarButtonItem] {
+                guard files != nil else { return [uploadFile, terminal] }
+                guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
+                
+                // Check for GIT
+                var isGitRepo = false
+                for file in allFiles ?? [] {
+                    if file.filename == ".git" || file.filename == ".git/" {
+                        isGitRepo = true
+                    }
+                }
+                
+                // Check for Aptitude
+                guard let resultAPT = try? session.channel.execute("command -v apt-get").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n") else { return [] }
+                
+                if isGitRepo {
+                    if resultAPT.isEmpty {
+                        return [uploadFile, git, terminal]
+                    } else {
+                        return [uploadFile, apt, git, terminal]
+                    }
+                } else {
+                    if resultAPT.isEmpty {
+                        return [uploadFile, terminal]
+                    } else {
+                        return [uploadFile, apt, terminal]
+                    }
+                }
+            }
+            navigationItem.setRightBarButtonItems(buttons, animated: true)
+            
+            // Siri Shortcuts
+            
+            let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openDirectory")
+            if #available(iOS 12.0, *) {
+                activity.isEligibleForPrediction = true
+                //                    activity.suggestedInvocationPhrase = connection.name
+            }
+            activity.isEligibleForSearch = true
+            activity.keywords = [connection.name, connection.username, connection.host, directory.nsString.lastPathComponent, "ssh", "sftp"]
+            if directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
+                activity.title = connection.name
+            } else {
+                activity.title = directory.nsString.lastPathComponent
+            }
+            var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":directory, "port":connection.port] as [String : Any]
+            
+            if let pubKey = connection.publicKey {
+                userInfo["publicKey"] = pubKey
+            }
+            
+            if let privKey = connection.privateKey {
+                userInfo["privateKey"] = privKey
+            }
+            
+            activity.userInfo = userInfo
+            
+            let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+            if let os = connection.os?.lowercased(), directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
+                if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                    attributes.thumbnailData = UIImagePNGRepresentation(logo)
+                }
+            } else {
+                attributes.thumbnailData = UIImagePNGRepresentation(#imageLiteral(resourceName: "File icons/folder"))
+            }
+            attributes.addedDate = Date()
+            attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)\(directory)"
+            activity.contentAttributeSet = attributes
+            
+            self.userActivity = activity
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
@@ -1317,25 +1330,18 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }) {
             if files[indexPath.row].isDirectory { // Open folder
                 
-                let activityVC = ActivityViewController(message: Localizable.loading)
-                self.present(activityVC, animated: true, completion: {
-                    let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: path)
-                    if let delegate = self.delegate {
-                        activityVC.dismiss(animated: true, completion: {
+                let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: path)
+                if let delegate = self.delegate {
+                    
+                    delegate.directoryCollectionViewController(dirVC, didOpenDirectory: path)
+                    
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                } else {
+                    
+                    self.navigationController?.pushViewController(dirVC, animated: true)
                             
-                            delegate.directoryCollectionViewController(dirVC, didOpenDirectory: path)
-                            
-                            collectionView.deselectItem(at: indexPath, animated: true)
-                        })
-                    } else {
-                        activityVC.dismiss(animated: true, completion: {
-                            
-                            self.navigationController?.pushViewController(dirVC, animated: true)
-                            
-                            collectionView.deselectItem(at: indexPath, animated: true)
-                        })
-                    }
-                })
+                    collectionView.deselectItem(at: indexPath, animated: true)
+                }
             } else { // Download file
                 
                 let activityVC = UIAlertController(title: Localizable.DirectoryCollectionViewController.downloading, message: "\n\n", preferredStyle: .alert)
