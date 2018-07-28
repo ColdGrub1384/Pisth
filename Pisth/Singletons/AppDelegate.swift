@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 import GoogleMobileAds
 import SwiftKeychainWrapper
-import SwiftyStoreKit
 import Pisth_Shared
 import Firebase
 import Pisth_API
@@ -221,7 +220,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         }
         
         // Set default terminal theme
-        if UserDefaults.standard.string(forKey: "terminalTheme") == nil || !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
+        if UserDefaults.standard.string(forKey: "terminalTheme") == nil {
             UserDefaults.standard.set("Pisth", forKey: "terminalTheme")
             UserDefaults.standard.synchronize()
         }
@@ -257,39 +256,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         for file in (try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())) ?? [] {
             try? FileManager.default.removeItem(at: URL(fileURLWithPath: NSTemporaryDirectory().nsString.appendingPathComponent(file)))
         }
-        
-        // Finish transactions
-        SwiftyStoreKit.completeTransactions(atomically: false) { (purchases) in
-            for purchase in purchases {
-                switch purchase.transaction.transactionState {
-                case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
-                    
-                    if purchase.productId == ProductsID.themes.rawValue {
-                        UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
-                        UserDefaults.standard.synchronize()
-                    }
-                case .failed, .purchasing, .deferred:
-                    break
-                }
-            }
-        }
-        
-        // Unlock Terminal Themes with the `--iap` or `-i` argument
-        if CommandLine.arguments.contains("--iap") || CommandLine.arguments.contains("-i") {
-            UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
-            UserDefaults.standard.synchronize()
-        }
-                
-        // Buy themes from App Store
-        SwiftyStoreKit.shouldAddStorePaymentHandler = { payment, product in
-            return (product.productIdentifier == ProductsID.themes.rawValue && !UserDefaults.standard.bool(forKey: "terminalThemesPurchased"))
-        }
-        
-        // Initiliaze iAP products
-        Product.initProducts()
         
         // Request app review
         ReviewHelper.shared.launches += 1

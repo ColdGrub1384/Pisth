@@ -562,79 +562,13 @@
                                                         <outlet property="delegate" destination="zJU-Xt-wUr" id="c7r-kY-W9M"/>
                                                     </connections>
                                                 </collectionView>
-                                                <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjv-RO-NeK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73.666666666666671"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1MH-6O-Utz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="73.666666666666671"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locked" translatesAutoresizingMaskIntoConstraints="NO" id="Yte-jB-1wJ">
-                                                                <rect key="frame" x="0.0" y="-1" width="71" height="73.666666666666671"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="71" id="IUk-fF-hEe"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Themes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaE-7R-e5x">
-                                                                <rect key="frame" x="79" y="8" width="265" height="21"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJJ-tQ-VdP">
-                                                                <rect key="frame" x="79" y="42.666666666666664" width="85" height="29.999999999999993"/>
-                                                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="85" id="kTL-70-fdY"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
-                                                                <state key="normal" title="Buy">
-                                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="buyThemes:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="eR4-lV-f0k"/>
-                                                                </connections>
-                                                            </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aV-zQ-tZJ">
-                                                                <rect key="frame" x="172" y="42.666666666666664" width="85" height="29.999999999999993"/>
-                                                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="85" id="cCU-Lx-sLV"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                <state key="normal" title="Restore">
-                                                                    <color key="titleColor" red="0.062745098040000002" green="0.4823529412" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="restoreThemes:" destination="zJU-Xt-wUr" eventType="touchUpInside" id="zzE-MB-Jgd"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="9aV-zQ-tZJ" firstAttribute="leading" secondItem="OJJ-tQ-VdP" secondAttribute="trailing" constant="8" symbolic="YES" id="08Q-ba-gVl"/>
-                                                            <constraint firstItem="Yte-jB-1wJ" firstAttribute="leading" secondItem="1MH-6O-Utz" secondAttribute="leading" id="0k0-SI-r7V"/>
-                                                            <constraint firstItem="VaE-7R-e5x" firstAttribute="top" secondItem="1MH-6O-Utz" secondAttribute="topMargin" id="2DL-Wf-wP4"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Yte-jB-1wJ" secondAttribute="bottom" constant="1" id="79H-lH-c8s"/>
-                                                            <constraint firstAttribute="trailing" secondItem="VaE-7R-e5x" secondAttribute="trailing" constant="31" id="7Ib-de-0pm"/>
-                                                            <constraint firstItem="Yte-jB-1wJ" firstAttribute="bottom" secondItem="OJJ-tQ-VdP" secondAttribute="bottom" id="9AR-CS-cWP"/>
-                                                            <constraint firstItem="Yte-jB-1wJ" firstAttribute="top" secondItem="1MH-6O-Utz" secondAttribute="top" constant="-1" id="Ote-Ye-AgL"/>
-                                                            <constraint firstItem="OJJ-tQ-VdP" firstAttribute="baseline" secondItem="9aV-zQ-tZJ" secondAttribute="baseline" id="fTC-58-YpK"/>
-                                                            <constraint firstItem="VaE-7R-e5x" firstAttribute="leading" secondItem="OJJ-tQ-VdP" secondAttribute="leading" id="lhN-nX-BrC"/>
-                                                            <constraint firstItem="VaE-7R-e5x" firstAttribute="leading" secondItem="Yte-jB-1wJ" secondAttribute="trailing" constant="8" symbolic="YES" id="tpR-SS-X3o"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <blurEffect style="light"/>
-                                                </visualEffectView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="JGx-pf-mye" firstAttribute="leading" secondItem="qal-zt-zMZ" secondAttribute="leading" id="7WK-7H-KGj"/>
                                                 <constraint firstItem="JGx-pf-mye" firstAttribute="top" secondItem="qal-zt-zMZ" secondAttribute="top" id="Hzr-4F-jQa"/>
-                                                <constraint firstItem="jjv-RO-NeK" firstAttribute="bottom" secondItem="JGx-pf-mye" secondAttribute="bottom" id="LrF-Qz-ART"/>
                                                 <constraint firstItem="JGx-pf-mye" firstAttribute="centerY" secondItem="qal-zt-zMZ" secondAttribute="centerY" id="NJA-FR-3UV"/>
-                                                <constraint firstItem="jjv-RO-NeK" firstAttribute="leading" secondItem="JGx-pf-mye" secondAttribute="leading" id="S98-qI-kt2"/>
                                                 <constraint firstAttribute="trailing" secondItem="JGx-pf-mye" secondAttribute="trailing" id="cPn-Cp-JyT"/>
-                                                <constraint firstItem="jjv-RO-NeK" firstAttribute="trailing" secondItem="JGx-pf-mye" secondAttribute="trailing" id="rNF-1n-bTQ"/>
-                                                <constraint firstItem="jjv-RO-NeK" firstAttribute="centerY" secondItem="JGx-pf-mye" secondAttribute="centerY" id="wxt-o3-e9B"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -742,7 +676,6 @@
                         <outlet property="biometricAuthLabel" destination="8CF-NU-bJ6" id="9Mv-Y0-Kq6"/>
                         <outlet property="biometricAuthSwitch" destination="45R-GQ-uSU" id="Wlz-r0-dB8"/>
                         <outlet property="blinkCursorSwitch" destination="g7S-12-QcK" id="sQc-tB-aBx"/>
-                        <outlet property="buyThemesButton" destination="OJJ-tQ-VdP" id="Bpt-M0-cpr"/>
                         <outlet property="px12" destination="BkJ-Ht-xYc" id="HZK-TZ-8wo"/>
                         <outlet property="px13" destination="PDa-4W-yBG" id="y1J-86-nyD"/>
                         <outlet property="px14" destination="MrL-EH-fgs" id="jmt-vE-mO8"/>
@@ -750,9 +683,7 @@
                         <outlet property="px16" destination="ube-lm-1LG" id="IF4-7q-tFo"/>
                         <outlet property="px17" destination="iHM-6k-xSo" id="8n7-hZ-4LT"/>
                         <outlet property="px18" destination="Pg7-DU-Q5J" id="ijk-u3-XcX"/>
-                        <outlet property="restoreThemesButton" destination="9aV-zQ-tZJ" id="MS3-wZ-kqt"/>
                         <outlet property="showHiddenFilesSwitch" destination="ywO-un-kCr" id="ztH-IB-ajp"/>
-                        <outlet property="themesStore" destination="jjv-RO-NeK" id="kvb-0V-2dD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HIU-LF-Kqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -814,7 +745,6 @@
     </scenes>
     <resources>
         <image name="PisthViewer" width="512" height="512"/>
-        <image name="locked" width="80" height="80"/>
         <namedColor name="Purple">
             <color red="0.47058823529411764" green="0.12549019607843137" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

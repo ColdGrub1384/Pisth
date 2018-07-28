@@ -64,7 +64,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         initShowHiddenFilesSetting()
         initBlinkCursorSetting()
         initTextSizeSetting()
-        initThemesIAPSetting()
     }
     
     // MARK: - Blink cursor
@@ -245,30 +244,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         present(vc, animated: true, completion: nil)
     }
-    
-    /// Restore themes iap.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button.
-    @IBAction func restoreThemes(_ sender: UIButton) {
-        Product.restorePurchases { (results) in
-            for purchase in results.restoredPurchases {
-                if purchase.productId == ProductsID.themes.rawValue {
-                    UserDefaults.standard.set(true, forKey: "terminalThemesPurchased")
-                    UserDefaults.standard.synchronize()
-                    self.themesStore.isHidden = true
-                }
-            }
-        }
-    }
-    
-    func initThemesIAPSetting() {
-        buyThemesButton.layer.cornerRadius = 16
-        restoreThemesButton.layer.cornerRadius = 16
-        buyThemesButton.setTitle(Product.terminalThemes.price ?? "Buy", for: .normal)
-        themesStore.isHidden = UserDefaults.standard.bool(forKey: "terminalThemesPurchased")
-    }
-    
     
     // MARK: Table view delegate
     

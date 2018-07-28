@@ -6,7 +6,6 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
-import GoogleMobileAds
 import NMSSH
 import Pisth_Shared
 import Firebase
@@ -39,9 +38,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Close after sending file.
     var closeAfterSending = false
-    
-    /// Ad banner view displayed at top of table view.
-    var bannerView: GADBannerView!
     
     private var headerView_: UIView?
     
@@ -306,14 +302,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             title = titleComponents[titleComponents.count-2]
         }
         
-        // Banner ad
-        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerView.rootViewController = self
-            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-            bannerView.load(GADRequest())
-        }
-        
         navigationItem.largeTitleDisplayMode = .never
         
         // TableView cells
@@ -353,8 +341,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         header.switchLayout = { _ in // Switch layout
             self.loadLayout()
         }
-        
-        footerView = bannerView
         
         loadLayout()
         

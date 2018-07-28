@@ -7,7 +7,6 @@
 
 import UIKit
 import Zip
-import GoogleMobileAds
 import AVFoundation
 import AVKit
 import Pisth_Shared
@@ -31,9 +30,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     /// Delegate used.
     var delegate: LocalDirectoryCollectionViewControllerDelegate?
-    
-    /// Ad banner view displayed as header of Table view.
-    var bannerView: GADBannerView!
     
     private var headerView_: UIView?
     
@@ -396,14 +392,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         title = directory.lastPathComponent
         
-        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-            // Banner ad
-            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerView.rootViewController = self
-            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-            bannerView.load(GADRequest())
-        }
-        
         navigationItem.largeTitleDisplayMode = .never
         
         collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
@@ -441,8 +429,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         header.switchLayout = { _ in // Switch layout
             self.loadLayout()
         }
-        
-        footerView = bannerView
         
         loadLayout()
         

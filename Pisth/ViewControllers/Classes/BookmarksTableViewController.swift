@@ -7,20 +7,16 @@
 
 import UIKit
 import CoreData
-import GoogleMobileAds
 import SwiftKeychainWrapper
 import BiometricAuthentication
 import MultipeerConnectivity
 import Pisth_Shared
 
 /// `TableViewController` used to list, connections.
-class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, GADInterstitialDelegate {
+class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate {
     
     /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
-    
-    /// Ad banner view displayed as header of Table view.
-    var bannerView: GADBannerView!
     
     /// Search controller used to filter connections.
     var searchController: UISearchController!
@@ -94,15 +90,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
-        
-        // Banner ad
-        if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-            bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-            bannerView.rootViewController = self
-            bannerView.adUnitID = "ca-app-pub-9214899206650515/4247056376"
-            bannerView.delegate = self
-            bannerView.load(GADRequest())
-        }
         
         // Search
         searchController = UISearchController(searchResultsController: nil)
@@ -274,13 +261,7 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         
         if indexPath.section == 0 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
-            
-            let interstitial = GADInterstitial(adUnitID: "ca-app-pub-9214899206650515/9370519681")
-            if !UserDefaults.standard.bool(forKey: "terminalThemesPurchased") {
-                interstitial.load(GADRequest())
-                interstitial.delegate = self
-            }
-            
+
             /// Open connection.
             func connect() {
                 let activityVC = ActivityViewController(message: Localizable.BookmarksTableViewController.connecting)
@@ -304,11 +285,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryCollectionViewController: dirVC)
                             } else {
-                                
-                                if interstitial.isReady {
-                                    interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
-                                }
-                                
                                 AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
                                 
                             }
@@ -327,11 +303,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
                             if let delegate = self.delegate {
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
                             } else {
-                                
-                                if interstitial.isReady {
-                                    interstitial.present(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController ?? self)
-                                }
-                                
                                 AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
                                 
                             }
@@ -416,14 +387,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
         }
     }
     
-    
-    // MARK: - Banner view delegate
-    
-    /// Show ad when it's received.
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        tableView.tableHeaderView = bannerView
-    }
-    
     // MARK: Search bar delegate
     
     /// Search for connection.
@@ -497,18 +460,6 @@ class BookmarksTableViewController: UITableViewController, GADBannerViewDelegate
             tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
             tableView.endUpdates()
             tableView.backgroundView?.isHidden = !shouldShowBackgroundView
-        }
-    }
-    
-    // MARK: - Interstitial delegate
-    
-    /// Make the terminal first responder.
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        
-        if let termVC = AppDelegate.shared.navigationController.visibleViewController as? TerminalViewController {
-            
-            _ = termVC.becomeFirstResponder()
-            
         }
     }
 }
