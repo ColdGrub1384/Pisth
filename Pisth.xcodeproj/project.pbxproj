@@ -286,10 +286,6 @@
 		C99FE3BA210D19F8000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Contribute.strings; sourceTree = "<group>"; };
 		C99FE3BB210D19F8000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Beta.strings; sourceTree = "<group>"; };
 		C99FE3BC210D19F9000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/File Info.strings"; sourceTree = "<group>"; };
-		C99FE3BD210D19F9000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		C99FE3BE210D19F9000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
-		C99FE3BF210D19FA000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
-		C99FE3C0210D19FA000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C99FE3C1210D19FB000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C99FE3C2210D2490000A885D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Image.strings; sourceTree = "<group>"; };
 		C99FE3C3210D2493000A885D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Image.strings; sourceTree = "<group>"; };
@@ -1084,7 +1080,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3ACF9AE320409446006C3218 /* Base */,
-				C99FE3BF210D19FA000A885D /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1093,7 +1088,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3ACF9AE820409446006C3218 /* Base */,
-				C99FE3C0210D19FA000A885D /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1102,7 +1096,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				3AFDD90E1FF140FE0061677B /* Base */,
-				C99FE3BD210D19F9000A885D /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1231,7 +1224,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C9CB27E820D5BB9800290DBE /* Base */,
-				C99FE3BE210D19F9000A885D /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
