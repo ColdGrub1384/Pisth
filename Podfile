@@ -10,11 +10,9 @@ target 'Pisth' do
   pod 'NMSSH'
   pod 'Highlightr'
   pod 'Zip'
-  pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftKeychainWrapper'
   pod 'BiometricAuthentication'
   pod 'ActionSheetPicker-3.0'
-  pod 'SwiftyStoreKit'
   pod 'Firebase/Core'
   pod 'PanelKit'
 end

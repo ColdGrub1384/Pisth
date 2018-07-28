@@ -1,6 +1,0 @@
-framework module SwiftyStoreKit {
-  umbrella header "SwiftyStoreKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

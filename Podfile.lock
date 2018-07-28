@@ -13,7 +13,6 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (2.0.9):
     - FirebaseCore (~> 4.0)
-  - Google-Mobile-Ads-SDK (7.29.0)
   - GoogleToolboxForMac/Defines (2.1.3)
   - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
@@ -26,19 +25,16 @@ PODS:
   - NMSSH (2.2.8)
   - PanelKit (2.0.1)
   - SwiftKeychainWrapper (3.0.1)
-  - SwiftyStoreKit (0.13.0)
   - Zip (1.1.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - BiometricAuthentication
   - Firebase/Core
-  - Google-Mobile-Ads-SDK
   - Highlightr
   - NMSSH
   - PanelKit
   - SwiftKeychainWrapper
-  - SwiftyStoreKit
   - Zip
 
 SPEC REPOS:
@@ -49,14 +45,12 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseInstanceID
-    - Google-Mobile-Ads-SDK
     - GoogleToolboxForMac
     - Highlightr
     - nanopb
     - NMSSH
     - PanelKit
     - SwiftKeychainWrapper
-    - SwiftyStoreKit
     - Zip
 
 SPEC CHECKSUMS:
@@ -66,16 +60,14 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
   FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
   FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
-  Google-Mobile-Ads-SDK: 375bbb821b3df2106c37b74f6b0a97576ddc5f6b
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   Highlightr: e68a91ed9067ef0a787b920dd9becbd9935c2b79
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
   PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
-  SwiftyStoreKit: df6a58aba530128e1c5d5ae4fe7d191e5ac50d5d
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 29c2aa2c2386385bc52f73a5b5f2e4a12d360ffd
+PODFILE CHECKSUM: 00afc907f0b48a975c7424e2b38cb54c8e79854f
 
 COCOAPODS: 1.5.2
