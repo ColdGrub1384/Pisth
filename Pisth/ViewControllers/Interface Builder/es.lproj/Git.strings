@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "(current)"; ObjectID = "3BK-zN-Mi0"; */
+"3BK-zN-Mi0.text" = "(actual)";
+
+/* Class = "UILabel"; text = "(current)"; ObjectID = "3Jo-HN-nlK"; */
+"3Jo-HN-nlK.text" = "(actual)";
+
+/* Class = "UIBarButtonItem"; title = "Pull"; ObjectID = "5iF-LD-JFE"; */
+"5iF-LD-JFE.title" = "Pull";
+
+/* Class = "UIBarButtonItem"; title = "Commit"; ObjectID = "OrR-8b-t6C"; */
+"OrR-8b-t6C.title" = "Commit";
+
+/* Class = "UILabel"; text = "master"; ObjectID = "Pxi-wH-Lid"; */
+"Pxi-wH-Lid.text" = "master";
+
+/* Class = "UILabel"; text = "Branches"; ObjectID = "T8e-Md-VT2"; */
+"T8e-Md-VT2.text" = "Ramas";
+
+/* Class = "UILabel"; text = "origin/master"; ObjectID = "U4j-YH-vlE"; */
+"U4j-YH-vlE.text" = "origin/master";
+
+/* Class = "UITableViewController"; title = "Remote Branches"; ObjectID = "WYX-4p-FkS"; */
+"WYX-4p-FkS.title" = "Ramas Remotas";
+
+/* Class = "UINavigationItem"; title = "Branches"; ObjectID = "hHI-qq-Bta"; */
+"hHI-qq-Bta.title" = "Ramas";
+
+/* Class = "UILabel"; text = "Remotes"; ObjectID = "jmc-9r-pnG"; */
+"jmc-9r-pnG.text" = "Remotos";
+
+/* Class = "UINavigationItem"; title = "Source control"; ObjectID = "psI-be-9z7"; */
+"psI-be-9z7.title" = "Source control";
+
+/* Class = "UINavigationItem"; title = "Remote Branches"; ObjectID = "qZd-DB-KdZ"; */
+"qZd-DB-KdZ.title" = "Ramas remotas";
+
+/* Class = "UIBarButtonItem"; title = "Push"; ObjectID = "uMp-KR-zoC"; */
+"uMp-KR-zoC.title" = "Push";
+
+/* Class = "UIBarButtonItem"; title = "Fetch"; ObjectID = "zmD-aJ-snR"; */
+"zmD-aJ-snR.title" = "Fetch";

@@ -125,28 +125,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Port" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-4X-ab2">
-                                                    <rect key="frame" x="16" y="9.3333333333333357" width="48" height="21"/>
+                                                    <rect key="frame" x="16" y="9" width="80" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="jgd-4R-K8T"/>
+                                                        <constraint firstAttribute="width" constant="80" id="69A-o6-FOK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="22" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTu-Kl-87d">
-                                                    <rect key="frame" x="76" y="5.6666666666666661" width="283" height="28.333333333333336"/>
+                                                    <rect key="frame" x="104" y="6" width="255" height="28"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="DTu-Kl-87d" firstAttribute="leading" secondItem="KPe-4X-ab2" secondAttribute="trailing" constant="12" id="7RW-9L-YFf"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="DTu-Kl-87d" secondAttribute="bottom" constant="-5" id="K4l-jw-Nmj"/>
-                                                <constraint firstItem="KPe-4X-ab2" firstAttribute="centerY" secondItem="3xe-4n-BeT" secondAttribute="centerY" id="eRC-Cv-Cxq"/>
-                                                <constraint firstItem="DTu-Kl-87d" firstAttribute="trailing" secondItem="3xe-4n-BeT" secondAttribute="trailingMargin" id="qxS-Mq-gS3"/>
-                                                <constraint firstItem="KPe-4X-ab2" firstAttribute="leading" secondItem="3xe-4n-BeT" secondAttribute="leadingMargin" id="voT-xS-ZJv"/>
-                                                <constraint firstItem="DTu-Kl-87d" firstAttribute="centerY" secondItem="3xe-4n-BeT" secondAttribute="centerY" id="z7c-RA-4r2"/>
+                                                <constraint firstItem="KPe-4X-ab2" firstAttribute="leading" secondItem="3xe-4n-BeT" secondAttribute="leadingMargin" id="4RX-C6-T27"/>
+                                                <constraint firstItem="KPe-4X-ab2" firstAttribute="centerY" secondItem="DTu-Kl-87d" secondAttribute="centerY" id="7VV-KZ-0SU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="DTu-Kl-87d" secondAttribute="bottom" constant="-5" id="b1n-ch-eJn"/>
+                                                <constraint firstItem="KPe-4X-ab2" firstAttribute="centerY" secondItem="3xe-4n-BeT" secondAttribute="centerY" id="bjX-KY-q9X"/>
+                                                <constraint firstItem="DTu-Kl-87d" firstAttribute="trailing" secondItem="3xe-4n-BeT" secondAttribute="trailingMargin" id="pzw-mh-6Pp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="KPe-4X-ab2" secondAttribute="bottom" constant="-1" id="qSz-Ei-r6w"/>
+                                                <constraint firstItem="DTu-Kl-87d" firstAttribute="leading" secondItem="KPe-4X-ab2" secondAttribute="trailing" constant="8" symbolic="YES" id="uHh-gD-Gu5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -193,7 +194,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aM0-AG-eJ6">
-                                                    <rect key="frame" x="16" y="9" width="114" height="21"/>
+                                                    <rect key="frame" x="16" y="9.6666666666666661" width="114" height="20.333333333333336"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="114" id="bU2-px-PLF"/>
                                                     </constraints>
@@ -202,7 +203,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RxJ-zh-q6o">
-                                                    <rect key="frame" x="138" y="7" width="221" height="26"/>
+                                                    <rect key="frame" x="138" y="6.6666666666666661" width="221" height="26.333333333333336"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
@@ -257,7 +258,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Path" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TsD-H8-nji">
-                                                    <rect key="frame" x="16" y="9" width="90" height="21"/>
+                                                    <rect key="frame" x="16" y="9.6666666666666661" width="90" height="20.333333333333336"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="MWV-Oh-xC1"/>
                                                     </constraints>
@@ -266,7 +267,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kju-dJ-cKo">
-                                                    <rect key="frame" x="114" y="7" width="245" height="26"/>
+                                                    <rect key="frame" x="114" y="6.6666666666666661" width="245" height="26.333333333333336"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>

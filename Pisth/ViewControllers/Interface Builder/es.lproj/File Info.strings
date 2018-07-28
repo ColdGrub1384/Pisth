@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "Parent directory"; ObjectID = "8TR-7z-s98"; */
+"8TR-7z-s98.text" = "Carpeta contenedora";
+
+/* Class = "UILabel"; text = "Permissions"; ObjectID = "JQa-Ip-Hat"; */
+"JQa-Ip-Hat.text" = "Permisos";
+
+/* Class = "UILabel"; text = "Permissions"; ObjectID = "MLM-Kl-RVj"; */
+"MLM-Kl-RVj.text" = "Permisos";
+
+/* Class = "UILabel"; text = "File name"; ObjectID = "MvF-3T-Qvc"; */
+"MvF-3T-Qvc.text" = "Nombre";
+
+/* Class = "UILabel"; text = "File type"; ObjectID = "Ny7-G8-vpP"; */
+"Ny7-G8-vpP.text" = "Tipo";
+
+/* Class = "UILabel"; text = "Modification date"; ObjectID = "b9m-w2-eOP"; */
+"b9m-w2-eOP.text" = "Fecha de modificación";
+
+/* Class = "UILabel"; text = "File type"; ObjectID = "bAV-RT-act"; */
+"bAV-RT-act.text" = "Tipo";
+
+/* Class = "UILabel"; text = "Size"; ObjectID = "cBZ-fd-sAP"; */
+"cBZ-fd-sAP.text" = "Tamaño";
+
+/* Class = "UILabel"; text = "Size"; ObjectID = "erb-Ra-TeP"; */
+"erb-Ra-TeP.text" = "Tamaño";
+
+/* Class = "UILabel"; text = "Modification"; ObjectID = "mlK-pR-FN7"; */
+"mlK-pR-FN7.text" = "Modificación";

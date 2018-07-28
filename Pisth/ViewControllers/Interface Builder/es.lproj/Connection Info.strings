@@ -1,0 +1,33 @@
+
+/* Class = "UIButton"; normalTitle = "Import Public key"; ObjectID = "0WK-qj-5lR"; */
+"0WK-qj-5lR.normalTitle" = "Importar Public key";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "3El-e5-yY4"; */
+"3El-e5-yY4.title" = "Guardar";
+
+/* Class = "UILabel"; text = "Use SFTP"; ObjectID = "4HX-kj-yBq"; */
+"4HX-kj-yBq.text" = "Usar SFTP";
+
+/* Class = "UITextField"; placeholder = "22"; ObjectID = "DTu-Kl-87d"; */
+"DTu-Kl-87d.placeholder" = "22";
+
+/* Class = "UILabel"; text = "Port"; ObjectID = "KPe-4X-ab2"; */
+"KPe-4X-ab2.text" = "Puerto";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "NV5-ed-Tzc"; */
+"NV5-ed-Tzc.text" = "Usuario";
+
+/* Class = "UIButton"; normalTitle = "Import Private key"; ObjectID = "PQ0-5N-RJn"; */
+"PQ0-5N-RJn.normalTitle" = "Importar Private key";
+
+/* Class = "UILabel"; text = "Path"; ObjectID = "TsD-H8-nji"; */
+"TsD-H8-nji.text" = "Camino";
+
+/* Class = "UILabel"; text = "Host"; ObjectID = "UuM-6U-JAD"; */
+"UuM-6U-JAD.text" = "Servidor";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "aM0-AG-eJ6"; */
+"aM0-AG-eJ6.text" = "Contraseña";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "wCC-30-vW5"; */
+"wCC-30-vW5.text" = "Nombre";
