@@ -629,10 +629,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 ConnectionManager.shared.session?.channel.closeShell()
                 try? ConnectionManager.shared.session?.channel.startShell()
             }
-            
-            if isPresentedInFullscreen {
-                showNavBar()
-            }
         }
         
         if pureMode {
