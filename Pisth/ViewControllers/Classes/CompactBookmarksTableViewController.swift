@@ -6,11 +6,6 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
-import CoreData
-import GoogleMobileAds
-import SwiftKeychainWrapper
-import BiometricAuthentication
-import MultipeerConnectivity
 import Pisth_Shared
 
 /// A `BookmarksTableViewController` for being presented on compact windows on the top of a connection.

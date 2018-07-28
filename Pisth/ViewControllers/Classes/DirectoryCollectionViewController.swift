@@ -112,9 +112,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Resume closed session.
     @objc func resume() {
-        
-        footerView = bannerView
-        
+                
         let activityVC = ActivityViewController(message: Localizable.loading)
         present(activityVC, animated: true) {
             let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: self.directory)

@@ -34,9 +34,7 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
             let activityVC = ActivityViewController(message: "Loading...")
             UIApplication.shared.keyWindow?.topViewController()?.present(activityVC, animated: true) {
                 AppDelegate.shared.searchForUpdates(completion: {
-                    activityVC.dismiss(animated: true, completion: {
-                        AppDelegate.shared.presentInterstitialAd()
-                    })
+                    activityVC.dismiss(animated: true, completion: nil)
                 })
             }
         })

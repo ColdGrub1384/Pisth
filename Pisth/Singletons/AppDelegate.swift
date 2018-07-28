@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import GoogleMobileAds
 import SwiftKeychainWrapper
 import Pisth_Shared
 import Firebase

@@ -30,11 +30,6 @@ extension UIViewController {
         return (UIStoryboard(name: "Settings", bundle: Bundle.main).instantiateInitialViewController() as? SettingsTableViewController) ?? SettingsTableViewController()
     }
     
-    /// Returns the themes store initialised from nib.
-    static var themesStore: ThemesStoreViewController {
-        return (Bundle.main.loadNibNamed("Themes Store", owner: nil, options: nil)?[0] as? ThemesStoreViewController) ?? ThemesStoreViewController()
-    }
-    
     /// Returns the navigation controller with `SourceControlTableViewController` initialised from storyboard.
     static var gitNavigationController: UINavigationController {
         return (UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as? UINavigationController) ?? UINavigationController()

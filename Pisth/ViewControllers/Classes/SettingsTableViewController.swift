@@ -221,30 +221,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         }
     }
     
-    
-    // MARK: - Unlock themes
-    
-    /// View blocking access to themes if they are not purchased.
-    @IBOutlet weak var themesStore: UIVisualEffectView!
-    
-    /// Button used to buy themes iap.
-    @IBOutlet weak var buyThemesButton: UIButton!
-    
-    /// Button used to restore themes iap.
-    @IBOutlet weak var restoreThemesButton: UIButton!
-    
-    /// Buy themes iap.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button.
-    @IBAction func buyThemes(_ sender: UIButton) {
-        let vc = UIViewController.themesStore
-        
-        vc.modalPresentationStyle = .overCurrentContext
-        
-        present(vc, animated: true, completion: nil)
-    }
-    
     // MARK: Table view delegate
     
     /// Open licenses or deselect selected row.

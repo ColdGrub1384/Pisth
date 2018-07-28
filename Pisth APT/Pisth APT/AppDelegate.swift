@@ -9,7 +9,6 @@ import UIKit
 import NMSSH
 import Pisth_Shared
 import Pisth_API
-import GoogleMobileAds
 import Firebase
 
 /// Pisth API object
@@ -17,7 +16,7 @@ let pisth = Pisth(message: "Import DEB package", urlScheme: URL(string:"dpkgPist
 
 /// The app delegate.
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     /// Shared and unique instance.
     static var shared: AppDelegate!
@@ -52,25 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
     /// URL of app that opened this app with the API.
     var apiURL: URL?
     
-    /// Interstitial ad.
-    var interstitialAd: GADInterstitial!
-    
-    /// Present interstitial ad.
-    func presentInterstitialAd() {
-        if interstitialAd.isReady, let rootVC = UIApplication.shared.keyWindow?.topViewController() {
-            interstitialAd.present(fromRootViewController: rootVC)
-        }
-    }
-    
-    /// Returns a ready to use interstitial ad.
-    var createAndLoadAd: GADInterstitial {
-        let ad = GADInterstitial(adUnitID: "ca-app-pub-9214899206650515/4961139411")
-        ad.delegate = self
-        ad.load(GADRequest())
-        
-        return ad
-    }
-    
     /// Close connection opened with the API.
     @objc func goToPreviousApp() {
         UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: {
@@ -93,9 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
                             UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
                                 self.connect()
                                 self.searchForUpdates(completion: {
-                                    activityVC.dismiss(animated: true, completion: {
-                                        self.presentInterstitialAd()
-                                    })
+                                    activityVC.dismiss(animated: true, completion: nil)
                                 })
                             })
                         })
@@ -250,10 +228,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
     
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        FirebaseApp.configure()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~6828541853")
-        interstitialAd = createAndLoadAd
-        
         connect()
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
@@ -325,7 +299,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
                                 }
                                 
                                 connectingVC.present(viewController, animated: true, completion: {
-                                    self.presentInterstitialAd()
                                     for vc in viewController.viewControllers ?? [] {
                                         (vc as? UINavigationController)?.visibleViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))
                                     }
@@ -390,18 +363,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GADInterstitialDelegate {
         }
         
         return false
-    }
-
-    // MARK: - Interstitial
-    
-    /// Reload ad.
-    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        interstitialAd = createAndLoadAd
-    }
-    
-    /// Print error.
-    func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
-        print("Error receiving ad: \(error.localizedDescription)")
     }
 }
 
