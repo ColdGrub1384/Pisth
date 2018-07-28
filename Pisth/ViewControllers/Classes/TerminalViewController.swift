@@ -1045,18 +1045,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             
             do {
                 if !self.pureMode {
-                    let clearLastFromHistory = "history -d $(history 1)"
                     
                     session.channel.closeShell()
                     session.channel.delegate = self
                     try session.channel.startShell()
                     
                     if let pwd = self.pwd {
-                        try session.channel.write("cd '\(pwd)'; \(clearLastFromHistory)\n")
+                        try session.channel.write("cd '\(pwd)'\n")
                     }
-                    
-                    try session.channel.write("clear; \(clearLastFromHistory)\n")
-                    
+                                        
                     if let command = self.command {
                         try session.channel.write("\(command);\n")
                     }
