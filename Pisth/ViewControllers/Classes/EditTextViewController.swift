@@ -73,7 +73,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         let dismissKeyboard = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard(_:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let tab = UIBarButtonItem(title: "↹", style: .plain, target: self, action: #selector(insertTab))
+        let tab = UIBarButtonItem(title: "⇥", style: .plain, target: self, action: #selector(insertTab))
         
         let items = [tab, flexSpace, dismissKeyboard] as [UIBarButtonItem]
         toolbar.items = items
