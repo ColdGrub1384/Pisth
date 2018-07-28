@@ -998,6 +998,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
         selectionTextView.backgroundColor = theme.backgroundColor
         selectionTextView.textColor = theme.foregroundColor
+        view.backgroundColor = theme.backgroundColor
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
             if !self.viewer {
@@ -1323,6 +1324,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Returns: `UIDropProposal(operation: .copy)`.
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
+    }
+    
+    /// Add `webView`.
+    func dropInteraction(_ interaction: UIDropInteraction, concludeDrop session: UIDropSession) {
+        view.addSubview(webView)
+    }
+    
+    /// Remove `webView`.
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnter session: UIDropSession) {
+        webView.removeFromSuperview()
     }
     
     // MARK: - Panel content delegate
