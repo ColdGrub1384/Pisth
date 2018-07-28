@@ -159,11 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIViewController.content
         window?.makeKeyAndVisible()
-        GADBannerView.appearance().ignoresInvertColors = true
-        
-        // Initialize the Google Mobile Ads SDK.
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-9214899206650515~2846344793")
-        
+
         // Firebase analytics
         FirebaseApp.configure()
         
