@@ -221,7 +221,7 @@
 "dir.errorUploadingTitle" = "Error uploading file!";
 
 /* Import file from the Pisth sandbox. */
-"dir.importFromPisth" = "Import from Pisth";
+"dir.importFromPisth" = "Import from other session";
 
 /* Message of the alert asking for sending a file to the server. Do you want to send <File> to <Directory>? */
 "dir.sendFile" = "Do you want to send %@ to %@?";

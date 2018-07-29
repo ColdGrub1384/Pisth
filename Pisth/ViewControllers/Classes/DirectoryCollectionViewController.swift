@@ -733,13 +733,17 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     ///
     /// - Parameters:
     ///     - file: Local file to upload.
+    ///     - data: Data to send.
+    ///     - filename: The filename. Default is `file.lastPathComponent`.
     ///     - directory: Directory where upload files, default is current directory.
     ///     - uploadHandler: Code to execute after uploading file, nil by default.
     ///     - errorHandler: Code to execute after the upload failed.
     ///     - showAlert: If show uploading alert.
     ///
     /// - Returns: `false` if upload failed, always returns `true` if `showAlert` is `true`.
-    @discardableResult func sendFile(file: URL, toDirectory path: String? = nil, uploadHandler: (() -> Void)? = nil, errorHandler: (() -> Void)? = nil, showAlert: Bool = true) -> Bool {
+    @discardableResult func sendFile(file: URL? = nil, data: Data? = nil, filename: String? = nil, toDirectory path: String? = nil, uploadHandler: (() -> Void)? = nil, errorHandler: (() -> Void)? = nil, showAlert: Bool = true) -> Bool {
+        
+        let filename_ = filename ?? file?.lastPathComponent ?? "uploaded"
         
         var directory: String!
         if path == nil {
@@ -755,7 +759,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         /// - Returns: `false` if upload failed.
         func upload() -> Bool {
             do {
-                let dataToSend = try Data(contentsOf: file)
+                
+                guard !(file != nil && data != nil) else {
+                    fatalError("A file and data can't be specified. Choose one.")
+                }
+                
+                var dataToSend: Data
+                if let file = file {
+                    dataToSend = try Data(contentsOf: file)
+                } else if let data = data {
+                    dataToSend = data
+                } else {
+                    fatalError("A file URL or the data have to be specified.")
+                }
                 
                 /// Show error or run error handler.
                 func showError_() {
@@ -763,7 +779,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         handler()
                     } else {
                         let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (_) in
+                        alert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (_) in
                             if let handler = errorHandler {
                                 handler()
                             }
@@ -783,7 +799,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
                 
-                guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(file.lastPathComponent)) else {
+                guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(filename_)) else {
                     
                     showError()
                     
@@ -1043,11 +1059,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.present(picker, animated: true, completion: nil)
         }))
         
-        chooseAlert.addAction(UIAlertAction(title: Localizable.DirectoryCollectionViewController.importFromPisth, style: .default, handler: { (_) in // Upload file from Pisth
-            let localDirVC = LocalDirectoryCollectionViewController(directory: FileManager.default.documents)
-            localDirVC.delegate = self
+        chooseAlert.addAction(UIAlertAction(title: Localizable.DirectoryCollectionViewController.importFromPisth, style: .default, handler: { (_) in // Upload file from other session
             
-            self.navigationController?.pushViewController(localDirVC, animated: true)
+            AppDelegate.shared.pisthAPIDirectoryCollectionViewControllerSender = self
+            Pisth(message: nil, urlScheme: URL(string:"pisth://")!).importFile()
         }))
         
         chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.createTitle, style: .default, handler: { (_) in // Create file

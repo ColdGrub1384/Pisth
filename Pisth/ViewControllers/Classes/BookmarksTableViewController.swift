@@ -29,7 +29,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     /// Returns `true` if the view saying that there is no bookmarks should be shown.
     var shouldShowBackgroundView: Bool {
-        return (DataManager.shared.connections.count == 0 && devices.count == 0 || tableView.backgroundView is UIVisualEffectView)
+        return (DataManager.shared.connections.count == 0 && devices.count == 0 || tableView.backgroundView is UIVisualEffectView || tableView.backgroundView?.tag == 1)
     }
     
     /// Open app's settings.

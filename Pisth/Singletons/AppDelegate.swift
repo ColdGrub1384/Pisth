@@ -31,8 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     /// The shared Split view controller used in the app.
     var splitViewController = SplitViewController()
     
-    /// An instance of DirectoryCollectionViewController to be used to upload files from the share menu.
+    /// An instance of `DirectoryCollectionViewController` to be used to upload files from the share menu.
     var directoryCollectionViewController: DirectoryCollectionViewController?
+    
+    /// An instance of `DirectoryCollectionViewController` to be used to upload a file from Pisth API.
+    var pisthAPIDirectoryCollectionViewControllerSender: DirectoryCollectionViewController?
     
     /// The file opened from share menu.
     var openedFile: URL?
@@ -455,6 +458,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     let imageView = UIImageView(image: backgroundImage)
                     imageView.ignoresInvertColors = true
                     let containerView = UIView()
+                    containerView.tag = 1
                     containerView.addSubview(imageView)
                     containerView.addSubview(blurView)
                     
@@ -477,6 +481,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
                     bookmarksVC.navigationItem.prompt = Localizable.AppDelegate.selectConnectionToExportFile
                 })
+            } else if url.absoluteString.hasPrefix("pisth:") { // Send file from Pisth API
+                
+                let pisth = Pisth(message: nil, urlScheme: URL(string:"pisth://")!)
+                
+                if let file = pisth.receivedFile, let dirVC = pisthAPIDirectoryCollectionViewControllerSender {
+                    pisthAPIDirectoryCollectionViewControllerSender = nil
+                    
+                    dirVC.sendFile(file: nil, data: file.data, filename: file.filename, toDirectory: dirVC.directory)
+                }
             }
         }
         
