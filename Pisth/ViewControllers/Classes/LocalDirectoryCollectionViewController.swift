@@ -85,12 +85,14 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     /// `footerView` superview.
     var footerSuperview: UIView?
     
+    private var document: UIDocumentInteractionController!
+    
     /// Share file with an `UIDocumentInteractionController`.
     ///
     /// - Parameters:
     ///     - sender: `sender.tag` will be used as index of file in `files` array.
     @objc func shareFile(_ sender: UIButton) {
-        let document = UIDocumentInteractionController(url: files[sender.tag])
+        document = UIDocumentInteractionController(url: files[sender.tag])
         document.delegate = self
         document.presentOpenInMenu(from: sender.bounds, in: sender, animated: true)
     }
