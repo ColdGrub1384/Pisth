@@ -350,11 +350,14 @@ class FileCollectionViewCell: UICollectionViewCell {
         directoryCollectionViewController.present(fileInfoVC, animated: true)
     }
     
+    private var controller: UIDocumentInteractionController!
+    
     /// Share local file.
     @objc func shareFile(_ sender: Any) {
         if let localDirectoryCollectionViewController = localDirectoryCollectionViewController {
-            let controller = UIDocumentInteractionController(url: localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
-            controller.presentOpenInMenu(from: bounds, in: self, animated: true)
+            controller = UIDocumentInteractionController(url: localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
+            controller.presentOptionsMenu(from: bounds, in: self, animated: true)
+            print(localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
         }
     }
 }
