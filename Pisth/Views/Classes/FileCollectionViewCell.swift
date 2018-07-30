@@ -61,7 +61,7 @@ class FileCollectionViewCell: UICollectionViewCell {
                 
                 return (action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
             } else {
-                return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
+                return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)))
             }
         }
         
