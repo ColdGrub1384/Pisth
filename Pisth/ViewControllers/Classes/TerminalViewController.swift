@@ -416,27 +416,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         AudioServicesPlayAlertSound(1054)
     }
     
-    /// Reload terminal with animation.
+    /// Resize the terminal.
     @objc func reload() {
         
-        let view = UIVisualEffectView(frame: webView.frame)
-        
-        if keyboardAppearance == .dark {
-            view.effect = UIBlurEffect(style: .dark)
-        } else {
-            view.effect = UIBlurEffect(style: .light)
-        }
-        
-        view.alpha = 0
-        view.tag = 5
-        
-        self.view.addSubview(view)
-        
-        webView.reload()
-        
-        UIView.animate(withDuration: 0.5) {
-            view.alpha = 1
-        }
+        webView.evaluateJavaScript("fit(term)", completionHandler: {_, _ in
+            if !self.viewer {
+                self.changeSize(completion: nil)
+            }
+        })
     }
     
     /// Resize and reload `webView`.
