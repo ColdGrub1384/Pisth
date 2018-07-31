@@ -1393,7 +1393,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                     // Send notification
                                     let content = UNMutableNotificationContent()
                                     content.title = newFile.lastPathComponent
-                                    content.body = "Download finished"
+                                    content.body = Localizable.DirectoryCollectionViewController.downloadFinished
                                     content.sound = UNNotificationSound.default()
                                     let request = UNNotificationRequest(identifier: "download", content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
                                     UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
