@@ -361,7 +361,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Hide or show navigation bar.
     @objc func showNavBar() {
         navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden.inverted ?? true, animated: true)
-        reload()
+        fit()
     }
     
     /// Enter in selection mode or paste text.
@@ -383,6 +383,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.selectText = true
                 
                 _ = self.resignFirstResponder()
+                self.reload()
             }))
         }
         
@@ -416,14 +417,27 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         AudioServicesPlayAlertSound(1054)
     }
     
-    /// Resize the terminal.
+    /// Reload terminal with animation.
     @objc func reload() {
         
-        webView.evaluateJavaScript("fit(term)", completionHandler: {_, _ in
-            if !self.viewer {
-                self.changeSize(completion: nil)
-            }
-        })
+        let view = UIVisualEffectView(frame: webView.frame)
+        
+        if keyboardAppearance == .dark {
+            view.effect = UIBlurEffect(style: .dark)
+        } else {
+            view.effect = UIBlurEffect(style: .light)
+        }
+        
+        view.alpha = 0
+        view.tag = 5
+        
+        self.view.addSubview(view)
+        
+        webView.reload()
+        
+        UIView.animate(withDuration: 0.5) {
+            view.alpha = 1
+        }
     }
     
     /// Resize and reload `webView`.
@@ -439,7 +453,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             arrowsVC.view.frame = webView.frame
         }
         
-        reload()
+        fit()
+    }
+    
+    /// Fit the terminal content.
+    func fit() {
+        webView.evaluateJavaScript("fit(term)", completionHandler: {_, _ in
+            if !self.viewer {
+                self.changeSize(completion: nil)
+            }
+        })
     }
     
     /// Close this View controller.
@@ -666,7 +689,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Reload `webView`.
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        reload()
+        fit()
     }
     
     /// Set user info.
@@ -728,7 +751,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if webView.frame.size != view.bounds.size {
             webView.frame = view.bounds
-            reload()
+            fit()
         }
         
         if let arrowsVC = ArrowsViewController.current {
