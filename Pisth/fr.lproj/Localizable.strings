@@ -110,7 +110,7 @@
 "cell.paste" = "Coller";
 
 /* Paste selection */
-"cell.pasteSelection" = "Coller la séléction";
+"cell.pasteSelection" = "Coller la sélection";
 
 /* Title of the alert shown while removing file. */
 "cell.removing" = "Suppression";
@@ -338,7 +338,7 @@
 "menu.rename" = "Renommer";
 
 /* Selection mode */
-"menu.selectionMode" = "Mode séléction";
+"menu.selectionMode" = "Mode sélection";
 
 /* Share */
 "menu.share" = "Partager";
@@ -395,7 +395,7 @@
 "terminal.selectAction" = "Selectionnez une action";
 
 /* Request a commit message to the user. */
-"terminal.selectionMode" = "Mode séléction";
+"terminal.selectionMode" = "Mode sélection";
 
 /* Key command description. */
 "terminal.sendCtrlKey" = "Envoyer ^%@";
