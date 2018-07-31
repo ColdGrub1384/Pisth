@@ -614,22 +614,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         checkForConnectionError(errorHandler: {
             self.showError()
         }) {
-            
-            let activityVC = ActivityViewController(message: Localizable.loading)
-            self.present(activityVC, animated: true, completion: {
-                let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: directory)
-                if let delegate = self.delegate {
-                    activityVC.dismiss(animated: true, completion: {
-                        
-                        delegate.directoryCollectionViewController(dirVC, didOpenDirectory: directory)
-                    })
-                } else {
-                    activityVC.dismiss(animated: true, completion: {
-                        
-                        self.navigationController?.pushViewController(dirVC, animated: true)
-                    })
-                }
-            })
+            let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: directory)
+            if let delegate = self.delegate {
+                
+                delegate.directoryCollectionViewController(dirVC, didOpenDirectory: directory)
+            } else {
+                self.navigationController?.pushViewController(dirVC, animated: true)
+            }
         }
     }
     
