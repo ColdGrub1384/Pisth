@@ -469,8 +469,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - gesture: The `UILongPressGestureRecognizer` that triggered the action.
     @objc func showMenu(_ gesture: UILongPressGestureRecognizer) {
+
         UIMenuController.shared.setTargetRect(CGRect(origin: gesture.location(in: webView), size: CGSize.zero), in: webView)
-        UIMenuController.shared.setMenuVisible(true, animated: true)
+        
+        if gesture.state == .ended {
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                UIMenuController.shared.setMenuVisible(true, animated: true)
+            })
+        } else {
+            UIMenuController.shared.setMenuVisible(true, animated: true)
+        }
     }
     
     // MARK: - View controller
