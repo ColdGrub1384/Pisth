@@ -14,6 +14,7 @@ import Pisth_API
 import StoreKit
 import PanelKit
 import CoreSpotlight
+import UserNotifications
 
 /// Collection view controller to manage remote files.
 class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
@@ -1397,6 +1398,14 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                         ConnectionManager.shared.saveFile = SaveFile(localFile: newFile.path, remoteFile: path)
                                         LocalDirectoryCollectionViewController.openFile(newFile, wasJustDownloaded: true, from: collectionView.cellForItem(at: indexPath)!.frame, in: collectionView, navigationController: self.navigationController, showActivityViewControllerInside: self)
                                     })
+                                    
+                                    // Send notification
+                                    let content = UNMutableNotificationContent()
+                                    content.title = newFile.lastPathComponent
+                                    content.body = "Download finished"
+                                    content.sound = UNNotificationSound.default()
+                                    let request = UNNotificationRequest(identifier: "download", content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
+                                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                                 } catch let error {
                                     activityVC.dismiss(animated: true, completion: {
                                         let errorAlert = UIAlertController(title: Localizable.errorSavingFile, message: error.localizedDescription, preferredStyle: .alert)

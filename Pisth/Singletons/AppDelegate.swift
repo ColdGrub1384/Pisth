@@ -11,6 +11,7 @@ import SwiftKeychainWrapper
 import Pisth_Shared
 import Firebase
 import Pisth_API
+import UserNotifications
 
 /// The app's delegate.
 @UIApplicationMain
@@ -162,6 +163,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIViewController.content
         window?.makeKeyAndVisible()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (_, _) in }
 
         // Firebase analytics
         FirebaseApp.configure()
