@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     ///
     /// Returns each time a new instance.
     var showBookmarksBarButtonItem: UIBarButtonItem {
-        return UIBarButtonItem(title: "Bookmarks", style: .done, target: self, action: #selector(showBookmarks))
+        return UIBarButtonItem(title: Localizable.BookmarksTableViewController.bookmarksTitle, style: .done, target: self, action: #selector(showBookmarks))
     }
     
     /// Update 3D touch shortucts from connections.
