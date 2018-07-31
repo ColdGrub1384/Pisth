@@ -95,6 +95,7 @@
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
+		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
 		C98D6CB32101303E00B3052E /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB22101303E00B3052E /* Header.xib */; };
 		C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */; };
 		C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB62101522C00B3052E /* List File Cell.xib */; };
@@ -269,6 +270,9 @@
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
+		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C983BF9D2110DEE900CCB298 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C983BF9E2110DEEB00CCB298 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C98D6CB22101303E00B3052E /* Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Header.xib; sourceTree = "<group>"; };
 		C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderToolbar.swift; sourceTree = "<group>"; };
 		C98D6CB62101522C00B3052E /* List File Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "List File Cell.xib"; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 			children = (
 				C9BD2858210A353F00244AAF /* Localizable.strings */,
 				3AFDD9101FF140FE0061677B /* Info.plist */,
+				C983BF9C2110DEE600CCB298 /* InfoPlist.strings */,
 				3A3A015B2007ADE900B5B655 /* langs.plist */,
 				3A8A32AF2047574D00A38E89 /* OS */,
 				3ADDFEB920068E5500FA6ACD /* html */,
@@ -892,6 +897,7 @@
 				C9BD2864210A3D7400244AAF /* Code Editor.xib in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
 				3AD7E0572049E8CC00834D59 /* amzn.png in Resources */,
+				C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */,
 				3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */,
 				C98D6CB32101303E00B3052E /* Header.xib in Resources */,
 				3AD7E0582049E8CD00834D59 /* arch.png in Resources */,
@@ -1098,6 +1104,16 @@
 				3AFDD90E1FF140FE0061677B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C983BF9C2110DEE600CCB298 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C983BF9B2110DEE600CCB298 /* en */,
+				C983BF9D2110DEE900CCB298 /* fr */,
+				C983BF9E2110DEEB00CCB298 /* es */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		C9BD2858210A353F00244AAF /* Localizable.strings */ = {
