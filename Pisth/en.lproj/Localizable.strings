@@ -196,6 +196,9 @@
 /* Downloading... */
 "dir.downloading" = "Downloading...";
 
+/* Body of the notification sent when a file was downloaded. */
+"dir.downloadFinished" = "Download finished.";
+
 /* Message of the alert shown when the client couldn't login to the server. */
 "dir.errorAuthenticating" = "Unable to authenticate, check for username and password.";
 

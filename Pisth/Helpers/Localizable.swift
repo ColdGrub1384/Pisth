@@ -329,6 +329,9 @@ class Localizable: Static {
         /// Import file from the Pisth sandbox.
         static let importFromPisth = NSLocalizedString("dir.importFromPisth", comment: "Import file from the Pisth sandbox.")
         
+        /// Body of the notification sent when a file was downloaded.
+        static let downloadFinished = NSLocalizedString("dir.downloadFinished", comment: "Body of the notification sent when a file was downloaded.")
+        
         /// Downloading...
         static let downloading = NSLocalizedString("dir.downloading", comment: "Downloading...")
         
