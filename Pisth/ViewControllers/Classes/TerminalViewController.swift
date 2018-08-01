@@ -95,9 +95,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// If true, all addtional commands will not be executed and the shell with be launched 'purely'.
     var pureMode = false
     
-    /// Select text after loading terminal and put text in `selectionTextView`.
-    var selectText = false
-    
     /// The theme currently used by the terminal.
     var theme: TerminalTheme {
         if UIAccessibilityIsInvertColorsEnabled() {
@@ -308,10 +305,21 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Show plain output and allow selection.
     @objc func selectionMode() {
         selectionTextView.isHidden = false
+        selectionTextView.text = ""
         webView.isHidden = true
-        selectText = true
         _ = resignFirstResponder()
-        reload()
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+            self.webView.evaluateJavaScript("fit(term); term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
+                
+                if let result = result as? String {
+                    self.selectionTextView.text = result
+                    self.selectionTextView.scrollRangeToVisible(NSRange(location: self.selectionTextView.text.nsString.length, length: 1))
+                }
+                
+                self.webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
+            })
+        })
     }
     
     /// Hide plain output and disallow selection.
@@ -370,20 +378,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if !selectionTextView.isHidden {
             actions.append(UIAlertAction(title: Localizable.TerminalViewController.insertMode, style: .default, handler: { (_) in
-                self.selectionTextView.isHidden = true
-                self.webView.isHidden = false
-                
-                _ = self.becomeFirstResponder()
+                self.insertMode()
             }))
         } else {
             actions.append(UIAlertAction(title: Localizable.TerminalViewController.selectionMode, style: .default, handler: { (_) in
-                self.selectionTextView.isHidden = false
-                self.webView.isHidden = true
-                
-                self.selectText = true
-                
-                _ = self.resignFirstResponder()
-                self.reload()
+                self.selectionMode()
             }))
         }
         
@@ -736,6 +735,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if let arrowsVC = ArrowsViewController.current {
             arrowsVC.view.frame = webView.frame
+        }
+        
+        if !selectionTextView.isHidden {
+            insertMode()
         }
     }
     
@@ -1154,22 +1157,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
             } catch {}
         } else {
-            webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: {_, _ in
-                if self.selectText {
-                    webView.evaluateJavaScript("term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
-                        
-                        if let result = result as? String {
-                            self.selectionTextView.text = result
-                            self.selectionTextView.scrollRangeToVisible(NSRange(location: self.selectionTextView.text.nsString.length, length: 1))
-                        }
-                        
-                        webView.evaluateJavaScript("term.selectionManager.setSelection(0)", completionHandler: nil)
-                        
-                    })
-                    
-                    self.selectText = false
-                }
-            })
+            webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: nil)
         }
         
         // Plugins
