@@ -23,18 +23,22 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' remote update --prune")
-        
-        if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch -r") {
-            for branch in result.components(separatedBy: "\n") {
-                if !branch.contains("/HEAD ") && branch.replacingOccurrences(of: " ", with: "") != "" {
-                    self.branches.append(branch.replacingOccurrences(of: " ", with: ""))
+        DispatchQueue.global(qos: .background).async {
+            _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' remote update --prune")
+            
+            if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' branch -r") {
+                for branch in result.components(separatedBy: "\n") {
+                    if !branch.contains("/HEAD ") && branch.replacingOccurrences(of: " ", with: "") != "" {
+                        self.branches.append(branch.replacingOccurrences(of: " ", with: ""))
+                    }
                 }
             }
+            
+            DispatchQueue.main.async {
+                self.tableView.backgroundView = nil
+                self.tableView.reloadData()
+            }
         }
-        
-        tableView.backgroundView = nil
-        tableView.reloadData()
     }
     
     // MARK: - Table view data source
