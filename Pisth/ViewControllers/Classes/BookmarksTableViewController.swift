@@ -265,7 +265,13 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             /// Open connection.
             func connect() {
                 let activityVC = ActivityViewController(message: Localizable.BookmarksTableViewController.connecting)
-                present(activityVC, animated: true) {
+                var vc: UIViewController
+                if view.window != nil {
+                    vc = self
+                } else {
+                    vc = UIApplication.shared.keyWindow?.rootViewController ?? self
+                }
+                vc.present(activityVC, animated: true) {
                     
                     ConnectionManager.shared.session = nil
                     ConnectionManager.shared.filesSession = nil

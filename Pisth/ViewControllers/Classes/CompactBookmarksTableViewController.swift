@@ -42,25 +42,21 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     /// Ask to the user for restarting the current session.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc = navigationController ?? self
-        
-        dismiss(animated: true) {
-            if indexPath.section == 0, let connection = ConnectionManager.shared.connection, DataManager.shared.connections[indexPath.row] == connection {
-                let alert = UIAlertController(title: Localizable.BookmarksTableViewController.sessionAlreadyActiveTitle, message: Localizable.BookmarksTableViewController.sessionAlreadyActiveMessage, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: Localizable.BookmarksTableViewController.resume, style: .default, handler: { (_) in
-                    self.dismiss(animated: true, completion: nil)
-                }))
-                alert.addAction(UIAlertAction(title: Localizable.BookmarksTableViewController.restart, style: .destructive, handler: { (_) in
+        if indexPath.section == 0, let connection = ConnectionManager.shared.connection, DataManager.shared.connections[indexPath.row] == connection {
+            let alert = UIAlertController(title: Localizable.BookmarksTableViewController.sessionAlreadyActiveTitle, message: Localizable.BookmarksTableViewController.sessionAlreadyActiveMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Localizable.BookmarksTableViewController.resume, style: .default, handler: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: Localizable.BookmarksTableViewController.restart, style: .destructive, handler: { (_) in
+                self.dismiss(animated: true, completion: {
                     super.tableView(tableView, didSelectRowAt: indexPath)
-                }))
-                alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: { (_) in
-                    UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true)
-                }))
-                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-                return
-            } else {
-                super.tableView(tableView, didSelectRowAt: indexPath)
-            }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        } else {
+            super.tableView(tableView, didSelectRowAt: indexPath)
         }
     }
 }
