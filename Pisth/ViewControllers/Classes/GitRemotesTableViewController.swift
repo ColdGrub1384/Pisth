@@ -10,8 +10,18 @@ import UIKit
 /// Git branches table view controller to display Git remote branches at `repoPath`.
 class GitRemotesTableViewController: GitBranchesTableViewController {
     
-    /// List remote branches for Git repo.
+    /// Setup loading screen.
     override func viewDidLoad() {
+        
+        tableView.backgroundView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        (tableView.backgroundView as? UIActivityIndicatorView)?.startAnimating()
+        tableView.tableFooterView = UIView()
+        navigationItem.setRightBarButtonItems(nil, animated: false)
+    }
+    
+    /// List remote branches for Git repo.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' remote update --prune")
         
@@ -23,8 +33,8 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
             }
         }
         
-        tableView.tableFooterView = UIView()
-        navigationItem.setRightBarButtonItems(nil, animated: false)
+        tableView.backgroundView = nil
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
