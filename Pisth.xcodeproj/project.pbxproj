@@ -1404,6 +1404,7 @@
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1427,6 +1428,7 @@
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1507,6 +1509,7 @@
 				);
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IS_BETA = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";

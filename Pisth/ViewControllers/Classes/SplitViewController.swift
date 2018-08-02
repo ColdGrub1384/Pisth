@@ -19,6 +19,8 @@ class SplitViewController: UISplitViewController {
     /// A detail view controller. If it's set, you must set `detailNavigationController`. This View controller will be displayed and `detailNavigationController` will be passed to `AppDelegate.shared`.
     var detailViewController: UIViewController?
     
+    private var presentedBetaAlert = false
+    
     /// Show given view controllers and pass them to `AppDelegate.shared`.
     func load() {
         preferredDisplayMode = .primaryHidden
@@ -54,6 +56,13 @@ class SplitViewController: UISplitViewController {
         super.viewDidAppear(animated)
         
         preferredDisplayMode = .primaryHidden
+        
+        let betaAlert = UIAlertController(title: "Thanks for using Pisth beta!", message: "Don't forget to report any issue you see.", preferredStyle: .alert)
+        betaAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        if (Bundle.main.infoDictionary?["Is Beta"] as? String) == "YES" && !presentedBetaAlert {
+            present(betaAlert, animated: true, completion: nil)
+            presentedBetaAlert = true
+        }
     }
     
     // MARK: - Split view controller

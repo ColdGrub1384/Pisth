@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Tint Color Name</key>
-	<string>$(TINT_COLOR)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
@@ -98,6 +96,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>13</string>
+	<key>Is Beta</key>
+	<string>$(IS_BETA)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>pisthapt</string>
@@ -116,6 +116,8 @@
 		<string>ch.marcela.ada.Pisth.openDirectory</string>
 		<string>ch.marcela.ada.Pisth.openTerminal</string>
 	</array>
+	<key>Tint Color Name</key>
+	<string>$(TINT_COLOR)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
