@@ -161,6 +161,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         DataManager.shared.saveCompletion = update3DTouchShortucts
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
+            
+            window?.tintColor = tint
+            UISwitch.appearance().onTintColor = tint
+        }
         window?.rootViewController = UIViewController.content
         window?.makeKeyAndVisible()
         

@@ -47,9 +47,8 @@ class NavigationController: UINavigationController {
         
         // Setup window
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.tintColor = UIColor(named: "Purple")
+        window.tintColor = UIApplication.shared.keyWindow?.tintColor
         window.backgroundColor = .white
-        UISwitch.appearance().onTintColor = UIColor(named: "Purple")
         window.rootViewController = splitViewController
         window.makeKeyAndVisible()
         AppDelegate.shared.window = window

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09F8E087091C60688A3B878681637BC9"
+               BlueprintIdentifier = "898C500B62D4539D89E4BB9F46D7558C"
                BlueprintName = "BiometricAuthentication"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "BiometricAuthentication.framework">
