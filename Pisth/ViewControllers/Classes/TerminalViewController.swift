@@ -1379,6 +1379,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return isFirstResponder
     }
     
+    var closeButtonTitle: String {
+        return "×"
+    }
+    
+    var modalCloseButtonTitle: String {
+        return "×"
+    }
+    
     // MARK: - Static
     
     /// Print this to dismiss the keyboard (from SSH).
