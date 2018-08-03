@@ -1369,7 +1369,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
         for item in items {
-            item?.tintColor = UIColor(named: "Purple")
+            item?.tintColor = UIApplication.shared.keyWindow?.tintColor
         }
         return (items as? [UIBarButtonItem]) ?? []
     }
