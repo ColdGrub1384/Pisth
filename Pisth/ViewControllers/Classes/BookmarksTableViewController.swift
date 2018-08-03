@@ -27,28 +27,9 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Fetched nearby devices by `searchController` to display.
     var fetchedNearby = [MCPeerID]()
     
-    /// Fetched nearby snippets by `searchController` to display.
-    var fetchedSnippets = [Snippet]()
-    
     /// Returns `true` if the view saying that there is no bookmarks should be shown.
     var shouldShowBackgroundView: Bool {
-        return (DataManager.shared.connections.count == 0 && devices.count == 0 && snippets.count == 0 || tableView.backgroundView is UIVisualEffectView || tableView.backgroundView?.tag == 1)
-    }
-    
-    /// The list of snippets.
-    var snippets: [Snippet] {
-        
-        get {
-            guard let data = UserDefaults.standard.value(forKey: "snippets") as? Data else {
-                return []
-            }
-            return NSKeyedUnarchiver.unarchiveObject(with: data) as? [Snippet] ?? []
-        }
-        
-        set {
-            UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: newValue), forKey: "snippets")
-            UserDefaults.standard.synchronize()
-        }
+        return (DataManager.shared.connections.count == 0 && devices.count == 0 || tableView.backgroundView is UIVisualEffectView || tableView.backgroundView?.tag == 1)
     }
     
     /// Open app's settings.
@@ -65,20 +46,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     /// Add connection.
-    @objc func addConnection(_ sender: UIBarButtonItem) {
-        let chooser = UIAlertController(title: "Choose an action", message: "You can create a snippet to send it to your servers or add a connection.", preferredStyle: .actionSheet)
-        chooser.addAction(UIAlertAction(title: "Add a connection", style: .default, handler: { (_) in
-            self.showInfoAlert()
-        }))
-        chooser.addAction(UIAlertAction(title: "Add a snippet", style: .default, handler: { (_) in
-            let navVC = UINavigationController(rootViewController: UIViewController.snippetInfo)
-            navVC.modalPresentationStyle = .formSheet
-            
-            self.present(navVC, animated: true, completion: nil)
-        }))
-        chooser.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
-        chooser.popoverPresentationController?.barButtonItem = sender
-        present(chooser, animated: true, completion: nil)
+    @objc func addConnection() {
+        showInfoAlert()
     }
     
     /// Edit connection or create connnection.
@@ -112,7 +81,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         title = Localizable.BookmarksTableViewController.bookmarksTitle
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
         let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
         
@@ -155,17 +124,19 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             return 1
         }
         
-        return 3
+        return 2
     }
     
-    /// - Returns: `"Connections"`, `"Nearby Devices"` if there are nearby devices or `"Sinppets"`.
+    /// - Returns: `"Connections"` or `"Nearby Devices"` if there are nearby devices.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if section == 0 && DataManager.shared.connections.count > 0 {
+        guard (devices.count > 0) else {
+            return nil
+        }
+        
+        if section == 0 {
             return Localizable.BookmarksTableViewController.connectionsTitle
-        } else if section == 1 && snippets.count > 0 {
-            return "Snippets"
-        } else if section == 2 && devices.count > 0 {
+        } else if section == 1 {
             return Localizable.BookmarksTableViewController.devicesTitle
         }
         
@@ -184,8 +155,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             
             return DataManager.shared.connections.count
         } else if section == 1 {
-            return snippets.count
-        } else if section == 2 {
             
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 return fetchedNearby.count
@@ -231,27 +200,9 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                 cell.textLabel?.text = cell.detailTextLabel?.text
                 cell.detailTextLabel?.text = ""
             }
-            
-        // Snippets
-        } else if indexPath.section == 1 {
-            
-            cell.accessoryType = .detailButton
-            
-            var snippets = self.snippets
-            
-            if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
-                snippets = fetchedSnippets
-            }
-            
-            let name = snippets[indexPath.row].name
-            if name.isEmpty {
-                cell.textLabel?.text = snippets[indexPath.row].content
-            } else {
-                cell.textLabel?.text = name
-            }
-            
+                        
         // Near devices
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 1 {
             
             var devices = self.devices
             
@@ -411,18 +362,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             } else {
                 open()
             }
-        } else if indexPath.section == 1 { // Open snippet
-            
-            let alert = UIAlertController(title: "Snippet", message: snippets[indexPath.row].content, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (_) in
-                UIPasteboard.general.string = self.snippets[indexPath.row].content
-            }))
-            alert.addAction(UIAlertAction(title: Localizable.cancel, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-        } else if indexPath.section == 2 { // Multipeer connectivity
+        } else if indexPath.section == 1 { // Multipeer connectivity
             
             ConnectionManager.shared.connection = nil
             
@@ -444,25 +384,12 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     /// Show connection information.
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        
-        func perform() {
-            if indexPath.section == 0 {
-                showInfoAlert(editInfoAt: indexPath.row)
-            } else if indexPath.section == 1 {
-                let vc = UIViewController.snippetInfo
-                vc.index = indexPath.row
-                let navVC = UINavigationController(rootViewController: vc)
-                navVC.modalPresentationStyle = .formSheet
-                present(navVC, animated: true, completion: nil)
-            }
-        }
-        
         if searchController.isActive {
             searchController.dismiss(animated: true, completion: {
-                perform()
+                self.showInfoAlert(editInfoAt: indexPath.row)
             })
         } else {
-            perform()
+            showInfoAlert(editInfoAt: indexPath.row)
         }
     }
     
@@ -473,7 +400,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         fetchedConnections = []
         fetchedNearby = []
-        fetchedSnippets = []
         
         if !searchText.isEmpty {
             
@@ -489,12 +415,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             for device in devices {
                 if device.displayName.lowercased().contains(searchText.lowercased()) {
                     fetchedNearby.append(device)
-                }
-            }
-            
-            for snippet in snippets {
-                if snippet.name.lowercased().contains(searchText.lowercased()) || snippet.content.lowercased().contains(searchText.lowercased()) {
-                    snippets.append(snippet)
                 }
             }
         }

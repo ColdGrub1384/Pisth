@@ -93,9 +93,6 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
-		C95916962113BB820073BCCE /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95916952113BB820073BCCE /* Snippet.swift */; };
-		C95916982113BFB10073BCCE /* Snippet Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = C95916972113BFB10073BCCE /* Snippet Info.xib */; };
-		C959169A2113C24A0073BCCE /* SnippetInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95916992113C2490073BCCE /* SnippetInfoViewController.swift */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
@@ -272,9 +269,6 @@
 		59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.beta.xcconfig"; sourceTree = "<group>"; };
 		6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C95916952113BB820073BCCE /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
-		C95916972113BFB10073BCCE /* Snippet Info.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Snippet Info.xib"; sourceTree = "<group>"; };
-		C95916992113C2490073BCCE /* SnippetInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnippetInfoViewController.swift; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -478,7 +472,6 @@
 		3AA3FDC1202754EF00C07C7A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */,
 				3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */,
 				3A89B5BF2037793D00B750D9 /* UIButton.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
@@ -498,7 +491,6 @@
 			children = (
 				3AA3FDC1202754EF00C07C7A /* Extensions */,
 				3A843EEC202A64030096632E /* ReviewHelper.swift */,
-				C95916952113BB820073BCCE /* Snippet.swift */,
 				C9BD2852210A34A000244AAF /* Localizable.swift */,
 				3ACF9AC0204079A9006C3218 /* AppAction.swift */,
 				3AA117F41FF4257A007BB84A /* SaveFile.swift */,
@@ -507,6 +499,7 @@
 				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
 				3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
+				3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -584,7 +577,6 @@
 				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
 				C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */,
 				C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */,
-				C95916992113C2490073BCCE /* SnippetInfoViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -602,7 +594,6 @@
 				3AD2F69920713FC10017F2EB /* Web.xib */,
 				3A0964F220CC209F006D5B4C /* Content.storyboard */,
 				C9BD2897210A3E3D00244AAF /* File Info.xib */,
-				C95916972113BFB10073BCCE /* Snippet Info.xib */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -916,7 +907,6 @@
 				3AD7E0592049E8CF00834D59 /* centos.png in Resources */,
 				3AD7E05D2049E8D500834D59 /* linux.png in Resources */,
 				C9BD2856210A353F00244AAF /* Localizable.strings in Resources */,
-				C95916982113BFB10073BCCE /* Snippet Info.xib in Resources */,
 				3AD7E05B2049E8D200834D59 /* debian.png in Resources */,
 				C9BD289C210A3E5200244AAF /* No Connections.xib in Resources */,
 				3AD7E05E2049E8D600834D59 /* opensuse.png in Resources */,
@@ -1047,12 +1037,10 @@
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */,
 				3ADD28CB1FFAFC3900977905 /* Pasteboard.swift in Sources */,
-				C959169A2113C24A0073BCCE /* SnippetInfoViewController.swift in Sources */,
 				3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */,
 				3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */,
 				C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
-				C95916962113BB820073BCCE /* Snippet.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,
 				C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */,
