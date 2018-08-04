@@ -161,12 +161,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         DataManager.shared.saveCompletion = update3DTouchShortucts
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
-            
-            window?.tintColor = tint
-            UISwitch.appearance().onTintColor = tint
-        }
-        window?.rootViewController = UIViewController.content
+        let content = UIViewController.content
+        window?.rootViewController = content
+        ContentViewController.shared = content as? ContentViewController
         window?.makeKeyAndVisible()
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (_, _) in }
@@ -686,9 +683,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     /// Change display mode.
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        splitViewController.viewControllers = [navigationController, self.splitViewController.detailNavigationController]
         
-        if splitViewController.preferredDisplayMode == .primaryHidden && !(self.splitViewController.detailNavigationController.visibleViewController is BookmarksTableViewController) {
+        splitViewController.viewControllers = [self.splitViewController.navigationController ?? self.navigationController, self.splitViewController.detailViewController ?? self.splitViewController.detailNavigationController]
+        
+        if splitViewController.preferredDisplayMode == .primaryHidden && !(self.splitViewController.detailNavigationController?.visibleViewController is BookmarksTableViewController) {
             splitViewController.preferredDisplayMode = .primaryOverlay
             _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                 let button = splitViewController.displayModeButtonItem
@@ -696,7 +694,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             })
         }
         
-        return navigationController
+        return splitViewController.viewControllers.last
     }
     
     // MARK: - Static

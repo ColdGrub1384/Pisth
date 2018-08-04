@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0964F220CC209F006D5B4C /* Content.storyboard */; };
-		3A0964F520CC2417006D5B4C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0964F420CC2416006D5B4C /* NavigationController.swift */; };
 		3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
 		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
@@ -182,7 +181,6 @@
 
 /* Begin PBXFileReference section */
 		3A0964F220CC209F006D5B4C /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
-		3A0964F420CC2416006D5B4C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
@@ -573,7 +571,6 @@
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
 				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
 				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
-				3A0964F420CC2416006D5B4C /* NavigationController.swift */,
 				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
 				C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */,
 				C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */,
@@ -1026,7 +1023,6 @@
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
-				3A0964F520CC2417006D5B4C /* NavigationController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,

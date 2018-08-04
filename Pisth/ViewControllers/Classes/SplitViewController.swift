@@ -51,6 +51,46 @@ class SplitViewController: UISplitViewController {
         UIApplication.shared.sendAction(displayModeButtonItem.action!, to: displayModeButtonItem.target, from: nil, for: nil)
     }
     
+    /// Set singleton and load view controllers.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        
+        // Setup Navigation Controller
+        let bookmarksVC = BookmarksTableViewController()
+        bookmarksVC.modalPresentationStyle = .overCurrentContext
+        bookmarksVC.view.backgroundColor = .clear
+        bookmarksVC.tableView.backgroundColor = .clear
+        bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let navigationController = UINavigationController(rootViewController: bookmarksVC)
+        navigationController.navigationBar.prefersLargeTitles = true
+        
+        // Setup Split view controller
+        navigationController_ = navigationController
+        detailNavigationController = UINavigationController(rootViewController: BookmarksTableViewController())
+        detailNavigationController.navigationBar.prefersLargeTitles = true
+        load()
+        AppDelegate.shared.window?.rootViewController = UIViewController()
+        AppDelegate.shared.navigationController = detailNavigationController
+        
+        // Setup window
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.tintColor = UIApplication.shared.keyWindow?.tintColor
+        window.backgroundColor = .white
+        window.rootViewController = ContentViewController.shared
+        if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
+            
+            window.tintColor = tint
+            UISwitch.appearance().onTintColor = tint
+        }
+        window.makeKeyAndVisible()
+        AppDelegate.shared.window = window
+        
+        AppDelegate.shared.splitViewController = self
+        delegate = AppDelegate.shared
+    }
+    
     /// Set preferred display mode.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

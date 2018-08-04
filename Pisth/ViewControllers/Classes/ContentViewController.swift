@@ -84,13 +84,6 @@ class ContentViewController: UIViewController, PanelManager {
     
     // MARK: - View controller
     
-    /// Setup singleton
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        ContentViewController.shared = self
-    }
-    
     // MARK: - Panel manager
     
     /// Returns `ContentViewController.shared.wrapperView`.
