@@ -1379,10 +1379,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return isFirstResponder
     }
     
+    /// `"×"`.
     var closeButtonTitle: String {
         return "×"
     }
     
+    /// `"×"`.
     var modalCloseButtonTitle: String {
         return "×"
     }

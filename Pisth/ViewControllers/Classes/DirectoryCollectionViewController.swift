@@ -1759,6 +1759,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return false
     }
     
+    /// `"×"`.
+    var closeButtonTitle: String {
+        return "×"
+    }
+    
+    /// `"×"`.
+    var modalCloseButtonTitle: String {
+        return "×"
+    }
+    
     // MARK: - Static
     
     /// Action to do.
