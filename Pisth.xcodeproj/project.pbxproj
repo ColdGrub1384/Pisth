@@ -470,6 +470,7 @@
 		3AA3FDC1202754EF00C07C7A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */,
 				3AAF00EA1FF2D4F400ECCA6F /* FIleManager.swift */,
 				3A89B5BF2037793D00B750D9 /* UIButton.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
@@ -497,7 +498,6 @@
 				3AF9AEAD1FF5511A00840E8A /* isFilePDF.swift */,
 				3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
-				3ABEEF172074420F00697D4E /* UIView+ignoresInvertColors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
