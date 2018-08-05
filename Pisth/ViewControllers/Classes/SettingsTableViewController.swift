@@ -44,10 +44,10 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         static let pisthViewer = IndexPath(row: 0, section: 5)
         
         /// Show Twitter account.
-        static let licenses = IndexPath(row: 1, section: 5)
+        static let licenses = IndexPath(row: 2, section: 5)
         
         /// Show licenses.
-        static let twitter = IndexPath(row: 2, section: 5)
+        static let twitter = IndexPath(row: 1, section: 5)
     }
     
     /// Close this view controller.
