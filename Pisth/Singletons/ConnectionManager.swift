@@ -8,12 +8,21 @@
 import NMSSH
 import Pisth_Shared
 
+private let sharedInstance = ConnectionManager()
+private let importInstance = ConnectionManager()
+
 /// A class that manages SSH connections.
 class ConnectionManager {
     
-    /// Shared and unique instance of ConnectionManager.
-    static let shared = ConnectionManager()
-    private init() {}
+    /// Shared instance of `ConnectionManager`. Different instance is returned for importing file with the api.
+    static var shared: ConnectionManager {
+        if AppDelegate.shared.action == .apiImport {
+            return importInstance
+        } else {
+            return sharedInstance
+        }
+    }
+    fileprivate init() {}
     
     /// Background task to keep the session active.
     var backgroundTask: UIBackgroundTaskIdentifier?

@@ -655,6 +655,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     func didOpenFile(_ file: URL, withData data: Data) {
         
         if action == .apiImport {
+            action = nil
             try? FileManager.default.removeItem(at: file)
             LocalDirectoryCollectionViewController.delegate = nil
             
