@@ -14,7 +14,6 @@
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2C2D46208156F8002B8230 /* Pisth_API.framework */; };
 		3A2C2D48208156F8002B8230 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2C2D46208156F8002B8230 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A38DC402035D9980093A091 /* StoreKit.framework */; };
 		3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38FC531FF5719200690382 /* TerminalViewController.swift */; };
 		3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */; };
 		3A3A015C2007ADE900B5B655 /* langs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3A015B2007ADE900B5B655 /* langs.plist */; };
@@ -186,7 +185,6 @@
 		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A2C2D46208156F8002B8230 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A38DC402035D9980093A091 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		3A3A015B2007ADE900B5B655 /* langs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = langs.plist; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 				3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */,
 				3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
-				3A38DC412035D9980093A091 /* StoreKit.framework in Frameworks */,
 				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,7 +638,6 @@
 			children = (
 				C9B205B720D6CBBF00045F20 /* NMSSH.framework */,
 				C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */,
-				3A38DC402035D9980093A091 /* StoreKit.framework */,
 				9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */,
 				6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */,
 			);
@@ -827,7 +823,7 @@
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
