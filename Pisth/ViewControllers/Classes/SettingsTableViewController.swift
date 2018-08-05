@@ -43,8 +43,11 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         /// Promote Pisth Viewer.
         static let pisthViewer = IndexPath(row: 0, section: 5)
         
-        /// Show licenses.
+        /// Show Twitter account.
         static let licenses = IndexPath(row: 1, section: 5)
+        
+        /// Show licenses.
+        static let twitter = IndexPath(row: 2, section: 5)
     }
     
     /// Close this view controller.
@@ -252,6 +255,10 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             present(UIViewController.contribute, animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
+        } else if indexPath == IndexPaths.twitter {
+            
+            // Show Twitter account
+            UIApplication.shared.open(URL(string:"https://twitter.com/pisthapp")!, options: [:], completionHandler: nil)
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
