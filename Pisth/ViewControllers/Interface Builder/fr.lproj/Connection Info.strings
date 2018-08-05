@@ -18,7 +18,7 @@
 "NV5-ed-Tzc.text" = "Utilisateur";
 
 /* Class = "UIButton"; normalTitle = "Import Private key"; ObjectID = "PQ0-5N-RJn"; */
-"PQ0-5N-RJn.normalTitle" = "Importer la Private key";
+"PQ0-5N-RJn.normalTitle" = "Importer une Private key";
 
 /* Class = "UILabel"; text = "Path"; ObjectID = "TsD-H8-nji"; */
 "TsD-H8-nji.text" = "Chemin";
