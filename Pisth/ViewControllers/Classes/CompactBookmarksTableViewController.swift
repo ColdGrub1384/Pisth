@@ -24,6 +24,13 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     
     override func viewDidAppear(_ animated: Bool) { }
     
+    /// Update status bar appearance.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        ContentViewController.shared.setNeedsStatusBarAppearanceUpdate()
+    }
+    
     /// Setup dark style.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
