@@ -1,6 +1,5 @@
 Follow [@pisthapp](https://twitter.com/pisthapp) on Twitter for news about this project and commits.
 
-
 ![mockup](https://pisth.github.io/mockup.png)
 
 
@@ -85,7 +84,8 @@ More information at https://pisth.github.io/docs/getting-started.html.
 
 - [Pisth Shared/](Pisth%20Shared/): Shared sources between targets.
 - [Pisth Terminal/](Pisth%20Terminal/): HTML page for displaying the terminal.
-- [Pisth/](Pisth): iOS and macOS Applications.
+- [Pisth/](Pisth): iOS Application.
+- [Pisth Mac/](Pisth%20Mac/): macOS Applications.
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
