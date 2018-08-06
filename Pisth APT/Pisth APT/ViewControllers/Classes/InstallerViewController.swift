@@ -103,39 +103,47 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        packageNameLabel.text = package
-        
-        activityView.isHidden = false
-        
-        if let package = package {
-            if let session = AppDelegate.shared.session {
-                if session.isConnected && session.isAuthorized {
-                    if let description = try? session.channel.execute("aptitude show '\(package)'") {
-                        
-                        var properties = [String]()
-                        for property in description.components(separatedBy: "\n") {
-                            if property.contains(": ") {
-                                properties.append(property)
-                            } else {
-                                if let last = properties.last {
-                                    properties.remove(at: properties.count-1)
-                                    properties.append(last+"\n"+property)
-                                }
-                            }
-                        }
-                        
-                        self.packageProperties = properties
-                        self.propertiesTableView.reloadData()
-                    }
-                }
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.packageNameLabel.text = self.package
+                
+                self.activityView.isHidden = false
             }
             
-            
-            updateButton.isEnabled = AppDelegate.shared.updates.contains(package)
-            installButton.isEnabled = !AppDelegate.shared.installed.contains(package)
-            removeButton.isEnabled = AppDelegate.shared.installed.contains(package)
-            
-            activityView.isHidden = true
+            if let package = self.package {
+                if let session = AppDelegate.shared.session {
+                    if session.isConnected && session.isAuthorized {
+                        if let description = try? session.channel.execute("aptitude show '\(package)'") {
+                            
+                            var properties = [String]()
+                            for property in description.components(separatedBy: "\n") {
+                                if property.contains(": ") {
+                                    properties.append(property)
+                                } else {
+                                    if let last = properties.last {
+                                        properties.remove(at: properties.count-1)
+                                        properties.append(last+"\n"+property)
+                                    }
+                                }
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self.packageProperties = properties
+                                self.propertiesTableView.reloadData()
+                            }
+                        }
+                    }
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self.updateButton.isEnabled = AppDelegate.shared.updates.contains(package)
+                    self.installButton.isEnabled = !AppDelegate.shared.installed.contains(package)
+                    self.removeButton.isEnabled = AppDelegate.shared.installed.contains(package)
+                    
+                    self.activityView.isHidden = true
+                }
+            }
         }
     }
     
