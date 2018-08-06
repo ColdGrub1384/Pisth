@@ -81,8 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             let button = AppDelegate.shared.splitViewController.displayModeButtonItem
             _ = button.target?.perform(button.action)
         } else {
-            let navVC = UINavigationController(rootViewController: CompactBookmarksTableViewController())
-            navVC.navigationBar.barStyle = .black
+            let navVC = BlackNavigationController(rootViewController: CompactBookmarksTableViewController())
             navVC.modalPresentationStyle = .overCurrentContext
             navVC.view.backgroundColor = .clear
             navVC.modalTransitionStyle = .crossDissolve

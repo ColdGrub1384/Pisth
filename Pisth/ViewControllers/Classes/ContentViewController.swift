@@ -84,6 +84,11 @@ class ContentViewController: UIViewController, PanelManager {
     
     // MARK: - View controller
     
+    /// Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
+    }
+    
     // MARK: - Panel manager
     
     /// Returns `ContentViewController.shared.wrapperView`.

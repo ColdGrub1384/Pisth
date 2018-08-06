@@ -122,6 +122,7 @@
 		C9BD2895210A3E3D00244AAF /* File Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD2897210A3E3D00244AAF /* File Info.xib */; };
 		C9BD289C210A3E5200244AAF /* No Connections.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD289E210A3E5200244AAF /* No Connections.xib */; };
 		C9BD28A3210A3E6900244AAF /* Disconnected.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD28A5210A3E6900244AAF /* Disconnected.xib */; };
+		C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */; };
 		C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */; };
 		C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */; };
 		C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9CB27E520D5BB9800290DBE /* Assets.xcassets */; };
@@ -330,6 +331,7 @@
 		C9BD28A4210A3E6900244AAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Disconnected.xib; sourceTree = "<group>"; };
 		C9BD28A7210A3E6E00244AAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Disconnected.strings; sourceTree = "<group>"; };
 		C9BD28A9210A3E7100244AAF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Disconnected.strings; sourceTree = "<group>"; };
+		C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackNavigationController.swift; sourceTree = "<group>"; };
 		C9CB27DC20D5BB9500290DBE /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
 				C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */,
 				C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */,
+				C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
+				C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
