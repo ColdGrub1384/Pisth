@@ -259,6 +259,8 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             
             // Show Twitter account
             UIApplication.shared.open(URL(string:"https://twitter.com/pisthapp")!, options: [:], completionHandler: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+            
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
