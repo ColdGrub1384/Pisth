@@ -202,39 +202,41 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 }
             }
             
-            // Sorry Termius ;-(
-            let os = try? ConnectionManager.shared.filesSession?.channel.execute("""
-            SA_OS_TYPE="Linux"
-            REAL_OS_NAME=`uname`
-            if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
-            then
-            echo $REAL_OS_NAME
-            else
-            DISTRIB_ID=\"`cat /etc/*release`\"
-            echo $DISTRIB_ID;
-            fi;
-            exit;
-            """)
-            
-            connection.os = os ?? nil
-            
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-            request.returnsObjectsAsFaults = false
-            
-            do {
-                let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+            if directory == nil {
+                // Sorry Termius ;-(
+                let os = try? ConnectionManager.shared.filesSession?.channel.execute("""
+                SA_OS_TYPE="Linux"
+                REAL_OS_NAME=`uname`
+                if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
+                then
+                echo $REAL_OS_NAME
+                else
+                DISTRIB_ID=\"`cat /etc/*release`\"
+                echo $DISTRIB_ID;
+                fi;
+                exit;
+                """)
                 
-                for result in results {
-                    if result.value(forKey: "host") as? String == connection.host {
-                        if let os = os {
-                            result.setValue(os, forKey: "os")
+                connection.os = os ?? nil
+                
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+                request.returnsObjectsAsFaults = false
+                
+                do {
+                    let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                    
+                    for result in results {
+                        if result.value(forKey: "host") as? String == connection.host {
+                            if let os = os {
+                                result.setValue(os, forKey: "os")
+                            }
                         }
                     }
+                    
+                    DataManager.shared.saveContext()
+                } catch let error {
+                    print("Error retrieving connections: \(error.localizedDescription)")
                 }
-                
-                DataManager.shared.saveContext()
-            } catch let error {
-                print("Error retrieving connections: \(error.localizedDescription)")
             }
             
             // TODO: - Make it compatible with only SFTP
@@ -398,7 +400,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
             }
-            navigationItem.setRightBarButtonItems(buttons, animated: true)
+            DispatchQueue.global(qos: .background).async {
+                let buttons_ = buttons
+                DispatchQueue.main.async {
+                    self.navigationItem.setRightBarButtonItems(buttons_, animated: true)
+                }
+            }
             
             // Siri Shortcuts
             
