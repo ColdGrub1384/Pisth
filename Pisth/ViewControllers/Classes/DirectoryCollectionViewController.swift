@@ -303,6 +303,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             collectionView?.refreshControl?.endRefreshing()
             
             guard self.files != nil else {
+                showErrorIfThereIsOne()
                 return
             }
             
@@ -404,6 +405,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 let buttons_ = buttons
                 DispatchQueue.main.async {
                     self.navigationItem.setRightBarButtonItems(buttons_, animated: true)
+                    
+                    // Connection errors
+                    self.showErrorIfThereIsOne()
                 }
             }
             
@@ -453,9 +457,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         // Toolbar
         setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
-        
-        // Connection errors
-        showErrorIfThereIsOne()
     }
 
     /// Hides toolbar.
@@ -569,8 +570,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         if alert != nil {
             
             alert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: { (_) in
-                AppDelegate.shared.splitViewController.navigationController_.popToRootViewController(animated: true)
-                AppDelegate.shared.splitViewController.detailNavigationController.popToRootViewController(animated: true)
+                AppDelegate.shared.showBookmarks()
             }))
             
             UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
