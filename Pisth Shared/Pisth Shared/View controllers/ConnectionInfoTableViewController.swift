@@ -10,13 +10,15 @@ import UIKit
 import CoreData
 
 /// Table view controller containing information about a connection.
-open class ConnectionInformationTableViewController: UITableViewController {
+open class ConnectionInformationTableViewController: UITableViewController, NetServiceDelegate {
     
     /// Table view to reload after making changes.
     open var rootTableView: UITableView?
     
     /// Root view controller.
     open var rootViewController: UIViewController?
+        
+    var bonjourDomainsTableView: UITableView!
     
     /// Init with given style.
     ///
@@ -51,6 +53,28 @@ open class ConnectionInformationTableViewController: UITableViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bonjourDomainsTableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        
+        bonjourDomainsTableView.delegate = self
+        bonjourDomainsTableView.dataSource = self
+        
+        _ = Bonjour().findDomains({ (domains) in
+            for domain in domains {
+                _ = Bonjour().findService(Bonjour.Services.Secure_Shell, domain: domain, found: { (services) in
+                    for service in services {
+                        self.services.append(service)
+                    }
+                    
+                    if self.services.count > 0 {
+                        self.tableView.tableHeaderView = self.bonjourDomainsTableView
+                    } else {
+                        self.tableView.tableHeaderView = nil
+                    }
+                    self.bonjourDomainsTableView.reloadData()
+                })
+            }
+        })
         
         textFields = [name, host, port, username, password, path]
         
@@ -158,6 +182,68 @@ open class ConnectionInformationTableViewController: UITableViewController {
             self.rootViewController?.viewDidAppear(true)
             self.rootTableView?.reloadData()
         })
+    }
+    
+    // MARK: - Bonjour
+    
+    var services = [NetService]()
+    
+    // MARK: - Table view data source
+    
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        guard tableView == bonjourDomainsTableView else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+        
+        return services.count
+    }
+    
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard tableView == bonjourDomainsTableView else {
+            return super.tableView(tableView, cellForRowAt: indexPath)
+        }
+        
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.textLabel?.text = services[indexPath.row].name
+        
+        return cell
+    }
+    
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard tableView == bonjourDomainsTableView else {
+            return super.tableView(tableView, titleForHeaderInSection: section)
+        }
+        
+        if services.count > 0 {
+            return NSLocalizedString("nearby", comment: "Nearby SSH servers found by Bonjour.")
+        } else {
+            return nil
+        }
+    }
+    
+    // MARK: - Table view delegate
+    
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard tableView == bonjourDomainsTableView else {
+            return
+        }
+        
+        let service = services[indexPath.row]
+        service.delegate = self
+        service.resolve(withTimeout: 0)
+    }
+    
+    // MARK: Net service delegate
+    
+    public func netServiceDidResolveAddress(_ sender: NetService) {
+        host?.text = sender.hostName
+        port?.text = "\(sender.port)"
     }
     
     // MARK: - Fields
