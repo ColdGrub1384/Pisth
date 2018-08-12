@@ -549,6 +549,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     /// Go back and show error.
     func showError() {
         
+        collectionView?.backgroundView = nil
+        
+        setToolbarItems([UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
+        navigationController?.setToolbarHidden(false, animated: true)
+        
         let navVC = AppDelegate.shared.navigationController
         
         guard navVC.visibleViewController == self else {
