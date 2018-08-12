@@ -13,7 +13,7 @@ import MultipeerConnectivity
 import Pisth_Shared
 
 /// `TableViewController` used to list, connections.
-class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate {
+class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, NetServiceBrowserDelegate, NetServiceDelegate {
     
     /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
@@ -27,9 +27,15 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Fetched nearby devices by `searchController` to display.
     var fetchedNearby = [MCPeerID]()
     
+    /// Fetched nearby bonjour servers by `searchController` to display.
+    var fetchedServices = [NetService]()
+    
+    /// Browser used to find services trough Bonjour.
+    let serviceBrowser = NetServiceBrowser()
+    
     /// Returns `true` if the view saying that there is no bookmarks should be shown.
     var shouldShowBackgroundView: Bool {
-        return (DataManager.shared.connections.count == 0 && devices.count == 0 || tableView.backgroundView is UIVisualEffectView || tableView.backgroundView?.tag == 1)
+        return (DataManager.shared.connections.count == 0 && devices.count == 0 && services.count == 0 || tableView.backgroundView is UIVisualEffectView || tableView.backgroundView?.tag == 1)
     }
     
     /// Open app's settings.
@@ -102,6 +108,10 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "terminal")
         mcNearbyServiceBrowser.delegate = self
         mcNearbyServiceBrowser.startBrowsingForPeers()
+        
+        // Bonjour
+        serviceBrowser.delegate = self
+        serviceBrowser.searchForServices(ofType: "_ssh._tcp.", inDomain: "local.")
     }
     
     /// Clear selection on collapsed Split view controller.
@@ -130,7 +140,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     /// - Returns: `"Connections"` or `"Nearby Devices"` if there are nearby devices.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        guard (devices.count > 0) else {
+        guard (devices.count > 0 || services.count > 0) else {
             return nil
         }
         
@@ -157,10 +167,10 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         } else if section == 1 {
             
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
-                return fetchedNearby.count
+                return fetchedNearby.count+fetchedServices.count
             }
             
-            return devices.count
+            return devices.count+services.count
         }
         
         return 0
@@ -205,12 +215,26 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         } else if indexPath.section == 1 {
             
             var devices = self.devices
+            var services = self.services
             
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 devices = fetchedNearby
+                services = fetchedServices
             }
             
-            cell.textLabel?.text = devices[indexPath.row].displayName
+            var all = [Any]()
+            for device in devices {
+                all.append(device)
+            }
+            for service in services {
+                all.append(service)
+            }
+            
+            if let peer = all[indexPath.row] as? MCPeerID {
+                cell.textLabel?.text = peer.displayName
+            } else if let service = all[indexPath.row] as? NetService {
+                cell.textLabel?.text = service.name
+            }
         }
         
         return cell
@@ -362,22 +386,40 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             } else {
                 open()
             }
-        } else if indexPath.section == 1 { // Multipeer connectivity
+        } else if indexPath.section == 1 {
+            var all = [Any]()
+            for device in devices {
+                all.append(device)
+            }
+            for service in services {
+                all.append(service)
+            }
             
-            ConnectionManager.shared.connection = nil
+            if let peer = all[indexPath.row] as? MCPeerID { // Multipeer connectivity
             
-            let termVC = TerminalViewController()
-            
-            termVC.pureMode = true
-            termVC.viewer = true
-            termVC.peerID = peerID
-            
-            AppDelegate.shared.splitViewController.setDisplayMode()
-            AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
-            
-            _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
-                self.mcNearbyServiceBrowser.invitePeer(self.devices[indexPath.row], to: termVC.mcSession, withContext: nil, timeout: 10)
-            })
+                ConnectionManager.shared.connection = nil
+                
+                let termVC = TerminalViewController()
+                
+                termVC.pureMode = true
+                termVC.viewer = true
+                termVC.peerID = peerID
+                
+                AppDelegate.shared.splitViewController.setDisplayMode()
+                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                
+                _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
+                    self.mcNearbyServiceBrowser.invitePeer(peer, to: termVC.mcSession, withContext: nil, timeout: 10)
+                })
+            } else if let service = all[indexPath.row] as? NetService { // Bonjour
+                tableView.deselectRow(at: indexPath, animated: true)
+                if service.port == -1 {
+                    service.delegate = self
+                    service.resolve(withTimeout: 0)
+                } else {
+                    netServiceDidResolveAddress(service)
+                }
+            }
         }
         
     }
@@ -400,6 +442,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         fetchedConnections = []
         fetchedNearby = []
+        fetchedServices = []
         
         if !searchText.isEmpty {
             
@@ -415,6 +458,12 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             for device in devices {
                 if device.displayName.lowercased().contains(searchText.lowercased()) {
                     fetchedNearby.append(device)
+                }
+            }
+            
+            for service in services {
+                if service.name.lowercased().contains(searchText.lowercased()) {
+                    fetchedServices.append(service)
                 }
             }
         }
@@ -467,5 +516,48 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             tableView.endUpdates()
             tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         }
+    }
+    
+    // MARK: - Bonjour
+    
+    /// Services found by Bonjour for SSH.
+    var services = [NetService]()
+    
+    // MARK: - Net service browser delegate
+    
+    /// Append service.
+    func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
+        
+        guard !services.contains(service) else {
+            return
+        }
+        
+        services.append(service)
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: (devices.count-1)+(services.count-1), section: 1)], with: .automatic)
+        tableView.endUpdates()
+        tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+    }
+    
+    /// Remove service.
+    func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
+        if let i = services.firstIndex(of: service) {
+            services.remove(at: i)
+            tableView.beginUpdates()
+            print((devices.count)+i)
+            tableView.deleteRows(at: [IndexPath(row: (devices.count)+i, section: 1)], with: .automatic)
+            tableView.endUpdates()
+            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+        }
+    }
+    
+    // MARK: - Net service delegate
+    
+    /// Connect to the server.
+    func netServiceDidResolveAddress(_ sender: NetService) {
+        guard let hostname = sender.hostName, let url = URL(string: "sftp://\(hostname):\(sender.port)") else {
+            return
+        }
+        _ = AppDelegate.shared.application(UIApplication.shared, open: url, options: [:])
     }
 }
