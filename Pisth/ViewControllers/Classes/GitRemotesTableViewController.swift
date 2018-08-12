@@ -66,7 +66,7 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
             return
         }
         
-        launch(command: "git -C '\(repoPath!)' --no-pager log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
+        launch(command: "git -C '\(repoPath!)' log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

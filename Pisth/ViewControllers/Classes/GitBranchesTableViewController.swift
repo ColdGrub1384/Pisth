@@ -32,7 +32,7 @@ class GitBranchesTableViewController: UITableViewController {
     func launch(command: String, withTitle title: String) {
         let terminalVC = TerminalViewController()
         terminalVC.title = title
-        terminalVC.command = "clear; "+command+"; echo -e \"\\033[CLOSE\""
+        terminalVC.command = "clear; "+command
         
         navigationController?.pushViewController(terminalVC, animated: true, completion: {
             terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
