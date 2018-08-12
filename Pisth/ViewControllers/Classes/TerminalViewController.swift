@@ -565,6 +565,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-Terminal", AnalyticsParameterItemName : "Terminal"])
         
+        edgesForExtendedLayout = []
+        
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
@@ -628,13 +630,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         keyboardAppearance = theme.keyboardAppearance
     }
     
-    /// Become first responder, close and open shell, add `toolbar` to keyboard and configure `navigationController`.
+    /// Setup terminal.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         navigationController_ = navigationController
-        
-        edgesForExtendedLayout = []
         
         if !viewer {
             mcNearbyServiceAdvertiser.startAdvertisingPeer()
