@@ -494,10 +494,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         if !devices.contains(peerID) && peerID.displayName != self.peerID.displayName {
             devices.append(peerID)
-            tableView.beginUpdates()
-            tableView.insertRows(at: [IndexPath(row: devices.count-1, section: 1)], with: .automatic)
-            tableView.endUpdates()
-            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+            
+            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
         }
     }
     
@@ -511,10 +509,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         if let i = devices.index(of: peerID) {
             devices.remove(at: i)
             
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [IndexPath(row: i, section: 1)], with: .automatic)
-            tableView.endUpdates()
-            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
         }
     }
     
@@ -533,21 +528,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         
         services.append(service)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: (devices.count-1)+(services.count-1), section: 1)], with: .automatic)
-        tableView.endUpdates()
-        tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+        tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
     }
     
     /// Remove service.
     func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
         if let i = services.firstIndex(of: service) {
             services.remove(at: i)
-            tableView.beginUpdates()
-            print((devices.count)+i)
-            tableView.deleteRows(at: [IndexPath(row: (devices.count)+i, section: 1)], with: .automatic)
-            tableView.endUpdates()
-            tableView.backgroundView?.isHidden = !shouldShowBackgroundView
+            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
         }
     }
     

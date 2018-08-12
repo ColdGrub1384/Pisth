@@ -218,7 +218,7 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
         }
         
         if services.count > 0 {
-            return NSLocalizedString("nearby", comment: "Nearby SSH servers found by Bonjour.")
+            return Bundle(for: ConnectionInformationTableViewController.self).localizedString(forKey: "nearby", value: nil, table: nil)
         } else {
             return nil
         }
