@@ -322,9 +322,11 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
                 return nil
             }
             
-            try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+            if !event.modifierFlags.contains(.command) {
+                try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+            }
             
-            return nil
+            return event
         }
     }
     

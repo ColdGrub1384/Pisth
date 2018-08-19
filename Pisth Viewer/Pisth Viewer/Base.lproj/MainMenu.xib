@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14269.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.3.2"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14313.3.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -42,23 +42,20 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Preferences…" id="BOF-NM-1cW">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
+                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                             <menuItem title="Services" id="NMo-om-nkz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                            <menuItem title="Hide Pisth Viewer" id="Olw-nP-bQN">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Hide Pisth Viewer" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
                                     <action selector="hide:" target="-1" id="PnN-Uc-m68"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Hide Others" id="Vdr-fp-XzO">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Hide Others" keyEquivalent="H" id="Vdr-fp-XzO">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-1" id="VT4-aY-XCT"/>
                                 </connections>
@@ -70,8 +67,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                            <menuItem title="Quit Pisth Viewer" id="4sb-4s-VLi">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Quit Pisth Viewer" keyEquivalent="q" id="4sb-4s-VLi">
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
                                 </connections>
@@ -83,8 +79,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="Print…" id="aTl-1u-JFS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                 <connections>
                                     <action selector="print:" target="aQx-5k-rf6" id="Q6l-BN-bfW"/>
                                 </connections>
@@ -96,20 +91,17 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Edit" autoenablesItems="NO" id="W48-6f-4Dl">
                         <items>
-                            <menuItem title="Copy" id="x3v-GG-iWU">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Copy" keyEquivalent="c" id="x3v-GG-iWU">
                                 <connections>
                                     <action selector="copy:" target="-1" id="G1f-GL-Joy"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Paste" id="REK-S0-Pdh">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Paste" keyEquivalent="v" id="REK-S0-Pdh">
                                 <connections>
                                     <action selector="pasteText:" target="Voe-Tx-rLC" id="auT-1H-ut9"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Select All" id="Ruw-6m-B2m">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">
                                 <connections>
                                     <action selector="selectAll:" target="-1" id="VNm-Mi-diN"/>
                                 </connections>
