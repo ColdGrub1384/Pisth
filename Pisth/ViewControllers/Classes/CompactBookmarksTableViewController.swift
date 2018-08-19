@@ -63,7 +63,9 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
             present(alert, animated: true, completion: nil)
             return
         } else {
-            super.tableView(tableView, didSelectRowAt: indexPath)
+            dismiss(animated: true) {
+                super.tableView(tableView, didSelectRowAt: indexPath)
+            }
         }
     }
 }
