@@ -1317,7 +1317,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Allow dragging a `NMSFTPFile`.
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        return (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
+        let canHandle = (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
+        if canHandle {
+            webView.removeFromSuperview()
+        }
+        return canHandle
     }
     
     /// - Returns: `UIDropProposal(operation: .copy)`.
@@ -1326,13 +1330,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Add `webView`.
-    func dropInteraction(_ interaction: UIDropInteraction, concludeDrop session: UIDropSession) {
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
         view.addSubview(webView)
-    }
-    
-    /// Remove `webView`.
-    func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnter session: UIDropSession) {
-        webView.removeFromSuperview()
     }
     
     // MARK: - Panel content delegate

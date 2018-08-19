@@ -1700,8 +1700,17 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
          
             return dragPreview
         }
-         
+        
+        (ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController)?.webView?.removeFromSuperview()
+        
         return [item]
+    }
+    
+    /// Add the terminal to the view.
+    func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
+        if let term = ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController {
+            term.view.addSubview(term.webView)
+        }
     }
     
     /// Allow dragging only if the selected file is not the parent directory.
