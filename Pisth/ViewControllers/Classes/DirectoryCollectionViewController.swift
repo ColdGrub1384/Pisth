@@ -276,7 +276,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-RemoteFileBrowser", AnalyticsParameterItemName : "Remote File Browser"])
         
         collectionView?.backgroundColor = .white
-        collectionView?.backgroundView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        collectionView?.backgroundView = UIActivityIndicatorView(style: .gray)
         (collectionView?.backgroundView as? UIActivityIndicatorView)?.startAnimating()
     }
     
@@ -326,8 +326,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             // TableView cells
             collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
             collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
             collectionView?.refreshControl = UIRefreshControl()
             collectionView?.backgroundView = nil
             clearsSelectionOnViewWillAppear = false
@@ -440,10 +440,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
             if let os = connection.os?.lowercased(), directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
                 if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                    attributes.thumbnailData = UIImagePNGRepresentation(logo)
+                    attributes.thumbnailData = logo.pngData()
                 }
             } else {
-                attributes.thumbnailData = UIImagePNGRepresentation(#imageLiteral(resourceName: "File icons/folder"))
+                attributes.thumbnailData = #imageLiteral(resourceName: "File icons/folder").pngData()
             }
             attributes.addedDate = Date()
             attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)\(directory)"
@@ -452,7 +452,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.userActivity = activity
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         // Toolbar
         setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
@@ -1305,7 +1305,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     /// - Returns: An header view containing `headerView` or a footer containing `footerView`.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
             
             headerSuperview = view
@@ -1406,7 +1406,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                     let content = UNMutableNotificationContent()
                                     content.title = newFile.lastPathComponent
                                     content.body = Localizable.DirectoryCollectionViewController.downloadFinished
-                                    content.sound = UNNotificationSound.default()
+                                    content.sound = UNNotificationSound.default
                                     let request = UNNotificationRequest(identifier: "download", content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
                                     UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                                 } catch let error {

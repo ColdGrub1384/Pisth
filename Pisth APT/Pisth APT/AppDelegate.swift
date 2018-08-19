@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func goToPreviousApp() {
         UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: {
             if let url = self.apiURL {
-                UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (success) in
                     if success {
                         UIApplication.shared.keyWindow?.tintColor = UIView().tintColor
                         self.openReason = .default
@@ -222,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application delegate
     
     /// Open the session.
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
     
@@ -245,7 +245,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Install Deb or open connection with the API..
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         guard let vc = UIApplication.shared.keyWindow?.rootViewController else {
             return false
@@ -366,3 +366,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

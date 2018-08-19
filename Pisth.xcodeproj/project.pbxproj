@@ -107,7 +107,6 @@
 		C9B205BA20D6CBCB00045F20 /* NMSSH.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9B205B720D6CBBF00045F20 /* NMSSH.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9B205BB20D6CC0E00045F20 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C020D70CD400045F20 /* FileObserver.swift */; };
-		C9B205C520D71A8600045F20 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9B205C420D71A8600045F20 /* Info.plist */; };
 		C9B205C920D72FE300045F20 /* FilesOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C820D72FE300045F20 /* FilesOutlineView.swift */; };
 		C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */; };
 		C9BD2853210A34A100244AAF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BD2852210A34A000244AAF /* Localizable.swift */; };
@@ -825,15 +824,17 @@
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Original;
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = ADA;
 				TargetAttributes = {
 					3ACF9ADB20409446006C3218 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					3AFDD9001FF140FE0061677B = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -940,7 +941,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */,
-				C9B205C520D71A8600045F20 /* Info.plist in Resources */,
 				C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */,
 				C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */,
 				C9CB27E920D5BB9800290DBE /* Main.storyboard in Resources */,
@@ -1272,7 +1272,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1288,7 +1288,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1308,6 +1308,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1315,6 +1316,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1366,6 +1368,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1373,6 +1376,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1421,7 +1425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TINT_COLOR = Red;
 			};
@@ -1445,7 +1449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TINT_COLOR = Purple;
 			};
@@ -1466,6 +1470,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1473,6 +1478,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1526,7 +1532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TINT_COLOR = Orange;
 			};
@@ -1543,7 +1549,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Beta;

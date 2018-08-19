@@ -13,7 +13,7 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
     /// Setup loading screen.
     override func viewDidLoad() {
         
-        tableView.backgroundView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        tableView.backgroundView = UIActivityIndicatorView(style: .gray)
         (tableView.backgroundView as? UIActivityIndicatorView)?.startAnimating()
         tableView.tableFooterView = UIView()
         navigationItem.setRightBarButtonItems(nil, animated: false)

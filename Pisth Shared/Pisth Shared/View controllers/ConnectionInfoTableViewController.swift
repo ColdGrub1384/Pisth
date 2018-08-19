@@ -24,7 +24,7 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
     ///
     /// - Parameters:
     ///     - style: Style to use.
-    public override init(style: UITableViewStyle) {
+    public override init(style: UITableView.Style) {
         super.init(style: style)
     }
     

@@ -94,7 +94,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         
         propertiesTableView.dataSource = self
         propertiesTableView.delegate = self
-        propertiesTableView.rowHeight = UITableViewAutomaticDimension
+        propertiesTableView.rowHeight = UITableView.automaticDimension
         propertiesTableView.estimatedRowHeight = 200
         packageNameLabel.text = ""
     }
@@ -176,7 +176,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     
     /// - Returns: `200`.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     // MARK: - Static

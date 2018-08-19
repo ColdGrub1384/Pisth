@@ -67,6 +67,11 @@ open class Pisth {
             UIPasteboard.general.image = screenshot
         }
         
-        UIApplication.shared.open(pisthURLScheme, options: [:], completionHandler: nil)
+        UIApplication.shared.open(pisthURLScheme, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

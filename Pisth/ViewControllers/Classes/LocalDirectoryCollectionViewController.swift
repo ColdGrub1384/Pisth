@@ -398,8 +398,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
         collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
-        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
-        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footer")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
         collectionView?.backgroundColor = .white
         clearsSelectionOnViewWillAppear = false
         collectionView?.dragDelegate = self
@@ -446,7 +446,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         if let error = error {
             let errorAlert = UIAlertController(title: Localizable.Browsers.errorOpeningDirectory, message: error.localizedDescription, preferredStyle: .alert)
@@ -567,7 +567,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     /// - Returns: An header view containing `headerView`.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
             
             headerSuperview = view

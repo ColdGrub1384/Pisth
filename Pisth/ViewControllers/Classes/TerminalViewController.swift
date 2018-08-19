@@ -97,7 +97,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// The theme currently used by the terminal.
     var theme: TerminalTheme {
-        if UIAccessibilityIsInvertColorsEnabled() {
+        if UIAccessibility.isInvertColorsEnabled {
             return ProTheme()
         } else {
             return TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!
@@ -544,11 +544,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         var commands =  [
             UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: Localizable.TerminalViewController.paste),
-            UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
-            UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendDownArrow),
-            UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
-            UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
-            UIKeyCommand(input: UIKeyInputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendDownArrow),
+            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
+            UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
         ]
         
         let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
@@ -573,8 +573,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         addToolbar()
         
         // Resize webView
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         // Setup connectivity
         if peerID == nil {
@@ -615,8 +615,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             selectionTextView.trailingAnchor.constraint(equalTo: webView.layoutMarginsGuide.trailingAnchor)
         ])
         NSLayoutConstraint.activate([
-            selectionTextView.topAnchor.constraintEqualToSystemSpacingBelow(webView.layoutMarginsGuide.topAnchor, multiplier: 1.0),
-            webView.layoutMarginsGuide.bottomAnchor.constraintEqualToSystemSpacingBelow(selectionTextView.bottomAnchor, multiplier: 1.0)
+            selectionTextView.topAnchor.constraint(equalToSystemSpacingBelow: webView.layoutMarginsGuide.topAnchor, multiplier: 1.0),
+            webView.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: selectionTextView.bottomAnchor, multiplier: 1.0)
         ])
         
         if readOnly {
@@ -729,7 +729,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size, let toolbarFrame = toolbar?.convert(toolbar.frame, to: view), toolbarFrame.origin.y > 0 {
             
             resizeView(withSize: CGSize(width: view.frame.width, height: toolbarFrame.origin.y))
-        } else if let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        } else if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
         }
         
@@ -872,15 +872,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if command.modifierFlags.rawValue == 0 {
             switch command.input {
-            case UIKeyInputUpArrow?:
+            case UIKeyCommand.inputUpArrow?:
                 try? channel.write(Keys.arrowUp)
-            case UIKeyInputDownArrow?:
+            case UIKeyCommand.inputDownArrow?:
                 try? channel.write(Keys.arrowDown)
-            case UIKeyInputLeftArrow?:
+            case UIKeyCommand.inputLeftArrow?:
                 try? channel.write(Keys.arrowLeft)
-            case UIKeyInputRightArrow?:
+            case UIKeyCommand.inputRightArrow?:
                 try? channel.write(Keys.arrowRight)
-            case UIKeyInputEscape?:
+            case UIKeyCommand.inputEscape?:
                 try? channel.write(Keys.esc)
             default:
                 break
@@ -1146,7 +1146,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
                     if let os = connection.os?.lowercased() {
                         if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                            attributes.thumbnailData = UIImagePNGRepresentation(logo)
+                            attributes.thumbnailData = logo.pngData()
                         }
                     }
                     attributes.addedDate = Date()

@@ -158,8 +158,8 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
         
         // Resize textView
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         // Syntax coloring
         
@@ -370,7 +370,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     /// Resize `textView` when will show keyboard.
     @objc func keyboardWillShow(_ notification:Notification) {
         let d = notification.userInfo!
-        var r = d[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        var r = d[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         
         r = textView.convert(r, from:nil)
         textView.contentInset.bottom = r.size.height

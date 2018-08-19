@@ -2,6 +2,10 @@
 # platform :ios, '9.0'
 
 target 'Pisth' do
+
+  # ignore all warnings from all pods
+  inhibit_all_warnings!
+  
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 

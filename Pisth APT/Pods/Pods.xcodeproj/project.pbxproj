@@ -3,63 +3,62 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09DE75B190EE5892D92F929F2BABFAD8 /* NMSSHSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EC675438B183C89B99396DE9F3760F /* NMSSHSession.m */; };
-		1CD220C0C5CB0A23E19C2C2B0B7F41E9 /* NMSSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 64FCF27336E4D38DA78AA41A26BB7DEB /* NMSSHChannel.m */; };
+		13343F10B7E760DB7D080C61822C0B76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC365FEF314CAE9760892B813E187E /* Foundation.framework */; };
 		21BB009BD854FE3D760FE0449F95DC5D /* NMSSHChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = D232468CBDCAB39F497DF25E3A0F3F6B /* NMSSHChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23AFC33C07D45CFB47B03D13F4BE8A6F /* BiometricAuthentication-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 262EB0C170E2967C827D74C60014333F /* BiometricAuthentication-dummy.m */; };
 		2773911979B38F916EAF9755B9237273 /* libssh2.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F7B3B4296AC4331B6F681C6C4D563B /* libssh2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29FEADDF2086FDEA7D5BA87DD23B08C6 /* pb_decode.h in Headers */ = {isa = PBXBuildFile; fileRef = 21F1F1E8E8141EF17937B1FB190FF9A7 /* pb_decode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2CFC9885B7E0952E7DE87F6500290481 /* NMSFTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 82F696DF552BEDE120643F6C38905AA1 /* NMSFTP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3159D7CAFD56B809F40CA3330DA10889 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
 		36B93F2A2C4145C1C82A8E0B9CC30632 /* NMSFTPFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8ED82C760D7DFEDB1A99320A72BF6 /* NMSFTPFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		381DCF0B2F439F677F1AB441CFC08AC2 /* NMSFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B5814FCF014E91A8B74BF022B0AE7777 /* NMSFTPFile.m */; };
 		38C23F80C08B3D94A304DA24E9E15DEA /* libssh2_publickey.h in Headers */ = {isa = PBXBuildFile; fileRef = A988F99BDB047F4E2687F7FCDF314035 /* libssh2_publickey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		392F2CF142BAA751AC1BB61D8B757D98 /* pb.h in Headers */ = {isa = PBXBuildFile; fileRef = F3BD96B7B6AB74C826D5FC9AD2E575CA /* pb.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3A50F5C8ECED9627F2EBD97F61BD376D /* pb_common.c in Sources */ = {isa = PBXBuildFile; fileRef = AA87AC3D9CC3D96F9A0CD4396D4D13FA /* pb_common.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc -fno-objc-arc"; }; };
 		3CCF20DCB88F20DD59966E0BEDAA14E9 /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 52FCEDCFFD41995ACC0ED4829BDFF5D7 /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45BEBE577FFF0E9515FA1CA493C5FFE1 /* Pods-Pisth APT-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F055960268AAE68191B56D8D9F2720 /* Pods-Pisth APT-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		468DFD90B6C4DA2F7CFA0C1C89F1B615 /* nanopb-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EED00AE0595BD507921E9DC29B2F3A09 /* nanopb-dummy.m */; };
-		502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 85B00A114491E4C742729A842AAC7C31 /* NMSSH-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		418B8F524BE9823A0225D0FC48AEAC36 /* NMSFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B5814FCF014E91A8B74BF022B0AE7777 /* NMSFTPFile.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		45BEBE577FFF0E9515FA1CA493C5FFE1 /* Pods-Pisth APT-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E39526215A4DBBC76A64805F6C64021 /* Pods-Pisth APT-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		468DFD90B6C4DA2F7CFA0C1C89F1B615 /* nanopb-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D5A2B00127E2F822E185AF98DA82EC /* nanopb-dummy.m */; };
+		478252251C71D62DEF17CEE4FFBE6859 /* NMSSHHostConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DE807883B6C156473006830A6770BE /* NMSSHHostConfig.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		4A97EB67DD822CA5EAABBA77B93FCA7D /* NMSFTP.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC1525436DCB643F8CE007D84BC9C7 /* NMSFTP.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		4B46D8A93B58269188B8B88F58FCBA2C /* NMSSHSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EC675438B183C89B99396DE9F3760F /* NMSSHSession.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FAD34BA621923012ABB6A78E7999E5F /* NMSSH-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52F333DF6E858B07AEBCB2DBF2A99976 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC365FEF314CAE9760892B813E187E /* Foundation.framework */; };
 		541C5362289CC44D4F067D097F231250 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A4D1920849C59B167F00FEAD59046B /* GTMDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		54F580BF4588159D6A61F21D15591805 /* pb_decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3471BA5B83A8F25CA2321CFD15FC53C4 /* pb_decode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
-		55D8D5D912CFD2F3584E4553C2EAD734 /* pb_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = F94DD60CBF9FA0FA4C63D493096CD572 /* pb_encode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -fno-objc-arc"; }; };
 		5BFE34936B673E3800863193391DF092 /* socket_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = ACC723AF511C722415A64D52CF451E38 /* socket_helper.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		62DD7C7EB75A2EFAF26C2F7AAF1A83D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
-		646577B03E696CBE3F414CA9B717ECDE /* NMSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 010C5914667B97277565FE90A0E6D559 /* NMSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		647185EE96E0B4F08A9925C90C371F23 /* NMSSHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DA590A90C930DF2F0AF45158754CE3 /* NMSSHConfig.m */; };
-		6C7EBC945B821EB7727634033D6DF3C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
+		63829D25BF4A2C02E7791593FECC402C /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EE834DAC14278BCC0600FB42C1A4 /* BioMetricAuthenticator.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		6614868A1125D35E2727E5F1C37FE9B0 /* NMSSHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DA590A90C930DF2F0AF45158754CE3 /* NMSSHConfig.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		6E979220FD7F4202CC8665708B831C11 /* NMSSH+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 99F60BDC0099E88E0C567611EB5DFA19 /* NMSSH+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		6F7BAFBCEE0933C40A76E1ABB7BA3E8A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBA5794656CD6EAD5432F6E93991FC63 /* CFNetwork.framework */; };
-		74CDCC6E9AE244DC50DE93FA111DE384 /* NMSFTP.m in Sources */ = {isa = PBXBuildFile; fileRef = FBCC1525436DCB643F8CE007D84BC9C7 /* NMSFTP.m */; };
-		7640505CDB0CD0F37B5A51DF7B865EFF /* NMSSHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FE44F830ED190FA1381897DACD738373 /* NMSSHLogger.m */; };
+		76A4F2AE50D5140C8E15E236D0C29870 /* NMSSH-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C685DCB14A85325AB7BAA89E31A433F7 /* NMSSH-dummy.m */; };
+		7A6B3416DA1B00A53647726AFE5F09E5 /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D39B091E387CA48861BE9752AED9A8 /* GTMNSData+zlib.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		806BAA4E00218D70995697C4400BE7A0 /* pb_common.h in Headers */ = {isa = PBXBuildFile; fileRef = EE95863811C36919CCB8E5D7C1C1C63D /* pb_common.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81E4B6988FF26F9249B79C6C8CC667B4 /* GoogleToolboxForMac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4C74413D99887DE248BC697EFBE9A51 /* GoogleToolboxForMac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		861C4DA1383172332A4A43B4AFEFDC10 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D5903D346A8FA046AD8073350028A /* AuthenticationErrors.swift */; };
-		8B1D2B08674E7AB076E540A5230F12CC /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE6EE834DAC14278BCC0600FB42C1A4 /* BioMetricAuthenticator.swift */; };
-		8F91F2B443813BBC44B4A805F04A39C4 /* NMSSHHostConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DE807883B6C156473006830A6770BE /* NMSSHHostConfig.m */; };
+		81E4B6988FF26F9249B79C6C8CC667B4 /* GoogleToolboxForMac-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BECA93477776267A99ADB23ECDCF1164 /* GoogleToolboxForMac-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		922868FC8545055AF825BCB9BC287432 /* NMSSHConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F28B92D0F5AF1B08F694014BDE8EBCB2 /* NMSSHConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA0513F6530D4F36DC714AF1B5FF7331 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
+		955FB33A865B6CBB0BC278DAEDDFC7D6 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47D5903D346A8FA046AD8073350028A /* AuthenticationErrors.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		97FFCD86891384332F1AB5FA57E0E333 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11A86747E18CB9C3D5D7027293A2F6 /* BiometricAuthenticationConstants.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A154377844877C99CB6AE226353D2ED3 /* pb_decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3471BA5B83A8F25CA2321CFD15FC53C4 /* pb_decode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks -fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A15F8237B3813C61726DAB05F588A3EC /* NMSSHLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FE44F830ED190FA1381897DACD738373 /* NMSSHLogger.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A5BA819AE9CA559C66A043F263725BF6 /* pb_encode.c in Sources */ = {isa = PBXBuildFile; fileRef = F94DD60CBF9FA0FA4C63D493096CD572 /* pb_encode.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks -fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		AF766E616C7548F74C8E8AA48CE8F501 /* NMSSHChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FD8808F771A358F7812E410BF9E80873 /* NMSSHChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B40C5DFF7E01C15D738FBFB1641F683E /* socket_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C3685636E1E7C3DC3BD376A4F06BD05F /* socket_helper.m */; };
-		C09348A6D17868C5B278A576C6C21EE9 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A11A86747E18CB9C3D5D7027293A2F6 /* BiometricAuthenticationConstants.swift */; };
+		BEF183C3929850CF4CC4D04C60080C5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC365FEF314CAE9760892B813E187E /* Foundation.framework */; };
 		D0103D2E66D03C0BA07BE4BD53DECAEF /* NMSSHSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B696E339498B256576AEEB303FF2768 /* NMSSHSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0A38E6F50A64B0C79E75316393853C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC365FEF314CAE9760892B813E187E /* Foundation.framework */; };
+		D6ACAC5B8FD528546A893C365B25076D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89DC365FEF314CAE9760892B813E187E /* Foundation.framework */; };
+		D749F6CDDD1D5CAC39934997E927AF74 /* socket_helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C3685636E1E7C3DC3BD376A4F06BD05F /* socket_helper.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		DA85BB3FC6D0E25EAE9AABACEDEA2A40 /* NMSSHLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DFE1777356AFA6FB0801BE3942002FC /* NMSSHLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBFECCB0BBE3F11CC41A3C1A8C4879D3 /* GTMNSData+zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 78EFD5E7FB43A4477FD7E8AC83AFBBB7 /* GTMNSData+zlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E181395E73163EB702FCE9A21403D67B /* pb_encode.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE3984F9566A735B594B88B0CD3F8C3 /* pb_encode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E325B473256B452B23D808FAE16ED00B /* NMSSHHostConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E27B29CD54F52D503538F66BBE64DF3 /* NMSSHHostConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E492F9301A28A6F0E197558C25C8493D /* NMSSH-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AB1833EF54D4EBA9A3E92ED1A9EAB2 /* NMSSH-dummy.m */; };
-		E604FC89FFB05E379A4A63B44DF46060 /* Pods-Pisth APT-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D729E13BB6D910B83F26A992A1770E4 /* Pods-Pisth APT-dummy.m */; };
-		E6EE41D578F5A21CD9A56815D447E5CA /* BiometricAuthentication-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 52FC8F94063E140585D2FA5C90309557 /* BiometricAuthentication-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E771078EBAA22A6E00637B2D70831395 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */; };
+		E52FAF01E4928A0A2226BF5B1EBC5587 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6757C44D1A8B62FD3A7062E345EA7F6 /* CFNetwork.framework */; };
+		E604FC89FFB05E379A4A63B44DF46060 /* Pods-Pisth APT-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B99E80481055275CC3D2301ACE1182 /* Pods-Pisth APT-dummy.m */; };
+		E6EE41D578F5A21CD9A56815D447E5CA /* BiometricAuthentication-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E71D062D35AB3FF8E87489C9A95A089C /* BiometricAuthentication-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F45E543EA311E6D1F1926F2F645D736D /* libssh2_sftp.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C955EE6D456FE658FE7409DB31571F3 /* libssh2_sftp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7D889906DECB078EAAECB9D4A320E9C /* GTMNSData+zlib.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D39B091E387CA48861BE9752AED9A8 /* GTMNSData+zlib.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F9D92BA503505CB48EF4ECF0DDF57686 /* nanopb-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 23FD9293E7A56D7E85546ABEA5724801 /* nanopb-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAC3F3CAABA60EF76069431C5BB5032A /* GoogleToolboxForMac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 57B58730CFF81D4420E2EEDAA9E47C13 /* GoogleToolboxForMac-dummy.m */; };
+		F9A16152854098FE83A55CFA85C70AA1 /* BiometricAuthentication-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DA50188EA2574AB7585F67BE357732 /* BiometricAuthentication-dummy.m */; };
+		F9D92BA503505CB48EF4ECF0DDF57686 /* nanopb-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DEC42251EBF9ECD3085A09608D37782C /* nanopb-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAC3F3CAABA60EF76069431C5BB5032A /* GoogleToolboxForMac-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 70E62B0184F52E19BA591D22D7E769CA /* GoogleToolboxForMac-dummy.m */; };
 		FC4041E14EC85D5FF3060D606C31E5CA /* NMSSHSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 490804DF0B8F37BB663C257DCB30DC51 /* NMSSHSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE8C558F84E146975426CDD42A582FD8 /* pb_common.c in Sources */ = {isa = PBXBuildFile; fileRef = AA87AC3D9CC3D96F9A0CD4396D4D13FA /* pb_common.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks -fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks -fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		FEF946D8845575BB8CEC4E10554D21C9 /* NMSSHChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 64FCF27336E4D38DA78AA41A26BB7DEB /* NMSSHChannel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,90 +94,90 @@
 
 /* Begin PBXFileReference section */
 		0015C1C13E22DAE7788955AD54ADFDFE /* libssh2.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssh2.a; path = "NMSSH-iOS/Libraries/lib/libssh2.a"; sourceTree = "<group>"; };
+		008158399BB2BDF2659B390200928FEF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		010C5914667B97277565FE90A0E6D559 /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = NMSSH/NMSSH.h; sourceTree = "<group>"; };
-		0355E2F7AFDD42DBF1043692059E01D8 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = nanopb.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		05695FFA868112719CA275466850B5DC /* GoogleToolboxForMac-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-prefix.pch"; sourceTree = "<group>"; };
-		070C58F77A01725BF744AD6C93C49E1F /* NMSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NMSSH.framework; path = NMSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0355E2F7AFDD42DBF1043692059E01D8 /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		070C58F77A01725BF744AD6C93C49E1F /* NMSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NMSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C955EE6D456FE658FE7409DB31571F3 /* libssh2_sftp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_sftp.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_sftp.h"; sourceTree = "<group>"; };
 		1A11A86747E18CB9C3D5D7027293A2F6 /* BiometricAuthenticationConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BiometricAuthenticationConstants.swift; path = BiometricAuthentication/BiometricAuthentication/Constants/BiometricAuthenticationConstants.swift; sourceTree = "<group>"; };
-		1CB3780C1A101C3F6B6F8E78416DDCC1 /* Pods-Pisth APT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.release.xcconfig"; sourceTree = "<group>"; };
 		1E27B29CD54F52D503538F66BBE64DF3 /* NMSSHHostConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHHostConfig.h; path = NMSSH/NMSSHHostConfig.h; sourceTree = "<group>"; };
 		21EC675438B183C89B99396DE9F3760F /* NMSSHSession.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHSession.m; path = NMSSH/NMSSHSession.m; sourceTree = "<group>"; };
 		21F1F1E8E8141EF17937B1FB190FF9A7 /* pb_decode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_decode.h; sourceTree = "<group>"; };
-		23FD9293E7A56D7E85546ABEA5724801 /* nanopb-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-umbrella.h"; sourceTree = "<group>"; };
-		262EB0C170E2967C827D74C60014333F /* BiometricAuthentication-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BiometricAuthentication-dummy.m"; sourceTree = "<group>"; };
+		290CD8B02CB9EC47D3A674B27523A44F /* BiometricAuthentication.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BiometricAuthentication.modulemap; sourceTree = "<group>"; };
 		2A5C22EF8E3F9BCA30B62079E4764786 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Frameworks/FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		3471BA5B83A8F25CA2321CFD15FC53C4 /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_decode.c; sourceTree = "<group>"; };
+		321FCBFEAEB271A88D9A821D72BE005A /* Pods-Pisth APT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.debug.xcconfig"; sourceTree = "<group>"; };
+		33D5A2B00127E2F822E185AF98DA82EC /* nanopb-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "nanopb-dummy.m"; sourceTree = "<group>"; };
+		3471BA5B83A8F25CA2321CFD15FC53C4 /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_decode.c; sourceTree = "<group>"; };
 		3741EAFA7F3819948E52B627D69AF4DB /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = Frameworks/FirebaseNanoPB.framework; sourceTree = "<group>"; };
 		3DE6EE834DAC14278BCC0600FB42C1A4 /* BioMetricAuthenticator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BioMetricAuthenticator.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/BioMetricAuthenticator.swift; sourceTree = "<group>"; };
 		3DFE1777356AFA6FB0801BE3942002FC /* NMSSHLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHLogger.h; path = NMSSH/Config/NMSSHLogger.h; sourceTree = "<group>"; };
+		3F3B0F13BF54817BAE0687162F9D7AEF /* NMSSH-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-prefix.pch"; sourceTree = "<group>"; };
 		3FE3984F9566A735B594B88B0CD3F8C3 /* pb_encode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_encode.h; sourceTree = "<group>"; };
-		423D97651756F1C8D948CD3F7B8D8D6E /* NMSSH.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = NMSSH.modulemap; sourceTree = "<group>"; };
-		42A59D18971F1881E703820624CEED5E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		477F35D2540A3B0A597D748DCA38621B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4818988330C6923187AAD16B3FA33640 /* GoogleToolboxForMac-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-prefix.pch"; sourceTree = "<group>"; };
 		490804DF0B8F37BB663C257DCB30DC51 /* NMSSHSession.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSession.h; path = NMSSH/NMSSHSession.h; sourceTree = "<group>"; };
-		49715D5697A4FC6A07FBE0A4B77E8331 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52FC8F94063E140585D2FA5C90309557 /* BiometricAuthentication-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-umbrella.h"; sourceTree = "<group>"; };
+		4C5B3C5259C7E412EF714B8760E5A494 /* NMSSH.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NMSSH.modulemap; sourceTree = "<group>"; };
 		52FCEDCFFD41995ACC0ED4829BDFF5D7 /* NMSSH.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSH.h; path = "NMSSH-iOS/NMSSH.h"; sourceTree = "<group>"; };
-		57B58730CFF81D4420E2EEDAA9E47C13 /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
-		5846F1F68E5F0542A9DF3D73A781970E /* BiometricAuthentication.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = BiometricAuthentication.modulemap; sourceTree = "<group>"; };
+		54341ECC6FBEE68B84DC9682B20B9DD9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59B99E80481055275CC3D2301ACE1182 /* Pods-Pisth APT-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pisth APT-dummy.m"; sourceTree = "<group>"; };
 		5B5A7CA03AE16EE448D127FD5BC855A7 /* Firebase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = Core/Sources/Firebase.h; sourceTree = "<group>"; };
-		5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5DC632A11E6ED2732F386B8C31764004 /* Pods-Pisth APT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Pisth APT.modulemap"; sourceTree = "<group>"; };
-		632D87BF2629B14B3A4146D9B55316F7 /* Pods-Pisth APT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.debug.xcconfig"; sourceTree = "<group>"; };
+		5FAD34BA621923012ABB6A78E7999E5F /* NMSSH-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-umbrella.h"; sourceTree = "<group>"; };
 		64FCF27336E4D38DA78AA41A26BB7DEB /* NMSSHChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHChannel.m; path = NMSSH/NMSSHChannel.m; sourceTree = "<group>"; };
-		6693D3F3A79FD0937FD7E89991EAE5C3 /* Pods-Pisth APT-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-resources.sh"; sourceTree = "<group>"; };
-		688D3DF10F3ED59CE6043F75F1A973ED /* BiometricAuthentication-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-prefix.pch"; sourceTree = "<group>"; };
+		6608B732FF3D7145C1F3854366FE19A6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		68F7B3B4296AC4331B6F681C6C4D563B /* libssh2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2.h"; sourceTree = "<group>"; };
-		71DEB864FC8D40AED0EBF65574105E2D /* GoogleToolboxForMac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = GoogleToolboxForMac.modulemap; sourceTree = "<group>"; };
-		74AB1833EF54D4EBA9A3E92ED1A9EAB2 /* NMSSH-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMSSH-dummy.m"; sourceTree = "<group>"; };
+		70E62B0184F52E19BA591D22D7E769CA /* GoogleToolboxForMac-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GoogleToolboxForMac-dummy.m"; sourceTree = "<group>"; };
+		72A1026B114B405FE21395D68DA065FA /* Pods-Pisth APT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pisth APT.release.xcconfig"; sourceTree = "<group>"; };
+		74F3FEB7CBDB2A6CC9EFB4243F28DF30 /* Pods-Pisth APT-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Pisth APT-acknowledgements.markdown"; sourceTree = "<group>"; };
 		75DA590A90C930DF2F0AF45158754CE3 /* NMSSHConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHConfig.m; path = NMSSH/NMSSHConfig.m; sourceTree = "<group>"; };
-		76325B4C62D80953250C27798EA61D8E /* BiometricAuthentication.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BiometricAuthentication.xcconfig; sourceTree = "<group>"; };
 		78EFD5E7FB43A4477FD7E8AC83AFBBB7 /* GTMNSData+zlib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GTMNSData+zlib.h"; path = "Foundation/GTMNSData+zlib.h"; sourceTree = "<group>"; };
-		7F2A13C8C4EDBF528AA44CB496635170 /* GoogleToolboxForMac.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleToolboxForMac.xcconfig; sourceTree = "<group>"; };
+		8001F49E5C576DEFF032C099BE29157C /* nanopb.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = nanopb.xcconfig; sourceTree = "<group>"; };
 		82F696DF552BEDE120643F6C38905AA1 /* NMSFTP.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTP.h; path = NMSSH/NMSFTP.h; sourceTree = "<group>"; };
-		83541B4BD2E058BB543F3BE5E9563670 /* NMSSH.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMSSH.xcconfig; sourceTree = "<group>"; };
 		84D8ED82C760D7DFEDB1A99320A72BF6 /* NMSFTPFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSFTPFile.h; path = NMSSH/NMSFTPFile.h; sourceTree = "<group>"; };
-		85B00A114491E4C742729A842AAC7C31 /* NMSSH-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-umbrella.h"; sourceTree = "<group>"; };
-		8D729E13BB6D910B83F26A992A1770E4 /* Pods-Pisth APT-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Pisth APT-dummy.m"; sourceTree = "<group>"; };
+		89DC365FEF314CAE9760892B813E187E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		8DBEC6DD9438466BF9A4DA069752DF6E /* nanopb.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = nanopb.modulemap; sourceTree = "<group>"; };
+		8E39526215A4DBBC76A64805F6C64021 /* Pods-Pisth APT-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Pisth APT-umbrella.h"; sourceTree = "<group>"; };
 		8F2F96339D9D6748E8D1BB9C57ECBD87 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Frameworks/FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		92B13382B88D1598438C25AD017756D9 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GoogleToolboxForMac.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		92B13382B88D1598438C25AD017756D9 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DA50188EA2574AB7585F67BE357732 /* BiometricAuthentication-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BiometricAuthentication-dummy.m"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94B61DA599A737D8D3E880E0777C7835 /* libcrypto.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcrypto.a; path = "NMSSH-iOS/Libraries/lib/libcrypto.a"; sourceTree = "<group>"; };
 		94DE807883B6C156473006830A6770BE /* NMSSHHostConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSSHHostConfig.m; path = NMSSH/NMSSHHostConfig.m; sourceTree = "<group>"; };
 		99F60BDC0099E88E0C567611EB5DFA19 /* NMSSH+Protected.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NMSSH+Protected.h"; path = "NMSSH/Config/NMSSH+Protected.h"; sourceTree = "<group>"; };
 		9B696E339498B256576AEEB303FF2768 /* NMSSHSessionDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHSessionDelegate.h; path = NMSSH/Protocols/NMSSHSessionDelegate.h; sourceTree = "<group>"; };
-		A3E4C2B84D60D5B31F71CBF846E8BD1E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BB6BAD57E62F96769CF6596137F859D /* GoogleToolboxForMac.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleToolboxForMac.xcconfig; sourceTree = "<group>"; };
+		9D1B507DDD8C1DB59B32A60162A9B771 /* Pods-Pisth APT-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-resources.sh"; sourceTree = "<group>"; };
 		A6A4D1920849C59B167F00FEAD59046B /* GTMDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		A7CB58686C134D8B0348B908396E9B13 /* BiometricAuthentication-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-prefix.pch"; sourceTree = "<group>"; };
 		A988F99BDB047F4E2687F7FCDF314035 /* libssh2_publickey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = libssh2_publickey.h; path = "NMSSH-iOS/Libraries/include/libssh2/libssh2_publickey.h"; sourceTree = "<group>"; };
-		AA196E9D2287CC82780235050E05EC3C /* Pods_Pisth_APT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Pisth_APT.framework; path = "Pods-Pisth APT.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA87AC3D9CC3D96F9A0CD4396D4D13FA /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_common.c; sourceTree = "<group>"; };
+		AA196E9D2287CC82780235050E05EC3C /* Pods_Pisth_APT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_APT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA87AC3D9CC3D96F9A0CD4396D4D13FA /* pb_common.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_common.c; sourceTree = "<group>"; };
 		ACC723AF511C722415A64D52CF451E38 /* socket_helper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = socket_helper.h; path = NMSSH/Config/socket_helper.h; sourceTree = "<group>"; };
-		AF2F8EFF3ED5EF83F45EB3D86FB6106E /* nanopb.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = nanopb.modulemap; sourceTree = "<group>"; };
+		AE334B894930CA91560A7B14420D935F /* BiometricAuthentication.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BiometricAuthentication.xcconfig; sourceTree = "<group>"; };
 		AFEF17B078441EDC0854158BAF3DF9D3 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Frameworks/frameworks/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		B1960E3FC82856DCC4304A82350D413A /* Pods-Pisth APT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Pisth APT.modulemap"; sourceTree = "<group>"; };
+		B25D71FE3A0F6CF7BD546CFA617BCB09 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5814FCF014E91A8B74BF022B0AE7777 /* NMSFTPFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTPFile.m; path = NMSSH/NMSFTPFile.m; sourceTree = "<group>"; };
+		BECA93477776267A99ADB23ECDCF1164 /* GoogleToolboxForMac-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-umbrella.h"; sourceTree = "<group>"; };
 		C240E6794E4314F43DE69BAB041D95F5 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Frameworks/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		C3685636E1E7C3DC3BD376A4F06BD05F /* socket_helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = socket_helper.m; path = NMSSH/Config/socket_helper.m; sourceTree = "<group>"; };
+		C3AC5B386DD7C504366908ACB4CB2E19 /* Pods-Pisth APT-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-frameworks.sh"; sourceTree = "<group>"; };
 		C3D39B091E387CA48861BE9752AED9A8 /* GTMNSData+zlib.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "GTMNSData+zlib.m"; path = "Foundation/GTMNSData+zlib.m"; sourceTree = "<group>"; };
-		C5FCFB43E849E00DBA5D5A545B3295B2 /* NMSSH-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMSSH-prefix.pch"; sourceTree = "<group>"; };
-		C80C32872E3E0EAB43149AE50F4EF3A6 /* BiometricAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BiometricAuthentication.framework; path = BiometricAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0DB44FEB9CC65267D23FAEC7FA4098D /* Pods-Pisth APT-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Pisth APT-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C4849B4E794C73128BBFCEBBC89ADAC2 /* NMSSH.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMSSH.xcconfig; sourceTree = "<group>"; };
+		C6757C44D1A8B62FD3A7062E345EA7F6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		C685DCB14A85325AB7BAA89E31A433F7 /* NMSSH-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMSSH-dummy.m"; sourceTree = "<group>"; };
+		C80C32872E3E0EAB43149AE50F4EF3A6 /* BiometricAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BiometricAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0D07F4C04797F9904C42B8475E36E32 /* nanopb-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-prefix.pch"; sourceTree = "<group>"; };
 		D232468CBDCAB39F497DF25E3A0F3F6B /* NMSSHChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannel.h; path = NMSSH/NMSSHChannel.h; sourceTree = "<group>"; };
 		D47D5903D346A8FA046AD8073350028A /* AuthenticationErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationErrors.swift; path = BiometricAuthentication/BiometricAuthentication/Authentication/AuthenticationErrors.swift; sourceTree = "<group>"; };
-		D562C5D2CDDAF4A8D57205284BEDEDCB /* Pods-Pisth APT-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pisth APT-acknowledgements.plist"; sourceTree = "<group>"; };
-		D6E3F0A41D4DA517AAC0EB5C5C084EA7 /* nanopb.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = nanopb.xcconfig; sourceTree = "<group>"; };
-		DBA5794656CD6EAD5432F6E93991FC63 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		E89E123B30122E0C60D744113366C015 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9EBB122C80DA2303DD5A306416A7F44 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEC42251EBF9ECD3085A09608D37782C /* nanopb-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-umbrella.h"; sourceTree = "<group>"; };
+		E71D062D35AB3FF8E87489C9A95A089C /* BiometricAuthentication-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BiometricAuthentication-umbrella.h"; sourceTree = "<group>"; };
+		EA956A098290BA14166CCFE291F7F4E8 /* Pods-Pisth APT-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pisth APT-acknowledgements.plist"; sourceTree = "<group>"; };
 		EE95863811C36919CCB8E5D7C1C1C63D /* pb_common.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_common.h; sourceTree = "<group>"; };
-		EED00AE0595BD507921E9DC29B2F3A09 /* nanopb-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "nanopb-dummy.m"; sourceTree = "<group>"; };
-		EFBDCE4507DF143B6861E6951D5AFEF2 /* Pods-Pisth APT-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Pisth APT-frameworks.sh"; sourceTree = "<group>"; };
 		F11C907AD1E0BA49F00E0D6B0DC8C150 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Frameworks/FirebaseCore.framework; sourceTree = "<group>"; };
+		F21338642DA2C342B755F9EC8E1735EA /* GoogleToolboxForMac.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GoogleToolboxForMac.modulemap; sourceTree = "<group>"; };
 		F28B92D0F5AF1B08F694014BDE8EBCB2 /* NMSSHConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHConfig.h; path = NMSSH/NMSSHConfig.h; sourceTree = "<group>"; };
 		F3BD96B7B6AB74C826D5FC9AD2E575CA /* pb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb.h; sourceTree = "<group>"; };
-		F4C74413D99887DE248BC697EFBE9A51 /* GoogleToolboxForMac-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GoogleToolboxForMac-umbrella.h"; sourceTree = "<group>"; };
-		F7F055960268AAE68191B56D8D9F2720 /* Pods-Pisth APT-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Pisth APT-umbrella.h"; sourceTree = "<group>"; };
-		F94DD60CBF9FA0FA4C63D493096CD572 /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; path = pb_encode.c; sourceTree = "<group>"; };
-		FA09AF7E8AB71711FBE113559EB1952A /* nanopb-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "nanopb-prefix.pch"; sourceTree = "<group>"; };
+		F94DD60CBF9FA0FA4C63D493096CD572 /* pb_encode.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_encode.c; sourceTree = "<group>"; };
 		FA84E99FBE56E1AAF465E8DA72859323 /* libssl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssl.a; path = "NMSSH-iOS/Libraries/lib/libssl.a"; sourceTree = "<group>"; };
 		FBCC1525436DCB643F8CE007D84BC9C7 /* NMSFTP.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMSFTP.m; path = NMSSH/NMSFTP.m; sourceTree = "<group>"; };
 		FD8808F771A358F7812E410BF9E80873 /* NMSSHChannelDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMSSHChannelDelegate.h; path = NMSSH/Protocols/NMSSHChannelDelegate.h; sourceTree = "<group>"; };
@@ -190,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E771078EBAA22A6E00637B2D70831395 /* Foundation.framework in Frameworks */,
+				D0A38E6F50A64B0C79E75316393853C1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA0513F6530D4F36DC714AF1B5FF7331 /* Foundation.framework in Frameworks */,
+				D6ACAC5B8FD528546A893C365B25076D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62DD7C7EB75A2EFAF26C2F7AAF1A83D6 /* Foundation.framework in Frameworks */,
+				52F333DF6E858B07AEBCB2DBF2A99976 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,8 +213,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F7BAFBCEE0933C40A76E1ABB7BA3E8A /* CFNetwork.framework in Frameworks */,
-				6C7EBC945B821EB7727634033D6DF3C6 /* Foundation.framework in Frameworks */,
+				E52FAF01E4928A0A2226BF5B1EBC5587 /* CFNetwork.framework in Frameworks */,
+				13343F10B7E760DB7D080C61822C0B76 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,20 +222,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3159D7CAFD56B809F40CA3330DA10889 /* Foundation.framework in Frameworks */,
+				BEF183C3929850CF4CC4D04C60080C5D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07B963F066CF1C907024B787F3D5186F /* iOS */ = {
+		024FF523189F6D78D6F24147BC6EA0EB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				DBA5794656CD6EAD5432F6E93991FC63 /* CFNetwork.framework */,
-				5C074C11AE6A5B57D6F593C07D4511E4 /* Foundation.framework */,
+				F21338642DA2C342B755F9EC8E1735EA /* GoogleToolboxForMac.modulemap */,
+				9BB6BAD57E62F96769CF6596137F859D /* GoogleToolboxForMac.xcconfig */,
+				70E62B0184F52E19BA591D22D7E769CA /* GoogleToolboxForMac-dummy.m */,
+				4818988330C6923187AAD16B3FA33640 /* GoogleToolboxForMac-prefix.pch */,
+				BECA93477776267A99ADB23ECDCF1164 /* GoogleToolboxForMac-umbrella.h */,
+				54341ECC6FBEE68B84DC9682B20B9DD9 /* Info.plist */,
 			);
-			name = iOS;
+			name = "Support Files";
+			path = "../Target Support Files/GoogleToolboxForMac";
 			sourceTree = "<group>";
 		};
 		0D4F13684A151736BFE7D03CEEE8C305 /* GoogleToolboxForMac */ = {
@@ -244,24 +248,9 @@
 			children = (
 				6EE0A9B75FE987215BD4C2EF7F3FBD4A /* Defines */,
 				7A00D5E3DD6C7894D1FE125FD5369B7C /* NSData+zlib */,
-				B31001BF10D0CFFFDFCF205C45DFCD39 /* Support Files */,
+				024FF523189F6D78D6F24147BC6EA0EB /* Support Files */,
 			);
-			name = GoogleToolboxForMac;
 			path = GoogleToolboxForMac;
-			sourceTree = "<group>";
-		};
-		109F3E771FCF22B4C35C5B763462A328 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				A3E4C2B84D60D5B31F71CBF846E8BD1E /* Info.plist */,
-				423D97651756F1C8D948CD3F7B8D8D6E /* NMSSH.modulemap */,
-				83541B4BD2E058BB543F3BE5E9563670 /* NMSSH.xcconfig */,
-				74AB1833EF54D4EBA9A3E92ED1A9EAB2 /* NMSSH-dummy.m */,
-				C5FCFB43E849E00DBA5D5A545B3295B2 /* NMSSH-prefix.pch */,
-				85B00A114491E4C742729A842AAC7C31 /* NMSSH-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/NMSSH";
 			sourceTree = "<group>";
 		};
 		15D90E6D6566DD97A65C2E95A7064D65 /* Pods */ = {
@@ -285,7 +274,6 @@
 			children = (
 				B6D32D1D814F419F9D02AA35EF7A2357 /* Frameworks */,
 			);
-			name = FirebaseInstanceID;
 			path = FirebaseInstanceID;
 			sourceTree = "<group>";
 		};
@@ -301,6 +289,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		38DA32E88F9C20B4F292C60687BA7778 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				290CD8B02CB9EC47D3A674B27523A44F /* BiometricAuthentication.modulemap */,
+				AE334B894930CA91560A7B14420D935F /* BiometricAuthentication.xcconfig */,
+				92DA50188EA2574AB7585F67BE357732 /* BiometricAuthentication-dummy.m */,
+				A7CB58686C134D8B0348B908396E9B13 /* BiometricAuthentication-prefix.pch */,
+				E71D062D35AB3FF8E87489C9A95A089C /* BiometricAuthentication-umbrella.h */,
+				6608B732FF3D7145C1F3854366FE19A6 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BiometricAuthentication";
+			sourceTree = "<group>";
+		};
 		39994F5267AFBCE6D4ADD8C1C653AFB5 /* encode */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,9 +316,8 @@
 				D47D5903D346A8FA046AD8073350028A /* AuthenticationErrors.swift */,
 				1A11A86747E18CB9C3D5D7027293A2F6 /* BiometricAuthenticationConstants.swift */,
 				3DE6EE834DAC14278BCC0600FB42C1A4 /* BioMetricAuthenticator.swift */,
-				CDDC11A87ED9436B128AE0C6E756263B /* Support Files */,
+				38DA32E88F9C20B4F292C60687BA7778 /* Support Files */,
 			);
-			name = BiometricAuthentication;
 			path = BiometricAuthentication;
 			sourceTree = "<group>";
 		};
@@ -325,7 +326,6 @@
 			children = (
 				C35435E66E2D289E1572D3DAB8A37A31 /* Frameworks */,
 			);
-			name = FirebaseAnalytics;
 			path = FirebaseAnalytics;
 			sourceTree = "<group>";
 		};
@@ -357,16 +357,15 @@
 				ACC723AF511C722415A64D52CF451E38 /* socket_helper.h */,
 				C3685636E1E7C3DC3BD376A4F06BD05F /* socket_helper.m */,
 				4CDA07E7E086EFD38BA039A4FDFC7B18 /* Frameworks */,
-				109F3E771FCF22B4C35C5B763462A328 /* Support Files */,
+				81CA453C6B981C6B69ADCE6631144056 /* Support Files */,
 			);
-			name = NMSSH;
 			path = NMSSH;
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07B963F066CF1C907024B787F3D5186F /* iOS */,
+				D52304B3F0670EE0236B3F34A532CB30 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -386,7 +385,6 @@
 			children = (
 				F643346EFF3A812FAF6CCA1364EB64A2 /* Core */,
 			);
-			name = Firebase;
 			path = Firebase;
 			sourceTree = "<group>";
 		};
@@ -426,44 +424,26 @@
 			);
 			sourceTree = "<group>";
 		};
+		81CA453C6B981C6B69ADCE6631144056 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				477F35D2540A3B0A597D748DCA38621B /* Info.plist */,
+				4C5B3C5259C7E412EF714B8760E5A494 /* NMSSH.modulemap */,
+				C4849B4E794C73128BBFCEBBC89ADAC2 /* NMSSH.xcconfig */,
+				C685DCB14A85325AB7BAA89E31A433F7 /* NMSSH-dummy.m */,
+				3F3B0F13BF54817BAE0687162F9D7AEF /* NMSSH-prefix.pch */,
+				5FAD34BA621923012ABB6A78E7999E5F /* NMSSH-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/NMSSH";
+			sourceTree = "<group>";
+		};
 		8BCFA4E566F2CD95CB62E400ADB70BBE /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B314C348A036555F0E9C4AFC140DD780 /* Pods-Pisth APT */,
+				D885E13C32A1515CCC38E06A148B16E5 /* Pods-Pisth APT */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		B31001BF10D0CFFFDFCF205C45DFCD39 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				71DEB864FC8D40AED0EBF65574105E2D /* GoogleToolboxForMac.modulemap */,
-				7F2A13C8C4EDBF528AA44CB496635170 /* GoogleToolboxForMac.xcconfig */,
-				57B58730CFF81D4420E2EEDAA9E47C13 /* GoogleToolboxForMac-dummy.m */,
-				05695FFA868112719CA275466850B5DC /* GoogleToolboxForMac-prefix.pch */,
-				F4C74413D99887DE248BC697EFBE9A51 /* GoogleToolboxForMac-umbrella.h */,
-				E9EBB122C80DA2303DD5A306416A7F44 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/GoogleToolboxForMac";
-			sourceTree = "<group>";
-		};
-		B314C348A036555F0E9C4AFC140DD780 /* Pods-Pisth APT */ = {
-			isa = PBXGroup;
-			children = (
-				E89E123B30122E0C60D744113366C015 /* Info.plist */,
-				5DC632A11E6ED2732F386B8C31764004 /* Pods-Pisth APT.modulemap */,
-				D0DB44FEB9CC65267D23FAEC7FA4098D /* Pods-Pisth APT-acknowledgements.markdown */,
-				D562C5D2CDDAF4A8D57205284BEDEDCB /* Pods-Pisth APT-acknowledgements.plist */,
-				8D729E13BB6D910B83F26A992A1770E4 /* Pods-Pisth APT-dummy.m */,
-				EFBDCE4507DF143B6861E6951D5AFEF2 /* Pods-Pisth APT-frameworks.sh */,
-				6693D3F3A79FD0937FD7E89991EAE5C3 /* Pods-Pisth APT-resources.sh */,
-				F7F055960268AAE68191B56D8D9F2720 /* Pods-Pisth APT-umbrella.h */,
-				632D87BF2629B14B3A4146D9B55316F7 /* Pods-Pisth APT.debug.xcconfig */,
-				1CB3780C1A101C3F6B6F8E78416DDCC1 /* Pods-Pisth APT.release.xcconfig */,
-			);
-			name = "Pods-Pisth APT";
-			path = "Target Support Files/Pods-Pisth APT";
 			sourceTree = "<group>";
 		};
 		B3F9207117A18CE75FADCD19E17906FD /* decode */ = {
@@ -511,24 +491,9 @@
 				3FE3984F9566A735B594B88B0CD3F8C3 /* pb_encode.h */,
 				B3F9207117A18CE75FADCD19E17906FD /* decode */,
 				39994F5267AFBCE6D4ADD8C1C653AFB5 /* encode */,
-				E0EBB691CBC8A2241595F70FEB75D72D /* Support Files */,
+				E8DEC4384578C8C73C669566DA4F63A7 /* Support Files */,
 			);
-			name = nanopb;
 			path = nanopb;
-			sourceTree = "<group>";
-		};
-		CDDC11A87ED9436B128AE0C6E756263B /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5846F1F68E5F0542A9DF3D73A781970E /* BiometricAuthentication.modulemap */,
-				76325B4C62D80953250C27798EA61D8E /* BiometricAuthentication.xcconfig */,
-				262EB0C170E2967C827D74C60014333F /* BiometricAuthentication-dummy.m */,
-				688D3DF10F3ED59CE6043F75F1A973ED /* BiometricAuthentication-prefix.pch */,
-				52FC8F94063E140585D2FA5C90309557 /* BiometricAuthentication-umbrella.h */,
-				42A59D18971F1881E703820624CEED5E /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/BiometricAuthentication";
 			sourceTree = "<group>";
 		};
 		D314ED6D265E97DAF6473245111B09EA /* FirebaseCore */ = {
@@ -536,19 +501,45 @@
 			children = (
 				B90CF04A6EF9AD6862BF51F9E19979C5 /* Frameworks */,
 			);
-			name = FirebaseCore;
 			path = FirebaseCore;
 			sourceTree = "<group>";
 		};
-		E0EBB691CBC8A2241595F70FEB75D72D /* Support Files */ = {
+		D52304B3F0670EE0236B3F34A532CB30 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				49715D5697A4FC6A07FBE0A4B77E8331 /* Info.plist */,
-				AF2F8EFF3ED5EF83F45EB3D86FB6106E /* nanopb.modulemap */,
-				D6E3F0A41D4DA517AAC0EB5C5C084EA7 /* nanopb.xcconfig */,
-				EED00AE0595BD507921E9DC29B2F3A09 /* nanopb-dummy.m */,
-				FA09AF7E8AB71711FBE113559EB1952A /* nanopb-prefix.pch */,
-				23FD9293E7A56D7E85546ABEA5724801 /* nanopb-umbrella.h */,
+				C6757C44D1A8B62FD3A7062E345EA7F6 /* CFNetwork.framework */,
+				89DC365FEF314CAE9760892B813E187E /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D885E13C32A1515CCC38E06A148B16E5 /* Pods-Pisth APT */ = {
+			isa = PBXGroup;
+			children = (
+				B25D71FE3A0F6CF7BD546CFA617BCB09 /* Info.plist */,
+				B1960E3FC82856DCC4304A82350D413A /* Pods-Pisth APT.modulemap */,
+				74F3FEB7CBDB2A6CC9EFB4243F28DF30 /* Pods-Pisth APT-acknowledgements.markdown */,
+				EA956A098290BA14166CCFE291F7F4E8 /* Pods-Pisth APT-acknowledgements.plist */,
+				59B99E80481055275CC3D2301ACE1182 /* Pods-Pisth APT-dummy.m */,
+				C3AC5B386DD7C504366908ACB4CB2E19 /* Pods-Pisth APT-frameworks.sh */,
+				9D1B507DDD8C1DB59B32A60162A9B771 /* Pods-Pisth APT-resources.sh */,
+				8E39526215A4DBBC76A64805F6C64021 /* Pods-Pisth APT-umbrella.h */,
+				321FCBFEAEB271A88D9A821D72BE005A /* Pods-Pisth APT.debug.xcconfig */,
+				72A1026B114B405FE21395D68DA065FA /* Pods-Pisth APT.release.xcconfig */,
+			);
+			name = "Pods-Pisth APT";
+			path = "Target Support Files/Pods-Pisth APT";
+			sourceTree = "<group>";
+		};
+		E8DEC4384578C8C73C669566DA4F63A7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				008158399BB2BDF2659B390200928FEF /* Info.plist */,
+				8DBEC6DD9438466BF9A4DA069752DF6E /* nanopb.modulemap */,
+				8001F49E5C576DEFF032C099BE29157C /* nanopb.xcconfig */,
+				33D5A2B00127E2F822E185AF98DA82EC /* nanopb-dummy.m */,
+				D0D07F4C04797F9904C42B8475E36E32 /* nanopb-prefix.pch */,
+				DEC42251EBF9ECD3085A09608D37782C /* nanopb-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/nanopb";
@@ -559,7 +550,6 @@
 			children = (
 				72F091EAADFE179A349AA50162E8F2B7 /* Frameworks */,
 			);
-			name = "Google-Mobile-Ads-SDK";
 			path = "Google-Mobile-Ads-SDK";
 			sourceTree = "<group>";
 		};
@@ -614,7 +604,6 @@
 				6E979220FD7F4202CC8665708B831C11 /* NMSSH+Protected.h in Headers */,
 				502CFF5323F58A3B9A026EF2A46A315A /* NMSSH-umbrella.h in Headers */,
 				3CCF20DCB88F20DD59966E0BEDAA14E9 /* NMSSH.h in Headers */,
-				646577B03E696CBE3F414CA9B717ECDE /* NMSSH.h in Headers */,
 				21BB009BD854FE3D760FE0449F95DC5D /* NMSSHChannel.h in Headers */,
 				AF766E616C7548F74C8E8AA48CE8F501 /* NMSSHChannelDelegate.h in Headers */,
 				922868FC8545055AF825BCB9BC287432 /* NMSSHConfig.h in Headers */,
@@ -660,7 +649,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CC43F3FF4D35C524C5B15A77F4DEC5E /* Build configuration list for PBXNativeTarget "BiometricAuthentication" */;
 			buildPhases = (
-				DF3090798C858C628A883FDF55F0329C /* Sources */,
+				E2ED5E331E93FA38D2BAD06252B56546 /* Sources */,
 				0A18859F50F3D0D0CF04637D1ABBE4CD /* Frameworks */,
 				7FAA9B0D70CFFA082EC3C5E98DD3D461 /* Headers */,
 			);
@@ -677,7 +666,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DADA8A63460EDF7A9F989652D6AED71D /* Build configuration list for PBXNativeTarget "NMSSH" */;
 			buildPhases = (
-				75BE7FF602B9E1E506A9298D07B8E4E0 /* Sources */,
+				457E2427B49E0A7ADE13E799544211D2 /* Sources */,
 				BFA4F7CA0DCE647E8309C585F0B2307A /* Frameworks */,
 				F44C6FC351B3914D3CCC9BBE342D5A3E /* Headers */,
 			);
@@ -734,8 +723,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -764,9 +753,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				468DFD90B6C4DA2F7CFA0C1C89F1B615 /* nanopb-dummy.m in Sources */,
-				3A50F5C8ECED9627F2EBD97F61BD376D /* pb_common.c in Sources */,
-				54F580BF4588159D6A61F21D15591805 /* pb_decode.c in Sources */,
-				55D8D5D912CFD2F3584E4553C2EAD734 /* pb_encode.c in Sources */,
+				FE8C558F84E146975426CDD42A582FD8 /* pb_common.c in Sources */,
+				A154377844877C99CB6AE226353D2ED3 /* pb_decode.c in Sources */,
+				A5BA819AE9CA559C66A043F263725BF6 /* pb_encode.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		457E2427B49E0A7ADE13E799544211D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A97EB67DD822CA5EAABBA77B93FCA7D /* NMSFTP.m in Sources */,
+				418B8F524BE9823A0225D0FC48AEAC36 /* NMSFTPFile.m in Sources */,
+				76A4F2AE50D5140C8E15E236D0C29870 /* NMSSH-dummy.m in Sources */,
+				FEF946D8845575BB8CEC4E10554D21C9 /* NMSSHChannel.m in Sources */,
+				6614868A1125D35E2727E5F1C37FE9B0 /* NMSSHConfig.m in Sources */,
+				478252251C71D62DEF17CEE4FFBE6859 /* NMSSHHostConfig.m in Sources */,
+				A15F8237B3813C61726DAB05F588A3EC /* NMSSHLogger.m in Sources */,
+				4B46D8A93B58269188B8B88F58FCBA2C /* NMSSHSession.m in Sources */,
+				D749F6CDDD1D5CAC39934997E927AF74 /* socket_helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,23 +780,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC3F3CAABA60EF76069431C5BB5032A /* GoogleToolboxForMac-dummy.m in Sources */,
-				F7D889906DECB078EAAECB9D4A320E9C /* GTMNSData+zlib.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75BE7FF602B9E1E506A9298D07B8E4E0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				74CDCC6E9AE244DC50DE93FA111DE384 /* NMSFTP.m in Sources */,
-				381DCF0B2F439F677F1AB441CFC08AC2 /* NMSFTPFile.m in Sources */,
-				E492F9301A28A6F0E197558C25C8493D /* NMSSH-dummy.m in Sources */,
-				1CD220C0C5CB0A23E19C2C2B0B7F41E9 /* NMSSHChannel.m in Sources */,
-				647185EE96E0B4F08A9925C90C371F23 /* NMSSHConfig.m in Sources */,
-				8F91F2B443813BBC44B4A805F04A39C4 /* NMSSHHostConfig.m in Sources */,
-				7640505CDB0CD0F37B5A51DF7B865EFF /* NMSSHLogger.m in Sources */,
-				09DE75B190EE5892D92F929F2BABFAD8 /* NMSSHSession.m in Sources */,
-				B40C5DFF7E01C15D738FBFB1641F683E /* socket_helper.m in Sources */,
+				7A6B3416DA1B00A53647726AFE5F09E5 /* GTMNSData+zlib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,14 +792,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DF3090798C858C628A883FDF55F0329C /* Sources */ = {
+		E2ED5E331E93FA38D2BAD06252B56546 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				861C4DA1383172332A4A43B4AFEFDC10 /* AuthenticationErrors.swift in Sources */,
-				23AFC33C07D45CFB47B03D13F4BE8A6F /* BiometricAuthentication-dummy.m in Sources */,
-				C09348A6D17868C5B278A576C6C21EE9 /* BiometricAuthenticationConstants.swift in Sources */,
-				8B1D2B08674E7AB076E540A5230F12CC /* BioMetricAuthenticator.swift in Sources */,
+				955FB33A865B6CBB0BC278DAEDDFC7D6 /* AuthenticationErrors.swift in Sources */,
+				F9A16152854098FE83A55CFA85C70AA1 /* BiometricAuthentication-dummy.m in Sources */,
+				97FFCD86891384332F1AB5FA57E0E333 /* BiometricAuthenticationConstants.swift in Sources */,
+				63829D25BF4A2C02E7791593FECC402C /* BioMetricAuthenticator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,415 +833,450 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0F32B0CD5D416A9C0C6D881B9FD4D8F4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76325B4C62D80953250C27798EA61D8E /* BiometricAuthentication.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BiometricAuthentication;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1911C3E034CD5F041D3FD6062ADFCD52 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6E3F0A41D4DA517AAC0EB5C5C084EA7 /* nanopb.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = nanopb;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		31EA5BBFECF9253E1F517BAF93538D0F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F2A13C8C4EDBF528AA44CB496635170 /* GoogleToolboxForMac.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = GoogleToolboxForMac;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		3DE59E81305ACEF5A094D76CB52D5818 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CB3780C1A101C3F6B6F8E78416DDCC1 /* Pods-Pisth APT.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Pisth APT/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Pisth APT/Pods-Pisth APT.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Pisth_APT;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4A47021B849AA91DA0F38D015B968520 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76325B4C62D80953250C27798EA61D8E /* BiometricAuthentication.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BiometricAuthentication;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		657EA49120DD0D9EEDB809D6BFF2509D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83541B4BD2E058BB543F3BE5E9563670 /* NMSSH.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = NMSSH;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9C7A5EE6DE2C3784BAA89D1A5D5EB30D /* Release */ = {
+		08638A96A528B1EC32DE62F8A728389D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		A01D870F497334175A7927F8897D5875 /* Release */ = {
+		67C64120B9D7B0B5DF0FC0FD945CFCDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F2A13C8C4EDBF528AA44CB496635170 /* GoogleToolboxForMac.xcconfig */;
+			baseConfigurationReference = 72A1026B114B405FE21395D68DA065FA /* Pods-Pisth APT.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = GoogleToolboxForMac;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A475335BF9C28A2C1E1624453D59B527 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6E3F0A41D4DA517AAC0EB5C5C084EA7 /* nanopb.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = nanopb;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BD11387C024584094A8936BA86279754 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83541B4BD2E058BB543F3BE5E9563670 /* NMSSH.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = NMSSH;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		CB765604DA882F4936F03C904B12CB39 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 632D87BF2629B14B3A4146D9B55316F7 /* Pods-Pisth APT.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Pisth APT/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Pisth APT/Pods-Pisth APT.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Pisth_APT;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8AC46A9F862A259D05D86744308F8E17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4849B4E794C73128BBFCEBBC89ADAC2 /* NMSSH.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
+				PRODUCT_MODULE_NAME = NMSSH;
+				PRODUCT_NAME = NMSSH;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		CE5513B3E35A5C69E7F70F186BD3CE9C /* Debug */ = {
+		9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		A66D1759C77EA6F4F786454A7715DCFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE334B894930CA91560A7B14420D935F /* BiometricAuthentication.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
+				PRODUCT_MODULE_NAME = BiometricAuthentication;
+				PRODUCT_NAME = BiometricAuthentication;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B76BB9E30BCD2BF2E02C9485D233235C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BB6BAD57E62F96769CF6596137F859D /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BB136EB423DF1483E5151B6341C4F46C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8001F49E5C576DEFF032C099BE29157C /* nanopb.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
+				PRODUCT_MODULE_NAME = nanopb;
+				PRODUCT_NAME = nanopb;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C00DB3882A982300E1DC26E2F4F4EA39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE334B894930CA91560A7B14420D935F /* BiometricAuthentication.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BiometricAuthentication/BiometricAuthentication-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BiometricAuthentication/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BiometricAuthentication/BiometricAuthentication.modulemap";
+				PRODUCT_MODULE_NAME = BiometricAuthentication;
+				PRODUCT_NAME = BiometricAuthentication;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C3D5E32177148E2F6879E540183E811F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 321FCBFEAEB271A88D9A821D72BE005A /* Pods-Pisth APT.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Pisth APT/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Pisth APT/Pods-Pisth APT.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C75EBD193288D114F70020DCC0AC255A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4849B4E794C73128BBFCEBBC89ADAC2 /* NMSSH.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/NMSSH/NMSSH-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/NMSSH/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/NMSSH/NMSSH.modulemap";
+				PRODUCT_MODULE_NAME = NMSSH;
+				PRODUCT_NAME = NMSSH;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C78BAF7EB7DB65507E26010CC16D0969 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BB6BAD57E62F96769CF6596137F859D /* GoogleToolboxForMac.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/GoogleToolboxForMac/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac.modulemap";
+				PRODUCT_MODULE_NAME = GoogleToolboxForMac;
+				PRODUCT_NAME = GoogleToolboxForMac;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E6433B00FDB1ACDB5D011E598C227846 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8001F49E5C576DEFF032C099BE29157C /* nanopb.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/nanopb/nanopb-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/nanopb/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/nanopb/nanopb.modulemap";
+				PRODUCT_MODULE_NAME = nanopb;
+				PRODUCT_NAME = nanopb;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -1262,8 +1286,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE5513B3E35A5C69E7F70F186BD3CE9C /* Debug */,
-				9C7A5EE6DE2C3784BAA89D1A5D5EB30D /* Release */,
+				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
+				08638A96A528B1EC32DE62F8A728389D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1271,8 +1295,8 @@
 		7CC43F3FF4D35C524C5B15A77F4DEC5E /* Build configuration list for PBXNativeTarget "BiometricAuthentication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4A47021B849AA91DA0F38D015B968520 /* Debug */,
-				0F32B0CD5D416A9C0C6D881B9FD4D8F4 /* Release */,
+				C00DB3882A982300E1DC26E2F4F4EA39 /* Debug */,
+				A66D1759C77EA6F4F786454A7715DCFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1280,8 +1304,8 @@
 		B1DB1F42CA097FE22985E261C01CD5B3 /* Build configuration list for PBXNativeTarget "Pods-Pisth APT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CB765604DA882F4936F03C904B12CB39 /* Debug */,
-				3DE59E81305ACEF5A094D76CB52D5818 /* Release */,
+				C3D5E32177148E2F6879E540183E811F /* Debug */,
+				67C64120B9D7B0B5DF0FC0FD945CFCDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1289,8 +1313,8 @@
 		C43D9CA5106C6CCEF973B7EDF833947B /* Build configuration list for PBXNativeTarget "GoogleToolboxForMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				31EA5BBFECF9253E1F517BAF93538D0F /* Debug */,
-				A01D870F497334175A7927F8897D5875 /* Release */,
+				B76BB9E30BCD2BF2E02C9485D233235C /* Debug */,
+				C78BAF7EB7DB65507E26010CC16D0969 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1298,8 +1322,8 @@
 		DADA8A63460EDF7A9F989652D6AED71D /* Build configuration list for PBXNativeTarget "NMSSH" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				657EA49120DD0D9EEDB809D6BFF2509D /* Debug */,
-				BD11387C024584094A8936BA86279754 /* Release */,
+				8AC46A9F862A259D05D86744308F8E17 /* Debug */,
+				C75EBD193288D114F70020DCC0AC255A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1307,8 +1331,8 @@
 		F118B0FA84AC9116AB2E480C302C3999 /* Build configuration list for PBXNativeTarget "nanopb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A475335BF9C28A2C1E1624453D59B527 /* Debug */,
-				1911C3E034CD5F041D3FD6062ADFCD52 /* Release */,
+				E6433B00FDB1ACDB5D011E598C227846 /* Debug */,
+				BB136EB423DF1483E5151B6341C4F46C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

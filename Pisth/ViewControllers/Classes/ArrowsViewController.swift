@@ -30,7 +30,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     ///
     /// - Parameters:
     ///     - direction: Direction where arrow will point.
-    func indicateArrow(withDirection direction: UISwipeGestureRecognizerDirection) {
+    func indicateArrow(withDirection direction: UISwipeGestureRecognizer.Direction) {
         helpLabel.isHidden = true
         arrowLabel.isHidden = false
         
@@ -58,7 +58,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     ///
     /// - Parameters:
     ///     - direction: Direction where arrow will point.
-    func sendArrow(withDirection direction: UISwipeGestureRecognizerDirection) {
+    func sendArrow(withDirection direction: UISwipeGestureRecognizer.Direction) {
         
         switch direction {
         case .up:

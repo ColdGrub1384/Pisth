@@ -258,7 +258,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.twitter {
             
             // Show Twitter account
-            UIApplication.shared.open(URL(string:"https://twitter.com/pisthapp")!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string:"https://twitter.com/pisthapp")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else {
@@ -318,4 +318,9 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         collectionView.reloadData()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

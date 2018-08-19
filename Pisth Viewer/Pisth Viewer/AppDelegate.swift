@@ -280,39 +280,39 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
             switch key {
                 
             // Arrow keys
-            case NSUpArrowFunctionKey:
+            case NSEvent.SpecialKey.upArrow.rawValue:
                 character = Keys.arrowUp
-            case NSDownArrowFunctionKey:
+            case NSEvent.SpecialKey.downArrow.rawValue:
                 character = Keys.arrowDown
-            case NSLeftArrowFunctionKey:
+            case NSEvent.SpecialKey.leftArrow.rawValue:
                 character = Keys.arrowLeft
-            case NSRightArrowFunctionKey:
+            case NSEvent.SpecialKey.rightArrow.rawValue:
                 character = Keys.arrowRight
                 
             // Function Keys
-            case NSF1FunctionKey:
+            case NSEvent.SpecialKey.f1.rawValue:
                 character = Keys.f1
-            case NSF2FunctionKey:
+            case NSEvent.SpecialKey.f2.rawValue:
                 character = Keys.f2
-            case NSF3FunctionKey:
+            case NSEvent.SpecialKey.f3.rawValue:
                 character = Keys.f3
-            case NSF4FunctionKey:
+            case NSEvent.SpecialKey.f4.rawValue:
                 character = Keys.f4
-            case NSF5FunctionKey:
+            case NSEvent.SpecialKey.f5.rawValue:
                 character = Keys.f5
-            case NSF6FunctionKey:
+            case NSEvent.SpecialKey.f6.rawValue:
                 character = Keys.f6
-            case NSF7FunctionKey:
+            case NSEvent.SpecialKey.f7.rawValue:
                 character = Keys.f7
-            case NSF8FunctionKey:
+            case NSEvent.SpecialKey.f8.rawValue:
                 character = Keys.f8
-            case NSF2FunctionKey:
+            case NSEvent.SpecialKey.f2.rawValue:
                 character = Keys.f2
-            case NSF9FunctionKey:
+            case NSEvent.SpecialKey.f9.rawValue:
                 character = Keys.f9
-            case NSF10FunctionKey:
+            case NSEvent.SpecialKey.f10.rawValue:
                 character = Keys.f10
-            case NSF11FunctionKey:
+            case NSEvent.SpecialKey.f11.rawValue:
                 character = Keys.f11
             default:
                 break

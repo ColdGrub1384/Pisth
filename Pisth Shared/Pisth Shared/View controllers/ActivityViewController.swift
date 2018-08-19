@@ -31,7 +31,7 @@ public class ActivityViewController: UIViewController {
 class ActivityView: UIView {
     
     /// Activity indicator.
-    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     
     /// Alert view.
     let boundingBoxView = UIView(frame: CGRect.zero)

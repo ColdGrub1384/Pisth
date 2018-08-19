@@ -92,7 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return
         }
         
-        guard let bookmarksVC = NSApp.keyWindow?.contentViewController as? BookmarksViewController else {
+        guard NSApp.keyWindow?.contentViewController is BookmarksViewController else {
             return
         }
         NSApp.keyWindow?.contentViewController?.presentAsSheet(sheet)

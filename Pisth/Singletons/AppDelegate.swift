@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         window?.rootViewController?.dismiss(animated: true, completion: {
             
             if self.dataReceiverAppURLScheme != nil {
-                UIApplication.shared.open(self.dataReceiverAppURLScheme!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(self.dataReceiverAppURLScheme!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         })
     }
@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     // MARK: - Application delegate
     
     /// Initialize app's window, and setup / repair saved data.
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
         
@@ -267,7 +267,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     }
     
     /// Open file, upload file or open connection.
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         /// Handle URL.
         func handle() {
@@ -334,7 +334,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     let activityVC = ActivityViewController(message: Localizable.loading)
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(activityVC, animated: true, completion: {
-                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: password, publicKey: options[UIApplication.OpenURLOptionsKey.init(rawValue: "publicKey")] as? String, privateKey: options[UIApplication.OpenURLOptionsKey.init(rawValue: "privateKey")] as? String, name: "", path: (options[UIApplication.OpenURLOptionsKey.init(rawValue: "path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         
                         ConnectionManager.shared.session = nil
                         ConnectionManager.shared.filesSession = nil
@@ -371,7 +371,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     })
                 }
                 
-                if let password = options[.init("password")] as? String {
+                if let password = options[UIApplication.OpenURLOptionsKey.init(rawValue: "password")] as? String {
                     connect(withPassword: password)
                 } else {
                     alert.addTextField(configurationHandler: { (textField) in
@@ -384,7 +384,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                         connect(withPassword: passwordTextField?.text ?? "")
                     }))
                     alert.addAction(UIAlertAction(title: Localizable.AppDelegate.connectAndRemember, style: .default, handler: { (_) in
-                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField?.text ?? "", publicKey: options[.init("publicKey")] as? String, privateKey: options[.init("privateKey")] as? String, name: "", path: (options[.init("path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
+                        let connection = RemoteConnection(host: host, username: userTextField?.text ?? user, password: passwordTextField?.text ?? "", publicKey: options[UIApplication.OpenURLOptionsKey.init(rawValue: "publicKey")] as? String, privateKey: options[UIApplication.OpenURLOptionsKey.init(rawValue: "privateKey")] as? String, name: "", path: (options[UIApplication.OpenURLOptionsKey.init(rawValue: "path")] as? String) ?? "~", port: UInt64(port) ?? 22, useSFTP: (url.absoluteString.hasPrefix("sftp:") || url.absoluteString.hasPrefix("pisthsftp:")), os: nil)
                         DataManager.shared.addNew(connection: connection)
                         connect(withPassword: connection.password)
                     }))
@@ -539,7 +539,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     }
     
     /// Open connection from user activity.
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
                 
         guard let username = userActivity.userInfo?["username"] as? String else {
             return false
@@ -559,12 +559,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         
         let path = userActivity.userInfo?["directory"] as? String ?? "~"
         
-        var options = [.init("path"):path, .init("password"):password] as [UIApplicationOpenURLOptionsKey : String]
+        var options = [.init("path"):path, .init("password"):password] as! [UIApplication.OpenURLOptionsKey : String]
         if let pubKey = userActivity.userInfo?["publicKey"] as? String {
-            options[.init("publicKey")] = pubKey
+            options[UIApplication.OpenURLOptionsKey.init(rawValue: "publicKey")] = pubKey
         }
         if let privKey = userActivity.userInfo?["privateKey"] as? String {
-            options[.init("privateKey")] = privKey
+            options[UIApplication.OpenURLOptionsKey.init(rawValue: "privateKey")] = privKey
         }
         
         if userActivity.activityType == "ch.marcela.ada.Pisth.openDirectory" {
@@ -662,7 +662,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             
             navigationController.dismiss(animated: true, completion: {
                 if let dataReceiverAppURLScheme = self.dataReceiverAppURLScheme {
-                    UIApplication.shared.open(dataReceiverAppURLScheme, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(dataReceiverAppURLScheme, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                 }
             })
         }
@@ -703,3 +703,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     static var shared: AppDelegate!
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
