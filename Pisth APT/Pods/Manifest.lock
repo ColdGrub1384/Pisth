@@ -6,15 +6,15 @@ PODS:
   - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.15):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (2.0.9):
     - FirebaseCore (~> 4.0)
   - Google-Mobile-Ads-SDK (7.29.0)
   - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -29,6 +29,18 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - NMSSH
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BiometricAuthentication
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - Google-Mobile-Ads-SDK
+    - GoogleToolboxForMac
+    - nanopb
+    - NMSSH
+
 SPEC CHECKSUMS:
   BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
   Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
@@ -40,6 +52,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
 
-PODFILE CHECKSUM: 88d93f2d21e731370320646e88f40dcac7bb8588
+PODFILE CHECKSUM: 11363eaee74b1a3712b38966b4c077b49505dd14
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.5.2
