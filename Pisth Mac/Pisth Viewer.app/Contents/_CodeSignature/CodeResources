@@ -10,11 +10,11 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		80AygBXCjjRv/tfDV4dgNC87sts=
+		DZ1Jnc5sYngxgsIy8qePKggr97M=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<data>
-		7fFN6wVUWST+kxS6Uw8d3+gCAdc=
+		Qm9v4z7HepOcN5buqA0CUXTcJ+A=
 		</data>
 		<key>Resources/Licenses.html</key>
 		<data>
@@ -31,7 +31,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			u6W3Y9uYT+n8MNEcLEi1w/fm5nI=
+			H7EsoqAYx/w2sn7+Kp/RXSalB4Q=
 			</data>
 			<key>requirement</key>
 			<string>identifier "ch.ada.Pisth-Shared" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: Marcela Cid (F87UAG5NNZ)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -40,7 +40,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			FyYKmvcKu3BjL2VfwmrrttikePU=
+			o29UiTZXJ+qg9G2D08bdio7pGOE=
 			</data>
 			<key>requirement</key>
 			<string>identifier "ch.ada.Pisth-Terminal" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: Marcela Cid (F87UAG5NNZ)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -162,15 +162,6 @@
 			<key>requirement</key>
 			<string>identifier "com.apple.dt.runtime.swiftQuartzCore" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: Marcela Cid (F87UAG5NNZ)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
-		<key>Frameworks/libswiftSwiftOnoneSupport.dylib</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			QQ5UxnS6eGmFzAjyCLZp0FddLvY=
-			</data>
-			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftSwiftOnoneSupport" and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: Marcela Cid (F87UAG5NNZ)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
-		</dict>
 		<key>Frameworks/libswiftXPC.dylib</key>
 		<dict>
 			<key>cdhash</key>
@@ -200,14 +191,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			gxSOsssG5oGIPGGmB2W3Pw7awIeBHc36rEIOi2t+46w=
+			Izos0gDZ+DgFCeqkewgx2/EB0+U/j0+GzGFSPOlUywU=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/hMaULTspdccKUYkbEBRb1wEVZ+Z98jcU9J+rn4TJAQ=
+			/bRlmBVEfZur/COZ2EzKJoFlMtOrDyvJXxiKGyAQ5VI=
 			</data>
 		</dict>
 		<key>Resources/Licenses.html</key>
