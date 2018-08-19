@@ -111,6 +111,10 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - View controller
     
+    override var keyCommands: [UIKeyCommand]? {
+        return [UIKeyCommand(input: "s", modifierFlags: .command, action: #selector(saveFrom(keyCommand:)), discoverabilityTitle: "Save")]
+    }
+    
     /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,6 +211,17 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     // MARK: - Actions
+    
+    /// Save if file was modified from given Key command.
+    @objc func saveFrom(keyCommand: UIKeyCommand) {
+        do {
+            // Check if file was modified
+            let fileContent = try String.init(contentsOf: file)
+            if textView.text != fileContent {
+                save(keyCommand)
+            }
+        } catch _ {}
+    }
     
     /// Save file locally and upload it if is necessary.
     /// - Parameters:
