@@ -241,6 +241,14 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// Custom selected files to open with `openFile(showInFinder:)`.
     var selectedFiles: [NMSFTPFile]?
     
+    /// Open selected file with application.
+    ///
+    /// - Parameters:
+    ///     - sender: Item representing the app
+    @objc func openFileWith(_ sender: AppMenuItem) {
+        openFile(showInFinder: false, with: sender.appURL)
+    }
+    
     @objc private func openFile_() {
         openFile()
     }
@@ -249,7 +257,8 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     ///
     /// - Parameters:
     ///     - showInFinder: Show file in Finder.
-    @objc func openFile(showInFinder: Bool = false) {
+    ///     - application: App used to edit the file.
+    @objc func openFile(showInFinder: Bool = false, with application: URL? = nil) {
         
         var files = [NMSFTPFile]()
         if let files_ = selectedFiles {
@@ -318,7 +327,7 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
                                     }
                                 }
                                 
-                                NSWorkspace.shared.openFile(filePath)
+                                NSWorkspace.shared.openFile(filePath, withApplication: application?.path)
                             } else { // Show file in Finder
                                 do {
                                     let downloads = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]

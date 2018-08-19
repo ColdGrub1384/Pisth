@@ -124,6 +124,7 @@
 		C9BD28A3210A3E6900244AAF /* Disconnected.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD28A5210A3E6900244AAF /* Disconnected.xib */; };
 		C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */; };
 		C9BE90552119028A000A61C8 /* isFilePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE905421190289000A61C8 /* isFilePDF.swift */; };
+		C9CAC7A3212A0731005D7A00 /* AppMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */; };
 		C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */; };
 		C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */; };
 		C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9CB27E520D5BB9800290DBE /* Assets.xcassets */; };
@@ -334,6 +335,7 @@
 		C9BD28A9210A3E7100244AAF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Disconnected.strings; sourceTree = "<group>"; };
 		C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackNavigationController.swift; sourceTree = "<group>"; };
 		C9BE905421190289000A61C8 /* isFilePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = isFilePDF.swift; sourceTree = "<group>"; };
+		C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuItem.swift; sourceTree = "<group>"; };
 		C9CB27DC20D5BB9500290DBE /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 				C9985AAE20D6C4F500389A7B /* ConnectionController.swift */,
 				C9B205C020D70CD400045F20 /* FileObserver.swift */,
 				C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */,
+				C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1075,6 +1078,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9A9585B20DDD3DF00BF6C03 /* TerminalViewController.swift in Sources */,
+				C9CAC7A3212A0731005D7A00 /* AppMenuItem.swift in Sources */,
 				C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */,
 				C9CB27F820D5E0D700290DBE /* ConnectionInfoViewController.swift in Sources */,
 				C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */,

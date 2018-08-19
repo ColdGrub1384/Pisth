@@ -430,6 +430,38 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
                 }
             } else if item.title == "Paste" {
                 item.isEnabled = (dirVC.controller.selectedFilePaths.count > 0)
+            } else if item.title == "Open with" {
+                
+                item.submenu?.items = []
+                
+                guard highlightedRows(forOutlineView: dirVC.outlineView).count == 1 || dirVC.outlineView.clickedRow != -1 else {
+                    item.isEnabled = false
+                    return
+                }
+                
+                var file: NMSFTPFile
+                if dirVC.outlineView.clickedRow != -1 {
+                    file = dirVC.directoryContents[dirVC.outlineView.clickedRow]
+                } else {
+                    file = dirVC.directoryContents[highlightedRows(forOutlineView: dirVC.outlineView).first!]
+                }
+                
+                item.isEnabled = !file.isDirectory
+                
+                let localFilePath = NSTemporaryDirectory().nsString.appendingPathComponent(dirVC.directory).nsString.appendingPathComponent(file.filename)
+                
+                if FileManager.default.createFile(atPath: localFilePath, contents: nil, attributes: nil) {
+                    
+                    let appsForOpeningFile = LSCopyApplicationURLsForURL(URL(fileURLWithPath: localFilePath) as CFURL, LSRolesMask.all)?.takeRetainedValue() as? [URL] ?? []
+                    for app in appsForOpeningFile {
+                        
+                        let appItem = AppMenuItem(title: app.deletingPathExtension().lastPathComponent, action: #selector(dirVC.openFileWith(_:)), keyEquivalent: "")
+                        appItem.appURL = app
+                        appItem.image = NSWorkspace.shared.icon(forFile: app.path)
+                        appItem.isEnabled = true
+                        item.submenu?.items.append(appItem)
+                    }
+                }
             } else {
                 item.isEnabled = true
             }
