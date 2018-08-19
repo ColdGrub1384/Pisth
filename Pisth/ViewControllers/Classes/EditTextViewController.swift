@@ -111,6 +111,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - View controller
     
+    /// Returns CMD+S to save file.
     override var keyCommands: [UIKeyCommand]? {
         return [UIKeyCommand(input: "s", modifierFlags: .command, action: #selector(saveFrom(keyCommand:)), discoverabilityTitle: "Save")]
     }
