@@ -42,7 +42,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         for item in menu.items {
-            item.isEnabled = (bookmarksVC.outlineView.item(atRow: bookmarksVC.outlineView.selectedRow) is RemoteConnection)
+            if item.title != "New" {
+                item.isEnabled = (bookmarksVC.outlineView.item(atRow: bookmarksVC.outlineView.selectedRow) is RemoteConnection)
+            } else {
+                item.isEnabled = true
+            }
         }
     }
     
@@ -80,6 +84,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         
         DataManager.shared.removeConnection(at: bookmarksVC.outlineView.selectedRow-1)
+    }
+    
+    /// Create a new connection.
+    @IBAction func newConnection(_ sender: Any) {
+        guard let sheet = NSStoryboard(name: "Main", bundle: Bundle.main).instantiateController(withIdentifier: "connectionInfo") as? ConnectionInfoViewController else {
+            return
+        }
+        
+        guard let bookmarksVC = NSApp.keyWindow?.contentViewController as? BookmarksViewController else {
+            return
+        }
+        NSApp.keyWindow?.contentViewController?.presentAsSheet(sheet)
     }
     
     /// Set theme from clicked item.

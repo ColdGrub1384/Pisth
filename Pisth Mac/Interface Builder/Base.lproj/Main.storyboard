@@ -422,6 +422,11 @@ CA
                                                 <action selector="deleteConnection:" target="Voe-Tx-rLC" id="Gcn-wY-pPJ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="New" keyEquivalent="N" id="vch-Dr-QNC">
+                                            <connections>
+                                                <action selector="newConnection:" target="Voe-Tx-rLC" id="qov-k1-57h"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                     <connections>
                                         <outlet property="delegate" destination="Voe-Tx-rLC" id="dMi-dN-vmf"/>
