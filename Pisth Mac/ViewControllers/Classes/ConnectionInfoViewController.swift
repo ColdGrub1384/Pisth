@@ -16,6 +16,7 @@ class ConnectionInfoViewController: NSViewController {
     
     /// Create or modify connection.
     @IBAction func saveConnection(_ sender: Any) {
+        
         let name = nameTextField.stringValue
         let host = hostTextField.stringValue
         var port = portTextField.stringValue
@@ -24,8 +25,10 @@ class ConnectionInfoViewController: NSViewController {
         var path = pathTextField.stringValue
         let useSFTP = (useSFTPCheck.state == .on)
         
+        let areKeysInvalid = !((privateKey == nil && publicKey == nil) || (publicKey != nil && privateKey != nil) || (privateKey != nil))
+        
         // Check for requierd fields
-        if host == "" || username == "" {
+        if host == "" || username == "" || areKeysInvalid {
             if host == "" {
                 hostTextField.backgroundColor = .red
             } else {
@@ -36,6 +39,12 @@ class ConnectionInfoViewController: NSViewController {
                 usernameTextField.backgroundColor = .red
             } else {
                 usernameTextField.backgroundColor = .clear
+            }
+            
+            if areKeysInvalid {
+                importPrivKeyButton.layer?.backgroundColor = NSColor.red.cgColor
+            } else {
+                importPrivKeyButton.layer?.backgroundColor = nil
             }
         } else {
             if port == "" { // Port is 22 by default
@@ -62,6 +71,8 @@ class ConnectionInfoViewController: NSViewController {
                         result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
                         result.setValue(useSFTP, forKey: "sftp")
+                        result.setValue(privateKey, forKey: "privateKey")
+                        result.setValue(publicKey, forKey: "publicKey")
                         KeychainSwift().set(password, forKey: passKey)
                         
                         DataManager.shared.saveContext()
@@ -71,7 +82,7 @@ class ConnectionInfoViewController: NSViewController {
                     
                     dismiss(self)
                 } else {
-                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
+                    DataManager.shared.addNew(connection: RemoteConnection(host: host, username: username, password: password, publicKey: publicKey, privateKey: privateKey, name: name, path: path, port: port, useSFTP: useSFTP, os: nil))
                     
                     dismiss(self)
                 }
@@ -83,6 +94,18 @@ class ConnectionInfoViewController: NSViewController {
     }
     
     // MARK: - Values
+    
+    /// Private key in plain text.
+    var privateKey: String?
+    
+    /// Public key in plain text.
+    var publicKey: String?
+    
+    /// Button for importing a public key.
+    @IBOutlet weak var importPubKeyButton: NSButton!
+    
+    /// Button for importing a private key.
+    @IBOutlet weak var importPrivKeyButton: NSButton!
     
     /// The Text field containing the connection's name.
     @IBOutlet weak var nameTextField: NSTextField!
@@ -111,7 +134,6 @@ class ConnectionInfoViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         if let i = index, DataManager.shared.connections.indices.contains(i) {
             let connection = DataManager.shared.connections[i]
             
@@ -121,9 +143,78 @@ class ConnectionInfoViewController: NSViewController {
             portTextField.stringValue = "\(connection.port)"
             passwordTextField.stringValue = connection.password
             pathTextField.stringValue = connection.path
+            privateKey = connection.privateKey
+            publicKey = connection.publicKey
             if !connection.useSFTP {
                 useSFTPCheck.state = .off
             }
+            if connection.privateKey == nil {
+                self.passwordTextField.placeholderString = ""
+            } else {
+                self.passwordTextField.placeholderString = "Passphrase for keys"
+                self.importPrivKeyButton.title = "Change Private Key"
+            }
+            if connection.publicKey != nil {
+                self.importPubKeyButton.title = "Change Public Key"
+            }
         }
     }
+    
+    // MARK: - SSH Keys
+    
+    private func pickKey(completion: @escaping ((String?) -> Void)) {
+        let picker = NSOpenPanel()
+        picker.allowsMultipleSelection = false
+        picker.canChooseDirectories = false
+        picker.canCreateDirectories = true
+        picker.allowedFileTypes = ["public.data"]
+        let sshDir = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(".ssh")
+        if FileManager.default.fileExists(atPath: sshDir.path) {
+            picker.directoryURL = sshDir
+        }
+        
+        
+        guard let window = view.window else {
+            return
+        }
+        
+        picker.beginSheetModal(for: window) { (_) in
+            guard let file = picker.urls.first else {
+                return completion(nil)
+            }
+            
+            do {
+                completion(try String(contentsOf: file))
+            } catch {
+                NSApp.presentError(error)
+            }
+        }
+    }
+    
+    /// Pick public key.
+    @IBAction func importPubKey(_ sender: Any) {
+        pickKey { (pubKey) in
+            self.publicKey = pubKey
+            if pubKey == nil {
+                self.importPubKeyButton.title = "Import Public key"
+            } else {
+                self.importPubKeyButton.title = "Change Public Key"
+            }
+        }
+    }
+    
+    /// Pick private key.
+    @IBAction func importPrivKey(_ sender: Any) {
+        pickKey { (privKey) in
+            self.privateKey = privKey
+            if privKey == nil {
+                self.importPrivKeyButton.title = "Import Private Key"
+                self.passwordTextField.placeholderString = ""
+            } else {
+                self.importPrivKeyButton.title = "Change Private Key"
+                self.passwordTextField.placeholderString = "Passphrase for keys"
+            }
+        }
+    }
+    
 }

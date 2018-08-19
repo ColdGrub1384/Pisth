@@ -793,10 +793,34 @@ Gw
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                             </secureTextField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CdO-Dy-Jdg">
+                                <rect key="frame" x="2" y="46" width="220" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Import Public Key" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6tj-Hn-ggV">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="importPubKey:" target="UQI-KD-6ew" id="p5G-aP-ZoO"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bxh-Gh-Caq">
+                                <rect key="frame" x="216" y="46" width="220" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Import Private Key" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7uO-is-veQ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="importPrivKey:" target="UQI-KD-6ew" id="fg4-cJ-gPr"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="hostTextField" destination="clg-0c-AGE" id="pFc-6b-dIX"/>
+                        <outlet property="importPrivKeyButton" destination="Bxh-Gh-Caq" id="0d7-T3-aQy"/>
+                        <outlet property="importPubKeyButton" destination="CdO-Dy-Jdg" id="Gmz-c2-dR0"/>
                         <outlet property="nameTextField" destination="O08-1E-EWJ" id="c6J-4f-7Gt"/>
                         <outlet property="passwordTextField" destination="niJ-SL-Xdd" id="49N-gs-beB"/>
                         <outlet property="pathTextField" destination="7Eo-Dr-TZb" id="EH5-OL-59T"/>

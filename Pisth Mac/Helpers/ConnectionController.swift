@@ -119,7 +119,11 @@ class ConnectionController {
         
         func openShell() throws {
             if shellSession.isConnected {
-                shellSession.authenticate(byPassword: connection.password)
+                if let privateKey = connection.privateKey {
+                    shellSession.authenticate(byPublicKey: connection.publicKey, privateKey: privateKey, andPassword: connection.password)
+                } else {
+                    shellSession.authenticate(byPassword: connection.password)
+                }
                 if shellSession.isAuthorized {
                     home = try? shellSession.channel.execute("echo ~").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                     shellSession.channel.requestPty = true
@@ -134,7 +138,11 @@ class ConnectionController {
         
         if connection.useSFTP {
             if session.isConnected {
-                session.authenticate(byPassword: connection.password)
+                if let privateKey = connection.privateKey {
+                    session.authenticate(byPublicKey: connection.publicKey, privateKey: privateKey, andPassword: connection.password)
+                } else {
+                    session.authenticate(byPassword: connection.password)
+                }
                 if session.isAuthorized {
                     session.sftp.connect()
                     
