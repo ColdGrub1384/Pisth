@@ -94,7 +94,7 @@ More information at https://pisth.github.io/docs/getting-started.html.
 
 - [Pisth/pisth.github.io](https://github.com/Pisth/pisth.github.io): Page for this project.
 - [Pisth/docs](https://github.com/Pisth/docs): Documentation for the API.
-- [Pisth/meta](https://github.com/Pisth/meta): Metadata for iTunes Connect.
+- [Pisth/meta](https://github.com/Pisth/meta): Metadata for App Store Connect.
 
 # Acknowledgements
 See licenses [here](http://htmlpreview.github.io/?https://github.com/ColdGrub1384/Pisth/blob/master/Pisth/Licenses.html).
