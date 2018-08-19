@@ -292,7 +292,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Pisth Viewer/Pisth_Viewer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FTTZS623CZ;
+				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
@@ -309,7 +309,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Pisth Viewer/Pisth_Viewer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = FTTZS623CZ;
+				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = "Pisth Viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
