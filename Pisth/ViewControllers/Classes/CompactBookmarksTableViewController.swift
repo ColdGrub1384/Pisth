@@ -62,10 +62,12 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
             alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
-        } else {
+        } else if indexPath.section == 0 {
             dismiss(animated: true) {
                 super.tableView(tableView, didSelectRowAt: indexPath)
             }
+        } else {
+            super.tableView(tableView, didSelectRowAt: indexPath)
         }
     }
 }
