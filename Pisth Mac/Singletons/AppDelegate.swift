@@ -50,6 +50,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     /// Open the connection represented by the clicked row.
     @IBAction func openConnection(_ sender: Any) {
+        guard let bookmarksVC = NSApp.keyWindow?.contentViewController as? BookmarksViewController else {
+            return
+        }
+        
+        bookmarksVC.openConnection(sender)
     }
     
     /// Edit the connection represented by the clicked row.

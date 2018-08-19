@@ -102,7 +102,7 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     /// Open the connection represented by the clicked row.
     @objc @IBAction func openConnection(_ sender: Any) {
         
-        guard let connection = outlineView.item(atRow: outlineView.clickedRow) as? RemoteConnection else {
+        guard let connection = outlineView.item(atRow: outlineView.clickedRow) as? RemoteConnection ?? outlineView.item(atRow: outlineView.selectedRow) as? RemoteConnection  else {
             return
         }
         
