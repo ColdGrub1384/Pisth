@@ -90,6 +90,7 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
+		C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */ = {isa = PBXBuildFile; fileRef = C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
@@ -265,6 +266,7 @@
 		59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.beta.xcconfig"; sourceTree = "<group>"; };
 		6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 		C9985AA420D6C12E00389A7B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */,
 				C9CB27E520D5BB9800290DBE /* Assets.xcassets */,
 				C9B205C420D71A8600045F20 /* Info.plist */,
 				C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */,
@@ -933,6 +936,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */,
 				C9B205C520D71A8600045F20 /* Info.plist in Resources */,
 				C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */,
 				C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */,

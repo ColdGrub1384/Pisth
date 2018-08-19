@@ -21,6 +21,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// The "Text size" menu.
     @IBOutlet weak var textSizeMenu: NSMenu!
     
+    /// Open Pisth Viewer.
+    @IBAction func openPisthViewer(_ sender: Any) {
+        if let pisthViewer = Bundle.main.path(forResource: "Pisth Viewer", ofType: "app") {
+            NSWorkspace.shared.openFile(pisthViewer)
+        }
+    }
+    
     // MARK: - "Connection" menu
     
     // MARK: - Menu delegate
