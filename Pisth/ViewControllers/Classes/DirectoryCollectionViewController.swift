@@ -405,9 +405,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 let buttons_ = buttons
                 DispatchQueue.main.async {
                     self.navigationItem.setRightBarButtonItems(buttons_, animated: true)
-                    
-                    // Connection errors
-                    self.showErrorIfThereIsOne()
                 }
             }
             
@@ -457,6 +454,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         // Toolbar
         setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
+        
+        // Connection errors
+        self.showErrorIfThereIsOne()
     }
 
     /// Hides toolbar.
