@@ -95,7 +95,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>16</string>
 	<key>Is Beta</key>
 	<string>$(IS_BETA)</string>
 	<key>LSApplicationQueriesSchemes</key>
