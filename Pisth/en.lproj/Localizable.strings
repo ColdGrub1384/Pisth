@@ -5,10 +5,10 @@
 "arrows.helpTextScroll" = "Scroll to\ngo down /\ngo up.";
 
 /* Message of the alert shown when a session that is already active was clicked. */
-"bookmaks.sessionAlreadyActiveMessage" = "Would you like to resume the session, or restart it?";
+"bookmarks.sessionAlreadyActiveMessage" = "Would you like to resume the session, or restart it?";
 
 /* Title of the alert shown when a session that is already active was clicked. */
-"bookmaks.sessionAlreadyActiveTitle" = "Session already active";
+"bookmarks.sessionAlreadyActiveTitle" = "Session already active";
 
 /* Authenticate with biometry to connect to the connection. */
 "bookmarks.authenticateToConnect" = "Authenticate to connect";
@@ -21,6 +21,12 @@
 
 /* Devices title header. */
 "bookmarks.devices" = "Nearby devices";
+
+/* Title of the alert for entering credentials when they are not provided. */
+"bookmarks.enterCredentials" = "Enter credentials.";
+
+/* Message of the alert for entering credentials when they are not provided. Enter credentials for <Host>. */
+"bookmarks.enterCredentialsFor" = "Enter credentials for %@.";
 
 /* Enter password if biometry auth failed. */
 "bookmarks.enterPassword" = "Enter password";

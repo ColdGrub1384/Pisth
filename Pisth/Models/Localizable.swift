@@ -373,11 +373,24 @@ class Localizable: Static {
     
     class BookmarksTableViewController: Static {
         
+        /// Title of the alert for entering credentials when they are not provided.
+        static let enterCredentials = NSLocalizedString("bookmarks.enterCredentials", comment: "Title of the alert for entering credentials when they are not provided.")
+        
+        /// Message of the alert for entering credentials when they are not provided.
+        ///
+        /// - Parameters:
+        ///     - host: Host for entering credentials.
+        ///
+        /// - Returns: Enter credentials for `host`.
+        static func enterCredentials(for host: String) -> String {
+            return NSString(format: NSLocalizedString("bookmarks.enterCredentialsFor", comment: "Message of the alert for entering credentials when they are not provided. Enter credentials for <Host>.") as NSString, host) as String
+        }
+        
         /// Title of the alert shown when a session that is already active was clicked.
-        static let sessionAlreadyActiveTitle = NSLocalizedString("bookmaks.sessionAlreadyActiveTitle", comment: "Title of the alert shown when a session that is already active was clicked.")
+        static let sessionAlreadyActiveTitle = NSLocalizedString("bookmarks.sessionAlreadyActiveTitle", comment: "Title of the alert shown when a session that is already active was clicked.")
         
         /// Message of the alert shown when a session that is already active was clicked.
-        static let sessionAlreadyActiveMessage = NSLocalizedString("bookmaks.sessionAlreadyActiveMessage", comment: "Message of the alert shown when a session that is already active was clicked.")
+        static let sessionAlreadyActiveMessage = NSLocalizedString("bookmarks.sessionAlreadyActiveMessage", comment: "Message of the alert shown when a session that is already active was clicked.")
         
         /// Resume the session.
         static let resume = NSLocalizedString("bookmarks.resume", comment: "Resume the session.")

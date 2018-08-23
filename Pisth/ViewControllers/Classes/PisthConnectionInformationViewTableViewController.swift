@@ -15,6 +15,11 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
     private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
     
+    /// Returns `false`.
+    override var isUsernameRequired: Bool {
+        return false
+    }
+    
     /// Button for importing public key. After importing one, its title is the name of the file.
     @IBOutlet weak var importPublicKeyBtn: UIButton!
     

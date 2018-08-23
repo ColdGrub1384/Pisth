@@ -199,7 +199,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             // Configure the cell...
             
             cell.textLabel?.text = connection.name
-            cell.detailTextLabel?.text = "\(connection.username)@\(connection.host):\(connection.port):\(connection.path)"
+            var username: String? {
+                if connection.username.isEmpty {
+                    return nil
+                } else {
+                    return connection.username+"@"
+                }
+            }
+            cell.detailTextLabel?.text = "\(username ?? "")\(connection.host):\(connection.port):\(connection.path)"
             if let os = connection.os?.lowercased() {
                 cell.imageView?.ignoresInvertColors = true
                 cell.imageView?.image = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: ""))
@@ -304,7 +311,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                     ContentViewController.shared.closeAllPinnedPanels()
                     ContentViewController.shared.closeAllFloatingPanels()
                     
-                    if DataManager.shared.connections[indexPath.row].useSFTP {
+                    if connection.useSFTP {
                         
                         let dirVC = DirectoryCollectionViewController(connection: connection)
                         
@@ -358,6 +365,33 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                 self.present(passwordAlert, animated: true, completion: nil)
             }
             
+            func askForCredentials() {
+                var name: String? {
+                    if connection.name.isEmpty {
+                        return nil
+                    } else {
+                        return connection.name
+                    }
+                }
+                let alert = UIAlertController(title: Localizable.BookmarksTableViewController.enterCredentials, message: Localizable.BookmarksTableViewController.enterCredentials(for: name ?? connection.host), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: Localizable.connect, style: .default, handler: { (_) in
+                    connection.username = alert.textFields?.first?.text ?? connection.name
+                    connection.password = alert.textFields?.last?.text ?? connection.password
+                    connect()
+                }))
+                alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                alert.addTextField { (usernameTextField) in
+                    usernameTextField.placeholder = Localizable.AppDelegate.usernamePlaceholder
+                    usernameTextField.text = connection.name
+                }
+                alert.addTextField { (passwordTextField) in
+                    passwordTextField.placeholder = Localizable.AppDelegate.passwordPlaceholder
+                    passwordTextField.text = connection.password
+                    passwordTextField.isSecureTextEntry = true
+                }
+                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
+            
             /// Open connection or ask for biometric authentication.
             func open() {
                 if UserDefaults.standard.bool(forKey: "biometricAuth") {
@@ -375,16 +409,24 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                 }
             }
             
+            func openConnection() {
+                if connection.name.isEmpty || connection.host.isEmpty {
+                    askForCredentials()
+                } else {
+                    open()
+                }
+            }
+            
             if searchController.isActive {
                 if searchController.searchBar.text != "" {
                     connection = fetchedConnections[indexPath.row]
                 }
                 
                 searchController.dismiss(animated: true, completion: {
-                    open()
+                    openConnection()
                 })
             } else {
-                open()
+                openConnection()
             }
         } else if indexPath.section == 1 {
             var all = [Any]()

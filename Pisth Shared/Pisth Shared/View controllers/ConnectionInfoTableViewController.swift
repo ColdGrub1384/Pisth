@@ -12,6 +12,11 @@ import CoreData
 /// Table view controller containing information about a connection.
 open class ConnectionInformationTableViewController: UITableViewController, NetServiceDelegate {
     
+    /// Return `true` for making the username required.
+    open var isUsernameRequired: Bool {
+        return true
+    }
+    
     /// Table view to reload after making changes.
     open var rootTableView: UITableView?
     
@@ -117,7 +122,7 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
         let useSFTP = self.useSFTP?.isOn ?? false
         
         // Check for requierd fields
-        if host == "" || username == "" {
+        if host == "" || (username == "" && isUsernameRequired) {
             if host == "" {
                 self.host?.backgroundColor = .red
             } else {
