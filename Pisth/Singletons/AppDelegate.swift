@@ -421,6 +421,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                     
+                    return
                 }
                 
                 // Upload file
@@ -434,7 +435,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 let bookmarksVC = BookmarksTableViewController()
                 let navVC = UINavigationController(rootViewController: bookmarksVC)
                 navVC.navigationBar.prefersLargeTitles = true
-                navigationController.present(navVC, animated: true, completion: {
+                window?.rootViewController?.present(navVC, animated: true, completion: {
                     bookmarksVC.delegate = self
                     bookmarksVC.navigationItem.largeTitleDisplayMode = .never
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
