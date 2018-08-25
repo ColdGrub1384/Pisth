@@ -1011,11 +1011,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
         webView.backgroundColor = theme.backgroundColor
-        view.backgroundColor = theme.backgroundColor
         (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
         selectionTextView.backgroundColor = theme.backgroundColor
         selectionTextView.textColor = theme.foregroundColor
-        view.backgroundColor = theme.backgroundColor
+        if theme.keyboardAppearance == .dark {
+            view.backgroundColor = .black
+        } else {
+            view.backgroundColor = .white
+        }
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
             if !self.viewer {
