@@ -10,7 +10,6 @@
 		3ACF9BAC2041BE21006C3218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9BAB2041BE21006C3218 /* AppDelegate.swift */; };
 		3ACF9BAE2041BE21006C3218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BAD2041BE21006C3218 /* Assets.xcassets */; };
 		3ACF9BB12041BE21006C3218 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BAF2041BE21006C3218 /* MainMenu.xib */; };
-		3ACF9BBA2041BE84006C3218 /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9BB92041BE83006C3218 /* Licenses.html */; };
 		3ACF9BE52041C066006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */; };
 		3ACF9BE62041C066006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9BE92041C0C6006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */; };
@@ -39,7 +38,6 @@
 		3ACF9BB02041BE21006C3218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		3ACF9BB22041BE22006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF9BB32041BE22006C3218 /* Pisth_Viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pisth_Viewer.entitlements; sourceTree = "<group>"; };
-		3ACF9BB92041BE83006C3218 /* Licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3ACF9BE42041C066006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BE82041C0C6006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -79,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				3ACF9BAB2041BE21006C3218 /* AppDelegate.swift */,
-				3ACF9BB92041BE83006C3218 /* Licenses.html */,
 				3ACF9BAD2041BE21006C3218 /* Assets.xcassets */,
 				3ACF9BAF2041BE21006C3218 /* MainMenu.xib */,
 				3ACF9BB22041BE22006C3218 /* Info.plist */,
@@ -151,7 +148,6 @@
 			files = (
 				3ACF9BAE2041BE21006C3218 /* Assets.xcassets in Resources */,
 				3ACF9BB12041BE21006C3218 /* MainMenu.xib in Resources */,
-				3ACF9BBA2041BE84006C3218 /* Licenses.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

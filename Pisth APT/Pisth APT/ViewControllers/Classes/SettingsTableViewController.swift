@@ -23,7 +23,7 @@ class SettingsTableViewController: UITableViewController {
         if indexPath.section == 1 && indexPath.row == 0 {
             
             // Open licenses
-            present(SFSafariViewController(url: URL(string: "https://pisth.github.io/Licenses/APT")!), animated: true, completion: nil)
+            present(SFSafariViewController(url: URL(string: "https://pisth.github.io/Licenses")!), animated: true, completion: nil)
         }
     }
     

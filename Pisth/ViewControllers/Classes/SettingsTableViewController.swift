@@ -233,7 +233,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         if indexPath == IndexPaths.licenses {
             
             // Open Licenses
-            let safari = SFSafariViewController(url: URL(string: "https://pisth.github.io/Licenses/iOS")!)
+            let safari = SFSafariViewController(url: URL(string: "https://pisth.github.io/Licenses")!)
             present(safari, animated: true)
 
         } else if indexPath == IndexPaths.plugins {

@@ -15,40 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "196"
             endingLineNumber = "196"
-            landmarkName = "ConnectionInfoViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Pisth.ConnectionInfoViewController.importPubKey(Any) -&gt; ()"
-                  moduleName = "Pisth"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adrianlabbe/Desktop/Pisth/Pisth%20Mac/ViewControllers/Classes/ConnectionInfoViewController.swift"
-                  timestampString = "556408712.772182"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "196"
-                  endingLineNumber = "196"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in Pisth.ConnectionInfoViewController.importPubKey(Any) -&gt; ()"
-                  moduleName = "Pisth"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adrianlabbe/Desktop/Pisth/Pisth%20Mac/ViewControllers/Classes/ConnectionInfoViewController.swift"
-                  timestampString = "556408712.796317"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "197"
-                  endingLineNumber = "197"
-                  offsetFromSymbolStart = "33">
-               </Location>
-            </Locations>
+            landmarkName = "importPubKey(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

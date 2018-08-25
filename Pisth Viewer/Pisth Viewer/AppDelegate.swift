@@ -21,8 +21,9 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Last received theme name.
     var lastReceivedThemeName = ""
     
-    /// Web view used to display licenses.
-    @IBOutlet weak var licensesWebView: WKWebView!
+    @IBAction func showLicenses(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://pisth.github.io/Licenses")!)
+    }
     
     /// Paste text.
     ///
@@ -226,13 +227,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         mcNearbyServiceBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: "terminal")
         mcNearbyServiceBrowser.delegate = self
         mcNearbyServiceBrowser.startBrowsingForPeers()
-        
-        // Licenses
-        guard let licenses = Bundle.main.url(forResource: "Licenses", withExtension: "html") else {
-            return
-        }
-        licensesWebView.loadFileURL(licenses, allowingReadAccessTo: licenses.deletingLastPathComponent())
-        
         
         // Check for new version
         URLSession.shared.dataTask(with: URL(string:"https://pisth.github.io/PisthViewer/NEW_VERSION")!) { (data, _, _) in
