@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A15A9D8206E88BF007A8E7D /* Licenses.html */; };
 		3A5F98402066FFB900E43793 /* InstallerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F983F2066FFB900E43793 /* InstallerViewController.swift */; };
 		3A610C6F207E98C80026E627 /* amzn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C5D207E98C40026E627 /* amzn.png */; };
 		3A610C70207E98C80026E627 /* arch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A610C5E207E98C40026E627 /* arch.png */; };
@@ -110,7 +109,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3A15A9D8206E88BF007A8E7D /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3A5F983F2066FFB900E43793 /* InstallerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerViewController.swift; sourceTree = "<group>"; };
 		3A610C5D207E98C40026E627 /* amzn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amzn.png; sourceTree = "<group>"; };
 		3A610C5E207E98C40026E627 /* arch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arch.png; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				3A610C5C207E98C40026E627 /* OS */,
-				3A15A9D8206E88BF007A8E7D /* Licenses.html */,
 				3ACDC3E42065AEC00049034F /* Assets.xcassets */,
 				3ACDC3E62065AEC00049034F /* LaunchScreen.storyboard */,
 				3ACDC3E92065AEC20049034F /* Info.plist */,
@@ -453,7 +450,6 @@
 				3A610C72207E98C80026E627 /* darwin.png in Resources */,
 				3A610C79207E98C80026E627 /* slackware.png in Resources */,
 				3A610C7A207E98C80026E627 /* sles.png in Resources */,
-				3A15A9D9206E88BF007A8E7D /* Licenses.html in Resources */,
 				3A610C71207E98C80026E627 /* centos.png in Resources */,
 				3A610C77207E98C80026E627 /* raspbian.png in Resources */,
 				3A610C70207E98C80026E627 /* arch.png in Resources */,
