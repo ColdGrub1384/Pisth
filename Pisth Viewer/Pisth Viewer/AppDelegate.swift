@@ -21,6 +21,7 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Last received theme name.
     var lastReceivedThemeName = ""
     
+    /// Show licenses in a web browser.
     @IBAction func showLicenses(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "https://pisth.github.io/Licenses")!)
     }
