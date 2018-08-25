@@ -379,10 +379,12 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                     connection.password = alert.textFields?.last?.text ?? connection.password
                     connect()
                 }))
-                alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: { _ in
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }))
                 alert.addTextField { (usernameTextField) in
                     usernameTextField.placeholder = Localizable.AppDelegate.usernamePlaceholder
-                    usernameTextField.text = connection.name
+                    usernameTextField.text = connection.username
                 }
                 alert.addTextField { (passwordTextField) in
                     passwordTextField.placeholder = Localizable.AppDelegate.passwordPlaceholder
