@@ -358,7 +358,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Hide or show navigation bar.
     @objc func showNavBar() {
-        navigationController?.setNavigationBarHidden(!navigationController?.isNavigationBarHidden ?? true, animated: true)
+        navigationController?.setNavigationBarHidden(!navigationController!.isNavigationBarHidden, animated: true)
         fit()
     }
     
