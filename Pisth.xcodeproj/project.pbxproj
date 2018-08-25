@@ -10,7 +10,6 @@
 		3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0964F220CC209F006D5B4C /* Content.storyboard */; };
 		3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */; };
 		3A0E2921200A6BD8006FFF81 /* SourceControlTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */; };
-		3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */ = {isa = PBXBuildFile; fileRef = 3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */; };
 		3A2258911FF6A850001B9710 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2258901FF6A850001B9710 /* Reachability.swift */; };
 		3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2C2D46208156F8002B8230 /* Pisth_API.framework */; };
 		3A2C2D48208156F8002B8230 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2C2D46208156F8002B8230 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -81,7 +80,6 @@
 		3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */; };
 		3AEF111A201115850089389E /* empty in Resources */ = {isa = PBXBuildFile; fileRef = 3AEF1119201115850089389E /* empty */; };
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
-		3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9AE991FF53C3000840E8A /* Licenses.html */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
 		3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */; };
 		3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFC34992003E19400E32F17 /* Bool+inverted.swift */; };
@@ -185,7 +183,6 @@
 		3A0964F220CC209F006D5B4C /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceControlTableViewController.swift; sourceTree = "<group>"; };
-		3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "ActionSheetPicker-3.0-Authors.html"; sourceTree = "<group>"; };
 		3A2258901FF6A850001B9710 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3A2C2D46208156F8002B8230 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A38FC531FF5719200690382 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -253,7 +250,6 @@
 		3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryAction.swift; sourceTree = "<group>"; };
 		3AEF1119201115850089389E /* empty */ = {isa = PBXFileReference; lastKnownFileType = text; path = empty; sourceTree = "<group>"; };
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
-		3AF9AE991FF53C3000840E8A /* Licenses.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Licenses.html; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		3AFC34992003E19400E32F17 /* Bool+inverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+inverted.swift"; sourceTree = "<group>"; };
@@ -525,15 +521,6 @@
 			path = "Pisth API Example";
 			sourceTree = "<group>";
 		};
-		3ADDFEB920068E5500FA6ACD /* html */ = {
-			isa = PBXGroup;
-			children = (
-				3AF9AE991FF53C3000840E8A /* Licenses.html */,
-				3A1137662013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html */,
-			);
-			name = html;
-			sourceTree = "<group>";
-		};
 		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,7 +529,6 @@
 				C983BF9C2110DEE600CCB298 /* InfoPlist.strings */,
 				3A3A015B2007ADE900B5B655 /* langs.plist */,
 				3A8A32AF2047574D00A38E89 /* OS */,
-				3ADDFEB920068E5500FA6ACD /* html */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
 				3A7C919A2044972C006E0434 /* GoogleService-Info.plist */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
@@ -905,7 +891,6 @@
 				C9BD2872210A3DCE00244AAF /* Settings.storyboard in Resources */,
 				C9BD2880210A3DFB00244AAF /* Git.storyboard in Resources */,
 				C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */,
-				3AF9AE9A1FF53C3000840E8A /* Licenses.html in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
@@ -930,7 +915,6 @@
 				3AD7E0612049E8DA00834D59 /* slackware.png in Resources */,
 				3AD7E0622049E8DB00834D59 /* sles.png in Resources */,
 				3AD7E0602049E8D900834D59 /* rhel.png in Resources */,
-				3A1137672013C89700B860D0 /* ActionSheetPicker-3.0-Authors.html in Resources */,
 				3AD7E0632049E8DD00834D59 /* ubuntu.png in Resources */,
 				3AD7E05A2049E8D000834D59 /* darwin.png in Resources */,
 				3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */,

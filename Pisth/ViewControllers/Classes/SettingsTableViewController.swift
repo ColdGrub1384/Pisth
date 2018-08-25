@@ -8,6 +8,7 @@
 import UIKit
 import BiometricAuthentication
 import Pisth_Shared
+import SafariServices
 
 /// Table view controller for displaying and changing settings.
 class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -232,10 +233,8 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         if indexPath == IndexPaths.licenses {
             
             // Open Licenses
-            let webVC = UIViewController.webViewController
-            webVC.file = Bundle.main.url(forResource: "Licenses", withExtension: "html")
-            webVC.navigationItem.leftBarButtonItem = nil
-            navigationController?.pushViewController(webVC, animated: true)
+            let safari = SFSafariViewController(url: URL(string: "https://pisth.github.io/Licenses/iOS")!)
+            present(safari, animated: true)
 
         } else if indexPath == IndexPaths.plugins {
             
