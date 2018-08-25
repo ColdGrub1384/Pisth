@@ -12,8 +12,9 @@ fileprivate var gestureRecognizerTimer: Timer?
 
 extension PanelContentDelegate {
     
-    /// Disable `AppDelegate.shared.splitViewController`'s gesture while dragging.
     func panelDragGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        // Disable `AppDelegate.shared.splitViewController`'s gesture while dragging.
         
         AppDelegate.shared.splitViewController.presentsWithGesture = false
         

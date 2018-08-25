@@ -386,7 +386,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -442,7 +441,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         navigationItem.setRightBarButtonItems([createFile], animated: true)
     }
     
-    /// Show error if there are or open `openFile` file.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -469,14 +467,12 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         reload()
     }
     
-    /// Remove observer.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         NotificationCenter.default.removeObserver(self)
     }
     
-    /// Update `collectionView`'s layout.
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != LocalDirectoryCollectionViewController.gridLayout.itemSize {
@@ -484,7 +480,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         }
     }
     
-    /// Resize layout.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -495,17 +490,14 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     // MARK: - Table view data source
     
-    /// - Returns: `1`.
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    /// - Returns: count of `files`.
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return files.count
     }
     
-    /// - Returns: A `UICollectionViewCell` with title as the current filename and file icon for current file.
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell: FileCollectionViewCell
@@ -532,17 +524,14 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         return cell
     }
     
-    /// - Returns: Enable copying files.
     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
     }
     
-    /// - Returns: `true`.
     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    /// Copy selected file.
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         
         if action == #selector(copy(_:)) { // Copy file
@@ -564,7 +553,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         }
     }
     
-    /// - Returns: An header view containing `headerView`.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionView.elementKindSectionHeader {
@@ -592,7 +580,6 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     // MARK: - Table view delegate
     
-    /// Open selected file or directory.
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else { return }
@@ -616,16 +603,12 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         }
     }
     
-    // MARK: - Banner view delegate
-    
     // MARK: - Document picker delegate
     
-    /// Dismiss document picker.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    /// Import selected documents.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
             do {
@@ -641,8 +624,10 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     // MARK: - Local directory collection view controller
     
-    /// Copy or move file.
     func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenDirectory directory: URL) {
+        
+        // Copy or move file.
+        
         localDirectoryCollectionViewController.delegate = localDirectoryCollectionViewController
         
         if LocalDirectoryCollectionViewController.action == .copyFile {
@@ -665,26 +650,25 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
     }
     
-    /// Call defailt handler.
     func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenFile file: URL) {
+        
+        // Call default handler.
+        
         LocalDirectoryCollectionViewController.openFile(file, from: localDirectoryCollectionViewController.collectionView!.cellForItem(at: IndexPath(row: localDirectoryCollectionViewController.files.index(of: file) ?? 0, section: 0))?.frame ?? CGRect.zero, in: localDirectoryCollectionViewController.view, navigationController: navigationController, showActivityViewControllerInside: localDirectoryCollectionViewController)
     }
     
     // MARK: - Preview controller data source
     
-    /// - Returns: count of `files.`
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return files.count
     }
     
-    /// - Returns: file in `files` at current index.
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return files[index] as QLPreviewItem
     }
     
     // MARK: - Document interaction controller delegate
     
-    /// - Returns: `self`.
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self
     }

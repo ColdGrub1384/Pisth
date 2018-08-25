@@ -25,15 +25,10 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
         
     var bonjourDomainsTableView: UITableView!
     
-    /// Init with given style.
-    ///
-    /// - Parameters:
-    ///     - style: Style to use.
     public override init(style: UITableView.Style) {
         super.init(style: style)
     }
     
-    /// Init.
     public init() {
         super.init(style: .plain)
     }

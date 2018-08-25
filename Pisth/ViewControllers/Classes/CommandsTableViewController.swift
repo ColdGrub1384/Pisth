@@ -18,10 +18,8 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     ///     "A command", ["A command", "Title to display"]
     var commands = [Any]()
     
-    
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,12 +31,10 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Table view data source
     
-    /// - Returns: count of `commands`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commands.count
     }
     
-    /// - Returns: An `UITableViewCell` with title as command or command title.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "command")!
         
@@ -55,7 +51,6 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Table view delgate
     
-    /// Send selected command and dismiss `self`.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         dismiss(animated: true) {
@@ -69,7 +64,6 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     
     // MARK: Popover presentation controller delegate
     
-    /// - Returns: `UIModalPresentationStyle.none`
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }

@@ -13,7 +13,6 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     
     // MARK: - Bookmarks table view controller
     
-    /// Setup dark style.
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -24,14 +23,12 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     
     override func viewDidAppear(_ animated: Bool) { }
     
-    /// Update status bar appearance.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         ContentViewController.shared.setNeedsStatusBarAppearanceUpdate()
     }
     
-    /// Setup dark style.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -41,13 +38,13 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
         return cell
     }
     
-    /// Returns `.lightContent`.
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    /// Ask to the user for restarting the current session.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Ask to the user for restarting the current session.
         
         if indexPath.section == 0, let connection = ConnectionManager.shared.connection, DataManager.shared.connections[indexPath.row] == connection {
             let alert = UIAlertController(title: Localizable.BookmarksTableViewController.sessionAlreadyActiveTitle, message: Localizable.BookmarksTableViewController.sessionAlreadyActiveMessage, preferredStyle: .alert)

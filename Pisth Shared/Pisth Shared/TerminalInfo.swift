@@ -70,7 +70,6 @@ open class TerminalInfo: NSObject, NSCoding {
     
     // MARK: - Coding
     
-    /// Encode info.
     open func encode(with aCoder: NSCoder) {
         aCoder.encode(message, forKey: "message")
         aCoder.encode(terminalSize, forKey: "terminalSize")
@@ -78,7 +77,6 @@ open class TerminalInfo: NSObject, NSCoding {
         aCoder.encode(terminalColsAndRows, forKey: "terminalColsAndRows")
     }
     
-    /// Decode given `NSCoder` and set variables.
     public required init?(coder aDecoder: NSCoder) {
         
         super.init()

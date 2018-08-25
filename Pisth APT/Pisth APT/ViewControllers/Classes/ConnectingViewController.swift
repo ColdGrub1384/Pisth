@@ -22,7 +22,6 @@ class ConnectingViewController: UIViewController {
     
     // MARK: - View controller
     
-    /// Fetch and display info.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

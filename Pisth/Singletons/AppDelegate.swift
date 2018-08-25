@@ -138,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Application delegate
     
-    /// Initialize app's window, and setup / repair saved data.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
@@ -281,8 +280,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         return true
     }
     
-    /// Open file, upload file or open connection.
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        // Open file, upload file or open connection.
         
         /// Handle URL.
         func handle() {
@@ -530,8 +530,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         return true
     }
     
-    /// Open connection for shortcut.
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        // Open connection for shortcut.
         
         navigationController.popToRootViewController(animated: true) {
             guard let bookmarksVC = self.navigationController.visibleViewController as? BookmarksTableViewController else {
@@ -554,9 +555,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         }
     }
     
-    /// Open connection from user activity.
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-                
+        
+        // Open connection from user activity.
+        
         guard let username = userActivity.userInfo?["username"] as? String else {
             return false
         }
@@ -604,10 +606,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Directory collection view controller delegate
     
-    /// `DirectoryCollectionViewControllerDelegate`'s` `directoryCollectionViewController(_:, didOpenDirectory:)``function.
-    ///
-    /// Upload file at selected directory.
     func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
+        
+        // Upload file at selected directory.
+        
         if action == .upload {
             directoryCollectionViewController.navigationItem.prompt = Localizable.AppDelegate.selectFolderWhereUploadFile
         } else if action == .apiImport {
@@ -629,8 +631,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Bookmarks table view controller delegate
     
-    /// Upload file at selected connection.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inDirectoryCollectionViewController directoryCollectionViewController: DirectoryCollectionViewController) {
+        
+        // Upload file at selected connection.
         
         if action == .upload {
             directoryCollectionViewController.navigationItem.prompt = Localizable.AppDelegate.selectFolderWhereUploadFile
@@ -651,23 +654,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         }
     }
     
-    /// Deselect row.
     func bookmarksTableViewController(_ bookmarksTableViewController: BookmarksTableViewController, didOpenConnection connection: RemoteConnection, inTerminalViewController terminalViewController: TerminalViewController) {
         
         if let indexPath = bookmarksTableViewController.tableView.indexPathForSelectedRow {
             
             bookmarksTableViewController.tableView.deselectRow(at: indexPath, animated: true)
         }
-        
-        /*let alert = UIAlertController(title: "Cannot upload file!", message: "SFTP must be enabled.\nIf you want to upload file here, press the \"info\" button and enable SFTP.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        bookmarksTableViewController.present(alert, animated: true, completion: nil)*/ // SSH connections are disabled here
     }
     
     // MARK: - Directory collection view controller static delegate
     
-    /// Export file with API.
     func didOpenFile(_ file: URL, withData data: Data) {
+    
+        // Export file with API.
         
         if action == .apiImport {
             action = nil
@@ -687,8 +686,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Split view controller delegate
     
-    /// Change display mode and View controllers.
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        
+        // Change display mode and View controllers.
+        
         splitViewController.viewControllers = [secondaryViewController]
         if splitViewController.preferredDisplayMode == .primaryOverlay {
             splitViewController.preferredDisplayMode = .primaryHidden
@@ -697,8 +698,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         return true
     }
     
-    /// Change display mode.
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
+        
+        // Change display mode.
         
         splitViewController.viewControllers = [self.splitViewController.navigationController ?? self.navigationController, self.splitViewController.detailViewController ?? self.splitViewController.detailNavigationController]
         

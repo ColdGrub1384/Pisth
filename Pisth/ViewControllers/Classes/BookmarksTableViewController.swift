@@ -81,7 +81,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,7 +113,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         serviceBrowser.searchForServices(ofType: "_ssh._tcp.", inDomain: "local.")
     }
     
-    /// Clear selection on collapsed Split view controller.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -127,7 +125,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Table view data source
 
-    /// - Returns: `2`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if delegate is AppDelegate {
@@ -137,7 +134,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         return 2
     }
     
-    /// - Returns: `"Connections"` or `"Nearby Devices"` if there are nearby devices.
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         guard (devices.count > 0 || services.count > 0) else {
@@ -153,7 +149,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         return nil
     }
 
-    /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         tableView.backgroundView?.isHidden = !shouldShowBackgroundView
@@ -175,8 +170,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         return 0
     }
-
-    /// - Returns: A cell with with title as the connection's nickname and subtitle as connection's details.
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
         cell.backgroundColor = .clear
@@ -247,12 +241,10 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         return cell
     }
     
-    /// - Returns: `true` for first section.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
     }
     
-    /// Remove connection.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             DataManager.shared.removeConnection(at: indexPath.row)
@@ -261,7 +253,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
     }
 
-    /// Move connections.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         var connections = DataManager.shared.connections
         
@@ -276,14 +267,12 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
     }
     
-    /// Allow moving rows for first section.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
     }
     
     // MARK: - Table view delegate
     
-    /// Connect to selected connection.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         AppDelegate.shared.navigationController.setNavigationBarHidden(false, animated: true)
@@ -468,7 +457,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
     }
     
-    /// Show connection information.
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if searchController.isActive {
             searchController.dismiss(animated: true, completion: {
@@ -481,7 +469,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: Search bar delegate
     
-    /// Search for connection.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         fetchedConnections = []
@@ -514,7 +501,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         tableView.reloadData()
     }
-    
     /// Reset connections.
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
@@ -533,7 +519,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Browser for near devices.
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     
-    /// Display found peer.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         
         if !devices.contains(peerID) && peerID.displayName != self.peerID.displayName {
@@ -543,7 +528,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
     }
     
-    /// Hide lost peer.
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         
         guard peerID.displayName != self.peerID.displayName else {
@@ -564,7 +548,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Net service browser delegate
     
-    /// Append service.
     func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
         
         guard !services.contains(service) else {
@@ -575,7 +558,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
     }
     
-    /// Remove service.
     func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
         if let i = services.firstIndex(of: service) {
             services.remove(at: i)
@@ -585,7 +567,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Net service delegate
     
-    /// Connect to the server.
     func netServiceDidResolveAddress(_ sender: NetService) {
         guard let hostname = sender.hostName, let url = URL(string: "sftp://\(hostname):\(sender.port)") else {
             return

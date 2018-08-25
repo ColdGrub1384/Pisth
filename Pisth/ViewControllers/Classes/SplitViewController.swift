@@ -51,7 +51,6 @@ class SplitViewController: UISplitViewController {
         UIApplication.shared.sendAction(displayModeButtonItem.action!, to: displayModeButtonItem.target, from: nil, for: nil)
     }
     
-    /// Set singleton and load view controllers.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,7 +90,6 @@ class SplitViewController: UISplitViewController {
         delegate = AppDelegate.shared
     }
     
-    /// Set preferred display mode.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         

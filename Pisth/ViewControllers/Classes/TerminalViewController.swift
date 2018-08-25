@@ -21,7 +21,6 @@ import CoreSpotlight
 /// Terminal used to do SSH.
 class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate {
     
-    /// Terminal size in this format: `"0,0"`.
     private var terminalSize: String?
     
     /// Returns `false` if the terminal is presented as a panel on iPad.
@@ -114,9 +113,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var navigationController_: UINavigationController?
     
     /// Show commands history.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender Bar button item.
     @objc func showHistory(_ sender: UIBarButtonItem) {
         
         do {
@@ -231,18 +227,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Show or hide the first toolbar of the keyboard.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button.
     @objc func toggleFirstToolbar(_ sender: UIButton) {
         addToolbar()
         reloadInputViews()
     }
     
     /// Show or hide the second toolbar of the keyboard.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button.
     @objc func toggleSecondToolbar(_ sender: UIButton) {
         
         var toolbar: UIToolbar
@@ -368,7 +358,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Hide or show navigation bar.
     @objc func showNavBar() {
-        navigationController?.setNavigationBarHidden(navigationController?.isNavigationBarHidden.inverted ?? true, animated: true)
+        navigationController?.setNavigationBarHidden(!navigationController?.isNavigationBarHidden ?? true, animated: true)
         fit()
     }
     
@@ -474,9 +464,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Show the menu.
-    ///
-    /// - Parameters:
-    ///     - gesture: The `UILongPressGestureRecognizer` that triggered the action.
     @objc func showMenu(_ gesture: UILongPressGestureRecognizer) {
 
         UIMenuController.shared.setTargetRect(CGRect(origin: gesture.location(in: webView), size: CGSize.zero), in: webView)
@@ -492,23 +479,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - View controller
     
-    /// `UIViewController`'s `canBecomeFirstResponder` variable.
-    ///
-    /// Returns if `webView is different than nil`.
     override var canBecomeFirstResponder: Bool {
         return (webView != nil && !readOnly)
     }
-
-    /// `UIViewController`'s `canResignFirstResponder` variable.
-    ///
-    /// Returns `true`.
+    
     override var canResignFirstResponder: Bool {
         return true
     }
     
-    /// `UIViewController`'s `inputAccessoryView` variable.
-    ///
-    /// Returns `accessoryView`.
     override var inputAccessoryView: UIView? {
         
         if !isFirstResponder {
@@ -518,9 +496,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return accessoryView
     }
     
-    /// Update keyboard icon.
-    ///
-    /// - Returns: `true`.
     override func resignFirstResponder() -> Bool {
         super.resignFirstResponder()
         
@@ -528,9 +503,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return true
     }
     
-    /// Update keyboard icon.
-    ///
-    /// - Returns: `true`.
     override func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()
         
@@ -538,7 +510,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return true
     }
     
-    /// Returns arrow keys, esc keys and ctrl keys from `A` to `_`.
     override var keyCommands: [UIKeyCommand]? {
         // Bluetooth keyboard
         
@@ -559,7 +530,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return commands
     }
     
-    /// Add notifications to resize `webView` when keyboard appears and setup multipeer connectivity.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -630,7 +600,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         keyboardAppearance = theme.keyboardAppearance
     }
     
-    /// Setup terminal.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -658,7 +627,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
          _ = becomeFirstResponder()
     }
     
-    /// Reset appearance and stop advertising peer.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -667,7 +635,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         navigationController_?.view.backgroundColor = .white
     }
     
-    /// Returns `.lightContent` for dark themes.
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!], theme.toolbarStyle == .black {
             return .lightContent
@@ -676,7 +643,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return .default
     }
     
-    /// - Returns: `true` for pasting, enabling selection mode and showing the navigation bar in insert mode.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if selectionTextView.isHidden {
             return (action == #selector(pasteText) || action == #selector(selectionMode) || action == #selector(showNavBar))
@@ -685,13 +651,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Reload `webView`.
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         fit()
     }
     
-    /// Set user info.
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         
@@ -813,12 +777,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Insert special key.
     ///
+    /// The key sent will depend on the button's tag.
+    ///
+    /// # Possible tags
+    /// - 1: Ctrl
+    /// - 6: Esc
+    /// - 7: Function keys
+    /// - 8: Left arrow
+    /// - 9: Up arrow
+    /// - 10: Down arrow
+    /// - 11: Right arrow
+    ///
     /// - Parameters:
-    ///     - sender: Sender bar button item.
+    ///     - sender: Sender button. Set its tag to insert key.
     @objc func insertKey(_ sender: UIButton) {
         
         if sender.tag == 1 { // ctrl
-            ctrl = ctrl.inverted
+            ctrl = !ctrl
         } else if sender.tag == 6 { // Esc
             insertText(Keys.esc)
         } else if sender.tag == 7 { // F keys
@@ -845,9 +820,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// Insert key by a long press gesture.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender event.
     @objc func insertKeyByLongPress(_ sender: UILongPressGestureRecognizer) {
         
         arrowsLongPressDelay -= 1
@@ -892,7 +864,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: NMSSH channel delegate
     
-    /// Write data to `webView` and send data to MC peers.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message
@@ -926,7 +897,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Dismiss.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
         DispatchQueue.main.async {
             if self.isFirstResponder {
@@ -939,7 +909,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Key input
     
-    /// Send text or ctrl key to shell.
     func insertText(_ text: String) {
         do {
             
@@ -967,7 +936,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } catch {}
     }
     
-    /// Send backspace to shell.
     func deleteBackward() {
         do {
             if viewer {
@@ -980,25 +948,20 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } catch {}
     }
     
-    /// Returns true.
     var hasText: Bool {
         return true
     }
     
     // MARK: Text input traits
     
-    /// `.default`.
     var keyboardAppearance: UIKeyboardAppearance = .default
     
-    /// `UITextAutocorrectionType.no`
     var autocorrectionType: UITextAutocorrectionType = .no
     
-    /// Returns `.no`.
     var smartQuotesType: UITextSmartQuotesType = .no
     
     // MARK: Web kit navigation delegate
 
-    /// Run startup commands if `console` is empty, enable blinking cursor if `UserDefaults` 'blink' value is `true` and resize terminal if the Web view was reloaded.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         if UserDefaults.standard.bool(forKey: "blink") {
@@ -1180,7 +1143,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: Web kit ui delegate
     
-    /// Sound bell if the text of the alert is "bell".
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         if message == "bell" { // Play bell
             bell()
@@ -1203,7 +1165,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// `MCNearbyServiceAdvertiser` used to be discoverable by the Mac app.
     var mcNearbyServiceAdvertiser: MCNearbyServiceAdvertiser!
     
-    /// Display an alert to accept or decline invitation.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
         let alert = UIAlertController(title: Localizable.TerminalViewController.acceptInvitation(from: peerID.displayName), message: Localizable.TerminalViewController.peerWantsToSeeTheTerminal(peerID.displayName), preferredStyle: .alert)
@@ -1222,7 +1183,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         present(alert, animated: true, completion: nil)
     }
     
-    /// If `state` is connected, send initial information to `peer`.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 
         if state == .connected {
@@ -1243,7 +1203,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Write received String to the Shell.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         NSKeyedUnarchiver.setClass(TerminalInfo.self, forClassName: "TerminalInfo")
         
@@ -1270,31 +1229,26 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    /// Do nothing.
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         print("Received stream")
     }
     
-    /// Do nothing.
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         print("Start receiving resource")
     }
     
-    /// Do nothing
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving resource")
     }
     
     // MARK: - Gesture recognizer delegate
     
-    /// - Returns: `true`.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
     // MARK: - Drop interaction delegate
     
-    /// Drop a file.
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         
         if session.localDragSession?.items.first?.localObject is NMSFTPFile {
@@ -1318,7 +1272,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
        _ = becomeFirstResponder()
     }
     
-    /// Allow dragging a `NMSFTPFile`.
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
         let canHandle = (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
         if canHandle {
@@ -1326,45 +1279,37 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         return canHandle
     }
-    
-    /// - Returns: `UIDropProposal(operation: .copy)`.
+
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
     }
     
-    /// Add `webView`.
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
         view.addSubview(webView)
     }
     
     // MARK: - Panel content delegate
     
-    /// Returns `CGSize(width: 320, height: 500)`.
     var preferredPanelContentSize: CGSize {
         return CGSize(width: 500, height: 500)
     }
     
-    /// Returns `CGSize(width: 240, height: 260)`.
     var minimumPanelContentSize: CGSize {
         return CGSize(width: 240, height: 260)
     }
     
-    /// Returns `CGSize(width: 320, height: 500)`.
     var maximumPanelContentSize: CGSize {
         return UIScreen.main.bounds.size
     }
     
-    /// Returns: `500`.
     var preferredPanelPinnedHeight: CGFloat {
         return 500
     }
-    
-    /// Returns: `500`.
+
     var preferredPanelPinnedWidth: CGFloat {
         return 500
     }
     
-    /// The keyboard and action button.
     var rightBarButtonItems: [UIBarButtonItem] {
         if keyboardButton == nil {
             keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
@@ -1376,17 +1321,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return (items as? [UIBarButtonItem]) ?? []
     }
     
-    /// Returns `isFirstResponder`.
     var shouldAdjustForKeyboard: Bool {
         return isFirstResponder
     }
     
-    /// `"×"`.
     var closeButtonTitle: String {
         return "×"
     }
     
-    /// `"×"`.
     var modalCloseButtonTitle: String {
         return "×"
     }

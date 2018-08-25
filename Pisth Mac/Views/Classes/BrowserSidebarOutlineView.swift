@@ -27,7 +27,6 @@ class BrowserSidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutli
     
     // MARK: - View
     
-    /// Set `delegate` and `dataSource`.
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
         
@@ -37,24 +36,20 @@ class BrowserSidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutli
     
     // MARK: - Data source
     
-    /// - Returns: `false`.
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return false
     }
     
-    /// - Returns: The item for current index in `items`.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         return items[index]
     }
     
-    /// - Returns: The count of `items`.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         return items.count
     }
     
     // MARK: - Delegate
     
-    /// Setup view.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let item = item as? Item else {
             return nil
@@ -76,7 +71,6 @@ class BrowserSidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutli
         return cell
     }
     
-    /// Go to the selected directory or not if `ignoreSelection` is `true`.
     func outlineViewSelectionDidChange(_ notification: Notification) {
         if let dirVC = window?.contentViewController as? DirectoryViewController, !ignoreSelection {
             dirVC.go(to: items[selectedRow].value.replacingFirstOccurrence(of: "~", with: dirVC.controller.home ?? "~"))
@@ -84,7 +78,6 @@ class BrowserSidebarOutlineView: NSOutlineView, NSOutlineViewDataSource, NSOutli
         ignoreSelection = false
     }
     
-    /// - Returns: `true`.
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
         return true
     }

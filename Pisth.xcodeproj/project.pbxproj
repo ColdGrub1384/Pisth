@@ -82,7 +82,6 @@
 		3AF50F151FFEEE43000F7B31 /* GitBranchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */; };
 		3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */; };
 		3AF9AEAB1FF54C8B00840E8A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */; };
-		3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFC34992003E19400E32F17 /* Bool+inverted.swift */; };
 		3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD9041FF140FE0061677B /* AppDelegate.swift */; };
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
@@ -252,7 +251,6 @@
 		3AF50F141FFEEE43000F7B31 /* GitBranchesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitBranchesTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA31FF5458200840E8A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3AF9AEA91FF54C8B00840E8A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		3AFC34992003E19400E32F17 /* Bool+inverted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+inverted.swift"; sourceTree = "<group>"; };
 		3AFDD9011FF140FE0061677B /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDD9041FF140FE0061677B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AFDD90E1FF140FE0061677B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -475,7 +473,6 @@
 				3A89B5BF2037793D00B750D9 /* UIButton.swift */,
 				3AA117F21FF417BF007BB84A /* UINavigationController.swift */,
 				3A89B5BB2037760D00B750D9 /* UIImage.swift */,
-				3AFC34992003E19400E32F17 /* Bool+inverted.swift */,
 				3A5888B0205C62540002F9E1 /* UIViewController.swift */,
 				3A5888B2205C64CB0002F9E1 /* UIView.swift */,
 				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
@@ -1020,7 +1017,6 @@
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */,
 				C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */,
-				3AFC349A2003E19400E32F17 /* Bool+inverted.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,

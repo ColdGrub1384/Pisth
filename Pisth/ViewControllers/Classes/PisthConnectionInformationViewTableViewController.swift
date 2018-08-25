@@ -15,7 +15,6 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
     private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
     
-    /// Returns `false`.
     override var isUsernameRequired: Bool {
         return false
     }
@@ -51,7 +50,6 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     
     // MARK: - Connection information table view controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +65,6 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     
     // MARK: - Document picker delegate
     
-    /// Import private or public key.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if controller === publicKeyPicker {
             publicKey = (try? String(contentsOf: urls[0]))
@@ -81,7 +78,6 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
         }
     }
     
-    /// Reset values.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         if controller === publicKeyPicker {
             publicKey = nil

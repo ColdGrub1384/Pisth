@@ -29,7 +29,6 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: View Controller
     
-    /// Display image and setup `scrollView`.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -46,7 +45,6 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Scroll view delegate
 
-    /// - Returns: `imageView`.
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }

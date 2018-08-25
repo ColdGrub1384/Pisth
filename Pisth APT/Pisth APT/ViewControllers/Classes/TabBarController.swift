@@ -19,7 +19,6 @@ class TabBarController: UITabBarController {
     
     // MARK: - View controller
     
-    /// Set singleton.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         

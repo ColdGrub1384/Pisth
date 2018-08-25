@@ -8,17 +8,14 @@
 /// Grass theme for the terminal.
 open class ProTheme: TerminalTheme {
     
-    /// Returns black.
     open override var backgroundColor: Color? {
         return .black
     }
     
-    /// Returns white.
     open override var foregroundColor: Color? {
         return Color(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
     }
     
-    /// Returns white.
     open override var cursorColor: Color? {
         return .white
     }

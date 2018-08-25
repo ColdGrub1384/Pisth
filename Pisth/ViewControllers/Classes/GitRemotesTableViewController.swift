@@ -10,7 +10,6 @@ import UIKit
 /// Git branches table view controller to display Git remote branches at `repoPath`.
 class GitRemotesTableViewController: GitBranchesTableViewController {
     
-    /// Setup loading screen.
     override func viewDidLoad() {
         
         tableView.backgroundView = UIActivityIndicatorView(style: .gray)
@@ -19,7 +18,6 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
         navigationItem.setRightBarButtonItems(nil, animated: false)
     }
     
-    /// List remote branches for Git repo.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -43,7 +41,6 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
     
     // MARK: - Table view data source
     
-    /// - Returns: An `UITableViewCell` with title as branch name.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "branch", for: indexPath)
         
@@ -58,7 +55,6 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
     
     // MARK: - Table view delegate
     
-    /// View commits for selected branch.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let handler = selectionHandler {

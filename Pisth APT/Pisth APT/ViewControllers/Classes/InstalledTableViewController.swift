@@ -73,7 +73,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,7 +92,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Table view data source
     
-    /// - Returns: Count of installed packages.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
@@ -103,7 +101,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         return AppDelegate.shared.installed.count
     }
     
-    /// - Returns: A cell with the title as the package for current index.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "package") else {
             return UITableViewCell()
@@ -123,7 +120,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Table view delegate
     
-    /// Show package.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -141,7 +137,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Search bar delegate
     
-    /// Search for package.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         fetchedPackages = []
@@ -159,7 +154,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.reloadData()
     }
     
-    /// Reset packages.
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()
@@ -168,7 +162,6 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - Document picker delegate
     
-    /// Upload and install Debian package.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         let activityVC = ActivityViewController(message: "Uploading...")
         
@@ -201,14 +194,12 @@ class InstalledTableViewController: UITableViewController, UISearchBarDelegate, 
         })
     }
     
-    /// Dismiss.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Store product view controller delegate
     
-    /// Dismiss.
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }

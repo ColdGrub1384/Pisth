@@ -32,8 +32,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     // MARK: - Menu delegate
     
-    /// Enable items if the selected row is a `RemoteConnection`.
     func menuWillOpen(_ menu: NSMenu) {
+        
+        // Enable items if the selected row is a `RemoteConnection`.
+        
         guard let bookmarksVC = NSApp.keyWindow?.contentViewController as? BookmarksViewController else {
             for item in menu.items {
                 item.isEnabled = false
@@ -175,7 +177,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     // MARK: - Application delegate
     
-    /// Setup menus.
     func applicationDidFinishLaunching(_ notification: Notification) {
         
         if UserDefaults.standard.string(forKey: "theme") == nil {

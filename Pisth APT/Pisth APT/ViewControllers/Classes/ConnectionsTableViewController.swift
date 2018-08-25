@@ -46,14 +46,12 @@ class ConnectionsTableViewController: UITableViewController {
     
     // MARK: - View controller
     
-    /// Add `editButtonItem`.
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItems?.append(editButtonItem)
     }
     
-    /// Reload data.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -69,18 +67,15 @@ class ConnectionsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    /// - Returns: number of connections or number of fetched connections with `searchController`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return DataManager.shared.connections.count
     }
     
-    /// - Returns: A cell with with title as the connection's nickname and subtitle as connection's details.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "connection") else {
             return UITableViewCell()
@@ -108,12 +103,10 @@ class ConnectionsTableViewController: UITableViewController {
         return cell
     }
     
-    /// - Returns: `true` for first section.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
     }
     
-    /// - Returns: A button to delete the connection and one to edit it.
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
@@ -139,7 +132,6 @@ class ConnectionsTableViewController: UITableViewController {
         return [delete, edit]
     }
     
-    /// Move connections.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         var connections = DataManager.shared.connections
         
@@ -154,16 +146,12 @@ class ConnectionsTableViewController: UITableViewController {
         }
     }
     
-    /// `UITableViewController`'s `tableView(_:, canMoveRowAt:)` function.
-    ///
-    /// Allow moving rows for first section.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return (indexPath.section == 0)
     }
     
     // MARK: - Table view delegate
     
-    /// Select connection
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row != UserDefaults.standard.integer(forKey: "connection") {

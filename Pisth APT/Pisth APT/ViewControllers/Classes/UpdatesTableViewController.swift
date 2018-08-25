@@ -50,7 +50,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +69,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Table view data source
     
-    /// - Returns: Count of available updates or fetched updates.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
@@ -80,7 +78,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
         return AppDelegate.shared.updates.count
     }
     
-    /// - Returns: A cell with the title as the package for current index.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "package") else {
             return UITableViewCell()
@@ -100,7 +97,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Table view delegate
     
-    /// Show package.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -118,7 +114,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Search bar delegate
     
-    /// Search for package.
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         fetchedPackages = []
@@ -136,7 +131,6 @@ class UpdatesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.reloadData()
     }
     
-    /// Reset packages.
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()

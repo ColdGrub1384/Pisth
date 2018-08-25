@@ -8,17 +8,14 @@
 /// Ubuntu theme for the terminal.
 open class UbuntuTheme: TerminalTheme {
     
-    /// Returns purple.
     open override var backgroundColor: Color? {
         return Color(red: 48/255, green: 10/255, blue: 36/255, alpha: 1)
     }
     
-    /// Returns white.
     open override var foregroundColor: Color? {
         return Color(red: 255/255, green: 253/255, blue: 244/255, alpha: 1)
     }
     
-    /// Returns white.
     open override var cursorColor: Color? {
         return Color(red: 251/255, green: 251/255, blue: 251/255, alpha: 1)
     }

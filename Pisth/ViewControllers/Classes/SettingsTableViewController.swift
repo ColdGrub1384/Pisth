@@ -58,7 +58,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// MARK: - View controller
     
-    /// Display current settings.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,9 +75,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     @IBOutlet weak var blinkCursorSwitch: UISwitch!
     
     /// Toogle blinking cursor.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender switch.
     @IBAction func toggleBlinkCursor(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "blink")
         UserDefaults.standard.synchronize()
@@ -96,9 +92,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     @IBOutlet weak var showHiddenFilesSwitch: UISwitch!
     
     /// Toogle showing hidden files.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender switch.
     @IBAction func toggleHiddenFiles(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "hidden")
         UserDefaults.standard.synchronize()
@@ -119,9 +112,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     @IBOutlet weak var biometricAuthLabel: UILabel!
     
     /// Toogle biometric authentication.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender switch.
     @IBAction func toggleBiometricAuth(_ sender: UISwitch) {
         
         guard BioMetricAuthenticator.canAuthenticate() else { return }
@@ -190,9 +180,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     @IBOutlet weak var px12: UIButton!
     
     /// Set text size as the sender's button text size.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button.
     @IBAction func setTextSize(_ sender: UIButton) {
         
         UserDefaults.standard.set(sender.titleLabel?.font.pointSize, forKey: "terminalTextSize")
@@ -227,7 +214,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: Table view delegate
     
-    /// Open licenses or deselect selected row.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if indexPath == IndexPaths.licenses {
@@ -268,12 +254,10 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view data source
     
-    /// - Returns: `12`.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 12
     }
     
-    /// - Returns: the cell corresponding to the index path.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(indexPath.row)", for: indexPath)
@@ -294,7 +278,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     // MARK: - Collection view delegate
     
-    /// Set theme for selected item.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(indexPath.row)", for: indexPath)

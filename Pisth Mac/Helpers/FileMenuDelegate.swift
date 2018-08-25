@@ -405,7 +405,6 @@ class FileMenuDelegate: NSObject, NSMenuDelegate {
     
     // MARK: - Menu delegate
     
-    /// Enable or disable items.
     func menuWillOpen(_ menu: NSMenu) {
         guard let dirVC = NSApp.keyWindow?.contentViewController as? DirectoryViewController else {
             for item in menu.items {

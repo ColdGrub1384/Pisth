@@ -25,9 +25,6 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     /// Close this view controller.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func done(_ sender: Any) {
         dismiss(animated: true, completion: {
             
@@ -126,14 +123,12 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
     
     // MARK: - View controller
     
-    /// Reload web view.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         webView.reload()
     }
     
-    /// Setup the terminal
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -168,7 +163,6 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
     
     // MARK: - Navigation delegate
     
-    /// Setup the terminal and send commands.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         webView.evaluateJavaScript("fit(term)") { (_, _) in
@@ -188,7 +182,6 @@ class TerminalViewController: UIViewController, WKNavigationDelegate, NMSSHChann
     
     // MARK: - Channel delegate
     
-    /// Show received data.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         DispatchQueue.main.async {
             self.console += message

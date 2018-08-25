@@ -33,7 +33,6 @@ class FileCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Collection view cell
     
-    /// Setup selection view.
     override func didMoveToWindow() {
         super.didMoveToWindow()
         
@@ -42,7 +41,6 @@ class FileCollectionViewCell: UICollectionViewCell {
         selectedBackgroundView = view
     }
     
-    /// Change text color when it's set.
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -53,7 +51,6 @@ class FileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    /// - Returns: `true` to allow moving and renaming file if this cell represents a remote file.
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if let directoryCollectionViewController = directoryCollectionViewController {
             
@@ -68,9 +65,6 @@ class FileCollectionViewCell: UICollectionViewCell {
         return (action == #selector(shareFile(_:)) || action == #selector(deleteFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(moveFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(renameFile(_:)))
     }
     
-    /// `UIViewController`'s `canBecomeFirstResponder` variable.
-    ///
-    /// Returnns true to allow actions.
     override var canBecomeFirstResponder: Bool {
         return true
     }

@@ -88,7 +88,6 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - View controller
     
-    /// Setup views
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,7 +98,6 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         packageNameLabel.text = ""
     }
     
-    /// Fetch info.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -149,12 +147,10 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Table view data source
     
-    /// - Returns: The number of properties.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return packageProperties?.count ?? 0
     }
     
-    /// - Returns: A cell with the name and the value of the property.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "property") as? PackagePropertyTableViewCell else {
@@ -174,7 +170,6 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-    /// - Returns: `200`.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

@@ -18,7 +18,6 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    /// Show licenses.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 && indexPath.row == 0 {
             

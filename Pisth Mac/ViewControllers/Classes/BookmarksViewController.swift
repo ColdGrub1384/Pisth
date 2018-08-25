@@ -16,7 +16,6 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - View controller
     
-    /// Update `outlineView` when saving CoreData context and set `outlineView` double click action.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,17 +28,14 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - Outline view data source
     
-    /// - Returns: The number of connections plus 1.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         return DataManager.shared.connections.count+1
     }
     
-    /// - Returns: `false`.
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return false
     }
     
-    /// The header and saved connections.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         
         if index == 0 {
@@ -51,14 +47,10 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - Outline view delegate
     
-    /// - Returns: `true` if the item is a `RemoteConnection`.
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
         return (item is RemoteConnection)
     }
     
-    /// Setup view.
-    ///
-    /// - Returns: A view representing a connection or the header.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         if (item as? Int) == 0 {
@@ -90,7 +82,6 @@ class BookmarksViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - Menu delegate
     
-    /// Enable items if the clicked row is a `RemoteConnection`.
     func menuWillOpen(_ menu: NSMenu) {
         for item in menu.items {
             item.isEnabled = (outlineView.item(atRow: outlineView.clickedRow) is RemoteConnection)

@@ -70,7 +70,6 @@ class ErrorViewController: UIViewController {
     
     // MARK: - View controller
     
-    /// Setup views.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,7 +78,6 @@ class ErrorViewController: UIViewController {
         errorView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
     
-    /// Hide error if it was resolved.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -92,7 +90,6 @@ class ErrorViewController: UIViewController {
         }
     }
     
-    /// Returns light content.
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

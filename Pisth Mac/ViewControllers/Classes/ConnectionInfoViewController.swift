@@ -130,7 +130,6 @@ class ConnectionInfoViewController: NSViewController {
     
     // MARK: - View controller
     
-    /// Fill info.
     override func viewDidLoad() {
         super.viewDidLoad()
         

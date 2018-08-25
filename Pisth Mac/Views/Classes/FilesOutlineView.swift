@@ -16,17 +16,14 @@ class FilesOutlineView: NSOutlineView {
     
     // MARK: - Dragging destination
     
-    /// - Returns: The sender's operation.
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         return sender.draggingSourceOperationMask
     }
     
-    /// - Returns: The sender's operation.
     override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
         return sender.draggingSourceOperationMask
     }
     
-    /// Upload files.
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         
         guard let dirVC = directoryViewController else {

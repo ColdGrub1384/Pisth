@@ -26,7 +26,6 @@ public class ActivityViewController: UIAlertController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Setup activity indicator.
     public override func viewDidLoad() {
         super.viewDidLoad()
         

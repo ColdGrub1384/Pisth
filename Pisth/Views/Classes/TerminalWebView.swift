@@ -44,25 +44,21 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate {
         addGestureRecognizer(tap)
     }
     
-    /// Set `gestureRecognizer` delegate to this Web view.
     override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
         super.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.delegate = self
     }
     
-    /// Returns: `false.`
     override func becomeFirstResponder() -> Bool {
         return false
     }
     
-    /// Returns: `false.`
     override var canBecomeFirstResponder: Bool {
         return false
     }
     
     // MARK: - Gesture recognizer delegate
     
-    /// - Returns: `true` if the gestures are not `longPress` and `tap`.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if (gestureRecognizer == tap && otherGestureRecognizer == longPress) || (gestureRecognizer == longPress && otherGestureRecognizer == tap) {

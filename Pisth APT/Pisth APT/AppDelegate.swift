@@ -221,7 +221,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Application delegate
     
-    /// Open the session.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
@@ -244,7 +243,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /// Install Deb or open connection with the API..
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         guard let vc = UIApplication.shared.keyWindow?.rootViewController else {

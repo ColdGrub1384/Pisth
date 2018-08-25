@@ -13,33 +13,27 @@
 open class OceanTheme: TerminalTheme {
     
     #if os(iOS)
-        /// Returns light.
         open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
-        /// Returns default.
         open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
-    /// Returns blue.
     open override var selectionColor: Color? {
         return Color(red: 33/255, green: 109/255, blue: 255/255, alpha: 0.5)
     }
     
-    /// Returns blue.
     open override var backgroundColor: Color? {
         return Color(red: 34/255, green: 79/255, blue: 188/255, alpha: 1)
     }
     
-    /// Returns white.
     open override var foregroundColor: Color? {
         return .white
     }
     
-    /// Returns gray.
     open override var cursorColor: Color? {
         return Color(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     }

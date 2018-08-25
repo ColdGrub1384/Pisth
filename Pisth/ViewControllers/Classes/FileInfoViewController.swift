@@ -50,7 +50,6 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
     
     // MARK: - View controller
     
-    /// Setup placeholder.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +60,6 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
     }
     
-    /// Fill info.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -103,7 +101,6 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
     
     // MARK: - Popover presentation controller delegate
     
-    /// - Returns: A Navigation view controller with this View controller
     func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         
         return UINavigationController(rootViewController: self)

@@ -89,7 +89,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     
     // MARK: - View controller
     
-    /// Load the terminal.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,7 +159,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     
     // MARK: - SSH channel delegate
     
-    /// Show message.
     func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
         console += message
         DispatchQueue.main.async {
@@ -168,7 +166,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
         }
     }
     
-    /// Print a message.
     func channelShellDidClose(_ channel: NMSSHChannel!) {
     
         let text = "\n\rConnection to \(channel.session.host!) closed."
@@ -180,7 +177,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     
     // MARK: - Web kit navigation delegate
     
-    /// Set theme, set size and start shell.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         window.delegate = self
@@ -226,7 +222,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     
     // MARK: - Web kit UI delegate
     
-    /// Set title.
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         
         if message.hasPrefix("changeTitle") {
@@ -240,7 +235,6 @@ class TerminalViewController: NSViewController, WKNavigationDelegate, WKUIDelega
     
     // MARK: - Window controller
     
-    /// Reload `webView`.
     func windowDidResize(_ notification: Notification) {
         webView.reload()
     }

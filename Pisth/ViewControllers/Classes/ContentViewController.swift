@@ -84,24 +84,23 @@ class ContentViewController: UIViewController, PanelManager {
     
     // MARK: - View controller
     
-    /// Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        // Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
+        
         return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
     }
     
     // MARK: - Panel manager
     
-    /// Returns `ContentViewController.shared.wrapperView`.
     var panelContentWrapperView: UIView {
         return wrapperView
     }
     
-    /// Returns `ContentViewController.shared.contentView`.
     var panelContentView: UIView {
         return contentView
     }
     
-    /// Returns terminal panel and directory panels.
     var panels: [PanelViewController] {
         var panels_ = directoryPanels
         if let term = terminalPanel {
@@ -110,23 +109,22 @@ class ContentViewController: UIViewController, PanelManager {
         return panels_
     }
     
-    /// Returns `2`.
     func maximumNumberOfPanelsPinned(at side: PanelPinSide) -> Int {
         return 2
     }
     
-    /// Returns `true`.
     var allowPanelPinning: Bool {
         return true
     }
     
-    /// Returns `true`.
     var allowFloatingPanels: Bool {
         return true
     }
     
-    /// Update `DirectoryCollectionViewController`s layouts.
     func didUpdatePinnedPanels() {
+        
+        // Update `DirectoryCollectionViewController`s layouts.
+        
         var viewControllers = [DirectoryCollectionViewController]()
         for panel in panels {
             if let dirVC = panel.contentViewController as? DirectoryCollectionViewController {

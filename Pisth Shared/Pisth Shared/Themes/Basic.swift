@@ -17,18 +17,15 @@
 open class BasicTheme: TerminalTheme {
     
     #if os(iOS)
-        /// Returns light.
         open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
-        /// Returns default.
         open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
-    /// Returns light blue or system selection color.
     open override var selectionColor: Color? {
         #if os(macOS)
             return Color.selectedControlColor
@@ -37,7 +34,6 @@ open class BasicTheme: TerminalTheme {
         #endif
     }
     
-    /// Returns white or a kind of black for macOS dark mode.
     open override var backgroundColor: Color? {
         #if os(macOS)
             if #available(OSX 10.14, *) {
@@ -54,7 +50,6 @@ open class BasicTheme: TerminalTheme {
         #endif
     }
     
-    /// Returns black or white for macOS dark mode.
     open override var foregroundColor: Color? {
         #if os(macOS)
             if #available(OSX 10.14, *) {
@@ -71,7 +66,6 @@ open class BasicTheme: TerminalTheme {
         #endif
     }
     
-    /// Returns gray.
     open override var cursorColor: Color? {
         return Color(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
     }

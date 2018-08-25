@@ -15,9 +15,6 @@ import Pisth_Shared
 class EditTextViewController: UIViewController, UITextViewDelegate {
     
     /// Dismiss this View controller.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -100,9 +97,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     /// Share current file.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func share(_ sender: UIBarButtonItem) {
         let document = UIDocumentInteractionController(url: file)
         document.presentOpenInMenu(from: sender, animated: true)
@@ -111,12 +105,10 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - View controller
     
-    /// Returns CMD+S to save file.
     override var keyCommands: [UIKeyCommand]? {
         return [UIKeyCommand(input: "s", modifierFlags: .command, action: #selector(saveFrom(keyCommand:)), discoverabilityTitle: "Save")]
     }
     
-    /// Call `setupTextView` function and disable large title.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,7 +119,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         navigationItem.largeTitleDisplayMode = .never
     }
 
-    /// Open `file` and highlight it.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
                 
@@ -170,7 +161,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    /// Save file if is needed.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
                 
@@ -279,9 +269,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     /// Change highlighter language.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func changeLanguage(_ sender: Any) {
         let wasFirstResponder = textView.isFirstResponder
         
@@ -316,9 +303,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     }
     
     /// Change editor's theme.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func changeTheme(_ sender: Any) {
         
         let wasFirstResponder = textView.isFirstResponder
@@ -360,9 +344,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     // MARK: Keyboard
     
     /// Dismiss keyboard.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender Bar button item.
     @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
         textView.resignFirstResponder()
     }

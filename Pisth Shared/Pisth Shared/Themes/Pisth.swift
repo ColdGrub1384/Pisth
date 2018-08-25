@@ -13,28 +13,23 @@ import UIKit
 open class PisthTheme: TerminalTheme {
     
     #if os(iOS)
-    /// Returns light.
     open override var keyboardAppearance: UIKeyboardAppearance {
         return .light
     }
     
-    /// Returns default.
     open override var toolbarStyle: UIBarStyle {
         return .default
     }
     #endif
     
-    /// Returns white.
     open override var backgroundColor: Color? {
         return .white
     }
     
-    /// Returns purple.
     open override var foregroundColor: Color? {
         return Color(red: 120/255, green: 32/255, blue: 157/255, alpha: 1)
     }
     
-    /// Returns purple.
     open override var cursorColor: Color? {
         return Color(red: 120/255, green: 32/255, blue: 157/255, alpha: 1)
     }

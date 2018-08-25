@@ -63,7 +63,6 @@ public class RemoteConnection: NSObject, NSCoding {
     
     // MARK: - Coding
     
-    /// Encode this object.
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(host, forKey: "Host")
         aCoder.encode(username, forKey: "Username")
@@ -75,7 +74,6 @@ public class RemoteConnection: NSObject, NSCoding {
         aCoder.encode(os, forKey: "OS")
     }
     
-    /// Decode this object.
     public required init?(coder aDecoder: NSCoder) {
         guard let host = aDecoder.decodeObject(forKey: "Host") as? String else {
             return nil

@@ -55,7 +55,6 @@ class HeaderToolbar: UIToolbar {
     
     // MARK: - Toolbar
     
-    /// Setup views.
     override func didMoveToWindow() {
         super.didMoveToWindow()
         

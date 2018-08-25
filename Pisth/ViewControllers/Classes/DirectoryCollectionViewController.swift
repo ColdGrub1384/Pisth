@@ -269,7 +269,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - View controller
     
-    /// Firebase analystics and setup some things.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -459,7 +458,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         self.showErrorIfThereIsOne()
     }
 
-    /// Hides toolbar.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -467,7 +465,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         NotificationCenter.default.removeObserver(self)
     }
     
-    /// Resize layout.
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -476,7 +473,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
-    /// Resize layout.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -485,7 +481,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
-    /// Set user info.
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         
@@ -1215,7 +1210,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view data source
     
-    /// - Returns: count of `files`.
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if let files = files {
@@ -1225,7 +1219,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return 0
     }
     
-    /// - Returns: A `FileCollectionViewCell` with title as current file name and with icon for current file.
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell: FileCollectionViewCell
@@ -1266,7 +1259,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return cell
     }
     
-    /// - Returns: Enable copying for files but not directories.
     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         
         if files![indexPath.row].isDirectory {
@@ -1276,12 +1268,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return (action == #selector(UIResponderStandardEditActions.copy(_:))) // Enable copy
     }
     
-    /// - Returns: `true`.
     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    /// Copy selected file.
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         
         if action == #selector(copy(_:)) { // Copy file
@@ -1302,7 +1292,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
-    /// - Returns: An header view containing `headerView` or a footer containing `footerView`.
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionView.elementKindSectionHeader {
@@ -1330,7 +1319,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view delegate
     
-    /// Open selected file or directory.
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let files = files else { return }
@@ -1437,8 +1425,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
 
     // MARK: - Local directory collection view controller delegate
     
-    /// Upload local file.
     func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenFile file: URL) {
+        
+        // Upload local file.
         
         // Go back here
         navigationController?.popToViewController(self, animated: true, completion: {
@@ -1446,15 +1435,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         })
     }
     
-    /// Open directory.
     func localDirectoryCollectionViewController(_ localDirectoryCollectionViewController: LocalDirectoryCollectionViewController, didOpenDirectory directory: URL) {
     localDirectoryCollectionViewController.navigationController?.pushViewController(localDirectoryCollectionViewController, animated: true)
     }
     
     // MARK: - Directory collection view controller delegate
     
-    /// Copy or move remote file.
     func directoryCollectionViewController(_ directoryCollectionViewController: DirectoryCollectionViewController, didOpenDirectory directory: String) {
+        
+        // Copy or move remote file.
+        
         directoryCollectionViewController.delegate = directoryCollectionViewController
         
         if DirectoryCollectionViewController.action == .copyFile {
@@ -1478,17 +1468,14 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Document picker delegate
     
-    /// Dismiss browser.
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
     
-    /// Send selected file.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         present(upload(file: url), animated: true, completion: nil)
     }
     
-    /// Send selected files.
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
         if urls.count == 1 {
@@ -1520,8 +1507,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view drop delegate
         
-    /// Move dropped file to destination folder.
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        
+        // Move dropped file to destination folder.
         
         guard let sftp = ConnectionManager.shared.filesSession?.sftp else {
             return
@@ -1632,7 +1620,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
-    /// Set animation for moving files into a directory.
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         
         guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
@@ -1669,7 +1656,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view drag delegate
     
-    /// Start dragging file.
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else {
@@ -1706,14 +1692,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return [item]
     }
     
-    /// Add the terminal to the view.
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         if let term = ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController {
             term.view.addSubview(term.webView)
         }
     }
     
-    /// Allow dragging only if the selected file is not the parent directory.
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         
         guard let files = files else {
@@ -1745,47 +1729,38 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Store product view controller delegate
     
-    /// Dismiss.
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Panel content delegate
     
-    /// Returns `CGSize(width: 320, height: 400)`.
     let preferredPanelContentSize = CGSize(width: 320, height: 400)
     
-    /// Returns `CGSize(width: 240, height: 260)`.
     var minimumPanelContentSize: CGSize {
         return CGSize(width: 240, height: 260)
     }
     
-    /// Returns `CGSize(width: 500, height: 500)`.
     var maximumPanelContentSize: CGSize {
         return CGSize(width: 500, height: 500)
     }
     
-    /// Returns: `320`.
     var preferredPanelPinnedHeight: CGFloat {
         return 400
     }
     
-    /// Returns: `400`.
     var preferredPanelPinnedWidth: CGFloat {
         return 400
     }
     
-    /// Returns `false`.
     var shouldAdjustForKeyboard: Bool {
         return false
     }
     
-    /// `"×"`.
     var closeButtonTitle: String {
         return "×"
     }
     
-    /// `"×"`.
     var modalCloseButtonTitle: String {
         return "×"
     }

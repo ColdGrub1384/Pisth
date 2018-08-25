@@ -13,33 +13,27 @@
 open class GrassTheme: TerminalTheme {
     
     #if os(iOS)
-        /// Returns light.
         open override var keyboardAppearance: UIKeyboardAppearance {
             return .light
         }
     
-        /// Returns default.
         open override var toolbarStyle: UIBarStyle {
             return .default
         }
     #endif
     
-    /// Returns red.
     open override var selectionColor: Color? {
         return Color(red: 182/255, green: 73/255, blue: 38/255, alpha: 0.5)
     }
     
-    /// Returns green.
     open override var backgroundColor: Color? {
         return Color(red: 19/255, green: 129/255, blue: 61/255, alpha: 1)
     }
  
-    /// Returns a sort of yellow.
     open override var foregroundColor: Color? {
         return Color(red: 255/255, green: 240/255, blue: 165/255, alpha: 1)
     }
     
-    /// Returns a sort of red.
     open override var cursorColor: Color? {
         return Color(red: 142/255, green: 40/255, blue: 0, alpha: 1)
     }

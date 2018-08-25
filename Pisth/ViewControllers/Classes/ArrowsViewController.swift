@@ -18,9 +18,6 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     var helpLabel: UILabel!
     
     /// Send arrow to shell with given gesture.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender gesture.
     @objc func sendArrow(_ sender: UISwipeGestureRecognizer) {
         indicateArrow(withDirection: sender.direction)
         sendArrow(withDirection: sender.direction)
@@ -76,7 +73,6 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     
     // MARK: - View controller
     
-    /// Setup views and singleton.
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -140,14 +136,12 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
         })
     }
     
-    /// Unset singleton.
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         ArrowsViewController.current = nil
     }
     
-    /// Resize views.
     override func viewDidLayoutSubviews() {
         helpLabel.center = view.center
         arrowLabel.center = view.center
@@ -155,13 +149,12 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     
     // MARK: - Popover presentation controller delegate
     
-    /// - Returns: UIModalPresentationStyle.none
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
     
     // MARK: - Static
     
-    /// Current Arrows view controller opened.
+    /// Current Arrows view controller visible.
     static var current: ArrowsViewController?
 }

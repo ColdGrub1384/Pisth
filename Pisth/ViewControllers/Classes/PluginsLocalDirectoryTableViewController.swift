@@ -28,7 +28,6 @@ class PluginsLocalDirectoryCollectionViewController: LocalDirectoryCollectionVie
     
     // MARK: - Table view data source
     
-    /// Disable files that are not plugins.
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
@@ -51,7 +50,6 @@ class PluginsLocalDirectoryCollectionViewController: LocalDirectoryCollectionVie
     
     // MARK: - Table view delegate
     
-    /// Do nothing if the selected file is not a plugin.
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         var isDir: ObjCBool = false

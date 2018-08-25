@@ -402,7 +402,6 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - View controller
     
-    /// Go to typed directory.
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.go(to: fieldEditor.string)
@@ -410,7 +409,6 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         return true
     }
     
-    /// Fetch files and setup `outlineView`.
     override func viewDidAppear() {
         super.viewDidAppear()
         
@@ -427,22 +425,18 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - Outline view data source
     
-    /// - Returns: The file for given index.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         return directoryContents[index]
     }
     
-    /// - Returns: `false`.
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return false
     }
     
-    /// - Returns: The count of `directoryContents`.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         return directoryContents.count
     }
     
-    /// - Returns: `65`.
     func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
         return 65
     }
@@ -460,7 +454,6 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
         return nil
     }
     
-    /// Setup view.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         
         if let file = item as? NMSFTPFile {
@@ -492,12 +485,10 @@ class DirectoryViewController: NSViewController, NSOutlineViewDataSource, NSOutl
     
     // MARK: - Dragging destination
     
-    /// - Returns: `.copy`.
     func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         return .copy
     }
     
-    /// Upload files.
     func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         
         let dirVC = self

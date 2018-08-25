@@ -11,12 +11,10 @@ import WebKit
 /// Web view used to display the content for the terminal.
 class TerminalWebView: WKWebView {
     
-    /// - Returns: `false.`
     override func becomeFirstResponder() -> Bool {
         return false
     }
     
-    /// - Returns: `false.`
     override var canBecomeFirstResponder: Bool {
         return false
     }

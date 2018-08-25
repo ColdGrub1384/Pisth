@@ -43,9 +43,6 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     /// Dismiss `self` or `navigationController`.`
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @objc func done(_ sender: Any) {
         if let navVC = navigationController {
             navVC.dismiss(animated: true, completion: nil)
@@ -56,7 +53,6 @@ class GitBranchesTableViewController: UITableViewController {
     
     // MARK: - View controller
     
-    /// List branches at Git repo.
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,7 +73,6 @@ class GitBranchesTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    /// Setup `navigationController`.
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -89,17 +84,11 @@ class GitBranchesTableViewController: UITableViewController {
     // MARK: - Git Actions
     
     /// Git fetch
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func fetch(_ sender: Any) {
         launch(command: "git -C '\(repoPath!)' fetch", withTitle: "Fetch")
     }
     
     /// Git pull
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func pull(_ sender: Any) {
         let remotesVC = UIViewController.gitRemoteBranches
         remotesVC.repoPath = repoPath
@@ -118,17 +107,11 @@ class GitBranchesTableViewController: UITableViewController {
     }
     
     /// Git commit
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func commit(_ sender: Any) {
         launch(command: "read -ep \"\(Localizable.Git.commitMessage) \" msg; git -C '\(repoPath!)' add .; git -C '\(repoPath!)' commit -m \"$msg\"", withTitle: "Commit")
     }
     
     /// Git push.
-    ///
-    /// - Parameters:
-    ///     - sender: Sender object.
     @IBAction func push(_ sender: Any) {
         let remotesVC = UIViewController.gitRemoteBranches
         remotesVC.repoPath = repoPath
@@ -148,17 +131,14 @@ class GitBranchesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    /// - Returns: `1`.
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    /// - Returns: count of `branches`.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return branches.count
     }
 
-    /// - Returns: An `UITableViewCell` with title as branch name.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "branch", for: indexPath)
 
@@ -171,15 +151,12 @@ class GitBranchesTableViewController: UITableViewController {
         return cell
     }
 
-    /// - Returns: `87`.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
     }
     
-    
     // MARK: - Table view delegate
 
-    /// View commits for selected branch.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let handler = selectionHandler {

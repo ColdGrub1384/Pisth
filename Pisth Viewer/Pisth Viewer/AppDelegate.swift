@@ -52,22 +52,18 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// View displaying near devices.
     @IBOutlet weak var outlineView: NSOutlineView!
     
-    /// - Returns: Count of `devices`.
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         return devices.count
     }
     
-    /// - Returns: `false`.
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         return false
     }
     
-    /// - Returns device for given index.
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         return devices[index]
     }
     
-    /// - Returns: The header view if the item is the first or a cell displaying the peer display name.
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         guard let peerID = item as? MCPeerID else {
             return nil
@@ -91,13 +87,11 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// Invite peer for selected row.
     func outlineViewSelectionDidChange(_ notification: Notification) {
         print(outlineView.selectedRow)
         mcNearbyServiceBrowser.invitePeer(devices[outlineView.selectedRow], to: mcSession, withContext: nil, timeout: 10)
     }
     
-    /// Disable selection for header.
     func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
         return ((item as? MCPeerID) != devices[0])
     }
@@ -114,7 +108,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     /// Multipeer connectivity browser used to browser nearby devices.
     var mcNearbyServiceBrowser: MCNearbyServiceBrowser!
     
-    /// Clear the terminal if the state is connected.
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         print("Changed state!")
         
@@ -125,7 +118,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// Resize window for received size and display received message.
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
         NSKeyedUnarchiver.setClass(TerminalInfo.self, forClassName: "TerminalInfo")
@@ -155,29 +147,24 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
         }
     }
     
-    /// Do nothing.
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         print("Received stream")
     }
     
-    /// Do nothing.
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
         print("Start receiving resource")
     }
     
-    /// Do nothing.
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         print("Finish receiving resource")
     }
     
-    /// Display found peer.
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         devices.append(peerID)
         outlineView.reloadData()
         print(devices)
     }
     
-    /// Hide lost peer.
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         if let index = devices.index(of: peerID) {
             devices.remove(at: index)
@@ -203,7 +190,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     @IBOutlet weak var webView: WKWebView!
     
     
-    /// Display help message.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         showHelpMessage()
         webView.evaluateJavaScript("document.body.style.backgroundColor = '#000000'", completionHandler: nil)
@@ -213,7 +199,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     
     // MARK: - App delegate
     
-    /// Setup browser and check for updates.
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         guard let terminal = Bundle.terminal.url(forResource: "terminal", withExtension: "html") else {
@@ -328,7 +313,6 @@ class PisthViewerAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate,
     
     // MARK: - Window delegate
     
-    /// Exit app.
     func windowWillClose(_ notification: Notification) {
         exit(0)
     }

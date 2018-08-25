@@ -22,7 +22,6 @@ class SourceControlTableViewController: UITableViewController {
     
     /// MARK: - View controller
     
-    /// Setup View controller.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +30,6 @@ class SourceControlTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    /// `UITableViewController`'s `tableView(_:, didSelectRowAt:)`.
-    ///
-    /// Open remotes or local branches.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             performSegue(withIdentifier: "local", sender: nil)
@@ -44,9 +40,6 @@ class SourceControlTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    /// `UIViewController`'s `prepare(for:, sender:)`.
-    ///
-    /// Set `repoPath` value for opened View controller.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let remotesVC = segue.destination as? GitRemotesTableViewController { // Open remotes
             remotesVC.repoPath = repoPath
