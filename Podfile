@@ -19,4 +19,5 @@ target 'Pisth' do
   pod 'ActionSheetPicker-3.0'
   pod 'Firebase/Core'
   pod 'PanelKit'
+  pod 'WhatsNew'
 end

@@ -12,6 +12,7 @@ import Pisth_Shared
 import Firebase
 import Pisth_API
 import UserNotifications
+import WhatsNew
 
 /// The app's delegate.
 @UIApplicationMain
@@ -262,6 +263,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         // Request app review
         ReviewHelper.shared.launches += 1
         ReviewHelper.shared.requestReview()
+        
+        // News
+        let whatsNew = WhatsNewViewController(items: Localizable.WhatsNewViewController.features)
+        whatsNew.buttonBackgroundColor = window?.tintColor ?? whatsNew.buttonBackgroundColor
+        whatsNew.buttonTextColor = .white
+        whatsNew.buttonText = Localizable.continue
+        whatsNew.titleText = Localizable.WhatsNewViewController.title
+        if let vc = window?.rootViewController {
+            #if DEBUG
+            vc.present(whatsNew, animated: true, completion: nil)
+            #else
+            whatsNew.presentIfNeeded(on: vc)
+            #endif
+        }
         
         return true
     }

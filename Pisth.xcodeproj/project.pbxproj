@@ -133,6 +133,7 @@
 		C9CB27F320D5C22B00290DBE /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9CB27F620D5C23500290DBE /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */; };
 		C9CB27F820D5E0D700290DBE /* ConnectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */; };
+		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
 		C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
@@ -344,6 +345,7 @@
 		C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoViewController.swift; sourceTree = "<group>"; };
+		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
 		C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
 				3A7C919A2044972C006E0434 /* GoogleService-Info.plist */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
+				C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */,
 				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
 				3AEF1119201115850089389E /* empty */,
 			);
@@ -916,6 +919,7 @@
 				3AD7E0582049E8CD00834D59 /* arch.png in Resources */,
 				3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */,
 				3AD7E0592049E8CF00834D59 /* centos.png in Resources */,
+				C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */,
 				3AD7E05D2049E8D500834D59 /* linux.png in Resources */,
 				C9BD2856210A353F00244AAF /* Localizable.strings in Resources */,
 				3AD7E05B2049E8D200834D59 /* debian.png in Resources */,
@@ -982,6 +986,7 @@
 				"${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework",
 				"${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip/Zip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -994,6 +999,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMSSH.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNew.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

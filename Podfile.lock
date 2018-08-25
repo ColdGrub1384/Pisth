@@ -25,6 +25,7 @@ PODS:
   - NMSSH (2.2.8)
   - PanelKit (2.0.1)
   - SwiftKeychainWrapper (3.0.1)
+  - WhatsNew (0.4.3)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - NMSSH
   - PanelKit
   - SwiftKeychainWrapper
+  - WhatsNew
   - Zip
 
 SPEC REPOS:
@@ -51,6 +53,7 @@ SPEC REPOS:
     - NMSSH
     - PanelKit
     - SwiftKeychainWrapper
+    - WhatsNew
     - Zip
 
 SPEC CHECKSUMS:
@@ -66,8 +69,9 @@ SPEC CHECKSUMS:
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
   PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  WhatsNew: ddf224a0ac4f5fc32deb15188c820ccc625f4929
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: f8482abc6c6e0760906b1245e3c0a87d741bf6a8
+PODFILE CHECKSUM: fe500ebf629df0a37133b1340d57b088da3b8068
 
 COCOAPODS: 1.5.2

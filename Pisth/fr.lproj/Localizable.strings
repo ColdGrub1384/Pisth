@@ -151,6 +151,9 @@
 /* Passphrase for key placeholder */
 "connection.passphrase" = "Mot de passe pour les clées";
 
+/* Continue */
+"continue" = "Continuer";
+
 /* Copying */
 "copying" = "Copie";
 
@@ -426,6 +429,12 @@
 
 /* Uploading */
 "uploading" = "Téléversement";
+
+/* Title for View controller displaying new update features. */
+"whatsNew.title" = "Nouveautés";
+
+/* All new features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
+"whatsNew.features" = "Globe::Nouvelle langues::Pisth supporte maintenant le français et l'español.|Redesign::Redesign::L'app a été redesignée avec une meilleure expérience pour iPad et les icônes des fichiers sont celles du système.|Bonjour::Bonjour::Trouvez des appareils dans le réseau.|Keychain::Clées SSH::Utilisez vos clées privées et/ou publique.";
 
 /* Yes */
 "yes" = "Oui";

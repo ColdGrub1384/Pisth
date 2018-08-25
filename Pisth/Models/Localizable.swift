@@ -6,6 +6,7 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import Foundation
+import WhatsNew
 
 public class Static {
     private init() {}
@@ -24,6 +25,9 @@ class Localizable: Static {
     
     /// No
     static let no = NSLocalizedString("no", comment: "No")
+    
+    /// Continue
+    static let `continue` = NSLocalizedString("continue", comment: "Continue")
     
     /// Cancel
     static let cancel = NSLocalizedString("cancel", comment: "Cancel")
@@ -47,6 +51,27 @@ class Localizable: Static {
     static let errorSavingFile = NSLocalizedString("errorSavingFile", comment: "Title for the alert shown when there is an error saving the file.")
     
     // MARK: - Other
+    
+    class WhatsNewViewController: Static {
+        
+        /// Title for View controller displaying new update features.
+        static let title = NSLocalizedString("whatsNew.title", comment: "Title for View controller displaying new update features.")
+        
+        /// All new features.
+        ///
+        /// Formated as: `"Image Name::Title::Subtitle|Image Name::Title::Subtitle"`
+        static var features: [WhatsNewItem] {
+            var items = [WhatsNewItem]()
+            for component in NSLocalizedString("whatsNew.features", comment: "All new features by title.`Formated as: \"Image Name::Title::Subtitle|Image Name::Title::Subtitle\"").components(separatedBy: "|") {
+                if component.components(separatedBy: "::").count < 3 {
+                    items.append(WhatsNewItem.text(title: component.components(separatedBy: "::")[0], subtitle: component.components(separatedBy: "::")[1]))
+                } else {
+                    items.append(WhatsNewItem.image(title: component.components(separatedBy: "::")[1], subtitle: component.components(separatedBy: "::")[2], image: UIImage(imageLiteralResourceName: component.components(separatedBy: "::")[0])))
+                }
+            }
+            return items
+        }
+    }
     
     class ArrowsViewControllers: Static {
         
