@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DF63FAF8F46B7CEA95CAF6241B0414C5"
+               BlueprintIdentifier = "0143E308DE729F2209BB6A3FBD8025BA"
                BlueprintName = "ActionSheetPicker-3.0"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "ActionSheetPicker-3.0.framework">

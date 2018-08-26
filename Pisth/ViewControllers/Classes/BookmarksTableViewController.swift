@@ -92,9 +92,16 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
-        navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
+        if !isShell {
+            navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
+        } else {
+            navigationItem.setLeftBarButtonItems([addButton], animated: true)
+        }
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
+        if isShell {
+            tableView.backgroundColor = UIColor(named: "ShellBackground")
+        }
         
         // Search
         searchController = UISearchController(searchResultsController: nil)
@@ -121,6 +128,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         
         tableView.reloadData()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if !isShell {
+            return .default
+        } else {
+            return .lightContent
+        }
     }
     
     // MARK: - Table view data source
@@ -174,6 +189,10 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "bookmark")
         cell.backgroundColor = .clear
+        if isShell {
+            cell.textLabel?.textColor = .white
+            cell.detailTextLabel?.textColor = .white
+        }
         
         // Connections
         if indexPath.section == 0 {
@@ -276,7 +295,11 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         AppDelegate.shared.navigationController.setNavigationBarHidden(false, animated: true)
-        AppDelegate.shared.navigationController.navigationBar.barStyle = .default
+        if !isShell {
+            AppDelegate.shared.navigationController.navigationBar.barStyle = .default
+        } else {
+            AppDelegate.shared.navigationController.navigationBar.barStyle = .black
+        }
         AppDelegate.shared.navigationController.navigationBar.isTranslucent = true
         
         if indexPath.section == 0 { // Open connection
@@ -568,7 +591,19 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     // MARK: - Net service delegate
     
     func netServiceDidResolveAddress(_ sender: NetService) {
-        guard let hostname = sender.hostName, let url = URL(string: "sftp://\(hostname):\(sender.port)") else {
+        
+        guard let hostname = sender.hostName else {
+            return
+        }
+        
+        var url_: URL?
+        if !isShell {
+             url_ = URL(string: "sftp://\(hostname):\(sender.port)")
+        } else {
+            url_ = URL(string: "ssh://\(hostname):\(sender.port)")
+        }
+        
+        guard let url = url_ else {
             return
         }
         _ = AppDelegate.shared.application(UIApplication.shared, open: url, options: [:])

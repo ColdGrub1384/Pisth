@@ -631,7 +631,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.viewDidDisappear(animated)
         
         mcNearbyServiceAdvertiser.stopAdvertisingPeer()
-        navigationController_?.navigationBar.barStyle = .default
+        if !isShell {
+            navigationController_?.navigationBar.barStyle = .default
+        } else {
+            navigationController_?.navigationBar.barStyle = .black
+        }
         navigationController_?.view.backgroundColor = .white
     }
     

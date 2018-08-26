@@ -63,6 +63,35 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isShell {
+            useSFTP?.isOn = false
+            navigationController?.navigationBar.barStyle = .black
+            tableView.backgroundColor = UIColor(named: "ShellBackground")
+            for cell in tableView.visibleCells {
+                cell.backgroundColor = UIColor(named: "ShellBackground")
+                for view in cell.contentView.subviews {
+                    if let label = view as? UILabel {
+                        label.textColor = .white
+                    } else if let textField = view as? UITextField {
+                        textField.textColor = .white
+                    }
+                }
+            }
+            tableView.tableFooterView?.backgroundColor = tableView.backgroundColor
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isShell && indexPath.row == 5 {
+            return 0
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
     // MARK: - Document picker delegate
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {

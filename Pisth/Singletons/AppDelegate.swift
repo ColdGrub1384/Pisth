@@ -14,6 +14,11 @@ import Pisth_API
 import UserNotifications
 import WhatsNew
 
+/// Returns `true` if the app was built as the free version containing only the Shell. Use this boolean to limit functionalities.
+var isShell: Bool {
+    return ((Bundle.main.infoDictionary?["Is Shell"] as? Bool) == true)
+}
+
 /// The app's delegate.
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryCollectionViewControllerStaticDelegate, UISplitViewControllerDelegate {
@@ -269,7 +274,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         whatsNew.buttonTextColor = .white
         whatsNew.buttonText = Localizable.continue
         whatsNew.titleText = Localizable.WhatsNewViewController.title
-        if let vc = window?.rootViewController {
+        if let vc = window?.rootViewController, !isShell {
             #if DEBUG
             vc.present(whatsNew, animated: true, completion: nil)
             #else

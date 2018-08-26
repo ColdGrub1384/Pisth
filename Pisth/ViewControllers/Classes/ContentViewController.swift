@@ -88,7 +88,18 @@ class ContentViewController: UIViewController, PanelManager {
         
         // Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
         
-        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
+        var defaultStyle: UIStatusBarStyle
+        if !isShell {
+            defaultStyle = .default
+        } else {
+            defaultStyle = .lightContent
+            
+            guard !(presentedViewController is UIAlertController) else {
+                return defaultStyle
+            }
+        }
+        
+        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
     }
     
     // MARK: - Panel manager

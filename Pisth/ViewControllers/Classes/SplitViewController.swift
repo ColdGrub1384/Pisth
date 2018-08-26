@@ -61,14 +61,24 @@ class SplitViewController: UISplitViewController {
         bookmarksVC.modalPresentationStyle = .overCurrentContext
         bookmarksVC.view.backgroundColor = .clear
         bookmarksVC.tableView.backgroundColor = .clear
-        bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        if !isShell {
+            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        } else {
+            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        }
         let navigationController = UINavigationController(rootViewController: bookmarksVC)
         navigationController.navigationBar.prefersLargeTitles = true
+        if isShell {
+            navigationController.navigationBar.barStyle = .black
+        }
         
         // Setup Split view controller
         navigationController_ = navigationController
         detailNavigationController = UINavigationController(rootViewController: BookmarksTableViewController())
         detailNavigationController.navigationBar.prefersLargeTitles = true
+        if isShell {
+            detailNavigationController.navigationBar.barStyle = .black
+        }
         load()
         AppDelegate.shared.window?.rootViewController = UIViewController()
         AppDelegate.shared.navigationController = detailNavigationController

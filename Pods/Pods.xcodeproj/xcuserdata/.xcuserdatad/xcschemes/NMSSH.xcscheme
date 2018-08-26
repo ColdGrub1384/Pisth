@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C60C8CD03F382A024FE68B270D2A4647"
+               BlueprintIdentifier = "D9A0AFD226AC37D5711519FB49916E18"
                BlueprintName = "NMSSH"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "NMSSH.framework">
