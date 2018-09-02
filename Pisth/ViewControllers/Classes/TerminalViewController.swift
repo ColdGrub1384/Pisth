@@ -295,6 +295,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Show plain output and allow selection.
     @objc func selectionMode() {
         selectionTextView.isHidden = false
+        view.backgroundColor = selectionTextView.backbackgroundColor
         selectionTextView.text = ""
         webView.isHidden = true
         _ = resignFirstResponder()
@@ -316,6 +317,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @objc func insertMode() {
         selectionTextView.isHidden = true
         webView.isHidden = false
+        if theme.keyboardAppearance == .dark {
+            view.backgroundColor = .black
+        } else {
+            view.backgroundColor = .white
+        }
         _ = becomeFirstResponder()
     }
     
