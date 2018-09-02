@@ -67,7 +67,9 @@ class SplitViewController: UISplitViewController {
             bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         }
         let navigationController = UINavigationController(rootViewController: bookmarksVC)
-        navigationController.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            navigationController.navigationBar.prefersLargeTitles = true
+        }
         if isShell {
             navigationController.navigationBar.barStyle = .black
         }
@@ -75,7 +77,9 @@ class SplitViewController: UISplitViewController {
         // Setup Split view controller
         navigationController_ = navigationController
         detailNavigationController = UINavigationController(rootViewController: BookmarksTableViewController())
-        detailNavigationController.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            detailNavigationController.navigationBar.prefersLargeTitles = true
+        }
         if isShell {
             detailNavigationController.navigationBar.barStyle = .black
         }
@@ -88,10 +92,12 @@ class SplitViewController: UISplitViewController {
         window.tintColor = UIApplication.shared.keyWindow?.tintColor
         window.backgroundColor = .white
         window.rootViewController = ContentViewController.shared
-        if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
-            
-            window.tintColor = tint
-            UISwitch.appearance().onTintColor = tint
+        if #available(iOS 11.0, *) {
+            if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
+                
+                window.tintColor = tint
+                UISwitch.appearance().onTintColor = tint
+            }
         }
         window.makeKeyAndVisible()
         AppDelegate.shared.window = window

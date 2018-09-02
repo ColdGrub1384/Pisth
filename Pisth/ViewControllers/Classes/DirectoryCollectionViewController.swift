@@ -320,7 +320,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 title = titleComponents[titleComponents.count-2]
             }
             
-            navigationItem.largeTitleDisplayMode = .never
+            if #available(iOS 11.0, *) {
+                navigationItem.largeTitleDisplayMode = .never
+            }
             
             // TableView cells
             collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
@@ -330,9 +332,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             collectionView?.refreshControl = UIRefreshControl()
             collectionView?.backgroundView = nil
             clearsSelectionOnViewWillAppear = false
-            collectionView?.dropDelegate = self
-            collectionView?.dragDelegate = self
-            collectionView?.dragInteractionEnabled = true
+            if #available(iOS 11.0, *) {
+                collectionView?.dropDelegate = self
+                collectionView?.dragDelegate = self
+                collectionView?.dragInteractionEnabled = true
+            }
             
             // Header
             let header = UIView.browserHeader
@@ -1052,7 +1056,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.import, style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-            picker.allowsMultipleSelection = true
+            if #available(iOS 11.0, *) {
+                picker.allowsMultipleSelection = true
+            }
             picker.delegate = self
             
             self.present(picker, animated: true, completion: nil)
@@ -1507,6 +1513,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view drop delegate
         
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         
         // Move dropped file to destination folder.
@@ -1620,6 +1627,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
     }
     
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         
         guard let _ = session.localDragSession?.items.first?.localObject as? NMSFTPFile else {
@@ -1656,6 +1664,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     // MARK: - Collection view drag delegate
     
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? FileCollectionViewCell else {
@@ -1692,12 +1701,14 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return [item]
     }
     
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         if let term = ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController {
             term.view.addSubview(term.webView)
         }
     }
     
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         
         guard let files = files else {

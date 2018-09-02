@@ -91,7 +91,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView.autocapitalizationType = UITextAutocapitalizationType.none
         textView.inputAccessoryView = toolbar
         textView.font = textStorage.highlightr.theme.codeFont
-        textView.smartQuotesType = .no
+        if #available(iOS 11.0, *) {
+            textView.smartQuotesType = .no
+        }
         setTextColor()
         placeholderView.addSubview(textView)
     }
@@ -116,7 +118,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         setupTextView()
         
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

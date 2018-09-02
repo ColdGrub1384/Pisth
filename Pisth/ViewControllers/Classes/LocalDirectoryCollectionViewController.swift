@@ -183,7 +183,9 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.import, style: .default, handler: { (_) in // Upload file from browser
             let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-            picker.allowsMultipleSelection = true
+            if #available(iOS 11.0, *) {
+                picker.allowsMultipleSelection = true
+            }
             picker.delegate = self
             
             self.present(picker, animated: true, completion: nil)
@@ -393,7 +395,9 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         
         title = directory.lastPathComponent
         
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
         collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
@@ -401,7 +405,9 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
         collectionView?.backgroundColor = .white
         clearsSelectionOnViewWillAppear = false
-        collectionView?.dragDelegate = self
+        if #available(iOS 11.0, *) {
+            collectionView?.dragDelegate = self
+        }
         
         // Header
         let header = UIView.browserHeader
@@ -675,6 +681,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     // MARK: - Collection view drag delegate
     
+    @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
         let file = files[indexPath.row]

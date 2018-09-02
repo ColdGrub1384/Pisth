@@ -132,6 +132,7 @@
 		C9CB27F820D5E0D700290DBE /* ConnectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */; };
 		C9D6EC782133025900A81D88 /* LaunchScreenDark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */; };
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
+		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
 		C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
@@ -344,6 +345,7 @@
 		C9D6EC752133022600A81D88 /* InfoShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoShell.plist; sourceTree = "<group>"; };
 		C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenDark.storyboard; sourceTree = "<group>"; };
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
+		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
 		C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
 				C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */,
 				C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */,
+				C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1035,6 +1038,7 @@
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
+				C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */,
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift in Sources */,
 				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
 				3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */,
@@ -1413,7 +1417,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
@@ -1437,7 +1441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y96PL6G497;
 				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
@@ -1520,7 +1524,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
 				);
 				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;

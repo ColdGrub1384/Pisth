@@ -48,7 +48,9 @@ class ContentViewController: UIViewController, PanelManager {
                 if self.terminalPanel.canFloat {
                     self.toggleFloatStatus(for: self.terminalPanel)
                 }
-                terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+                if #available(iOS 11.0, *) {
+                    terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+                }
             }
         }
     }
@@ -78,7 +80,9 @@ class ContentViewController: UIViewController, PanelManager {
             if directoryPanel.canFloat {
                 self.toggleFloatStatus(for: directoryPanel)
             }
-            browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+            if #available(iOS 11.0, *) {
+                browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+            }
         }
     }
     

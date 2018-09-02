@@ -36,14 +36,18 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     
     /// Import public key.
     @IBAction func importPublicKey(_ sender: Any) {
-        publicKeyPicker.allowsMultipleSelection = false
+        if #available(iOS 11.0, *) {
+            publicKeyPicker.allowsMultipleSelection = false
+        }
         publicKeyPicker.delegate = self
         present(publicKeyPicker, animated: true, completion: nil)
     }
     
     /// Import private key.
     @IBAction func importPrivateKey(_ sender: Any) {
-        privateKeyPicker.allowsMultipleSelection = false
+        if #available(iOS 11.0, *) {
+            privateKeyPicker.allowsMultipleSelection = false
+        }
         privateKeyPicker.delegate = self
         present(privateKeyPicker, animated: true, completion: nil)
     }
@@ -69,9 +73,13 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
         if isShell {
             useSFTP?.isOn = false
             navigationController?.navigationBar.barStyle = .black
-            tableView.backgroundColor = UIColor(named: "ShellBackground")
+            if #available(iOS 11.0, *) {
+                tableView.backgroundColor = UIColor(named: "ShellBackground")
+            }
             for cell in tableView.visibleCells {
-                cell.backgroundColor = UIColor(named: "ShellBackground")
+                if #available(iOS 11.0, *) {
+                    cell.backgroundColor = UIColor(named: "ShellBackground")
+                }
                 for view in cell.contentView.subviews {
                     if let label = view as? UILabel {
                         label.textColor = .white

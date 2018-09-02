@@ -100,14 +100,18 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
         if isShell {
-            tableView.backgroundColor = UIColor(named: "ShellBackground")
+            if #available(iOS 11.0, *) {
+                tableView.backgroundColor = UIColor(named: "ShellBackground")
+            }
         }
         
         // Search
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
-        navigationItem.searchController = searchController
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        }
         
         // Multipeer connectivity
         peerID = MCPeerID(displayName: UIDevice.current.name)

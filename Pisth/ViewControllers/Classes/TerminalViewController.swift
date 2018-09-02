@@ -285,17 +285,19 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         reloadInputViews()
         
         
-        if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
-            toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
-        } else {
-            toolbar.frame.origin.y = 0
+        if #available(iOS 11.0, *) {
+            if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
+                toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
+            } else {
+                toolbar.frame.origin.y = 0
+            }
         }
     }
     
     /// Show plain output and allow selection.
     @objc func selectionMode() {
         selectionTextView.isHidden = false
-        view.backgroundColor = selectionTextView.backbackgroundColor
+        view.backgroundColor = selectionTextView.backgroundColor
         selectionTextView.text = ""
         webView.isHidden = true
         _ = resignFirstResponder()
@@ -577,7 +579,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.toggleKeyboard = toggleKeyboard
         webView.showMenu = showMenu(_:)
         
-        view.addInteraction(UIDropInteraction(delegate: self))
+        if #available(iOS 11.0, *) {
+            view.addInteraction(UIDropInteraction(delegate: self))
+        }
         
         // Create selection Textview
         selectionTextView = UITextView(frame: view.frame)
@@ -590,10 +594,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             selectionTextView.leadingAnchor.constraint(equalTo: webView.layoutMarginsGuide.leadingAnchor),
             selectionTextView.trailingAnchor.constraint(equalTo: webView.layoutMarginsGuide.trailingAnchor)
         ])
-        NSLayoutConstraint.activate([
-            selectionTextView.topAnchor.constraint(equalToSystemSpacingBelow: webView.layoutMarginsGuide.topAnchor, multiplier: 1.0),
-            webView.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: selectionTextView.bottomAnchor, multiplier: 1.0)
-        ])
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([
+                selectionTextView.topAnchor.constraint(equalToSystemSpacingBelow: webView.layoutMarginsGuide.topAnchor, multiplier: 1.0),
+                webView.layoutMarginsGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: selectionTextView.bottomAnchor, multiplier: 1.0)
+            ])
+        }
         
         if readOnly {
             toolbarItems?.remove(at: 1)
@@ -626,7 +632,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if pureMode {
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
         }
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
         
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
         
@@ -762,7 +770,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             ArrowsViewController.current?.helpLabel.text = Localizable.ArrowsViewControllers.helpTextScroll
             
             for gesture in ArrowsViewController.current!.view.gestureRecognizers! {
-                if gesture.name == "arrow" {
+                if gesture.gestureName == "arrow" {
                     gesture.isEnabled = false
                 } else {
                     webView.addGestureRecognizer(gesture)
@@ -968,8 +976,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     var autocorrectionType: UITextAutocorrectionType = .no
     
-    var smartQuotesType: UITextSmartQuotesType = .no
-    
+    @available(iOS 11.0, *)
+    var smartQuotesType: UITextSmartQuotesType {
+        get {
+            return .no
+        }
+        
+        set {
+            print("`smartQuotesType` setter not implemented")
+        }
+    }
+
     // MARK: Web kit navigation delegate
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -1259,6 +1276,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - Drop interaction delegate
     
+    @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         
         if session.localDragSession?.items.first?.localObject is NMSFTPFile {
@@ -1282,6 +1300,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
        _ = becomeFirstResponder()
     }
     
+    @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
         let canHandle = (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
         if canHandle {
@@ -1290,10 +1309,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return canHandle
     }
 
+    @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
     }
     
+    @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
         view.addSubview(webView)
     }

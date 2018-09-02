@@ -75,7 +75,9 @@ class ErrorViewController: UIViewController {
         
         errorView.clipsToBounds = true
         errorView.layer.cornerRadius = 20
-        errorView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        if #available(iOS 11.0, *) {
+            errorView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

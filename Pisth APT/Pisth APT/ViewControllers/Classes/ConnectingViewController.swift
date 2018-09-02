@@ -25,7 +25,9 @@ class ConnectingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        osLogo.accessibilityIgnoresInvertColors = true
+        if #available(iOS 11.0, *) {
+            osLogo.accessibilityIgnoresInvertColors = true
+        }
         
         if let connection = connection {
             if let os = connection.os?.lowercased() {

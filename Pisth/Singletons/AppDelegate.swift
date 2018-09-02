@@ -454,10 +454,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 
                 let bookmarksVC = BookmarksTableViewController()
                 let navVC = UINavigationController(rootViewController: bookmarksVC)
-                navVC.navigationBar.prefersLargeTitles = true
+                if #available(iOS 11.0, *) {
+                    navVC.navigationBar.prefersLargeTitles = true
+                }
                 window?.rootViewController?.present(navVC, animated: true, completion: {
                     bookmarksVC.delegate = self
-                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    if #available(iOS 11.0, *) {
+                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    }
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.close))], animated: true)
                     bookmarksVC.navigationItem.prompt = Localizable.AppDelegate.selectConnectionToUploadFile
@@ -498,10 +502,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 }
                 
                 let navVC = UINavigationController(rootViewController: bookmarksVC)
-                navVC.navigationBar.prefersLargeTitles = true
+                if #available(iOS 11.0, *) {
+                    navVC.navigationBar.prefersLargeTitles = true
+                }
                 navigationController.present(navVC, animated: true, completion: {
                     bookmarksVC.delegate = self
-                    bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    if #available(iOS 11.0, *) {
+                        bookmarksVC.navigationItem.largeTitleDisplayMode = .never
+                    }
                     bookmarksVC.navigationItem.setLeftBarButtonItems([], animated: true)
                     bookmarksVC.navigationItem.setRightBarButtonItems([UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.goToPreviousApp))], animated: true)
                     bookmarksVC.navigationItem.prompt = Localizable.AppDelegate.selectConnectionToExportFile

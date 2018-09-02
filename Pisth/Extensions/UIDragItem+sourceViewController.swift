@@ -9,6 +9,7 @@ import UIKit
 
 fileprivate var source: UIViewController?
 
+@available(iOS 11.0, *)
 extension UIDragItem {
     
     /// The view controller where the item is from.
