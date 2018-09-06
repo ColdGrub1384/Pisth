@@ -74,11 +74,11 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             useSFTP?.isOn = false
             navigationController?.navigationBar.barStyle = .black
             if #available(iOS 11.0, *) {
-                tableView.backgroundColor = UIColor(named: "ShellBackground")
+                tableView.backgroundColor = shellBackgroundColor
             }
             for cell in tableView.visibleCells {
                 if #available(iOS 11.0, *) {
-                    cell.backgroundColor = UIColor(named: "ShellBackground")
+                    cell.backgroundColor = shellBackgroundColor
                 }
                 for view in cell.contentView.subviews {
                     if let label = view as? UILabel {

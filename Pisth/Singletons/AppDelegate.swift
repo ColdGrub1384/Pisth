@@ -19,6 +19,9 @@ var isShell: Bool {
     return ((Bundle.main.infoDictionary?["Is Shell"] as? Bool) == true)
 }
 
+/// The global theme color to use in Pisth Shell.
+let shellBackgroundColor = UIColor(hexString: "#404040")
+
 /// The app's delegate.
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewControllerDelegate, BookmarksTableViewControllerDelegate, LocalDirectoryCollectionViewControllerStaticDelegate, UISplitViewControllerDelegate {

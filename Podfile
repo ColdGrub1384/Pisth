@@ -20,4 +20,5 @@ target 'Pisth' do
   pod 'Firebase/Core'
   pod 'PanelKit'
   pod 'WhatsNew'
+  pod 'ObjectUserDefaults'
 end

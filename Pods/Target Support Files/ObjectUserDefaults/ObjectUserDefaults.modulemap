@@ -1,0 +1,6 @@
+framework module ObjectUserDefaults {
+  umbrella header "ObjectUserDefaults-umbrella.h"
+
+  export *
+  module * { export * }
+}

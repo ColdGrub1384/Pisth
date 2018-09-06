@@ -101,7 +101,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
         if isShell {
             if #available(iOS 11.0, *) {
-                tableView.backgroundColor = UIColor(named: "ShellBackground")
+                tableView.backgroundColor = shellBackgroundColor
             }
         }
         

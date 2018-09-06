@@ -23,6 +23,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - NMSSH (2.2.8)
+  - ObjectUserDefaults (1.0)
   - PanelKit (2.0.1)
   - SwiftKeychainWrapper (3.0.1)
   - WhatsNew (0.4.3)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Highlightr
   - NMSSH
+  - ObjectUserDefaults
   - PanelKit
   - SwiftKeychainWrapper
   - WhatsNew
@@ -51,6 +53,7 @@ SPEC REPOS:
     - Highlightr
     - nanopb
     - NMSSH
+    - ObjectUserDefaults
     - PanelKit
     - SwiftKeychainWrapper
     - WhatsNew
@@ -67,11 +70,12 @@ SPEC CHECKSUMS:
   Highlightr: e68a91ed9067ef0a787b920dd9becbd9935c2b79
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
+  ObjectUserDefaults: 72b8d13aea15090168579b079a21cae312a1cefd
   PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   WhatsNew: ddf224a0ac4f5fc32deb15188c820ccc625f4929
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: fe500ebf629df0a37133b1340d57b088da3b8068
+PODFILE CHECKSUM: a393fd51d5870d3f882fa5995594e6d8c8c2a449
 
 COCOAPODS: 1.5.2
