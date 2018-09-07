@@ -78,13 +78,12 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// Toogle blinking cursor.
     @IBAction func toggleBlinkCursor(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: "blink")
-        UserDefaults.standard.synchronize()
+        UserKeys.blink.boolValue = sender.isOn
     }
     
     /// Display current blinking cursor setting
     func initBlinkCursorSetting() {
-        blinkCursorSwitch.isOn = UserDefaults.standard.bool(forKey: "blink")
+        blinkCursorSwitch.isOn = UserKeys.blink.boolValue
     }
     
     
@@ -95,13 +94,12 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// Toogle showing hidden files.
     @IBAction func toggleHiddenFiles(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: "hidden")
-        UserDefaults.standard.synchronize()
+        UserKeys.shouldHiddenFilesBeShown.boolValue = sender.isOn
     }
     
     /// Display current blinking cursor setting.
     func initShowHiddenFilesSetting() {
-        showHiddenFilesSwitch.isOn = UserDefaults.standard.bool(forKey: "hidden")
+        showHiddenFilesSwitch.isOn = UserKeys.shouldHiddenFilesBeShown.boolValue
     }
     
     
@@ -118,15 +116,13 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         guard BioMetricAuthenticator.canAuthenticate() else { return }
         
-        if !UserDefaults.standard.bool(forKey: "biometricAuth") {
-            UserDefaults.standard.set(true, forKey: "biometricAuth")
-            UserDefaults.standard.synchronize()
+        if !UserKeys.isBiometricAuthenticationEnabled.boolValue {
+            UserKeys.isBiometricAuthenticationEnabled.boolValue = true
         } else { // If biometric auth is enabled, authenticate before setting
             sender.isOn = true
             
             BioMetricAuthenticator.authenticateWithPasscode(reason: Localizable.Settings.authenticateToTurnOffAuthentication, success: {
-                UserDefaults.standard.set(false, forKey: "biometricAuth")
-                UserDefaults.standard.synchronize()
+                UserKeys.isBiometricAuthenticationEnabled.boolValue = false
                 sender.isOn = false
             }, failure: { (error) in
                 
@@ -142,7 +138,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// Display current biometric authentication setting.
     func initBiometricAuthenticationSetting() {
-        biometricAuthSwitch.isOn = UserDefaults.standard.bool(forKey: "biometricAuth")
+        biometricAuthSwitch.isOn = UserKeys.isBiometricAuthenticationEnabled.boolValue
         
         if !BioMetricAuthenticator.canAuthenticate() { // Only enable this setting if Biometric authentication is enabled
             biometricAuthSwitch.isEnabled = false
@@ -184,8 +180,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     /// Set text size as the sender's button text size.
     @IBAction func setTextSize(_ sender: UIButton) {
         
-        UserDefaults.standard.set(sender.titleLabel?.font.pointSize, forKey: "terminalTextSize")
-        UserDefaults.standard.synchronize()
+        UserKeys.terminalTextSize.value = sender.titleLabel?.font.pointSize
         
         let buttons = [px18, px17, px16, px15, px14, px13, px12]
         
@@ -206,7 +201,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
                 return
             }
             
-            if Int(size) == UserDefaults.standard.integer(forKey: "terminalTextSize") {
+            if Int(size) == UserKeys.terminalTextSize.integerValue {
                 
                 button?.isEnabled = false
                 
@@ -268,7 +263,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             return cell
         }
         
-        if title.text == UserDefaults.standard.string(forKey: "terminalTheme") {
+        if title.text == UserKeys.terminalTheme.stringValue {
             cell.viewWithTag(2)?.isHidden = false
         } else {
             cell.viewWithTag(2)?.isHidden = true
@@ -292,8 +287,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             return
         }
         
-        UserDefaults.standard.set(title.text, forKey: "terminalTheme")
-        UserDefaults.standard.synchronize()
+        UserKeys.terminalTheme.stringValue = title.text
         
         let termVC = (AppDelegate.shared.navigationController.visibleViewController as? TerminalViewController) ?? ContentViewController.shared?.terminalPanel?.contentViewController as? TerminalViewController
         termVC?.keyboardAppearance = theme.keyboardAppearance

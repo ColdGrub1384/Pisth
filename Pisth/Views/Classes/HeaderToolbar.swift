@@ -21,7 +21,7 @@ class HeaderToolbar: UIToolbar {
     
     /// `true` if list is enabled. Set before calling `switchLayout`.
     @objc var isListEnabled: Bool {
-        return UserDefaults.standard.bool(forKey: "list")
+        return UserKeys.areListViewsEnabled.boolValue
     }
     
     /// `true` if the view is already setup.
@@ -34,8 +34,7 @@ class HeaderToolbar: UIToolbar {
     }
     
     @IBAction private func switchLayout_(_ sender: UIButton) {
-        UserDefaults.standard.set(!isListEnabled, forKey: "list")
-        UserDefaults.standard.synchronize()
+        UserKeys.areListViewsEnabled.boolValue = !isListEnabled
         
         for header in HeaderToolbar.all {
             header.switchLayoutState()

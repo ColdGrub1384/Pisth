@@ -69,7 +69,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if self.ctrl_ {
                 ctrlKey.setTitleColor(.lightGray, for: .normal)
             } else {
-                if TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth"]?.toolbarStyle == .default {
+                if TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"]?.toolbarStyle == .default {
                     ctrlKey.setTitleColor(.black, for: .normal)
                 } else {
                     ctrlKey.setTitleColor(.white, for: .normal)
@@ -99,7 +99,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if UIAccessibility.isInvertColorsEnabled {
             return ProTheme()
         } else {
-            return TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!]!
+            return TerminalTheme.themes[UserKeys.terminalTheme.stringValue!]!
         }
     }
     
@@ -654,7 +654,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "terminalTheme")!], theme.toolbarStyle == .black {
+        if let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue!], theme.toolbarStyle == .black {
             return .lightContent
         }
         
@@ -899,7 +899,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
                     
                     // Send data to peer
-                    let info = TerminalInfo(message: message, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
+                    let info = TerminalInfo(message: message, themeName: UserKeys.terminalTheme.stringValue ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     if self.mcSession.connectedPeers.count > 0 {
@@ -991,12 +991,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        if UserDefaults.standard.bool(forKey: "blink") {
+        if UserKeys.blink.boolValue {
             webView.evaluateJavaScript("term.setOption('cursorBlink', true)", completionHandler: nil)
         }
-        
-        webView.evaluateJavaScript("term.setOption('fontSize', \(UserDefaults.standard.integer(forKey: "terminalTextSize")))", completionHandler: nil)
-        selectionTextView.font = selectionTextView.font?.withSize(CGFloat(UserDefaults.standard.integer(forKey: "terminalTextSize")))
+        webView.evaluateJavaScript("term.setOption('fontSize', \(UserKeys.terminalTextSize.integerValue))", completionHandler: nil)
+        selectionTextView.font = selectionTextView.font?.withSize(CGFloat(UserKeys.terminalTextSize.integerValue))
         
         (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
@@ -1217,7 +1216,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if !viewer {
                 DispatchQueue.main.async {
                     // Send data to peer
-                    let info = TerminalInfo(message: self.console, themeName: UserDefaults.standard.string(forKey: "terminalTheme") ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
+                    let info = TerminalInfo(message: self.console, themeName: UserKeys.terminalTheme.stringValue ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)])
                     NSKeyedArchiver.setClassName("TerminalInfo", for: TerminalInfo.self)
                     let data = NSKeyedArchiver.archivedData(withRootObject: info)
                     try? self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .reliable)

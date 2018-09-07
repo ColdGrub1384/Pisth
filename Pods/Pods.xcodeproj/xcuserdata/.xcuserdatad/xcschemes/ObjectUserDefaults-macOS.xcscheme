@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC6A6739D044209B6797B802B3246CDE"
-               BlueprintName = "ObjectUserDefaults"
+               BlueprintIdentifier = "42A7D778CC49D333743BA5E616916622"
+               BlueprintName = "ObjectUserDefaults-macOS"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "ObjectUserDefaults.framework">
+               BuildableName = "ObjectUserDefaults-macOS.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

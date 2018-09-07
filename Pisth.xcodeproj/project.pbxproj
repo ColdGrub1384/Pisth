@@ -87,6 +87,9 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
+		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
+		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
+		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
 		C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */ = {isa = PBXBuildFile; fileRef = C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
@@ -136,6 +139,7 @@
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
 		C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
+		DC58430070C076BEF19AEF4D /* Pods_Pisth_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
@@ -262,8 +266,14 @@
 		3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.beta.xcconfig"; sourceTree = "<group>"; };
 		6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82DD9C492FDC36F191BEE7D5 /* Pods-Pisth Mac.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.beta.xcconfig"; sourceTree = "<group>"; };
 		987F0B78640D7B7DED10C32C /* Pods-Pisth.shell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.shell.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.shell.xcconfig"; sourceTree = "<group>"; };
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F56A04B7E9093551D684A8D /* Pods-Pisth Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.release.xcconfig"; sourceTree = "<group>"; };
+		AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.shell.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.shell.xcconfig"; sourceTree = "<group>"; };
+		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
+		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
+		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +361,7 @@
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
+		F9E5A848F83ABDD6742B15FD /* Pods-Pisth Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +392,7 @@
 				C9B205B820D6CBBF00045F20 /* NMSSH.framework in Frameworks */,
 				C9CB27F620D5C23500290DBE /* Pisth_Terminal.framework in Frameworks */,
 				C9CB27F220D5C22B00290DBE /* Pisth_Shared.framework in Frameworks */,
+				DC58430070C076BEF19AEF4D /* Pods_Pisth_Mac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +406,10 @@
 				D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */,
 				59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */,
 				987F0B78640D7B7DED10C32C /* Pods-Pisth.shell.xcconfig */,
+				F9E5A848F83ABDD6742B15FD /* Pods-Pisth Mac.debug.xcconfig */,
+				9F56A04B7E9093551D684A8D /* Pods-Pisth Mac.release.xcconfig */,
+				AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */,
+				82DD9C492FDC36F191BEE7D5 /* Pods-Pisth Mac.beta.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -500,6 +516,8 @@
 				3A2258901FF6A850001B9710 /* Reachability.swift */,
 				3ADD28CE1FFBC27800977905 /* DirectoryAction.swift */,
 				3A397AF91FFD33DD00D46368 /* ConnectionResult.swift */,
+				C9213CFD2141E0C800DEDD6C /* Static.swift */,
+				C9213CFB2141E08E00DEDD6C /* UserKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -708,6 +726,7 @@
 				C9B205C020D70CD400045F20 /* FileObserver.swift */,
 				C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */,
 				C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */,
+				C9213D012141F54A00DEDD6C /* UserKeys.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -798,10 +817,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9CB27EE20D5BB9800290DBE /* Build configuration list for PBXNativeTarget "Pisth Mac" */;
 			buildPhases = (
+				7E4FC904FD803052194C5F2A /* [CP] Check Pods Manifest.lock */,
 				C9CB27D820D5BB9500290DBE /* Sources */,
 				C9CB27D920D5BB9500290DBE /* Frameworks */,
 				C9CB27DA20D5BB9500290DBE /* Resources */,
 				C9CB27F420D5C22D00290DBE /* Embed Frameworks */,
+				514C69E690C05D397CD98D97 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -964,6 +985,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		514C69E690C05D397CD98D97 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectUserDefaults.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E4FC904FD803052194C5F2A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pisth Mac-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F21CA456D2169C5D27312609 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -976,7 +1033,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults/ObjectUserDefaults.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS/ObjectUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework",
@@ -1053,12 +1110,14 @@
 				C9BE90552119028A000A61C8 /* isFilePDF.swift in Sources */,
 				C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */,
 				3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */,
+				C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */,
 				3AA117F11FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */,
 				C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */,
 				C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */,
 				3A843EED202A64030096632E /* ReviewHelper.swift in Sources */,
 				3A5888B1205C62540002F9E1 /* UIViewController.swift in Sources */,
+				C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */,
 				3ADD28CF1FFBC27800977905 /* DirectoryAction.swift in Sources */,
 				3A5888B3205C64CB0002F9E1 /* UIView.swift in Sources */,
 				3ACF9AC320408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift in Sources */,
@@ -1087,6 +1146,7 @@
 				C9CB27F020D5C12700290DBE /* Pisth.xcdatamodel in Sources */,
 				C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */,
 				C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */,
+				C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */,
 				C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */,
 				C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */,
 				C9B205C920D72FE300045F20 /* FilesOutlineView.swift in Sources */,
@@ -1556,6 +1616,7 @@
 		};
 		C959168E2113A1850073BCCE /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82DD9C492FDC36F191BEE7D5 /* Pods-Pisth Mac.beta.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1583,6 +1644,7 @@
 		};
 		C9CB27EC20D5BB9800290DBE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9E5A848F83ABDD6742B15FD /* Pods-Pisth Mac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1612,6 +1674,7 @@
 		};
 		C9CB27ED20D5BB9800290DBE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F56A04B7E9093551D684A8D /* Pods-Pisth Mac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1732,6 +1795,7 @@
 		};
 		C9D6EC6A2132FEDA00A81D88 /* Shell */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

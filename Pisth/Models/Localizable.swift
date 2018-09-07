@@ -8,10 +8,6 @@
 import Foundation
 import WhatsNew
 
-public class Static {
-    private init() {}
-}
-
 /// A class containing localizable strings used in code.
 class Localizable: Static {
     

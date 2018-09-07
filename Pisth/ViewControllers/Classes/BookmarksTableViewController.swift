@@ -412,7 +412,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             
             /// Open connection or ask for biometric authentication.
             func open() {
-                if UserDefaults.standard.bool(forKey: "biometricAuth") {
+                if UserKeys.isBiometricAuthenticationEnabled.boolValue {
                     BioMetricAuthenticator.authenticateWithBioMetrics(reason: Localizable.BookmarksTableViewController.authenticateToConnect, fallbackTitle: Localizable.BookmarksTableViewController.enterPassword, cancelTitle: nil, success: {
                         connect()
                     }, failure: { (error) in

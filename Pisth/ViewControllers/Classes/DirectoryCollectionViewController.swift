@@ -154,7 +154,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     /// Set layout selected by the user.
     func loadLayout() {
         var layout: UICollectionViewFlowLayout
-        if UserDefaults.standard.bool(forKey: "list") {
+        if UserKeys.areListViewsEnabled.boolValue {
             layout = DirectoryCollectionViewController.listLayout(forView: view)
         } else {
             layout = DirectoryCollectionViewController.gridLayout
@@ -289,7 +289,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
             self.allFiles = files
-            if !UserDefaults.standard.bool(forKey: "hidden") {
+            if !UserKeys.shouldHiddenFilesBeShown.boolValue {
                 for file in files ?? [] {
                     if file.filename.hasPrefix(".") {
                         guard let i = files?.index(of: file) else { break }
@@ -673,7 +673,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         guard ConnectionManager.shared.filesSession != nil else { return }
         var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
         self.allFiles = files
-        if !UserDefaults.standard.bool(forKey: "hidden") {
+        if !UserKeys.shouldHiddenFilesBeShown.boolValue {
             for file in files ?? [] {
                 if file.filename.hasPrefix(".") {
                     guard let i = files?.index(of: file) else { break }
@@ -1228,7 +1228,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell: FileCollectionViewCell
-        if UserDefaults.standard.bool(forKey: "list") {
+        if UserKeys.areListViewsEnabled.boolValue {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileList", for: indexPath) as! FileCollectionViewCell
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell

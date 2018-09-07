@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9E2F3276827795B3A7A8676273727E72"
+               BlueprintIdentifier = "76F083BE706E9658ECB21D6ECB97294E"
                BlueprintName = "Pods-Pisth"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "Pods-Pisth.framework">

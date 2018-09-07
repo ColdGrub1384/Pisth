@@ -85,7 +85,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         textView = UITextView(frame: placeholderView.bounds, textContainer: textContainer)
         textView.isScrollEnabled = false
         textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        textStorage.highlightr.setTheme(to: UserDefaults.standard.string(forKey: "editorTheme")!)
+        textStorage.highlightr.setTheme(to: UserKeys.editorTheme.stringValue!)
         textView.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
         textView.autocorrectionType = UITextAutocorrectionType.no
         textView.autocapitalizationType = UITextAutocapitalizationType.none
@@ -313,13 +313,12 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         
         textView.resignFirstResponder()
         
-        ActionSheetStringPicker.show(withTitle: Localizable.EditTextViewController.selectATheme, rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserDefaults.standard.string(forKey: "editorTheme")!) ?? 0, doneBlock: { (_, _, theme) in
+        ActionSheetStringPicker.show(withTitle: Localizable.EditTextViewController.selectATheme, rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserKeys.editorTheme.stringValue!) ?? 0, doneBlock: { (_, _, theme) in
             
             if let theme = theme as? String {
                 self.textStorage.highlightr.setTheme(to: theme)
                 self.textView.backgroundColor = self.textStorage.highlightr.theme.themeBackgroundColor
-                UserDefaults.standard.set(theme, forKey: "editorTheme")
-                UserDefaults.standard.synchronize()
+                UserKeys.editorTheme.stringValue = theme
             }
             
             self.setTextColor()

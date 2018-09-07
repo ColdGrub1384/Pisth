@@ -22,12 +22,11 @@ class ConnectionController {
     /// Show hidden files.
     static var showHiddenFiles: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "showHiddenFiles")
+            return UserKeys.shouldHiddenFilesBeShown.boolValue
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: "showHiddenFiles")
-            UserDefaults.standard.synchronize()
+            UserKeys.shouldHiddenFilesBeShown.boolValue = newValue
         }
     }
     

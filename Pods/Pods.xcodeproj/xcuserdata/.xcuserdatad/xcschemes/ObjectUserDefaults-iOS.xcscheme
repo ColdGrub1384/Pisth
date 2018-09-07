@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "138454D78045B242E924AF7B8D317F55"
-               BlueprintName = "WhatsNew"
+               BlueprintIdentifier = "2A31478069521C6C57930BEFBA0A4F99"
+               BlueprintName = "ObjectUserDefaults-iOS"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "WhatsNew.framework">
+               BuildableName = "ObjectUserDefaults-iOS.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

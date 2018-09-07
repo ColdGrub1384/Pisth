@@ -143,56 +143,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS/ObjectUserDefaults.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS/ObjectUserDefaults.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework"
 fi
 if [[ "$CONFIGURATION" == "Shell" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS/ObjectUserDefaults.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework"
 fi
 if [[ "$CONFIGURATION" == "Beta" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/BiometricAuthentication/BiometricAuthentication.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NMSSH/NMSSH.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS/ObjectUserDefaults.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/WhatsNew/WhatsNew.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -102,13 +102,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     /// Set theme from clicked item.
     @objc func setTheme(_ sender: NSMenuItem) {
-        UserDefaults.standard.set(sender.title, forKey: "theme")
-        UserDefaults.standard.synchronize()
+        UserKeys.terminalTheme.stringValue = sender.title
         setupThemeMenu()
         
         for window in NSApp.windows {
             if let term = window.contentViewController as? TerminalViewController {
-                term.theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "theme") ?? "Basic"]!
+                term.theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Basic"]!
                 term.webView.reload()
             }
         }
@@ -116,13 +115,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     /// Set text size from clicked item.
     @objc func setTextSize(_ sender: NSMenuItem) {
-        UserDefaults.standard.set(sender.tag, forKey: "textSize")
-        UserDefaults.standard.synchronize()
+        UserKeys.terminalTextSize.integerValue = sender.tag
         setupTextSizeMenu()
         
         for window in NSApp.windows {
             if let term = window.contentViewController as? TerminalViewController {
-                term.theme = TerminalTheme.themes[UserDefaults.standard.string(forKey: "theme") ?? "Basic"]!
                 term.webView.reload()
             }
         }
@@ -136,7 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         for (name, value) in TerminalTheme.themes {
             let item = NSMenuItem(title: name, action: #selector(setTheme(_:)), keyEquivalent: "")
             item.isEnabled = true
-            if UserDefaults.standard.string(forKey: "theme") == item.title {
+            if UserKeys.terminalTheme.stringValue == item.title {
                 item.state = .on
             }
             
@@ -167,7 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 item = NSMenuItem(title: "\(size)px", action: #selector(setTextSize(_:)), keyEquivalent: "")
             }
             item.isEnabled = true
-            if UserDefaults.standard.integer(forKey: "textSize") == size {
+            if UserKeys.terminalTextSize.integerValue == size {
                 item.state = .on
             }
             item.tag = size
@@ -179,14 +176,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         
-        if UserDefaults.standard.string(forKey: "theme") == nil {
-            UserDefaults.standard.set("Basic", forKey: "theme")
-            UserDefaults.standard.synchronize()
+        if UserKeys.terminalTheme.stringValue == nil {
+            UserKeys.terminalTheme.stringValue = "Basic"
         }
         
-        if UserDefaults.standard.value(forKey: "textSize") == nil {
-            UserDefaults.standard.set(12, forKey: "textSize")
-            UserDefaults.standard.synchronize()
+        if UserKeys.terminalTextSize.value == nil {
+            UserKeys.terminalTextSize.integerValue = 12
         }
         
         setupTextSizeMenu()

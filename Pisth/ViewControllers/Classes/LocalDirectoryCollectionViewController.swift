@@ -347,7 +347,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     /// Set layout selected by the user.
     func loadLayout() {
         var layout: UICollectionViewFlowLayout
-        if UserDefaults.standard.bool(forKey: "list") {
+        if UserKeys.areListViewsEnabled.boolValue {
             layout = LocalDirectoryCollectionViewController.listLayout(forView: view)
         } else {
             layout = LocalDirectoryCollectionViewController.gridLayout
@@ -507,7 +507,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell: FileCollectionViewCell
-        if UserDefaults.standard.bool(forKey: "list") {
+        if UserKeys.areListViewsEnabled.boolValue {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileList", for: indexPath) as! FileCollectionViewCell
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fileGrid", for: indexPath) as! FileCollectionViewCell

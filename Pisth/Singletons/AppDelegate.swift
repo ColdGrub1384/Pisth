@@ -179,8 +179,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         FirebaseApp.configure()
         
         // Save passwords to keychain if they are not
-        // See how passwords are managed since 3.0 at 'Helpers/DataManager.swift'
-        if !UserDefaults.standard.bool(forKey: "savedToKeychain") {
+        // See how passwords are managed since 3.0 at 'Pisth Shared/DataManager.swift'
+        if !UserKeys.savedToKeychain.boolValue {
             // Update data to be compatible with 3.0
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
             request.returnsObjectsAsFaults = false
@@ -201,13 +201,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 print("Error retrieving connections: \(error.localizedDescription)")
             }
             
-            UserDefaults.standard.set(true, forKey: "savedToKeychain")
-            UserDefaults.standard.synchronize()
+            UserKeys.savedToKeychain.boolValue = true
         }
         
         // Add 'sftp' attributes to saved connections if there are not
         // 'sftp' attribute was added in 5.1
-        if !UserDefaults.standard.bool(forKey: "addedSftpAttribute") {
+        if !UserKeys.isSFTPAttributeAdded.boolValue {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
             request.returnsObjectsAsFaults = false
             
@@ -225,35 +224,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 print("Error retrieving connections: \(error.localizedDescription)")
             }
             
-            UserDefaults.standard.setValue(true, forKey: "addedSftpAttribute")
-            UserDefaults.standard.synchronize()
+            UserKeys.isSFTPAttributeAdded.boolValue = true
         }
         
         // Set default terminal theme
-        if UserDefaults.standard.string(forKey: "terminalTheme") == nil {
-            UserDefaults.standard.set("Pisth", forKey: "terminalTheme")
-            UserDefaults.standard.synchronize()
+        if UserKeys.terminalTheme.value == nil {
+            UserKeys.terminalTheme.stringValue = "Pisth"
         }
         
         // Setup 3D touch shortcuts
         AppDelegate.shared.update3DTouchShortucts()
         
         // Blink cursor by default
-        if UserDefaults.standard.value(forKey: "blink") == nil {
-            UserDefaults.standard.set(true, forKey: "blink")
-            UserDefaults.standard.synchronize()
+        if UserKeys.blink.value == nil {
+            UserKeys.blink.boolValue = true
         }
         
         // Use Xcode theme by default
-        if UserDefaults.standard.value(forKey: "editorTheme") == nil {
-            UserDefaults.standard.set("xcode", forKey: "editorTheme")
-            UserDefaults.standard.synchronize()
+        if UserKeys.editorTheme.value == nil {
+            UserKeys.editorTheme.stringValue = "xcode"
         }
         
         // Set default terminal text size
-        if UserDefaults.standard.value(forKey: "terminalTextSize") == nil || UserDefaults.standard.integer(forKey: "terminalTextSize") == 0 {
-            UserDefaults.standard.set(15, forKey: "terminalTextSize")
-            UserDefaults.standard.synchronize()
+        
+        if UserKeys.terminalTextSize.value == nil || UserKeys.terminalTextSize.integerValue == 0 {
+            UserKeys.terminalTextSize.integerValue = 15
         }
         
         // Create plugins directory
