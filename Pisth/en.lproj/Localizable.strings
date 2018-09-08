@@ -436,6 +436,12 @@
 /* All new features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
 "whatsNew.features" = "Globe::New Languages::Pisth supports now French and Spanish.|Redesign::Redesign::The app is redesigned, better iPad experience and the file icons are now system icons.|Bonjour::Bonjour::Discover devices on the same network.|Keychain::SSH Keys::Use private and/or public keys.";
 
+/* Main features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
+"whatsNew.welcome" = "Icon::Bookmarks::Organize your favourite connections to be accessed easely from the main screen. Given them names.|File icons/folder::File browser::Browse files over SSH or download, remove or upload files.|shell::Terminal::Over SSH, access to a terminal with xterm features. Use your favourite editors like nano or vim.";
+
+/* Title of the Welcome Screen */
+"welcome" = "Welcome";
+
 /* Yes */
 "yes" = "Yes";
 

@@ -15,6 +15,9 @@ class UserKeys: Static {
     
     // MARK: - Compatibility
     
+    /// This key says if the welcome screen was shown.
+    static let wasWelcomeScreenShown = ud.item(forKey: "wasWelcomeScreenShown")
+    
     /// Passwords are stored to the keychain since the 3.0. This key says if the passwords are already stored to the keychain. Its value should be a boolean.
     static let savedToKeychain = ud.item(forKey: "savedToKeychain")
     

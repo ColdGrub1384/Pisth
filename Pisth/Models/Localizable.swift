@@ -43,6 +43,8 @@ class Localizable: Static {
     /// Connect
     static let connect = NSLocalizedString("connect", comment: "Connect")
     
+    static let welcome = NSLocalizedString("welcome", comment: "Title of the Welcome screen")
+    
     /// Title for the alert shown when there is an error saving the file.
     static let errorSavingFile = NSLocalizedString("errorSavingFile", comment: "Title for the alert shown when there is an error saving the file.")
     
@@ -59,6 +61,21 @@ class Localizable: Static {
         static var features: [WhatsNewItem] {
             var items = [WhatsNewItem]()
             for component in NSLocalizedString("whatsNew.features", comment: "All new features by title.`Formated as: \"Image Name::Title::Subtitle|Image Name::Title::Subtitle\"").components(separatedBy: "|") {
+                if component.components(separatedBy: "::").count < 3 {
+                    items.append(WhatsNewItem.text(title: component.components(separatedBy: "::")[0], subtitle: component.components(separatedBy: "::")[1]))
+                } else {
+                    items.append(WhatsNewItem.image(title: component.components(separatedBy: "::")[1], subtitle: component.components(separatedBy: "::")[2], image: UIImage(imageLiteralResourceName: component.components(separatedBy: "::")[0])))
+                }
+            }
+            return items
+        }
+        
+        /// All main features.
+        ///
+        /// Formated as: `"Image Name::Title::Subtitle|Image Name::Title::Subtitle"`
+        static var mainFeatures: [WhatsNewItem] {
+            var items = [WhatsNewItem]()
+            for component in NSLocalizedString("whatsNew.welcome", comment: "All main features by title.`Formated as: \"Image Name::Title::Subtitle|Image Name::Title::Subtitle\"").components(separatedBy: "|") {
                 if component.components(separatedBy: "::").count < 3 {
                     items.append(WhatsNewItem.text(title: component.components(separatedBy: "::")[0], subtitle: component.components(separatedBy: "::")[1]))
                 } else {

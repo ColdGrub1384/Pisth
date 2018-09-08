@@ -436,6 +436,12 @@
 /* All new features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
 "whatsNew.features" = "Globe::Nuevas lenguas::Pisth soporta ahora el francés y el español.|Redesign::Rediseño::La app ha sido rediseñada para una mejor experiencia en iPad y los iconos de los archivos son ahora los del sistema..|Bonjour::Bonjour::Encuentra dispositivos en tu red.|Keychain::Llaves SSH::Use sus llaves públicas y/o privadas.";
 
+/* Main features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
+"whatsNew.welcome" = "Icon::Marcador::Organise sus conexiones para que sean facilmente accesibles desde la pantalla principal.|File icons/folder::Navegador de archivos::Navegue archivos a través del SSH o descargue, borre o suba archivos.|shell::Terminal::A través del SSH, accede a un terminal con las funcionalidades de xterm y use sus editores favoritos como nano o vim.";
+
+/* Title of the Welcome Screen */
+"welcome" = "Bienvenido(a)";
+
 /* Yes */
 "yes" = "Si";
 

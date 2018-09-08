@@ -267,17 +267,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         ReviewHelper.shared.requestReview()
         
         // News
-        let whatsNew = WhatsNewViewController(items: Localizable.WhatsNewViewController.features)
+        var items: [WhatsNewItem]
+        if UserKeys.wasWelcomeScreenShown.boolValue {
+            items = Localizable.WhatsNewViewController.features
+        } else {
+            items = Localizable.WhatsNewViewController.mainFeatures
+        }
+        let whatsNew = WhatsNewViewController(items: items)
         whatsNew.buttonBackgroundColor = window?.tintColor ?? whatsNew.buttonBackgroundColor
         whatsNew.buttonTextColor = .white
         whatsNew.buttonText = Localizable.continue
-        whatsNew.titleText = Localizable.WhatsNewViewController.title
+        whatsNew.presentationOption = .majorVersion
+        if UserKeys.wasWelcomeScreenShown.boolValue {
+            whatsNew.titleText = Localizable.WhatsNewViewController.title
+        } else {
+            whatsNew.titleText = Localizable.welcome
+        }
+        func setContentMode(ofView view: UIView) {
+            view.contentMode = .scaleAspectFit
+            for subview in view.subviews {
+                setContentMode(ofView: subview)
+            }
+        }
+        setContentMode(ofView: whatsNew.view)
         if let vc = window?.rootViewController, !isShell {
             #if DEBUG
             vc.present(whatsNew, animated: true, completion: nil)
             #else
             whatsNew.presentIfNeeded(on: vc)
             #endif
+            UserKeys.wasWelcomeScreenShown.boolValue = true
         }
         
         return true
