@@ -1696,14 +1696,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             return dragPreview
         }
         
-        (ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController)?.webView?.removeFromSuperview()
+        for terminal in ContentViewController.shared.terminalPanels {
+            (terminal.contentViewController as? TerminalViewController)?.webView?.removeFromSuperview()
+        }
         
         return [item]
     }
     
     @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
-        if let term = ContentViewController.shared.terminalPanel?.contentViewController as? TerminalViewController {
+        for terminal in ContentViewController.shared.terminalPanels {
+            guard let term = terminal.contentViewController as? TerminalViewController else {
+                continue
+            }
             term.view.addSubview(term.webView)
         }
     }

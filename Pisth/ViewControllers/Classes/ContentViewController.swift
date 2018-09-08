@@ -7,12 +7,13 @@
 
 import UIKit
 import PanelKit
+import Pisth_Shared
 
 /// A View controller for showing connection content.
 class ContentViewController: UIViewController, PanelManager {
     
     /// The panel containing the current terminal.
-    var terminalPanel: PanelViewController!
+    var terminalPanels = [PanelViewController]()
     
     private var directoryPanels = [PanelViewController]()
     
@@ -25,33 +26,45 @@ class ContentViewController: UIViewController, PanelManager {
     /// Present the terminal in given directory from given sender. This view controller must be visible.
     func presentTerminal(inDirectory directory: String, from sender: UIBarButtonItem?) {
         
-        if let terminal = terminalPanel?.contentViewController as? TerminalViewController, terminal.view.window != nil {
-            terminal.console = ""
-            terminal.pwd = directory
-            terminal.reload()
-        } else {
-            
-            let terminal = TerminalViewController()
-            terminal.pwd = directory
-            terminal.console = ""
-            
-            terminalPanel = PanelViewController(with: terminal, in: self)
-            terminalPanel.modalPresentationStyle = .popover
-            terminalPanel.popoverPresentationController?.barButtonItem = sender
-            
-            var vc: UIViewController? = self
-            if view.window == nil {
-                vc = UIApplication.shared.keyWindow?.rootViewController
-            }
-            
+        let terminal = TerminalViewController()
+        terminal.pwd = directory
+        terminal.console = ""
+        
+        let terminalPanel = PanelViewController(with: terminal, in: self)
+        terminalPanels.append(terminalPanel)
+        terminalPanel.modalPresentationStyle = .popover
+        terminalPanel.popoverPresentationController?.barButtonItem = sender
+        
+        var vc: UIViewController? = self
+        if view.window == nil {
+            vc = UIApplication.shared.keyWindow?.rootViewController
+        }
+        func present() {
             vc?.present(terminalPanel, animated: true) {
-                if self.terminalPanel.canFloat {
-                    self.toggleFloatStatus(for: self.terminalPanel)
+                if terminalPanel.canFloat {
+                    self.toggleFloatStatus(for: terminalPanel)
                 }
                 if #available(iOS 11.0, *) {
                     terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
                 }
             }
+        }
+        
+        if terminalPanels.count > 0 {
+            terminal.pureMode = true
+            let connection = ConnectionManager.shared.connection
+            connection?.useSFTP = false
+            let connectionManager = ConnectionManager(connection: connection)
+            terminal.connectionManager = connectionManager
+            let activityVC = ActivityViewController(message: Localizable.BookmarksTableViewController.connecting)
+            self.present(activityVC, animated: true) {
+                connectionManager.connect()
+                activityVC.dismiss(animated: true, completion: {
+                    present()
+                })
+            }
+        } else {
+            present()
         }
     }
     
@@ -117,11 +130,9 @@ class ContentViewController: UIViewController, PanelManager {
     }
     
     var panels: [PanelViewController] {
-        var panels_ = directoryPanels
-        if let term = terminalPanel {
-            panels_.append(term)
-        }
-        return panels_
+        var panels = directoryPanels
+        panels.append(contentsOf: terminalPanels)
+        return panels
     }
     
     func maximumNumberOfPanelsPinned(at side: PanelPinSide) -> Int {

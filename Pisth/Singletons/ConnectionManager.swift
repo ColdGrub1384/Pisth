@@ -22,7 +22,14 @@ class ConnectionManager {
             return sharedInstance
         }
     }
-    fileprivate init() {}
+    
+    /// Initialize a `ConnectionManager` for managing given connection.
+    ///
+    /// - Parameters:
+    ///     - connection: Connection used to connect.
+    init(connection: RemoteConnection? = nil) {
+        self.connection = connection
+    }
     
     /// Background task to keep the session active.
     var backgroundTask: UIBackgroundTaskIdentifier?

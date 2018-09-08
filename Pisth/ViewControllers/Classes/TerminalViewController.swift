@@ -32,6 +32,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return (!panel.isPresentedAsPopover && !panel.isFloating)
     }
     
+    /// Object managing the connection.
+    var connectionManager = ConnectionManager.shared
+    
     /// If the terminal is in viewer mode.
     var viewer = false
     
@@ -113,10 +116,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var navigationController_: UINavigationController?
     
     /// Show commands history.
+    @available(*, deprecated, message: "Showing the history from the terminal is now unsupported.")
     @objc func showHistory(_ sender: UIBarButtonItem) {
         
         do {
-            guard let session = ConnectionManager.shared.filesSession else { return }
+            guard let session = connectionManager.filesSession else { return }
             let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
             
             let commandsVC = CommandsTableViewController()
@@ -152,7 +156,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             print(cols)
             print(rows)
             self.terminalSize = "\(cols),\(rows)"
-            ConnectionManager.shared.session?.channel.requestSizeWidth(cols, height: rows)
+            connectionManager.session?.channel.requestSizeWidth(cols, height: rows)
         }
         
         // Get and set columns
@@ -351,14 +355,14 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @objc func sendPassword() {
         if isFirstResponder {
             
-            BioMetricAuthenticator.authenticateWithBioMetrics(reason: Localizable.TerminalViewController.authenticateToSendPassword(of: ConnectionManager.shared.connection?.username ?? "user"), fallbackTitle: "", cancelTitle: nil, success: {
+            BioMetricAuthenticator.authenticateWithBioMetrics(reason: Localizable.TerminalViewController.authenticateToSendPassword(of: connectionManager.connection?.username ?? "user"), fallbackTitle: "", cancelTitle: nil, success: {
                 
-                self.insertText(ConnectionManager.shared.connection?.password ?? "")
+                self.insertText(self.connectionManager.connection?.password ?? "")
                 
             }, failure: { (error) in
                 
                 if error == .biometryNotEnrolled || error == .passcodeNotSet || error == .biometryNotAvailable {
-                    self.insertText(ConnectionManager.shared.connection?.password ?? "")
+                    self.insertText(self.connectionManager.connection?.password ?? "")
                 }
             })
         }
@@ -485,6 +489,16 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
+    /// Called by `NotificationCenter` to inform the theme changed.
+    @objc func themeDidChanged(_ notification: Notification) {
+        guard let theme = notification.object as? TerminalTheme else {
+            return
+        }
+        
+        keyboardAppearance = theme.keyboardAppearance
+        webView.reload()
+    }
+    
     // MARK: - View controller
     
     override var canBecomeFirstResponder: Bool {
@@ -553,6 +567,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChanged), name: .init("TerminalThemeDidChanged"), object: nil)
         
         // Setup connectivity
         if peerID == nil {
@@ -624,12 +639,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if console.isEmpty {
             
             if !pureMode {
-                ConnectionManager.shared.session?.channel.closeShell()
-                try? ConnectionManager.shared.session?.channel.startShell()
+                connectionManager.session?.channel.closeShell()
+                try? connectionManager.session?.channel.startShell()
             }
         }
         
-        if pureMode {
+        if pureMode && panelNavigationController == nil {
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
         }
         if #available(iOS 11.0, *) {
@@ -677,7 +692,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func updateUserActivityState(_ activity: NSUserActivity) {
         super.updateUserActivityState(activity)
         
-        guard let connection = ConnectionManager.shared.connection else {
+        guard let connection = connectionManager.connection else {
             return
         }
         
@@ -858,7 +873,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// - Parameters:
     ///     - command: Command sent from keyboard.
     @objc func write(fromCommand command: UIKeyCommand) {
-        guard let channel = ConnectionManager.shared.session?.channel else { return }
+        guard let channel = connectionManager.session?.channel else { return }
         
         if command.modifierFlags.rawValue == 0 {
             switch command.input {
@@ -936,7 +951,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
                     }
                 } else {
-                    try ConnectionManager.shared.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
+                    try connectionManager.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
                 }
             } else {
                 if viewer {
@@ -944,7 +959,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
                     }
                 } else {
-                    try ConnectionManager.shared.session?.channel.write(Keys.ctrlKey(from: text))
+                    try connectionManager.session?.channel.write(Keys.ctrlKey(from: text))
                 }
                 
                 ctrl = false
@@ -961,7 +976,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
                 }
             } else {
-                try ConnectionManager.shared.session?.channel.write(Keys.delete)
+                try connectionManager.session?.channel.write(Keys.delete)
             }
         } catch {}
     }
@@ -1035,7 +1050,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             // Session
-            guard let session = ConnectionManager.shared.session else {
+            guard let session = connectionManager.session else {
                 self.close()
                 return
             }
@@ -1073,7 +1088,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 } else {
                     
                     // Sorry Termius ;-(
-                    let os = try? ConnectionManager.shared.session?.channel.execute("""
+                    let os = try? connectionManager.session?.channel.execute("""
                     SA_OS_TYPE="Linux"
                     REAL_OS_NAME=`uname`
                     if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
@@ -1085,7 +1100,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     fi;
                     """)
                     
-                    ConnectionManager.shared.connection?.os = os ?? nil
+                    connectionManager.connection?.os = os ?? nil
                     
                     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
                     request.returnsObjectsAsFaults = false
@@ -1094,7 +1109,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                         
                         for result in results {
-                            if result.value(forKey: "host") as? String == ConnectionManager.shared.connection?.host {
+                            if result.value(forKey: "host") as? String == connectionManager.connection?.host {
                                 if let os = os {
                                     result.setValue(os, forKey: "os")
                                 }
@@ -1111,7 +1126,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     
                     // Siri Shortcuts
                     
-                    guard let connection = ConnectionManager.shared.connection else {
+                    guard let connection = connectionManager.connection else {
                         return
                     }
                     
@@ -1175,7 +1190,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else if message.hasPrefix("changeTitle") { // Change title
             title = message.replacingFirstOccurrence(of: "changeTitle", with: "")
         } else if message.hasPrefix("runCommand") { // Run command
-            try? ConnectionManager.shared.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
+            try? connectionManager.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
         }
         completionHandler()
     }
@@ -1285,13 +1300,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         return
                     }
                     
-                    try? ConnectionManager.shared.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
+                    try? connectionManager.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
                 }
             }
         } else if session.canLoadObjects(ofClass: String.self) {
             _ = session.loadObjects(ofClass: String.self) { (strings) in
                 for string in strings {
-                    try? ConnectionManager.shared.session?.channel.write(string+" ")
+                    try? self.connectionManager.session?.channel.write(string+" ")
                 }
             }
         }
