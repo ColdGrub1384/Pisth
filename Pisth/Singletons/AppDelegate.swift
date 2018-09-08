@@ -204,6 +204,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             UserKeys.savedToKeychain.boolValue = true
         }
         
+        UserKeys.wasWelcomeScreenShown.boolValue = UserKeys.isSFTPAttributeAdded.boolValue
+        
         // Add 'sftp' attributes to saved connections if there are not
         // 'sftp' attribute was added in 5.1
         if !UserKeys.isSFTPAttributeAdded.boolValue {
