@@ -521,6 +521,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func resignFirstResponder() -> Bool {
         super.resignFirstResponder()
         
+        webView.evaluateJavaScript("term.setOption('cursorStyle', 'bar')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
         return true
     }
@@ -528,6 +529,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()
         
+        webView.evaluateJavaScript("term.setOption('cursorStyle', 'block')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
         return true
     }
