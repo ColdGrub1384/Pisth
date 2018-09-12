@@ -428,7 +428,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             }
             
             func openConnection() {
-                if connection.name.isEmpty || connection.host.isEmpty {
+                if connection.username.isEmpty || connection.host.isEmpty {
                     askForCredentials()
                 } else {
                     open()
