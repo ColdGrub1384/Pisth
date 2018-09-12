@@ -579,6 +579,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Check for connection errors and run handler if there is an error.
     func checkForConnectionError(errorHandler: @escaping () -> Void, successHandler: (() -> Void)? = nil) {
+        
+        guard AppDelegate.shared.action == nil else {
+            successHandler?()
+            return
+        }
+        
         guard let session = ConnectionManager.shared.session else {
             ConnectionManager.shared.session = nil
             ConnectionManager.shared.filesSession = nil
