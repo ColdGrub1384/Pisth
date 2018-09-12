@@ -16,7 +16,7 @@ class ConnectionManager {
     
     /// Shared instance of `ConnectionManager`. Different instance is returned for importing file with the api.
     static var shared: ConnectionManager {
-        if AppDelegate.shared.action == .apiImport {
+        if AppDelegate.shared.action != nil {
             return importInstance
         } else {
             return sharedInstance

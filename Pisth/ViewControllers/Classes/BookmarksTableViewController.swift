@@ -146,7 +146,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        if delegate is AppDelegate {
+        if delegate is AppDelegate || AppDelegate.shared.action != nil {
             return 1
         }
         
@@ -577,7 +577,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
         
-        guard !services.contains(service) else {
+        guard !services.contains(service), tableView.numberOfSections > 1 else {
             return
         }
         
@@ -586,7 +586,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
-        if let i = services.firstIndex(of: service) {
+        if let i = services.firstIndex(of: service), tableView.numberOfSections > 1 {
             services.remove(at: i)
             tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
         }

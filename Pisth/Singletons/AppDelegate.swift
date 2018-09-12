@@ -73,11 +73,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     }
     
     /// Dismiss app's Root View Controller and cancel file upload.
-    /// Called did close the BookmarksTableViewController opened when upload a file.
+    /// Called when closing the BookmarksTableViewController opened when upload a file.
     @objc func close() {
         if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
             rootVC.dismiss(animated: true, completion: {
                 self.openedFile = nil
+                self.action = nil
                 self.directoryCollectionViewController = nil
             })
         }
