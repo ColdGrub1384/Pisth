@@ -404,12 +404,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
             }
-            DispatchQueue.global(qos: .background).async {
-                let buttons_ = buttons
-                DispatchQueue.main.async {
-                    self.navigationItem.setRightBarButtonItems(buttons_, animated: true)
-                }
-            }
+            
+            navigationItem.setRightBarButtonItems(buttons, animated: true)
             
             // Siri Shortcuts
             

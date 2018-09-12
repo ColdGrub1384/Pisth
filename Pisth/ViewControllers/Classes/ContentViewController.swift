@@ -31,7 +31,6 @@ class ContentViewController: UIViewController, PanelManager {
         terminal.console = ""
         
         let terminalPanel = PanelViewController(with: terminal, in: self)
-        terminalPanels.append(terminalPanel)
         terminalPanel.modalPresentationStyle = .popover
         terminalPanel.popoverPresentationController?.barButtonItem = sender
         
@@ -66,6 +65,7 @@ class ContentViewController: UIViewController, PanelManager {
         } else {
             present()
         }
+        terminalPanels.append(terminalPanel)
     }
     
     /// Present the given remote directory. This view controller must be visible.
