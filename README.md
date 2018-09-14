@@ -14,13 +14,20 @@ Follow [@pisthapp](https://twitter.com/pisthapp) on Twitter for news about this 
 Pisth is an SSH and SFTP client.
 Use Pisth to upload, view and edit files in your SSH server.
 
-Why use Pisth:
+Features:
 
-• Pisth is free (but there are ads and In App Purchases).
-• You can manage files in your SSH server and use the Shell in the same app.
-• You can edit text files and code with colored syntax.
-• The Shell supports colors and real time output and input, so you can use text editors such as nano, vim, etc.
-• The Shell supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
+  • Manage files in your SSH server and use the Shell in the same app.
+  • Edit text files and code with colored syntax.
+  • The terminal is like xterm, so you can use text editors such as nano, vim, etc. 
+  • SSH Keys
+  • Drag and drop.
+  • Send special keys.
+  • The terminal supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
+  • Open multiple panels in iPad.
+  • Find your connections with Spotlight.
+  • Share shell session between other devices using Pisth or your Mac.
+  • Transfer files between servers.
+  • Find servers with Bonjour.
 ```
 
 ![status](https://img.shields.io/badge/status-stable-green.svg)
