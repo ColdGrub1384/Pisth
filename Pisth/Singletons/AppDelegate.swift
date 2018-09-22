@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     /// Go back to app that opened the URL scheme.
     @objc func goToPreviousApp() {
+        action = nil
         window?.rootViewController?.dismiss(animated: true, completion: {
             
             if self.dataReceiverAppURLScheme != nil {
