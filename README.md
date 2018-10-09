@@ -39,6 +39,12 @@ Features:
 
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
 
+## Building
+
+1. Download release.tar.gz from [ios_system latest release](https://github.com/holzschu/ios_system/releases/latest).
+3. Unarchive the file.
+4. Move ios_system to the repo.
+
 # Pisth Mac
 
 ![status](https://img.shields.io/badge/status-In%20development-red.svg)
