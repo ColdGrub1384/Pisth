@@ -157,6 +157,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         sideLoading = true
         initializeEnvironment()
         
+        // Python
+        putenv("PYTHONHOME=\(Bundle.main.bundlePath)".cValue)
+        putenv("PYTHONPATH=\(Bundle.main.bundlePath)/site-packages".cValue)
+        putenv("PYTHONOPTIMIZE=".cValue)
+        putenv("PYTHONDONTWRITEBYTECODE=1".cValue)
+        
         UIMenuController.shared.menuItems = [
             .init(title: Localizable.UIMenuItem.delete, action: #selector(FileCollectionViewCell.deleteFile(_:))),
             .init(title: Localizable.UIMenuItem.move, action: #selector(FileCollectionViewCell.moveFile(_:))),

@@ -87,6 +87,9 @@
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
 		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
+		C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9147BBB216D6DBA00E959DD /* String+cValue.swift */; };
+		C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */ = {isa = PBXBuildFile; fileRef = C9147BBD216D6E0F00E959DD /* python27.zip */; };
+		C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BF216AD0D9005939AC /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
 		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
@@ -188,6 +191,7 @@
 				3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
 				C9BBD2C6216C092B001C665D /* InputAssistant.framework in Embed Frameworks */,
 				C9FAD8EF216AD1D3005939AC /* files.framework in Embed Frameworks */,
+				C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */,
 				C9FAD8ED216AD1D0005939AC /* awk.framework in Embed Frameworks */,
 				C9BBD2C8216C092B001C665D /* LibTermCore.framework in Embed Frameworks */,
 				3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
@@ -198,6 +202,17 @@
 				C9FAD8E5216AD1C2005939AC /* curl_ios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9147BBF216D6E2000E959DD /* Copy Python Home */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = lib;
+			dstSubfolderSpec = 7;
+			files = (
+				C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */,
+			);
+			name = "Copy Python Home";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C9CB27F420D5C22D00290DBE /* Embed Frameworks */ = {
@@ -302,6 +317,8 @@
 		9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F56A04B7E9093551D684A8D /* Pods-Pisth Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.release.xcconfig"; sourceTree = "<group>"; };
 		AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.shell.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.shell.xcconfig"; sourceTree = "<group>"; };
+		C9147BBB216D6DBA00E959DD /* String+cValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cValue.swift"; sourceTree = "<group>"; };
+		C9147BBD216D6E0F00E959DD /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python27.zip; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
@@ -559,6 +576,7 @@
 				C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */,
 				C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */,
 				C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */,
+				C9147BBB216D6DBA00E959DD /* String+cValue.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -604,6 +622,7 @@
 		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C9147BBD216D6E0F00E959DD /* python27.zip */,
 				C9BD2858210A353F00244AAF /* Localizable.strings */,
 				C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */,
 				C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */,
@@ -891,6 +910,7 @@
 				3AFDD8FF1FF140FE0061677B /* Resources */,
 				F21CA456D2169C5D27312609 /* [CP] Embed Pods Frameworks */,
 				3ACF9B0A2041B300006C3218 /* Embed Frameworks */,
+				C9147BBF216D6E2000E959DD /* Copy Python Home */,
 			);
 			buildRules = (
 			);
@@ -1177,6 +1197,7 @@
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */,
 				C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */,
+				C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
