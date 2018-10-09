@@ -11,6 +11,8 @@ import SwiftKeychainWrapper
 import BiometricAuthentication
 import MultipeerConnectivity
 import Pisth_Shared
+import LibTermCore
+import ios_system
 
 /// `TableViewController` used to list, connections.
 class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, NetServiceBrowserDelegate, NetServiceDelegate {
@@ -56,6 +58,21 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         showInfoAlert()
     }
     
+    /// Open the shell.
+    @objc func openShell() {
+        guard let term = UIStoryboard(name: "Terminal", bundle: Bundle(for: LTTerminalViewController.self)).instantiateInitialViewController() as? LTTerminalViewController, let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] else {
+            return
+        }
+        LTForegroundColor = theme.foregroundColor ?? LTForegroundColor
+        LTBackgroundColor = theme.backgroundColor ?? LTBackgroundColor
+        LTKeyboardAppearance = theme.keyboardAppearance
+        
+        initializeEnvironment()
+        AppDelegate.shared.navigationController.setViewControllers([term], animated: true)
+        
+        term.navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
+    }
+    
     /// Edit connection or create connnection.
     ///
     /// If `index` is nil, a connection will be created, else, the connection at given index will be edited.
@@ -89,13 +106,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
         let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
+        let shellButton = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
         if !isShell {
-            navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
+            navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton, shellButton], animated: true)
         } else {
-            navigationItem.setLeftBarButtonItems([addButton], animated: true)
+            navigationItem.setLeftBarButtonItems([addButton, shellButton], animated: true)
         }
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
@@ -339,7 +357,6 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryCollectionViewController: dirVC)
                             } else {
                                 AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
-                                
                             }
                         })
                     } else {

@@ -1,0 +1,11 @@
+framework module InputAssistant {
+  umbrella header "InputAssistant.h"
+
+  export *
+  module * { export * }
+}
+
+module InputAssistant.Swift {
+    header "InputAssistant-Swift.h"
+    requires objc
+}

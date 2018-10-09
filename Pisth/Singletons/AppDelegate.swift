@@ -13,6 +13,7 @@ import Firebase
 import Pisth_API
 import UserNotifications
 import WhatsNew
+import ios_system
 
 /// Returns `true` if the app was built as the free version containing only the Shell. Use this boolean to limit functionalities.
 var isShell: Bool {
@@ -151,6 +152,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
+        
+        // ios_system
+        sideLoading = true
+        initializeEnvironment()
         
         UIMenuController.shared.menuItems = [
             .init(title: Localizable.UIMenuItem.delete, action: #selector(FileCollectionViewCell.deleteFile(_:))),

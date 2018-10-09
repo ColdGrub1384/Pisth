@@ -13,6 +13,12 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
     
     // MARK: - Bookmarks table view controller
     
+    override func openShell() {
+        dismiss(animated: true) {
+            super.openShell()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 
