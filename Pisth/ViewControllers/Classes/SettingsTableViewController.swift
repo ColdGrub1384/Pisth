@@ -228,8 +228,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.beta {
             
             // Send beta test request
-            present(UIViewController.beta, animated: true, completion: nil)
-            tableView.deselectRow(at: indexPath, animated: true)
+            UIApplication.shared.open(URL(string:"https://testflight.apple.com/join/wTFS8gRY")!, options: [:], completionHandler: nil)
             
         } else if indexPath == IndexPaths.sourceCode {
                 

@@ -9,6 +9,7 @@ import UIKit
 import MessageUI
 
 /// View controller to invite people to participate in the beta testing.
+@available(*, deprecated, message: "Use TestFlight links instead.")
 class BetaViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBAction func cancel(_ sender: Any) {
