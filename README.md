@@ -39,12 +39,6 @@ Features:
 
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
 
-## Building
-
-1. Download release.tar.gz from [ios_system latest release](https://github.com/holzschu/ios_system/releases/latest).
-3. Unarchive the file.
-4. Move ios_system to the repo.
-
 # Pisth Mac
 
 ![status](https://img.shields.io/badge/status-In%20development-red.svg)
@@ -102,6 +96,13 @@ More information at https://pisth.github.io/docs/getting-started.html.
 - [Pisth Viewer/](Pisth%20Viewer/): Pisth Viewer macOS Application.
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
+
+## Building project
+
+1. Download release.tar.gz from [ios_system latest release](https://github.com/$
+2. Unarchive the file.
+3. Move ios_system to the repo.
+4. Just build any target you want from `Pisth.xcworkspace`.
 
 # Projects
 
