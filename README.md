@@ -99,7 +99,7 @@ More information at https://pisth.github.io/docs/getting-started.html.
 
 ## Building project
 
-1. Download release.tar.gz from [ios_system latest release](https://github.com/$
+1. Download release.tar.gz from [ios_system latest release](https://github.com/holzschu/ios_system/releases/latest)
 2. Unarchive the file.
 3. Move ios_system to the repo.
 4. Just build any target you want from `Pisth.xcworkspace`.
