@@ -66,6 +66,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         LTForegroundColor = theme.foregroundColor ?? LTForegroundColor
         LTBackgroundColor = theme.backgroundColor ?? LTBackgroundColor
         LTKeyboardAppearance = theme.keyboardAppearance
+        LTBarStyle = theme.toolbarStyle
         
         initializeEnvironment()
         AppDelegate.shared.navigationController.setViewControllers([term], animated: true)
