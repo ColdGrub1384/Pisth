@@ -97,7 +97,7 @@ More information at https://pisth.github.io/docs/getting-started.html.
 - [Pisth API/](Pisth%20API/): API for iOS.
 - [Pisth APT/](Pisth%20APT/): iOS Aptitude package manager.
 
-## Building project
+# Building project
 
 1. Download release.tar.gz from [ios_system latest release](https://github.com/holzschu/ios_system/releases/latest)
 2. Unarchive the file.
