@@ -185,19 +185,29 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-@class TerminalTextView;
-@class UITextView;
+@class UITextPosition;
+@class NSTextContainer;
+@class NSCoder;
+
+/// The Text view containing the terminal.
+SWIFT_CLASS("_TtC11LibTermCore18LTTerminalTextView")
+@interface LTTerminalTextView : UITextView
+- (CGRect)caretRectForPosition:(UITextPosition * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer * _Nullable)textContainer OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=7.0);
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class UIDocumentPickerViewController;
 @class NSBundle;
-@class NSCoder;
 
 /// The terminal interacting with the shell.
 SWIFT_CLASS("_TtC11LibTermCore24LTTerminalViewController")
 @interface LTTerminalViewController : UIViewController <UIDocumentPickerDelegate, UITextViewDelegate>
 /// The Text view displaying content.
-@property (nonatomic, weak) IBOutlet TerminalTextView * _Null_unspecified terminalTextView;
+@property (nonatomic, weak) IBOutlet LTTerminalTextView * _Null_unspecified terminalTextView;
 - (void)viewDidLoad;
 - (void)viewDidAppear:(BOOL)animated;
+- (void)viewDidDisappear:(BOOL)animated;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidLayoutSubviews;
 - (void)textViewDidChange:(UITextView * _Nonnull)textView;
@@ -208,17 +218,6 @@ SWIFT_CLASS("_TtC11LibTermCore24LTTerminalViewController")
 @end
 
 
-
-@class UITextPosition;
-@class NSTextContainer;
-
-/// The Text view containing the terminal.
-SWIFT_CLASS("_TtC11LibTermCore16TerminalTextView")
-@interface TerminalTextView : UITextView
-- (CGRect)caretRectForPosition:(UITextPosition * _Nonnull)position SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer * _Nullable)textContainer OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=7.0);
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
