@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+cd $DIR
+
 # Get ios_system release URL
 
 ios_system="$(curl -s 'https://api.github.com/repos/holzschu/ios_system/releases/latest' \
@@ -18,3 +21,11 @@ done
 
 curl $ios_system -o ios_system.tar.gz
 tar xf ios_system.tar.gz ios_system_builds/
+
+# Update submodules
+
+git submodule update --init --recursive
+
+# Install pods
+
+pod install
