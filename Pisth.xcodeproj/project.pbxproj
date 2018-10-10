@@ -90,6 +90,12 @@
 		C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9147BBB216D6DBA00E959DD /* String+cValue.swift */; };
 		C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */ = {isa = PBXBuildFile; fileRef = C9147BBD216D6E0F00E959DD /* python27.zip */; };
 		C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BF216AD0D9005939AC /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; };
+		C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91DD1E9216E78EE0001B21B /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1E8216E78D30001B21B /* ios_system.framework */; };
+		C91DD1EA216E78EE0001B21B /* ios_system.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1E8216E78D30001B21B /* ios_system.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91DD1F8216E79930001B21B /* LibTermCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1F7216E79840001B21B /* LibTermCore.framework */; };
+		C91DD1F9216E79930001B21B /* LibTermCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1F7216E79840001B21B /* LibTermCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
 		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
@@ -112,8 +118,6 @@
 		C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C020D70CD400045F20 /* FileObserver.swift */; };
 		C9B205C920D72FE300045F20 /* FilesOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C820D72FE300045F20 /* FilesOutlineView.swift */; };
 		C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */; };
-		C9BBD2C7216C092B001C665D /* LibTermCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BBD2C0216C091A001C665D /* LibTermCore.framework */; };
-		C9BBD2C8216C092B001C665D /* LibTermCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9BBD2C0216C091A001C665D /* LibTermCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9BBD2CF216C1D7E001C665D /* extraCommandsDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */; };
 		C9BBD2D0216C1D7E001C665D /* commandDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */; };
 		C9BD2853210A34A100244AAF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BD2852210A34A000244AAF /* Localizable.swift */; };
@@ -160,6 +164,72 @@
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C91DD1D9216E74340001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C2E4347201E7E6C00E4254A;
+			remoteInfo = InputAssistant;
+		};
+		C91DD1DB216E74340001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C2E4379201EFACD00E4254A;
+			remoteInfo = libInputAssistant;
+		};
+		C91DD1DD216E74340001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3C2E435B201E883E00E4254A;
+			remoteInfo = "InputAssistant Sample";
+		};
+		C91DD1E1216E743F0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C2E4346201E7E6C00E4254A;
+			remoteInfo = InputAssistant;
+		};
+		C91DD1E7216E78D30001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 223496AB1FD5FC71007ED1A9;
+			remoteInfo = ios_system;
+		};
+		C91DD1EB216E78EE0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 223496AA1FD5FC71007ED1A9;
+			remoteInfo = ios_system;
+		};
+		C91DD1F4216E79840001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C9806BC12160467E00F870B5;
+			remoteInfo = LibTerm;
+		};
+		C91DD1F6216E79840001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C9FAD8F9216AD24A005939AC;
+			remoteInfo = LibTermCore;
+		};
+		C91DD1FA216E79930001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C9FAD8F8216AD24A005939AC;
+			remoteInfo = LibTermCore;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		3ACF9AF2204094E4006C3218 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -181,14 +251,16 @@
 			files = (
 				C9FAD8E9216AD1CB005939AC /* libssh2.framework in Embed Frameworks */,
 				3A2C2D48208156F8002B8230 /* Pisth_API.framework in Embed Frameworks */,
+				C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */,
+				C91DD1EA216E78EE0001B21B /* ios_system.framework in Embed Frameworks */,
 				C9FAD8EB216AD1CE005939AC /* tar.framework in Embed Frameworks */,
 				C9FAD8E7216AD1C4005939AC /* openssl.framework in Embed Frameworks */,
+				C91DD1F9216E79930001B21B /* LibTermCore.framework in Embed Frameworks */,
 				C9FAD8E3216AD1BF005939AC /* shell.framework in Embed Frameworks */,
 				3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
 				C9FAD8EF216AD1D3005939AC /* files.framework in Embed Frameworks */,
 				C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */,
 				C9FAD8ED216AD1D0005939AC /* awk.framework in Embed Frameworks */,
-				C9BBD2C8216C092B001C665D /* LibTermCore.framework in Embed Frameworks */,
 				3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
 				C9FAD8F3216AD1DE005939AC /* lua_ios.framework in Embed Frameworks */,
 				C9FAD8E1216AD1BC005939AC /* network_ios.framework in Embed Frameworks */,
@@ -313,6 +385,9 @@
 		AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth Mac.shell.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac.shell.xcconfig"; sourceTree = "<group>"; };
 		C9147BBB216D6DBA00E959DD /* String+cValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cValue.swift"; sourceTree = "<group>"; };
 		C9147BBD216D6E0F00E959DD /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python27.zip; sourceTree = "<group>"; };
+		C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InputAssistant.xcodeproj; path = InputAssistant/InputAssistant.xcodeproj; sourceTree = "<group>"; };
+		C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ios_system.xcodeproj; path = ios_system/ios_system.xcodeproj; sourceTree = "<group>"; };
+		C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LibTerm.xcodeproj; path = LibTerm/LibTerm.xcodeproj; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
@@ -351,7 +426,6 @@
 		C9B205C420D71A8600045F20 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9B205C820D72FE300045F20 /* FilesOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesOutlineView.swift; sourceTree = "<group>"; };
 		C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
-		C9BBD2C0216C091A001C665D /* LibTermCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LibTermCore.framework; sourceTree = "<group>"; };
 		C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = extraCommandsDictionary.plist; sourceTree = "<group>"; };
 		C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = commandDictionary.plist; sourceTree = "<group>"; };
 		C9BD2852210A34A000244AAF /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -441,10 +515,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9BBD2C7216C092B001C665D /* LibTermCore.framework in Frameworks */,
+				C91DD1F8216E79930001B21B /* LibTermCore.framework in Frameworks */,
 				3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */,
+				C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */,
 				3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
+				C91DD1E9216E78EE0001B21B /* ios_system.framework in Frameworks */,
 				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,8 +756,10 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
-				C9BBD2C0216C091A001C665D /* LibTermCore.framework */,
-				C9FAD8B7216AD0D9005939AC /* ios_system */,
+				C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */,
+				C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */,
+				C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */,
+				C9FAD8B7216AD0D9005939AC /* ios_system_builds */,
 				C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */,
 				3A2C2D46208156F8002B8230 /* Pisth_API.framework */,
 				3A625BEE208011F7008D647C /* Pisth_Shared.framework */,
@@ -731,6 +809,33 @@
 				6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C91DD1D4216E74340001B21B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C91DD1DA216E74340001B21B /* InputAssistant.framework */,
+				C91DD1DC216E74340001B21B /* liblibInputAssistant.a */,
+				C91DD1DE216E74340001B21B /* InputAssistant Sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C91DD1E4216E78D20001B21B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C91DD1E8216E78D30001B21B /* ios_system.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C91DD1EE216E79830001B21B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C91DD1F5216E79840001B21B /* LibTerm.app */,
+				C91DD1F7216E79840001B21B /* LibTermCore.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C9985AA220D6C11600389A7B /* Singletons */ = {
@@ -842,7 +947,7 @@
 			path = "Pisth Mac";
 			sourceTree = "<group>";
 		};
-		C9FAD8B7216AD0D9005939AC /* ios_system */ = {
+		C9FAD8B7216AD0D9005939AC /* ios_system_builds */ = {
 			isa = PBXGroup;
 			children = (
 				C9FAD8B8216AD0D9005939AC /* libtexlua52.5.dylib */,
@@ -864,7 +969,7 @@
 				C9FAD8C9216AD0D9005939AC /* text.framework */,
 				C9FAD8CA216AD0D9005939AC /* lua_ios.framework */,
 			);
-			path = ios_system;
+			path = ios_system_builds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -903,6 +1008,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				C91DD1E2216E743F0001B21B /* PBXTargetDependency */,
+				C91DD1EC216E78EE0001B21B /* PBXTargetDependency */,
+				C91DD1FB216E79930001B21B /* PBXTargetDependency */,
 			);
 			name = Pisth;
 			productName = Pisth;
@@ -983,6 +1091,20 @@
 			mainGroup = 3AFDD8F81FF140FD0061677B;
 			productRefGroup = 3AFDD9021FF140FE0061677B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C91DD1D4216E74340001B21B /* Products */;
+					ProjectRef = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
+				},
+				{
+					ProductGroup = C91DD1E4216E78D20001B21B /* Products */;
+					ProjectRef = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
+				},
+				{
+					ProductGroup = C91DD1EE216E79830001B21B /* Products */;
+					ProjectRef = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3AFDD9001FF140FE0061677B /* Pisth */,
@@ -991,6 +1113,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C91DD1DA216E74340001B21B /* InputAssistant.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = InputAssistant.framework;
+			remoteRef = C91DD1D9216E74340001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1DC216E74340001B21B /* liblibInputAssistant.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibInputAssistant.a;
+			remoteRef = C91DD1DB216E74340001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1DE216E74340001B21B /* InputAssistant Sample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "InputAssistant Sample.app";
+			remoteRef = C91DD1DD216E74340001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1E8216E78D30001B21B /* ios_system.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ios_system.framework;
+			remoteRef = C91DD1E7216E78D30001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1F5216E79840001B21B /* LibTerm.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LibTerm.app;
+			remoteRef = C91DD1F4216E79840001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1F7216E79840001B21B /* LibTermCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LibTermCore.framework;
+			remoteRef = C91DD1F6216E79840001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3ACF9ADA20409446006C3218 /* Resources */ = {
@@ -1253,6 +1420,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C91DD1E2216E743F0001B21B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InputAssistant;
+			targetProxy = C91DD1E1216E743F0001B21B /* PBXContainerItemProxy */;
+		};
+		C91DD1EC216E78EE0001B21B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ios_system;
+			targetProxy = C91DD1EB216E78EE0001B21B /* PBXContainerItemProxy */;
+		};
+		C91DD1FB216E79930001B21B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LibTermCore;
+			targetProxy = C91DD1FA216E79930001B21B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3ACF9AE220409446006C3218 /* Main.storyboard */ = {

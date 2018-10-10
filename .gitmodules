@@ -1,0 +1,9 @@
+[submodule "InputAssistant"]
+	path = InputAssistant
+	url = https://github.com/IMcD23/InputAssistant.git
+[submodule "ios_system"]
+	path = ios_system
+	url = https://github.com/ColdGrub1384/ios_system.git
+[submodule "LibTerm"]
+	path = LibTerm
+	url = https://github.com/ColdGrub1384/LibTerm.git
