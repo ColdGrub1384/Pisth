@@ -33,13 +33,15 @@ done
 
 # Download and setup ios_system
 
-curl $ios_system -o ios_system.tar.gz
+curl -L $ios_system -o ios_system.tar.gz
 tar -xzf ios_system.tar.gz -Cios_system_builds/
+mv ios_system_builds/release/* ios_system_builds/
+rm -rf ios_system_builds/release
 rm ios_system.tar.gz
 
 # Download and setup xterm.js
 
-curl $xtermjs -o xtermjs.zip
+curl -L $xtermjs -o xtermjs.zip
 unzip xtermjs.zip -d "Pisth Terminal/Pisth Terminal/"
 rm xtermjs.zip
 
