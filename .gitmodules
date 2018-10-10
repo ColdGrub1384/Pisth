@@ -1,3 +1,6 @@
 [submodule "InputAssistant"]
 	path = InputAssistant
 	url = https://github.com/IMcD23/InputAssistant.git
+[submodule "ios_system_submodule"]
+	path = ios_system_submodule
+	url = https://github.com/holzschu/ios_system

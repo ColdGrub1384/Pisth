@@ -92,6 +92,8 @@
 		C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BF216AD0D9005939AC /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C91DD1A8216D76D20001B21B /* InputAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1A3216D76BF0001B21B /* InputAssistant.framework */; };
 		C91DD1A9216D76D20001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1A3216D76BF0001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91DD1C7216D7B7A0001B21B /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1B8216D7B6E0001B21B /* ios_system.framework */; };
+		C91DD1C8216D7B7A0001B21B /* ios_system.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1B8216D7B6E0001B21B /* ios_system.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
 		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
@@ -146,8 +148,6 @@
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
-		C9FAD8D5216AD0DA005939AC /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C2216AD0D9005939AC /* ios_system.framework */; };
-		C9FAD8DF216AD174005939AC /* ios_system.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C2216AD0D9005939AC /* ios_system.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9FAD8E1216AD1BC005939AC /* network_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BA216AD0D9005939AC /* network_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9FAD8E3216AD1BF005939AC /* shell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8B9216AD0D9005939AC /* shell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9FAD8E5216AD1C2005939AC /* curl_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BC216AD0D9005939AC /* curl_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -193,6 +193,69 @@
 			remoteGlobalIDString = 3C2E4346201E7E6C00E4254A;
 			remoteInfo = InputAssistant;
 		};
+		C91DD1B7216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 223496AB1FD5FC71007ED1A9;
+			remoteInfo = ios_system;
+		};
+		C91DD1B9216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 228264E82067F0A9002F9671;
+			remoteInfo = files;
+		};
+		C91DD1BB216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 225E1B6B2067F39F005AC151;
+			remoteInfo = tar;
+		};
+		C91DD1BD216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22F6A10C2068390800E618F9;
+			remoteInfo = shell;
+		};
+		C91DD1BF216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22F6A128206839EF00E618F9;
+			remoteInfo = text;
+		};
+		C91DD1C1216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22F6A14F20683BBD00E618F9;
+			remoteInfo = awk;
+		};
+		C91DD1C3216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22F6A16620683D5200E618F9;
+			remoteInfo = ssh_cmd;
+		};
+		C91DD1C5216D7B6E0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22F6A1AF20683F4100E618F9;
+			remoteInfo = curl_ios;
+		};
+		C91DD1C9216D7B7A0001B21B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 223496AA1FD5FC71007ED1A9;
+			remoteInfo = ios_system;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -217,6 +280,7 @@
 				C9FAD8E9216AD1CB005939AC /* libssh2.framework in Embed Frameworks */,
 				3A2C2D48208156F8002B8230 /* Pisth_API.framework in Embed Frameworks */,
 				C91DD1A9216D76D20001B21B /* InputAssistant.framework in Embed Frameworks */,
+				C91DD1C8216D7B7A0001B21B /* ios_system.framework in Embed Frameworks */,
 				C9FAD8EB216AD1CE005939AC /* tar.framework in Embed Frameworks */,
 				C9FAD8E7216AD1C4005939AC /* openssl.framework in Embed Frameworks */,
 				C9FAD8E3216AD1BF005939AC /* shell.framework in Embed Frameworks */,
@@ -227,7 +291,6 @@
 				C9BBD2C8216C092B001C665D /* LibTermCore.framework in Embed Frameworks */,
 				3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
 				C9FAD8F3216AD1DE005939AC /* lua_ios.framework in Embed Frameworks */,
-				C9FAD8DF216AD174005939AC /* ios_system.framework in Embed Frameworks */,
 				C9FAD8E1216AD1BC005939AC /* network_ios.framework in Embed Frameworks */,
 				C9FAD8F1216AD1DC005939AC /* text.framework in Embed Frameworks */,
 				C9FAD8E5216AD1C2005939AC /* curl_ios.framework in Embed Frameworks */,
@@ -351,6 +414,7 @@
 		C9147BBB216D6DBA00E959DD /* String+cValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cValue.swift"; sourceTree = "<group>"; };
 		C9147BBD216D6E0F00E959DD /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python27.zip; sourceTree = "<group>"; };
 		C91DD19C216D76BF0001B21B /* InputAssistant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InputAssistant.xcodeproj; path = InputAssistant/InputAssistant.xcodeproj; sourceTree = "<group>"; };
+		C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ios_system.xcodeproj; path = ios_system_submodule/ios_system.xcodeproj; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
@@ -450,7 +514,6 @@
 		C9FAD8BF216AD0D9005939AC /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Python_ios.framework; sourceTree = "<group>"; };
 		C9FAD8C0216AD0D9005939AC /* libssh2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libssh2.framework; sourceTree = "<group>"; };
 		C9FAD8C1216AD0D9005939AC /* libctags.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libctags.dylib; sourceTree = "<group>"; };
-		C9FAD8C2216AD0D9005939AC /* ios_system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ios_system.framework; sourceTree = "<group>"; };
 		C9FAD8C3216AD0D9005939AC /* libpdftex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpdftex.dylib; sourceTree = "<group>"; };
 		C9FAD8C4216AD0D9005939AC /* libbibtex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbibtex.dylib; sourceTree = "<group>"; };
 		C9FAD8C5216AD0D9005939AC /* tar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tar.framework; sourceTree = "<group>"; };
@@ -483,9 +546,9 @@
 				C9BBD2C7216C092B001C665D /* LibTermCore.framework in Frameworks */,
 				3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */,
 				C91DD1A8216D76D20001B21B /* InputAssistant.framework in Frameworks */,
-				C9FAD8D5216AD0DA005939AC /* ios_system.framework in Frameworks */,
 				3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
+				C91DD1C7216D7B7A0001B21B /* ios_system.framework in Frameworks */,
 				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,6 +784,7 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
+				C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */,
 				C91DD19C216D76BF0001B21B /* InputAssistant.xcodeproj */,
 				C9BBD2C0216C091A001C665D /* LibTermCore.framework */,
 				C9FAD8B7216AD0D9005939AC /* ios_system */,
@@ -781,6 +845,21 @@
 				C91DD1A3216D76BF0001B21B /* InputAssistant.framework */,
 				C91DD1A5216D76BF0001B21B /* liblibInputAssistant.a */,
 				C91DD1A7216D76BF0001B21B /* InputAssistant Sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C91DD1AD216D7B6D0001B21B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C91DD1B8216D7B6E0001B21B /* ios_system.framework */,
+				C91DD1BA216D7B6E0001B21B /* files.framework */,
+				C91DD1BC216D7B6E0001B21B /* tar.framework */,
+				C91DD1BE216D7B6E0001B21B /* shell.framework */,
+				C91DD1C0216D7B6E0001B21B /* text.framework */,
+				C91DD1C2216D7B6E0001B21B /* awk.framework */,
+				C91DD1C4216D7B6E0001B21B /* ssh_cmd.framework */,
+				C91DD1C6216D7B6E0001B21B /* curl_ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -907,7 +986,6 @@
 				C9FAD8BF216AD0D9005939AC /* Python_ios.framework */,
 				C9FAD8C0216AD0D9005939AC /* libssh2.framework */,
 				C9FAD8C1216AD0D9005939AC /* libctags.dylib */,
-				C9FAD8C2216AD0D9005939AC /* ios_system.framework */,
 				C9FAD8C3216AD0D9005939AC /* libpdftex.dylib */,
 				C9FAD8C4216AD0D9005939AC /* libbibtex.dylib */,
 				C9FAD8C5216AD0D9005939AC /* tar.framework */,
@@ -957,6 +1035,7 @@
 			);
 			dependencies = (
 				C91DD1AB216D76D20001B21B /* PBXTargetDependency */,
+				C91DD1CA216D7B7A0001B21B /* PBXTargetDependency */,
 			);
 			name = Pisth;
 			productName = Pisth;
@@ -1042,6 +1121,10 @@
 					ProductGroup = C91DD19D216D76BF0001B21B /* Products */;
 					ProjectRef = C91DD19C216D76BF0001B21B /* InputAssistant.xcodeproj */;
 				},
+				{
+					ProductGroup = C91DD1AD216D7B6D0001B21B /* Products */;
+					ProjectRef = C91DD1AC216D7B6D0001B21B /* ios_system.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1072,6 +1155,62 @@
 			fileType = wrapper.application;
 			path = "InputAssistant Sample.app";
 			remoteRef = C91DD1A6216D76BF0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1B8216D7B6E0001B21B /* ios_system.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ios_system.framework;
+			remoteRef = C91DD1B7216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1BA216D7B6E0001B21B /* files.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = files.framework;
+			remoteRef = C91DD1B9216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1BC216D7B6E0001B21B /* tar.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = tar.framework;
+			remoteRef = C91DD1BB216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1BE216D7B6E0001B21B /* shell.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = shell.framework;
+			remoteRef = C91DD1BD216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1C0216D7B6E0001B21B /* text.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = text.framework;
+			remoteRef = C91DD1BF216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1C2216D7B6E0001B21B /* awk.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = awk.framework;
+			remoteRef = C91DD1C1216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1C4216D7B6E0001B21B /* ssh_cmd.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ssh_cmd.framework;
+			remoteRef = C91DD1C3216D7B6E0001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91DD1C6216D7B6E0001B21B /* curl_ios.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = curl_ios.framework;
+			remoteRef = C91DD1C5216D7B6E0001B21B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1343,6 +1482,11 @@
 			isa = PBXTargetDependency;
 			name = InputAssistant;
 			targetProxy = C91DD1AA216D76D20001B21B /* PBXContainerItemProxy */;
+		};
+		C91DD1CA216D7B7A0001B21B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ios_system;
+			targetProxy = C91DD1C9216D7B7A0001B21B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
