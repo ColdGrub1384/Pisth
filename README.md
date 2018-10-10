@@ -102,7 +102,8 @@ More information at https://pisth.github.io/docs/getting-started.html.
 1. Download release.tar.gz from [ios_system latest release](https://github.com/holzschu/ios_system/releases/latest)
 2. Unarchive the file.
 3. Move ios_system to the repo.
-4. Just build any target you want from `Pisth.xcworkspace`.
+4. `$ git submodule update --init --recursive`
+5. Just build any target you want from `Pisth.xcworkspace`.
 
 # Projects
 
