@@ -17,9 +17,10 @@ import AVFoundation
 import CoreData
 import PanelKit
 import CoreSpotlight
+import InputAssistant
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate, InputAssistantViewDelegate, InputAssistantViewDataSource {
     
     private var terminalSize: String?
     
@@ -46,42 +47,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Command to run at starting.
     var command: String?
-    
-    /// Ctrl key button.
-    var ctrlKey: UIButton!
-    
-    /// Accessory view used in keyboard.
-    var accessoryView: UIView!
-    
-    /// Toolbar used in keyboard.
-    var toolbar: UIToolbar!
-    
+        
     /// Don't scroll when console's content changes.
     var dontScroll = false
-    
-    /// Send Ctrl key.
-    private var ctrl_ = false
     
     /// The button for becoming or resigning first responder.
     var keyboardButton: UIBarButtonItem!
     
     /// Send Ctrl key.
-    var ctrl: Bool {
-        set {
-            ctrl_ = newValue
-            if self.ctrl_ {
-                ctrlKey.setTitleColor(.lightGray, for: .normal)
-            } else {
-                if TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"]?.toolbarStyle == .default {
-                    ctrlKey.setTitleColor(.black, for: .normal)
-                } else {
-                    ctrlKey.setTitleColor(.white, for: .normal)
-                }
-            }
-        }
-        
-        get {
-            return ctrl_
+    var ctrl = false {
+        didSet {
+            inputAssistant.reloadData()
         }
     }
     
@@ -105,6 +81,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return TerminalTheme.themes[UserKeys.terminalTheme.stringValue!]!
         }
     }
+    
+    /// The input assistant view.
+    let inputAssistant = InputAssistantView()
     
     /// Ignored notifications name strings.
     /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
@@ -176,124 +155,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         completion()
                     }
                 }
-            }
-        }
-    }
-    
-    /// Add keyboard's toolbar.
-    @objc func addToolbar() {
-        
-        var toolbar: UIToolbar
-        
-        if theme.toolbarStyle == .default {
-            toolbar = UIView.whiteTerminalToolbar
-        } else {
-            toolbar = UIView.blackTerminalToolbar
-        }
-        
-        enum ItemsTag: Int {
-            case finger = 1
-            case ctrl = 2
-            case esc = 3
-            case more = 4
-            case hideKeyboard = 5
-            case back = 6
-        }
-        
-        for item in toolbar.items ?? [] {
-            
-            switch item.tag {
-            case ItemsTag.back.rawValue:
-                item.target = (panelNavigationController ?? self)
-                item.action = #selector(close)
-            case ItemsTag.more.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleSecondToolbar(_:)), for: .touchUpInside)
-            case ItemsTag.finger.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendArrows(_:)), for: .touchUpInside)
-            case ItemsTag.hideKeyboard.rawValue:
-                item.target = self
-                item.action = #selector(resignFirstResponder)
-            default:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
-                if item.tag == ItemsTag.ctrl.rawValue {
-                    self.ctrlKey = (item.customView as? UIButton)
-                    
-                    if self.ctrl {
-                        ctrlKey.setTitleColor(.lightGray, for: .normal)
-                    }
-                }
-            }
-        }
-        
-        self.accessoryView = toolbar
-        self.toolbar = toolbar
-        reloadInputViews()
-    }
-    
-    /// Show or hide the first toolbar of the keyboard.
-    @objc func toggleFirstToolbar(_ sender: UIButton) {
-        addToolbar()
-        reloadInputViews()
-    }
-    
-    /// Show or hide the second toolbar of the keyboard.
-    @objc func toggleSecondToolbar(_ sender: UIButton) {
-        
-        var toolbar: UIToolbar
-        
-        if theme.toolbarStyle == .default {
-            toolbar = UIView.secondWhiteTerminalToolbar
-        } else {
-            toolbar = UIView.secondBlackTerminalToolbar
-        }
-                
-        enum ItemsTag: Int {
-            case more = 1
-            case fKeys = 2
-            case arrowRight = 3
-            case arrowDown = 4
-            case arrowUp = 5
-            case arrowLeft = 6
-            case sendPassword = 7
-        }
-        
-        for item in toolbar.items ?? [] {
-            
-            switch item.tag {
-            case ItemsTag.more.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(toggleFirstToolbar(_:)), for: .touchUpInside)
-            case ItemsTag.fKeys.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
-            case ItemsTag.arrowLeft.rawValue, ItemsTag.arrowUp.rawValue, ItemsTag.arrowDown.rawValue, ItemsTag.arrowRight.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(insertKey(_:)), for: .touchUpInside)
-                
-                let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(insertKeyByLongPress(_:)))
-                (item.customView as? UIButton)?.addGestureRecognizer(longPressRecognizer)
-            case ItemsTag.sendPassword.rawValue:
-                (item.customView as? UIButton)?.addTarget(self, action: #selector(sendPassword), for: .touchUpInside)
-            default:
-                break
-            }
-        }
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolbar.frame.height))
-        
-        view.addSubview(toolbar)
-        
-        toolbar.frame.size.width = view.frame.width
-        toolbar.autoresizingMask = [.flexibleWidth]
-        
-        self.toolbar = toolbar
-        accessoryView = view
-        
-        reloadInputViews()
-        
-        
-        if #available(iOS 11.0, *) {
-            if !self.view.safeAreaLayoutGuide.layoutFrame.contains(toolbar.convert(toolbar.frame, to: self.view)) {
-                toolbar.frame.origin.y = view.safeAreaLayoutGuide.layoutFrame.height-toolbar.frame.height
-            } else {
-                toolbar.frame.origin.y = 0
             }
         }
     }
@@ -443,10 +304,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Resize and reload `webView`.
     func resizeView(withSize size: CGSize) {
-        
-        guard toolbar != nil else {
-            return
-        }
                 
         webView.frame.size = size
         webView.frame.origin = CGPoint(x: 0, y: 0)
@@ -510,12 +367,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     override var inputAccessoryView: UIView? {
-        
-        if !isFirstResponder {
-            return nil
-        }
-        
-        return accessoryView
+        return inputAssistant
     }
     
     override func resignFirstResponder() -> Bool {
@@ -563,8 +415,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
-        
-        addToolbar()
         
         // Resize webView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
@@ -627,6 +477,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         (panelNavigationController?.navigationController ?? navigationController)?.view.ignoresInvertColors = true
         
         keyboardAppearance = theme.keyboardAppearance
+        selectionTextView.keyboardAppearance = keyboardAppearance
+        
+        // Input assistant
+        inputAssistant.delegate = self
+        inputAssistant.dataSource = self
+        inputAssistant.attach(to: selectionTextView) // For keyboard appearance
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -725,10 +581,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        if UIApplication.shared.keyWindow?.frame.size == UIScreen.main.bounds.size, let toolbarFrame = toolbar?.convert(toolbar.frame, to: view), toolbarFrame.origin.y > 0 {
-            
-            resizeView(withSize: CGSize(width: view.frame.width, height: toolbarFrame.origin.y))
-        } else if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
         }
         
@@ -764,10 +617,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Enable or disable swiping to send arrow keys.
     ///
     /// - Parameters:
-    ///     - sender: Sender button. If its tint color is white, this function will enable swiping and set its tint color to white, and if its tint color is gray, this function will disable swiping and set its tint color to blue.
-    @objc func sendArrows(_ sender: UIButton) {
+    ///     - flag: If `true`, arrows will be enabled.
+    @objc func toggleSendArrows(_ flag: Bool) {
         
-        if sender.tintColor != .lightGray {
+        if flag {
             let arrowsVC = ArrowsViewController()
             
             view.addSubview(arrowsVC.view)
@@ -776,11 +629,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             for gesture in webView.gestureRecognizers ?? [] {
                 arrowsVC.view.addGestureRecognizer(gesture)
             }
-            
-            sender.tintColor = .lightGray
         } else {
-            
-            sender.isEnabled = false
             
             ArrowsViewController.current?.helpLabel.isHidden = false
             ArrowsViewController.current?.helpLabel.alpha = 1
@@ -801,72 +650,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     ArrowsViewController.current?.helpLabel.isHidden = true
                     
                     ArrowsViewController.current?.view.removeFromSuperview()
-                    
-                    sender.isEnabled = true
                 })
             })
-            
-            sender.tintColor = .white
-        }
-    }
-    
-    /// Insert special key.
-    ///
-    /// The key sent will depend on the button's tag.
-    ///
-    /// # Possible tags
-    /// - 1: Ctrl
-    /// - 6: Esc
-    /// - 7: Function keys
-    /// - 8: Left arrow
-    /// - 9: Up arrow
-    /// - 10: Down arrow
-    /// - 11: Right arrow
-    ///
-    /// - Parameters:
-    ///     - sender: Sender button. Set its tag to insert key.
-    @objc func insertKey(_ sender: UIButton) {
-        
-        if sender.tag == 1 { // ctrl
-            ctrl = !ctrl
-        } else if sender.tag == 6 { // Esc
-            insertText(Keys.esc)
-        } else if sender.tag == 7 { // F keys
-            let commandsVC = CommandsTableViewController()
-            commandsVC.title = "Function keys"
-            commandsVC.commands = [[Keys.f1, "F1"], [Keys.f2, "F2"], [Keys.f3, "F3"], [Keys.f4, "F4"], [Keys.f5, "F5"], [Keys.f6, "F6"], [Keys.f7, "F7"], [Keys.f8, "F8"], [Keys.f9, "F9"], [Keys.f10, "F10"], [Keys.f11, "F11"], [Keys.f12, "F12"]]
-            commandsVC.modalPresentationStyle = .popover
-            
-            if let popover = commandsVC.popoverPresentationController {
-                popover.sourceView = sender
-                popover.delegate = commandsVC
-                
-                self.present(commandsVC, animated: true, completion: nil)
-            }
-        } else if sender.tag == 8 { // Left arrow
-           insertText(Keys.arrowLeft)
-        } else if sender.tag == 9 { // Up arrow
-            insertText(Keys.arrowUp)
-        } else if sender.tag == 10 { // Down arrow
-            insertText(Keys.arrowDown)
-        } else if sender.tag == 11 { // Right arrow
-            insertText(Keys.arrowRight)
-        }
-    }
-    
-    /// Insert key by a long press gesture.
-    @objc func insertKeyByLongPress(_ sender: UILongPressGestureRecognizer) {
-        
-        arrowsLongPressDelay -= 1
-        
-        guard arrowsLongPressDelay <= 0 else {
-            return
-        }
-        
-        arrowsLongPressDelay = 2
-        
-        if let button = sender.view as? UIButton {
-            insertKey(button)
         }
     }
     
@@ -965,7 +750,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 }
                 
                 ctrl = false
-                
             }
             
         } catch {}
@@ -1378,6 +1162,82 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     var modalCloseButtonTitle: String {
         return "×"
+    }
+    
+    // MARK: - Suggestions
+    
+    private struct Suggestion {
+        
+        var name: String
+        var value: String?
+        var customHandler: (() -> Void)?
+    }
+    
+    private var arrows = false
+    
+    private var suggestions: [Suggestion] {
+        
+        if ctrl {
+            var ctrlKeysSuggestions = [Suggestion(name: "abc", value: nil, customHandler: {
+                self.ctrl = false
+            })]
+            let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
+            for key in ctrlKeys {
+                ctrlKeysSuggestions.append(Suggestion(name: "^\(key)", value: key, customHandler: nil))
+            }
+            return ctrlKeysSuggestions
+        } else {
+            return [
+                Suggestion(name: "👆", value: nil, customHandler: {
+                    self.arrows = !self.arrows
+                    self.toggleSendArrows(self.arrows)
+                }),
+                Suggestion(name: "ctrl", value: nil, customHandler: {
+                    self.ctrl = true
+                }),
+                Suggestion(name: "esc", value: Keys.esc, customHandler: nil),
+                Suggestion(name: "←", value: Keys.arrowLeft, customHandler: nil),
+                Suggestion(name: "↑", value: Keys.arrowUp, customHandler: nil),
+                Suggestion(name: "↓", value: Keys.arrowDown, customHandler: nil),
+                Suggestion(name: "→", value: Keys.arrowRight, customHandler: nil),
+                Suggestion(name: "F1-F12", value: nil, customHandler: {
+                    let commandsVC = CommandsTableViewController()
+                    commandsVC.title = "Function keys"
+                    commandsVC.commands = [[Keys.f1, "F1"], [Keys.f2, "F2"], [Keys.f3, "F3"], [Keys.f4, "F4"], [Keys.f5, "F5"], [Keys.f6, "F6"], [Keys.f7, "F7"], [Keys.f8, "F8"], [Keys.f9, "F9"], [Keys.f10, "F10"], [Keys.f11, "F11"], [Keys.f12, "F12"]]
+                    commandsVC.modalPresentationStyle = .popover
+                    
+                    if let popover = commandsVC.popoverPresentationController {
+                        popover.sourceView = self.inputAssistant
+                        popover.delegate = commandsVC
+                        
+                        self.present(commandsVC, animated: true, completion: nil)
+                    }
+                })
+            ]
+        }
+    }
+    
+    // MARK: - Input assistant view delegete
+    
+    func inputAssistantView(_ inputAssistantView: InputAssistantView, didSelectSuggestionAtIndex index: Int) {
+        if let value = suggestions[index].value {
+            insertText(value)
+        }
+        suggestions[index].customHandler?()
+    }
+    
+    // MARK: - Input assistant view data source
+    
+    func textForEmptySuggestionsInInputAssistantView() -> String? {
+        return ""
+    }
+    
+    func numberOfSuggestionsInInputAssistantView() -> Int {
+        return suggestions.count
+    }
+    
+    func inputAssistantView(_ inputAssistantView: InputAssistantView, nameForSuggestionAtIndex index: Int) -> String {
+        return suggestions[index].name
     }
     
     // MARK: - Static

@@ -27,14 +27,12 @@
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
 		3A625BEF208011F7008D647C /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; };
 		3A625BF0208011F7008D647C /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */; };
 		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
 		3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */; };
 		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
 		3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A897E1D201660E400B5C73C /* ArrowsViewController.swift */; };
 		3A89B5BC2037760D00B750D9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BB2037760D00B750D9 /* UIImage.swift */; };
-		3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */; };
 		3A89B5C02037793D00B750D9 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89B5BF2037793D00B750D9 /* UIButton.swift */; };
 		3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */; };
 		3AA117F11FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA117F01FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift */; };
@@ -315,14 +313,12 @@
 		3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A625BEE208011F7008D647C /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Terminal Toolbar-White.xib"; sourceTree = "<group>"; };
 		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
 		3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3A7C919A2044972C006E0434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
 		3A897E1D201660E400B5C73C /* ArrowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowsViewController.swift; sourceTree = "<group>"; };
 		3A89B5BB2037760D00B750D9 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "Terminal Toolbar-Black.xib"; sourceTree = "<group>"; };
 		3A89B5BF2037793D00B750D9 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginsLocalDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		3AA117F01FF414CA007BB84A /* LocalDirectoryCollectionViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryCollectionViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -619,8 +615,6 @@
 			children = (
 				3AA3FDBC2027549800C07C7A /* Grid File Cell.xib */,
 				C98D6CB62101522C00B3052E /* List File Cell.xib */,
-				3A6D4F9C204C965800B3C7F9 /* Terminal Toolbar-White.xib */,
-				3A89B5BD2037777600B750D9 /* Terminal Toolbar-Black.xib */,
 				C9BD28A5210A3E6900244AAF /* Disconnected.xib */,
 				C98D6CB22101303E00B3052E /* Header.xib */,
 				C9BD289E210A3E5200244AAF /* No Connections.xib */,
@@ -1193,7 +1187,6 @@
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
 				3AD7E0572049E8CC00834D59 /* amzn.png in Resources */,
 				C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */,
-				3A6D4F9D204C965900B3C7F9 /* Terminal Toolbar-White.xib in Resources */,
 				C98D6CB32101303E00B3052E /* Header.xib in Resources */,
 				3AD7E0582049E8CD00834D59 /* arch.png in Resources */,
 				3A0964F320CC20A0006D5B4C /* Content.storyboard in Resources */,
@@ -1211,7 +1204,6 @@
 				3AD7E0602049E8D900834D59 /* rhel.png in Resources */,
 				3AD7E0632049E8DD00834D59 /* ubuntu.png in Resources */,
 				3AD7E05A2049E8D000834D59 /* darwin.png in Resources */,
-				3A89B5BE2037777600B750D9 /* Terminal Toolbar-Black.xib in Resources */,
 				C9BD2887210A3E0D00244AAF /* Contribute.xib in Resources */,
 				3AD2F69A20713FC10017F2EB /* Web.xib in Resources */,
 				C9BD285D210A3D1400244AAF /* Connection Info.storyboard in Resources */,
