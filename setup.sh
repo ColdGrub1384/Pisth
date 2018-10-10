@@ -17,10 +17,31 @@ ios_system=$url
 fi
 done
 
+# Get the built xterm.js URL
+
+xtermjs="$(curl -s 'https://api.github.com/repos/ColdGrub1384/Pisth/releases/latest' \
+| grep browser_download_url | cut -d '"' -f 4)"
+xtermjs=' ' read -r -a array <<< "$ios_system"
+
+for url in $xtermjs
+do
+if [[ "$url" == *xtermjs.zip ]]
+then
+xtermjs=$url
+fi
+done
+
 # Download and setup ios_system
 
 curl $ios_system -o ios_system.tar.gz
 tar xf ios_system.tar.gz ios_system_builds/
+rm ios_system.tar.gz
+
+# Download and setup xterm.js
+
+curl $xtermjs -o xtermjs.zip
+unzip xtermjs.zip -d "Pisth Terminal/Pisth Terminal/"
+rm xtermjs.zip
 
 # Update submodules
 
