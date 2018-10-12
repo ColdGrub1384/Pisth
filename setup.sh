@@ -58,3 +58,5 @@ git submodule update --init --recursive
 # Install pods
 
 pod install
+cd "Pisth APT"
+pod install
