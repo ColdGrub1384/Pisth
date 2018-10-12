@@ -45,6 +45,12 @@ curl -L $xtermjs -o xtermjs.zip
 unzip xtermjs.zip -d "Pisth Terminal/Pisth Terminal/"
 rm xtermjs.zip
 
+# Download Pisth Viewer for embedding it into Pisth Mac
+
+curl -L "https://pisth.github.io/PisthViewer/Pisth%20Viewer.zip" -o viewer.zip
+rm -rf "Pisth Mac/Pisth Viewer.app"
+unzip viewer.zip -d "Pisth Mac/"
+
 # Update submodules
 
 git submodule update --init --recursive
