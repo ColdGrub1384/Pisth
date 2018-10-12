@@ -16,23 +16,23 @@ Use Pisth to upload, view and edit files in your SSH server.
 
 Features:
 
-  • Manage files in your SSH server and use the Shell in the same app.
-  • Edit text files and code with colored syntax.
-  • The terminal is like xterm, so you can use text editors such as nano, vim, etc. 
-  • SSH Keys
-  • Drag and drop.
-  • Send special keys.
-  • The terminal supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
-  • Open multiple panels in iPad.
-  • Find your connections with Spotlight.
-  • Share shell session between other devices using Pisth or your Mac.
-  • Transfer files between servers.
-  • Find servers with Bonjour.
+• Manage files in your SSH server and use the Shell in the same app.
+• Edit text files and code with colored syntax.
+• The terminal is like xterm, so you can use text editors such as nano, vim, etc. 
+• A local terminal is integrated with Python 2.7 and Lua.
+• SSH Keys
+• Drag and drop.
+• Send special keys.
+• The terminal supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
+• Open multiple panels in iPad.
+• Find your connections with Spotlight.
+• Share shell session between other devices using Pisth or your Mac.
+• Transfer files between servers.
+• Find servers with Bonjour.
 ```
 
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-green.svg)
-[![Build status](https://build.appcenter.ms/v0.1/apps/3ba4cc7e-7510-4345-b79e-e09b8b046f38/branches/master/badge)](https://appcenter.ms)
 
 ## Screenshots
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
