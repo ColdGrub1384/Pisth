@@ -1,3 +1,8 @@
+<p align="center">
+  <b>Pisth</b> &bull;
+  <a href="https://github.com/ColdGrub1384/Pyto">Pyto</a>
+</p>
+
 Follow [@pisthapp](https://twitter.com/pisthapp) on Twitter for news about this project and commits.
 
 ![mockup](https://pisth.github.io/mockup.png)
