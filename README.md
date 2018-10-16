@@ -1,5 +1,6 @@
 <p align="center">
   <b>Pisth</b> &bull;
+  <a href="https://github.com/ColdGrub1384/Edidown">Edidown</a>
   <a href="https://github.com/ColdGrub1384/Pyto">Pyto</a>
 </p>
 
