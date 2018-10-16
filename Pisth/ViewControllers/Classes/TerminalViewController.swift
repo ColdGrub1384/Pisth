@@ -40,7 +40,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     var viewer = false
     
     /// Directory to open.
-    var pwd: String?
+    var pwd: String? {
+        didSet {
+            files = files_ // Call the getter only once for improving performance
+        }
+    }
     
     /// Content of console.
     var console = ""
@@ -739,6 +743,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     }
                 } else {
                     try connectionManager.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
+                    if text == "\n" {
+                        files = files_
+                        inputAssistant.reloadData()
+                    }
                 }
             } else {
                 if viewer {
@@ -1177,6 +1185,29 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     private var arrows = false
     
+    private var files_: [String] {
+        
+        guard let fileSession = connectionManager.filesSession else {
+            return []
+        }
+        
+        let dir =  pwd ?? (try? fileSession.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "")) ?? "/"
+        
+        guard !viewer, let files = connectionManager.files(inDirectory: dir) else {
+            return []
+        }
+        
+        var filenames = [String]()
+        
+        for file in files {
+            filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+        }
+        
+        return filenames
+    }
+    
+    private var files = [String]()
+    
     private var suggestions: [Suggestion] {
         
         if ctrl {
@@ -1189,7 +1220,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             return ctrlKeysSuggestions
         } else {
-            return [
+            var suggestions = [
                 Suggestion(name: "👆", value: nil, customHandler: {
                     self.arrows = !self.arrows
                     self.toggleSendArrows(self.arrows)
@@ -1216,6 +1247,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     }
                 })
             ]
+            
+            for file in files {
+                suggestions.append(Suggestion(name: URL(fileURLWithPath: file).lastPathComponent, value: file+" ", customHandler: nil))
+            }
+            
+            return suggestions
         }
     }
     
