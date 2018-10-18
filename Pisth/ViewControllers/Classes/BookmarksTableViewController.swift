@@ -60,13 +60,19 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     /// Open the shell.
     @objc func openShell() {
-        guard let term = UIStoryboard(name: "Terminal", bundle: Bundle(for: LTTerminalViewController.self)).instantiateInitialViewController() as? LTTerminalViewController, let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] else {
-            return
+        let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] ?? ProTheme()
+        
+        var preferences = LTTerminalViewController.Preferences()
+        if let foreground = theme.foregroundColor {
+            preferences.foregroundColor = foreground
         }
-        LTForegroundColor = theme.foregroundColor ?? LTForegroundColor
-        LTBackgroundColor = theme.backgroundColor ?? LTBackgroundColor
-        LTKeyboardAppearance = theme.keyboardAppearance
-        LTBarStyle = theme.toolbarStyle
+        if let background = theme.backgroundColor {
+            preferences.backgroundColor = background
+        }
+        preferences.keyboardAppearance = theme.keyboardAppearance
+        preferences.barStyle = theme.toolbarStyle
+        
+        let term = LTTerminalViewController.makeTerminal(preferences: preferences)
         
         initializeEnvironment()
         AppDelegate.shared.navigationController.setViewControllers([term], animated: true)
