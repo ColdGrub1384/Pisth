@@ -591,12 +591,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 return
             }
             
-            guard bookmarksVC.tableView.cellForRow(at: IndexPath(row: index, section: 0)) != nil else {
+            guard bookmarksVC.tableView.cellForRow(at: IndexPath(row: index, section: 1)) != nil else {
                 completionHandler(false)
                 return
             }
             
-            bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 0))
+            bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 1))
         }
     }
     

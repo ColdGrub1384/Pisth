@@ -23,6 +23,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     /// Search controller used to filter connections.
     var searchController: UISearchController!
     
+    private var localTermFound = true
+    
     /// Fetched connections by `searchController` to display.
     var fetchedConnections = [RemoteConnection]()
     
@@ -59,18 +61,31 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     /// Open the shell.
-    @objc func openShell() {
+    func openShell() {
+        
+        if ConnectionManager.shared.session?.isConnected == true {
+            ConnectionManager.shared.session?.disconnect()
+        }
+        if ConnectionManager.shared.filesSession?.isConnected == true {
+            ConnectionManager.shared.filesSession?.disconnect()
+        }
+        ConnectionManager.shared.session = nil
+        ConnectionManager.shared.filesSession = nil
+        
         let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] ?? ProTheme()
         
         var preferences = LTTerminalViewController.Preferences()
         if let foreground = theme.foregroundColor {
+            print(foreground.hexString)
             preferences.foregroundColor = foreground
+            print(preferences.foregroundColor.hexString)
         }
         if let background = theme.backgroundColor {
             preferences.backgroundColor = background
         }
         preferences.keyboardAppearance = theme.keyboardAppearance
         preferences.barStyle = theme.toolbarStyle
+        preferences.caretStyle = .block
         
         let term = LTTerminalViewController.makeTerminal(preferences: preferences)
         
@@ -113,14 +128,13 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
         let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
-        let shellButton = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell))
         
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem
         if !isShell {
-            navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton, shellButton], animated: true)
+            navigationItem.setLeftBarButtonItems([addButton, settingsButton, viewDocumentsButton], animated: true)
         } else {
-            navigationItem.setLeftBarButtonItems([addButton, shellButton], animated: true)
+            navigationItem.setLeftBarButtonItems([addButton], animated: true)
         }
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         tableView.backgroundView = Bundle.main.loadNibNamed("No Connections", owner: nil, options: nil)?.first as? UIView
@@ -175,7 +189,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             return 1
         }
         
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -184,9 +198,9 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             return nil
         }
         
-        if section == 0 {
+        if section == 1 {
             return Localizable.BookmarksTableViewController.connectionsTitle
-        } else if section == 1 {
+        } else if section == 2 {
             return Localizable.BookmarksTableViewController.devicesTitle
         }
         
@@ -198,12 +212,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         
         if section == 0 {
+            return 1
+        } else if section == 1 {
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 return fetchedConnections.count
             }
             
             return DataManager.shared.connections.count
-        } else if section == 1 {
+        } else if section == 2 {
             
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 return fetchedNearby.count+fetchedServices.count
@@ -223,8 +239,23 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             cell.detailTextLabel?.textColor = .white
         }
         
-        // Connections
+        // Local
         if indexPath.section == 0 {
+            
+            cell.textLabel?.text = UIDevice.current.name
+            cell.detailTextLabel?.text = "mobile@localhost/Documents"
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                cell.imageView?.image = UIImage(named: "OnMyiPad_Normal")
+            } else if UIDevice.current.userInterfaceIdiom == .phone {
+                cell.imageView?.image = UIImage(named: "OnMyiPhone_Normal")
+            }
+            
+            cell.isHidden = !localTermFound
+            
+            return cell
+            
+        // Connections
+        } else if indexPath.section == 1 {
             
             cell.accessoryType = .detailButton
             
@@ -261,7 +292,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             }
                         
         // Near devices
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             
             var devices = self.devices
             var services = self.services
@@ -290,7 +321,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return (indexPath.section == 0)
+        return (indexPath.section == 1)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -316,7 +347,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return (indexPath.section == 0)
+        return (indexPath.section == 1)
     }
     
     // MARK: - Table view delegate
@@ -331,7 +362,9 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         AppDelegate.shared.navigationController.navigationBar.isTranslucent = true
         
-        if indexPath.section == 0 { // Open connection
+        if indexPath.section == 0 { // Open local terminal
+            openShell()
+        } else if indexPath.section == 1 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
 
             /// Open connection.
@@ -548,6 +581,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                     fetchedServices.append(service)
                 }
             }
+            
+            localTermFound = (UIDevice.current.name.lowercased().contains(searchText.lowercased()) || "mobile@localhost/documents".contains(searchText.lowercased()))
         }
         
         tableView.reloadData()
@@ -575,7 +610,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         if !devices.contains(peerID) && peerID.displayName != self.peerID.displayName {
             devices.append(peerID)
             
-            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+            tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
         }
     }
     
@@ -588,7 +623,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         if let i = devices.index(of: peerID) {
             devices.remove(at: i)
             
-            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+            tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
         }
     }
     
@@ -606,13 +641,13 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         
         services.append(service)
-        tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+        tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
     }
     
     func netServiceBrowser(_ browser: NetServiceBrowser, didRemove service: NetService, moreComing: Bool) {
         if let i = services.firstIndex(of: service), tableView.numberOfSections > 1 {
             services.remove(at: i)
-            tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
+            tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
         }
     }
     
