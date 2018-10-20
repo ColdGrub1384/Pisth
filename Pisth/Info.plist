@@ -42,7 +42,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11.1</string>
+	<string>11.1.1</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -95,7 +95,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>1</string>
 	<key>Is Beta</key>
 	<string>$(IS_BETA)</string>
 	<key>LSApplicationQueriesSchemes</key>

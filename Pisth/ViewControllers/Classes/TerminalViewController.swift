@@ -1191,7 +1191,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return []
         }
         
-        let dir =  pwd ?? (try? fileSession.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "")) ?? "/"
+        let homeDir = try? fileSession.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "")
+        let dir =  pwd ?? homeDir ?? "/"
         
         guard !viewer, let files = connectionManager.files(inDirectory: dir) else {
             return []
@@ -1201,6 +1202,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         for file in files {
             filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+        }
+        
+        if let data = fileSession.sftp.contents(atPath: (homeDir ?? "~")+"/.bash_history"), let history = String(data: data, encoding: .utf8)?.components(separatedBy: "\n") {
+            for command in history {
+                filenames.append(command)
+            }
         }
         
         return filenames
