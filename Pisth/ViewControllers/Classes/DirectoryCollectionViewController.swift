@@ -1792,6 +1792,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     static var gridLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 100, height: 120)
+        layout.minimumInteritemSpacing = 1
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         return layout
     }
     
