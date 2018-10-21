@@ -503,7 +503,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             } else {
                 openConnection()
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             var all = [Any]()
             for device in devices {
                 all.append(device)
