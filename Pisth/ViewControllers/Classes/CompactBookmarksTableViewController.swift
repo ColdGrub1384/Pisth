@@ -52,7 +52,7 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
         
         // Ask to the user for restarting the current session.
         
-        if indexPath.section == 0, let connection = ConnectionManager.shared.connection, DataManager.shared.connections[indexPath.row] == connection {
+        if indexPath.section == 1, let connection = ConnectionManager.shared.connection, DataManager.shared.connections[indexPath.row] == connection {
             let alert = UIAlertController(title: Localizable.BookmarksTableViewController.sessionAlreadyActiveTitle, message: Localizable.BookmarksTableViewController.sessionAlreadyActiveMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: Localizable.BookmarksTableViewController.resume, style: .default, handler: { (_) in
                 self.dismiss(animated: true, completion: nil)
@@ -65,10 +65,12 @@ class CompactBookmarksTableViewController: BookmarksTableViewController {
             alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
-        } else if indexPath.section == 0 {
+        } else if indexPath.section == 1 {
             dismiss(animated: true) {
                 super.tableView(tableView, didSelectRowAt: indexPath)
             }
+        } else if indexPath.section == 0 {
+            openShell()
         } else {
             super.tableView(tableView, didSelectRowAt: indexPath)
         }

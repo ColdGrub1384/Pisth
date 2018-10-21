@@ -71,6 +71,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         ConnectionManager.shared.session = nil
         ConnectionManager.shared.filesSession = nil
+        ConnectionManager.shared.connection = nil
         
         let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] ?? ProTheme()
         
@@ -84,8 +85,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             preferences.backgroundColor = background
         }
         preferences.keyboardAppearance = theme.keyboardAppearance
-        preferences.barStyle = theme.toolbarStyle
         preferences.caretStyle = .block
+        preferences.barStyle = .default
         
         let term = LTTerminalViewController.makeTerminal(preferences: preferences)
         
