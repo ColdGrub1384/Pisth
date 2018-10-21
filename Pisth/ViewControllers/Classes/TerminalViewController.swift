@@ -702,7 +702,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }
             
             if self.webView != nil {
-                self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString))", completionHandler: { (_, _) in
+                self.webView.evaluateJavaScript("term.write(\(message.javaScriptEscapedString)); term.scrollToBottom();", completionHandler: { (_, _) in
                     
                     // Send data to peer
                     let info = TerminalInfo(message: message, themeName: UserKeys.terminalTheme.stringValue ?? "Pisth", terminalSize: [Float(self.webView.frame.width), Float(self.webView.frame.height)], terminalColsAndRows: self.terminalSize)
