@@ -880,7 +880,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                     } else {
                         
                         // Sorry Termius ;-(
-                        let os = try? connectionManager.session?.channel.execute("""
+                        let os = try? self.connectionManager.session?.channel.execute("""
                         SA_OS_TYPE="Linux"
                         REAL_OS_NAME=`uname`
                         if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
@@ -892,7 +892,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         fi;
                         """)
                         
-                        connectionManager.connection?.os = os ?? nil
+                        self.connectionManager.connection?.os = os ?? nil
                         
                         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
                         request.returnsObjectsAsFaults = false
@@ -901,7 +901,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                             let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
                             
                             for result in results {
-                                if result.value(forKey: "host") as? String == connectionManager.connection?.host {
+                                if result.value(forKey: "host") as? String == self.connectionManager.connection?.host {
                                     if let os = os {
                                         result.setValue(os, forKey: "os")
                                     }
@@ -918,7 +918,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         
                         // Siri Shortcuts
                         
-                        guard let connection = connectionManager.connection else {
+                        guard let connection = self.connectionManager.connection else {
                             return
                         }
                         
