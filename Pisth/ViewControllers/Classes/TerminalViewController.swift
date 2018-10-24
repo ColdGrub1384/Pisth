@@ -585,7 +585,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        let inputAssistantOrigin = view.convert(inputAssistant.frame.origin, from: inputAssistant)
+        if inputAssistantOrigin.y > 0 {
+            resizeView(withSize: CGSize(width: view.frame.width, height: inputAssistantOrigin.y))
+        } else if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
         }
         
