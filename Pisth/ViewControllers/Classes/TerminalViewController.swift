@@ -868,100 +868,102 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
-            do {
-                
-                if !self.pureMode {
+            DispatchQueue.main.async {
+                do {
                     
-                    session.channel.closeShell()
-                    session.channel.delegate = self
-                    try session.channel.startShell()
-                    
-                } else {
-                    
-                    // Sorry Termius ;-(
-                    let os = try? connectionManager.session?.channel.execute("""
-                    SA_OS_TYPE="Linux"
-                    REAL_OS_NAME=`uname`
-                    if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
-                    then
-                    echo $REAL_OS_NAME
-                    else
-                    DISTRIB_ID=\"`cat /etc/*release`\"
-                    echo $DISTRIB_ID;
-                    fi;
-                    """)
-                    
-                    connectionManager.connection?.os = os ?? nil
-                    
-                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-                    request.returnsObjectsAsFaults = false
-                    
-                    do {
-                        let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                    if !self.pureMode {
                         
-                        for result in results {
-                            if result.value(forKey: "host") as? String == connectionManager.connection?.host {
-                                if let os = os {
-                                    result.setValue(os, forKey: "os")
+                        session.channel.closeShell()
+                        session.channel.delegate = self
+                        try session.channel.startShell()
+                        
+                    } else {
+                        
+                        // Sorry Termius ;-(
+                        let os = try? connectionManager.session?.channel.execute("""
+                        SA_OS_TYPE="Linux"
+                        REAL_OS_NAME=`uname`
+                        if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
+                        then
+                        echo $REAL_OS_NAME
+                        else
+                        DISTRIB_ID=\"`cat /etc/*release`\"
+                        echo $DISTRIB_ID;
+                        fi;
+                        """)
+                        
+                        connectionManager.connection?.os = os ?? nil
+                        
+                        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+                        request.returnsObjectsAsFaults = false
+                        
+                        do {
+                            let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                            
+                            for result in results {
+                                if result.value(forKey: "host") as? String == connectionManager.connection?.host {
+                                    if let os = os {
+                                        result.setValue(os, forKey: "os")
+                                    }
                                 }
                             }
+                            
+                            DataManager.shared.saveContext()
+                        } catch let error {
+                            print("Error retrieving connections: \(error.localizedDescription)")
                         }
                         
-                        DataManager.shared.saveContext()
-                    } catch let error {
-                        print("Error retrieving connections: \(error.localizedDescription)")
-                    }
-                    
-                    session.channel.delegate = self
-                    try session.channel.startShell()
-                    
-                    // Siri Shortcuts
-                    
-                    guard let connection = connectionManager.connection else {
-                        return
-                    }
-                    
-                    let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openTerminal")
-                    if #available(iOS 12.0, *) {
-                        activity.isEligibleForPrediction = true
-                        //                    activity.suggestedInvocationPhrase = connection.name
-                    }
-                    activity.isEligibleForSearch = true
-                    activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
-                    activity.title = connection.name
-                    var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
-                    
-                    if let pubKey = connection.publicKey {
-                        userInfo["publicKey"] = pubKey
-                    }
-                    
-                    if let privKey = connection.privateKey {
-                        userInfo["privateKey"] = privKey
-                    }
-                    
-                    activity.userInfo = userInfo
-                    
-                    let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
-                    if let os = connection.os?.lowercased() {
-                        if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                            attributes.thumbnailData = logo.pngData()
+                        session.channel.delegate = self
+                        try session.channel.startShell()
+                        
+                        // Siri Shortcuts
+                        
+                        guard let connection = connectionManager.connection else {
+                            return
                         }
+                        
+                        let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openTerminal")
+                        if #available(iOS 12.0, *) {
+                            activity.isEligibleForPrediction = true
+                            //                    activity.suggestedInvocationPhrase = connection.name
+                        }
+                        activity.isEligibleForSearch = true
+                        activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
+                        activity.title = connection.name
+                        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
+                        
+                        if let pubKey = connection.publicKey {
+                            userInfo["publicKey"] = pubKey
+                        }
+                        
+                        if let privKey = connection.privateKey {
+                            userInfo["privateKey"] = privKey
+                        }
+                        
+                        activity.userInfo = userInfo
+                        
+                        let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+                        if let os = connection.os?.lowercased() {
+                            if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                                attributes.thumbnailData = logo.pngData()
+                            }
+                        }
+                        attributes.addedDate = Date()
+                        attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
+                        activity.contentAttributeSet = attributes
+                        
+                        self.userActivity = activity
                     }
-                    attributes.addedDate = Date()
-                    attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
-                    activity.contentAttributeSet = attributes
                     
-                    self.userActivity = activity
-                }
-                
-                if let pwd = self.pwd {
-                    try session.channel.write("cd '\(pwd)'\n")
-                }
-                
-                if let command = self.command {
-                    try session.channel.write("\(command);\n")
-                }
-            } catch {}
+                    if let pwd = self.pwd {
+                        try session.channel.write("cd '\(pwd)'\n")
+                    }
+                    
+                    if let command = self.command {
+                        try session.channel.write("\(command);\n")
+                    }
+                } catch {}
+            }
         } else {
             webView.evaluateJavaScript("term.write(\(self.console.javaScriptEscapedString))", completionHandler: nil)
         }
