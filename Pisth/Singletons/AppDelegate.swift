@@ -183,7 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         window = UIWindow(frame: UIScreen.main.bounds)
         let content = ContentViewController.makeViewController()
         window?.rootViewController = content
-        ContentViewController.shared = content as? ContentViewController
+        ContentViewController.shared = content
         window?.makeKeyAndVisible()
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (_, _) in }
