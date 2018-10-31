@@ -461,7 +461,7 @@
 "whatsNew.title" = "What's New";
 
 /* All new features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
-"whatsNew.features" = "shell::Terminal::Pisth has now a local shell with Python 2.7.";
+"whatsNew.features" = "shell::Snippets::Pisth allows you now to run snippets of code very quickly.";
 
 /* Main features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
 "whatsNew.welcome" = "Icon::Bookmarks::Organize your favourite connections to be accessed easely from the main screen. Given them names.|File icons/folder::File browser::Browse files over SSH or download, remove or upload files.|shell::Terminal::Over SSH, access to a terminal with xterm features. Use your favourite editors like nano or vim.";

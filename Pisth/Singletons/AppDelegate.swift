@@ -292,7 +292,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         whatsNew.buttonBackgroundColor = window?.tintColor ?? whatsNew.buttonBackgroundColor
         whatsNew.buttonTextColor = .white
         whatsNew.buttonText = Localizable.continue
-        whatsNew.presentationOption = .majorVersion
         if UserKeys.wasWelcomeScreenShown.boolValue {
             whatsNew.titleText = Localizable.WhatsNewViewController.title
         } else {
@@ -305,7 +304,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             }
         }
         setContentMode(ofView: whatsNew.view)
-        if let vc = window?.rootViewController, !isShell {
+        if let vc = window?.rootViewController, !isShell, !NSLocalizedString("whatsNew.features", comment: "").isEmpty {
             #if DEBUG
             vc.present(whatsNew, animated: true, completion: nil)
             #else
