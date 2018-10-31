@@ -23,16 +23,27 @@ class ContentViewController: UIViewController, PanelManager {
     /// The content view.
     @IBOutlet weak var contentView: UIView!
     
-    /// Present the terminal in given directory from given sender. This view controller must be visible.
-    func presentTerminal(inDirectory directory: String, from sender: UIBarButtonItem?) {
+    /// Present the terminal. This view controller must be visible.
+    ///
+    /// - Parameters:
+    ///     - directory: The directory to be the cwd.
+    ///     - command: The command to execute.
+    ///     - sender: The sender bar button item.
+    ///     - view: The sender view.
+    func presentTerminal(inDirectory directory: String? = nil, command: String? = nil, from sender: UIBarButtonItem? = nil, fromView sourceView: UIView? = nil) {
         
         let terminal = TerminalViewController()
         terminal.pwd = directory
+        terminal.command = command
         terminal.console = ""
         
         let terminalPanel = PanelViewController(with: terminal, in: self)
         terminalPanel.modalPresentationStyle = .popover
         terminalPanel.popoverPresentationController?.barButtonItem = sender
+        if let view = sourceView {
+            terminalPanel.popoverPresentationController?.sourceView = view
+            terminalPanel.popoverPresentationController?.sourceRect = view.bounds
+        }
         
         var vc: UIViewController? = self
         if view.window == nil {

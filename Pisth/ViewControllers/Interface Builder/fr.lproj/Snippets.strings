@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "4Qe-cm-UHS"; */
+"4Qe-cm-UHS.normalTitle" = "Éditer";
+
+/* Class = "UILabel"; text = "Snippets"; ObjectID = "6Lu-Gd-WTV"; */
+"6Lu-Gd-WTV.text" = "Snippets";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "rkH-eu-4Q6"; */
+"rkH-eu-4Q6.placeholder" = "Chercher";

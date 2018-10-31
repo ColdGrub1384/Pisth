@@ -50,6 +50,36 @@ class Localizable: Static {
     
     // MARK: - Other
     
+    class SnippetsViewController: Static {
+        
+        /// The alternate state of the 'Edit' button
+        static let done = NSLocalizedString("snippets.done", comment: "The alternate state of the 'Edit' button")
+        
+        /// The button for editing the table view content
+        static let edit = NSLocalizedString("snippets.edit", comment: "The button for editing the table view content")
+        
+        /// The title of the alert for creating a snippet
+        static let createSnippet = NSLocalizedString("snippets.createSnippet", comment: "The title of the alert for creating a snippet")
+        
+        /// The message of the alert for creating a snippet
+        static let createSnippetMessage = NSLocalizedString("snippets.createSnippetMessage", comment: "The message of the alert for creating a snippet")
+        
+        /// The button for adding a snippet
+        static let add = NSLocalizedString("snippets.add", comment: "The button for adding a snippet")
+        
+        /// The error saying that the code cannot be empty
+        static let emptyCode = NSLocalizedString("snippets.emptyCode", comment: "The error saying that the code cannot be empty")
+        
+        /// The placeholder for typing the snippet title
+        static let title = NSLocalizedString("snippets.title", comment: "The placeholder for typing the snippet title")
+        
+        /// The placeholder for typing the snippet code
+        static let code = NSLocalizedString("snippets.code", comment: "The placeholder for typing the snippet code")
+        
+        /// The error saying that the snippet already exists
+        static let alreadyExists = NSLocalizedString("snippets.alreadyExists", comment: "The error saying that the snippet already exists")
+    }
+    
     class WhatsNewViewController: Static {
         
         /// Title for View controller displaying new update features.

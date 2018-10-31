@@ -588,7 +588,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         tableView.reloadData()
     }
-    /// Reset connections.
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()

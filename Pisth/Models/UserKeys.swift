@@ -46,4 +46,7 @@ class UserKeys: Static {
     
     /// This key says if hidden files should be shown. Its value should be a boolean.
     static let shouldHiddenFilesBeShown = ud.item(forKey: "hidden")
+    
+    /// This key contains all snippets.
+    static let snippets = ud.item(forKey: "snippets")
 }

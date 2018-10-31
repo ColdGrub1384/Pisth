@@ -373,6 +373,33 @@
 /* Use Touch ID */
 "settings.useTouchID" = "Touch ID";
 
+/* The button for adding a snippet */
+"snippets.add" = "Ajouter";
+
+/* The error saying that the snippet already exists */
+"snippets.alreadyExists" = "Ce snippet éxiste déjà.";
+
+/* The placeholder for typing the snippet code */
+"snippets.code" = "Code";
+
+/* The title of the alert for creating a snippet */
+"snippets.createSnippet" = "Créer un snippet";
+
+/* The message of the alert for creating a snippet */
+"snippets.createSnippetMessage" = "Entrez le titre et le contenu du nouveau snippet.";
+
+/* The alternate state of the 'Edit' button */
+"snippets.done" = "Terminé";
+
+/* The button for editing the table view content */
+"snippets.edit" = "Éditer";
+
+/* The error saying that the code cannot be empty */
+"snippets.emptyCode" = "Le code ne peut pas être vide.";
+
+/* The placeholder for typing the snippet title */
+"snippets.title" = "Titre";
+
 /* Accept invitation from peer. */
 "terminal.accept" = "Accepter";
 

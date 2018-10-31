@@ -373,6 +373,33 @@
 /* Use Touch ID */
 "settings.useTouchID" = "Use Touch ID";
 
+/* The button for adding a snippet */
+"snippets.add" = "Add";
+
+/* The error saying that the snippet already exists */
+"snippets.alreadyExists" = "This snippet already exists.";
+
+/* The placeholder for typing the snippet code */
+"snippets.code" = "Code";
+
+/* The title of the alert for creating a snippet */
+"snippets.createSnippet" = "Create a snippet";
+
+/* The message of the alert for creating a snippet */
+"snippets.createSnippetMessage" = "Please type the snippet title and content.";
+
+/* The alternate state of the 'Edit' button */
+"snippets.done" = "Done";
+
+/* The button for editing the table view content */
+"snippets.edit" = "Edit";
+
+/* The error saying that the code cannot be empty */
+"snippets.emptyCode" = "The code cannot be empty.";
+
+/* The placeholder for typing the snippet title */
+"snippets.title" = "Title";
+
 /* Accept invitation from peer. */
 "terminal.accept" = "Accept";
 

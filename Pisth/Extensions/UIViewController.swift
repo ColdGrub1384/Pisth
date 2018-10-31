@@ -69,4 +69,9 @@ extension UIViewController {
     static var fileInfo: FileInfoViewController {
         return (Bundle.main.loadNibNamed("File Info", owner: nil, options: nil)?[0] as? FileInfoViewController) ?? FileInfoViewController()
     }
+    
+    /// Returns the Snippets view controller initialised from Storyboard.
+    static var snippets: SnippetsViewController {
+        return UIStoryboard(name: "Snippets", bundle: nil).instantiateInitialViewController() as? SnippetsViewController ?? SnippetsViewController()
+    }
 }
