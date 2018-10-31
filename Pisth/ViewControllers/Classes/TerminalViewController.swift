@@ -253,6 +253,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             }))
         }
         
+        actions.append(UIAlertAction(title: "Snippets", style: .default, handler: { (_) in
+            self.present(SnippetsViewController.makeViewController(connectionManager: self.connectionManager), animated: true, completion: nil)
+        }))
+        
         actions.append(UIAlertAction(title: Localizable.TerminalViewController.paste, style: .default, handler: { (_) in
             self.insertText(UIPasteboard.general.string ?? "")
         }))

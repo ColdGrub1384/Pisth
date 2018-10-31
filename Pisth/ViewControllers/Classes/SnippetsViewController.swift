@@ -27,11 +27,22 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     /// Code called for collapsing this View controller.
     var collapsionHandler: (() -> Void)?
     
+    private var connection_: RemoteConnection?
+    
     /// The connection where snippets are from.
-    var connection: RemoteConnection!
+    var connection: RemoteConnection {
+        if let connection = connection_ ?? connectionManager?.connection {
+            return connection
+        } else {
+            fatalError("`connection` or `connectionManager` should be defined but both are undefined")
+        }
+    }
     
     /// The directory where the commands are ran.
     var directory: String?
+    
+    /// The connection manager where run snippets.
+    var connectionManager: ConnectionManager?
     
     /// Snippets for the current connection.
     var snippets: [Snippet] {
@@ -40,6 +51,11 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             return fetchedSnippets
         }
+    }
+    
+    /// Dismisses this View controller.
+    @objc func dismissViewController() {
+        dismiss(animated: true, completion: nil)
     }
     
     private var fetchedSnippets = [Snippet]()
@@ -153,10 +169,30 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     static func makeViewController(connection: RemoteConnection, directory: String) -> SnippetsViewController {
         
         let vc = makeViewController()
-        vc.connection = connection
+        vc.connection_ = connection
         vc.directory = directory
         
         return vc
+    }
+    
+    /// Makes a new View controller for managing snippets inside a terminal.
+    ///
+    /// - Parameters:
+    ///     - connectionManager: The connectionn where run snippets.
+    ///
+    /// - Returns: A newly initialized View controller.
+    static func makeViewController(connectionManager: ConnectionManager) -> UINavigationController {
+        
+        let vc = makeViewController()
+        vc.connectionManager = connectionManager
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(SnippetsViewController.dismissViewController))
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .formSheet
+        navVC.navigationBar.isTranslucent = false
+        navVC.navigationBar.shadowImage = UIImage()
+        
+        return navVC
     }
     
     // MARK: - View controller
@@ -228,7 +264,12 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         collapsionHandler?()
         
-        ContentViewController.shared.presentTerminal(inDirectory: directory, command: snippets[indexPath.row].content, fromView: handleArea)
+        if let manager = connectionManager {
+            try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
+            dismiss(animated: true, completion: nil)
+        } else {
+            ContentViewController.shared.presentTerminal(inDirectory: directory, command: snippets[indexPath.row].content, fromView: handleArea)
+        }
     }
     
     // MARK: - Table view drag delegate
