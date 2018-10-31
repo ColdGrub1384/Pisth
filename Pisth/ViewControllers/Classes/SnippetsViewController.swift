@@ -185,6 +185,10 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         let vc = makeViewController()
         vc.connectionManager = connectionManager
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(SnippetsViewController.dismissViewController))
+        vc.loadViewIfNeeded()
+        if let cardView = vc.view.viewWithTag(1) {
+            cardView.removeFromSuperview()
+        }
         
         let navVC = UINavigationController(rootViewController: vc)
         navVC.modalPresentationStyle = .formSheet
