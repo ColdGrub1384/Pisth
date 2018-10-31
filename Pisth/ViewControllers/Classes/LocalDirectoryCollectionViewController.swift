@@ -752,7 +752,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             
             if let _ = try? String.init(contentsOfFile: file.path) { // Is text
                 var editTextVC: EditTextViewController! {
-                    let editTextViewController = UIViewController.codeEditor
+                    let editTextViewController = EditTextViewController.makeViewController()
                     
                     editTextViewController.file = file
                     
@@ -762,7 +762,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 if file.pathExtension.lowercased() == "html" || file.pathExtension.lowercased() == "htm" { // Ask for view HTML or edit
                     let alert = UIAlertController(title: Localizable.LocalDirectoryCollectionViewController.openFileTitle, message: Localizable.LocalDirectoryCollectionViewController.openFileMessage, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: Localizable.LocalDirectoryCollectionViewController.viewHTML, style: .default, handler: { (_) in // View HTML
-                        let webVC = UIViewController.webViewController
+                        let webVC = WebViewController.makeViewController()
                         webVC.file = file
                         
                         vc.present(UINavigationController(rootViewController: webVC), animated: true, completion: nil)
@@ -819,7 +819,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
             }
             
             if isFilePDF(file) {
-                let webVC = UIViewController.webViewController
+                let webVC = WebViewController.makeViewController()
                 webVC.file = file
                 
                 if viewController == nil {
@@ -851,7 +851,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                     })
                 }
             } else if let image = UIImage(contentsOfFile: file.path) { // Image
-                let imageViewer = UIViewController.imageViewer
+                let imageViewer = ImageViewController.makeViewController()
                 imageViewer.image = image
                 if viewController == nil {
                     vc.present(UINavigationController(rootViewController: imageViewer), animated: true, completion: nil)

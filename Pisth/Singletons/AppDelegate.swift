@@ -181,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         DataManager.shared.saveCompletion = update3DTouchShortucts
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let content = UIViewController.content
+        let content = ContentViewController.makeViewController()
         window?.rootViewController = content
         ContentViewController.shared = content as? ContentViewController
         window?.makeKeyAndVisible()

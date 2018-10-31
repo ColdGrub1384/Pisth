@@ -10,7 +10,7 @@ import Pisth_Shared
 import Firebase
 
 /// Table view controller to display Git branches at `repoPath`.
-class GitBranchesTableViewController: UITableViewController {
+class GitBranchesTableViewController: UITableViewController, Storyboard {
 
     /// Remote path of Git repo.
     var repoPath: String!
@@ -90,7 +90,7 @@ class GitBranchesTableViewController: UITableViewController {
     
     /// Git pull
     @IBAction func pull(_ sender: Any) {
-        let remotesVC = UIViewController.gitRemoteBranches
+        let remotesVC = GitRemotesTableViewController.makeViewController()
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)
@@ -113,7 +113,7 @@ class GitBranchesTableViewController: UITableViewController {
     
     /// Git push.
     @IBAction func push(_ sender: Any) {
-        let remotesVC = UIViewController.gitRemoteBranches
+        let remotesVC = GitRemotesTableViewController.makeViewController()
         remotesVC.repoPath = repoPath
         
         let navVC = UINavigationController(rootViewController: remotesVC)
@@ -166,5 +166,19 @@ class GitBranchesTableViewController: UITableViewController {
         
         launch(command: "git -C '\(repoPath!)' log --graph \(branches[indexPath.row])", withTitle: Localizable.Git.commits(for: branches[indexPath.row]))
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - Storyboard
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: "Git", bundle: nil)
+    }
+    
+    static var storyboardIdentifier: String? {
+        if self is GitRemotesTableViewController.Type {
+            return "remoteBranches"
+        } else {
+            return "localBranches"
+        }
     }
 }

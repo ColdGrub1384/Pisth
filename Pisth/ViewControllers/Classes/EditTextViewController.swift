@@ -12,12 +12,22 @@ import Firebase
 import Pisth_Shared
 
 /// View controller used to edit text files.
-class EditTextViewController: UIViewController, UITextViewDelegate {
+class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
     
     /// Dismiss this View controller.
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    /// The 'Done' button for dissmissing this View controller.
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    /// The button for changing language.
+    @IBOutlet weak var languageButton: UIBarButtonItem!
+    
+    /// The button for changing the theme.
+    @IBOutlet weak var themeButton: UIBarButtonItem!
+    
     
     /// View created from IB managing size of `textView`.
     @IBOutlet weak var placeholderView: UIView!
@@ -121,6 +131,9 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
+        
+        navigationItem.leftBarButtonItem = doneButton
+        navigationItem.rightBarButtonItems = [languageButton, themeButton]
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -365,5 +378,11 @@ class EditTextViewController: UIViewController, UITextViewDelegate {
     @objc func keyboardWillHide(_ notification:Notification) {
         textView.contentInset = .zero
         textView.scrollIndicatorInsets = .zero
+    }
+    
+    // MARK: - Xib
+    
+    static var nibName: String {
+        return "Code Editor"
     }
 }

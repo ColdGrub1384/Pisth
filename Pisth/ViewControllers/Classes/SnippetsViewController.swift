@@ -10,7 +10,7 @@ import UIKit
 import Pisth_Shared
 
 /// The View controller for commiting files.
-class SnippetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITableViewDragDelegate, UISearchBarDelegate {
+class SnippetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITableViewDragDelegate, UISearchBarDelegate, Storyboard {
     
     /// The table view displaying files.
     @IBOutlet weak var tableView: UITableView!
@@ -143,6 +143,22 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         present(creationAlert, animated: true, completion: nil)
     }
     
+    /// Makes a new View controller for managing snippets.
+    ///
+    /// - Parameters:
+    ///     - connection: The connection where snippets are from.
+    ///     - directory: The directory where run snippets.
+    ///
+    /// - Returns: A newly initialized View controller.
+    static func makeViewController(connection: RemoteConnection, directory: String) -> SnippetsViewController {
+        
+        let vc = makeViewController()
+        vc.connection = connection
+        vc.directory = directory
+        
+        return vc
+    }
+    
     // MARK: - View controller
     
     override func viewDidLoad() {
@@ -253,6 +269,12 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.tableView.reloadData()
         })
+    }
+    
+    // MARK: - Storyboard
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: "Snippets", bundle: nil)
     }
 }
 

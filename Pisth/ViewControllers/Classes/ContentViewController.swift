@@ -10,7 +10,7 @@ import PanelKit
 import Pisth_Shared
 
 /// A View controller for showing connection content.
-class ContentViewController: UIViewController, PanelManager {
+class ContentViewController: UIViewController, PanelManager, Storyboard {
     
     /// The panel containing the current terminal.
     var terminalPanels = [PanelViewController]()
@@ -179,6 +179,12 @@ class ContentViewController: UIViewController, PanelManager {
                 layout.itemSize.width = dirVC.view.frame.width
             }
         }
+    }
+    
+    // MARK: - Storyboard
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: "Content", bundle: nil)
     }
     
     // MARK: - Static

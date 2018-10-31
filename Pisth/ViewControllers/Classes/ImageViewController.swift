@@ -8,7 +8,10 @@
 import UIKit
 
 /// View controller used to view an image.
-class ImageViewController: UIViewController, UIScrollViewDelegate {
+class ImageViewController: UIViewController, UIScrollViewDelegate, Xib {
+    
+    /// The 'Done' button for dissmiss this View controller.
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     /// Dismiss this View controller.
     ///
@@ -29,6 +32,12 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: View Controller
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = doneButton
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -47,5 +56,11 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
+    }
+    
+    // MARK: - Xib
+    
+    static var nibName: String {
+        return "Image"
     }
 }

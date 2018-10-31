@@ -9,7 +9,7 @@ import UIKit
 import SafariServices
 
 /// View controller for inviting people to contribute to this project.
-class ContributeViewController: UIViewController {
+class ContributeViewController: UIViewController, Xib {
     
     @IBAction func showSourceCode(_ sender: Any) {
         let vc = SFSafariViewController(url: URL(string:"https://github.com/ColdGrub1384/Pisth")!)
@@ -18,5 +18,11 @@ class ContributeViewController: UIViewController {
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Xib
+    
+    static var nibName: String {
+        return "Contribute"
     }
 }

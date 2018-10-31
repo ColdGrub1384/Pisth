@@ -10,7 +10,7 @@ import Pisth_Shared
 import MobileCoreServices
 
 /// `ConnectionInformationTableViewController` that can import keys pair.
-class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, UIDocumentPickerDelegate {
+class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, UIDocumentPickerDelegate, Storyboard {
     
     private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
     private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
@@ -125,5 +125,11 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             privateKey = nil
             importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPrivateKey, for: .normal)
         }
+    }
+    
+    // MARK: - Storyboard
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: "Connection Info", bundle: nil)
     }
 }

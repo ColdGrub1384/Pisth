@@ -137,7 +137,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             return
         }
         
-        let fileInfoVC = UIViewController.fileInfo
+        let fileInfoVC = FileInfoViewController.makeViewController()
         fileInfoVC.file = files[sender.tag]
         if sender.tag != files.count-1 {
             fileInfoVC.parentDirectory = directory
@@ -664,7 +664,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Open source control manager for Git repos.
     @objc func git() {
-        let navVC = UIViewController.gitNavigationController
+        let navVC = SourceControlTableViewController.makeViewController()
         guard let branchesVC = navVC.topViewController as? SourceControlTableViewController else { return }
         
         branchesVC.repoPath = directory
@@ -1858,9 +1858,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         visualEffectView.isUserInteractionEnabled = false
         cardSuperView.addSubview(visualEffectView)
         
-        cardViewController = UIViewController.snippets
-        cardViewController.directory = directory
-        cardViewController.connection = connection
+        cardViewController = SnippetsViewController.makeViewController(connection: connection, directory: directory)
         cardViewController.expansionHandler = {
             if !self.cardVisible {
                 self.animateTransitionIfNeeded(state: .expanded, duration: 0.9)

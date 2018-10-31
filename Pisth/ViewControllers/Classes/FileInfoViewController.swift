@@ -10,7 +10,7 @@ import NMSSH
 import MobileCoreServices
 
 /// A View controller for displaying remote file info.
-class FileInfoViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class FileInfoViewController: UIViewController, UIPopoverPresentationControllerDelegate, Xib {
     
     /// Close this view controller
     @objc func close() {
@@ -104,5 +104,11 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
     func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
         
         return UINavigationController(rootViewController: self)
+    }
+    
+    // MARK: - Xib
+    
+    static var nibName: String {
+        return "File Info"
     }
 }

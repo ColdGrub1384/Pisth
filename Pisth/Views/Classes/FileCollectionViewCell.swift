@@ -329,7 +329,7 @@ class FileCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let fileInfoVC = UIViewController.fileInfo
+        let fileInfoVC = FileInfoViewController.makeViewController()
         fileInfoVC.file = directoryCollectionViewController.files?[i]
         if i != directoryCollectionViewController.files!.count-1 {
             fileInfoVC.parentDirectory = directoryCollectionViewController.directory

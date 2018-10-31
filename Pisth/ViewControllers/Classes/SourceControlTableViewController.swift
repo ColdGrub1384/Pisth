@@ -49,4 +49,8 @@ class SourceControlTableViewController: UITableViewController {
             remotesVC.repoPath = repoPath
         }
     }
+        
+    static func makeViewController() -> UINavigationController {
+        return UIStoryboard(name: "Git", bundle: Bundle.main).instantiateInitialViewController() as! UINavigationController
+    }
 }

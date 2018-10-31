@@ -44,7 +44,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     /// Open app's settings.
     @objc func openSettings() {
-        let navVC = UINavigationController(rootViewController: UIViewController.settings)
+        let navVC = UINavigationController(rootViewController: SettingsTableViewController.makeViewController())
         navVC.modalPresentationStyle = .formSheet
         
         present(navVC, animated: true, completion: nil)
@@ -104,7 +104,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     ///     - index: Index of connection to edit.
     func showInfoAlert(editInfoAt index: Int? = nil) {
         
-        let editConnectionVC = UIViewController.connectionInfo
+        let editConnectionVC = PisthConnectionInformationTableViewController.makeViewController()
         editConnectionVC.rootTableView = tableView
         
         if let index = index {

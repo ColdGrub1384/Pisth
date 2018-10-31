@@ -11,7 +11,7 @@ import Pisth_Shared
 import SafariServices
 
 /// Table view controller for displaying and changing settings.
-class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, Storyboard {
     
     /// Index of each setting.
     class IndexPaths {
@@ -233,7 +233,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.sourceCode {
                 
             // View the source code
-            present(UIViewController.contribute, animated: true, completion: nil)
+            present(ContributeViewController.makeViewController(), animated: true, completion: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else if indexPath == IndexPaths.twitter {
@@ -287,6 +287,12 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         NotificationCenter.default.post(name: .init("TerminalThemeDidChanged"), object: TerminalTheme.themes[title.text!])
         
         collectionView.reloadData()
+    }
+    
+    // MARK: - Storyboard
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard(name: "Settings", bundle: nil)
     }
 }
 
