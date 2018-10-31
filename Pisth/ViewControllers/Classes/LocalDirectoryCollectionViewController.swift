@@ -716,6 +716,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     static func listLayout(forView view: UIView) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        layout.minimumInteritemSpacing = 1
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         return layout
     }
     
