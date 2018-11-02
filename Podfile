@@ -12,14 +12,14 @@ target 'Pisth' do
   # Pods for Pisth
 
   pod 'NMSSH'
-  pod 'Highlightr'
+  pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master' 
   pod 'Zip'
   pod 'SwiftKeychainWrapper'
-  pod 'BiometricAuthentication'
+  pod 'BiometricAuthentication', '~> 2.1'
   pod 'ActionSheetPicker-3.0'
   pod 'Firebase/Core'
   pod 'PanelKit'
-  pod 'WhatsNew'
+  pod 'WhatsNew', '~> 0.4.4'
   pod 'ObjectUserDefaults'
 end
 
@@ -34,4 +34,18 @@ target 'Pisth Mac' do
   # Pods for Pisth
   
   pod 'ObjectUserDefaults'
+end
+
+# post install
+post_install do |installer|
+    # Build settings
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings = config.build_settings.dup
+            if config.build_settings['PRODUCT_MODULE_NAME'] == 'PanelKit'
+                puts "Set Swift version for PanelKit"
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+    end
 end
