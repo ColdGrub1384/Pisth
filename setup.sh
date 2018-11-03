@@ -50,6 +50,7 @@ rm xtermjs.zip
 curl -L "https://pisth.github.io/PisthViewer/Pisth%20Viewer.zip" -o viewer.zip
 rm -rf "Pisth Mac/Pisth Viewer.app"
 unzip viewer.zip -d "Pisth Mac/"
+rm viewer.zip
 
 # Update submodules
 
