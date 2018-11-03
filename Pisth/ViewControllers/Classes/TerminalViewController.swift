@@ -312,7 +312,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Resize and reload `webView`.
     func resizeView(withSize size: CGSize) {
-                
         webView.frame.size = size
         webView.frame.origin = CGPoint(x: 0, y: 0)
         if let arrowsVC = ArrowsViewController.current {
@@ -424,9 +423,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
-        // Resize webView
+        // Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenDidConnect), name: UIScreen.didConnectNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenDidDisconnect), name: UIScreen.didDisconnectNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChanged), name: .init("TerminalThemeDidChanged"), object: nil)
         
         // Setup connectivity
@@ -519,6 +520,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
         
+        // External display
+        if UIScreen.screens.count > 1, let externalDisplay = UIScreen.screens.last {
+            setupExternalDisplay(externalDisplay)
+        }
+        
          _ = becomeFirstResponder()
     }
     
@@ -585,7 +591,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
-        guard isPresentedInFullscreen else {
+        guard isPresentedInFullscreen, UIScreen.screens.count == 1 else {
             return
         }
         
@@ -612,6 +618,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let i = ignoredNotifications.index(of: notification.name) {
                 ignoredNotifications.remove(at: i)
             }
+            return
+        }
+        
+        guard UIScreen.screens.count == 1 else {
             return
         }
         
@@ -998,6 +1008,59 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             try? connectionManager.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
         }
         completionHandler()
+    }
+    
+    // MARK: - External display
+    
+    /// Called when an external display is connected.
+    @objc func screenDidConnect(_ notification: Notification) {
+        if let externalDisplay = UIScreen.screens.last {
+            setupExternalDisplay(externalDisplay)
+        }
+    }
+    
+    /// Called when an external display is disconnected.
+    @objc func screenDidDisconnect(_ notification: Notification) {
+        setupMainDisplay()
+    }
+    
+    /// The window for the external window.
+    var externalWindow: UIWindow?
+    
+    /// Setups the main display. Called when an external display is not available anymore.
+    func setupMainDisplay() {
+        webView.removeFromSuperview()
+        externalWindow?.isHidden = true
+        externalWindow = nil
+        
+        view.addSubview(webView)
+        resizeView(withSize: view.frame.size)
+        webView.reload()
+        _ = becomeFirstResponder()
+    }
+    
+    /// Setups the given display. Called when an external display is available.
+    ///
+    /// - Parameters:
+    ///     - display: The external display to setup.
+    func setupExternalDisplay(_ display: UIScreen) {
+        
+        for controller in ContentViewController.shared.terminalPanels {
+            if let terminal = controller.contentViewController as? TerminalViewController, terminal !== self {
+                terminal.setupMainDisplay()
+            }
+        }
+        
+        externalWindow = UIWindow(frame: display.bounds)
+        
+        externalWindow?.screen = display
+        externalWindow?.isHidden = false
+        
+        webView.removeFromSuperview()
+        externalWindow?.addSubview(webView)
+        
+        resizeView(withSize: display.bounds.size)
+        webView.reload()
     }
     
     // MARK: - Multipeer connectivity
