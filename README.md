@@ -29,7 +29,6 @@ Features:
 • SSH Keys
 • Drag and drop.
 • Send special keys.
-• The terminal supports Bluetooth keyboard including arrows and ctrl keys but excluding function keys.
 • Open multiple panels in iPad.
 • Find your connections with Spotlight.
 • Share shell session between other devices using Pisth or your Mac.
