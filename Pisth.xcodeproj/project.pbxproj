@@ -232,6 +232,13 @@
 			remoteGlobalIDString = C9FAD8F8216AD24A005939AC;
 			remoteInfo = LibTermCore;
 		};
+		C9F15D3321939324003AC553 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C91D4CF1218F9D98003F73FF;
+			remoteInfo = "LibTerm Simulator";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -846,6 +853,7 @@
 			children = (
 				C91DD1F5216E79840001B21B /* LibTerm.app */,
 				C91DD1F7216E79840001B21B /* LibTermCore.framework */,
+				C9F15D3421939324003AC553 /* LibTerm Simulator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1167,6 +1175,13 @@
 			fileType = wrapper.framework;
 			path = LibTermCore.framework;
 			remoteRef = C91DD1F6216E79840001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C9F15D3421939324003AC553 /* LibTerm Simulator.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "LibTerm Simulator.app";
+			remoteRef = C9F15D3321939324003AC553 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
