@@ -109,7 +109,6 @@ Then build any scheme you want from `Pisth.xcworkspace`.
 
 # Projects
 
-- [Pisth/pisth.github.io](https://github.com/Pisth/pisth.github.io): Page for this project.
 - [Pisth/docs](https://github.com/Pisth/docs): Documentation for the API.
 - [Pisth/meta](https://github.com/Pisth/meta): Metadata for App Store Connect.
 - [Pisth/Licenses](https://github.com/Pisth/Licenses): Open source licenses used in the project.
