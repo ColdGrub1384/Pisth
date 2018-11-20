@@ -90,7 +90,14 @@ class Localizable: Static {
         /// Formated as: `"Image Name::Title::Subtitle|Image Name::Title::Subtitle"`
         static var features: [WhatsNewItem] {
             var items = [WhatsNewItem]()
-            for component in NSLocalizedString("whatsNew.features", comment: "All new features by title.`Formated as: \"Image Name::Title::Subtitle|Image Name::Title::Subtitle\"").components(separatedBy: "|") {
+            
+            let features = NSLocalizedString("whatsNew.features", comment: "All new features by title.`Formated as: \"Image Name::Title::Subtitle|Image Name::Title::Subtitle\"")
+            
+            guard !features.isEmpty else {
+                return []
+            }
+            
+            for component in features.components(separatedBy: "|") {
                 if component.components(separatedBy: "::").count < 3 {
                     items.append(WhatsNewItem.text(title: component.components(separatedBy: "::")[0], subtitle: component.components(separatedBy: "::")[1]))
                 } else {
