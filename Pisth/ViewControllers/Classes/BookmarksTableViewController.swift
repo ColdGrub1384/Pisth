@@ -89,7 +89,8 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         preferences.barStyle = .default
         
         let term = LTTerminalViewController.makeTerminal(preferences: preferences)
-        
+        term.loadViewIfNeeded()
+        term.tprint("IMPORTANT! Pisth is not a local terminal by itself like Blink. Do not use the terminal to open connections every time. Pisth has a UI and the terminal is just for running local commands but not opening connections! The `ssh` and `sftp` commands just open the corresponding URL. You can use these commands to add bookmarks, but then, it's highly recommendable to use the bookmark. Pisth do not contain the true `ssh` and `sftp` commands. They are just for adding bookmarks. For adding SSH Keys, use the UI.\n\n")
         initializeEnvironment()
         AppDelegate.shared.navigationController.setViewControllers([term], animated: true)
         
