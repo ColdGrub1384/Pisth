@@ -461,7 +461,7 @@
 "whatsNew.title" = "Novedades";
 
 /* All new features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
-"whatsNew.features" = "shell::Terminal::Pisth vous permet maintenant d'exécuter des fragments de code très rapidement.";
+"whatsNew.features" = "";
 
 /* Main features by title. Formated as: "Image Name::Title::Subtitle|Image Name::Title::Subtitle" */
 "whatsNew.welcome" = "Icon::Marcador::Organise sus conexiones para que sean facilmente accesibles desde la pantalla principal.|File icons/folder::Navegador de archivos::Navegue archivos a través del SSH o descargue, borre o suba archivos.|shell::Terminal::A través del SSH, accede a un terminal con las funcionalidades de xterm y use sus editores favoritos como nano o vim.";
