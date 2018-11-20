@@ -244,7 +244,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         } else if indexPath == IndexPaths.twitter {
             
             // Show Twitter account
-            UIApplication.shared.open(URL(string:"https://twitter.com/pisthapp")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+            UIApplication.shared.open(URL(string:"https://twitter.com/develobile")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else {
