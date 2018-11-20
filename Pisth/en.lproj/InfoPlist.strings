@@ -1,2 +1,4 @@
 
 "NSFaceIDUsageDescription" = "This app requires Face ID permission to authenticate using Face recognition.";
+
+"NSPhotoLibraryUsageDescription" = "This app requires access to the Photo Library for saving downloaded photos.";

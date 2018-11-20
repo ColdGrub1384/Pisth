@@ -1,2 +1,4 @@
 
 "NSFaceIDUsageDescription" = "Esta app requiere Face ID para el reconocimiento facial.";
+
+"NSPhotoLibraryUsageDescription" = "Esta aplicación requiere acceso a la biblioteca de fotos para guardar las fotos descargadas.";
