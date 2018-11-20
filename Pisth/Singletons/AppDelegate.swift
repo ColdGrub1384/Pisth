@@ -157,6 +157,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         sideLoading = true
         initializeEnvironment()
         
+        // cacert.pem
+        let cacertNewURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("cacert.pem")
+        if let cacertURL = Bundle.main.url(forResource: "cacert", withExtension: "pem"), !FileManager.default.fileExists(atPath: cacertNewURL.path) {
+            try? FileManager.default.copyItem(at: cacertURL, to: cacertNewURL)
+        }
+        
         // Python
         putenv("PYTHONHOME=\(Bundle.main.bundlePath)".cValue)
         putenv("PYTHONPATH=\(Bundle.main.bundlePath)/site-packages".cValue)

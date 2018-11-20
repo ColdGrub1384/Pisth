@@ -90,7 +90,7 @@
 		C911BEE72189F07C00B5FCE5 /* Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE62189F07C00B5FCE5 /* Xib.swift */; };
 		C911BEE92189F5A200B5FCE5 /* WebViewController+Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */; };
 		C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9147BBB216D6DBA00E959DD /* String+cValue.swift */; };
-		C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */ = {isa = PBXBuildFile; fileRef = C9147BBD216D6E0F00E959DD /* python27.zip */; };
+		C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */ = {isa = PBXBuildFile; fileRef = C9147BBD216D6E0F00E959DD /* python27.zip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BF216AD0D9005939AC /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; };
 		C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -103,6 +103,7 @@
 		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
 		C951122B2183BBF200A0D1BC /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C951122A2183BBF200A0D1BC /* Snippet.swift */; };
 		C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */ = {isa = PBXBuildFile; fileRef = C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */; };
+		C95BE13A21A4AC1100FB135B /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = C95BE13921A4AC1100FB135B /* cacert.pem */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
@@ -409,6 +410,7 @@
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C951122A2183BBF200A0D1BC /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
+		C95BE13921A4AC1100FB135B /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C95BE13921A4AC1100FB135B /* cacert.pem */,
 				C9147BBD216D6E0F00E959DD /* python27.zip */,
 				C9BD2858210A353F00244AAF /* Localizable.strings */,
 				C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */,
@@ -1215,6 +1218,7 @@
 				C911BED62189E1C700B5FCE5 /* Snippets.storyboard in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */,
+				C95BE13A21A4AC1100FB135B /* cacert.pem in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
 				C9BD2864210A3D7400244AAF /* Code Editor.xib in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
