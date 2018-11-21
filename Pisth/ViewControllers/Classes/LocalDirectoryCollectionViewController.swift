@@ -617,6 +617,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
+            _ = urls[0].startAccessingSecurityScopedResource()
             do {
                 try FileManager.default.copyItem(atPath: url.path, toPath: directory.appendingPathComponent(url.lastPathComponent).path)
                 reload()

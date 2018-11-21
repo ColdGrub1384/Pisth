@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the Photo Library for saving downloaded photos.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
@@ -97,7 +95,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>5</string>
 	<key>Is Beta</key>
 	<string>$(IS_BETA)</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -113,6 +111,8 @@
 	</dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>This app requires Face ID permission to authenticate using Face recognition.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the Photo Library for saving downloaded photos.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ch.marcela.ada.Pisth.openDirectory</string>

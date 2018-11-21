@@ -1495,7 +1495,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
-        if urls.count == 1 {
+        if urls.count == 1 && urls[0].startAccessingSecurityScopedResource() {
             documentPicker(controller, didPickDocumentAt: urls[0])
             return
         }

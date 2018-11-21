@@ -12,8 +12,8 @@ import MobileCoreServices
 /// `ConnectionInformationTableViewController` that can import keys pair.
 class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, UIDocumentPickerDelegate, Storyboard {
     
-    private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
-    private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .open)
+    private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .open)
+    private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .open)
     
     override var isUsernameRequired: Bool {
         return false
@@ -103,6 +103,9 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     // MARK: - Document picker delegate
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        
+        _ = urls[0].startAccessingSecurityScopedResource()
+        
         if controller === publicKeyPicker {
             publicKey = (try? String(contentsOf: urls[0]))
             importPublicKeyBtn.setTitle(urls[0].lastPathComponent, for: .normal)
