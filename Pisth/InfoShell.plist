@@ -52,6 +52,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>pisthapt</string>
+		<string>libterm</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

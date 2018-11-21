@@ -9,7 +9,6 @@ import UIKit
 import BiometricAuthentication
 import Pisth_Shared
 import SafariServices
-import LibTermCore
 
 /// Table view controller for displaying and changing settings.
 class SettingsTableViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegate, Storyboard {
@@ -55,10 +54,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     /// Close this view controller.
     @IBAction func close() {
         dismiss(animated: true, completion: nil)
-        
-        if AppDelegate.shared.navigationController.visibleViewController is LTTerminalViewController {
-            BookmarksTableViewController().openShell()
-        }
     }
     
     /// MARK: - View controller

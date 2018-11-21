@@ -90,20 +90,13 @@
 		C911BEE72189F07C00B5FCE5 /* Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE62189F07C00B5FCE5 /* Xib.swift */; };
 		C911BEE92189F5A200B5FCE5 /* WebViewController+Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */; };
 		C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9147BBB216D6DBA00E959DD /* String+cValue.swift */; };
-		C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */ = {isa = PBXBuildFile; fileRef = C9147BBD216D6E0F00E959DD /* python27.zip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BF216AD0D9005939AC /* Python_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; };
 		C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C91DD1E9216E78EE0001B21B /* ios_system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1E8216E78D30001B21B /* ios_system.framework */; };
-		C91DD1EA216E78EE0001B21B /* ios_system.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1E8216E78D30001B21B /* ios_system.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C91DD1F8216E79930001B21B /* LibTermCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1F7216E79840001B21B /* LibTermCore.framework */; };
-		C91DD1F9216E79930001B21B /* LibTermCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1F7216E79840001B21B /* LibTermCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
 		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
 		C951122B2183BBF200A0D1BC /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C951122A2183BBF200A0D1BC /* Snippet.swift */; };
 		C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */ = {isa = PBXBuildFile; fileRef = C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */; };
-		C95BE13A21A4AC1100FB135B /* cacert.pem in Resources */ = {isa = PBXBuildFile; fileRef = C95BE13921A4AC1100FB135B /* cacert.pem */; };
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
@@ -153,16 +146,6 @@
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
-		C9FAD8E1216AD1BC005939AC /* network_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BA216AD0D9005939AC /* network_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8E3216AD1BF005939AC /* shell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8B9216AD0D9005939AC /* shell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8E5216AD1C2005939AC /* curl_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BC216AD0D9005939AC /* curl_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8E7216AD1C4005939AC /* openssl.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8BE216AD0D9005939AC /* openssl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8E9216AD1CB005939AC /* libssh2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C0216AD0D9005939AC /* libssh2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8EB216AD1CE005939AC /* tar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C5216AD0D9005939AC /* tar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8ED216AD1D0005939AC /* awk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C6216AD0D9005939AC /* awk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8EF216AD1D3005939AC /* files.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C7216AD0D9005939AC /* files.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8F1216AD1DC005939AC /* text.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8C9216AD0D9005939AC /* text.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9FAD8F3216AD1DE005939AC /* lua_ios.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9FAD8CA216AD0D9005939AC /* lua_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
 		DC58430070C076BEF19AEF4D /* Pods_Pisth_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */; };
@@ -198,48 +181,6 @@
 			remoteGlobalIDString = 3C2E4346201E7E6C00E4254A;
 			remoteInfo = InputAssistant;
 		};
-		C91DD1E7216E78D30001B21B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 223496AB1FD5FC71007ED1A9;
-			remoteInfo = ios_system;
-		};
-		C91DD1EB216E78EE0001B21B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 223496AA1FD5FC71007ED1A9;
-			remoteInfo = ios_system;
-		};
-		C91DD1F4216E79840001B21B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C9806BC12160467E00F870B5;
-			remoteInfo = LibTerm;
-		};
-		C91DD1F6216E79840001B21B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C9FAD8F9216AD24A005939AC;
-			remoteInfo = LibTermCore;
-		};
-		C91DD1FA216E79930001B21B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C9FAD8F8216AD24A005939AC;
-			remoteInfo = LibTermCore;
-		};
-		C9F15D3321939324003AC553 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C91D4CF1218F9D98003F73FF;
-			remoteInfo = "LibTerm Simulator";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -261,36 +202,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C9FAD8E9216AD1CB005939AC /* libssh2.framework in Embed Frameworks */,
 				3A2C2D48208156F8002B8230 /* Pisth_API.framework in Embed Frameworks */,
 				C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */,
-				C91DD1EA216E78EE0001B21B /* ios_system.framework in Embed Frameworks */,
-				C9FAD8EB216AD1CE005939AC /* tar.framework in Embed Frameworks */,
-				C9FAD8E7216AD1C4005939AC /* openssl.framework in Embed Frameworks */,
-				C91DD1F9216E79930001B21B /* LibTermCore.framework in Embed Frameworks */,
-				C9FAD8E3216AD1BF005939AC /* shell.framework in Embed Frameworks */,
 				3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */,
-				C9FAD8EF216AD1D3005939AC /* files.framework in Embed Frameworks */,
-				C9147BC2216D6E7600E959DD /* Python_ios.framework in Embed Frameworks */,
-				C9FAD8ED216AD1D0005939AC /* awk.framework in Embed Frameworks */,
 				3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */,
-				C9FAD8F3216AD1DE005939AC /* lua_ios.framework in Embed Frameworks */,
-				C9FAD8E1216AD1BC005939AC /* network_ios.framework in Embed Frameworks */,
-				C9FAD8F1216AD1DC005939AC /* text.framework in Embed Frameworks */,
-				C9FAD8E5216AD1C2005939AC /* curl_ios.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9147BBF216D6E2000E959DD /* Copy Python Home */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = lib;
-			dstSubfolderSpec = 7;
-			files = (
-				C9147BC0216D6E2B00E959DD /* python27.zip in Copy Python Home */,
-			);
-			name = "Copy Python Home";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C9CB27F420D5C22D00290DBE /* Embed Frameworks */ = {
@@ -401,16 +318,12 @@
 		C911BEE62189F07C00B5FCE5 /* Xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xib.swift; sourceTree = "<group>"; };
 		C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Xib.swift"; sourceTree = "<group>"; };
 		C9147BBB216D6DBA00E959DD /* String+cValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cValue.swift"; sourceTree = "<group>"; };
-		C9147BBD216D6E0F00E959DD /* python27.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = python27.zip; sourceTree = "<group>"; };
 		C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InputAssistant.xcodeproj; path = InputAssistant/InputAssistant.xcodeproj; sourceTree = "<group>"; };
-		C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ios_system.xcodeproj; path = ios_system/ios_system.xcodeproj; sourceTree = "<group>"; };
-		C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LibTerm.xcodeproj; path = LibTerm/LibTerm.xcodeproj; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C951122A2183BBF200A0D1BC /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
-		C95BE13921A4AC1100FB135B /* cacert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cacert.pem; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -493,24 +406,6 @@
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
-		C9FAD8B8216AD0D9005939AC /* libtexlua52.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtexlua52.5.dylib; sourceTree = "<group>"; };
-		C9FAD8B9216AD0D9005939AC /* shell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = shell.framework; sourceTree = "<group>"; };
-		C9FAD8BA216AD0D9005939AC /* network_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = network_ios.framework; sourceTree = "<group>"; };
-		C9FAD8BB216AD0D9005939AC /* libkpathsea.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libkpathsea.6.dylib; sourceTree = "<group>"; };
-		C9FAD8BC216AD0D9005939AC /* curl_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = curl_ios.framework; sourceTree = "<group>"; };
-		C9FAD8BD216AD0D9005939AC /* libluatex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libluatex.dylib; sourceTree = "<group>"; };
-		C9FAD8BE216AD0D9005939AC /* openssl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = openssl.framework; sourceTree = "<group>"; };
-		C9FAD8BF216AD0D9005939AC /* Python_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Python_ios.framework; sourceTree = "<group>"; };
-		C9FAD8C0216AD0D9005939AC /* libssh2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libssh2.framework; sourceTree = "<group>"; };
-		C9FAD8C1216AD0D9005939AC /* libctags.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libctags.dylib; sourceTree = "<group>"; };
-		C9FAD8C3216AD0D9005939AC /* libpdftex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpdftex.dylib; sourceTree = "<group>"; };
-		C9FAD8C4216AD0D9005939AC /* libbibtex.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libbibtex.dylib; sourceTree = "<group>"; };
-		C9FAD8C5216AD0D9005939AC /* tar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tar.framework; sourceTree = "<group>"; };
-		C9FAD8C6216AD0D9005939AC /* awk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = awk.framework; sourceTree = "<group>"; };
-		C9FAD8C7216AD0D9005939AC /* files.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = files.framework; sourceTree = "<group>"; };
-		C9FAD8C8216AD0D9005939AC /* ssh_cmd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ssh_cmd.framework; sourceTree = "<group>"; };
-		C9FAD8C9216AD0D9005939AC /* text.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = text.framework; sourceTree = "<group>"; };
-		C9FAD8CA216AD0D9005939AC /* lua_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = lua_ios.framework; sourceTree = "<group>"; };
 		C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
@@ -532,12 +427,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C91DD1F8216E79930001B21B /* LibTermCore.framework in Frameworks */,
 				3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */,
 				C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */,
 				3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
-				C91DD1E9216E78EE0001B21B /* ios_system.framework in Frameworks */,
 				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,8 +601,6 @@
 		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C95BE13921A4AC1100FB135B /* cacert.pem */,
-				C9147BBD216D6E0F00E959DD /* python27.zip */,
 				C9BD2858210A353F00244AAF /* Localizable.strings */,
 				C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */,
 				C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */,
@@ -778,10 +669,7 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
-				C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */,
-				C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */,
 				C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */,
-				C9FAD8B7216AD0D9005939AC /* ios_system_builds */,
 				C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */,
 				3A2C2D46208156F8002B8230 /* Pisth_API.framework */,
 				3A625BEE208011F7008D647C /* Pisth_Shared.framework */,
@@ -839,24 +727,6 @@
 				C91DD1DA216E74340001B21B /* InputAssistant.framework */,
 				C91DD1DC216E74340001B21B /* liblibInputAssistant.a */,
 				C91DD1DE216E74340001B21B /* InputAssistant Sample.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C91DD1E4216E78D20001B21B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C91DD1E8216E78D30001B21B /* ios_system.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C91DD1EE216E79830001B21B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C91DD1F5216E79840001B21B /* LibTerm.app */,
-				C91DD1F7216E79840001B21B /* LibTermCore.framework */,
-				C9F15D3421939324003AC553 /* LibTerm Simulator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -970,31 +840,6 @@
 			path = "Pisth Mac";
 			sourceTree = "<group>";
 		};
-		C9FAD8B7216AD0D9005939AC /* ios_system_builds */ = {
-			isa = PBXGroup;
-			children = (
-				C9FAD8B8216AD0D9005939AC /* libtexlua52.5.dylib */,
-				C9FAD8B9216AD0D9005939AC /* shell.framework */,
-				C9FAD8BA216AD0D9005939AC /* network_ios.framework */,
-				C9FAD8BB216AD0D9005939AC /* libkpathsea.6.dylib */,
-				C9FAD8BC216AD0D9005939AC /* curl_ios.framework */,
-				C9FAD8BD216AD0D9005939AC /* libluatex.dylib */,
-				C9FAD8BE216AD0D9005939AC /* openssl.framework */,
-				C9FAD8BF216AD0D9005939AC /* Python_ios.framework */,
-				C9FAD8C0216AD0D9005939AC /* libssh2.framework */,
-				C9FAD8C1216AD0D9005939AC /* libctags.dylib */,
-				C9FAD8C3216AD0D9005939AC /* libpdftex.dylib */,
-				C9FAD8C4216AD0D9005939AC /* libbibtex.dylib */,
-				C9FAD8C5216AD0D9005939AC /* tar.framework */,
-				C9FAD8C6216AD0D9005939AC /* awk.framework */,
-				C9FAD8C7216AD0D9005939AC /* files.framework */,
-				C9FAD8C8216AD0D9005939AC /* ssh_cmd.framework */,
-				C9FAD8C9216AD0D9005939AC /* text.framework */,
-				C9FAD8CA216AD0D9005939AC /* lua_ios.framework */,
-			);
-			path = ios_system_builds;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1026,14 +871,11 @@
 				3AFDD8FF1FF140FE0061677B /* Resources */,
 				F21CA456D2169C5D27312609 /* [CP] Embed Pods Frameworks */,
 				3ACF9B0A2041B300006C3218 /* Embed Frameworks */,
-				C9147BBF216D6E2000E959DD /* Copy Python Home */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C91DD1E2216E743F0001B21B /* PBXTargetDependency */,
-				C91DD1EC216E78EE0001B21B /* PBXTargetDependency */,
-				C91DD1FB216E79930001B21B /* PBXTargetDependency */,
 			);
 			name = Pisth;
 			productName = Pisth;
@@ -1119,14 +961,6 @@
 					ProductGroup = C91DD1D4216E74340001B21B /* Products */;
 					ProjectRef = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
 				},
-				{
-					ProductGroup = C91DD1E4216E78D20001B21B /* Products */;
-					ProjectRef = C91DD1E3216E78D20001B21B /* ios_system.xcodeproj */;
-				},
-				{
-					ProductGroup = C91DD1EE216E79830001B21B /* Products */;
-					ProjectRef = C91DD1ED216E79830001B21B /* LibTerm.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1157,34 +991,6 @@
 			fileType = wrapper.application;
 			path = "InputAssistant Sample.app";
 			remoteRef = C91DD1DD216E74340001B21B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C91DD1E8216E78D30001B21B /* ios_system.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ios_system.framework;
-			remoteRef = C91DD1E7216E78D30001B21B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C91DD1F5216E79840001B21B /* LibTerm.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = LibTerm.app;
-			remoteRef = C91DD1F4216E79840001B21B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C91DD1F7216E79840001B21B /* LibTermCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LibTermCore.framework;
-			remoteRef = C91DD1F6216E79840001B21B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C9F15D3421939324003AC553 /* LibTerm Simulator.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "LibTerm Simulator.app";
-			remoteRef = C9F15D3321939324003AC553 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1218,7 +1024,6 @@
 				C911BED62189E1C700B5FCE5 /* Snippets.storyboard in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
 				3AA3FDBE2027549900C07C7A /* Grid File Cell.xib in Resources */,
-				C95BE13A21A4AC1100FB135B /* cacert.pem in Resources */,
 				3AEF111A201115850089389E /* empty in Resources */,
 				C9BD2864210A3D7400244AAF /* Code Editor.xib in Resources */,
 				3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */,
@@ -1461,16 +1266,6 @@
 			isa = PBXTargetDependency;
 			name = InputAssistant;
 			targetProxy = C91DD1E1216E743F0001B21B /* PBXContainerItemProxy */;
-		};
-		C91DD1EC216E78EE0001B21B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ios_system;
-			targetProxy = C91DD1EB216E78EE0001B21B /* PBXContainerItemProxy */;
-		};
-		C91DD1FB216E79930001B21B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = LibTermCore;
-			targetProxy = C91DD1FA216E79930001B21B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -13,7 +13,6 @@ import Firebase
 import Pisth_API
 import UserNotifications
 import WhatsNew
-import ios_system
 
 /// Returns `true` if the app was built as the free version containing only the Shell. Use this boolean to limit functionalities.
 var isShell: Bool {
@@ -152,22 +151,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.shared = self
-        
-        // ios_system
-        sideLoading = true
-        initializeEnvironment()
-        
-        // cacert.pem
-        let cacertNewURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask)[0].appendingPathComponent("cacert.pem")
-        if let cacertURL = Bundle.main.url(forResource: "cacert", withExtension: "pem"), !FileManager.default.fileExists(atPath: cacertNewURL.path) {
-            try? FileManager.default.copyItem(at: cacertURL, to: cacertNewURL)
-        }
-        
-        // Python
-        putenv("PYTHONHOME=\(Bundle.main.bundlePath)".cValue)
-        putenv("PYTHONPATH=\(Bundle.main.bundlePath)/site-packages".cValue)
-        putenv("PYTHONOPTIMIZE=".cValue)
-        putenv("PYTHONDONTWRITEBYTECODE=1".cValue)
         
         UIMenuController.shared.menuItems = [
             .init(title: Localizable.UIMenuItem.delete, action: #selector(FileCollectionViewCell.deleteFile(_:))),

@@ -11,11 +11,10 @@ import SwiftKeychainWrapper
 import BiometricAuthentication
 import MultipeerConnectivity
 import Pisth_Shared
-import LibTermCore
-import ios_system
+import StoreKit
 
 /// `TableViewController` used to list, connections.
-class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, NetServiceBrowserDelegate, NetServiceDelegate {
+class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, MCNearbyServiceBrowserDelegate, NetServiceBrowserDelegate, NetServiceDelegate, SKStoreProductViewControllerDelegate {
     
     /// Delegate used.
     var delegate: BookmarksTableViewControllerDelegate?
@@ -62,39 +61,14 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
     
     /// Open the shell.
     func openShell() {
-        
-        if ConnectionManager.shared.session?.isConnected == true {
-            ConnectionManager.shared.session?.disconnect()
+        if let url = URL(string: "libterm://"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            let appStore = SKStoreProductViewController()
+            appStore.delegate = self
+            appStore.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: "1380911705"], completionBlock: nil)
+            present(appStore, animated: true, completion: nil)
         }
-        if ConnectionManager.shared.filesSession?.isConnected == true {
-            ConnectionManager.shared.filesSession?.disconnect()
-        }
-        ConnectionManager.shared.session = nil
-        ConnectionManager.shared.filesSession = nil
-        ConnectionManager.shared.connection = nil
-        
-        let theme = TerminalTheme.themes[UserKeys.terminalTheme.stringValue ?? "Pisth"] ?? ProTheme()
-        
-        var preferences = LTTerminalViewController.Preferences()
-        if let foreground = theme.foregroundColor {
-            print(foreground.hexString)
-            preferences.foregroundColor = foreground
-            print(preferences.foregroundColor.hexString)
-        }
-        if let background = theme.backgroundColor {
-            preferences.backgroundColor = background
-        }
-        preferences.keyboardAppearance = theme.keyboardAppearance
-        preferences.caretStyle = .block
-        preferences.barStyle = .default
-        
-        let term = LTTerminalViewController.makeTerminal(preferences: preferences)
-        term.loadViewIfNeeded()
-        term.tprint("IMPORTANT! Pisth is not a local terminal by itself like Blink. Do not use the terminal to open connections every time. Pisth has a UI and the terminal is just for running local commands but not opening connections! The `ssh` and `sftp` commands just open the corresponding URL. You can use these commands to add bookmarks, but then, it's highly recommendable to use the bookmark. Pisth do not contain the true `ssh` and `sftp` commands. They are just for adding bookmarks. For adding SSH Keys, use the UI.\n\n")
-        initializeEnvironment()
-        AppDelegate.shared.navigationController.setViewControllers([term], animated: true)
-        
-        term.navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
     }
     
     /// Edit connection or create connnection.
@@ -366,6 +340,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         if indexPath.section == 0 { // Open local terminal
             openShell()
+            tableView.deselectRow(at: indexPath, animated: true)
         } else if indexPath.section == 1 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
 
@@ -672,5 +647,11 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             return
         }
         _ = AppDelegate.shared.application(UIApplication.shared, open: url, options: [:])
+    }
+    
+    // MARK: - Store product view controller delegate
+    
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
