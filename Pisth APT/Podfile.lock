@@ -1,5 +1,5 @@
 PODS:
-  - BiometricAuthentication (1.0.5)
+  - BiometricAuthentication (2.1)
   - Firebase/Core (4.9.0):
     - FirebaseAnalytics (= 4.0.9)
     - FirebaseCore (= 4.0.15)
@@ -24,7 +24,7 @@ PODS:
   - NMSSH (2.2.8)
 
 DEPENDENCIES:
-  - BiometricAuthentication
+  - BiometricAuthentication (~> 2.1)
   - Firebase/Core
   - Google-Mobile-Ads-SDK
   - NMSSH
@@ -42,7 +42,7 @@ SPEC REPOS:
     - NMSSH
 
 SPEC CHECKSUMS:
-  BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
+  BiometricAuthentication: 6928c01583bc707f92c11349f190d5ae052217d3
   Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
   FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NMSSH: b722885a07485a2c03ffa3ea56a7b0308dbdc37c
 
-PODFILE CHECKSUM: 11363eaee74b1a3712b38966b4c077b49505dd14
+PODFILE CHECKSUM: 3cc142191ffcf6cc7279ad1dc3e7818295ee786d
 
 COCOAPODS: 1.5.3
