@@ -97,7 +97,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Navigation controller to reset at `viewDidDisappear(_:)`.
     var navigationController_: UINavigationController?
-    
+        
     /// Show commands history.
     @available(*, deprecated, message: "Showing the history from the terminal is now unsupported.")
     @objc func showHistory(_ sender: UIBarButtonItem) {

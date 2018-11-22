@@ -100,6 +100,7 @@
 		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
+		C987685221A62780009EA25C /* FloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C987685121A62780009EA25C /* FloatingPanelLandscapeLayout.swift */; };
 		C98D6CB32101303E00B3052E /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB22101303E00B3052E /* Header.xib */; };
 		C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */; };
 		C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB62101522C00B3052E /* List File Cell.xib */; };
@@ -329,6 +330,7 @@
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C983BF9D2110DEE900CCB298 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C983BF9E2110DEEB00CCB298 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C987685121A62780009EA25C /* FloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
 		C98D6CB22101303E00B3052E /* Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Header.xib; sourceTree = "<group>"; };
 		C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderToolbar.swift; sourceTree = "<group>"; };
 		C98D6CB62101522C00B3052E /* List File Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "List File Cell.xib"; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 				C9213CFD2141E0C800DEDD6C /* Static.swift */,
 				C9213CFB2141E08E00DEDD6C /* UserKeys.swift */,
 				C951122A2183BBF200A0D1BC /* Snippet.swift */,
+				C987685121A62780009EA25C /* FloatingPanelLandscapeLayout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1190,6 +1193,7 @@
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */,
 				C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */,
+				C987685221A62780009EA25C /* FloatingPanelLandscapeLayout.swift in Sources */,
 				C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
