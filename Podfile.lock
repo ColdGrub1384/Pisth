@@ -51,7 +51,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - NMSSH (2.3.1)
+  - NMSSH (2.2.9)
   - ObjectUserDefaults (1.0)
   - PanelKit (2.0.1)
   - SwiftKeychainWrapper (3.0.1)
@@ -63,7 +63,7 @@ DEPENDENCIES:
   - BiometricAuthentication (~> 2.1)
   - Firebase/Core
   - Highlightr (from `https://github.com/raspu/Highlightr.git`, branch `master`)
-  - NMSSH
+  - NMSSH (~> 2.2.8)
   - ObjectUserDefaults
   - PanelKit
   - SwiftKeychainWrapper
@@ -109,13 +109,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   Highlightr: 8162b4faba588963fb8852390ea9a78f166a6b99
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  NMSSH: cd689ae535a1581a6dd9fd4600ff71247df510a6
+  NMSSH: eb4a63d52631d3ffe348181793bb19434b01c32a
   ObjectUserDefaults: 72b8d13aea15090168579b079a21cae312a1cefd
   PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   WhatsNew: ebb4e2a85a0975c7c2705087c0c67939451f8b49
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: c919e0b44cd280877a006fc13f78deadabc75f06
+PODFILE CHECKSUM: bbc81e281ffc57441342c567fa1dce20ada1565c
 
 COCOAPODS: 1.5.3
