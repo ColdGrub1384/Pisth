@@ -21,7 +21,6 @@ target 'Pisth' do
   pod 'PanelKit'
   pod 'WhatsNew', '~> 0.4.4'
   pod 'ObjectUserDefaults'
-  pod 'FloatingPanel'
 end
 
 target 'Pisth Mac' do

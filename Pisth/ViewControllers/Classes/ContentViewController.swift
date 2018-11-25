@@ -8,7 +8,6 @@
 import UIKit
 import PanelKit
 import Pisth_Shared
-import FloatingPanel
 
 /// A View controller for showing connection content.
 class ContentViewController: UIViewController, PanelManager, Storyboard {

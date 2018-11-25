@@ -9,10 +9,16 @@ import UIKit
 import Pisth_Shared
 
 /// The View controller for commiting files.
-class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UISearchBarDelegate, Storyboard {
+class SnippetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITableViewDragDelegate, UISearchBarDelegate, Storyboard {
+    
+    /// The table view displaying files.
+    @IBOutlet weak var tableView: UITableView!
     
     /// The search bar for searching for snippets.
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    /// The area that allows to show this View controller like in the Shortcuts app.
+    @IBOutlet weak var handleArea: UIView!
     
     /// Code called for expanding this View controller.
     var expansionHandler: (() -> Void)?
@@ -192,7 +198,7 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         return navVC
     }
     
-    // MARK: - Table View controller
+    // MARK: - View controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,11 +209,13 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // MARK: - Table view data source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return snippets.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         
         let title = snippets[indexPath.row].title
@@ -223,7 +231,7 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return [UITableViewRowAction(style: .destructive, title: Localizable.UIMenuItem.delete, handler: { (_, indexPath) in
             if let index = self.allSnippets.firstIndex(of: self.snippets[indexPath.row]) {
                 self.allSnippets.remove(at: index)
@@ -232,11 +240,11 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         })]
     }
     
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return (searchBar.text == nil || searchBar.text?.isEmpty == true)
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         let snippet = snippets[sourceIndexPath.row]
         
@@ -248,11 +256,13 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         allSnippets.insert(snippet, at: destinationIndex)
     }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    // MARK: - Table view delegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         expansionHandler?()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         collapsionHandler?()
@@ -261,7 +271,7 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
             try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
             dismiss(animated: true, completion: nil)
         } else {
-            ContentViewController.shared.presentTerminal(inDirectory: directory, command: snippets[indexPath.row].content, fromView: view)
+            ContentViewController.shared.presentTerminal(inDirectory: directory, command: snippets[indexPath.row].content, fromView: handleArea)
         }
     }
     
@@ -311,4 +321,3 @@ class SnippetsViewController: UITableViewController, UITableViewDragDelegate, UI
         return UIStoryboard(name: "Snippets", bundle: nil)
     }
 }
-

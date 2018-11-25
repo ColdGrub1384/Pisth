@@ -21,7 +21,6 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
-  - FloatingPanel (1.2.0)
   - GoogleAppMeasurement (5.3.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -63,7 +62,6 @@ DEPENDENCIES:
   - ActionSheetPicker-3.0
   - BiometricAuthentication (~> 2.1)
   - Firebase/Core
-  - FloatingPanel
   - Highlightr (from `https://github.com/raspu/Highlightr.git`, branch `master`)
   - NMSSH
   - ObjectUserDefaults
@@ -80,7 +78,6 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseInstanceID
-    - FloatingPanel
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
@@ -108,7 +105,6 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseCore: fba2bfaa691c49028309b92e4dd37cc4b5512fbe
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
-  FloatingPanel: b6c56634780f25a4b5146025714f3ad5eeb5afb9
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   Highlightr: 8162b4faba588963fb8852390ea9a78f166a6b99
@@ -120,6 +116,6 @@ SPEC CHECKSUMS:
   WhatsNew: ebb4e2a85a0975c7c2705087c0c67939451f8b49
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: bacb6cb91b75d63da11997d95766200c903ae55c
+PODFILE CHECKSUM: c919e0b44cd280877a006fc13f78deadabc75f06
 
 COCOAPODS: 1.5.3
