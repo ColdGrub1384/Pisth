@@ -181,6 +181,111 @@
 			remoteGlobalIDString = 3C2E4346201E7E6C00E4254A;
 			remoteInfo = InputAssistant;
 		};
+		C93DB9F721AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC2049D1AB2DCFC9D71F3A20C1A7665C;
+			remoteInfo = "ActionSheetPicker-3.0";
+		};
+		C93DB9F921AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B5B1C6BFC27C334787407B219049FA2;
+			remoteInfo = BiometricAuthentication;
+		};
+		C93DB9FB21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33EEA35359E712057A799F74D542F8AC;
+			remoteInfo = FirebaseCore;
+		};
+		C93DB9FD21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 87E54682E7D329AB15896011C98F394A;
+			remoteInfo = GoogleUtilities;
+		};
+		C93DB9FF21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A378D6D98F564D2B978802FBCA489CA;
+			remoteInfo = Highlightr;
+		};
+		C93DBA0121AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 87B9627FD38733345DCA45CC0DC159B9;
+			remoteInfo = nanopb;
+		};
+		C93DBA0321AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB37FDC7CF5A7D1139AB6E0CE8DF0384;
+			remoteInfo = NMSSH;
+		};
+		C93DBA0521AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8403E8316D86A5645E78AFB30441CACA;
+			remoteInfo = "ObjectUserDefaults-iOS";
+		};
+		C93DBA0721AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 36B2269CCD23568AD85E308EB528328C;
+			remoteInfo = "ObjectUserDefaults-macOS";
+		};
+		C93DBA0921AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C4900B78F63FF7C3B2FF53A63C1CB8FE;
+			remoteInfo = PanelKit;
+		};
+		C93DBA0B21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADAA50C4460FEC41C0748B67380AEE8C;
+			remoteInfo = "Pods-Pisth";
+		};
+		C93DBA0D21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C710A2CFADBE5585049C1427E9F5DB50;
+			remoteInfo = "Pods-Pisth Mac";
+		};
+		C93DBA0F21AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 585AED6A4D0E895DB015C796D09F7734;
+			remoteInfo = SwiftKeychainWrapper;
+		};
+		C93DBA1121AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 668127D2F989052876500424511BB15C;
+			remoteInfo = WhatsNew;
+		};
+		C93DBA1321AAEC4300E3E222 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA8AFDB133DD0CBC39B46052C87E574C;
+			remoteInfo = Zip;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -322,6 +427,7 @@
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
+		C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		C951122A2183BBF200A0D1BC /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
 		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
@@ -669,6 +775,7 @@
 		3AFDD8F81FF140FD0061677B = {
 			isa = PBXGroup;
 			children = (
+				C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */,
 				C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */,
 				C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */,
 				3A2C2D46208156F8002B8230 /* Pisth_API.framework */,
@@ -727,6 +834,28 @@
 				C91DD1DA216E74340001B21B /* InputAssistant.framework */,
 				C91DD1DC216E74340001B21B /* liblibInputAssistant.a */,
 				C91DD1DE216E74340001B21B /* InputAssistant Sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C93DB9E421AAEC4300E3E222 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C93DB9F821AAEC4300E3E222 /* ActionSheetPicker_3_0.framework */,
+				C93DB9FA21AAEC4300E3E222 /* BiometricAuthentication.framework */,
+				C93DB9FC21AAEC4300E3E222 /* FirebaseCore.framework */,
+				C93DB9FE21AAEC4300E3E222 /* GoogleUtilities.framework */,
+				C93DBA0021AAEC4300E3E222 /* Highlightr.framework */,
+				C93DBA0221AAEC4300E3E222 /* nanopb.framework */,
+				C93DBA0421AAEC4300E3E222 /* NMSSH.framework */,
+				C93DBA0621AAEC4300E3E222 /* ObjectUserDefaults.framework */,
+				C93DBA0821AAEC4300E3E222 /* ObjectUserDefaults.framework */,
+				C93DBA0A21AAEC4300E3E222 /* PanelKit.framework */,
+				C93DBA0C21AAEC4300E3E222 /* Pods_Pisth.framework */,
+				C93DBA0E21AAEC4300E3E222 /* Pods_Pisth_Mac.framework */,
+				C93DBA1021AAEC4300E3E222 /* SwiftKeychainWrapper.framework */,
+				C93DBA1221AAEC4300E3E222 /* WhatsNew.framework */,
+				C93DBA1421AAEC4300E3E222 /* Zip.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -961,6 +1090,10 @@
 					ProductGroup = C91DD1D4216E74340001B21B /* Products */;
 					ProjectRef = C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */;
 				},
+				{
+					ProductGroup = C93DB9E421AAEC4300E3E222 /* Products */;
+					ProjectRef = C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -991,6 +1124,111 @@
 			fileType = wrapper.application;
 			path = "InputAssistant Sample.app";
 			remoteRef = C91DD1DD216E74340001B21B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DB9F821AAEC4300E3E222 /* ActionSheetPicker_3_0.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ActionSheetPicker_3_0.framework;
+			remoteRef = C93DB9F721AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DB9FA21AAEC4300E3E222 /* BiometricAuthentication.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BiometricAuthentication.framework;
+			remoteRef = C93DB9F921AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DB9FC21AAEC4300E3E222 /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = C93DB9FB21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DB9FE21AAEC4300E3E222 /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = C93DB9FD21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0021AAEC4300E3E222 /* Highlightr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Highlightr.framework;
+			remoteRef = C93DB9FF21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0221AAEC4300E3E222 /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = C93DBA0121AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0421AAEC4300E3E222 /* NMSSH.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NMSSH.framework;
+			remoteRef = C93DBA0321AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0621AAEC4300E3E222 /* ObjectUserDefaults.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectUserDefaults.framework;
+			remoteRef = C93DBA0521AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0821AAEC4300E3E222 /* ObjectUserDefaults.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectUserDefaults.framework;
+			remoteRef = C93DBA0721AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0A21AAEC4300E3E222 /* PanelKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PanelKit.framework;
+			remoteRef = C93DBA0921AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0C21AAEC4300E3E222 /* Pods_Pisth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_Pisth.framework;
+			remoteRef = C93DBA0B21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA0E21AAEC4300E3E222 /* Pods_Pisth_Mac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_Pisth_Mac.framework;
+			remoteRef = C93DBA0D21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA1021AAEC4300E3E222 /* SwiftKeychainWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftKeychainWrapper.framework;
+			remoteRef = C93DBA0F21AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA1221AAEC4300E3E222 /* WhatsNew.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WhatsNew.framework;
+			remoteRef = C93DBA1121AAEC4300E3E222 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C93DBA1421AAEC4300E3E222 /* Zip.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Zip.framework;
+			remoteRef = C93DBA1321AAEC4300E3E222 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

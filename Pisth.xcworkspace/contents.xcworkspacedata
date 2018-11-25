@@ -19,7 +19,4 @@
    <FileRef
       location = "group:Pisth APT/Pisth APT.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
 </Workspace>
