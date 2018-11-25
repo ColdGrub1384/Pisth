@@ -408,8 +408,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             }
             
             navigationItem.setRightBarButtonItems(buttons, animated: true)
-            navigationItem.setLeftBarButton(AppDelegate.shared.showBookmarksBarButtonItem, animated: true)
-            navigationItem.leftItemsSupplementBackButton = true
             
             // Siri Shortcuts
             
@@ -453,6 +451,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: UIApplication.didBecomeActiveNotification, object: nil)
+        
+        // Toolbar
+        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
+        navigationController?.setToolbarHidden(false, animated: true)
         
         // Connection errors
         self.showErrorIfThereIsOne()
