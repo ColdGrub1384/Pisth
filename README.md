@@ -1,7 +1,8 @@
 <p align="center">
   <b>Pisth</b> &bull;
   <a href="https://github.com/ColdGrub1384/Edidown">Edidown</a> &bull;
-  <a href="https://github.com/ColdGrub1384/Pyto">Pyto</a>
+  <a href="https://github.com/ColdGrub1384/Pyto">Pyto</a> &bull;
+  <a href="https://github.com/ColdGrub1384/Luade">Luade</a>
 </p>
 
 Follow [@develobile](https://twitter.com/develobile) on Twitter for news about this project and commits.
