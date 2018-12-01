@@ -599,7 +599,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if inputAssistantOrigin.y > 0 {
             resizeView(withSize: CGSize(width: view.frame.width, height: inputAssistantOrigin.y))
         } else if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
+            resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height-20))
         }
         
         if let arrowsVC = ArrowsViewController.current {
@@ -627,6 +627,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if webView.frame.size != view.bounds.size {
             webView.frame = view.bounds
+            webView.frame.size.height -= 20
             fit()
         }
         
