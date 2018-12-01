@@ -1276,12 +1276,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
         }
         
-        if let data = fileSession.sftp.contents(atPath: (homeDir ?? "~")+"/.bash_history"), let history = String(data: data, encoding: .utf8)?.components(separatedBy: "\n") {
-            for command in history {
-                filenames.append(command)
-            }
-        }
-        
         return filenames
     }
     
