@@ -1834,17 +1834,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1869,17 +1865,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Pisth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1957,7 +1949,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
 					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1970,10 +1961,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2153,17 +2141,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Pisth/InfoShell.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ios_system",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "Pisth Shell";
 				PROVISIONING_PROFILE_SPECIFIER = "";
