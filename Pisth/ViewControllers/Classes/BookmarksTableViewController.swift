@@ -587,7 +587,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         if !devices.contains(peerID) && peerID.displayName != self.peerID.displayName {
             devices.append(peerID)
             
-            tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
+            tableView.reloadData()
         }
     }
     
@@ -600,7 +600,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         if let i = devices.index(of: peerID) {
             devices.remove(at: i)
             
-            tableView.reloadSections(IndexSet(arrayLiteral: 2), with: .automatic)
+            tableView.reloadData()
         }
     }
     
