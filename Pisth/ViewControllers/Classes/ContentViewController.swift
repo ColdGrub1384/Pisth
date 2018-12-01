@@ -127,7 +127,7 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         
         return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
     }
-    
+        
     // MARK: - Panel manager
     
     var panelContentWrapperView: UIView {
@@ -177,6 +177,48 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
                 layout.itemSize.width = dirVC.view.frame.width
             }
         }
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        if TerminalViewController.current != nil {
+            return terminalKeyCommands
+        } else {
+            return nil
+        }
+    }
+    
+    // MARK: - Terminal commands
+    
+    /// Pastes text into the terminal
+    @objc func pasteText() {
+        TerminalViewController.current?.pasteText()
+    }
+    
+    /// Writes to the terminal.
+    ///
+    /// - Parameters:
+    ///     - command: The command to be sent.
+    @objc func write(fromCommand command: UIKeyCommand) {
+        TerminalViewController.current?.write(fromCommand: command)
+    }
+    
+    /// The Key commands used on the terminal.
+    var terminalKeyCommands: [UIKeyCommand] {
+        var commands =  [
+            UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: Localizable.TerminalViewController.paste),
+            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
+            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendDownArrow),
+            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
+            UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
+            ]
+        
+        let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
+        for ctrlKey in ctrlKeys {
+            commands.append(UIKeyCommand(input: ctrlKey, modifierFlags: .control, action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendCtrl(ctrlKey)))
+        }
+        
+        return commands
     }
     
     // MARK: - Storyboard

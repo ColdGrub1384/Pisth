@@ -388,29 +388,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()
         
+        TerminalViewController.current_ = self
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'block')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
         return true
-    }
-    
-    override var keyCommands: [UIKeyCommand]? {
-        // Bluetooth keyboard
-        
-        var commands =  [
-            UIKeyCommand(input: "v", modifierFlags: .command, action: #selector(pasteText), discoverabilityTitle: Localizable.TerminalViewController.paste),
-            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendUpArrow),
-            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendDownArrow),
-            UIKeyCommand(input: UIKeyCommand.inputLeftArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendLeftArrow),
-            UIKeyCommand(input: UIKeyCommand.inputRightArrow, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendRightArrow),
-            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: .init(rawValue: 0), action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendEsc),
-        ]
-        
-        let ctrlKeys = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_"] // All CTRL keys
-        for ctrlKey in ctrlKeys {
-            commands.append(UIKeyCommand(input: ctrlKey, modifierFlags: .control, action: #selector(write(fromCommand:)), discoverabilityTitle: Localizable.TerminalViewController.sendCtrl(ctrlKey)))
-        }
-        
-        return commands
     }
     
     override func viewDidLoad() {
@@ -1354,6 +1335,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     // MARK: - Static
+    
+    /// Returns the current terminal wich is the first responder.
+    static var current: TerminalViewController? {
+        if current_?.isFirstResponder == true {
+            return current_
+        } else {
+            return nil
+        }
+    }
+    
+    static private var current_: TerminalViewController?
     
     /// Print this to dismiss the keyboard (from SSH).
     static let close = "\(Keys.esc)[CLOSE"
