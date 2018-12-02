@@ -11,7 +11,7 @@ import Foundation
 open class PisthDarkTheme: ProTheme {
     
     open override var foregroundColor: Color? {
-        return Color(red: 120/255, green: 32/255, blue: 157/255, alpha: 1)
+        return Color(red: 178/255, green: 0/255, blue: 255/255, alpha: 1)
     }
     
     open override var cursorColor: Color? {
