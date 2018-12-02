@@ -212,9 +212,6 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
             if textView.text != fileContent {
                AppDelegate.shared.navigationController.visibleViewController?.present(alert, animated: true, completion: nil)
             } else {
-                if ConnectionManager.shared.saveFile?.localFile == file.path {
-                    try? FileManager.default.removeItem(at: file)
-                }
                 close()
             }
         } catch _ {
