@@ -108,10 +108,14 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
         placeholderView.addSubview(textView)
     }
     
+    // MARK: - Sharing
+    
+    private var documentInteractionController: UIDocumentInteractionController!
+    
     /// Share current file.
     @IBAction func share(_ sender: UIBarButtonItem) {
-        let document = UIDocumentInteractionController(url: file)
-        document.presentOpenInMenu(from: sender, animated: true)
+        documentInteractionController = UIDocumentInteractionController(url: file)
+        documentInteractionController.presentOpenInMenu(from: sender, animated: true)
     }
     
     
