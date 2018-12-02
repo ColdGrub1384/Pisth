@@ -10,7 +10,7 @@ import Pisth_Shared
 import Firebase
 
 /// Table view controller to display Git branches at `repoPath`.
-class GitBranchesTableViewController: UITableViewController, Storyboard {
+class GitBranchesTableViewController: UITableViewController {
 
     /// Remote path of Git repo.
     var repoPath: String!
@@ -170,15 +170,7 @@ class GitBranchesTableViewController: UITableViewController, Storyboard {
     
     // MARK: - Storyboard
     
-    static var storyboard: UIStoryboard {
-        return UIStoryboard(name: "Git", bundle: nil)
-    }
-    
-    static var storyboardIdentifier: String? {
-        if self is GitRemotesTableViewController.Type {
-            return "remoteBranches"
-        } else {
-            return "localBranches"
-        }
+    class func makeViewController() -> GitBranchesTableViewController {
+        return UIStoryboard(name: "Git", bundle: nil).instantiateViewController(withIdentifier: "localBranches") as! GitBranchesTableViewController
     }
 }

@@ -65,4 +65,10 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
         launch(command: "git -C '\(repoPath!)' log --graph \(branches[indexPath.row])", withTitle: "Commits for \(branches[indexPath.row])")
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: - Storyboard
+    
+    override class func makeViewController() -> GitRemotesTableViewController {
+        return UIStoryboard(name: "Git", bundle: nil).instantiateViewController(withIdentifier: "remoteBranches") as! GitRemotesTableViewController
+    }
 }
