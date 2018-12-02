@@ -87,6 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func connect() {
         
         func noConnection() {
+            
+            guard openReason != .openConnection else {
+                return
+            }
+            
             _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                 if let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "error") as? ErrorViewController {
                     UIApplication.shared.keyWindow?.rootViewController = vc
@@ -227,7 +232,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        connect()
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
+            self.connect()
+        })
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             if self.openReason != .openConnection {
