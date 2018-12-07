@@ -1609,6 +1609,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                     
                     if let file = file {
+                        
+                        _ = file.startAccessingSecurityScopedResource()
+                        
                         if !inPlace { // Copy file and upload it
                             do {
                                 let newFile = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)[0].appendingPathComponent(fileName ?? file.lastPathComponent)
@@ -1619,11 +1622,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                             self.reload()
                                         })
                                         try? FileManager.default.removeItem(at: newFile)
+                                        file.stopAccessingSecurityScopedResource()
                                     }, errorHandler: {
                                         let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploading(file: file.lastPathComponent, to: destination), preferredStyle: .alert)
                                         alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                                         self.present(alert, animated: true, completion: nil)
                                         try? FileManager.default.removeItem(at: newFile)
+                                        file.stopAccessingSecurityScopedResource()
                                     }, showAlert: false)
                                 }
                             } catch {
@@ -1635,10 +1640,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                             DispatchQueue.main.async {
                                 self.sendFile(file: file, toDirectory: destination, uploadHandler: {
                                     self.reload()
+                                    file.stopAccessingSecurityScopedResource()
                                 }, errorHandler: {
                                     let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploading(file: file.lastPathComponent, to: destination), preferredStyle: .alert)
                                     alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                                     self.present(alert, animated: true, completion: nil)
+                                    file.stopAccessingSecurityScopedResource()
                                 }, showAlert: false)
                             }
                         }
