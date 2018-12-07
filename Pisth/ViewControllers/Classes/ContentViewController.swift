@@ -158,21 +158,32 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
     
     func didUpdatePinnedPanels() {
         
+        // Fit terminal
+        
+        for terminalPanel in terminalPanels {
+            if let term = terminalPanel.contentViewController as? TerminalViewController, term.isFirstResponder {
+                _ = term.resignFirstResponder()
+                _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                    _ = term.becomeFirstResponder()
+                })
+            }
+        }
+        
         // Update `DirectoryCollectionViewController`s layouts.
         
-        var viewControllers = [DirectoryCollectionViewController]()
+        var directoryViewControllers = [DirectoryCollectionViewController]()
         for panel in panels {
             if let dirVC = panel.contentViewController as? DirectoryCollectionViewController {
-                viewControllers.append(dirVC)
+                directoryViewControllers.append(dirVC)
             }
         }
         for vc in AppDelegate.shared.navigationController.viewControllers {
             if let dirVC = vc as? DirectoryCollectionViewController {
-                viewControllers.append(dirVC)
+                directoryViewControllers.append(dirVC)
             }
         }
         
-        for dirVC in viewControllers {
+        for dirVC in directoryViewControllers {
             if let layout = dirVC.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
                 layout.itemSize.width = dirVC.view.frame.width
             }
