@@ -1827,7 +1827,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     private func setupCard() {
         
-        guard cardViewController == nil else {
+        guard cardViewController == nil, panelNavigationController == nil else {
             return
         }
         
