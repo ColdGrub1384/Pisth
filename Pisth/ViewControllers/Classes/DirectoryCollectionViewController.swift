@@ -1286,6 +1286,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     }
     
     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        
+        defer {
+            for terminal in ContentViewController.shared.terminalPanels {
+                guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
+                    continue
+                }
+                term.view.addSubview(term.webView)
+            }
+        }
+        
         return true
     }
     
@@ -1708,7 +1718,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
         
         for terminal in ContentViewController.shared.terminalPanels {
-            (terminal.contentViewController as? TerminalViewController)?.webView?.removeFromSuperview()
+            guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
+                continue
+            }
+            term.webView?.removeFromSuperview()
         }
         
         return [item]
@@ -1717,7 +1730,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         for terminal in ContentViewController.shared.terminalPanels {
-            guard let term = terminal.contentViewController as? TerminalViewController else {
+            guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
                 continue
             }
             term.view.addSubview(term.webView)
