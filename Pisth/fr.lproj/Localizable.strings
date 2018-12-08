@@ -2,7 +2,7 @@
 "arrows.helpTextArrows" = "Glissez\npour les\nflèches.";
 
 /* Text displayed after disabling `ArrowsViewControllers`. */
-"arrows.helpTextScroll" = "Glissez\npour\naviguer";
+"arrows.helpTextScroll" = "Glissez\npour\nnaviguer";
 
 /* Message of the alert shown when a session that is already active was clicked. */
 "bookmarks.sessionAlreadyActiveMessage" = "Voulez vous continuer la session ou la redémarrer?";
