@@ -1228,6 +1228,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         return "×"
     }
     
+    func panelDragGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return (ArrowsViewController.current == nil)
+    }
+    
     // MARK: - Suggestions
     
     private struct Suggestion {
