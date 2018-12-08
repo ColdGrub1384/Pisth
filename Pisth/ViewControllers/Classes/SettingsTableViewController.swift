@@ -284,7 +284,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         UserKeys.terminalTheme.stringValue = title.text
         
-        NotificationCenter.default.post(name: .init("TerminalThemeDidChanged"), object: TerminalTheme.themes[title.text!])
+        NotificationCenter.default.post(name: .init("TerminalThemeDidChange"), object: TerminalTheme.themes[title.text!])
         
         collectionView.reloadData()
     }

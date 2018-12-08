@@ -409,7 +409,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(screenDidConnect), name: UIScreen.didConnectNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(screenDidDisconnect), name: UIScreen.didDisconnectNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .init("TerminalThemeDidChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .init("TerminalThemeDidChange"), object: nil)
         
         // Setup connectivity
         if peerID == nil {
