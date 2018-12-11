@@ -24,8 +24,6 @@
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
-		3A625BEF208011F7008D647C /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; };
-		3A625BF0208011F7008D647C /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A625BEE208011F7008D647C /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
 		3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */; };
 		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
@@ -47,15 +45,8 @@
 		3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */; };
 		3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC0204079A9006C3218 /* AppAction.swift */; };
 		3ACF9AC320408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AC220408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift */; };
-		3ACF9ADF20409446006C3218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9ADE20409446006C3218 /* AppDelegate.swift */; };
-		3ACF9AE120409446006C3218 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE020409446006C3218 /* ViewController.swift */; };
-		3ACF9AE420409446006C3218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE220409446006C3218 /* Main.storyboard */; };
-		3ACF9AE620409446006C3218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE520409446006C3218 /* Assets.xcassets */; };
-		3ACF9AE920409446006C3218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ACF9AE720409446006C3218 /* LaunchScreen.storyboard */; };
 		3ACF9B772041BB4C006C3218 /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; };
 		3ACF9B782041BB4C006C3218 /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; };
-		3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9B792041BB5B006C3218 /* Pisth_API.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; };
 		3ACF9BED2041C4AC006C3218 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AD2917A207ADE7B0082306D /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD29179207ADE7B0082306D /* SplitViewController.swift */; };
@@ -264,18 +255,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3ACF9AF2204094E4006C3218 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3A625BF0208011F7008D647C /* Pisth_Shared.framework in Embed Frameworks */,
-				3ACF9B7B2041BB5B006C3218 /* Pisth_API.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3ACF9B0A2041B300006C3218 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,13 +310,6 @@
 		3AC623A91FF8175700B5D22A /* CommandsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsTableViewController.swift; sourceTree = "<group>"; };
 		3ACF9AC0204079A9006C3218 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		3ACF9AC220408A9C006C3218 /* LocalDirectoryCollectionViewControllerStaticDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDirectoryCollectionViewControllerStaticDelegate.swift; sourceTree = "<group>"; };
-		3ACF9ADC20409446006C3218 /* Pisth API Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pisth API Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ACF9ADE20409446006C3218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3ACF9AE020409446006C3218 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3ACF9AE320409446006C3218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3ACF9AE520409446006C3218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3ACF9AE820409446006C3218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3ACF9AEA20409446006C3218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9B792041BB5B006C3218 /* Pisth_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -460,15 +432,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3ACF9AD920409446006C3218 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A625BEF208011F7008D647C /* Pisth_Shared.framework in Frameworks */,
-				3ACF9B7A2041BB5B006C3218 /* Pisth_API.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3AFDD8FE1FF140FE0061677B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -620,19 +583,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		3ACF9ADD20409446006C3218 /* Pisth API Example */ = {
-			isa = PBXGroup;
-			children = (
-				3ACF9ADE20409446006C3218 /* AppDelegate.swift */,
-				3ACF9AE020409446006C3218 /* ViewController.swift */,
-				3ACF9AE220409446006C3218 /* Main.storyboard */,
-				3ACF9AE520409446006C3218 /* Assets.xcassets */,
-				3ACF9AE720409446006C3218 /* LaunchScreen.storyboard */,
-				3ACF9AEA20409446006C3218 /* Info.plist */,
-			);
-			path = "Pisth API Example";
-			sourceTree = "<group>";
-		};
 		3AF9AE981FF53BEA00840E8A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,7 +663,6 @@
 				3ACF9B792041BB5B006C3218 /* Pisth_API.framework */,
 				3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */,
 				3AFDD9031FF140FE0061677B /* Pisth */,
-				3ACF9ADD20409446006C3218 /* Pisth API Example */,
 				3AFDD9021FF140FE0061677B /* Products */,
 				2A2C0BF266D722E068E3424D /* Pods */,
 				56249940C7FBF904B64CFA50 /* Frameworks */,
@@ -724,7 +673,6 @@
 			isa = PBXGroup;
 			children = (
 				3AFDD9011FF140FE0061677B /* Pisth.app */,
-				3ACF9ADC20409446006C3218 /* Pisth API Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -799,24 +747,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3ACF9ADB20409446006C3218 /* Pisth API Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3ACF9AEB20409446006C3218 /* Build configuration list for PBXNativeTarget "Pisth API Example" */;
-			buildPhases = (
-				3ACF9AD820409446006C3218 /* Sources */,
-				3ACF9AD920409446006C3218 /* Frameworks */,
-				3ACF9ADA20409446006C3218 /* Resources */,
-				3ACF9AF2204094E4006C3218 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pisth API Example";
-			productName = "Pisth API Example";
-			productReference = 3ACF9ADC20409446006C3218 /* Pisth API Example.app */;
-			productType = "com.apple.product-type.application";
-		};
 		3AFDD9001FF140FE0061677B /* Pisth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AFDD9131FF140FE0061677B /* Build configuration list for PBXNativeTarget "Pisth" */;
@@ -849,11 +779,6 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = ADA;
 				TargetAttributes = {
-					3ACF9ADB20409446006C3218 = {
-						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-					};
 					3AFDD9001FF140FE0061677B = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 1000;
@@ -895,7 +820,6 @@
 			projectRoot = "";
 			targets = (
 				3AFDD9001FF140FE0061677B /* Pisth */,
-				3ACF9ADB20409446006C3218 /* Pisth API Example */,
 			);
 		};
 /* End PBXProject section */
@@ -1030,16 +954,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3ACF9ADA20409446006C3218 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3ACF9AE920409446006C3218 /* LaunchScreen.storyboard in Resources */,
-				3ACF9AE620409446006C3218 /* Assets.xcassets in Resources */,
-				3ACF9AE420409446006C3218 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3AFDD8FF1FF140FE0061677B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1149,15 +1063,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3ACF9AD820409446006C3218 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3ACF9AE120409446006C3218 /* ViewController.swift in Sources */,
-				3ACF9ADF20409446006C3218 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3AFDD8FD1FF140FE0061677B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1236,22 +1141,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3ACF9AE220409446006C3218 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3ACF9AE320409446006C3218 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3ACF9AE720409446006C3218 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3ACF9AE820409446006C3218 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1393,38 +1282,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3ACF9AEC20409446006C3218 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = "Pisth API Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3ACF9AED20409446006C3218 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = "Pisth API Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		3AFDD9111FF140FE0061677B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1691,22 +1548,6 @@
 			};
 			name = Beta;
 		};
-		C959168D2113A1850073BCCE /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = "Pisth API Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Beta;
-		};
 		C9D6EC672132FEDA00A81D88 /* Shell */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1791,36 +1632,9 @@
 			};
 			name = Shell;
 		};
-		C9D6EC692132FEDA00A81D88 /* Shell */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = "Pisth API Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.ada.Pisth-API-Example";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Shell;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3ACF9AEB20409446006C3218 /* Build configuration list for PBXNativeTarget "Pisth API Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3ACF9AEC20409446006C3218 /* Debug */,
-				3ACF9AED20409446006C3218 /* Release */,
-				C9D6EC692132FEDA00A81D88 /* Shell */,
-				C959168D2113A1850073BCCE /* Beta */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3AFDD8FC1FF140FD0061677B /* Build configuration list for PBXProject "Pisth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
