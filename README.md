@@ -5,10 +5,7 @@
   <a href="https://github.com/ColdGrub1384/Luade">Luade</a>
 </p>
 
-Follow [@develobile](https://twitter.com/develobile) on Twitter for news about this project and commits.
-
-![mockup](https://pisth.github.io/mockup.png)
-
+Follow [@develobile](https://twitter.com/develobile) on Twitter for news about my projects.
 
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
 
@@ -43,16 +40,6 @@ Features:
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
 
 ![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
-
-# Pisth Mac
-
-![status](https://img.shields.io/badge/status-In%20development-red.svg)
-![macOS](https://img.shields.io/badge/macOS-10.14%2B-green.svg)
-
-## Screenshots
-![Screenshots](https://pisth.github.io/mac/screenshot.png)
-
-![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20APT/Pisth%20APT/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%402x.png)
 
 # Pisth APT
 
