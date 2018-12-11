@@ -94,27 +94,14 @@
 		C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
-		C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213D012141F54A00DEDD6C /* UserKeys.swift */; };
 		C951122B2183BBF200A0D1BC /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C951122A2183BBF200A0D1BC /* Snippet.swift */; };
-		C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */ = {isa = PBXBuildFile; fileRef = C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */; };
-		C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
 		C98D6CB32101303E00B3052E /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB22101303E00B3052E /* Header.xib */; };
 		C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */; };
 		C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB62101522C00B3052E /* List File Cell.xib */; };
-		C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9985AA920D6C1DE00389A7B /* Connection.storyboard */; };
-		C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */; };
-		C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985AAE20D6C4F500389A7B /* ConnectionController.swift */; };
 		C99CB9632103885B00418DFF /* CompactBookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */; };
 		C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */; };
-		C9A9585B20DDD3DF00BF6C03 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A9585A20DDD3DF00BF6C03 /* TerminalViewController.swift */; };
-		C9B205B820D6CBBF00045F20 /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B205B720D6CBBF00045F20 /* NMSSH.framework */; };
-		C9B205BA20D6CBCB00045F20 /* NMSSH.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9B205B720D6CBBF00045F20 /* NMSSH.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9B205BB20D6CC0E00045F20 /* Pisth_Terminal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACF9BEB2041C4AC006C3218 /* Pisth_Terminal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C020D70CD400045F20 /* FileObserver.swift */; };
-		C9B205C920D72FE300045F20 /* FilesOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205C820D72FE300045F20 /* FilesOutlineView.swift */; };
-		C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */; };
 		C9BBD2CF216C1D7E001C665D /* extraCommandsDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */; };
 		C9BBD2D0216C1D7E001C665D /* commandDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */; };
 		C9BD2853210A34A100244AAF /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BD2852210A34A000244AAF /* Localizable.swift */; };
@@ -130,25 +117,13 @@
 		C9BD28A3210A3E6900244AAF /* Disconnected.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD28A5210A3E6900244AAF /* Disconnected.xib */; };
 		C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */; };
 		C9BE90552119028A000A61C8 /* isFilePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE905421190289000A61C8 /* isFilePDF.swift */; };
-		C9CAC7A3212A0731005D7A00 /* AppMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */; };
-		C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */; };
-		C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */; };
-		C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9CB27E520D5BB9800290DBE /* Assets.xcassets */; };
-		C9CB27E920D5BB9800290DBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9CB27E720D5BB9800290DBE /* Main.storyboard */; };
-		C9CB27F020D5C12700290DBE /* Pisth.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */; };
-		C9CB27F220D5C22B00290DBE /* Pisth_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */; };
-		C9CB27F320D5C22B00290DBE /* Pisth_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C9CB27F620D5C23500290DBE /* Pisth_Terminal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */; };
-		C9CB27F820D5E0D700290DBE /* ConnectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */; };
 		C9D6EC782133025900A81D88 /* LaunchScreenDark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */; };
 		C9E3F8FB2188D64800603388 /* SnippetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3F8FA2188D64800603388 /* SnippetsViewController.swift */; };
 		C9E3F901218900F900603388 /* No Snippets.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9E3F900218900F900603388 /* No Snippets.xib */; };
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
-		C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
-		DC58430070C076BEF19AEF4D /* Pods_Pisth_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0670A7C54F8E646A758B5 /* Pods_Pisth_Mac.framework */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
@@ -315,19 +290,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C9CB27F420D5C22D00290DBE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C9B205BB20D6CC0E00045F20 /* Pisth_Terminal.framework in Embed Frameworks */,
-				C9B205BA20D6CBCB00045F20 /* NMSSH.framework in Embed Frameworks */,
-				C9CB27F320D5C22B00290DBE /* Pisth_Shared.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -426,11 +388,8 @@
 		C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InputAssistant.xcodeproj; path = InputAssistant/InputAssistant.xcodeproj; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
-		C9213D012141F54A00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C93DB9E321AAEC4300E3E222 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		C951122A2183BBF200A0D1BC /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
-		C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = "Pisth Viewer.app"; sourceTree = "<group>"; };
-		C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSidebarOutlineView.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C983BF9D2110DEE900CCB298 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -438,9 +397,6 @@
 		C98D6CB22101303E00B3052E /* Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Header.xib; sourceTree = "<group>"; };
 		C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderToolbar.swift; sourceTree = "<group>"; };
 		C98D6CB62101522C00B3052E /* List File Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "List File Cell.xib"; sourceTree = "<group>"; };
-		C9985AA920D6C1DE00389A7B /* Connection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Connection.storyboard; sourceTree = "<group>"; };
-		C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
-		C9985AAE20D6C4F500389A7B /* ConnectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionController.swift; sourceTree = "<group>"; };
 		C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactBookmarksTableViewController.swift; sourceTree = "<group>"; };
 		C99FE3B3210D19F4000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Disconnected.strings; sourceTree = "<group>"; };
 		C99FE3B4210D19F5000A885D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/No Connections.strings"; sourceTree = "<group>"; };
@@ -455,14 +411,7 @@
 		C99FE3C2210D2490000A885D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Image.strings; sourceTree = "<group>"; };
 		C99FE3C3210D2493000A885D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Image.strings; sourceTree = "<group>"; };
 		C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDragItem+sourceViewController.swift"; sourceTree = "<group>"; };
-		C9A9585A20DDD3DF00BF6C03 /* TerminalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		C9B205B720D6CBBF00045F20 /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NMSSH.framework; sourceTree = "<group>"; };
-		C9B205BC20D6CD9300045F20 /* Pisth Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pisth Mac-Bridging-Header.h"; sourceTree = "<group>"; };
-		C9B205BF20D6E26B00045F20 /* Pisth Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Pisth Mac.entitlements"; sourceTree = "<group>"; };
-		C9B205C020D70CD400045F20 /* FileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileObserver.swift; sourceTree = "<group>"; };
-		C9B205C420D71A8600045F20 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C9B205C820D72FE300045F20 /* FilesOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesOutlineView.swift; sourceTree = "<group>"; };
-		C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMenuDelegate.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = extraCommandsDictionary.plist; sourceTree = "<group>"; };
 		C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = commandDictionary.plist; sourceTree = "<group>"; };
 		C9BD2852210A34A000244AAF /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -495,16 +444,8 @@
 		C9BD28A9210A3E7100244AAF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Disconnected.strings; sourceTree = "<group>"; };
 		C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackNavigationController.swift; sourceTree = "<group>"; };
 		C9BE905421190289000A61C8 /* isFilePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = isFilePDF.swift; sourceTree = "<group>"; };
-		C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuItem.swift; sourceTree = "<group>"; };
-		C9CB27DC20D5BB9500290DBE /* Pisth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pisth.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
-		C9CB27E520D5BB9800290DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C9CB27E820D5BB9800290DBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInfoViewController.swift; sourceTree = "<group>"; };
 		C9D6EC752133022600A81D88 /* InfoShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoShell.plist; sourceTree = "<group>"; };
 		C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenDark.storyboard; sourceTree = "<group>"; };
 		C9E3F8FA2188D64800603388 /* SnippetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnippetsViewController.swift; sourceTree = "<group>"; };
@@ -512,7 +453,6 @@
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
-		C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
@@ -538,17 +478,6 @@
 				3A2C2D47208156F8002B8230 /* Pisth_API.framework in Frameworks */,
 				E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */,
 				3ACF9BEC2041C4AC006C3218 /* Pisth_Terminal.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9CB27D920D5BB9500290DBE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9B205B820D6CBBF00045F20 /* NMSSH.framework in Frameworks */,
-				C9CB27F620D5C23500290DBE /* Pisth_Terminal.framework in Frameworks */,
-				C9CB27F220D5C22B00290DBE /* Pisth_Shared.framework in Frameworks */,
-				DC58430070C076BEF19AEF4D /* Pods_Pisth_Mac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,7 +713,6 @@
 				3ACF9B792041BB5B006C3218 /* Pisth_API.framework */,
 				3ACF9B762041BB4C006C3218 /* Pisth_Shared.framework */,
 				3AFDD9031FF140FE0061677B /* Pisth */,
-				C9CB27DD20D5BB9500290DBE /* Pisth Mac */,
 				3ACF9ADD20409446006C3218 /* Pisth API Example */,
 				3AFDD9021FF140FE0061677B /* Products */,
 				2A2C0BF266D722E068E3424D /* Pods */,
@@ -797,7 +725,6 @@
 			children = (
 				3AFDD9011FF140FE0061677B /* Pisth.app */,
 				3ACF9ADC20409446006C3218 /* Pisth API Example.app */,
-				C9CB27DC20D5BB9500290DBE /* Pisth.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -860,92 +787,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C9985AA220D6C11600389A7B /* Singletons */ = {
-			isa = PBXGroup;
-			children = (
-				C9CB27DE20D5BB9500290DBE /* AppDelegate.swift */,
-			);
-			path = Singletons;
-			sourceTree = "<group>";
-		};
-		C9985AA320D6C12000389A7B /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				C9985AA720D6C17F00389A7B /* Classes */,
-				C9985AA820D6C19400389A7B /* Interface Builder */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		C9985AA420D6C12E00389A7B /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C951BAC52129F8B700BDF1C7 /* Pisth Viewer.app */,
-				C9CB27E520D5BB9800290DBE /* Assets.xcassets */,
-				C9B205C420D71A8600045F20 /* Info.plist */,
-				C9CB27EF20D5C12700290DBE /* Pisth.xcdatamodel */,
-				C9B205BF20D6E26B00045F20 /* Pisth Mac.entitlements */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		C9985AA520D6C13C00389A7B /* Interface Builder */ = {
-			isa = PBXGroup;
-			children = (
-				C9CB27E720D5BB9800290DBE /* Main.storyboard */,
-			);
-			path = "Interface Builder";
-			sourceTree = "<group>";
-		};
-		C9985AA720D6C17F00389A7B /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				C9CB27F720D5E0D700290DBE /* ConnectionInfoViewController.swift */,
-				C9CB27E020D5BB9500290DBE /* BookmarksViewController.swift */,
-				C9985AAB20D6C43F00389A7B /* DirectoryViewController.swift */,
-				C9A9585A20DDD3DF00BF6C03 /* TerminalViewController.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		C9985AA820D6C19400389A7B /* Interface Builder */ = {
-			isa = PBXGroup;
-			children = (
-				C9985AA920D6C1DE00389A7B /* Connection.storyboard */,
-			);
-			path = "Interface Builder";
-			sourceTree = "<group>";
-		};
-		C9985AAD20D6C4D900389A7B /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				C9985AAE20D6C4F500389A7B /* ConnectionController.swift */,
-				C9B205C020D70CD400045F20 /* FileObserver.swift */,
-				C9B205CA20DD97B100045F20 /* FileMenuDelegate.swift */,
-				C9CAC7A2212A0731005D7A00 /* AppMenuItem.swift */,
-				C9213D012141F54A00DEDD6C /* UserKeys.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C9B205C620D72FC000045F20 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C9B205C720D72FCA00045F20 /* Classes */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		C9B205C720D72FCA00045F20 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				C9B205C820D72FE300045F20 /* FilesOutlineView.swift */,
-				C960D04120E037CF005CCE3A /* BrowserSidebarOutlineView.swift */,
-				C9FF166E2103F3DD0071AD22 /* TerminalWebView.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		C9BE9056211902A6000A61C8 /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -953,20 +794,6 @@
 				C9BE905421190289000A61C8 /* isFilePDF.swift */,
 			);
 			path = Global;
-			sourceTree = "<group>";
-		};
-		C9CB27DD20D5BB9500290DBE /* Pisth Mac */ = {
-			isa = PBXGroup;
-			children = (
-				C9985AA220D6C11600389A7B /* Singletons */,
-				C9985AAD20D6C4D900389A7B /* Helpers */,
-				C9B205C620D72FC000045F20 /* Views */,
-				C9985AA320D6C12000389A7B /* ViewControllers */,
-				C9985AA420D6C12E00389A7B /* Resources */,
-				C9985AA520D6C13C00389A7B /* Interface Builder */,
-				C9B205BC20D6CD9300045F20 /* Pisth Mac-Bridging-Header.h */,
-			);
-			path = "Pisth Mac";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1011,26 +838,6 @@
 			productReference = 3AFDD9011FF140FE0061677B /* Pisth.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C9CB27DB20D5BB9500290DBE /* Pisth Mac */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C9CB27EE20D5BB9800290DBE /* Build configuration list for PBXNativeTarget "Pisth Mac" */;
-			buildPhases = (
-				7E4FC904FD803052194C5F2A /* [CP] Check Pods Manifest.lock */,
-				C9CB27D820D5BB9500290DBE /* Sources */,
-				C9CB27D920D5BB9500290DBE /* Frameworks */,
-				C9CB27DA20D5BB9500290DBE /* Resources */,
-				C9CB27F420D5C22D00290DBE /* Embed Frameworks */,
-				514C69E690C05D397CD98D97 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pisth Mac";
-			productName = "Pisth Mac";
-			productReference = C9CB27DC20D5BB9500290DBE /* Pisth.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1056,16 +863,6 @@
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 0;
-							};
-						};
-					};
-					C9CB27DB20D5BB9500290DBE = {
-						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.Sandbox = {
 								enabled = 0;
 							};
 						};
@@ -1099,7 +896,6 @@
 			targets = (
 				3AFDD9001FF140FE0061677B /* Pisth */,
 				3ACF9ADB20409446006C3218 /* Pisth API Example */,
-				C9CB27DB20D5BB9500290DBE /* Pisth Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -1291,17 +1087,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C9CB27DA20D5BB9500290DBE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C951BAC62129F8B800BDF1C7 /* Pisth Viewer.app in Resources */,
-				C9CB27E620D5BB9800290DBE /* Assets.xcassets in Resources */,
-				C9985AAA20D6C1DE00389A7B /* Connection.storyboard in Resources */,
-				C9CB27E920D5BB9800290DBE /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1317,42 +1102,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Pisth-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		514C69E690C05D397CD98D97 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-macOS/ObjectUserDefaults.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectUserDefaults.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth Mac/Pods-Pisth Mac-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7E4FC904FD803052194C5F2A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Pisth Mac-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1473,27 +1222,6 @@
 				3A2258911FF6A850001B9710 /* Reachability.swift in Sources */,
 				3A897E1E201660E400B5C73C /* ArrowsViewController.swift in Sources */,
 				3AA117F51FF4257A007BB84A /* SaveFile.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9CB27D820D5BB9500290DBE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9A9585B20DDD3DF00BF6C03 /* TerminalViewController.swift in Sources */,
-				C9CAC7A3212A0731005D7A00 /* AppMenuItem.swift in Sources */,
-				C9B205C120D70CD400045F20 /* FileObserver.swift in Sources */,
-				C9CB27F820D5E0D700290DBE /* ConnectionInfoViewController.swift in Sources */,
-				C9985AAF20D6C4F500389A7B /* ConnectionController.swift in Sources */,
-				C9CB27E120D5BB9500290DBE /* BookmarksViewController.swift in Sources */,
-				C9FF166F2103F3DD0071AD22 /* TerminalWebView.swift in Sources */,
-				C9CB27F020D5C12700290DBE /* Pisth.xcdatamodel in Sources */,
-				C960D04220E037CF005CCE3A /* BrowserSidebarOutlineView.swift in Sources */,
-				C9985AAC20D6C43F00389A7B /* DirectoryViewController.swift in Sources */,
-				C9213D022141F54A00DEDD6C /* UserKeys.swift in Sources */,
-				C9CB27DF20D5BB9500290DBE /* AppDelegate.swift in Sources */,
-				C9B205CB20DD97B100045F20 /* FileMenuDelegate.swift in Sources */,
-				C9B205C920D72FE300045F20 /* FilesOutlineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1660,14 +1388,6 @@
 				C99FE3B3210D19F4000A885D /* es */,
 			);
 			name = Disconnected.xib;
-			sourceTree = "<group>";
-		};
-		C9CB27E720D5BB9800290DBE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9CB27E820D5BB9800290DBE /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1987,92 +1707,6 @@
 			};
 			name = Beta;
 		};
-		C959168E2113A1850073BCCE /* Beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82DD9C492FDC36F191BEE7D5 /* Pods-Pisth Mac.beta.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "Pisth Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = Pisth;
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Beta;
-		};
-		C9CB27EC20D5BB9800290DBE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9E5A848F83ABDD6742B15FD /* Pods-Pisth Mac.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "Pisth Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = Pisth;
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		C9CB27ED20D5BB9800290DBE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F56A04B7E9093551D684A8D /* Pods-Pisth Mac.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "Pisth Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = Pisth;
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		C9D6EC672132FEDA00A81D88 /* Shell */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2173,34 +1807,6 @@
 			};
 			name = Shell;
 		};
-		C9D6EC6A2132FEDA00A81D88 /* Shell */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFB6C0826C10344113214A25 /* Pods-Pisth Mac.shell.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = "Pisth Mac/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.marcela.ada.Pisth-Mac";
-				PRODUCT_NAME = Pisth;
-				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Pisth Mac/Pisth Mac-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Shell;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2233,17 +1839,6 @@
 				3AFDD9151FF140FE0061677B /* Release */,
 				C9D6EC682132FEDA00A81D88 /* Shell */,
 				C959168C2113A1850073BCCE /* Beta */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C9CB27EE20D5BB9800290DBE /* Build configuration list for PBXNativeTarget "Pisth Mac" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C9CB27EC20D5BB9800290DBE /* Debug */,
-				C9CB27ED20D5BB9800290DBE /* Release */,
-				C9D6EC6A2132FEDA00A81D88 /* Shell */,
-				C959168E2113A1850073BCCE /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
