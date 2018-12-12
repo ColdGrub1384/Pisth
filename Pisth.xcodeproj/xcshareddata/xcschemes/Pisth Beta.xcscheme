@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C9E3918F21C0345E00F16622"
+               BuildableName = "PisthTests.xctest"
+               BlueprintName = "PisthTests"
+               ReferencedContainer = "container:Pisth.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C9E3919F21C0347A00F16622"
+               BuildableName = "PisthUITests.xctest"
+               BlueprintName = "PisthUITests"
+               ReferencedContainer = "container:Pisth.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
