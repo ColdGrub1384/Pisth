@@ -19,5 +19,5 @@ struct TestingConnection {
     static let password = "pisth"
     
     /// The host.
-    static let host = "raspberrypi.local"
+    static let host = "develobile.com"
 }
