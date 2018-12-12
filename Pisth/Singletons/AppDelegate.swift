@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         for connection in DataManager.shared.connections {
             var icon: UIApplicationShortcutIcon {
                 if connection.useSFTP {
-                    return UIApplicationShortcutIcon(templateImageName: "folder black")
+                    return UIApplicationShortcutIcon(templateImageName: "File icons/folder")
                 } else {
                     return UIApplicationShortcutIcon(templateImageName: "shell")
                 }
@@ -567,25 +567,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         
         // Open connection for shortcut.
         
-        navigationController.popToRootViewController(animated: true) {
-            guard let bookmarksVC = self.navigationController.visibleViewController as? BookmarksTableViewController else {
+        class AppBookmarksTableViewController: BookmarksTableViewController {
+            
+            override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
                 
-                completionHandler(false)
-                return
+                ContentViewController.shared.present(viewControllerToPresent, animated: flag, completion: completion)
             }
-            
-            guard let index = Int(shortcutItem.type.components(separatedBy: " ")[1]) else {
-                completionHandler(false)
-                return
-            }
-            
-            guard bookmarksVC.tableView.cellForRow(at: IndexPath(row: index, section: 1)) != nil else {
-                completionHandler(false)
-                return
-            }
-            
-            bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 1))
         }
+        
+        let bookmarksVC = AppBookmarksTableViewController()
+        bookmarksVC.loadViewIfNeeded()
+        
+        guard let index = Int(shortcutItem.type.components(separatedBy: " ")[1]) else {
+            completionHandler(false)
+            return
+        }
+        
+        guard bookmarksVC.tableView.cellForRow(at: IndexPath(row: index, section: 1)) != nil else {
+            completionHandler(false)
+            return
+        }
+        
+        bookmarksVC.tableView(bookmarksVC.tableView, didSelectRowAt: IndexPath(row: index, section: 1))
     }
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
