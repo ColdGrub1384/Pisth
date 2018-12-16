@@ -19,9 +19,9 @@ class ReviewHelper {
             minLaunches.integerValue = 0
         } else if (minLaunches.value as! Int) == 0 {
             minLaunches.integerValue = 3
-        } else if (minLaunches.value as! Int) == 3 {
+        } else if launches == 3 {
             minLaunches.integerValue = 5
-        } else if (minLaunches.value as! Int) == 3 {
+        } else if launches == 5 {
             minLaunches.integerValue = 0
         }
         
