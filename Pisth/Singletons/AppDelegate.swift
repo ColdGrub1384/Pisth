@@ -266,10 +266,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             try? FileManager.default.removeItem(at: URL(fileURLWithPath: NSTemporaryDirectory().nsString.appendingPathComponent(file)))
         }
         
-        // Request app review
-        ReviewHelper.shared.launches += 1
-        ReviewHelper.shared.requestReview()
-        
         // News
         var items: [WhatsNewItem]
         if UserKeys.wasWelcomeScreenShown.boolValue {

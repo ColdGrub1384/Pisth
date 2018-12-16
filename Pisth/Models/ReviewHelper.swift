@@ -7,16 +7,34 @@
 
 import Foundation
 import StoreKit
+import ObjectUserDefaults
 
 /// Helper used to request app review based on app launches.
 class ReviewHelper {
     
-    /// Request review, reset points and append current date to `reviewRequests`.
+    /// Request review and reset points.
     func requestReview() {
-        if launches >= minLaunches {
+        
+        if minLaunches.value == nil {
+            minLaunches.integerValue = 0
+        } else if (minLaunches.value as! Int) == 0 {
+            minLaunches.integerValue = 3
+        } else if (minLaunches.value as! Int) == 3 {
+            minLaunches.integerValue = 5
+        } else if (minLaunches.value as! Int) == 3 {
+            minLaunches.integerValue = 0
+        }
+        
+        if launches >= minLaunches.integerValue {
             launches = 0
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(1 * Double(NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
+                    if UIApplication.shared.windows.count > 1 {
+                        _ = TerminalViewController.current?.resignFirstResponder()
+                    }
+                })
             }
         }
     }
@@ -44,5 +62,5 @@ class ReviewHelper {
     }
     
     /// Minimum launches for asking for review.
-    var minLaunches = 10
+    var minLaunches = ObjectUserDefaults.standard.item(forKey: "minLaunches")
 }

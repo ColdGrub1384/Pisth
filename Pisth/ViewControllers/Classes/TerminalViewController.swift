@@ -733,6 +733,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     // MARK: Key input
     
     func insertText(_ text: String) {
+        
+        if text == "\n" {
+            // Request app review
+            ReviewHelper.shared.launches += 1
+            ReviewHelper.shared.requestReview()
+        }
+        
         do {
             
             if !ctrl {
