@@ -188,7 +188,11 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         tableView.backgroundView?.isHidden = !shouldShowBackgroundView
         
         if section == 0 {
-            return 1
+            if numberOfSections(in: tableView) == 1 {
+                return self.tableView(tableView, numberOfRowsInSection: 1)
+            } else {
+                return 1
+            }
         } else if section == 1 {
             if searchController != nil && searchController.isActive && searchController.searchBar.text != "" {
                 return fetchedConnections.count
@@ -216,7 +220,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         
         // Local
-        if indexPath.section == 0 {
+        if indexPath.section == 0 && self.numberOfSections(in: tableView) > 1 {
             
             cell.textLabel?.text = UIDevice.current.name
             cell.detailTextLabel?.text = "mobile@localhost/Documents"
@@ -231,7 +235,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
             return cell
             
         // Connections
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 1 || self.numberOfSections(in: tableView) == 1 {
             
             cell.accessoryType = .detailButton
             
@@ -338,10 +342,10 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         }
         AppDelegate.shared.navigationController.navigationBar.isTranslucent = true
         
-        if indexPath.section == 0 { // Open local terminal
+        if indexPath.section == 0 && self.numberOfSections(in: tableView) > 1 { // Open local terminal
             openShell()
             tableView.deselectRow(at: indexPath, animated: true)
-        } else if indexPath.section == 1 { // Open connection
+        } else if indexPath.section == 1 || self.numberOfSections(in: tableView) == 1 { // Open connection
             var connection = DataManager.shared.connections[indexPath.row]
 
             /// Open connection.

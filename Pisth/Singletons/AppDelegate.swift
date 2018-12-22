@@ -427,7 +427,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     
                     UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                 }
-            } else if url.absoluteString.hasPrefix("file:") { // Upload file or import plugin or theme.
+            } else if url.isFileURL { // Upload file or import plugin or theme.
+                
+                _ = url.startAccessingSecurityScopedResource()
                 
                 if url.pathExtension.lowercased() == "termplugin" { // Import plugin
                     

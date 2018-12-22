@@ -382,6 +382,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'bar')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
+        
+        // Request app review
+        if ReviewHelper.shared.launches != -1 {
+            ReviewHelper.shared.launches += 1
+        }
+        ReviewHelper.shared.requestReview()
+        
         return true
     }
     
@@ -733,14 +740,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     // MARK: Key input
     
     func insertText(_ text: String) {
-        
-        if text == "\n" {
-            // Request app review
-            if ReviewHelper.shared.launches != -1 {
-                ReviewHelper.shared.launches += 1
-            }
-            ReviewHelper.shared.requestReview()
-        }
         
         do {
             
