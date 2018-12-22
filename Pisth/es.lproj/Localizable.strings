@@ -245,10 +245,10 @@
 "dir.sessionClosedTitle" = "¡Conexión cerrada!";
 
 /* Message of the alert for asking the user for uploading files. Do you want to upload <Files count> files to <Destination>? */
-"dir.uploadFilesMessage" = "¿Quiere subir %@ archivos a %@?";
+"dir.uploadFilesMessage" = "¿Quiere subir %i archivos a %@?";
 
 /* Title of the alert for asking the user for uploading files. Upload <Files count> files? */
-"dir.uploadFilesTitle" = "Subir %@ archivos?";
+"dir.uploadFilesTitle" = "Subir %i archivos?";
 
 /* Use default language */
 "editor.default" = "Por defecto";

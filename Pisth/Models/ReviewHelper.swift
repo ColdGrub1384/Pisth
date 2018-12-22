@@ -22,7 +22,7 @@ class ReviewHelper {
         } else if launches == 3 {
             minLaunches.integerValue = 5
         } else if launches == 5 {
-            minLaunches.integerValue = 0
+            minLaunches.integerValue = -1
         }
         
         if launches >= minLaunches.integerValue {
@@ -31,7 +31,8 @@ class ReviewHelper {
                 SKStoreReviewController.requestReview()
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(1 * Double(NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: {
-                    if UIApplication.shared.windows.count > 1 {
+                    print(UIApplication.shared.windows.count)
+                    if UIApplication.shared.windows.count > 2 {
                         _ = TerminalViewController.current?.resignFirstResponder()
                     }
                 })

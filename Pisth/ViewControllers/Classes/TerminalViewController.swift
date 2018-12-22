@@ -736,7 +736,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if text == "\n" {
             // Request app review
-            ReviewHelper.shared.launches += 1
+            if ReviewHelper.shared.launches != -1 {
+                ReviewHelper.shared.launches += 1
+            }
             ReviewHelper.shared.requestReview()
         }
         

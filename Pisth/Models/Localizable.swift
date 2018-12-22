@@ -141,7 +141,7 @@ class Localizable: Static {
         ///
         /// - Returns: Commits for `branch`
         static func commits(for branch: String) -> String {
-            return NSString(format: NSLocalizedString("git.commitsFor", comment: "Commits for <branch>") as NSString, branch) as String
+            return String(format: NSLocalizedString("git.commitsFor", comment: "Commits for <branch>"), branch)
         }
         
         /// Request a commit message to the user.
@@ -184,7 +184,7 @@ class Localizable: Static {
         ///
         /// - Returns: Send ^`key`
         static func sendCtrl(_ key: String) -> String {
-            return NSString(format: NSLocalizedString("terminal.sendCtrlKey", comment: "Key command description.") as NSString, key) as String
+            return String(format: NSLocalizedString("terminal.sendCtrlKey", comment: "Key command description."), key)
         }
         
         /// Title of function keys popover.
@@ -198,8 +198,7 @@ class Localizable: Static {
         
         /// Authenticate to send user's password.
         static func authenticateToSendPassword(of user: String) -> String {
-        
-            return NSString(format: NSLocalizedString("terminal.authenticateToSendPasswordFor", comment: "Authenticate to send user's password.") as NSString, user) as String
+            return String(format: NSLocalizedString("terminal.authenticateToSendPasswordFor", comment: "Authenticate to send user's password."), user)
         }
         
         /// Ask for accepting invitation from peer.
@@ -209,7 +208,7 @@ class Localizable: Static {
         ///
         /// - Returns: Accept invitation from `peer`?
         static func acceptInvitation(from peer: String) -> String {
-            return NSString(format: NSLocalizedString("terminal.acceptInvitation", comment: "Ask for accepting invitation from peer.") as NSString, peer) as String
+            return String(format: NSLocalizedString("terminal.acceptInvitation", comment: "Ask for accepting invitation from peer."), peer)
         }
         
         /// Ask for accepting invitation from peer.
@@ -219,7 +218,7 @@ class Localizable: Static {
         ///
         /// - Returns: `peer` wants to see the terminal.
         static func peerWantsToSeeTheTerminal(_ peer: String) -> String {
-            return NSString(format: NSLocalizedString("terminal.peerWantsToSeeTheTerminal", comment: "Ask for accepting invitation from peer.") as NSString, peer) as String
+            return String(format: NSLocalizedString("terminal.peerWantsToSeeTheTerminal", comment: "Ask for accepting invitation from peer."), peer)
         }
         
         /// Accept invitation from peer.
@@ -398,7 +397,7 @@ class Localizable: Static {
         ///
         /// - Returns: Do you want to send `file` to `dir`?
         static func send(_ file: String, to dir: String) -> String {
-            return NSString(format: NSLocalizedString("dir.sendFile", comment: "Message of the alert asking for sending a file to the server. Do you want to send <File> to <Directory>?") as NSString, file, dir) as String
+            return String(format: NSLocalizedString("dir.sendFile", comment: "Message of the alert asking for sending a file to the server. Do you want to send <File> to <Directory>?"), file, dir)
         }
         
         /// Import file from the Pisth sandbox.
@@ -420,7 +419,7 @@ class Localizable: Static {
         ///
         /// - Returns: Upload `fileCount` files?
         static func uploadTitle(for filesCount: Int) -> String {
-            return NSString(format: NSLocalizedString("dir.uploadFilesTitle", comment: "Title of the alert for asking the user for uploading files. Upload <Files count> files?") as NSString, filesCount) as String
+            return String(format: NSLocalizedString("dir.uploadFilesTitle", comment: "Title of the alert for asking the user for uploading files. Upload <Files count> files?"), filesCount)
         }
         
         /// Message of the alert for asking the user for uploading files.
@@ -431,7 +430,7 @@ class Localizable: Static {
         ///
         /// - Returns: Do you want to upload `filesCount` files to `Destination`?
         static func uploadMessage(for filesCount: Int, destination: String) -> String {
-            return NSString(format: NSLocalizedString("dir.uploadFilesMessage", comment: "Message of the alert for asking the user for uploading files. Do you want to upload <Files count> files to <Destination>?") as NSString, filesCount, destination) as String
+            return String(format: NSLocalizedString("dir.uploadFilesMessage", comment: "Message of the alert for asking the user for uploading files. Do you want to upload <Files count> files to <Destination>?"), filesCount, destination)
         }
         
         /// Message of the alert shown when a file couldn't be uploaded.
@@ -442,7 +441,7 @@ class Localizable: Static {
         ///
         /// - Returns: Error uploading `file` to `destination`.
         static func errorUploading(file: String, to destination: String) -> String {
-            return NSString(format: NSLocalizedString("dir.errorUploadingFileToDestination", comment: "Message of the alert shown when a file couldn't be uploaded. Error uploading <File> to <Destination>.") as NSString, file, destination) as String
+            return String(format: NSLocalizedString("dir.errorUploadingFileToDestination", comment: "Message of the alert shown when a file couldn't be uploaded. Error uploading <File> to <Destination>."), file, destination)
         }
     }
     
@@ -458,7 +457,8 @@ class Localizable: Static {
         ///
         /// - Returns: Enter credentials for `host`.
         static func enterCredentials(for host: String) -> String {
-            return NSString(format: NSLocalizedString("bookmarks.enterCredentialsFor", comment: "Message of the alert for entering credentials when they are not provided. Enter credentials for <Host>.") as NSString, host) as String
+            return String(format: NSLocalizedString("bookmarks.enterCredentialsFor", comment: "Message of the alert for entering credentials when they are not provided. Enter credentials for <Host>."), host)
+            
         }
         
         /// Title of the alert shown when a session that is already active was clicked.
@@ -495,7 +495,7 @@ class Localizable: Static {
         ///
         /// - Returns: Enter password for user `user`.
         static func enterPasswordMessage(for user: String) -> String {
-            return NSString(format: NSLocalizedString("bookmarks.enterPasswordMessage", comment: "Message of the alert for asking the user for the password. Enter password for user <User>.") as NSString, user) as String
+            return String(format: NSLocalizedString("bookmarks.enterPasswordMessage", comment: "Message of the alert for asking the user for the password. Enter password for user <User>."), user)
         }
         
         /// Authenticate with biometry to connect to the connection.
@@ -526,7 +526,8 @@ class Localizable: Static {
         ///
         /// - Returns: Write new name for `file`.
         static func rename(file: String) -> String {
-            return NSString(format: NSLocalizedString("cell.renameFileMessage", comment: "The mesage of the alert for rename a file. Write new name for <fileToRename.filename>.") as NSString, file) as String
+            return String(format: NSLocalizedString("cell.renameFileMessage", comment: "The mesage of the alert for rename a file. Write new name for <fileToRename.filename>."), file)
+            
         }
         
         /// New file name placeholder.
@@ -587,7 +588,7 @@ class Localizable: Static {
         ///
         /// - Returns: Authenticate as `user` user.
         static func authenticate(as user: String) -> String{
-            return NSString(format: NSLocalizedString("delegate.authenticateAsUser", comment: "Ask for the password. Authenticate as <User> user.") as NSString, user) as String
+            return String(format: NSLocalizedString("delegate.authenticateAsUser", comment: "Ask for the password. Authenticate as <User> user."), user)
         }
         
         /// Username placeholder.
@@ -642,7 +643,7 @@ class Localizable: Static {
         ///
         /// - Returns: `pathExtension` file
         static func file(withPathExtension pathExtension: String) -> String {
-            return NSString(format: NSLocalizedString("info.fileWithExtension", comment: "Describe file.") as NSString, pathExtension) as String
+            return String(format: NSLocalizedString("info.fileWithExtension", comment: "Describe file."), pathExtension)
         }
     }
     
