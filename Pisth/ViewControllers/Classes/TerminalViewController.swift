@@ -395,6 +395,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()
         
+        guard selectionTextView.isHidden else {
+            return false
+        }
+        
         TerminalViewController.current_ = self
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'block')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
@@ -594,7 +598,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             arrowsVC.view.frame = webView.frame
         }
         
-        if !selectionTextView.isHidden {
+        if !selectionTextView.isHidden, !selectionTextView.isFirstResponder {
             insertMode()
         }
     }
