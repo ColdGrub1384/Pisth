@@ -204,7 +204,12 @@ class FileCollectionViewCell: UICollectionViewCell {
             let renameAlert = UIAlertController(title: Localizable.FileCollectionViewCell.renameFileTitle, message: Localizable.FileCollectionViewCell.rename(file: fileToRename.filename), preferredStyle: .alert)
             renameAlert.addTextField(configurationHandler: { (textField) in
                 textField.placeholder = Localizable.FileCollectionViewCell.newFileName
-                textField.text = fileToRename.filename
+                
+                var name = fileToRename.filename ?? ""
+                if name.hasSuffix("/") {
+                    name.removeLast()
+                }
+                textField.text = name
             })
             
             renameAlert.addAction(UIAlertAction(title: Localizable.FileCollectionViewCell.rename, style: .default, handler: { (_) in
