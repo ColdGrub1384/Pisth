@@ -487,6 +487,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController_ = navigationController
         
+        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+        webView.backgroundColor = theme.backgroundColor
+        (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
+        
         if !viewer {
             mcNearbyServiceAdvertiser.startAdvertisingPeer()
         }
@@ -830,11 +835,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
         selectionTextView.backgroundColor = theme.backgroundColor
         selectionTextView.textColor = theme.foregroundColor
-        if theme.keyboardAppearance == .dark {
-            view.backgroundColor = .black
-        } else {
-            view.backgroundColor = .white
-        }
+        view.backgroundColor = theme.backgroundColor
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
             if !self.viewer {
