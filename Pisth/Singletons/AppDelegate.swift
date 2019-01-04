@@ -88,6 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     /// Show a `CompactBookmarksTableViewController` from compact window or show it from the left.
     @objc func showBookmarks() {
         
+        // Request app review
+        if ReviewHelper.shared.launches != -1 {
+            ReviewHelper.shared.launches += 1
+        }
+        ReviewHelper.shared.requestReview()
+        
         if !splitViewController.isCollapsed {
             let button = AppDelegate.shared.splitViewController.displayModeButtonItem
             _ = button.target?.perform(button.action)

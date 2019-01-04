@@ -25,6 +25,10 @@ class ReviewHelper {
             minLaunches.integerValue = -1
         }
         
+        guard minLaunches.integerValue != -1 else {
+            return
+        }
+        
         if launches >= minLaunches.integerValue {
             launches = 0
             if #available(iOS 10.3, *) {

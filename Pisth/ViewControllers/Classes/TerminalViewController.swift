@@ -385,12 +385,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'bar')", completionHandler: nil)
         keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
         
-        // Request app review
-        if ReviewHelper.shared.launches != -1 {
-            ReviewHelper.shared.launches += 1
-        }
-        ReviewHelper.shared.requestReview()
-        
         return true
     }
     
