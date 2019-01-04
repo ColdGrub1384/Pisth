@@ -1500,12 +1500,17 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        _ = url.startAccessingSecurityScopedResource()
         present(upload(file: url), animated: true, completion: nil)
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         
-        if urls.count == 1 && urls[0].startAccessingSecurityScopedResource() {
+        for url in urls {
+            _ = url.startAccessingSecurityScopedResource()
+        }
+        
+        if urls.count == 1 {
             documentPicker(controller, didPickDocumentAt: urls[0])
             return
         }
