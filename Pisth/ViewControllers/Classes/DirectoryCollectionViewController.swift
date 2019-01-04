@@ -1511,7 +1511,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
         
         if urls.count == 1 {
-            documentPicker(controller, didPickDocumentAt: urls[0])
+            present(upload(file: urls[0]), animated: true, completion: nil)
             return
         }
         

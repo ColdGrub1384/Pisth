@@ -320,6 +320,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             arrowsVC.view.frame = webView.frame
         }
         
+        guard !webView.isLoading, webView.url != nil else {
+            return
+        }
+        
         fit()
     }
     
@@ -433,7 +437,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
-        webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.webView.loadFileURL(Bundle.terminal.bundleURL.appendingPathComponent("terminal.html"), allowingReadAccessTo: URL(string:"file:///")!)
+        })
         view.addSubview(webView)
         webView.backgroundColor = .clear
         webView.navigationDelegate = self
@@ -517,8 +523,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if UIScreen.screens.count > 1, let externalDisplay = UIScreen.screens.last {
             setupExternalDisplay(externalDisplay)
         }
-        
-         _ = becomeFirstResponder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -551,7 +555,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        fit()
+        if isPresentedInFullscreen, isFirstResponder {
+            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                self.reload()
+            })
+        } else {
+            fit()
+        }
     }
     
     override func updateUserActivityState(_ activity: NSUserActivity) {
@@ -831,10 +841,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
-        webView.backgroundColor = theme.backgroundColor
         (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
         selectionTextView.backgroundColor = theme.backgroundColor
         selectionTextView.textColor = theme.foregroundColor
+        webView.backgroundColor = theme.backgroundColor
         view.backgroundColor = theme.backgroundColor
         
         webView.evaluateJavaScript("fit(term)", completionHandler: {_,_ in
