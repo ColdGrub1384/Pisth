@@ -85,6 +85,9 @@
 /* Import file. */
 "browsers.import" = "Import";
 
+/* Import from camera roll. */
+"browsers.importFromCameraRoll" = "Import photo / video";
+
 /* Move file in selected directory. */
 "browsers.moveHere" = "Move here";
 

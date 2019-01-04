@@ -275,6 +275,9 @@ class Localizable: Static {
     
     class Browsers: Static {
         
+        /// Import from camera roll.
+        static let importFromCameraRoll = NSLocalizedString("browsers.importFromCameraRoll", comment: "Import from camera roll")
+        
         /// Create a folder.
         static let createFolder = NSLocalizedString("browsers.createFolder", comment: "Create a folder.")
         

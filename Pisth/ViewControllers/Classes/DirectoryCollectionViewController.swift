@@ -15,9 +15,10 @@ import StoreKit
 import PanelKit
 import CoreSpotlight
 import UserNotifications
+import MobileCoreServices
 
 /// Collection view controller to manage remote files.
-class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate {
+class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -1019,7 +1020,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                 
                                 return false
                             }
-                                
+                            
                         } else {
                             if !self.sendFile(file: url, toDirectory: path, showAlert: false) {
                                 
@@ -1073,6 +1074,14 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             picker.delegate = self
             
             self.present(picker, animated: true, completion: nil)
+        }))
+        
+        chooseAlert.addAction(UIAlertAction(title: Localizable.Browsers.importFromCameraRoll, style: .default, handler: { (_) in
+            let vc = UIImagePickerController()
+            vc.sourceType = .photoLibrary
+            vc.mediaTypes = [kUTTypeImage, kUTTypeMovie] as [String]
+            vc.delegate = self
+            self.present(vc, animated: true, completion: nil)
         }))
         
         chooseAlert.addAction(UIAlertAction(title: Localizable.DirectoryCollectionViewController.importFromPisth, style: .default, handler: { (_) in // Upload file from other session
@@ -1815,6 +1824,29 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     var modalCloseButtonTitle: String {
         return "×"
+    }
+    
+    // MARK: - Image picker controller delegate
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var url: URL?
+        
+        if #available(iOS 11.0, *) {
+            url = (info[.imageURL] ?? info[.mediaURL]) as? URL
+        } else {
+            url = info[.mediaURL] as? URL
+        }
+        
+        picker.dismiss(animated: true) {
+            if let url = url {
+                self.present(self.upload(file: url), animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: - Commit card view
