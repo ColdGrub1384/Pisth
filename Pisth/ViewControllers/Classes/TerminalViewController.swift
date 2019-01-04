@@ -165,11 +165,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Show plain output and allow selection.
     @objc func selectionMode() {
-        selectionTextView.isHidden = false
-        view.backgroundColor = selectionTextView.backgroundColor
-        selectionTextView.text = ""
-        webView.isHidden = true
-        _ = resignFirstResponder()
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.selectionTextView.isHidden = false
+            self.view.backgroundColor = self.selectionTextView.backgroundColor
+            self.selectionTextView.text = ""
+            self.webView.isHidden = true
+            _ = self.resignFirstResponder()
+        })
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
             self.webView.evaluateJavaScript("fit(term); term.selectAll(); term.selectionManager.selectionText", completionHandler: { (result, _) in
