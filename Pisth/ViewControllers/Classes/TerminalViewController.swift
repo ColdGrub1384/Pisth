@@ -802,6 +802,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             print("`smartQuotesType` setter not implemented")
         }
     }
+    
+    @available(iOS 11.0, *)
+    var smartDashesType: UITextSmartDashesType {
+        get {
+            return .no
+        }
+        
+        set {
+            print("`smartDashesType` setter not implemented")
+        }
+    }
 
     // MARK: Web kit navigation delegate
 
