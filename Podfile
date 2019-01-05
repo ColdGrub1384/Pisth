@@ -45,28 +45,6 @@ target 'PisthTests' do
     pod 'ObjectUserDefaults'
 end
 
-target 'PisthUITests' do
-    
-    # ignore all warnings from all pods
-    inhibit_all_warnings!
-    
-    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-    use_frameworks!
-    
-    # Pods for Pisth
-    
-    pod 'NMSSH', '~> 2.2.8'
-    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
-    pod 'Zip'
-    pod 'SwiftKeychainWrapper'
-    pod 'BiometricAuthentication', '~> 2.1'
-    pod 'ActionSheetPicker-3.0'
-    pod 'Firebase/Core'
-    pod 'PanelKit'
-    pod 'WhatsNew', '~> 0.4.4'
-    pod 'ObjectUserDefaults'
-end
-
 # post install
 post_install do |installer|
     # Build settings
