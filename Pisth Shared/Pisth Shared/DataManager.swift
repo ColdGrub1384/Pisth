@@ -108,12 +108,12 @@ public class DataManager {
                 
                 guard let host = result.value(forKey: "host") as? String else { return fetchedConnections }
                 guard let username = result.value(forKey: "username") as? String else { return fetchedConnections }
-                guard let passKey = result.value(forKey: "password") as? String else { return fetchedConnections }
+                let passKey = (result.value(forKey: "password") as? String) ?? ""
                 guard let name = result.value(forKey: "name") as? String else { return fetchedConnections }
                 guard let port = result.value(forKey: "port") as? UInt64 else { return fetchedConnections }
                 guard let path = result.value(forKey: "path") as? String else { return fetchedConnections }
                 #if os(iOS)
-                guard let password = KeychainWrapper.standard.string(forKey: passKey) else { return fetchedConnections }
+                let password = KeychainWrapper.standard.string(forKey: passKey) ?? ""
                 #else
                 guard let password = KeychainSwift().get(passKey) else { return fetchedConnections }
                 #endif
