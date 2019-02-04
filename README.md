@@ -39,8 +39,6 @@ Features:
 ## Screenshots
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
 
-![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
-
 # API
 
 [![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
