@@ -59,8 +59,7 @@ class SplitViewController: UISplitViewController {
         // Setup Navigation Controller
         let bookmarksVC = BookmarksTableViewController()
         bookmarksVC.modalPresentationStyle = .overCurrentContext
-        bookmarksVC.view.backgroundColor = .clear
-        bookmarksVC.tableView.backgroundColor = .clear
+        bookmarksVC.tableView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         if !isShell {
             bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         } else {
