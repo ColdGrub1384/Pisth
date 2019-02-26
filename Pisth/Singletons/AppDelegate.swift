@@ -164,7 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             .init(title: Localizable.UIMenuItem.openInNewPanel, action: #selector(FileCollectionViewCell.openInNewPanel(_:))),
             .init(title: Localizable.UIMenuItem.selectionMode, action: #selector(TerminalViewController.selectionMode)),
             .init(title: Localizable.UIMenuItem.insertMode, action: #selector(TerminalViewController.insertMode)),
-            .init(title: Localizable.UIMenuItem.paste, action: #selector(TerminalViewController.pasteText)),
             .init(title: Localizable.UIMenuItem.toggleTopBar, action: #selector(TerminalViewController.showNavBar)),
             .init(title: Localizable.UIMenuItem.pasteSelection, action: #selector(TerminalViewController.pasteSelection))
         ]

@@ -371,6 +371,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: - View controller
     
+    override func paste(_ sender: Any?) {
+        self.pasteText()
+    }
+    
     override var canBecomeFirstResponder: Bool {
         return (webView != nil && !readOnly)
     }
@@ -547,7 +551,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if selectionTextView.isHidden {
-            return (action == #selector(pasteText) || action == #selector(selectionMode) || action == #selector(showNavBar))
+            return (action == #selector(UIResponder.paste(_:)) || action == #selector(selectionMode) || action == #selector(showNavBar))
         } else {
             return (action == #selector(pasteSelection) || action == #selector(insertMode) || action == #selector(showNavBar))
         }
