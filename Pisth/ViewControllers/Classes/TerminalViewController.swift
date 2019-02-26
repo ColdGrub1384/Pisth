@@ -104,7 +104,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         do {
             guard let session = connectionManager.filesSession else { return }
-            let history = try session.channel.execute("cat .pisth_history").components(separatedBy: "\n")
+            
+            var error: NSError?
+            let history = session.channel.execute("cat .pisth_history", error: &error).components(separatedBy: "\n")
+            if let error = error {
+                throw error
+            }
             
             let commandsVC = CommandsTableViewController()
             commandsVC.title = "History"
@@ -713,7 +718,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     // MARK: NMSSH channel delegate
     
-    func channel(_ channel: NMSSHChannel!, didReadData message: String!) {
+    func channel(_ channel: NMSSHChannel, didReadData message: String) {
         DispatchQueue.main.async {
             self.console += message
             
@@ -746,7 +751,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
     
-    func channelShellDidClose(_ channel: NMSSHChannel!) {
+    func channelShellDidClose(_ channel: NMSSHChannel) {
         DispatchQueue.main.async {
             if self.isFirstResponder {
                 _ = self.resignFirstResponder()
@@ -909,8 +914,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         
                     } else {
                         
+                        var error: NSError?
+                        
                         // Sorry Termius ;-(
-                        let os = try? self.connectionManager.session?.channel.execute("""
+                        let os = self.connectionManager.session?.channel.execute("""
                         SA_OS_TYPE="Linux"
                         REAL_OS_NAME=`uname`
                         if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
@@ -920,7 +927,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         DISTRIB_ID=\"`cat /etc/*release`\"
                         echo $DISTRIB_ID;
                         fi;
-                        """)
+                        """, error: &error)
+                        
+                        if let error = error {
+                            throw error
+                        }
                         
                         self.connectionManager.connection?.os = os ?? nil
                         
@@ -1283,17 +1294,25 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return []
         }
         
-        let homeDir = try? fileSession.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "")
-        let dir =  pwd ?? homeDir ?? "/"
+        var error: NSError?
+        var homeDir: String? = fileSession.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
         
-        guard !viewer, let files = connectionManager.files(inDirectory: dir) else {
+        if error != nil {
+            homeDir = nil
+        }
+        
+        let dir =  pwd ?? homeDir
+        
+        guard !viewer, let directory = dir, let files = connectionManager.files(inDirectory: directory) else {
             return []
         }
         
         var filenames = [String]()
         
         for file in files {
-            filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+            if let dir = dir {
+                filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+            }
         }
         
         return filenames

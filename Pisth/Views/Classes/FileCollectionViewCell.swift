@@ -96,7 +96,7 @@ class FileCollectionViewCell: UICollectionViewCell {
                         
                         func remove(directoryRecursively directory: String) -> Bool? {
                             while true {
-                                guard let files = sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else { return nil }
+                                guard let files = sftp.contentsOfDirectory(atPath: directory) else { return nil }
                                 
                                 if files.count > 0 {
                                     for file in files {
@@ -205,7 +205,7 @@ class FileCollectionViewCell: UICollectionViewCell {
             renameAlert.addTextField(configurationHandler: { (textField) in
                 textField.placeholder = Localizable.FileCollectionViewCell.newFileName
                 
-                var name = fileToRename.filename ?? ""
+                var name = fileToRename.filename 
                 if name.hasSuffix("/") {
                     name.removeLast()
                 }
@@ -313,7 +313,7 @@ class FileCollectionViewCell: UICollectionViewCell {
             if self.filename.text == ".." || self.filename.text == "../" {
                 dirToOpen = dir.deletingLastPathComponent
             } else {
-                dirToOpen = dir.appendingPathComponent(filename!)
+                dirToOpen = dir.appendingPathComponent(filename)
             }
             
             ContentViewController.shared.presentBrowser(inDirectory: dirToOpen, from: self)

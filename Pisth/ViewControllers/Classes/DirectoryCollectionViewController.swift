@@ -197,7 +197,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             if self.directory.contains("~") {
                 // Get absolute path from "~"
-                if let path = try? ConnectionManager.shared.filesSession?.channel.execute("echo $HOME").replacingOccurrences(of: "\n", with: "") {
+                var error: NSError?
+                let path = ConnectionManager.shared.filesSession?.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
+                if error == nil {
                     self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
                     self.homeDirectory = path ?? "/"
                 }
@@ -205,7 +207,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             if directory == nil {
                 // Sorry Termius ;-(
-                let os = try? ConnectionManager.shared.filesSession?.channel.execute("""
+                var error: NSError?
+                let os = ConnectionManager.shared.filesSession?.channel.execute("""
                 SA_OS_TYPE="Linux"
                 REAL_OS_NAME=`uname`
                 if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
@@ -216,9 +219,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 echo $DISTRIB_ID;
                 fi;
                 exit;
-                """)
+                """, error: &error)
                 
-                connection.os = os ?? nil
+                if error == nil {
+                    connection.os = os ?? nil
+                }
                 
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
                 request.returnsObjectsAsFaults = false
@@ -390,8 +395,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
                 
+                var error: NSError?
+                
                 // Check for Aptitude
-                guard let resultAPT = try? session.channel.execute("command -v apt-get").replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n") else { return [] }
+                let resultAPT = session.channel.execute("command -v apt-get", error: &error).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n")
+                guard error == nil else { return [] }
                 
                 if isGitRepo {
                     if resultAPT.isEmpty {
@@ -1101,7 +1109,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 let newPath = self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)
                 
-                guard let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: Bundle.main.path(forResource: "empty", ofType: nil), toFileAtPath: newPath) else { return }
+                guard let path = Bundle.main.path(forResource: "empty", ofType: nil), let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: path, toFileAtPath: newPath) else { return }
                 
                 if !result {
                     let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingFile, message: nil, preferredStyle: .alert)

@@ -77,8 +77,8 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         parentDirectoryLabel.text = parentDirectory.nsString.lastPathComponent
         let byteCountFormatter = ByteCountFormatter()
         byteCountFormatter.includesActualByteCount = true
-        sizeLabel.text = byteCountFormatter.string(fromByteCount: file.fileSize.int64Value)
-        if file.permissions.hasPrefix("l") {
+        sizeLabel.text = byteCountFormatter.string(fromByteCount: file.fileSize?.int64Value ?? 0)
+        if file.permissions?.hasPrefix("l") == true {
             fileTypeLabel.text = Localizable.FileInfoViewController.symLink
         } else if file.isDirectory {
             fileTypeLabel.text = Localizable.FileInfoViewController.directory
@@ -93,7 +93,7 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
             fileTypeLabel.text = Localizable.FileInfoViewController.file(withPathExtension: pathExtension.uppercased())
         }
         permissionsLabel.text = file.permissions
-        modificationLabel.text = DateFormatter().string(from: file.modificationDate)
+        modificationLabel.text = DateFormatter().string(from: file.modificationDate ?? Date())
         if modificationLabel.text?.isEmpty == true /* `==` because `text` is optional */ {
             view.viewWithTag(1)?.isHidden = true
         }

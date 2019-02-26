@@ -58,7 +58,11 @@ class GitBranchesTableViewController: UITableViewController {
 
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-SourceControl", AnalyticsParameterItemName : "Source Control"])
         
-        if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch").replacingOccurrences(of: " ", with: "") {
+        var error: NSError?
+        
+        let result = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch", error: &error).replacingOccurrences(of: " ", with: "")
+        
+        if error == nil {
             for branch in result.components(separatedBy: "\n") {
                 if branch.hasPrefix("*") {
                     current = branch.replacingOccurrences(of: "*", with: "")

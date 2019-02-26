@@ -1,60 +1,60 @@
 PODS:
   - ActionSheetPicker-3.0 (2.3.0)
-  - BiometricAuthentication (2.1)
-  - Firebase/Core (5.13.0):
+  - BiometricAuthentication (2.2)
+  - Firebase/Core (5.17.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.3.0)
-  - Firebase/CoreOnly (5.13.0):
-    - FirebaseCore (= 5.1.8)
-  - FirebaseAnalytics (5.3.0):
-    - FirebaseCore (~> 5.1)
-    - FirebaseInstanceID (~> 3.3)
-    - GoogleAppMeasurement (~> 5.3)
+    - FirebaseAnalytics (= 5.6.0)
+  - Firebase/CoreOnly (5.17.0):
+    - FirebaseCore (= 5.3.0)
+  - FirebaseAnalytics (5.6.0):
+    - FirebaseCore (~> 5.3)
+    - FirebaseInstanceID (~> 3.5)
+    - GoogleAppMeasurement (= 5.6.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.1.8):
+  - FirebaseCore (5.3.0):
     - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.3.0):
-    - FirebaseCore (~> 5.1)
+  - FirebaseInstanceID (3.5.0):
+    - FirebaseCore (~> 5.3)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
-  - GoogleAppMeasurement (5.3.0):
+  - GoogleAppMeasurement (5.6.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.6):
+  - GoogleUtilities/AppDelegateSwizzler (5.3.7):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.6)
-  - GoogleUtilities/Logger (5.3.6):
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.6):
+  - GoogleUtilities/MethodSwizzler (5.3.7):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.6):
+  - GoogleUtilities/Network (5.3.7):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.6)"
-  - GoogleUtilities/Reachability (5.3.6):
+  - "GoogleUtilities/NSData+zlib (5.3.7)"
+  - GoogleUtilities/Reachability (5.3.7):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.6):
+  - GoogleUtilities/UserDefaults (5.3.7):
     - GoogleUtilities/Logger
-  - Highlightr (2.0.1)
+  - Highlightr (2.1.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - NMSSH (2.2.9)
+  - NMSSH (2.3.1)
   - ObjectUserDefaults (1.0)
   - PanelKit (2.0.1)
-  - SwiftKeychainWrapper (3.0.1)
+  - SwiftKeychainWrapper (3.2.0)
   - WhatsNew (0.4.4)
   - Zip (1.1.0)
 
@@ -63,7 +63,7 @@ DEPENDENCIES:
   - BiometricAuthentication (~> 2.1)
   - Firebase/Core
   - Highlightr (from `https://github.com/raspu/Highlightr.git`, branch `master`)
-  - NMSSH (~> 2.2.8)
+  - NMSSH (from `https://github.com/NMSSH/NMSSH.git`, branch `master`)
   - ObjectUserDefaults
   - PanelKit
   - SwiftKeychainWrapper
@@ -81,7 +81,6 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
-    - NMSSH
     - ObjectUserDefaults
     - PanelKit
     - SwiftKeychainWrapper
@@ -92,30 +91,36 @@ EXTERNAL SOURCES:
   Highlightr:
     :branch: master
     :git: https://github.com/raspu/Highlightr.git
+  NMSSH:
+    :branch: master
+    :git: https://github.com/NMSSH/NMSSH.git
 
 CHECKOUT OPTIONS:
   Highlightr:
-    :commit: bd57404c28527b4d40ee15ce9f61fad734ad50a1
+    :commit: 87465e7ac116a4c8672fa29aae840e9c9e68bedb
     :git: https://github.com/raspu/Highlightr.git
+  NMSSH:
+    :commit: 94624c90e357eda412e40c1a3d9dec1a1cb7479d
+    :git: https://github.com/NMSSH/NMSSH.git
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
-  BiometricAuthentication: 6928c01583bc707f92c11349f190d5ae052217d3
-  Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
-  FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
-  FirebaseCore: fba2bfaa691c49028309b92e4dd37cc4b5512fbe
-  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
-  GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
-  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
-  Highlightr: 8162b4faba588963fb8852390ea9a78f166a6b99
+  BiometricAuthentication: 9eeaae9cda890d95bc1fc41e72285e68cb6bc8b0
+  Firebase: 59d557e064217fab6a03ff00baa73c06e73832e6
+  FirebaseAnalytics: 75e4bbc6417d190cc98ec1f17c41a4fad4c2c976
+  FirebaseCore: c0c4befb82374d6aef64d800e569f47625352edc
+  FirebaseInstanceID: 4522aad88f69297622062c0e9ffccdee3dd9b151
+  GoogleAppMeasurement: 008e04ecd8efedd97a693aea8634aefe220bd26e
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  NMSSH: eb4a63d52631d3ffe348181793bb19434b01c32a
+  NMSSH: cd689ae535a1581a6dd9fd4600ff71247df510a6
   ObjectUserDefaults: 72b8d13aea15090168579b079a21cae312a1cefd
   PanelKit: d05cecac1ab39af375b56ff21c7b5a9915a3eb5b
-  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftKeychainWrapper: 82c4c02cdc36f9a24f7edfcaab3e336401caa1a1
   WhatsNew: ebb4e2a85a0975c7c2705087c0c67939451f8b49
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: e7cc3cf2c68160e91294548e2cfa2c641b929e5d
+PODFILE CHECKSUM: 839d4a18db8d0006ead1eb0872bac434d4018691
 
 COCOAPODS: 1.5.3

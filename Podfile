@@ -11,7 +11,7 @@ target 'Pisth' do
 
   # Pods for Pisth
 
-  pod 'NMSSH', '~> 2.2.8'
+  pod 'NMSSH', :git => 'https://github.com/NMSSH/NMSSH.git', :branch => 'master'
   pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
   pod 'Zip'
   pod 'SwiftKeychainWrapper'
@@ -33,7 +33,7 @@ target 'PisthTests' do
     
     # Pods for Pisth
     
-    pod 'NMSSH', '~> 2.2.8'
+    pod 'NMSSH', :git => 'https://github.com/NMSSH/NMSSH.git', :branch => 'master'
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
     pod 'Zip'
     pod 'SwiftKeychainWrapper'

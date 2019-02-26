@@ -59,7 +59,7 @@ class ConnectionManager {
     func files(inDirectory directory: String, showHiddenFiles: Bool = false) -> [NMSFTPFile]?  {
         guard let session = filesSession else { return nil }
         
-        guard var files = session.sftp.contentsOfDirectory(atPath: directory) as? [NMSFTPFile] else {
+        guard var files = session.sftp.contentsOfDirectory(atPath: directory) else {
             return nil
         }
         

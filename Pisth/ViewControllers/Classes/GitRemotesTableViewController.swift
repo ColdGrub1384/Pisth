@@ -22,9 +22,11 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
         super.viewDidAppear(animated)
         
         DispatchQueue.global(qos: .background).async {
-            _ = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' remote update --prune")
+            _ = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' remote update --prune", error: nil)
             
-            if let result = try? ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' branch -r") {
+            var error: NSError?
+            let result = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' branch -r", error: &error)
+            if error == nil {
                 for branch in result.components(separatedBy: "\n") {
                     if !branch.contains("/HEAD ") && branch.replacingOccurrences(of: " ", with: "") != "" {
                         self.branches.append(branch.replacingOccurrences(of: " ", with: ""))
