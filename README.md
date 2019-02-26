@@ -39,38 +39,6 @@ Features:
 ## Screenshots
 ![Screenshots](https://pisth.github.io/ios/screenshots.png)
 
-![Icon](https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/Pisth%20Mac/Assets.xcassets/AppIcon.appiconset/Pisth-128%401x.png)
-
-# Pisth APT
-
-[![Download on the App Store](https://pisth.github.io/appstorebadge.svg)](https://itunes.apple.com/us/app/pisth-apt/id1369552277?ls=1&mt=8)
-
-
-```
-From the developer of Pisth! Pisth APT allows you to manage your packages on Debian based Linux distro from your iPhone or iPad using SSH.
-
-Why use Pisth APT:
-
-• Pisth APT is free (but there are ads).
-• You can easily browse, install, uninstall and update pakages.
-```
-
-![status](https://img.shields.io/badge/status-stable-green.svg)
-![iOS](https://img.shields.io/badge/iOS-11.0%2B-green.svg)
-
-## Screenshots
-![Screenshots](https://pisth.github.io/apt/screenshots.png)
-
-# Pisth Viewer
-
-![screenshot](https://github.com/Pisth/pisth.github.io/raw/master/PisthViewer/screenshot.png)
-
-Pisth Viewer allows you to share a terminal opened with Pisth in iOS from your Mac.
-
-## How does it work?
-
-Just open a terminal in [Pisth](https://pisth.github.io), and your iOS device will appear in Pisth Viewer if both Mac and iOS device are connected to the same network. You can also write from the macOS app.
-
 # API
 
 [![Documentation](https://pisth.github.io/docs/badge.svg)](https://pisth.github.io/docs)
