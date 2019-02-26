@@ -35,8 +35,8 @@ public class DataManager {
         newConnection.setValue(connection.port, forKey: "port")
         newConnection.setValue(connection.useSFTP, forKey: "sftp")
         newConnection.setValue(connection.os, forKey: "os")
-        newConnection.setValue(connection.publicKey, forKey: "publicKey")
-        newConnection.setValue(connection.privateKey, forKey: "privateKey")
+        newConnection.setValue(connection.publicKey?.data(using: .utf8), forKey: "publicKey")
+        newConnection.setValue(connection.privateKey?.data(using: .utf8), forKey: "privateKey")
         
         // Set password
         // The password in database is a random string, a password is saved to the keychain with key the random string
@@ -119,7 +119,18 @@ public class DataManager {
                 #endif
                 guard let useSFTP = result.value(forKey: "sftp") as? Bool else { return fetchedConnections }
                 
-                fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, publicKey: (result.value(forKey: "publicKey") as? String), privateKey: (result.value(forKey: "privateKey") as? String), name: name, path: path, port: port, useSFTP: useSFTP, os: result.value(forKey: "os") as? String))
+                var publicKey: String?
+                var privateKey: String?
+                
+                if let data = result.value(forKey: "publicKey") as? Data {
+                    publicKey = String(data: data, encoding: .utf8)
+                }
+                
+                if let data = result.value(forKey: "privateKey") as? Data {
+                    privateKey = String(data: data, encoding: .utf8)
+                }
+                
+                fetchedConnections.append(RemoteConnection(host: host, username: username, password: password, publicKey: publicKey, privateKey: privateKey, name: name, path: path, port: port, useSFTP: useSFTP, os: result.value(forKey: "os") as? String))
             }
         } catch let error {
             print("Error retrieving connections: \(error.localizedDescription)")

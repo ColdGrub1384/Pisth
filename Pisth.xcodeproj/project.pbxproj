@@ -74,7 +74,6 @@
 		3AFDD90F1FF140FE0061677B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */; };
 		3AFDD9171FF147860061677B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AFDD9161FF147860061677B /* Assets.xcassets */; };
 		3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */; };
-		3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */; };
 		6F93DC82220D23DAAF3DFA0B /* Pods_PisthTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF8B30054CA9184DD4879EA /* Pods_PisthTests.framework */; };
 		C911BED62189E1C700B5FCE5 /* Snippets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C911BED82189E1C700B5FCE5 /* Snippets.storyboard */; };
 		C911BEE32189EC2B00B5FCE5 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE22189EC2B00B5FCE5 /* ViewControllerFactory.swift */; };
@@ -117,6 +116,8 @@
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
+		C9F2672722256A980061F788 /* Text.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F2672622256A980061F788 /* Text.storyboard */; };
+		C9F2672F222570820061F788 /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9F2672D222570820061F788 /* Pisth.xcdatamodeld */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
@@ -246,7 +247,6 @@
 		3AFDD9101FF140FE0061677B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AFDD9161FF147860061677B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewController.swift; sourceTree = "<group>"; };
-		3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		4CDE4CB2B9469926FC8B740F /* Pods-PisthTests.shell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PisthTests.shell.xcconfig"; path = "Pods/Target Support Files/Pods-PisthTests/Pods-PisthTests.shell.xcconfig"; sourceTree = "<group>"; };
 		59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.beta.xcconfig"; sourceTree = "<group>"; };
 		5EC5CE12D6F9D8363242F65F /* Pods_PisthUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PisthUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +335,9 @@
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
+		C9F2672622256A980061F788 /* Text.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Text.storyboard; sourceTree = "<group>"; };
+		C9F2672E222570820061F788 /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
+		C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pisth 2.xcdatamodel"; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
@@ -518,8 +521,8 @@
 				3A7C919A2044972C006E0434 /* GoogleService-Info.plist */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */,
-				3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */,
 				3AEF1119201115850089389E /* empty */,
+				C9F2672D222570820061F788 /* Pisth.xcdatamodeld */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				C9BD2889210A3E0D00244AAF /* Contribute.xib */,
 				3AD2F69920713FC10017F2EB /* Web.xib */,
 				3A0964F220CC209F006D5B4C /* Content.storyboard */,
+				C9F2672622256A980061F788 /* Text.storyboard */,
 				C9BD2897210A3E3D00244AAF /* File Info.xib */,
 			);
 			path = "Interface Builder";
@@ -816,6 +820,7 @@
 				3AD7E05E2049E8D600834D59 /* opensuse.png in Resources */,
 				3AD7E05F2049E8D700834D59 /* raspbian.png in Resources */,
 				3AD7E05C2049E8D300834D59 /* fedora.png in Resources */,
+				C9F2672722256A980061F788 /* Text.storyboard in Resources */,
 				3AD7E0612049E8DA00834D59 /* slackware.png in Resources */,
 				3AD7E0622049E8DB00834D59 /* sles.png in Resources */,
 				3AD7E0602049E8D900834D59 /* rhel.png in Resources */,
@@ -966,6 +971,7 @@
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
 				C911BEE52189ED6100B5FCE5 /* Storyboard.swift in Sources */,
+				C9F2672F222570820061F788 /* Pisth.xcdatamodeld in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
@@ -990,7 +996,6 @@
 				3ACF9AC1204079A9006C3218 /* AppAction.swift in Sources */,
 				C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */,
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift in Sources */,
-				3AFDD91E1FF152010061677B /* Pisth.xcdatamodeld in Sources */,
 				3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
@@ -1663,12 +1668,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3AFDD91C1FF152010061677B /* Pisth.xcdatamodeld */ = {
+		C9F2672D222570820061F788 /* Pisth.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */,
+				C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */,
+				C9F2672E222570820061F788 /* Pisth.xcdatamodel */,
 			);
-			currentVersion = 3AFDD91D1FF152010061677B /* Pisth.xcdatamodel */;
+			currentVersion = C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */;
 			path = Pisth.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

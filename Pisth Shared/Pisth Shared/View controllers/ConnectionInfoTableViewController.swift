@@ -154,8 +154,8 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
                         result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
                         result.setValue(useSFTP, forKey: "sftp")
-                        result.setValue(publicKey, forKey: "publicKey")
-                        result.setValue(privateKey, forKey: "privateKey")
+                        result.setValue(publicKey?.data(using: .utf8), forKey: "publicKey")
+                        result.setValue(privateKey?.data(using: .utf8), forKey: "privateKey")
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
                         DataManager.shared.saveContext()

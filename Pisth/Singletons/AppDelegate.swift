@@ -223,6 +223,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                     if result.value(forKey: "sftp") == nil {
                         result.setValue(true, forKey: "sftp")
                     }
+                    
+                    if let privKey = result.value(forKey: "privateKey") as? String {
+                        result.setValue(privKey.data(using: .utf8), forKey: "privateKey")
+                    }
+                    
+                    if let pubKey = result.value(forKey: "publicKey") as? String {
+                        result.setValue(pubKey.data(using: .utf8), forKey: "publicKey")
+                    }
                 }
                 
                 try? DataManager.shared.coreDataContext.save()
