@@ -116,8 +116,9 @@
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
-		C9F2672722256A980061F788 /* Text.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F2672622256A980061F788 /* Text.storyboard */; };
 		C9F2672F222570820061F788 /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9F2672D222570820061F788 /* Pisth.xcdatamodeld */; };
+		C9F2673222257A1E0061F788 /* SSHKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */; };
+		C9F2673322257C680061F788 /* SSHKey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F2673522257C680061F788 /* SSHKey.storyboard */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
@@ -335,9 +336,13 @@
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
-		C9F2672622256A980061F788 /* Text.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Text.storyboard; sourceTree = "<group>"; };
 		C9F2672E222570820061F788 /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pisth 2.xcdatamodel"; sourceTree = "<group>"; };
+		C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSHKeyTableViewController.swift; path = /Users/adrianlabbe/Desktop/Pisth/Pisth/ViewControllers/Classes/SSHKeyTableViewController.swift; sourceTree = "<absolute>"; };
+		C9F2673422257C680061F788 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SSHKey.storyboard; sourceTree = "<group>"; };
+		C9F2673722257C700061F788 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSHKey.strings; sourceTree = "<group>"; };
+		C9F2673922257C740061F788 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SSHKey.strings; sourceTree = "<group>"; };
+		C9F2673B22257C780061F788 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SSHKey.strings; sourceTree = "<group>"; };
 		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
@@ -552,6 +557,7 @@
 				C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */,
 				C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */,
 				C9E3F8FA2188D64800603388 /* SnippetsViewController.swift */,
+				C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -568,8 +574,8 @@
 				C9BD2889210A3E0D00244AAF /* Contribute.xib */,
 				3AD2F69920713FC10017F2EB /* Web.xib */,
 				3A0964F220CC209F006D5B4C /* Content.storyboard */,
-				C9F2672622256A980061F788 /* Text.storyboard */,
 				C9BD2897210A3E3D00244AAF /* File Info.xib */,
+				C9F2673522257C680061F788 /* SSHKey.storyboard */,
 			);
 			path = "Interface Builder";
 			sourceTree = "<group>";
@@ -820,7 +826,7 @@
 				3AD7E05E2049E8D600834D59 /* opensuse.png in Resources */,
 				3AD7E05F2049E8D700834D59 /* raspbian.png in Resources */,
 				3AD7E05C2049E8D300834D59 /* fedora.png in Resources */,
-				C9F2672722256A980061F788 /* Text.storyboard in Resources */,
+				C9F2673322257C680061F788 /* SSHKey.storyboard in Resources */,
 				3AD7E0612049E8DA00834D59 /* slackware.png in Resources */,
 				3AD7E0622049E8DB00834D59 /* sles.png in Resources */,
 				3AD7E0602049E8D900834D59 /* rhel.png in Resources */,
@@ -988,6 +994,7 @@
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
 				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
+				C9F2673222257A1E0061F788 /* SSHKeyTableViewController.swift in Sources */,
 				3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */,
 				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
 				C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */,
@@ -1193,6 +1200,17 @@
 				C99FE3B3210D19F4000A885D /* es */,
 			);
 			name = Disconnected.xib;
+			sourceTree = "<group>";
+		};
+		C9F2673522257C680061F788 /* SSHKey.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9F2673422257C680061F788 /* Base */,
+				C9F2673722257C700061F788 /* en */,
+				C9F2673922257C740061F788 /* fr */,
+				C9F2673B22257C780061F788 /* es */,
+			);
+			name = SSHKey.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

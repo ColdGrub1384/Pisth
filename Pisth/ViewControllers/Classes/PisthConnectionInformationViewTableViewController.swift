@@ -10,10 +10,7 @@ import Pisth_Shared
 import MobileCoreServices
 
 /// `ConnectionInformationTableViewController` that can import keys pair.
-class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, UIDocumentPickerDelegate, Storyboard {
-    
-    private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
-    private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
+class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, Storyboard {
     
     override var isUsernameRequired: Bool {
         return false
@@ -36,20 +33,42 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     
     /// Import public key.
     @IBAction func importPublicKey(_ sender: Any) {
-        if #available(iOS 11.0, *) {
-            publicKeyPicker.allowsMultipleSelection = false
+        let vc =  SSHKeyTableViewController.makeViewController()
+        vc.keyType = .public
+        vc.setPublicKeyHandler = { key in
+            self.publicKey = key
+            
+            if key != nil {
+                self.importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.changePublicKey, for: .normal)
+            } else {
+                self.importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPublicKey, for: .normal)
+            }
         }
-        publicKeyPicker.delegate = self
-        present(publicKeyPicker, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .formSheet
+        present(navVC, animated: true, completion: {
+            vc.textView.text = self.publicKey
+        })
     }
     
     /// Import private key.
     @IBAction func importPrivateKey(_ sender: Any) {
-        if #available(iOS 11.0, *) {
-            privateKeyPicker.allowsMultipleSelection = false
+        let vc =  SSHKeyTableViewController.makeViewController()
+        vc.keyType = .private
+        vc.setPrivateKeyHandler = { key in
+            self.privateKey = key
+            
+            if key != nil {
+                self.importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.changePrivateKey, for: .normal)
+            } else {
+                self.importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPrivateKey, for: .normal)
+            }
         }
-        privateKeyPicker.delegate = self
-        present(privateKeyPicker, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .formSheet
+        present(navVC, animated: true, completion: {
+            vc.textView.text = self.privateKey
+        })
     }
     
     // MARK: - Connection information table view controller
@@ -97,33 +116,6 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
             return 0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-    }
-    
-    // MARK: - Document picker delegate
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        if controller === publicKeyPicker {
-            publicKey = (try? String(contentsOf: url))
-            importPublicKeyBtn.setTitle(url.lastPathComponent, for: .normal)
-        } else if controller === privateKeyPicker {
-            privateKey = (try? String(contentsOf: url))
-            importPrivateKeyBtn.setTitle(url.lastPathComponent, for: .normal)
-            importPrivateKeyBtn.tintColor = view.tintColor
-            
-            password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
-        }
-    }
-    
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        if controller === publicKeyPicker {
-            publicKey = nil
-            importPublicKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPublicKey, for: .normal)
-            importPrivateKeyBtn.tintColor = view.tintColor
-        } else if controller === privateKeyPicker {
-            password?.placeholder = ""
-            privateKey = nil
-            importPrivateKeyBtn.setTitle(Localizable.ConnectionInformationViewController.importPrivateKey, for: .normal)
         }
     }
     
