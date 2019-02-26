@@ -12,8 +12,8 @@ import MobileCoreServices
 /// `ConnectionInformationTableViewController` that can import keys pair.
 class PisthConnectionInformationTableViewController: ConnectionInformationTableViewController, UIDocumentPickerDelegate, Storyboard {
     
-    private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .open)
-    private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .open)
+    private let publicKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
+    private let privateKeyPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeItem as String], in: .import)
     
     override var isUsernameRequired: Bool {
         return false
@@ -102,16 +102,13 @@ class PisthConnectionInformationTableViewController: ConnectionInformationTableV
     
     // MARK: - Document picker delegate
     
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        
-        _ = urls[0].startAccessingSecurityScopedResource()
-        
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if controller === publicKeyPicker {
-            publicKey = (try? String(contentsOf: urls[0]))
-            importPublicKeyBtn.setTitle(urls[0].lastPathComponent, for: .normal)
+            publicKey = (try? String(contentsOf: url))
+            importPublicKeyBtn.setTitle(url.lastPathComponent, for: .normal)
         } else if controller === privateKeyPicker {
-            privateKey = (try? String(contentsOf: urls[0]))
-            importPrivateKeyBtn.setTitle(urls[0].lastPathComponent, for: .normal)
+            privateKey = (try? String(contentsOf: url))
+            importPrivateKeyBtn.setTitle(url.lastPathComponent, for: .normal)
             importPrivateKeyBtn.tintColor = view.tintColor
             
             password?.placeholder = Localizable.ConnectionInformationViewController.passphrase
