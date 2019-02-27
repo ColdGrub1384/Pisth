@@ -81,6 +81,7 @@
 		C911BEE72189F07C00B5FCE5 /* Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE62189F07C00B5FCE5 /* Xib.swift */; };
 		C911BEE92189F5A200B5FCE5 /* WebViewController+Xib.swift in Sources */ = {isa = PBXBuildFile; fileRef = C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */; };
 		C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9147BBB216D6DBA00E959DD /* String+cValue.swift */; };
+		C91CE3242226AA4B00D1D7C1 /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C91CE3222226AA4B00D1D7C1 /* Pisth.xcdatamodeld */; };
 		C91DD1DF216E743F0001B21B /* InputAssistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; };
 		C91DD1E0216E743F0001B21B /* InputAssistant.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91DD1DA216E74340001B21B /* InputAssistant.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9213CFC2141E08E00DEDD6C /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFB2141E08E00DEDD6C /* UserKeys.swift */; };
@@ -116,7 +117,6 @@
 		C9E5397A2131DD03005D8BA9 /* WhatsNew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */; };
 		C9ED9EC0213C912800C62793 /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */; };
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
-		C9F2672F222570820061F788 /* Pisth.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9F2672D222570820061F788 /* Pisth.xcdatamodeld */; };
 		C9F2673222257A1E0061F788 /* SSHKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */; };
 		C9F2673322257C680061F788 /* SSHKey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F2673522257C680061F788 /* SSHKey.storyboard */; };
 		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
@@ -265,6 +265,7 @@
 		C911BEE62189F07C00B5FCE5 /* Xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xib.swift; sourceTree = "<group>"; };
 		C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebViewController+Xib.swift"; sourceTree = "<group>"; };
 		C9147BBB216D6DBA00E959DD /* String+cValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+cValue.swift"; sourceTree = "<group>"; };
+		C91CE3232226AA4B00D1D7C1 /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
 		C91DD1D3216E74340001B21B /* InputAssistant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InputAssistant.xcodeproj; path = InputAssistant/InputAssistant.xcodeproj; sourceTree = "<group>"; };
 		C9213CFB2141E08E00DEDD6C /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
@@ -336,8 +337,6 @@
 		C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WhatsNew.xcassets; sourceTree = "<group>"; };
 		C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
 		C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
-		C9F2672E222570820061F788 /* Pisth.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pisth.xcdatamodel; sourceTree = "<group>"; };
-		C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Pisth 2.xcdatamodel"; sourceTree = "<group>"; };
 		C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SSHKeyTableViewController.swift; path = /Users/adrianlabbe/Desktop/Pisth/Pisth/ViewControllers/Classes/SSHKeyTableViewController.swift; sourceTree = "<absolute>"; };
 		C9F2673422257C680061F788 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SSHKey.storyboard; sourceTree = "<group>"; };
 		C9F2673722257C700061F788 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSHKey.strings; sourceTree = "<group>"; };
@@ -527,7 +526,7 @@
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */,
 				3AEF1119201115850089389E /* empty */,
-				C9F2672D222570820061F788 /* Pisth.xcdatamodeld */,
+				C91CE3222226AA4B00D1D7C1 /* Pisth.xcdatamodeld */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -977,7 +976,6 @@
 			files = (
 				3AAF00EF1FF2DBE500ECCA6F /* EditTextViewController.swift in Sources */,
 				C911BEE52189ED6100B5FCE5 /* Storyboard.swift in Sources */,
-				C9F2672F222570820061F788 /* Pisth.xcdatamodeld in Sources */,
 				3AFDD9051FF140FE0061677B /* AppDelegate.swift in Sources */,
 				3A397AFA1FFD33DD00D46368 /* ConnectionResult.swift in Sources */,
 				3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */,
@@ -1005,6 +1003,7 @@
 				3AAF00E91FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift in Sources */,
 				3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
+				C91CE3242226AA4B00D1D7C1 /* Pisth.xcdatamodeld in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				C911BEE92189F5A200B5FCE5 /* WebViewController+Xib.swift in Sources */,
 				C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */,
@@ -1686,13 +1685,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C9F2672D222570820061F788 /* Pisth.xcdatamodeld */ = {
+		C91CE3222226AA4B00D1D7C1 /* Pisth.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */,
-				C9F2672E222570820061F788 /* Pisth.xcdatamodel */,
+				C91CE3232226AA4B00D1D7C1 /* Pisth.xcdatamodel */,
 			);
-			currentVersion = C9F267302225708E0061F788 /* Pisth 2.xcdatamodel */;
+			currentVersion = C91CE3232226AA4B00D1D7C1 /* Pisth.xcdatamodel */;
 			path = Pisth.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

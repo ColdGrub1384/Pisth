@@ -35,13 +35,33 @@ public class DataManager {
         newConnection.setValue(connection.port, forKey: "port")
         newConnection.setValue(connection.useSFTP, forKey: "sftp")
         newConnection.setValue(connection.os, forKey: "os")
-        newConnection.setValue(connection.publicKey?.data(using: .utf8), forKey: "publicKey")
-        newConnection.setValue(connection.privateKey?.data(using: .utf8), forKey: "privateKey")
         
         // Set password
         // The password in database is a random string, a password is saved to the keychain with key the random string
+        // Same for SSH keys since 11.2.15
         let key = String.random(length: 100)
         newConnection.setValue(key, forKey: "password")
+        newConnection.setValue(key+"-pubKey", forKey: "publicKey")
+        newConnection.setValue(key+"-privKey", forKey: "privateKey")
+        
+        if let data = connection.publicKey?.data(using: .utf8) {
+            let _key = key+"-publicKey"
+            #if os(iOS)
+            KeychainWrapper.standard.set(data, forKey: _key)
+            #else
+            KeychainSwift().set(data, forKey: _key)
+            #endif
+        }
+        
+        if let data = connection.privateKey?.data(using: .utf8) {
+            let _key = key+"-privateKey"
+            #if os(iOS)
+            KeychainWrapper.standard.set(data, forKey: _key)
+            #else
+            KeychainSwift().set(data, forKey: _key)
+            #endif
+        }
+        
         #if os(iOS)
         KeychainWrapper.standard.set(connection.password, forKey: key)
         #else
@@ -122,11 +142,11 @@ public class DataManager {
                 var publicKey: String?
                 var privateKey: String?
                 
-                if let data = result.value(forKey: "publicKey") as? Data {
+                if let pubKey = result.value(forKey: "publicKey") as? String, let data = KeychainWrapper.standard.data(forKey: pubKey) {
                     publicKey = String(data: data, encoding: .utf8)
                 }
                 
-                if let data = result.value(forKey: "privateKey") as? Data {
+                if let pubKey = result.value(forKey: "privateKey") as? String, let data = KeychainWrapper.standard.data(forKey: pubKey) {
                     privateKey = String(data: data, encoding: .utf8)
                 }
                 

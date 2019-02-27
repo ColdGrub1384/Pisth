@@ -147,6 +147,8 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
                     do {
                         let result = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])[index]
                         let passKey = String.random(length: 100)
+                        let pubKey = passKey+"-publicKey"
+                        let privKey = passKey+"-privateKey"
                         result.setValue(name, forKey: "name")
                         result.setValue(host, forKey: "host")
                         result.setValue(port, forKey: "port")
@@ -154,8 +156,17 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
                         result.setValue(passKey, forKey: "password")
                         result.setValue(path, forKey: "path")
                         result.setValue(useSFTP, forKey: "sftp")
-                        result.setValue(publicKey?.data(using: .utf8), forKey: "publicKey")
-                        result.setValue(privateKey?.data(using: .utf8), forKey: "privateKey")
+                        
+                        if let publicKey = publicKey, let data = publicKey.data(using: .utf8) {
+                            result.setValue(pubKey, forKey: "publicKey")
+                            KeychainWrapper.standard.set(data, forKey: pubKey)
+                        }
+                        
+                        if let privateKey = privateKey, let data = privateKey.data(using: .utf8) {
+                            result.setValue(privKey, forKey: "privateKey")
+                            KeychainWrapper.standard.set(data, forKey: privKey)
+                        }
+                        
                         KeychainWrapper.standard.set(password, forKey: passKey)
                         
                         DataManager.shared.saveContext()

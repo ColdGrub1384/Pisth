@@ -24,6 +24,9 @@ class UserKeys: Static {
     /// Since the 5.1, the user can enable or disable the SFTP for a connection. This key says if the SFTP attribute is already set in bookmarks. Its value should be a boolean.
     static let isSFTPAttributeAdded = ud.item(forKey: "addedSftpAttribute")
     
+    /// Since 11.2.15, keys are stored in keychain. Set to `true` when they are already in keychain.
+    static let keysStoredInKeychain = ud.item(forKey: "keysStoredInKeychain")
+    
     // MARK: - Preferences
     
     /// The name of the selected terminal theme. Its value should be contained in `PisthShared.TerminalTheme.themes`.

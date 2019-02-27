@@ -212,7 +212,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         
         // Add 'sftp' attributes to saved connections if there are not
         // 'sftp' attribute was added in 5.1
-        if !UserKeys.isSFTPAttributeAdded.boolValue {
+        //
+        // Store SSH keys on Keychain since 11.2.15
+        if !UserKeys.isSFTPAttributeAdded.boolValue || !UserKeys.keysStoredInKeychain.boolValue {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
             request.returnsObjectsAsFaults = false
             
@@ -224,12 +226,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                         result.setValue(true, forKey: "sftp")
                     }
                     
-                    if let privKey = result.value(forKey: "privateKey") as? String {
-                        result.setValue(privKey.data(using: .utf8), forKey: "privateKey")
+                    let random = String.random(length: 100)
+                    let priv = random+"-privateKey"
+                    let pub = random+"-publicKey"
+                    
+                    if let privKey = result.value(forKey: "privateKey") as? String,
+                        SwiftKeychainWrapper.KeychainWrapper.standard.data(forKey: privKey) == nil {
+                        print("Private key")
+                        print(privKey)
+                        print(priv)
+                        SwiftKeychainWrapper.KeychainWrapper.standard.set(privKey, forKey: priv)
+                        result.setValue(priv, forKey: "privateKey")
                     }
                     
-                    if let pubKey = result.value(forKey: "publicKey") as? String {
-                        result.setValue(pubKey.data(using: .utf8), forKey: "publicKey")
+                    if let pubKey = result.value(forKey: "publicKey") as? String,
+                        SwiftKeychainWrapper.KeychainWrapper.standard.data(forKey: pubKey) == nil {
+                        print("Public key")
+                        print(pubKey)
+                        print(pub)
+                        SwiftKeychainWrapper.KeychainWrapper.standard.set(pubKey, forKey: pub)
+                        result.setValue(pub, forKey: "publicKey")
                     }
                 }
                 
@@ -239,6 +255,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             }
             
             UserKeys.isSFTPAttributeAdded.boolValue = true
+            UserKeys.keysStoredInKeychain.boolValue = true
         }
         
         // Set default terminal theme
