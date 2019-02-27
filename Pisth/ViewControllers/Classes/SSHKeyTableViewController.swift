@@ -1,9 +1,9 @@
+// This source file is part of the https://github.com/ColdGrub1384/Pisth open source project
 //
-//  SSHKeyViewController.swift
-//  
+// Copyright (c) 2017 - 2018 Adrian Labbé
+// Licensed under Apache License v2.0
 //
-//  Created by Adrian Labbé on 2/26/19.
-//
+// See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
 import MobileCoreServices
