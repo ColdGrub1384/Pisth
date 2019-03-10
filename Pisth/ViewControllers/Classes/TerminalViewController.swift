@@ -816,6 +816,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     var autocorrectionType: UITextAutocorrectionType = .no
     
+    var autocapitalizationType: UITextAutocapitalizationType = .none
+    
     @available(iOS 11.0, *)
     var smartQuotesType: UITextSmartQuotesType {
         get {
