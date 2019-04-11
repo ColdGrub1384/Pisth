@@ -232,7 +232,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (_) in
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
             self.connect()
         })
         
