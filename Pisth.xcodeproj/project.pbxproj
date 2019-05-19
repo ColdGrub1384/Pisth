@@ -855,7 +855,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PisthTests/Pods-PisthTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-PisthTests/Pods-PisthTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0-iOS12.1/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/BiometricAuthentication-iOS12.1/BiometricAuthentication.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-iOS12.1/GoogleUtilities.framework",
@@ -886,7 +886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PisthTests/Pods-PisthTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PisthTests/Pods-PisthTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4608AF53B420636B3889091F /* [CP] Check Pods Manifest.lock */ = {
@@ -935,7 +935,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Pisth/Pods-Pisth-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Pisth/Pods-Pisth-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0-iOS10.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/BiometricAuthentication-iOS10.0/BiometricAuthentication.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-iOS10.0/GoogleUtilities.framework",
@@ -964,7 +964,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pisth/Pods-Pisth-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pisth/Pods-Pisth-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

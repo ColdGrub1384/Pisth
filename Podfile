@@ -11,7 +11,7 @@ target 'Pisth' do
 
   # Pods for Pisth
 
-  pod 'NMSSH', :git => 'https://github.com/NMSSH/NMSSH.git', :branch => 'master'
+  pod 'NMSSH', :git => 'https://github.com/ColdGrub1384/NMSSH.git', :branch => 'master'
   pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
   pod 'Zip'
   pod 'SwiftKeychainWrapper'
@@ -33,7 +33,7 @@ target 'PisthTests' do
     
     # Pods for Pisth
     
-    pod 'NMSSH', :git => 'https://github.com/NMSSH/NMSSH.git', :branch => 'master'
+    pod 'NMSSH', :git => 'https://github.com/ColdGrub1384/NMSSH.git', :branch => 'master'
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :branch => 'master'
     pod 'Zip'
     pod 'SwiftKeychainWrapper'
@@ -54,6 +54,11 @@ post_install do |installer|
             if config.build_settings['PRODUCT_MODULE_NAME'] == 'PanelKit'
                 puts "Set Swift version for PanelKit"
                 config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+            
+            if config.build_settings['PRODUCT_MODULE_NAME'] == 'NMSSH'
+              puts "Disable bitcode for NMSSH"
+              config.build_settings['ENABLE_BITCODE'] = 'NO'
             end
         end
     end

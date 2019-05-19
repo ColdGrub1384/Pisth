@@ -63,7 +63,7 @@ DEPENDENCIES:
   - BiometricAuthentication (~> 2.1)
   - Firebase/Core
   - Highlightr (from `https://github.com/raspu/Highlightr.git`, branch `master`)
-  - NMSSH (from `https://github.com/NMSSH/NMSSH.git`, branch `master`)
+  - NMSSH (from `https://github.com/ColdGrub1384/NMSSH.git`, branch `master`)
   - ObjectUserDefaults
   - PanelKit
   - SwiftKeychainWrapper
@@ -93,15 +93,15 @@ EXTERNAL SOURCES:
     :git: https://github.com/raspu/Highlightr.git
   NMSSH:
     :branch: master
-    :git: https://github.com/NMSSH/NMSSH.git
+    :git: https://github.com/ColdGrub1384/NMSSH.git
 
 CHECKOUT OPTIONS:
   Highlightr:
     :commit: 87465e7ac116a4c8672fa29aae840e9c9e68bedb
     :git: https://github.com/raspu/Highlightr.git
   NMSSH:
-    :commit: 94624c90e357eda412e40c1a3d9dec1a1cb7479d
-    :git: https://github.com/NMSSH/NMSSH.git
+    :commit: d120bb344e36c53485f42bab83d12e88fdf6d731
+    :git: https://github.com/ColdGrub1384/NMSSH.git
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -121,6 +121,6 @@ SPEC CHECKSUMS:
   WhatsNew: ebb4e2a85a0975c7c2705087c0c67939451f8b49
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 839d4a18db8d0006ead1eb0872bac434d4018691
+PODFILE CHECKSUM: e5850083d1635886cae6a4f46c32b099e4aaf14c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
