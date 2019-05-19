@@ -148,3 +148,9 @@
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "zJU-Xt-wUr"; */
 "zJU-Xt-wUr.title" = "Ajustes";
+
+/* Class = "UILabel"; title = "Show snippets"; ObjectID = "KmV-g6-9LF"; */
+"KmV-g6-9LF.text" = "Mostrar snippets";
+
+/* Class = "UILabel"; title = "Show folders at top"; ObjectID = "zn7-Ax-MJx"; */
+"zn7-Ax-MJx.text" = "Mostrar carpetas arriba";
