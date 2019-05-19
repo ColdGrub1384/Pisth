@@ -177,46 +177,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let session = session {
             if session.isConnected && session.isAuthorized {
                 
-                if let homeDirectory = (try? session.channel.execute("echo $HOME"))?.replacingOccurrences(of: "\n", with: "") {
-                    self.homeDirectory = homeDirectory
+                guard let result = (try? session.channel.execute("echo $HOME; echo '__PisthAPT__Data__'; aptitude -F%p --disable-columns search ~U; echo '__PisthAPT__Data__'; apt-mark showmanual; echo '__PisthAPT__Data__'; apt-cache search .")) else {
+                    return
                 }
                 
-                if let packages = (try? session.channel.execute("aptitude -F%p --disable-columns search ~U").components(separatedBy: "\n")) {
-                    self.updates = packages
-                    self.updates.removeLast()
-                    
-                    if TabBarController.shared != nil {
-                        DispatchQueue.main.async {
-                            if let tableView = ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesTableViewController)?.tableView {
-                                tableView.reloadData()
-                            }
-                            if self.updates.count > 1 {
-                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
-                            } else {
-                                TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
-                            }
-                        }
-                    }
+                let components = result.components(separatedBy: "__PisthAPT__Data__")
+                
+                guard components.count == 4 else {
+                    return
                 }
                 
-                if let installed = (try? session.channel.execute("apt-mark showmanual").components(separatedBy: "\n")) {
-                    self.installed = installed
-                    self.installed.removeLast()
-                    
+                self.homeDirectory = components[0].replacingOccurrences(of: "\n", with: "")
+
+                var packages = components[1].components(separatedBy: "\n")
+                if packages.first == "" {
+                    packages.removeFirst()
+                }
+                
+                self.updates = packages
+                self.updates.removeLast()
+                
+                if TabBarController.shared != nil {
                     DispatchQueue.main.async {
-                        if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
+                        if let tableView = ((TabBarController.shared.viewControllers?[2] as? UINavigationController)?.topViewController as? UpdatesTableViewController)?.tableView {
                             tableView.reloadData()
                         }
+                        if self.updates.count > 1 {
+                            TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = "\(self.updates.count-1)"
+                        } else {
+                            TabBarController.shared.viewControllers?[2].tabBarItem.badgeValue = nil
+                        }
                     }
                 }
                 
-                if let allPackages = (try? session.channel.execute("apt-cache search .").components(separatedBy: "\n")) {
-                    self.allPackages = allPackages
-                    self.allPackages.removeLast()
+                var installed = components[2].components(separatedBy: "\n")
+                if installed.first == "" {
+                    installed.removeFirst()
+                }
+                
+                self.installed = installed
+                self.installed.removeLast()
                     
-                    if let tableView = ((TabBarController.shared.viewControllers?[0] as? UINavigationController)?.topViewController as? PackagesTableViewController)?.tableView {
+                DispatchQueue.main.async {
+                    if let tableView = ((TabBarController.shared.viewControllers?[1] as? UINavigationController)?.topViewController as? InstalledTableViewController)?.tableView {
                         tableView.reloadData()
                     }
+                }
+                
+                var allPackages = components[3].components(separatedBy: "\n")
+                if allPackages.first == "" {
+                    allPackages.removeFirst()
+                }
+                
+                self.allPackages = allPackages
+                self.allPackages.removeLast()
+                
+                if let tableView = ((TabBarController.shared.viewControllers?[0] as? UINavigationController)?.topViewController as? PackagesTableViewController)?.tableView {
+                    tableView.reloadData()
                 }
             }
         }
