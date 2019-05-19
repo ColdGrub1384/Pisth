@@ -50,6 +50,12 @@ class UserKeys: Static {
     /// This key says if hidden files should be shown. Its value should be a boolean.
     static let shouldHiddenFilesBeShown = ud.item(forKey: "hidden")
     
+    /// This key says if snippets panel should be hidden.
+    static let shouldHideSnippets = ud.item(forKey: "hideSnippets")
+    
+    /// This key says if folders should be shown at top.
+    static let shouldShowFoldersAtTop = ud.item(forKey: "foldersAtTop")
+    
     /// This key contains all snippets.
     static let snippets = ud.item(forKey: "snippets")
 }

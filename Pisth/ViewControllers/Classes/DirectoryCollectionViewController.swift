@@ -304,6 +304,22 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
             }
+            
+            if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
+                var files_ = [NMSFTPFile]()
+                var directories = [NMSFTPFile]()
+                
+                for file in files ?? [] {
+                    if file.isDirectory {
+                        directories.append(file)
+                    } else {
+                        files_.append(file)
+                    }
+                }
+                
+                files = directories+files_
+            }
+            
             self.files = files
             
             collectionView?.refreshControl?.endRefreshing()
@@ -700,6 +716,21 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     files?.remove(at: i)
                 }
             }
+        }
+        
+        if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
+            var files_ = [NMSFTPFile]()
+            var directories = [NMSFTPFile]()
+            
+            for file in files ?? [] {
+                if file.isDirectory {
+                    directories.append(file)
+                } else {
+                    files_.append(file)
+                }
+            }
+            
+            files = directories+files_
         }
         self.files = files
             
@@ -1892,7 +1923,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     private func setupCard() {
         
-        guard cardViewController == nil, panelNavigationController == nil else {
+        guard cardViewController == nil, panelNavigationController == nil, !UserKeys.shouldHideSnippets.boolValue else {
             return
         }
         

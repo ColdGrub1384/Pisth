@@ -23,6 +23,12 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         /// Show hidden files.
         static let showHiddenFiles = IndexPath(row: 0, section: 1)
         
+        /// Show snippets.
+        static let showSnippets = IndexPath(row: 0, section: 1)
+        
+        /// Show folders at top.
+        static let showFoldersAtTop = IndexPath(row: 0, section: 1)
+        
         /// Toggle blinking cursor.
         static let blinkCursor = IndexPath(row: 0, section: 2)
         
@@ -69,6 +75,8 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         initShowHiddenFilesSetting()
         initBlinkCursorSetting()
         initTextSizeSetting()
+        initShowFoldersAtTop()
+        initShowSnippets()
     }
     
     // MARK: - Blink cursor
@@ -86,7 +94,6 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         blinkCursorSwitch.isOn = UserKeys.blink.boolValue
     }
     
-    
     // MARK: - Show hidden files
     
     /// Switch to toggle showing hidden files.
@@ -102,6 +109,35 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         showHiddenFilesSwitch.isOn = UserKeys.shouldHiddenFilesBeShown.boolValue
     }
     
+    // MARK: - Show snippets
+    
+    /// Displays current setting for hidding snippets.
+    func initShowSnippets() {
+        showHiddenFilesSwitch.isOn = !UserKeys.shouldHideSnippets.boolValue
+    }
+    
+    /// Switch to toggle snippets panel.
+    @IBOutlet weak var showSnippetsSwitch: UISwitch!
+    
+    /// Toggles snippets panel.
+    @IBAction func toggleSnippets(_ sender: UISwitch) {
+        UserKeys.shouldHideSnippets.boolValue = !sender.isOn
+    }
+    
+    // MARK: - Show folders at top
+    
+    /// Displays current setting for showing folders at top.
+    func initShowFoldersAtTop() {
+        showFoldersAtTopSwitch.isOn = UserKeys.shouldShowFoldersAtTop.boolValue
+    }
+    
+    /// Switch to toggle showing folders at top.
+    @IBOutlet weak var showFoldersAtTopSwitch: UISwitch!
+    
+    /// Toggles showing folers at top.
+    @IBAction func toggleFoldersAtTop(_ sender: UISwitch) {
+        UserKeys.shouldShowFoldersAtTop.boolValue = sender.isOn
+    }
     
     // MARK: - Biometric authentication
     
