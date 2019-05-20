@@ -117,4 +117,16 @@ class SplitViewController: UISplitViewController {
             presentedBetaAlert = true
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        // Just, don't remove this code :)
+        
+        viewControllers = []
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
+            self.load()
+        })
+    }
 }
