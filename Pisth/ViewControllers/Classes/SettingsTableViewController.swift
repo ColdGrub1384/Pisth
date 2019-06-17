@@ -113,7 +113,7 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
     
     /// Displays current setting for hidding snippets.
     func initShowSnippets() {
-        showHiddenFilesSwitch.isOn = !UserKeys.shouldHideSnippets.boolValue
+        showSnippetsSwitch.isOn = !UserKeys.shouldHideSnippets.boolValue
     }
     
     /// Switch to toggle snippets panel.

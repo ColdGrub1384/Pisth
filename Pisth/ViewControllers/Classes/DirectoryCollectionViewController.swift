@@ -415,7 +415,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 // Check for Aptitude
                 let resultAPT = session.channel.execute("command -v apt-get", error: &error).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n")
-                guard error == nil else { return [] }
+                guard error == nil else {
+                    if isGitRepo {
+                        return [uploadFile, git, terminal]
+                    } else {
+                        return [uploadFile, terminal]
+                    }
+                }
                 
                 if isGitRepo {
                     if resultAPT.isEmpty {

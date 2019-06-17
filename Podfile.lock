@@ -112,7 +112,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 4522aad88f69297622062c0e9ffccdee3dd9b151
   GoogleAppMeasurement: 008e04ecd8efedd97a693aea8634aefe220bd26e
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
-  Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
+  Highlightr: 683f05d5223cade533a78528a35c9f06e4caddf8
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NMSSH: cd689ae535a1581a6dd9fd4600ff71247df510a6
   ObjectUserDefaults: 72b8d13aea15090168579b079a21cae312a1cefd
@@ -123,4 +123,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e5850083d1635886cae6a4f46c32b099e4aaf14c
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.1
