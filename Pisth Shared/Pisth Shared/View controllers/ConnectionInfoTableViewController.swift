@@ -160,11 +160,17 @@ open class ConnectionInformationTableViewController: UITableViewController, NetS
                         if let publicKey = publicKey, let data = publicKey.data(using: .utf8) {
                             result.setValue(pubKey, forKey: "publicKey")
                             KeychainWrapper.standard.set(data, forKey: pubKey)
+                        } else {
+                            result.setValue(nil, forKey: "publicKey")
+                            KeychainWrapper.standard.remove(key: pubKey)
                         }
                         
                         if let privateKey = privateKey, let data = privateKey.data(using: .utf8) {
                             result.setValue(privKey, forKey: "privateKey")
                             KeychainWrapper.standard.set(data, forKey: privKey)
+                        } else {
+                            result.setValue(nil, forKey: "privateKey")
+                            KeychainWrapper.standard.remove(key: privKey)
                         }
                         
                         KeychainWrapper.standard.set(password, forKey: passKey)
