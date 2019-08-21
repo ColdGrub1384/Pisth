@@ -20,7 +20,7 @@ import CoreSpotlight
 import InputAssistant
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate, InputAssistantViewDelegate, InputAssistantViewDataSource {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate, InputAssistantViewDelegate, InputAssistantViewDataSource {
     
     private var terminalSize: String?
     
@@ -840,6 +840,98 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
     }
 
+    // MARK: - Text input
+    
+    func replace(_ range: UITextRange, withText text: String) {
+        if !text.isEmpty {
+            insertText(text)
+        }
+    }
+    
+    func text(in range: UITextRange) -> String? {
+        return nil
+    }
+    
+    var selectedTextRange: UITextRange?
+    
+    var markedTextRange: UITextRange?
+    
+    var markedTextStyle: [NSAttributedString.Key : Any]?
+    
+    func setMarkedText(_ markedText: String?, selectedRange: NSRange) {
+        if let text = markedText, !text.isEmpty {
+            insertText(text)
+        }
+    }
+    
+    func unmarkText() {}
+    
+    var beginningOfDocument: UITextPosition = .init()
+    
+    var endOfDocument: UITextPosition = .init()
+    
+    func textRange(from fromPosition: UITextPosition, to toPosition: UITextPosition) -> UITextRange? {
+        return nil
+    }
+    
+    func position(from position: UITextPosition, offset: Int) -> UITextPosition? {
+        return nil
+    }
+    
+    func position(from position: UITextPosition, in direction: UITextLayoutDirection, offset: Int) -> UITextPosition? {
+        return nil
+    }
+    
+    func compare(_ position: UITextPosition, to other: UITextPosition) -> ComparisonResult {
+        return .orderedSame
+    }
+    
+    func offset(from: UITextPosition, to toPosition: UITextPosition) -> Int {
+        return 0
+    }
+    
+    var inputDelegate: UITextInputDelegate?
+    
+    var tokenizer: UITextInputTokenizer = UITextInputStringTokenizer()
+    
+    func position(within range: UITextRange, farthestIn direction: UITextLayoutDirection) -> UITextPosition? {
+        return nil
+    }
+    
+    func characterRange(byExtending position: UITextPosition, in direction: UITextLayoutDirection) -> UITextRange? {
+        return nil
+    }
+    
+    func baseWritingDirection(for position: UITextPosition, in direction: UITextStorageDirection) -> NSWritingDirection {
+        return .leftToRight
+    }
+    
+    func setBaseWritingDirection(_ writingDirection: NSWritingDirection, for range: UITextRange) {}
+    
+    func firstRect(for range: UITextRange) -> CGRect {
+        return .zero
+    }
+    
+    func caretRect(for position: UITextPosition) -> CGRect {
+        return .zero
+    }
+    
+    func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+        return []
+    }
+    
+    func closestPosition(to point: CGPoint) -> UITextPosition? {
+        return nil
+    }
+    
+    func closestPosition(to point: CGPoint, within range: UITextRange) -> UITextPosition? {
+        return nil
+    }
+    
+    func characterRange(at point: CGPoint) -> UITextRange? {
+        return nil
+    }
+    
     // MARK: Web kit navigation delegate
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
