@@ -260,7 +260,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         
         // Set default terminal theme
         if UserKeys.terminalTheme.value == nil {
-            UserKeys.terminalTheme.stringValue = "Pisth"
+            UserKeys.terminalTheme.stringValue = "Default"
         }
         
         // Setup 3D touch shortcuts
@@ -528,7 +528,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                 let bookmarksVC = BookmarksTableViewController()
                 
                 if let backgroundImage = UIPasteboard.general.image {
-                    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+                    let blurView: UIVisualEffectView
+                    if #available(iOS 13.0, *) {
+                        blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                    } else {
+                        blurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+                    }
                     let imageView = UIImageView(image: backgroundImage)
                     imageView.ignoresInvertColors = true
                     let containerView = UIView()
@@ -747,33 +752,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
     
     // MARK: - Split view controller delegate
     
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        
-        // Change display mode and View controllers.
-        
-        splitViewController.viewControllers = [secondaryViewController]
-        if splitViewController.preferredDisplayMode == .primaryOverlay {
-            splitViewController.preferredDisplayMode = .primaryHidden
-        }
-        
-        return true
-    }
-    
-    func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
-        
-        // Change display mode.
-        
-        splitViewController.viewControllers = [self.splitViewController.navigationController ?? self.navigationController, self.splitViewController.detailViewController ?? self.splitViewController.detailNavigationController]
-        
-        if splitViewController.preferredDisplayMode == .primaryHidden && !(self.splitViewController.detailNavigationController?.visibleViewController is BookmarksTableViewController) {
-            splitViewController.preferredDisplayMode = .primaryOverlay
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                let button = splitViewController.displayModeButtonItem
-                _ = button.target?.perform(button.action)
-            })
-        }
-        
-        return splitViewController.viewControllers.last
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
+        return false
     }
     
     // MARK: - Static

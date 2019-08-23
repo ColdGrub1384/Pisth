@@ -31,6 +31,7 @@
 		3ACF9B752041B914006C3218 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9B3E2041B484006C3218 /* String.swift */; };
 		3AF6027F207139B300347BFC /* Pisth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6027E207139B300347BFC /* Pisth.swift */; };
 		C909FF56210944DA00782E22 /* PisthDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C909FF55210944DA00782E22 /* PisthDark.swift */; };
+		C97DEE12230F664600064758 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97DEE11230F664600064758 /* Default.swift */; };
 		C9985A9C20D6B54F00389A7B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */; };
 		C9985A9D20D6B54F00389A7B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */; };
 		C9985A9E20D6B54F00389A7B /* SwiftKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */; };
@@ -71,6 +72,7 @@
 		3AF6027E207139B300347BFC /* Pisth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pisth.swift; sourceTree = "<group>"; };
 		5F420224BB8A5D277DF7B7F0 /* Pods_Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C909FF55210944DA00782E22 /* PisthDark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthDark.swift; sourceTree = "<group>"; };
+		C97DEE11230F664600064758 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		C9985A9920D6B54F00389A7B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		C9985A9A20D6B54F00389A7B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		C9985A9B20D6B54F00389A7B /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				3ACF9B662041B8C6006C3218 /* TerminalTheme.swift */,
+				C97DEE11230F664600064758 /* Default.swift */,
 				3AF6027E207139B300347BFC /* Pisth.swift */,
 				C909FF55210944DA00782E22 /* PisthDark.swift */,
 				3ACF9B5D2041B8C6006C3218 /* Basic.swift */,
@@ -292,6 +295,7 @@
 				3ACF9B6E2041B8C6006C3218 /* Pro.swift in Sources */,
 				3ACF9B702041B8C6006C3218 /* SilverAerogel.swift in Sources */,
 				3ACF9B6B2041B8C6006C3218 /* ManPage.swift in Sources */,
+				C97DEE12230F664600064758 /* Default.swift in Sources */,
 				3ACF9B6F2041B8C6006C3218 /* RedSands.swift in Sources */,
 				C9985AA020D6B55E00389A7B /* KeychainSwiftDistrib.swift in Sources */,
 				3A61DEA8206697C30002353B /* ConnectionInfoTableViewController.swift in Sources */,

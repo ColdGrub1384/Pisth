@@ -38,6 +38,7 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         terminal.console = ""
         
         let terminalPanel = PanelViewController(with: terminal, in: self)
+        terminalPanel.panelNavigationController.navigationBar.isTranslucent = false
         terminalPanel.modalPresentationStyle = .popover
         terminalPanel.popoverPresentationController?.barButtonItem = sender
         if let view = sourceView {

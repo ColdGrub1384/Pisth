@@ -25,9 +25,9 @@ class SplitViewController: UISplitViewController {
     func load() {
         preferredDisplayMode = .primaryHidden
         if let detailViewController = detailViewController {
-            viewControllers = [navigationController_, detailViewController]
+            viewControllers = [detailViewController, navigationController_]
         } else {
-            viewControllers = [navigationController_, detailNavigationController]
+            viewControllers = [detailNavigationController, navigationController_]
         }
     }
     
@@ -54,14 +54,26 @@ class SplitViewController: UISplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .clear
+        }
         
         // Setup Navigation Controller
         let bookmarksVC = BookmarksTableViewController()
         bookmarksVC.modalPresentationStyle = .overCurrentContext
-        bookmarksVC.tableView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        if #available(iOS 13.0, *) {
+            bookmarksVC.tableView.backgroundColor = .clear
+        } else {
+            bookmarksVC.tableView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        }
         if !isShell {
-            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            if #available(iOS 13.0, *) {
+                bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+            } else {
+                bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            }
         } else {
             bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         }
@@ -74,22 +86,26 @@ class SplitViewController: UISplitViewController {
         }
         
         // Setup Split view controller
-        navigationController_ = navigationController
-        detailNavigationController = UINavigationController(rootViewController: BookmarksTableViewController())
+        navigationController_ = UINavigationController(rootViewController: BookmarksTableViewController())
+        detailNavigationController = navigationController
         if #available(iOS 11.0, *) {
-            detailNavigationController.navigationBar.prefersLargeTitles = true
+            navigationController_.navigationBar.prefersLargeTitles = true
         }
         if isShell {
             detailNavigationController.navigationBar.barStyle = .black
         }
         load()
         AppDelegate.shared.window?.rootViewController = UIViewController()
-        AppDelegate.shared.navigationController = detailNavigationController
+        AppDelegate.shared.navigationController = navigationController_
         
         // Setup window
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.tintColor = UIApplication.shared.keyWindow?.tintColor
-        window.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            window.backgroundColor = .systemBackground
+        } else {
+            window.backgroundColor = .white
+        }
         window.rootViewController = ContentViewController.shared
         if #available(iOS 11.0, *) {
             if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
@@ -116,17 +132,5 @@ class SplitViewController: UISplitViewController {
             present(betaAlert, animated: true, completion: nil)
             presentedBetaAlert = true
         }
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        // Just, don't remove this code :)
-        
-        viewControllers = []
-        
-        _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_) in
-            self.load()
-        })
     }
 }

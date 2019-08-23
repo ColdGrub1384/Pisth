@@ -280,7 +280,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-RemoteFileBrowser", AnalyticsParameterItemName : "Remote File Browser"])
         
-        collectionView?.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            collectionView?.backgroundColor = .systemBackground
+        } else {
+            collectionView?.backgroundColor = .white
+        }
         collectionView?.backgroundView = UIActivityIndicatorView(style: .gray)
         (collectionView?.backgroundView as? UIActivityIndicatorView)?.startAnimating()
     }

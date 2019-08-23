@@ -69,7 +69,14 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
            
                 setTextColor()
                 
-                textStorage.setAttributes([.font:highlightr.theme.codeFont, .foregroundColor:textView.textColor ?? .white], range: NSRange(location: 0, length: textStorage.length))
+                let color: UIColor
+                if #available(iOS 13.0, *) {
+                    color = textView.textColor ?? .label
+                } else {
+                    color = textView.textColor ?? .white
+                }
+                
+                textStorage.setAttributes([.font:highlightr.theme.codeFont, .foregroundColor:color], range: NSRange(location: 0, length: textStorage.length))
             }
         }
     }
@@ -138,6 +145,10 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
         
         navigationItem.leftBarButtonItem = doneButton
         navigationItem.rightBarButtonItems = [languageButton, themeButton]
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -295,7 +306,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
         let languages = [Localizable.EditTextViewController.none]+highlightr.supportedLanguages()
         let initialSelection = languages.index(of: language ?? Localizable.EditTextViewController.none) ?? 0
         
-        let picker = ActionSheetStringPicker(title: Localizable.EditTextViewController.selectALanguage, rows: languages, initialSelection: initialSelection, doneBlock: { (picker, row, language) in
+        let picker = ActionSheetStringPicker(title: nil, rows: languages, initialSelection: initialSelection, doneBlock: { (picker, row, language) in
             
             if let language = language as? String {
                 if language != "None" {
@@ -327,7 +338,7 @@ class EditTextViewController: UIViewController, UITextViewDelegate, Xib {
         
         textView.resignFirstResponder()
         
-        ActionSheetStringPicker.show(withTitle: Localizable.EditTextViewController.selectATheme, rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserKeys.editorTheme.stringValue!) ?? 0, doneBlock: { (_, _, theme) in
+        ActionSheetStringPicker.show(withTitle: nil, rows: textStorage.highlightr.availableThemes(), initialSelection: textStorage.highlightr.availableThemes().index(of: UserKeys.editorTheme.stringValue!) ?? 0, doneBlock: { (_, _, theme) in
             
             if let theme = theme as? String {
                 self.textStorage.highlightr.setTheme(to: theme)

@@ -87,7 +87,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     /// The input assistant view.
-    let inputAssistant = InputAssistantView()
+    var inputAssistant = InputAssistantView()
     
     /// Ignored notifications name strings.
     /// When a the function linked with a notification listed here, the function will remove the given notification from this array and will return.
@@ -198,7 +198,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if theme.keyboardAppearance == .dark {
             view.backgroundColor = .black
         } else {
-            view.backgroundColor = .white
+            if #available(iOS 13.0, *) {
+                view.backgroundColor = .systemBackground
+            } else {
+                view.backgroundColor = .white
+            }
         }
         _ = becomeFirstResponder()
     }
@@ -371,6 +375,15 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         }
         
         keyboardAppearance = theme.keyboardAppearance
+        selectionTextView.keyboardAppearance = keyboardAppearance
+        
+        inputAssistant = InputAssistantView()
+        inputAssistant.delegate = self
+        inputAssistant.dataSource = self
+        inputAssistant.attach(to: selectionTextView)
+        
+        reloadInputViews()
+        
         webView.reload()
     }
     
@@ -543,7 +556,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else {
             navigationController_?.navigationBar.barStyle = .black
         }
-        navigationController_?.view.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            navigationController_?.view.backgroundColor = .systemBackground
+        } else {
+            navigationController_?.view.backgroundColor = .white
+        }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        themeDidChange(Notification(name: Notification.Name(rawValue: "TerminalThemeDidChange"), object: theme, userInfo: nil))
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -46,7 +46,11 @@ class FileCollectionViewCell: UICollectionViewCell {
             if isSelected {
                 filename.textColor = .white
             } else {
-                filename.textColor = .black
+                if #available(iOS 13.0, *) {
+                    filename.textColor = .label
+                } else {
+                    filename.textColor = .black
+                }
             }
         }
     }

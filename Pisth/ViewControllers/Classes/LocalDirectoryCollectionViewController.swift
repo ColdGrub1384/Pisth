@@ -403,7 +403,11 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
         collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
         collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
-        collectionView?.backgroundColor = .white
+        if #available(iOS 13.0, *) {
+            collectionView?.backgroundColor = .systemBackground
+        } else {
+            collectionView?.backgroundColor = .white
+        }
         clearsSelectionOnViewWillAppear = false
         if #available(iOS 11.0, *) {
             collectionView?.dragDelegate = self
@@ -753,7 +757,7 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                 return
             }
             
-            if let _ = try? String.init(contentsOfFile: file.path) { // Is text
+            if let _ = try? String(contentsOfFile: file.path) { // Is text
                 var editTextVC: EditTextViewController! {
                     let editTextViewController = EditTextViewController.makeViewController()
                     
@@ -772,7 +776,9 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                     }))
                     
                     alert.addAction(UIAlertAction(title: Localizable.LocalDirectoryCollectionViewController.editHTML, style: .default, handler: { (_) in // Edit HTML
-                        vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
+                        let _vc = UINavigationController(rootViewController: editTextVC)
+                        _vc.modalPresentationStyle = .fullScreen
+                        vc.present(_vc, animated: true, completion: nil)
                     }))
                     
                     alert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
@@ -785,11 +791,13 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                         })
                     }
                 } else {
+                    let _vc = UINavigationController(rootViewController: editTextVC)
+                    _vc.modalPresentationStyle = .fullScreen
                     if viewController == nil {
-                        vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
+                        vc.present(_vc, animated: true, completion: nil)
                     } else {
                         viewController?.dismiss(animated: true, completion: {
-                            vc.present(UINavigationController(rootViewController: editTextVC), animated: true, completion: nil)
+                            vc.present(_vc, animated: true, completion: nil)
                         })
                     }
                 }

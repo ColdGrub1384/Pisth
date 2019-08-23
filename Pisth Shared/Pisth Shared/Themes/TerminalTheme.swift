@@ -77,6 +77,7 @@ public struct AnsiColors {
 ///
 /// # Default themes
 ///
+/// - `DefaultTheme`
 /// - `PisthTheme`
 /// - `PisthDark`
 /// - `BasicTheme`
@@ -94,7 +95,7 @@ open class TerminalTheme {
     public init() {}
     
     /// Get theme by name.
-    public static let themes = ["Pisth":PisthTheme(), "Pisth Dark":PisthDarkTheme(), "Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme(), "Ubuntu":UbuntuTheme()] as [String:TerminalTheme]
+    public static let themes = ["Default":DefaultTheme(), "Pisth":PisthTheme(), "Pisth Dark":PisthDarkTheme(), "Basic":BasicTheme(), "Grass":GrassTheme(), "Homebrew":HomebrewTheme(), "Man Page":ManPageTheme(), "Novel":NovelTheme(), "Ocean":OceanTheme(), "Pro":ProTheme(), "Red Sands":RedSandsTheme(), "Silver Aerogel":SilverAerogelTheme(), "Ubuntu":UbuntuTheme()] as [String:TerminalTheme]
     
     #if os(iOS)
         /// Keyboard appearance used in terminal.

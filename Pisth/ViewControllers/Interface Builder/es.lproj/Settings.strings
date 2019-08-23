@@ -38,8 +38,14 @@
 /* Class = "UILabel"; text = "Current"; ObjectID = "Ac0-KX-Lkf"; */
 "Ac0-KX-Lkf.text" = "Actual";
 
-/* Class = "UILabel"; text = "Pisth"; ObjectID = "BP6-qW-gAU"; */
-"BP6-qW-gAU.text" = "Pisth";
+/* Class = "UILabel"; text = "Current"; ObjectID = "E4g-OV-Qvu"; */
+"E4g-OV-Qvu.text" = "Actual";
+
+/* Class = "UILabel"; text = "Pisth"; ObjectID = "7hj-D7-cl1"; */
+"7hj-D7-cl1.text" = "Pisth";
+
+/* Class = "UILabel"; text = "Default"; ObjectID = "BP6-qW-gAU"; */
+"BP6-qW-gAU.text" = "Default";
 
 /* Class = "UIButton"; normalTitle = "Aa"; ObjectID = "BkJ-Ht-xYc"; */
 "BkJ-Ht-xYc.normalTitle" = "Aa";
