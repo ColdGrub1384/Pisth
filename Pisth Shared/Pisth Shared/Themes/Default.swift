@@ -59,7 +59,13 @@ open class DefaultTheme: TerminalTheme {
             }
         #else
             if #available(iOS 13.0, *) {
-                return Color.secondarySystemBackground
+                return Color { (traitCollection) -> UIColor in
+                    if traitCollection.userInterfaceStyle == .dark {
+                        return .black
+                    } else {
+                        return .white
+                    }
+                }
             } else {
                 return Color.white
             }
