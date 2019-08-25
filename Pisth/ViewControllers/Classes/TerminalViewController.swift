@@ -384,7 +384,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         reloadInputViews()
         
-        webView.reload()
+        reload()
     }
     
     // MARK: - View controller
@@ -1385,11 +1385,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     var closeButtonTitle: String {
-        return "×"
+        return Bundle(for: UIApplication.self).localizedString(forKey: "Done", value: nil, table: nil)
     }
     
     var modalCloseButtonTitle: String {
-        return "×"
+        return Bundle(for: UIApplication.self).localizedString(forKey: "Done", value: nil, table: nil)
     }
     
     func panelDragGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

@@ -101,9 +101,7 @@ class SplitViewController: UISplitViewController {
         // Setup window
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.tintColor = UIApplication.shared.keyWindow?.tintColor
-        if #available(iOS 13.0, *) {
-            window.backgroundColor = .systemBackground
-        } else {
+        if #available(iOS 13.0, *) { } else {
             window.backgroundColor = .white
         }
         window.rootViewController = ContentViewController.shared

@@ -126,7 +126,8 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
             }
         }
         
-        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
+        let presented = (presentedViewController as? PanelViewController)?.contentViewController ?? presentedViewController
+        return presented?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
     }
         
     // MARK: - Panel manager
