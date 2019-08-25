@@ -52,6 +52,11 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
         let view = UIView()
         view.backgroundColor = window?.tintColor
         selectedBackgroundView = view
+        
+        if #available(iOS 13.0, *) {
+            backgroundColor = .systemBackground
+            more?.textColor = .secondaryLabel
+        }
     }
     
     override var isSelected: Bool {
