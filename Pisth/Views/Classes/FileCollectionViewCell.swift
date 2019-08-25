@@ -10,7 +10,7 @@ import Pisth_Shared
 import NMSSH
 
 /// Table View Cell that represents a remote or local file.
-class FileCollectionViewCell: UICollectionViewCell {
+class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDelegate {
     
     /// File's icon.
     @IBOutlet weak var iconView: UIImageView!
@@ -36,6 +36,19 @@ class FileCollectionViewCell: UICollectionViewCell {
     override func didMoveToWindow() {
         super.didMoveToWindow()
         
+        if #available(iOS 13.0, *) {
+            var containsMenuInteraction = false
+            for interaction in interactions {
+                if interaction is UIContextMenuInteraction {
+                    containsMenuInteraction = true
+                    break
+                }
+            }
+            if !containsMenuInteraction {
+                addInteraction(UIContextMenuInteraction(delegate: self))
+            }
+        }
+        
         let view = UIView()
         view.backgroundColor = window?.tintColor
         selectedBackgroundView = view
@@ -56,6 +69,11 @@ class FileCollectionViewCell: UICollectionViewCell {
     }
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        
+        if #available(iOS 13.0, *) {
+            return false
+        }
+        
         if let directoryCollectionViewController = directoryCollectionViewController {
             
             if directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
@@ -350,6 +368,10 @@ class FileCollectionViewCell: UICollectionViewCell {
         fileInfoVC.popoverPresentationController?.sourceRect = bounds
         fileInfoVC.popoverPresentationController?.delegate = fileInfoVC
         
+        if #available(iOS 13.0, *) {
+            fileInfoVC.view.backgroundColor = .systemBackground
+        }
+        
         directoryCollectionViewController.present(fileInfoVC, animated: true)
     }
     
@@ -361,6 +383,100 @@ class FileCollectionViewCell: UICollectionViewCell {
             controller = UIDocumentInteractionController(url: localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
             controller.presentOptionsMenu(from: bounds, in: self, animated: true)
             print(localDirectoryCollectionViewController.files[localDirectoryCollectionViewController.collectionView!.indexPath(for: self)!.row])
+        }
+    }
+    
+    // MARK: - Context menu interaction delegate
+    
+    @available(iOS 13.0, *)
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        /*
+         if #available(iOS 13.0, *) {
+             return false
+         }
+         
+         if let directoryCollectionViewController = directoryCollectionViewController {
+             
+             if directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
+                 
+                 return (action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)) || action == #selector(openInNewPanel(_:)))
+             } else {
+                 return (action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(showFileInfo(_:)) || action == #selector(deleteFile(_:)) || action == #selector(moveFile(_:)) || action == #selector(renameFile(_:)))
+             }
+         }
+         
+         return (action == #selector(shareFile(_:)) || action == #selector(deleteFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(moveFile(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)) || action == #selector(renameFile(_:)))
+         */
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (_) -> UIMenu? in
+            
+            let delete = UIAction(title: Localizable.UIMenuItem.delete, image: UIImage(systemName: "trash.fill"), attributes: [.destructive], handler: { (action) in
+                self.deleteFile(action)
+            })
+            
+            let share = UIAction(title: Localizable.UIMenuItem.move, image: UIImage(systemName: "square.and.arrow.up.fill"), handler: { (action) in
+                self.shareFile(action)
+            })
+                        
+            let move = UIAction(title: Localizable.UIMenuItem.move, image: UIImage(systemName: "folder.fill"), handler: { (action) in
+                self.moveFile(action)
+            })
+            
+            let copy = UIAction(title: Bundle(for: UIApplication.self).localizedString(forKey: "Copy", value: nil, table: nil), image: UIImage(systemName: "doc.on.doc.fill"), handler: { (action) in
+                if let directoryCollectionViewController = self.directoryCollectionViewController, let indexPath = directoryCollectionViewController.collectionView!.indexPath(for: self) {
+                    directoryCollectionViewController.collectionView(directoryCollectionViewController.collectionView, performAction: #selector(UIResponderStandardEditActions.copy(_:)), forItemAt: indexPath, withSender: action)
+                } else if let directoryCollectionViewController = self.localDirectoryCollectionViewController, let indexPath = directoryCollectionViewController.collectionView!.indexPath(for: self) {
+                    directoryCollectionViewController.collectionView(directoryCollectionViewController.collectionView, performAction: #selector(UIResponderStandardEditActions.copy(_:)), forItemAt: indexPath, withSender: action)
+                }
+            })
+            
+            let rename = UIAction(title: Localizable.UIMenuItem.rename, image: UIImage(systemName: "pencil"), handler: { (action) in
+                self.renameFile(action)
+            })
+            
+            let info = UIAction(title: Localizable.UIMenuItem.info, image: UIImage(systemName: "info.circle.fill"), handler: { (action) in
+                self.showFileInfo(action)
+            })
+            
+            let newPanel = UIAction(title: Localizable.UIMenuItem.openInNewPanel, image: UIImage(systemName: "uiwindow.split.2x1"), handler: { (action) in
+                self.openInNewPanel(action)
+            })
+            
+            let actions: [UIAction]
+            
+            if let directoryCollectionViewController = self.directoryCollectionViewController {
+                if directoryCollectionViewController.files![directoryCollectionViewController.collectionView!.indexPath(for: self)?.row ?? 0].isDirectory {
+                    
+                    actions = [
+                        move,
+                        rename,
+                        info,
+                        newPanel,
+                        delete
+                    ]
+                    
+                } else {
+                    
+                    actions = [
+                        copy,
+                        move,
+                        rename,
+                        info,
+                        delete
+                    ]
+                }
+            } else {
+                actions = [
+                    copy,
+                    move,
+                    rename,
+                    share,
+                    delete
+                ]
+            }
+                        
+            return UIMenu(title: self.filename.text ?? "", children: actions)
         }
     }
 }
