@@ -59,7 +59,7 @@ open class DefaultTheme: TerminalTheme {
             }
         #else
             if #available(iOS 13.0, *) {
-                return Color.systemBackground
+                return Color.secondarySystemBackground
             } else {
                 return Color.white
             }
