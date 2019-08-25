@@ -400,6 +400,9 @@
 /* The error saying that the code cannot be empty */
 "snippets.emptyCode" = "The code cannot be empty.";
 
+/* The button for opening snippets */
+"snippets.snippets" = "Snippets";
+
 /* The placeholder for typing the snippet title */
 "snippets.title" = "Title";
 

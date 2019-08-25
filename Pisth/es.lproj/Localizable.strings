@@ -397,6 +397,9 @@
 /* The error saying that the code cannot be empty */
 "snippets.emptyCode" = "El código no puede estar vacío.";
 
+/* The button for opening snippets */
+"snippets.snippets" = "Snippets";
+
 /* The placeholder for typing the snippet title */
 "snippets.title" = "Título";
 

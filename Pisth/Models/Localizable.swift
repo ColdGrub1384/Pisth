@@ -52,6 +52,9 @@ class Localizable: Static {
     
     class SnippetsViewController: Static {
         
+        /// The button for opening snippets
+        static let snippets = NSLocalizedString("snippets.snippets", comment: "The button for opening snippets")
+        
         /// The alternate state of the 'Edit' button
         static let done = NSLocalizedString("snippets.done", comment: "The alternate state of the 'Edit' button")
         

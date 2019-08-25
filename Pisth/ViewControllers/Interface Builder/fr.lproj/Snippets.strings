@@ -7,3 +7,6 @@
 
 /* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "rkH-eu-4Q6"; */
 "rkH-eu-4Q6.placeholder" = "Chercher";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "grD-oe-G1Z"; */
+"grD-oe-G1Z.text" = "OK";

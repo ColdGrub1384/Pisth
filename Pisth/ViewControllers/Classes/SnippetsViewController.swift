@@ -17,15 +17,6 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     /// The search bar for searching for snippets.
     @IBOutlet weak var searchBar: UISearchBar!
     
-    /// The area that allows to show this View controller like in the Shortcuts app.
-    @IBOutlet weak var handleArea: UIView!
-    
-    /// Code called for expanding this View controller.
-    var expansionHandler: (() -> Void)?
-    
-    /// Code called for collapsing this View controller.
-    var collapsionHandler: (() -> Void)?
-    
     private var connection_: RemoteConnection?
     
     /// The connection where snippets are from.
@@ -52,8 +43,11 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    /// The view where the terminal will be presented.
+    var fromView: UIView!
+    
     /// Dismisses this View controller.
-    @objc func dismissViewController() {
+    @IBAction func dismissViewController(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -141,8 +135,6 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
             
             self.allSnippets.append(snippet)
             self.tableView.insertRows(at: [IndexPath(row: self.snippets.count-1, section: 0)], with: .automatic)
-            
-            self.expansionHandler?()
         }))
         
         creationAlert.addTextField { (textField) in
@@ -258,20 +250,15 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: - Table view delegate
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        expansionHandler?()
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        collapsionHandler?()
-        
-        if let manager = connectionManager {
-            try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
-            dismiss(animated: true, completion: nil)
-        } else {
-            ContentViewController.shared.presentTerminal(inDirectory: directory, command: snippets[indexPath.row].content, fromView: handleArea)
+        dismiss(animated: true) {
+            if let manager = self.connectionManager {
+                try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
+            } else {
+                ContentViewController.shared.presentTerminal(inDirectory: self.directory, command: self.snippets[indexPath.row].content, fromView: self.fromView)
+            }
         }
     }
     
@@ -301,10 +288,6 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         self.tableView.reloadData()
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        expansionHandler?()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

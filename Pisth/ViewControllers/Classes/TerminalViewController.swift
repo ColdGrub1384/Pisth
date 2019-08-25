@@ -588,8 +588,10 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if isPresentedInFullscreen, isFirstResponder {
+            _ = resignFirstResponder()
             _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                 self.reload()
+                _ = self.becomeFirstResponder()
             })
         } else {
             fit()

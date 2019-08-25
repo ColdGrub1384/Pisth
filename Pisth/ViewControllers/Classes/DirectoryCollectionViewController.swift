@@ -291,9 +291,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        setupCard()
-        
+                
         if !isViewSet {
             
             isViewSet = true
@@ -358,7 +356,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
             collectionView?.refreshControl = UIRefreshControl()
             collectionView?.backgroundView = nil
-            collectionView?.contentInset.bottom += cardHandleAreaHeight
             clearsSelectionOnViewWillAppear = false
             if #available(iOS 11.0, *) {
                 collectionView?.dropDelegate = self
@@ -488,7 +485,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         // Toolbar
-        setToolbarItems([UIBarButtonItem(title:"/", style: .plain, target: self, action: #selector(goToRoot)), UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)), UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
+        setToolbarItems([
+            UIBarButtonItem(title: "/", style: .plain, target: self, action: #selector(goToRoot)),
+            UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: Localizable.SnippetsViewController.snippets, style: .plain, target: self, action: #selector(openSnippets)),
+            AppDelegate.shared.showBookmarksBarButtonItem
+        ], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
         
         // Connection errors
@@ -497,9 +500,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        unsetupCard()
-        
+                
         (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController)?.setToolbarHidden(true, animated: true)
         NotificationCenter.default.removeObserver(self)
     }
@@ -510,11 +511,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
             layout.itemSize.width = size.width
         }
-        
-        // I hate timers 😡😡
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            self.reloadCard()
-        })
     }
     
     override func viewDidLayoutSubviews() {
@@ -690,7 +686,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     @objc func goToRoot() {
         goTo(directory: "/")
     }
-
+    
+    /// Opens snippets VC.
+    @objc func openSnippets() {
+        let vc = SnippetsViewController.makeViewController(connection: connection, directory: directory)
+        vc.fromView = view
+        present(vc, animated: true, completion: nil)
+    }
     
     /// Dismiss `navigationController`.
     @objc func close() {
@@ -1895,205 +1897,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             if let url = url {
                 self.present(self.upload(file: url), animated: true, completion: nil)
             }
-        }
-    }
-    
-    // MARK: - Commit card view
-    
-    // Thanks to Brian Advent: https://github.com/brianadvent/InteractiveCardViewAnimation
-    
-    // That code implements the Snippets view on the bottom of the View controller like in the Shortcuts or Maps app.
-    
-    // That code hasn't been written by me, I don't code like that :)
-    
-    private enum CardState {
-        case expanded
-        case collapsed
-    }
-    
-    private var cardViewController: SnippetsViewController!
-    private var visualEffectView:UIVisualEffectView!
-    
-    private var cardHeight: CGFloat {
-        return view.frame.height-200
-    }
-    private let cardHandleAreaHeight: CGFloat = 200
-    
-    private var cardVisible = false
-    private var nextState: CardState {
-        return cardVisible ? .collapsed : .expanded
-    }
-    
-    private var runningAnimations = [UIViewPropertyAnimator]()
-    private var animationProgressWhenInterrupted: CGFloat = 0
-    
-    private var cardSuperView: UIView {
-        return view
-    }
-    
-    private func setupCard() {
-        
-        guard cardViewController == nil, panelNavigationController == nil, !UserKeys.shouldHideSnippets.boolValue else {
-            return
-        }
-        
-        visualEffectView = UIVisualEffectView()
-        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        visualEffectView.frame = cardSuperView.frame
-        visualEffectView.isUserInteractionEnabled = false
-        cardSuperView.addSubview(visualEffectView)
-        
-        cardViewController = SnippetsViewController.makeViewController(connection: connection, directory: directory)
-        cardViewController.expansionHandler = {
-            if !self.cardVisible {
-                self.animateTransitionIfNeeded(state: .expanded, duration: 0.9)
-            }
-        }
-        cardViewController.collapsionHandler = {
-            if self.cardVisible {
-                self.animateTransitionIfNeeded(state: .collapsed, duration: 0.9)
-            }
-        }
-        addChild(cardViewController)
-        cardSuperView.addSubview(cardViewController.view)
-        
-        reloadCard()
-        
-        cardViewController.view.clipsToBounds = true
-        cardViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleCardTap(recognzier:)))
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(recognizer:)))
-        
-        cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-        cardViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
-    }
-    
-    private func unsetupCard() {
-        guard cardViewController != nil else {
-            return
-        }
-        
-        visualEffectView.removeFromSuperview()
-        visualEffectView = nil
-        
-        cardViewController.view.removeFromSuperview()
-        cardViewController.removeFromParent()
-        cardViewController = nil
-        
-        cardVisible = false
-        runningAnimations = []
-        animationProgressWhenInterrupted = 0
-    }
-    
-    private func reloadCard() {
-        if !cardVisible {
-            cardViewController?.view.frame = CGRect(x: 0, y: cardSuperView.frame.height - cardHandleAreaHeight, width: cardSuperView.bounds.width, height: cardHeight)
-        }
-    }
-    
-    @objc private func handleCardTap(recognzier:UITapGestureRecognizer) {
-        switch recognzier.state {
-        case .ended:
-            animateTransitionIfNeeded(state: nextState, duration: 0.9)
-        default:
-            break
-        }
-    }
-    
-    @objc private func handleCardPan (recognizer:UIPanGestureRecognizer) {
-        switch recognizer.state {
-        case .began:
-            startInteractiveTransition(state: nextState, duration: 0.9)
-        case .changed:
-            let translation = recognizer.translation(in: self.cardViewController.handleArea)
-            var fractionComplete = translation.y / cardHeight
-            fractionComplete = cardVisible ? fractionComplete : -fractionComplete
-            updateInteractiveTransition(fractionCompleted: fractionComplete)
-        case .ended:
-            continueInteractiveTransition()
-        default:
-            break
-        }
-        
-    }
-    
-    private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
-        if runningAnimations.isEmpty {
-            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.cardViewController.view.frame.origin.y = self.cardSuperView.frame.height - self.cardHeight
-                case .collapsed:
-                    self.cardViewController.view.frame.origin.y = self.cardSuperView.frame.height - self.cardHandleAreaHeight
-                }
-            }
-            
-            frameAnimator.addCompletion { _ in
-                self.cardVisible = !self.cardVisible
-                self.runningAnimations.removeAll()
-            }
-            
-            frameAnimator.startAnimation()
-            runningAnimations.append(frameAnimator)
-            
-            
-            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
-                switch state {
-                case .expanded:
-                    self.cardViewController.view.layer.cornerRadius = 12
-                case .collapsed:
-                    self.cardViewController.view.layer.cornerRadius = 0
-                }
-            }
-            
-            cornerRadiusAnimator.startAnimation()
-            runningAnimations.append(cornerRadiusAnimator)
-            
-            let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.visualEffectView.effect = UIBlurEffect(style: .dark)
-                case .collapsed:
-                    self.visualEffectView.effect = nil
-                }
-            }
-            
-            blurAnimator.startAnimation()
-            runningAnimations.append(blurAnimator)
-        }
-    }
-    
-    private func startInteractiveTransition(state:CardState, duration:TimeInterval) {
-        if runningAnimations.isEmpty {
-            animateTransitionIfNeeded(state: state, duration: duration)
-        }
-        for animator in runningAnimations {
-            animator.pauseAnimation()
-            animationProgressWhenInterrupted = animator.fractionComplete
-        }
-    }
-    
-    private func updateInteractiveTransition(fractionCompleted:CGFloat) {
-        for animator in runningAnimations {
-            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
-        }
-    }
-    
-    private func continueInteractiveTransition (){
-        for animator in runningAnimations {
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
-    }
-    
-    // MARK: - Navigation controller delegate
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        if viewController != self {
-            unsetupCard()
-        } else {
-            view.setNeedsLayout()
-            setupCard()
         }
     }
     
