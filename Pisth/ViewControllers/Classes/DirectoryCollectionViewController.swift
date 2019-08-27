@@ -291,7 +291,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-                
+        
+        (navigationController?.navigationController?.splitViewController?.viewControllers.first as! UINavigationController).navigationBar.topItem?.hidesBackButton = true
+        
         if !isViewSet {
             
             isViewSet = true
@@ -507,6 +509,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        
+        (navigationController?.navigationController?.splitViewController?.viewControllers.first as! UINavigationController).navigationBar.topItem?.hidesBackButton = true
         
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
             layout.itemSize.width = size.width
