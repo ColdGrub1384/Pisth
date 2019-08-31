@@ -360,7 +360,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 return items
             }
             
-            self.navigationItem.setRightBarButtonItems(buttons, animated: true)
+            if self.navigationItem.rightBarButtonItems == nil || self.navigationItem.rightBarButtonItems?.count == 0 {
+                self.navigationItem.setRightBarButtonItems(buttons, animated: true)
+            }
             
             // Siri Shortcuts
             

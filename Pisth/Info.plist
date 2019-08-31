@@ -34,7 +34,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)${BUNDLE_ID_SUFFIX}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -96,8 +96,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
-	<key>Is Beta</key>
-	<string>$(IS_BETA)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>libterm</string>
@@ -119,8 +117,11 @@
 		<string>ch.marcela.ada.Pisth.openDirectory</string>
 		<string>ch.marcela.ada.Pisth.openTerminal</string>
 	</array>
-	<key>Tint Color Name</key>
-	<string>$(TINT_COLOR)</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

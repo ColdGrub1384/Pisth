@@ -68,21 +68,14 @@ class SplitViewController: UISplitViewController {
         } else {
             bookmarksVC.tableView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         }
-        if !isShell {
-            if #available(iOS 13.0, *) {
-                bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-            } else {
-                bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-            }
+        if #available(iOS 13.0, *) {
+            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
         } else {
-            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+            bookmarksVC.tableView.backgroundView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         }
         let navigationController = UINavigationController(rootViewController: bookmarksVC)
         if #available(iOS 11.0, *) {
             navigationController.navigationBar.prefersLargeTitles = true
-        }
-        if isShell {
-            navigationController.navigationBar.barStyle = .black
         }
         
         // Setup Split view controller
@@ -91,9 +84,7 @@ class SplitViewController: UISplitViewController {
         if #available(iOS 11.0, *) {
             navigationController_.navigationBar.prefersLargeTitles = true
         }
-        if isShell {
-            detailNavigationController.navigationBar.barStyle = .black
-        }
+        
         load()
         AppDelegate.shared.window?.rootViewController = UIViewController()
         AppDelegate.shared.navigationController = navigationController_
@@ -106,11 +97,15 @@ class SplitViewController: UISplitViewController {
         }
         window.rootViewController = ContentViewController.shared
         if #available(iOS 11.0, *) {
-            if let name = Bundle.main.infoDictionary?["Tint Color Name"] as? String, let tint = UIColor(named: name) {
+            if let tint = UIColor(named: "Purple") {
                 
                 window.tintColor = tint
                 UISwitch.appearance().onTintColor = tint
             }
+        } else {
+            let tint = UIColor.purple
+            window.tintColor = tint
+            UISwitch.appearance().onTintColor = tint
         }
         window.makeKeyAndVisible()
         AppDelegate.shared.window = window

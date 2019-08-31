@@ -109,7 +109,6 @@
 		C9BD28A3210A3E6900244AAF /* Disconnected.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9BD28A5210A3E6900244AAF /* Disconnected.xib */; };
 		C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE90522118FB55000A61C8 /* BlackNavigationController.swift */; };
 		C9BE90552119028A000A61C8 /* isFilePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BE905421190289000A61C8 /* isFilePDF.swift */; };
-		C9D6EC782133025900A81D88 /* LaunchScreenDark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */; };
 		C9E3919321C0345E00F16622 /* PisthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3919221C0345E00F16622 /* PisthTests.swift */; };
 		C9E3920421C03B8F00F16622 /* TestingConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E391B021C03B8B00F16622 /* TestingConnection.swift */; };
 		C9E3F8FB2188D64800603388 /* SnippetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3F8FA2188D64800603388 /* SnippetsViewController.swift */; };
@@ -325,8 +324,6 @@
 		C9BE905421190289000A61C8 /* isFilePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = isFilePDF.swift; sourceTree = "<group>"; };
 		C9CB27F120D5C22B00290DBE /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CB27F520D5C23500290DBE /* Pisth_Terminal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Terminal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9D6EC752133022600A81D88 /* InfoShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoShell.plist; sourceTree = "<group>"; };
-		C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenDark.storyboard; sourceTree = "<group>"; };
 		C9E3919021C0345E00F16622 /* PisthTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PisthTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9E3919221C0345E00F16622 /* PisthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthTests.swift; sourceTree = "<group>"; };
 		C9E3919421C0345E00F16622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -513,12 +510,10 @@
 				C9BBD2CE216C1D7E001C665D /* commandDictionary.plist */,
 				C9BBD2CD216C1D7E001C665D /* extraCommandsDictionary.plist */,
 				3AFDD9101FF140FE0061677B /* Info.plist */,
-				C9D6EC752133022600A81D88 /* InfoShell.plist */,
 				C983BF9C2110DEE600CCB298 /* InfoPlist.strings */,
 				3A3A015B2007ADE900B5B655 /* langs.plist */,
 				3A8A32AF2047574D00A38E89 /* OS */,
 				3AFDD90D1FF140FE0061677B /* LaunchScreen.storyboard */,
-				C9D6EC772133025900A81D88 /* LaunchScreenDark.storyboard */,
 				3A7C919A2044972C006E0434 /* GoogleService-Info.plist */,
 				3AFDD9161FF147860061677B /* Assets.xcassets */,
 				C9E539792131DD03005D8BA9 /* WhatsNew.xcassets */,
@@ -799,7 +794,6 @@
 				C9BD28A3210A3E6900244AAF /* Disconnected.xib in Resources */,
 				C9BD2872210A3DCE00244AAF /* Settings.storyboard in Resources */,
 				C9BD2880210A3DFB00244AAF /* Git.storyboard in Resources */,
-				C9D6EC782133025900A81D88 /* LaunchScreenDark.storyboard in Resources */,
 				C98D6CB72101522C00B3052E /* List File Cell.xib in Resources */,
 				C911BED62189E1C700B5FCE5 /* Snippets.storyboard in Resources */,
 				3A3A015C2007ADE900B5B655 /* langs.plist in Resources */,
@@ -1323,9 +1317,7 @@
 			baseConfigurationReference = D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				APP_ICON_SUFFIX = .dev;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SUFFIX)";
-				BUNDLE_ID_SUFFIX = .dev;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1346,7 +1338,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TINT_COLOR = Red;
 			};
 			name = Debug;
 		};
@@ -1355,9 +1346,7 @@
 			baseConfigurationReference = D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				APP_ICON_SUFFIX = "";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SUFFIX)";
-				BUNDLE_ID_SUFFIX = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1377,183 +1366,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TINT_COLOR = Purple;
 			};
 			name = Release;
-		};
-		C959168B2113A1850073BCCE /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Beta;
-		};
-		C959168C2113A1850073BCCE /* Beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59BC621133CB24CE980F54C4 /* Pods-Pisth.beta.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				APP_ICON_SUFFIX = .beta;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SUFFIX)";
-				BUNDLE_ID_SUFFIX = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"${PODS_ROOT}/Firebase/Core/Sources",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
-				);
-				INFOPLIST_FILE = Pisth/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				IS_BETA = YES;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TINT_COLOR = Orange;
-			};
-			name = Beta;
-		};
-		C9D6EC672132FEDA00A81D88 /* Shell */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Shell;
-		};
-		C9D6EC682132FEDA00A81D88 /* Shell */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 987F0B78640D7B7DED10C32C /* Pods-Pisth.shell.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				APP_ICON_SUFFIX = .shell;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SUFFIX)";
-				BUNDLE_ID_SUFFIX = .shell;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = Pisth/InfoShell.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				IS_BETA = "";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
-				PRODUCT_NAME = "Pisth Shell";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TINT_COLOR = Orange;
-			};
-			name = Shell;
 		};
 		C9E3919821C0345E00F16622 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1596,46 +1410,6 @@
 			};
 			name = Release;
 		};
-		C9E3919A21C0345E00F16622 /* Shell */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CDE4CB2B9469926FC8B740F /* Pods-PisthTests.shell.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = PisthTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.PisthTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pisth.app/Pisth";
-			};
-			name = Shell;
-		};
-		C9E3919B21C0345E00F16622 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A766C1173F661A3FD11B72D /* Pods-PisthTests.beta.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y96PL6G497;
-				INFOPLIST_FILE = PisthTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.ada.PisthTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pisth.app/Pisth";
-			};
-			name = Beta;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1644,8 +1418,6 @@
 			buildConfigurations = (
 				3AFDD9111FF140FE0061677B /* Debug */,
 				3AFDD9121FF140FE0061677B /* Release */,
-				C9D6EC672132FEDA00A81D88 /* Shell */,
-				C959168B2113A1850073BCCE /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1655,8 +1427,6 @@
 			buildConfigurations = (
 				3AFDD9141FF140FE0061677B /* Debug */,
 				3AFDD9151FF140FE0061677B /* Release */,
-				C9D6EC682132FEDA00A81D88 /* Shell */,
-				C959168C2113A1850073BCCE /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1666,8 +1436,6 @@
 			buildConfigurations = (
 				C9E3919821C0345E00F16622 /* Debug */,
 				C9E3919921C0345E00F16622 /* Release */,
-				C9E3919A21C0345E00F16622 /* Shell */,
-				C9E3919B21C0345E00F16622 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -38,6 +38,7 @@ class ContentViewController: UIViewController, Storyboard {
         
         let terminalPanel = UINavigationController(rootViewController: terminal)
         terminalPanel.navigationBar.isTranslucent = false
+        terminalPanel.modalPresentationStyle = .fullScreen
         
         var vc: UIViewController? = self
         if view.window == nil {
@@ -98,18 +99,7 @@ class ContentViewController: UIViewController, Storyboard {
         
         // Search for the `preferredStatusBarStyle` of the visible view controller or returns `.default`.
         
-        var defaultStyle: UIStatusBarStyle
-        if !isShell {
-            defaultStyle = .default
-        } else {
-            defaultStyle = .lightContent
-            
-            guard !(presentedViewController is UIAlertController) else {
-                return defaultStyle
-            }
-        }
-            
-        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
+        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? .default
     }
     
     override var keyCommands: [UIKeyCommand]? {
