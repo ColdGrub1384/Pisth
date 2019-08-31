@@ -31,6 +31,10 @@ class ContentViewController: UIViewController, Storyboard {
     ///     - view: The sender view.
     func presentTerminal(inDirectory directory: String? = nil, command: String? = nil, from sender: UIBarButtonItem? = nil, fromView sourceView: UIView? = nil) {
         
+        guard ConnectionManager.shared.connection != nil else {
+            return
+        }
+        
         let terminal = TerminalViewController()
         terminal.pwd = directory
         terminal.command = command
@@ -38,14 +42,23 @@ class ContentViewController: UIViewController, Storyboard {
         
         let terminalPanel = UINavigationController(rootViewController: terminal)
         terminalPanel.navigationBar.isTranslucent = false
-        terminalPanel.modalPresentationStyle = .fullScreen
         
         var vc: UIViewController? = self
         if view.window == nil {
             vc = UIApplication.shared.keyWindow?.rootViewController
         }
         func present() {
-            vc?.present(terminalPanel, animated: true) {
+            
+            let splitVC = TerminalSplitViewController()
+            
+            let browser = DirectoryCollectionViewController(connection: ConnectionManager.shared.connection!, directory: directory)
+            let directoryPanel = UINavigationController(rootViewController: browser)
+            
+            splitVC.viewControllers = [directoryPanel, terminalPanel]
+            splitVC.preferredDisplayMode = .allVisible
+            splitVC.modalPresentationStyle = .fullScreen
+            
+            vc?.present(splitVC, animated: true) {
                 if #available(iOS 11.0, *) {
                     terminalPanel.navigationBar.tintColor = UIColor(named: "Purple")
                 }
@@ -58,13 +71,10 @@ class ContentViewController: UIViewController, Storyboard {
             connection?.useSFTP = false
             let connectionManager = ConnectionManager(connection: connection)
             terminal.connectionManager = connectionManager
-            let activityVC = ActivityViewController(message: Localizable.BookmarksTableViewController.connecting)
-            self.present(activityVC, animated: true) {
+            connectionManager.runTask {
                 connectionManager.connect()
-                activityVC.dismiss(animated: true, completion: {
-                    present()
-                })
             }
+            present()
         } else {
             present()
         }

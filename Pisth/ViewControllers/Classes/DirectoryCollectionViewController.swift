@@ -178,7 +178,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         didSet {
             DispatchQueue.main.async {
                 if self.isLoaded && self.view.window != nil {
-                    ConnectionManager.shared.queue.async {
+                    ConnectionManager.shared.runTask {
                         self.fetchFiles()
                     }
                 }
@@ -216,32 +216,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         self.files = files
         
+        if self.directory.removingUnnecessariesSlashes != "/" {
+                        
+            if let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) {
+                self.files?.append(parent)
+            }
+        }
+        
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             
             guard self.files != nil else {
                 self.showErrorIfThereIsOne()
                 return
-            }
-            
-            if self.directory.removingUnnecessariesSlashes != "/" {
-                
-                let semaphore = DispatchSemaphore(value: 0)
-                
-                var _parent: NMSFTPFile?
-                ConnectionManager.shared.queue.async {
-                    _parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent)
-                    semaphore.signal()
-                }
-                
-                semaphore.wait()
-                
-                // Append parent directory
-                guard let parent = _parent else {
-                    return
-                }
-                
-                self.files!.append(parent)
             }
             
             let titleComponents = self.directory.components(separatedBy: "/")
@@ -278,7 +265,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 })
                 chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
                 chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
-                    ConnectionManager.shared.queue.async {
+                    ConnectionManager.shared.runTask {
                         guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
                         
                         DispatchQueue.main.async {
@@ -323,7 +310,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 var items = [UIBarButtonItem]()
                 let semaphore = DispatchSemaphore(value: 0)
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     var error: NSError?
                     
                     // Check for Aptitude
@@ -360,8 +347,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 return items
             }
             
+            var _buttons = buttons
+            if let i = _buttons.index(of: terminal), (self.navigationController?.splitViewController?.viewControllers.last as? UINavigationController)?.viewControllers.first is TerminalViewController {
+                _buttons.remove(at: i)
+            }
+            
             if self.navigationItem.rightBarButtonItems == nil || self.navigationItem.rightBarButtonItems?.count == 0 {
-                self.navigationItem.setRightBarButtonItems(buttons, animated: true)
+                self.navigationItem.setRightBarButtonItems(_buttons, animated: true)
             }
             
             // Siri Shortcuts
@@ -425,7 +417,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         
-        ConnectionManager.shared.queue.async {
+        ConnectionManager.shared.runTask {
             if !Reachability.isConnectedToNetwork() {
                 ConnectionManager.shared.result = .notConnected
             } else {
@@ -523,7 +515,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             isViewSet = true
             
             if isLoaded {
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     self.fetchFiles()
                 }
             }
@@ -539,7 +531,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             UIBarButtonItem(title: Localizable.SnippetsViewController.snippets, style: .plain, target: self, action: #selector(openSnippets)),
             AppDelegate.shared.showBookmarksBarButtonItem
         ], animated: true)
-        navigationController?.setToolbarHidden(false, animated: true)
+        if !((navigationController?.splitViewController?.viewControllers.last as? UINavigationController)?.viewControllers.first is TerminalViewController) {
+            navigationController?.setToolbarHidden(false, animated: true)
+        }
         
         // Hide back button on compact views
         if navigationController?.navigationController != nil && navigationController?.viewControllers.first == self {
@@ -643,7 +637,9 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         collectionView?.backgroundView = nil
         
         setToolbarItems([UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), AppDelegate.shared.showBookmarksBarButtonItem], animated: true)
-        navigationController?.setToolbarHidden(false, animated: true)
+        if !((navigationController?.splitViewController?.viewControllers.last as? UINavigationController)?.viewControllers.first is TerminalViewController) {
+            navigationController?.setToolbarHidden(false, animated: true)
+        }
         
         let navVC = AppDelegate.shared.navigationController
         
@@ -702,7 +698,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             return
         }
         
-        ConnectionManager.shared.queue.async {
+        ConnectionManager.shared.runTask {
             do {
                 try session.channel.write("")
                 if let handler = successHandler {
@@ -780,7 +776,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.showError()
         })
         
-        ConnectionManager.shared.queue.async {
+        ConnectionManager.shared.runTask {
             guard ConnectionManager.shared.filesSession != nil else { return }
             var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
             self.allFiles = files
@@ -921,7 +917,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     }
                 }
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(filename_)) else {
                         
                         showError()
@@ -1180,7 +1176,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 }
                 
                 self.present(activityVC, animated: true, completion: {
-                    ConnectionManager.shared.queue.async {
+                    ConnectionManager.shared.runTask {
                         _ = uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
                     }
                 })
@@ -1242,7 +1238,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 let newPath = self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     guard let path = Bundle.main.path(forResource: "empty", ofType: nil), let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: path, toFileAtPath: newPath) else { return }
                     
                     DispatchQueue.main.async {
@@ -1271,7 +1267,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 let filename = chooseName.textFields![0].text!
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(filename)) else { return }
                     
                     DispatchQueue.main.async {
@@ -1320,7 +1316,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 progressView.tintColor = UIApplication.shared.keyWindow?.tintColor
                 progress.view.addSubview(progressView)
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     guard let result = ConnectionManager.shared.filesSession?.sftp.copyContents(ofPath: Pasteboard.local.filePath!, toFileAtPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent), progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                         
                         let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
@@ -1374,7 +1370,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 self.showError()
             })
             
-            ConnectionManager.shared.queue.async {
+            ConnectionManager.shared.runTask {
                 guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
                     
                 DispatchQueue.main.async {
@@ -1564,7 +1560,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     
                     guard let session = ConnectionManager.shared.filesSession else { return }
                     
-                    ConnectionManager.shared.queue.async {
+                    ConnectionManager.shared.runTask {
                         if let data = session.sftp.contents(atPath: path, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                             
                             let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
@@ -1756,7 +1752,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     destination = directory.nsString.appendingPathComponent(file.filename)
                 }
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     if sftp.moveItem(atPath: target, toPath: destination) {
                         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                             DispatchQueue.main.async {
@@ -1870,6 +1866,36 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         return UICollectionViewDropProposal(operation: .move, intent: .insertIntoDestinationIndexPath)
     }
     
+    @available(iOS 11.0, *)
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        
+        guard let files = files else {
+            return false
+        }
+        
+        var hasSFTPFiles = false
+        var sftpFiles = [NMSFTPFile]()
+        
+        for item in session.localDragSession?.items ?? [] {
+            if let file = item.localObject as? NMSFTPFile {
+                sftpFiles.append(file)
+                hasSFTPFiles = true
+            }
+        }
+        
+        guard hasSFTPFiles else {
+            return (session.hasItemsConforming(toTypeIdentifiers: ["public.item"]))
+        }
+        
+        if directory.removingUnnecessariesSlashes == "/" {
+            return true
+        } else if let lastFile = files.last {
+            return !sftpFiles.contains(lastFile)
+        }
+        
+        return false
+    }
+    
     // MARK: - Collection view drag delegate
     
     @available(iOS 11.0, *)
@@ -1908,7 +1934,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             guard let term = terminal.visibleViewController as? TerminalViewController else {
                 continue
             }
-            term.webView?.removeFromSuperview()
+            term.webView?.isUserInteractionEnabled = false
         }
         
         return [item]
@@ -1920,38 +1946,8 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             guard let term = terminal.visibleViewController as? TerminalViewController else {
                 continue
             }
-            term.view.addSubview(term.webView)
+            term.webView?.isUserInteractionEnabled = true
         }
-    }
-    
-    @available(iOS 11.0, *)
-    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        
-        guard let files = files else {
-            return false
-        }
-        
-        var hasSFTPFiles = false
-        var sftpFiles = [NMSFTPFile]()
-        
-        for item in session.localDragSession?.items ?? [] {
-            if let file = item.localObject as? NMSFTPFile {
-                sftpFiles.append(file)
-                hasSFTPFiles = true
-            }
-        }
-        
-        guard hasSFTPFiles else {
-            return (session.hasItemsConforming(toTypeIdentifiers: ["public.item"]))
-        }
-        
-        if directory.removingUnnecessariesSlashes == "/" {
-            return true
-        } else if let lastFile = files.last {
-            return !sftpFiles.contains(lastFile)
-        }
-        
-        return false
     }
     
     // MARK: - Store product view controller delegate

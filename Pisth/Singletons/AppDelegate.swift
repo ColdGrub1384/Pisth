@@ -369,7 +369,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                                                 
                         if !connection.useSFTP { // SSH
                             
-                            ConnectionManager.shared.queue.async {
+                            ConnectionManager.shared.runTask {
                                 ConnectionManager.shared.connection = connection
                                 ConnectionManager.shared.connect()
                                 

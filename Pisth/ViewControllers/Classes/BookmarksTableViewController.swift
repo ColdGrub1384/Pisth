@@ -357,7 +357,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                             }
                         })
                     } else {
-                        ConnectionManager.shared.queue.async {
+                        ConnectionManager.shared.runTask {
                             ConnectionManager.shared.connection = connection
                             ConnectionManager.shared.connect()
                             

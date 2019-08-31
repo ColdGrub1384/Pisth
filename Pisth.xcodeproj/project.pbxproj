@@ -88,6 +88,7 @@
 		C9213CFE2141E0C800DEDD6C /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9213CFD2141E0C800DEDD6C /* Static.swift */; };
 		C951122B2183BBF200A0D1BC /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C951122A2183BBF200A0D1BC /* Snippet.swift */; };
 		C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */; };
+		C975C40A231A171600932444 /* TerminalSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C975C409231A171600932444 /* TerminalSplitViewController.swift */; };
 		C983BF9A2110DEE600CCB298 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C983BF9C2110DEE600CCB298 /* InfoPlist.strings */; };
 		C98D6CB32101303E00B3052E /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = C98D6CB22101303E00B3052E /* Header.xib */; };
 		C98D6CB521013AAB00B3052E /* HeaderToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D6CB421013AAB00B3052E /* HeaderToolbar.swift */; };
@@ -269,6 +270,7 @@
 		C9213CFD2141E0C800DEDD6C /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		C951122A2183BBF200A0D1BC /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 		C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisthConnectionInformationViewTableViewController.swift; sourceTree = "<group>"; };
+		C975C409231A171600932444 /* TerminalSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalSplitViewController.swift; sourceTree = "<group>"; };
 		C983BF9B2110DEE600CCB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C983BF9D2110DEE900CCB298 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C983BF9E2110DEEB00CCB298 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				3AFDD91A1FF14C1F0061677B /* BookmarksTableViewController.swift */,
 				C99CB9622103885B00418DFF /* CompactBookmarksTableViewController.swift */,
 				3AD29179207ADE7B0082306D /* SplitViewController.swift */,
+				C975C409231A171600932444 /* TerminalSplitViewController.swift */,
 				3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */,
 				3AAF00E81FF2D00600ECCA6F /* LocalDirectoryCollectionViewController.swift */,
 				3A8A32AB2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift */,
@@ -988,6 +991,7 @@
 				3A487CE81FF99B4600552B93 /* DirectoryCollectionViewControllerDelegate.swift in Sources */,
 				3AF9AEA51FF5458200840E8A /* SettingsTableViewController.swift in Sources */,
 				C91CE3242226AA4B00D1D7C1 /* Pisth.xcdatamodeld in Sources */,
+				C975C40A231A171600932444 /* TerminalSplitViewController.swift in Sources */,
 				3AAF00EB1FF2D4F400ECCA6F /* FIleManager.swift in Sources */,
 				C911BEE92189F5A200B5FCE5 /* WebViewController+Xib.swift in Sources */,
 				C960D04920E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift in Sources */,

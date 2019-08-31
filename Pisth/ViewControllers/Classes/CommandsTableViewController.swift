@@ -56,7 +56,7 @@ class CommandsTableViewController: UITableViewController, UIPopoverPresentationC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         dismiss(animated: true) {
-            ConnectionManager.shared.queue.async {
+            ConnectionManager.shared.runTask {
                 if let command = self.commands[indexPath.row] as? String {
                     try? ConnectionManager.shared.session?.channel.write(command)
                 } else if let command = self.commands[indexPath.row] as? [String] {

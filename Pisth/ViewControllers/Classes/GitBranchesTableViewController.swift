@@ -58,7 +58,7 @@ class GitBranchesTableViewController: UITableViewController {
 
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-SourceControl", AnalyticsParameterItemName : "Source Control"])
         
-        ConnectionManager.shared.queue.async {
+        ConnectionManager.shared.runTask {
             var error: NSError?
             
             let result = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' branch", error: &error).replacingOccurrences(of: " ", with: "")

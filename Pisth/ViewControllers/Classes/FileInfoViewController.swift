@@ -97,6 +97,14 @@ class FileInfoViewController: UIViewController, UIPopoverPresentationControllerD
         if modificationLabel.text?.isEmpty == true /* `==` because `text` is optional */ {
             view.viewWithTag(1)?.isHidden = true
         }
+        
+        if #available(iOS 13.0, *) {
+            fileTypeLabel.textColor = .secondaryLabel
+            permissionsLabel.textColor = .secondaryLabel
+            sizeLabel.textColor = .secondaryLabel
+            modificationLabel.textColor = .secondaryLabel
+            parentDirectoryLabel.textColor = .secondaryLabel
+        }
     }
     
     // MARK: - Popover presentation controller delegate

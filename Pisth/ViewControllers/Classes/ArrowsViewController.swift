@@ -57,7 +57,7 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     ///     - direction: Direction where arrow will point.
     func sendArrow(withDirection direction: UISwipeGestureRecognizer.Direction) {
         
-        ConnectionManager.shared.queue.async {
+        ConnectionManager.shared.runTask {
             switch direction {
             case .up:
                 try? ConnectionManager.shared.session?.channel.write(Keys.arrowUp)

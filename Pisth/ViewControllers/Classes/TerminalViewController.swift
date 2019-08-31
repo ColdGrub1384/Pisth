@@ -148,7 +148,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             print(cols)
             print(rows)
             self.terminalSize = "\(cols),\(rows)"
-            connectionManager.queue.async {
+            connectionManager.runTask {
                 self.connectionManager.session?.channel.requestSizeWidth(cols, height: rows)
             }
         }
@@ -376,6 +376,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return
         }
         
+        navigationController?.navigationBar.barStyle = theme.toolbarStyle
+        
         keyboardAppearance = theme.keyboardAppearance
         selectionTextView.keyboardAppearance = keyboardAppearance
         
@@ -418,6 +420,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override func becomeFirstResponder() -> Bool {
         super.becomeFirstResponder()
+        
+        webView.isUserInteractionEnabled = true
         
         guard selectionTextView.isHidden else {
             return false
@@ -522,27 +526,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             mcNearbyServiceAdvertiser.startAdvertisingPeer()
         }
         
-        if console.isEmpty {
-            
-            if !pureMode {
-                connectionManager.queue.async {
-                    self.connectionManager.session?.channel.closeShell()
-                    try? self.connectionManager.session?.channel.startShell()
-                }
-            }
-        }
-        
         if pureMode && presentingViewController == nil {
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
+        } else if (navigationController?.splitViewController?.viewControllers.last as? UINavigationController)?.viewControllers.first is TerminalViewController, let item = navigationController?.splitViewController?.displayModeButtonItem {
+            navigationItem.leftBarButtonItems = [item, UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))]
         } else {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
         }
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
-        
-        addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
-    }
+}
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -553,6 +547,28 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             navigationController_?.view.backgroundColor = .systemBackground
         } else {
             navigationController_?.view.backgroundColor = .white
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        let wasFirstResponder = isFirstResponder
+        
+        coordinator.animate(alongsideTransition: { (_) in
+            
+            if wasFirstResponder {
+                _ = self.resignFirstResponder()
+            }
+            
+        }) { (_) in
+            
+            self.reload()
+            
+            if wasFirstResponder {
+                _ = self.becomeFirstResponder()
+            }
+            
         }
     }
     
@@ -575,17 +591,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return (action == #selector(UIResponder.paste(_:)) || action == #selector(selectionMode) || action == #selector(showNavBar))
         } else {
             return (action == #selector(pasteSelection) || action == #selector(insertMode) || action == #selector(showNavBar))
-        }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if isFirstResponder {
-            _ = resignFirstResponder()
-            _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                self.reload()
-                _ = self.becomeFirstResponder()
-            })
         }
     }
     
@@ -623,7 +628,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if inputAssistantOrigin.y > 0 {
             resizeView(withSize: CGSize(width: view.frame.width, height: inputAssistantOrigin.y))
         } else if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height-20))
+            resizeView(withSize: CGSize(width: view.frame.width, height: view.frame.height-keyboardFrame.height))
         }
         
         if let arrowsVC = ArrowsViewController.current {
@@ -777,7 +782,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func insertText(_ text: String) {
         
-        connectionManager.queue.async {
+        connectionManager.runTask {
             do {
                 
                 if !self.ctrl {
@@ -811,7 +816,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     }
     
     func deleteBackward() {
-        connectionManager.queue.async {
+        connectionManager.runTask {
             do {
                 if self.viewer {
                     if let data = Keys.delete.data(using: .utf8) {
@@ -1015,7 +1020,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
-            connectionManager.queue.async {
+            connectionManager.runTask {
                 do {
                     
                     if !self.pureMode {
@@ -1146,7 +1151,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else if message.hasPrefix("changeTitle") { // Change title
             title = message.replacingFirstOccurrence(of: "changeTitle", with: "")
         } else if message.hasPrefix("runCommand") { // Run command
-            connectionManager.queue.async {
+            connectionManager.runTask {
                 try? self.connectionManager.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
             }
         }
@@ -1258,7 +1263,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         return
                     }
                     
-                    connectionManager.queue.async {
+                    connectionManager.runTask {
                         try? self.connectionManager.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
                     }
                 }
@@ -1266,7 +1271,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else if session.canLoadObjects(ofClass: String.self) {
             _ = session.loadObjects(ofClass: String.self) { (strings) in
                 for string in strings {
-                    self.connectionManager.queue.async {
+                    self.connectionManager.runTask {
                         try? self.connectionManager.session?.channel.write(string+" ")
                     }
                 }
@@ -1280,7 +1285,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
         let canHandle = (session.localDragSession?.items.first?.localObject is NMSFTPFile || session.canLoadObjects(ofClass: String.self))
         if canHandle {
-            webView.removeFromSuperview()
+            webView.isUserInteractionEnabled = false
         }
         return canHandle
     }
@@ -1292,7 +1297,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
-        view.addSubview(webView)
+        webView.isUserInteractionEnabled = true
     }
     
     // MARK: - Suggestions
@@ -1314,7 +1319,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         var filenames = [String]()
         let semaphore = DispatchSemaphore(value: 0)
-        connectionManager.queue.async {
+        connectionManager.runTask {
             var error: NSError?
             var homeDir: String? = fileSession.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
             

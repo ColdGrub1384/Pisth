@@ -156,7 +156,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                             }
                         }
                         
-                        ConnectionManager.shared.queue.async {
+                        ConnectionManager.shared.runTask {
                             guard let result = remove(directoryRecursively: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
                                 
                                 DispatchQueue.main.async {
@@ -183,7 +183,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                             }
                         }
                     } else { // Remove file
-                        ConnectionManager.shared.queue.async {
+                        ConnectionManager.shared.runTask {
                             guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
                                 DispatchQueue.main.async {
                                     activityVC.dismiss(animated: true, completion: {
@@ -255,7 +255,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                 guard let newFileName = renameAlert.textFields?[0].text else { return }
                 guard let session = ConnectionManager.shared.filesSession else { return }
                 
-                ConnectionManager.shared.queue.async {
+                ConnectionManager.shared.runTask {
                     if session.sftp.moveItem(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(newFileName)) {
                        
                         DispatchQueue.main.async {

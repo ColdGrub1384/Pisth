@@ -172,22 +172,12 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     ///     - connectionManager: The connectionn where run snippets.
     ///
     /// - Returns: A newly initialized View controller.
-    static func makeViewController(connectionManager: ConnectionManager) -> UINavigationController {
+    static func makeViewController(connectionManager: ConnectionManager) -> SnippetsViewController {
         
         let vc = makeViewController()
         vc.connectionManager = connectionManager
-        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: vc, action: #selector(SnippetsViewController.dismissViewController))
-        vc.loadViewIfNeeded()
-        if let cardView = vc.view.viewWithTag(1) {
-            cardView.removeFromSuperview()
-        }
         
-        let navVC = UINavigationController(rootViewController: vc)
-        navVC.modalPresentationStyle = .formSheet
-        navVC.navigationBar.isTranslucent = false
-        navVC.navigationBar.shadowImage = UIImage()
-        
-        return navVC
+        return vc
     }
     
     // MARK: - View controller
@@ -255,7 +245,7 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         dismiss(animated: true) {
             if let manager = self.connectionManager {
-                manager.queue.async {
+                manager.runTask {
                     try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
                 }
             } else {
