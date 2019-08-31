@@ -91,6 +91,7 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate, UIContextMenuInte
             let vc = UIViewController()
             
             let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
             imageView.image = imageWithView(view: self)
             vc.view = imageView
             
@@ -98,7 +99,7 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate, UIContextMenuInte
             imageView.layer.borderColor = self.terminal?.theme.foregroundColor?.cgColor
             imageView.layer.cornerRadius = 16
             
-            vc.preferredContentSize = CGSize(width: self.frame.width, height: self.frame.height)
+            vc.preferredContentSize = CGSize(width: 400, height: 200)
             return vc
         }) { (_) -> UIMenu? in
             

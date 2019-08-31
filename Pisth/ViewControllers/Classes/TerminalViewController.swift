@@ -257,7 +257,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Hide or show navigation bar.
     @objc func showNavBar() {
         navigationController?.setNavigationBarHidden(!navigationController!.isNavigationBarHidden, animated: true)
-        fit()
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+            self.fit()
+        }
     }
     
     /// Enter in selection mode or paste text.
@@ -544,7 +546,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         if pureMode && presentingViewController == nil {
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
-        } else if (navigationController?.splitViewController?.viewControllers.last as? UINavigationController)?.viewControllers.first is TerminalViewController, let item = navigationController?.splitViewController?.displayModeButtonItem {
+        } else if splitViewController is TerminalSplitViewController, let item = splitViewController?.displayModeButtonItem {
             navigationItem.leftBarButtonItems = [item, UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))]
         } else {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
@@ -1393,6 +1395,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 Suggestion(name: "→", value: Keys.arrowRight, customHandler: nil),
                 Suggestion(name: "F1-F12", value: nil, customHandler: {
                     let commandsVC = CommandsTableViewController()
+                    commandsVC.tableView.tableFooterView = UIView()
                     commandsVC.title = "Function keys"
                     commandsVC.commands = [[Keys.f1, "F1"], [Keys.f2, "F2"], [Keys.f3, "F3"], [Keys.f4, "F4"], [Keys.f5, "F5"], [Keys.f6, "F6"], [Keys.f7, "F7"], [Keys.f8, "F8"], [Keys.f9, "F9"], [Keys.f10, "F10"], [Keys.f11, "F11"], [Keys.f12, "F12"]]
                     commandsVC.modalPresentationStyle = .popover
