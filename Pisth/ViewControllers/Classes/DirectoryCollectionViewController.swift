@@ -121,15 +121,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     /// Resume closed session.
     @objc func resume() {
-                
-        let activityVC = ActivityViewController(message: Localizable.loading)
-        present(activityVC, animated: true) {
-            let dirVC = DirectoryCollectionViewController(connection: self.connection, directory: self.directory)
-
-            activityVC.dismiss(animated: true) {
-                self.navigationController?.pushViewController(dirVC, animated: true)
-            }
-        }
+        ConnectionManager.shared.session = nil
+        ConnectionManager.shared.filesSession = nil
+        ConnectionManager.shared.result = .notConnected
+        ConnectionManager.shared.connection = connection
+        
+        navigationController?.pushViewController(DirectoryCollectionViewController(connection: connection), animated: true)
     }
     
     /// Show file info.
@@ -214,14 +211,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             files = directories+files_
         }
         
-        self.files = files
+        var _files = files
         
         if self.directory.removingUnnecessariesSlashes != "/" {
                         
             if let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) {
-                self.files?.append(parent)
+                _files?.append(parent)
             }
         }
+        
+        self.files = _files
         
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
@@ -608,7 +607,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         checkForConnectionError(errorHandler: {
             self.showError()
         }) {
-            if self.allFiles == nil {
+            if self.allFiles == nil && self.files == nil {
                 
                 self.navigationController?.popViewController(animated: true, completion: {
                     let alert = UIAlertController(title: Localizable.Browsers.errorOpeningDirectory, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
@@ -634,7 +633,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         let view = UIView.disconnected
         
         (view.viewWithTag(1) as? UIButton)?.addTarget(self, action: #selector(resume), for: .touchUpInside)
-        (view.viewWithTag(2) as? UIButton)?.addTarget(navigationController, action: #selector(navigationController?.popToRootViewController(animated:)), for: .touchUpInside)
+        (view.viewWithTag(2) as? UIButton)?.addTarget(toolbarItems?.last?.target, action: toolbarItems?.last?.action ?? #selector(close), for: .touchUpInside)
         
         view.frame.size = CGSize(width: 320, height: 70)
         
