@@ -18,7 +18,6 @@ target 'Pisth' do
   pod 'BiometricAuthentication', '~> 2.1'
   pod 'ActionSheetPicker-3.0'
   pod 'Firebase/Core'
-  pod 'PanelKit'
   pod 'WhatsNew', '~> 0.4.4'
   pod 'ObjectUserDefaults'
 end

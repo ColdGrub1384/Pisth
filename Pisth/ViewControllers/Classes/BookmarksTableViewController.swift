@@ -362,10 +362,7 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                     ConnectionManager.shared.session = nil
                     ConnectionManager.shared.filesSession = nil
                     ConnectionManager.shared.result = .notConnected
-                    
-                    ContentViewController.shared.closeAllPinnedPanels()
-                    ContentViewController.shared.closeAllFloatingPanels()
-                    
+                                        
                     if connection.useSFTP {
                         
                         let dirVC = DirectoryCollectionViewController(connection: connection)

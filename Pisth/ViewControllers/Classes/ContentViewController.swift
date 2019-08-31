@@ -6,16 +6,15 @@
 // See https://raw.githubusercontent.com/ColdGrub1384/Pisth/master/LICENSE for license information
 
 import UIKit
-import PanelKit
 import Pisth_Shared
 
 /// A View controller for showing connection content.
-class ContentViewController: UIViewController, PanelManager, Storyboard {
+class ContentViewController: UIViewController, Storyboard {
     
     /// The panel containing the current terminal.
-    var terminalPanels = [PanelViewController]()
+    var terminalPanels = [UINavigationController]()
     
-    private var directoryPanels = [PanelViewController]()
+    private var directoryPanels = [UINavigationController]()
     
     /// The wrapper view for using with `PanelKit`
     @IBOutlet weak var wrapperView: UIView!
@@ -37,14 +36,8 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         terminal.command = command
         terminal.console = ""
         
-        let terminalPanel = PanelViewController(with: terminal, in: self)
-        terminalPanel.panelNavigationController.navigationBar.isTranslucent = false
-        terminalPanel.modalPresentationStyle = .popover
-        terminalPanel.popoverPresentationController?.barButtonItem = sender
-        if let view = sourceView {
-            terminalPanel.popoverPresentationController?.sourceView = view
-            terminalPanel.popoverPresentationController?.sourceRect = view.bounds
-        }
+        let terminalPanel = UINavigationController(rootViewController: terminal)
+        terminalPanel.navigationBar.isTranslucent = false
         
         var vc: UIViewController? = self
         if view.window == nil {
@@ -52,11 +45,8 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         }
         func present() {
             vc?.present(terminalPanel, animated: true) {
-                if terminalPanel.canFloat {
-                    self.toggleFloatStatus(for: terminalPanel)
-                }
                 if #available(iOS 11.0, *) {
-                    terminal.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+                    terminalPanel.navigationBar.tintColor = UIColor(named: "Purple")
                 }
             }
         }
@@ -89,11 +79,7 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         
         let browser = DirectoryCollectionViewController(connection: connection, directory: directory)
         
-        let directoryPanel = PanelViewController(with: browser, in: self)
-        directoryPanel.modalPresentationStyle = .popover
-        directoryPanel.popoverPresentationController?.sourceView = sender
-        directoryPanel.popoverPresentationController?.sourceRect = sender?.frame ?? CGRect.zero
-        
+        let directoryPanel = UINavigationController(rootViewController: browser)
         directoryPanels.append(directoryPanel)
         
         var vc: UIViewController? = self
@@ -102,11 +88,8 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
         }
         
         vc?.present(directoryPanel, animated: true) {
-            if directoryPanel.canFloat {
-                self.toggleFloatStatus(for: directoryPanel)
-            }
             if #available(iOS 11.0, *) {
-                browser.panelNavigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+                directoryPanel.navigationBar.tintColor = UIColor(named: "Purple")
             }
         }
     }
@@ -125,71 +108,8 @@ class ContentViewController: UIViewController, PanelManager, Storyboard {
                 return defaultStyle
             }
         }
-        
-        let presented = (presentedViewController as? PanelViewController)?.contentViewController ?? presentedViewController
-        return presented?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
-    }
-        
-    // MARK: - Panel manager
-    
-    var panelContentWrapperView: UIView {
-        return wrapperView
-    }
-    
-    var panelContentView: UIView {
-        return contentView
-    }
-    
-    var panels: [PanelViewController] {
-        var panels = directoryPanels
-        panels.append(contentsOf: terminalPanels)
-        return panels
-    }
-    
-    func maximumNumberOfPanelsPinned(at side: PanelPinSide) -> Int {
-        return 2
-    }
-    
-    var allowPanelPinning: Bool {
-        return true
-    }
-    
-    var allowFloatingPanels: Bool {
-        return true
-    }
-    
-    func didUpdatePinnedPanels() {
-        
-        // Fit terminal
-        
-        for terminalPanel in terminalPanels {
-            if let term = terminalPanel.contentViewController as? TerminalViewController, term.isFirstResponder {
-                _ = term.resignFirstResponder()
-                _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                    _ = term.becomeFirstResponder()
-                })
-            }
-        }
-        
-        // Update `DirectoryCollectionViewController`s layouts.
-        
-        var directoryViewControllers = [DirectoryCollectionViewController]()
-        for panel in panels {
-            if let dirVC = panel.contentViewController as? DirectoryCollectionViewController {
-                directoryViewControllers.append(dirVC)
-            }
-        }
-        for vc in AppDelegate.shared.navigationController.viewControllers {
-            if let dirVC = vc as? DirectoryCollectionViewController {
-                directoryViewControllers.append(dirVC)
-            }
-        }
-        
-        for dirVC in directoryViewControllers {
-            if let layout = dirVC.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
-                layout.itemSize.width = dirVC.view.frame.width
-            }
-        }
+            
+        return presentedViewController?.preferredStatusBarStyle ?? AppDelegate.shared.navigationController.visibleViewController?.preferredStatusBarStyle ?? defaultStyle
     }
     
     override var keyCommands: [UIKeyCommand]? {

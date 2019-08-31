@@ -15,23 +15,13 @@ import Pisth_Terminal
 import Firebase
 import AVFoundation
 import CoreData
-import PanelKit
 import CoreSpotlight
 import InputAssistant
 
 /// Terminal used to do SSH.
-class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, PanelContentDelegate, InputAssistantViewDelegate, InputAssistantViewDataSource {
+class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigationDelegate, WKUIDelegate, UIKeyInput, UITextInput, UITextInputTraits, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate, UIGestureRecognizerDelegate, UIDropInteractionDelegate, InputAssistantViewDelegate, InputAssistantViewDataSource {
     
     private var terminalSize: String?
-    
-    /// Returns `false` if the terminal is presented as a panel on iPad.
-    var isPresentedInFullscreen: Bool {
-        guard let panel = panelNavigationController?.panelViewController else {
-            return true
-        }
-        
-        return (!panel.isPresentedAsPopover && !panel.isFloating)
-    }
     
     /// Object managing the connection.
     var connectionManager = ConnectionManager.shared
@@ -61,8 +51,22 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Send Ctrl key.
     var ctrl = false {
         didSet {
-            inputAssistant.reloadData()
+            DispatchQueue.main.async {
+                self.inputAssistant.reloadData()
+            }
         }
+    }
+    
+    /// Right bar button items.
+    var rightBarButtonItems: [UIBarButtonItem] {
+        if keyboardButton == nil {
+            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
+        }
+        let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
+        for item in items {
+            item?.tintColor = UIApplication.shared.keyWindow?.tintColor
+        }
+        return (items as? [UIBarButtonItem]) ?? []
     }
     
     /// Is terminal read only.
@@ -1345,55 +1349,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     @available(iOS 11.0, *)
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
         view.addSubview(webView)
-    }
-    
-    // MARK: - Panel content delegate
-    
-    var preferredPanelContentSize: CGSize {
-        return CGSize(width: 500, height: 500)
-    }
-    
-    var minimumPanelContentSize: CGSize {
-        return CGSize(width: 240, height: 260)
-    }
-    
-    var maximumPanelContentSize: CGSize {
-        return UIScreen.main.bounds.size
-    }
-    
-    var preferredPanelPinnedHeight: CGFloat {
-        return 500
-    }
-
-    var preferredPanelPinnedWidth: CGFloat {
-        return 500
-    }
-    
-    var rightBarButtonItems: [UIBarButtonItem] {
-        if keyboardButton == nil {
-            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
-        }
-        let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
-        for item in items {
-            item?.tintColor = UIApplication.shared.keyWindow?.tintColor
-        }
-        return (items as? [UIBarButtonItem]) ?? []
-    }
-    
-    var shouldAdjustForKeyboard: Bool {
-        return isFirstResponder
-    }
-    
-    var closeButtonTitle: String {
-        return Bundle(for: UIApplication.self).localizedString(forKey: "Done", value: nil, table: nil)
-    }
-    
-    var modalCloseButtonTitle: String {
-        return Bundle(for: UIApplication.self).localizedString(forKey: "Done", value: nil, table: nil)
-    }
-    
-    func panelDragGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return (ArrowsViewController.current == nil)
     }
     
     // MARK: - Suggestions

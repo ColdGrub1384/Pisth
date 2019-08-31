@@ -119,7 +119,6 @@
 		C9EE202620F1847B00C8E302 /* FileInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */; };
 		C9F2673222257A1E0061F788 /* SSHKeyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F2673122257A1E0061F788 /* SSHKeyTableViewController.swift */; };
 		C9F2673322257C680061F788 /* SSHKey.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9F2673522257C680061F788 /* SSHKey.storyboard */; };
-		C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */; };
 		E6019D50D0EABA90DF0A9142 /* Pods_Pisth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F5574F1BD4D24D32463896F /* Pods_Pisth.framework */; };
 /* End PBXBuildFile section */
 
@@ -342,7 +341,6 @@
 		C9F2673722257C700061F788 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSHKey.strings; sourceTree = "<group>"; };
 		C9F2673922257C740061F788 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/SSHKey.strings; sourceTree = "<group>"; };
 		C9F2673B22257C780061F788 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SSHKey.strings; sourceTree = "<group>"; };
-		C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelContentDelegate.swift; sourceTree = "<group>"; };
 		D751325DE74D3465BA4BA8DD /* Pods-Pisth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.debug.xcconfig"; sourceTree = "<group>"; };
 		D7D1701FA780948313EFDD2E /* Pods-Pisth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pisth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pisth/Pods-Pisth.release.xcconfig"; sourceTree = "<group>"; };
 		E363245A2BEE636A38B47B6A /* Pods-PisthTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PisthTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PisthTests/Pods-PisthTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -474,7 +472,6 @@
 				3A5888B2205C64CB0002F9E1 /* UIView.swift */,
 				3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */,
 				C9A201AF20D45A8C00F606AF /* UIDragItem+sourceViewController.swift */,
-				C9FF16702104F5330071AD22 /* PanelContentDelegate.swift */,
 				C9ED9EBF213C912800C62793 /* UIGestureRecognizer.swift */,
 				C9147BBB216D6DBA00E959DD /* String+cValue.swift */,
 				C911BEE82189F5A200B5FCE5 /* WebViewController+Xib.swift */,
@@ -860,11 +857,11 @@
 				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS12.1/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/NMSSH-iOS12.1/NMSSH.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS12.1/ObjectUserDefaults.framework",
-				"${BUILT_PRODUCTS_DIR}/PanelKit-iOS12.1/PanelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper-iOS12.1/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNew-iOS12.1/WhatsNew.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip-iOS12.1/Zip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb-iOS12.1/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/PanelKit/PanelKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -874,11 +871,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMSSH.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectUserDefaults.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNew.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanelKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -938,7 +935,6 @@
 				"${BUILT_PRODUCTS_DIR}/Highlightr-iOS10.0/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/NMSSH-iOS10.0/NMSSH.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectUserDefaults-iOS10.0/ObjectUserDefaults.framework",
-				"${BUILT_PRODUCTS_DIR}/PanelKit-iOS10.0/PanelKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper-iOS10.0/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/WhatsNew-iOS10.0/WhatsNew.framework",
 				"${BUILT_PRODUCTS_DIR}/Zip-iOS10.0/Zip.framework",
@@ -952,7 +948,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMSSH.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectUserDefaults.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PanelKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WhatsNew.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zip.framework",
@@ -982,7 +977,6 @@
 				3AA117F71FF4281E007BB84A /* fileIcon.swift in Sources */,
 				3A38FC541FF5719200690382 /* TerminalViewController.swift in Sources */,
 				C9A201B020D45A8C00F606AF /* UIDragItem+sourceViewController.swift in Sources */,
-				C9FF16712104F5330071AD22 /* PanelContentDelegate.swift in Sources */,
 				C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,

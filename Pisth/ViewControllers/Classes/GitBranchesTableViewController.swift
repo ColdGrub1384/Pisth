@@ -37,7 +37,7 @@ class GitBranchesTableViewController: UITableViewController {
         navigationController?.pushViewController(terminalVC, animated: true, completion: {
             terminalVC.navigationItem.setRightBarButtonItems(nil, animated: true)
         })
-        for terminal in ContentViewController.shared.terminalPanels {
+        /*for terminal in ContentViewController.shared.terminalPanels {
             ContentViewController.shared.close(terminal)
         }
     }

@@ -12,13 +12,12 @@ import Firebase
 import CoreData
 import Pisth_API
 import StoreKit
-import PanelKit
 import CoreSpotlight
 import UserNotifications
 import MobileCoreServices
 
 /// Collection view controller to manage remote files.
-class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, PanelContentDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /// Directory used to list files.
     var directory: String
@@ -1353,7 +1352,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         
         defer {
             for terminal in ContentViewController.shared.terminalPanels {
-                guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
+                guard let term = terminal.visibleViewController as? TerminalViewController else {
                     continue
                 }
                 term.view.addSubview(term.webView)
@@ -1794,7 +1793,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         }
         
         for terminal in ContentViewController.shared.terminalPanels {
-            guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
+            guard let term = terminal.visibleViewController as? TerminalViewController else {
                 continue
             }
             term.webView?.removeFromSuperview()
@@ -1806,7 +1805,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     @available(iOS 11.0, *)
     func collectionView(_ collectionView: UICollectionView, dragSessionDidEnd session: UIDragSession) {
         for terminal in ContentViewController.shared.terminalPanels {
-            guard let term = terminal.contentViewController as? TerminalViewController, term.externalWindow == nil else {
+            guard let term = terminal.visibleViewController as? TerminalViewController else {
                 continue
             }
             term.view.addSubview(term.webView)
@@ -1847,38 +1846,6 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     
     func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    // MARK: - Panel content delegate
-    
-    let preferredPanelContentSize = CGSize(width: 320, height: 400)
-    
-    var minimumPanelContentSize: CGSize {
-        return CGSize(width: 240, height: 260)
-    }
-    
-    var maximumPanelContentSize: CGSize {
-        return CGSize(width: 500, height: 500)
-    }
-    
-    var preferredPanelPinnedHeight: CGFloat {
-        return 400
-    }
-    
-    var preferredPanelPinnedWidth: CGFloat {
-        return 400
-    }
-    
-    var shouldAdjustForKeyboard: Bool {
-        return false
-    }
-    
-    var closeButtonTitle: String {
-        return "×"
-    }
-    
-    var modalCloseButtonTitle: String {
-        return "×"
     }
     
     // MARK: - Image picker controller delegate
