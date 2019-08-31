@@ -476,6 +476,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         let config = WKWebViewConfiguration()
         config.mediaTypesRequiringUserActionForPlayback = .video
         webView = TerminalWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), configuration: config)
+        webView.terminal = self
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.isOpaque = false
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
@@ -1379,9 +1380,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return ctrlKeysSuggestions
         } else {
             var suggestions = [
-                Suggestion(name: "👆", value: nil, customHandler: {
-                    self.arrows = !self.arrows
-                    self.toggleSendArrows(self.arrows)
+                Suggestion(name: "⇥", value: nil, customHandler: {
+                    self.insertText("\t")
                 }),
                 Suggestion(name: "ctrl", value: nil, customHandler: {
                     self.ctrl = true
