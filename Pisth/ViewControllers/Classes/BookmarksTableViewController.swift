@@ -101,9 +101,16 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
         
         title = Localizable.BookmarksTableViewController.bookmarksTitle
         
+        let gear: UIImage?
+        if #available(iOS 13.0, *) {
+            gear = UIImage(systemName: "gear")
+        } else {
+            gear = #imageLiteral(resourceName: "gear")
+        }
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addConnection))
         let viewDocumentsButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(openDocuments))
-        let settingsButton = UIBarButtonItem(image: #imageLiteral(resourceName: "gear"), style: .plain, target: self, action: #selector(openSettings))
+        let settingsButton = UIBarButtonItem(image: gear, style: .plain, target: self, action: #selector(openSettings))
         
         clearsSelectionOnViewWillAppear = false
         navigationItem.rightBarButtonItem = editButtonItem

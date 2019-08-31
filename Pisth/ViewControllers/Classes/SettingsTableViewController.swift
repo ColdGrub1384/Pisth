@@ -40,21 +40,15 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
         
         /// Set terminal theme.
         static let terminalTheme = IndexPath(row: 0, section: 3)
-        
-        /// Send beta testing request.
-        static let beta = IndexPath(row: 0, section: 4)
-        
+                
         /// Show source code.
-        static let sourceCode = IndexPath(row: 1, section: 4)
-        
-        /// Promote Pisth Viewer.
-        static let pisthViewer = IndexPath(row: 0, section: 5)
+        static let sourceCode = IndexPath(row: 0, section: 4)
         
         /// Show Twitter account.
-        static let licenses = IndexPath(row: 2, section: 5)
+        static let licenses = IndexPath(row: 1, section: 5)
         
         /// Show licenses.
-        static let twitter = IndexPath(row: 1, section: 5)
+        static let twitter = IndexPath(row: 0, section: 5)
     }
     
     /// Close this view controller.
@@ -261,15 +255,10 @@ class SettingsTableViewController: UITableViewController, UICollectionViewDataSo
             let pluginsVC = PluginsLocalDirectoryCollectionViewController()
             navigationController?.pushViewController(pluginsVC, animated: true)
             
-        } else if indexPath == IndexPaths.beta {
-            
-            // Send beta test request
-            UIApplication.shared.open(URL(string:"https://testflight.apple.com/join/wTFS8gRY")!, options: [:], completionHandler: nil)
-            
         } else if indexPath == IndexPaths.sourceCode {
                 
             // View the source code
-            present(ContributeViewController.makeViewController(), animated: true, completion: nil)
+            UIApplication.shared.open(URL(string: "https://github.com/ColdGrub1384/Pisth")!, options: [:], completionHandler: nil)
             tableView.deselectRow(at: indexPath, animated: true)
             
         } else if indexPath == IndexPaths.twitter {

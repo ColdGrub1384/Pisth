@@ -292,8 +292,16 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.reload), for: .valueChanged)
             
             // Bar buttons
+            
+            let image: UIImage?
+            if #available(iOS 13.0, *) {
+                image = UIImage(systemName: "chevron.right")
+            } else {
+                image = #imageLiteral(resourceName: "terminal")
+            }
+            
             let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.uploadFile(_:)))
-            let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(self.openShell(_:)))
+            let terminal = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(self.openShell(_:)))
             let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
             let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(self.openAPTManager))
             var buttons: [UIBarButtonItem] {
@@ -524,9 +532,15 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         // Toolbar
+        let home: UIImage?
+        if #available(iOS 13.0, *) {
+            home = UIImage(systemName: "house.fill")
+        } else {
+            home = #imageLiteral(resourceName: "home")
+        }
         setToolbarItems([
             UIBarButtonItem(title: "/", style: .plain, target: self, action: #selector(goToRoot)),
-            UIBarButtonItem(image: #imageLiteral(resourceName: "home"), style: .plain, target: self, action: #selector(goToHome)),
+            UIBarButtonItem(image: home, style: .plain, target: self, action: #selector(goToHome)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(title: Localizable.SnippetsViewController.snippets, style: .plain, target: self, action: #selector(openSnippets)),
             AppDelegate.shared.showBookmarksBarButtonItem

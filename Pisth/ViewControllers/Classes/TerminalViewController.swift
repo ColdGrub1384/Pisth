@@ -60,7 +60,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     /// Right bar button items.
     var rightBarButtonItems: [UIBarButtonItem] {
         if keyboardButton == nil {
-            keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
+            if #available(iOS 13.0, *) {
+                keyboardButton = UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down"), style: .plain, target: self, action: #selector(toggleKeyboard))
+            } else {
+                keyboardButton = UIBarButtonItem(image: #imageLiteral(resourceName: "hide-keyboard"), style: .plain, target: self, action: #selector(toggleKeyboard))
+            }
         }
         let items = [UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showActions(_:))), keyboardButton]
         for item in items {
@@ -413,7 +417,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         super.resignFirstResponder()
         
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'bar')", completionHandler: nil)
-        keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
+        
+        if #available(iOS 13.0, *) {
+            keyboardButton?.image = UIImage(systemName: "keyboard.chevron.compact.down")?.rotate(byDegrees: 180)
+        } else {
+            keyboardButton?.image = #imageLiteral(resourceName: "show-keyboard")
+        }
         
         return true
     }
@@ -429,7 +438,13 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         TerminalViewController.current_ = self
         webView.evaluateJavaScript("term.setOption('cursorStyle', 'block')", completionHandler: nil)
-        keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
+        
+        if #available(iOS 13.0, *) {
+            keyboardButton?.image = UIImage(systemName: "keyboard.chevron.compact.down")
+        } else {
+            keyboardButton?.image = #imageLiteral(resourceName: "hide-keyboard")
+        }
+        
         return true
     }
     

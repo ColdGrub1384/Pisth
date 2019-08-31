@@ -78,4 +78,29 @@ extension UIImage {
         let fileName = (baseName as NSString).appendingPathExtension(pathExtension) ?? baseName
         return icon(forFileNamed: fileName, preferredSize: preferredSize)
     }
+    
+    /// Taken from https://stackoverflow.com/a/38678800/7515957
+    func rotate(byDegrees degree: Double) -> UIImage {
+        let radians = CGFloat(degree*Double.pi)/180.0 as CGFloat
+        let rotatedSize = self.size
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(rotatedSize, false, scale)
+        
+        guard let bitmap = UIGraphicsGetCurrentContext() else {
+            return self
+        }
+        
+        guard let cgImage = self.cgImage else {
+            return self
+        }
+        
+        bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+        bitmap.rotate(by: radians)
+        bitmap.scaleBy(x: 1.0, y: -1.0)
+        bitmap.draw(cgImage, in: CGRect(x: -self.size.width / 2, y: -self.size.height / 2 , width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        return newImage ?? self
+    }
 }

@@ -20,11 +20,9 @@
 		3A487CEA1FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */; };
 		3A5733C11FFFD9BF004F4973 /* GitRemotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */; };
 		3A5888B3205C64CB0002F9E1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B2205C64CB0002F9E1 /* UIView.swift */; };
-		3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */; };
 		3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */; };
 		3A5A60E71FF1BB9F00E94579 /* DirectoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */; };
 		3A60970C203B1F5600CB0776 /* TerminalWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A60970B203B1F5600CB0776 /* TerminalWebView.swift */; };
-		3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A729779205D5AF000F94BA7 /* BetaViewController.swift */; };
 		3A72977C205D5F4A00F94BA7 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */; };
 		3A7C919B2044972C006E0434 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C919A2044972C006E0434 /* GoogleService-Info.plist */; };
 		3A843EED202A64030096632E /* ReviewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A843EEC202A64030096632E /* ReviewHelper.swift */; };
@@ -191,12 +189,10 @@
 		3A487CE91FF99E6A00552B93 /* BookmarksTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
 		3A5888B2205C64CB0002F9E1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributeViewController.swift; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewController.swift; sourceTree = "<group>"; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A625BEE208011F7008D647C /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A729779205D5AF000F94BA7 /* BetaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaViewController.swift; sourceTree = "<group>"; };
 		3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3A7C919A2044972C006E0434 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A843EEC202A64030096632E /* ReviewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHelper.swift; sourceTree = "<group>"; };
@@ -544,8 +540,6 @@
 				3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */,
 				3A0E2920200A6BD8006FFF81 /* SourceControlTableViewController.swift */,
 				3A897E1D201660E400B5C73C /* ArrowsViewController.swift */,
-				3A5888B6205C73BF0002F9E1 /* ContributeViewController.swift */,
-				3A729779205D5AF000F94BA7 /* BetaViewController.swift */,
 				3A0964F620CC3BA6006D5B4C /* ContentViewController.swift */,
 				C960D04820E2FD1B005CCE3A /* PisthConnectionInformationViewTableViewController.swift */,
 				C9EE202520F1847B00C8E302 /* FileInfoViewController.swift */,
@@ -977,11 +971,9 @@
 				C9147BBC216D6DBA00E959DD /* String+cValue.swift in Sources */,
 				3AA3FDBD2027549900C07C7A /* FileCollectionViewCell.swift in Sources */,
 				3AC623AA1FF8175700B5D22A /* CommandsTableViewController.swift in Sources */,
-				3A5888B7205C73BF0002F9E1 /* ContributeViewController.swift in Sources */,
 				3A8A32AC2046FD0C00A38E89 /* PluginsLocalDirectoryTableViewController.swift in Sources */,
 				C9F2673222257A1E0061F788 /* SSHKeyTableViewController.swift in Sources */,
 				3A0964F720CC3BA7006D5B4C /* ContentViewController.swift in Sources */,
-				3A72977A205D5AF000F94BA7 /* BetaViewController.swift in Sources */,
 				C9BE90532118FB56000A61C8 /* BlackNavigationController.swift in Sources */,
 				3A5A60DE1FF1B4A200E94579 /* ConnectionManager.swift in Sources */,
 				3AFDD91B1FF14C1F0061677B /* BookmarksTableViewController.swift in Sources */,
