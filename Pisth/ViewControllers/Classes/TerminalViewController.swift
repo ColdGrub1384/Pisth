@@ -1327,7 +1327,8 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         var customHandler: (() -> Void)?
     }
     
-    private var arrows = false
+    /// A boolean indicating whether swiping will send arrow keys.
+    var arrows = false
     
     private var files_: [String] {
         

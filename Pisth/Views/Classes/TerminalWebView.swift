@@ -103,6 +103,13 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate, UIContextMenuInte
             return vc
         }) { (_) -> UIMenu? in
             
+            let arrowsState: UIMenuElement.State
+            if self.terminal?.arrows == true {
+                arrowsState = .on
+            } else {
+                arrowsState = .off
+            }
+            
             let items = [
                 UIAction(title: Localizable.TerminalViewController.paste, image: UIImage(systemName: "doc.on.clipboard"), identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off, handler: { (_) in
                     self.terminal?.pasteText()
@@ -110,6 +117,11 @@ class TerminalWebView: WKWebView, UIGestureRecognizerDelegate, UIContextMenuInte
                 
                 UIAction(title: Localizable.TerminalViewController.selectionMode, image: UIImage(systemName: "selection.pin.in.out"), identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off, handler: { (_) in
                     self.terminal?.selectionMode()
+                }),
+                
+                UIAction(title: Localizable.ArrowsViewControllers.helpTextArrows.replacingOccurrences(of: "\n", with: " "), image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: arrowsState, handler: { (_) in
+                    self.terminal?.arrows = !self.terminal!.arrows
+                    self.terminal?.toggleSendArrows(self.terminal!.arrows)
                 }),
                 
                 UIAction(title: Localizable.UIMenuItem.toggleTopBar, image: UIImage(systemName: "arrow.up.left.and.arrow.down.right"), identifier: nil, discoverabilityTitle: nil, attributes: [], state: .off, handler: { (_) in
