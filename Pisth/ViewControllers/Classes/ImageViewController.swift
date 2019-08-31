@@ -41,6 +41,10 @@ class ImageViewController: UIViewController, UIScrollViewDelegate, Xib {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        }
+        
         if let image = image {
             imageView.image = image
         }

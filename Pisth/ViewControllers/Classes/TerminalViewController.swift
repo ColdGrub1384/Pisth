@@ -148,7 +148,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             print(cols)
             print(rows)
             self.terminalSize = "\(cols),\(rows)"
-            connectionManager.session?.channel.requestSizeWidth(cols, height: rows)
+            connectionManager.queue.async {
+                self.connectionManager.session?.channel.requestSizeWidth(cols, height: rows)
+            }
         }
         
         // Get and set columns
@@ -351,11 +353,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     /// Close this View controller.
     @objc func close() {
-        if panelNavigationController != nil {
-            panelNavigationController?.dismiss(animated: true, completion: nil)
-        } else if navigationController != nil {
-            navigationController?.popViewController(animated: true)
-        }
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     /// Show the menu.
@@ -444,8 +442,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         // Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(screenDidConnect), name: UIScreen.didConnectNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(screenDidDisconnect), name: UIScreen.didDisconnectNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .init("TerminalThemeDidChange"), object: nil)
         
         // Setup connectivity
@@ -503,8 +499,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationItem.rightBarButtonItems = rightBarButtonItems
         
-        (panelNavigationController?.navigationController ?? navigationController)?.view.ignoresInvertColors = true
-        
         keyboardAppearance = theme.keyboardAppearance
         selectionTextView.keyboardAppearance = keyboardAppearance
         
@@ -519,9 +513,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         
         navigationController_ = navigationController
         
-        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+        navigationController?.navigationBar.barStyle = theme.toolbarStyle
         webView.backgroundColor = theme.backgroundColor
-        (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
+        navigationController?.view.backgroundColor = theme.backgroundColor
         view.backgroundColor = theme.backgroundColor
         
         if !viewer {
@@ -531,24 +525,23 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         if console.isEmpty {
             
             if !pureMode {
-                connectionManager.session?.channel.closeShell()
-                try? connectionManager.session?.channel.startShell()
+                connectionManager.queue.async {
+                    self.connectionManager.session?.channel.closeShell()
+                    try? self.connectionManager.session?.channel.startShell()
+                }
             }
         }
         
-        if pureMode && panelNavigationController == nil {
+        if pureMode && presentingViewController == nil {
             navigationItem.leftBarButtonItem = AppDelegate.shared.showBookmarksBarButtonItem
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
         }
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .never
         }
         
         addObserver(self, forKeyPath: #keyPath(view.frame), options: .new, context: nil)
-        
-        // External display
-        if UIScreen.screens.count > 1, let externalDisplay = UIScreen.screens.last {
-            setupExternalDisplay(externalDisplay)
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -591,14 +584,12 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        if isPresentedInFullscreen, isFirstResponder {
+        if isFirstResponder {
             _ = resignFirstResponder()
             _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
                 self.reload()
                 _ = self.becomeFirstResponder()
             })
-        } else {
-            fit()
         }
     }
     
@@ -629,10 +620,6 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             if let i = ignoredNotifications.index(of: notification.name) {
                 ignoredNotifications.remove(at: i)
             }
-            return
-        }
-        
-        guard isPresentedInFullscreen, UIScreen.screens.count == 1 else {
             return
         }
         
@@ -794,45 +781,51 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
     
     func insertText(_ text: String) {
         
-        do {
-            
-            if !ctrl {
-                if viewer {
-                    if let data = text.data(using: .utf8) {
-                        try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
+        connectionManager.queue.async {
+            do {
+                
+                if !self.ctrl {
+                    if self.viewer {
+                        if let data = text.data(using: .utf8) {
+                            try self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+                        }
+                    } else {
+                        try self.connectionManager.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
+                        DispatchQueue.main.async {
+                            if text == "\n" {
+                                self.files = self.files_
+                                self.inputAssistant.reloadData()
+                            }
+                        }
                     }
                 } else {
-                    try connectionManager.session?.channel.write(text.replacingOccurrences(of: "\n", with: Keys.unicode(dec: 13)))
-                    if text == "\n" {
-                        files = files_
-                        inputAssistant.reloadData()
+                    if self.viewer {
+                        if let data = Keys.ctrlKey(from: text).data(using: .utf8) {
+                            try self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+                        }
+                    } else {
+                        try self.connectionManager.session?.channel.write(Keys.ctrlKey(from: text))
                     }
-                }
-            } else {
-                if viewer {
-                    if let data = Keys.ctrlKey(from: text).data(using: .utf8) {
-                        try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
-                    }
-                } else {
-                    try connectionManager.session?.channel.write(Keys.ctrlKey(from: text))
+                    
+                    self.ctrl = false
                 }
                 
-                ctrl = false
-            }
-            
-        } catch {}
+            } catch {}
+        }
     }
     
     func deleteBackward() {
-        do {
-            if viewer {
-                if let data = Keys.delete.data(using: .utf8) {
-                    try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .unreliable)
+        connectionManager.queue.async {
+            do {
+                if self.viewer {
+                    if let data = Keys.delete.data(using: .utf8) {
+                        try self.mcSession.send(data, toPeers: self.mcSession.connectedPeers, with: .unreliable)
+                    }
+                } else {
+                    try self.connectionManager.session?.channel.write(Keys.delete)
                 }
-            } else {
-                try connectionManager.session?.channel.write(Keys.delete)
-            }
-        } catch {}
+            } catch {}
+        }
     }
     
     var hasText: Bool {
@@ -971,9 +964,9 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         webView.evaluateJavaScript("term.setOption('fontSize', \(UserKeys.terminalTextSize.integerValue))", completionHandler: nil)
         selectionTextView.font = selectionTextView.font?.withSize(CGFloat(UserKeys.terminalTextSize.integerValue))
         
-        (panelNavigationController?.navigationController ?? navigationController)?.navigationBar.barStyle = theme.toolbarStyle
+        navigationController?.navigationBar.barStyle = theme.toolbarStyle
         webView.evaluateJavaScript("term.setOption('theme', \(theme.javascriptValue))", completionHandler: nil)
-        (panelNavigationController?.navigationController ?? navigationController)?.view.backgroundColor = theme.backgroundColor
+        navigationController?.view.backgroundColor = theme.backgroundColor
         selectionTextView.backgroundColor = theme.backgroundColor
         selectionTextView.textColor = theme.foregroundColor
         webView.backgroundColor = theme.backgroundColor
@@ -1026,7 +1019,7 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                 return
             }
             
-            DispatchQueue.main.async {
+            connectionManager.queue.async {
                 do {
                     
                     if !self.pureMode {
@@ -1080,43 +1073,45 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         session.channel.delegate = self
                         try session.channel.startShell()
                         
-                        // Siri Shortcuts
-                        
-                        guard let connection = self.connectionManager.connection else {
-                            return
-                        }
-                        
-                        let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openTerminal")
-                        if #available(iOS 12.0, *) {
-                            activity.isEligibleForPrediction = true
-                            //                    activity.suggestedInvocationPhrase = connection.name
-                        }
-                        activity.isEligibleForSearch = true
-                        activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
-                        activity.title = connection.name
-                        var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
-                        
-                        if let pubKey = connection.publicKey {
-                            userInfo["publicKey"] = pubKey
-                        }
-                        
-                        if let privKey = connection.privateKey {
-                            userInfo["privateKey"] = privKey
-                        }
-                        
-                        activity.userInfo = userInfo
-                        
-                        let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
-                        if let os = connection.os?.lowercased() {
-                            if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                                attributes.thumbnailData = logo.pngData()
+                        DispatchQueue.main.async {
+                            // Siri Shortcuts
+                            
+                            guard let connection = self.connectionManager.connection else {
+                                return
                             }
+                            
+                            let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openTerminal")
+                            if #available(iOS 12.0, *) {
+                                activity.isEligibleForPrediction = true
+                                //                    activity.suggestedInvocationPhrase = connection.name
+                            }
+                            activity.isEligibleForSearch = true
+                            activity.keywords = [connection.name, connection.username, connection.host, connection.path,"ssh", "terminal"]
+                            activity.title = connection.name
+                            var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":connection.path, "port":connection.port] as [String : Any]
+                            
+                            if let pubKey = connection.publicKey {
+                                userInfo["publicKey"] = pubKey
+                            }
+                            
+                            if let privKey = connection.privateKey {
+                                userInfo["privateKey"] = privKey
+                            }
+                            
+                            activity.userInfo = userInfo
+                            
+                            let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+                            if let os = connection.os?.lowercased() {
+                                if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                                    attributes.thumbnailData = logo.pngData()
+                                }
+                            }
+                            attributes.addedDate = Date()
+                            attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
+                            activity.contentAttributeSet = attributes
+                            
+                            self.userActivity = activity
                         }
-                        attributes.addedDate = Date()
-                        attributes.contentDescription = "ssh://\(connection.username)@\(connection.host):\(connection.port)"
-                        activity.contentAttributeSet = attributes
-                        
-                        self.userActivity = activity
                     }
                     
                     if let pwd = self.pwd {
@@ -1155,62 +1150,11 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
         } else if message.hasPrefix("changeTitle") { // Change title
             title = message.replacingFirstOccurrence(of: "changeTitle", with: "")
         } else if message.hasPrefix("runCommand") { // Run command
-            try? connectionManager.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
-        }
-        completionHandler()
-    }
-    
-    // MARK: - External display
-    
-    /// Called when an external display is connected.
-    @objc func screenDidConnect(_ notification: Notification) {
-        if let externalDisplay = UIScreen.screens.last {
-            setupExternalDisplay(externalDisplay)
-        }
-    }
-    
-    /// Called when an external display is disconnected.
-    @objc func screenDidDisconnect(_ notification: Notification) {
-        setupMainDisplay()
-    }
-    
-    /// The window for the external window.
-    var externalWindow: UIWindow?
-    
-    /// Setups the main display. Called when an external display is not available anymore.
-    func setupMainDisplay() {
-        webView.removeFromSuperview()
-        externalWindow?.isHidden = true
-        externalWindow = nil
-        
-        view.addSubview(webView)
-        resizeView(withSize: view.frame.size)
-        webView.reload()
-        _ = becomeFirstResponder()
-    }
-    
-    /// Setups the given display. Called when an external display is available.
-    ///
-    /// - Parameters:
-    ///     - display: The external display to setup.
-    func setupExternalDisplay(_ display: UIScreen) {
-        
-        for controller in ContentViewController.shared.terminalPanels {
-            if let terminal = controller.contentViewController as? TerminalViewController, terminal !== self {
-                terminal.setupMainDisplay()
+            connectionManager.queue.async {
+                try? self.connectionManager.session?.channel.write(message.replacingFirstOccurrence(of: "runCommand", with: ""))
             }
         }
-        
-        externalWindow = UIWindow(frame: display.bounds)
-        
-        externalWindow?.screen = display
-        externalWindow?.isHidden = false
-        
-        webView.removeFromSuperview()
-        externalWindow?.addSubview(webView)
-        
-        resizeView(withSize: display.bounds.size)
-        webView.reload()
+        completionHandler()
     }
     
     // MARK: - Multipeer connectivity
@@ -1318,13 +1262,17 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
                         return
                     }
                     
-                    try? connectionManager.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
+                    connectionManager.queue.async {
+                        try? self.connectionManager.session?.channel.write("\(dirVC.directory.nsString.appendingPathComponent(file.filename)) ")
+                    }
                 }
             }
         } else if session.canLoadObjects(ofClass: String.self) {
             _ = session.loadObjects(ofClass: String.self) { (strings) in
                 for string in strings {
-                    try? self.connectionManager.session?.channel.write(string+" ")
+                    self.connectionManager.queue.async {
+                        try? self.connectionManager.session?.channel.write(string+" ")
+                    }
                 }
             }
         }
@@ -1368,27 +1316,35 @@ class TerminalViewController: UIViewController, NMSSHChannelDelegate, WKNavigati
             return []
         }
         
-        var error: NSError?
-        var homeDir: String? = fileSession.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
-        
-        if error != nil {
-            homeDir = nil
-        }
-        
-        let dir =  pwd ?? homeDir
-        
-        guard !viewer, let directory = dir, let files = connectionManager.files(inDirectory: directory) else {
-            return []
-        }
-        
         var filenames = [String]()
-        
-        for file in files {
-            if let dir = dir {
-                filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+        let semaphore = DispatchSemaphore(value: 0)
+        connectionManager.queue.async {
+            var error: NSError?
+            var homeDir: String? = fileSession.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
+            
+            if error != nil {
+                homeDir = nil
             }
+            
+            let dir =  self.pwd ?? homeDir
+            
+            guard !self.viewer, let directory = dir, let files = self.connectionManager.files(inDirectory: directory) else {
+                filenames = []
+                return
+            }
+            
+            var filenames = [String]()
+            
+            for file in files {
+                if let dir = dir {
+                    filenames.append(URL(fileURLWithPath: dir).appendingPathComponent(file.filename).path)
+                }
+            }
+            
+            semaphore.signal()
         }
         
+        semaphore.wait()
         return filenames
     }
     

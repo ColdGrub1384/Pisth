@@ -39,7 +39,7 @@ class GitBranchesTableViewController: UITableViewController {
         })
         /*for terminal in ContentViewController.shared.terminalPanels {
             ContentViewController.shared.close(terminal)
-        }
+        }*/
     }
     
     /// Dismiss `self` or `navigationController`.`
@@ -58,20 +58,24 @@ class GitBranchesTableViewController: UITableViewController {
 
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [AnalyticsParameterItemID : "id-SourceControl", AnalyticsParameterItemName : "Source Control"])
         
-        var error: NSError?
-        
-        let result = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(repoPath!)' branch", error: &error).replacingOccurrences(of: " ", with: "")
-        
-        if error == nil {
-            for branch in result.components(separatedBy: "\n") {
-                if branch.hasPrefix("*") {
-                    current = branch.replacingOccurrences(of: "*", with: "")
-                }
-                
-                if branch != "" {
-                    self.branches.append(branch.replacingOccurrences(of: "*", with: ""))
+        ConnectionManager.shared.queue.async {
+            var error: NSError?
+            
+            let result = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' branch", error: &error).replacingOccurrences(of: " ", with: "")
+            
+            if error == nil {
+                for branch in result.components(separatedBy: "\n") {
+                    if branch.hasPrefix("*") {
+                        self.current = branch.replacingOccurrences(of: "*", with: "")
+                    }
+                    
+                    if branch != "" {
+                        self.branches.append(branch.replacingOccurrences(of: "*", with: ""))
+                    }
                 }
             }
+            
+            self.tableView.reloadData()
         }
         
         tableView.tableFooterView = UIView()

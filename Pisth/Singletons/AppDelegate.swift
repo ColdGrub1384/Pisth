@@ -146,7 +146,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
             i += 1
         }
         
-        UIApplication.shared.shortcutItems = shortcuts
+        DispatchQueue.main.async {
+            UIApplication.shared.shortcutItems = shortcuts
+        }
     }
     
     // MARK: - Application delegate
@@ -264,7 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
         }
         
         // Setup 3D touch shortcuts
-        AppDelegate.shared.update3DTouchShortucts()
+        update3DTouchShortucts()
         
         // Blink cursor by default
         if UserKeys.blink.value == nil {
@@ -402,24 +404,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                         ConnectionManager.shared.session = nil
                         ConnectionManager.shared.filesSession = nil
                         ConnectionManager.shared.result = .notConnected
-                        
-                        ContentViewController.shared.closeAllPinnedPanels()
-                        ContentViewController.shared.closeAllFloatingPanels()
-                        
+                                                
                         if !connection.useSFTP { // SSH
                             
-                            ConnectionManager.shared.connection = connection
-                            ConnectionManager.shared.connect()
-                            
-                            let terminalVC = TerminalViewController()
-                            terminalVC.pureMode = true
-                            
-                            activityVC.dismiss(animated: true, completion: {
+                            ConnectionManager.shared.queue.async {
+                                ConnectionManager.shared.connection = connection
+                                ConnectionManager.shared.connect()
                                 
-                                self.splitViewController.setDisplayMode()
-                                
-                                self.navigationController.setViewControllers([terminalVC], animated: true)
-                            })
+                                DispatchQueue.main.async {
+                                    let terminalVC = TerminalViewController()
+                                    terminalVC.pureMode = true
+                                    
+                                    activityVC.dismiss(animated: true, completion: {
+                                        
+                                        self.splitViewController.setDisplayMode()
+                                        
+                                        self.navigationController.setViewControllers([terminalVC], animated: true)
+                                        
+                                        if AppDelegate.shared.splitViewController.displayMode == .primaryOverlay && !AppDelegate.shared.splitViewController.isCollapsed {
+                                            let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                            _ = button.target?.perform(button.action)
+                                        }
+                                    })
+                                }
+                            }
                         } else {
                             
                             let dirVC = DirectoryCollectionViewController(connection: connection)
@@ -429,6 +437,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DirectoryCollectionViewCo
                                 self.splitViewController.setDisplayMode()
                                 
                                 self.navigationController.setViewControllers([dirVC], animated: true)
+                                
+                                if AppDelegate.shared.splitViewController.displayMode == .primaryOverlay && !AppDelegate.shared.splitViewController.isCollapsed {
+                                    let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    _ = button.target?.perform(button.action)
+                                }
                             })
                         }
                     })

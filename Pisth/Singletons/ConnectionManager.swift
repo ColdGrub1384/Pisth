@@ -31,6 +31,40 @@ class ConnectionManager {
         self.connection = connection
     }
     
+    /// The queue running the SSH client. Run SSH actions on this queue.
+    let queue = DispatchQueue.global(qos: .userInteractive)
+    
+    private var waitingList = [(() -> Void)]()
+    
+    private var runningTasks = 0 {
+        didSet {
+            if runningTasks < oldValue, let _ = waitingList.first {
+                runningTasks += 1
+                queue.async {
+                    self.waitingList.remove(at: 0)()
+                    self.runningTasks -= 1
+                }
+            }
+        }
+    }
+    
+    /// Runs the given code on `queue`. Waits for other taks before
+    func runTask(_ code: @escaping (() -> Void)) {
+        
+        guard runningTasks == 0 else {
+            waitingList.append(code)
+            return
+        }
+        
+        runningTasks += 1
+        
+        queue.async {
+            code()
+            
+            self.runningTasks -= 1
+        }
+    }
+    
     /// Background task to keep the session active.
     var backgroundTask: UIBackgroundTaskIdentifier?
     

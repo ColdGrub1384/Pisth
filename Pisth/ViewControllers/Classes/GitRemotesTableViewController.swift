@@ -21,7 +21,7 @@ class GitRemotesTableViewController: GitBranchesTableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        DispatchQueue.global(qos: .background).async {
+        ConnectionManager.shared.queue.async {
             _ = ConnectionManager.shared.filesSession!.channel.execute("git -C '\(self.repoPath!)' remote update --prune", error: nil)
             
             var error: NSError?

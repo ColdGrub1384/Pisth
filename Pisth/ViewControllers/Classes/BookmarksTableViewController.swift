@@ -375,26 +375,40 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                                 delegate.bookmarksTableViewController(self, didOpenConnection: connection, inDirectoryCollectionViewController: dirVC)
                             } else {
                                 AppDelegate.shared.navigationController.setViewControllers([dirVC], animated: true)
+                                if AppDelegate.shared.splitViewController.displayMode == .primaryOverlay && !AppDelegate.shared.splitViewController.isCollapsed {
+                                    let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                    _ = button.target?.perform(button.action)
+                                }
                             }
                         })
                     } else {
-                        ConnectionManager.shared.connection = connection
-                        ConnectionManager.shared.connect()
-                        
-                        let termVC = TerminalViewController()
-                        termVC.pureMode = true
-                        
-                        activityVC.dismiss(animated: true, completion: {
+                        ConnectionManager.shared.queue.async {
+                            ConnectionManager.shared.connection = connection
+                            ConnectionManager.shared.connect()
                             
-                            AppDelegate.shared.splitViewController.setDisplayMode()
-                            
-                            if let delegate = self.delegate {
-                                delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
-                            } else {
-                                AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                            DispatchQueue.main.async {
+                                ConnectionManager.shared.connection = connection
+                                ConnectionManager.shared.connect()
                                 
+                                let termVC = TerminalViewController()
+                                termVC.pureMode = true
+                                
+                                activityVC.dismiss(animated: true, completion: {
+                                    
+                                    AppDelegate.shared.splitViewController.setDisplayMode()
+                                    
+                                    if let delegate = self.delegate {
+                                        delegate.bookmarksTableViewController(self, didOpenConnection: connection, inTerminalViewController: termVC)
+                                    } else {
+                                        AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                                        if AppDelegate.shared.splitViewController.displayMode == .primaryOverlay && !AppDelegate.shared.splitViewController.isCollapsed {
+                                            let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+                                            _ = button.target?.perform(button.action)
+                                        }
+                                    }
+                                })
                             }
-                        })
+                        }
                     }
                 }
             }
@@ -502,6 +516,11 @@ class BookmarksTableViewController: UITableViewController, UISearchBarDelegate, 
                 
                 AppDelegate.shared.splitViewController.setDisplayMode()
                 AppDelegate.shared.navigationController.setViewControllers([termVC], animated: true)
+                
+                if AppDelegate.shared.splitViewController.displayMode == .primaryOverlay && !AppDelegate.shared.splitViewController.isCollapsed {
+                    let button = AppDelegate.shared.splitViewController.displayModeButtonItem
+                    _ = button.target?.perform(button.action)
+                }
                 
                 _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { (_) in
                     self.mcNearbyServiceBrowser.invitePeer(peer, to: termVC.mcSession, withContext: nil, timeout: 10)

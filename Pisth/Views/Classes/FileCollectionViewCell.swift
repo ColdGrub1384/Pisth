@@ -156,44 +156,56 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                             }
                         }
                         
-                        guard let result = remove(directoryRecursively: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
+                        ConnectionManager.shared.queue.async {
+                            guard let result = remove(directoryRecursively: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
+                                
+                                DispatchQueue.main.async {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        directoryCollectionViewController.showError()
+                                    })
+                                }
+                                
+                                return
+                            }
                             
-                            activityVC.dismiss(animated: true, completion: {
-                                directoryCollectionViewController.showError()
-                            })
-                            
-                            return
-                        }
-                        
-                        if !result {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                                directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
-                            })
-                        } else {
-                            activityVC.dismiss(animated: true, completion: {
-                                directoryCollectionViewController.reload()
-                            })
+                            DispatchQueue.main.async {
+                                if !result {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                                        directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
+                                    })
+                                } else {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        directoryCollectionViewController.reload()
+                                    })
+                                }
+                            }
                         }
                     } else { // Remove file
-                        guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
-                            activityVC.dismiss(animated: true, completion: {
-                                directoryCollectionViewController.showError()
-                            })
-                            return
-                        }
-                        
-                        if !result {
-                            activityVC.dismiss(animated: true, completion: {
-                                let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                                directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
-                            })
-                        } else {
-                            activityVC.dismiss(animated: true, completion: {
-                                directoryCollectionViewController.reload()
-                            })
+                        ConnectionManager.shared.queue.async {
+                            guard let result = ConnectionManager.shared.filesSession?.sftp.removeFile(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRemove.filename)) else {
+                                DispatchQueue.main.async {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        directoryCollectionViewController.showError()
+                                    })
+                                }
+                                return
+                            }
+                            
+                            DispatchQueue.main.async {
+                                if !result {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRemovingFile, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
+                                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                                        directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
+                                    })
+                                } else {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        directoryCollectionViewController.reload()
+                                    })
+                                }
+                            }
                         }
                     }
                 })
@@ -243,13 +255,19 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                 guard let newFileName = renameAlert.textFields?[0].text else { return }
                 guard let session = ConnectionManager.shared.filesSession else { return }
                 
-                if session.sftp.moveItem(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(newFileName)) {
-                   
-                    directoryCollectionViewController.reload()
-                } else {
-                    let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRenaming, message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: nil))
-                    directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
+                ConnectionManager.shared.queue.async {
+                    if session.sftp.moveItem(atPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(fileToRename.filename), toPath: directoryCollectionViewController.directory.nsString.appendingPathComponent(newFileName)) {
+                       
+                        DispatchQueue.main.async {
+                            directoryCollectionViewController.reload()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            let errorAlert = UIAlertController(title: Localizable.FileCollectionViewCell.errorRenaming, message: nil, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: nil))
+                            directoryCollectionViewController.present(errorAlert, animated: true, completion: nil)
+                        }
+                    }
                 }
             }))
             

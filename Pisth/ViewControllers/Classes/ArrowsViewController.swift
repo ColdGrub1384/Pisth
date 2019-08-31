@@ -57,17 +57,19 @@ class ArrowsViewController: UIViewController, UIPopoverPresentationControllerDel
     ///     - direction: Direction where arrow will point.
     func sendArrow(withDirection direction: UISwipeGestureRecognizer.Direction) {
         
-        switch direction {
-        case .up:
-            try? ConnectionManager.shared.session?.channel.write(Keys.arrowUp)
-        case .down:
-            try? ConnectionManager.shared.session?.channel.write(Keys.arrowDown)
-        case .left:
-            try? ConnectionManager.shared.session?.channel.write(Keys.arrowLeft)
-        case .right:
-            try? ConnectionManager.shared.session?.channel.write(Keys.arrowRight)
-        default:
-            arrowLabel.isHidden = true
+        ConnectionManager.shared.queue.async {
+            switch direction {
+            case .up:
+                try? ConnectionManager.shared.session?.channel.write(Keys.arrowUp)
+            case .down:
+                try? ConnectionManager.shared.session?.channel.write(Keys.arrowDown)
+            case .left:
+                try? ConnectionManager.shared.session?.channel.write(Keys.arrowLeft)
+            case .right:
+                try? ConnectionManager.shared.session?.channel.write(Keys.arrowRight)
+            default:
+                self.arrowLabel.isHidden = true
+            }
         }
     }
     

@@ -29,7 +29,13 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     var connection: RemoteConnection
     
     /// Fetched files.
-    var files: [NMSFTPFile]?
+    var files: [NMSFTPFile]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.showErrorIfThereIsOne()
+            }
+        }
+    }
     
     /// All files including hidden files.
     var allFiles: [NMSFTPFile]?
@@ -166,7 +172,238 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         collectionView?.reloadData()
         collectionView?.setCollectionViewLayout(layout, animated: false)
     }
+    
+    /// A boolean indicating whether the initializer finished running.
+    var isLoaded = false {
+        didSet {
+            DispatchQueue.main.async {
+                if self.isLoaded && self.view.window != nil {
+                    ConnectionManager.shared.queue.async {
+                        self.fetchFiles()
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Fetches files.
+    func fetchFiles() {
+        var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+        self.allFiles = files
+        if !UserKeys.shouldHiddenFilesBeShown.boolValue {
+            for file in files ?? [] {
+                if file.filename.hasPrefix(".") {
+                    guard let i = files?.index(of: file) else { break }
+                    files?.remove(at: i)
+                }
+            }
+        }
         
+        if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
+            var files_ = [NMSFTPFile]()
+            var directories = [NMSFTPFile]()
+            
+            for file in files ?? [] {
+                if file.isDirectory {
+                    directories.append(file)
+                } else {
+                    files_.append(file)
+                }
+            }
+            
+            files = directories+files_
+        }
+        
+        self.files = files
+        
+        DispatchQueue.main.async {
+            self.collectionView?.refreshControl?.endRefreshing()
+            
+            guard self.files != nil else {
+                self.showErrorIfThereIsOne()
+                return
+            }
+            
+            if self.directory.removingUnnecessariesSlashes != "/" {
+                
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                var _parent: NMSFTPFile?
+                ConnectionManager.shared.queue.async {
+                    _parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent)
+                    semaphore.signal()
+                }
+                
+                semaphore.wait()
+                
+                // Append parent directory
+                guard let parent = _parent else {
+                    return
+                }
+                
+                self.files!.append(parent)
+            }
+            
+            let titleComponents = self.directory.components(separatedBy: "/")
+            self.title = titleComponents.last
+            if self.directory.hasSuffix("/") {
+                self.title = titleComponents[titleComponents.count-2]
+            }
+            
+            if #available(iOS 11.0, *) {
+                self.navigationItem.largeTitleDisplayMode = .never
+            }
+            
+            // TableView cells
+            self.collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
+            self.collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
+            self.collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+            self.collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
+            self.collectionView?.refreshControl = UIRefreshControl()
+            self.collectionView?.backgroundView = nil
+            self.clearsSelectionOnViewWillAppear = false
+            if #available(iOS 11.0, *) {
+                self.collectionView?.dropDelegate = self
+                self.collectionView?.dragDelegate = self
+                self.collectionView?.dragInteractionEnabled = true
+            }
+            
+            // Header
+            let header = UIView.browserHeader
+            self.headerView = header
+            header.createNewFolder = { _ in // Create folder
+                let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
+                chooseName.addTextField(configurationHandler: { (textField) in
+                    textField.placeholder = Localizable.Browsers.folderName
+                })
+                chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
+                    ConnectionManager.shared.queue.async {
+                        guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
+                        
+                        DispatchQueue.main.async {
+                            if !result {
+                                let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
+                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                            }
+                            
+                            self.reload()
+                        }
+                    }
+                }))
+                
+                self.present(chooseName, animated: true, completion: nil)
+            }
+            header.switchLayout = { _ in // Switch layout
+                self.loadLayout()
+            }
+            
+            self.loadLayout()
+            
+            // Initialize the refresh control.
+            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.reload), for: .valueChanged)
+            
+            // Bar buttons
+            let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.uploadFile(_:)))
+            let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(self.openShell(_:)))
+            let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
+            let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(self.openAPTManager))
+            var buttons: [UIBarButtonItem] {
+                guard files != nil else { return [uploadFile, terminal] }
+                guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
+                
+                // Check for GIT
+                var isGitRepo = false
+                for file in self.allFiles ?? [] {
+                    if file.filename == ".git" || file.filename == ".git/" {
+                        isGitRepo = true
+                    }
+                }
+                
+                var items = [UIBarButtonItem]()
+                let semaphore = DispatchSemaphore(value: 0)
+                ConnectionManager.shared.queue.async {
+                    var error: NSError?
+                    
+                    // Check for Aptitude
+                    let resultAPT = session.channel.execute("command -v apt-get", error: &error).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n")
+                    guard error == nil else {
+                        if isGitRepo {
+                            items = [uploadFile, git, terminal]
+                            semaphore.signal()
+                            return
+                        } else {
+                            items = [uploadFile, terminal]
+                            semaphore.signal()
+                            return
+                        }
+                    }
+                    
+                    if isGitRepo {
+                        if resultAPT.isEmpty {
+                            items = [uploadFile, terminal]
+                        } else {
+                            items = [uploadFile, apt, git, terminal]
+                        }
+                    } else {
+                        if resultAPT.isEmpty {
+                            items = [uploadFile, terminal]
+                        } else {
+                            items = [uploadFile, apt, terminal]
+                        }
+                    }
+                    
+                    semaphore.signal()
+                }
+                semaphore.wait()
+                return items
+            }
+            
+            self.navigationItem.setRightBarButtonItems(buttons, animated: true)
+            
+            // Siri Shortcuts
+            
+            let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openDirectory")
+            if #available(iOS 12.0, *) {
+                activity.isEligibleForPrediction = true
+                //                    activity.suggestedInvocationPhrase = connection.name
+            }
+            activity.isEligibleForSearch = true
+            activity.keywords = [self.connection.name, self.connection.username, self.connection.host, self.directory.nsString.lastPathComponent, "ssh", "sftp"]
+            if self.directory == self.connection.path.replacingOccurrences(of: "~", with: self.homeDirectory) {
+                activity.title = self.connection.name
+            } else {
+                activity.title = self.directory.nsString.lastPathComponent
+            }
+            var userInfo = ["username":self.connection.username, "password":self.connection.password, "host":self.connection.host, "directory":self.directory, "port":self.connection.port] as [String : Any]
+            
+            if let pubKey = self.connection.publicKey {
+                userInfo["publicKey"] = pubKey
+            }
+            
+            if let privKey = self.connection.privateKey {
+                userInfo["privateKey"] = privKey
+            }
+            
+            activity.userInfo = userInfo
+            
+            let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
+            if let os = self.connection.os?.lowercased(), self.directory == self.connection.path.replacingOccurrences(of: "~", with: self.homeDirectory) {
+                if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
+                    attributes.thumbnailData = logo.pngData()
+                }
+            } else {
+                attributes.thumbnailData = #imageLiteral(resourceName: "File icons/folder").pngData()
+            }
+            attributes.addedDate = Date()
+            attributes.contentDescription = "sftp://\(self.connection.username)@\(self.connection.host):\(self.connection.port)\(self.directory)"
+            activity.contentAttributeSet = attributes
+            
+            self.userActivity = activity
+        }
+    }
+    
     /// Init with given connection and directory.
     ///
     /// - Parameters:
@@ -184,88 +421,72 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.directory = directory!
         }
         
-        if !Reachability.isConnectedToNetwork() {
-            ConnectionManager.shared.result = .notConnected
-        } else {
-            if ConnectionManager.shared.session == nil && ConnectionManager.shared.filesSession == nil {
-                ConnectionManager.shared.connect()
-            }
-        }
-        
-        if ConnectionManager.shared.result == .connectedAndAuthorized {
-            
-            if self.directory.contains("~") {
-                // Get absolute path from "~"
-                var error: NSError?
-                let path = ConnectionManager.shared.filesSession?.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
-                if error == nil {
-                    self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
-                    self.homeDirectory = path ?? "/"
-                }
-            }
-            
-            if directory == nil {
-                // Sorry Termius ;-(
-                var error: NSError?
-                let os = ConnectionManager.shared.filesSession?.channel.execute("""
-                SA_OS_TYPE="Linux"
-                REAL_OS_NAME=`uname`
-                if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
-                then
-                echo $REAL_OS_NAME
-                else
-                DISTRIB_ID=\"`cat /etc/*release`\"
-                echo $DISTRIB_ID;
-                fi;
-                exit;
-                """, error: &error)
-                
-                if error == nil {
-                    connection.os = os ?? nil
-                }
-                
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
-                request.returnsObjectsAsFaults = false
-                
-                do {
-                    let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
-                    
-                    for result in results {
-                        if result.value(forKey: "host") as? String == connection.host {
-                            if let os = os {
-                                result.setValue(os, forKey: "os")
-                            }
-                        }
-                    }
-                    
-                    DataManager.shared.saveContext()
-                } catch let error {
-                    print("Error retrieving connections: \(error.localizedDescription)")
-                }
-            }
-            
-            // TODO: - Make it compatible with only SFTP
-            // Ignore files listed in ~/.pisthignore
-            /*if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
-                for file in result.components(separatedBy: "\n") {
-                    if file != "" && !file.hasSuffix("#") {
-                        
-                        if let files = self.files {
-                            var i = 0
-                            for file_ in files {
-                                if file_.filename == file {
-                                    self.files!.remove(at: i)
-                                    self.isDir.remove(at: i)
-                                }
-                                i += 1
-                            }
-                        }
-                    }
-                }
-            }*/
-        }
-        
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        
+        ConnectionManager.shared.queue.async {
+            if !Reachability.isConnectedToNetwork() {
+                ConnectionManager.shared.result = .notConnected
+            } else {
+                if ConnectionManager.shared.session == nil && ConnectionManager.shared.filesSession == nil {
+                    ConnectionManager.shared.connect()
+                }
+            }
+            
+            if ConnectionManager.shared.result == .connectedAndAuthorized {
+                
+                if self.directory.contains("~") {
+                    // Get absolute path from "~"
+                    var error: NSError?
+                    let path = ConnectionManager.shared.filesSession?.channel.execute("echo $HOME", error: &error).replacingOccurrences(of: "\n", with: "")
+                    if error == nil {
+                        self.directory = self.directory.replacingOccurrences(of: "~", with: path ?? "/")
+                        self.homeDirectory = path ?? "/"
+                    }
+                }
+                
+                if directory == nil {
+                    // Sorry Termius ;-(
+                    var error: NSError?
+                    let os = ConnectionManager.shared.filesSession?.channel.execute("""
+                    SA_OS_TYPE="Linux"
+                    REAL_OS_NAME=`uname`
+                    if [ "$REAL_OS_NAME" != "$SA_OS_TYPE" ] ;
+                    then
+                    echo $REAL_OS_NAME
+                    else
+                    DISTRIB_ID=\"`cat /etc/*release`\"
+                    echo $DISTRIB_ID;
+                    fi;
+                    exit;
+                    """, error: &error)
+                    
+                    if error == nil {
+                        self.connection.os = os ?? nil
+                    }
+                    
+                    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Connection")
+                    request.returnsObjectsAsFaults = false
+                    
+                    do {
+                        let results = try (DataManager.shared.coreDataContext.fetch(request) as! [NSManagedObject])
+                        
+                        for result in results {
+                            if result.value(forKey: "host") as? String == self.connection.host {
+                                if let os = os {
+                                    result.setValue(os, forKey: "os")
+                                }
+                            }
+                        }
+                        
+                        DataManager.shared.saveContext()
+                    } catch let error {
+                        print("Error retrieving connections: \(error.localizedDescription)")
+                    }
+                }
+            }
+            
+            self.isLoaded = true
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -284,203 +505,26 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         } else {
             collectionView?.backgroundColor = .white
         }
-        collectionView?.backgroundView = UIActivityIndicatorView(style: .gray)
+        if #available(iOS 13.0, *) {
+            collectionView?.backgroundView = UIActivityIndicatorView(style: .medium)
+        } else {
+            collectionView?.backgroundView = UIActivityIndicatorView(style: .gray)
+        }
         (collectionView?.backgroundView as? UIActivityIndicatorView)?.startAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        (navigationController?.navigationController?.splitViewController?.viewControllers.first as! UINavigationController).navigationBar.topItem?.hidesBackButton = true
-        
         if !isViewSet {
             
             isViewSet = true
             
-            var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
-            self.allFiles = files
-            if !UserKeys.shouldHiddenFilesBeShown.boolValue {
-                for file in files ?? [] {
-                    if file.filename.hasPrefix(".") {
-                        guard let i = files?.index(of: file) else { break }
-                        files?.remove(at: i)
-                    }
+            if isLoaded {
+                ConnectionManager.shared.queue.async {
+                    self.fetchFiles()
                 }
             }
-            
-            if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
-                var files_ = [NMSFTPFile]()
-                var directories = [NMSFTPFile]()
-                
-                for file in files ?? [] {
-                    if file.isDirectory {
-                        directories.append(file)
-                    } else {
-                        files_.append(file)
-                    }
-                }
-                
-                files = directories+files_
-            }
-            
-            self.files = files
-            
-            collectionView?.refreshControl?.endRefreshing()
-            
-            guard self.files != nil else {
-                showErrorIfThereIsOne()
-                return
-            }
-            
-            if self.directory.removingUnnecessariesSlashes != "/" {
-                // Append parent directory
-                guard let parent = ConnectionManager.shared.filesSession?.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else {
-                    return
-                }
-                self.files!.append(parent)
-            }
-            
-            let titleComponents = directory.components(separatedBy: "/")
-            title = titleComponents.last
-            if directory.hasSuffix("/") {
-                title = titleComponents[titleComponents.count-2]
-            }
-            
-            if #available(iOS 11.0, *) {
-                navigationItem.largeTitleDisplayMode = .never
-            }
-            
-            // TableView cells
-            collectionView?.register(UINib(nibName: "Grid File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileGrid")
-            collectionView?.register(UINib(nibName: "List File Cell", bundle: Bundle.main), forCellWithReuseIdentifier: "fileList")
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
-            collectionView?.refreshControl = UIRefreshControl()
-            collectionView?.backgroundView = nil
-            clearsSelectionOnViewWillAppear = false
-            if #available(iOS 11.0, *) {
-                collectionView?.dropDelegate = self
-                collectionView?.dragDelegate = self
-                collectionView?.dragInteractionEnabled = true
-            }
-            
-            // Header
-            let header = UIView.browserHeader
-            headerView = header
-            header.createNewFolder = { _ in // Create folder
-                let chooseName = UIAlertController(title: Localizable.Browsers.createFolder, message: Localizable.Browsers.chooseNewFolderName, preferredStyle: .alert)
-                chooseName.addTextField(configurationHandler: { (textField) in
-                    textField.placeholder = Localizable.Browsers.folderName
-                })
-                chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
-                chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
-                    guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
-                    
-                    if !result {
-                        let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                        UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
-                    }
-                    
-                    self.reload()
-                }))
-                
-                self.present(chooseName, animated: true, completion: nil)
-            }
-            header.switchLayout = { _ in // Switch layout
-                self.loadLayout()
-            }
-            
-            loadLayout()
-            
-            // Initialize the refresh control.
-            collectionView?.refreshControl?.addTarget(self, action: #selector(reload), for: .valueChanged)
-            
-            // Bar buttons
-            let uploadFile = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(uploadFile(_:)))
-            let terminal = UIBarButtonItem(image: #imageLiteral(resourceName: "terminal"), style: .plain, target: self, action: #selector(openShell(_:)))
-            let git = UIBarButtonItem(title: "Git", style: .plain, target: self, action: #selector(self.git))
-            let apt = UIBarButtonItem(image: #imageLiteral(resourceName: "package"), style: .plain, target: self, action: #selector(openAPTManager))
-            var buttons: [UIBarButtonItem] {
-                guard files != nil else { return [uploadFile, terminal] }
-                guard let session = ConnectionManager.shared.filesSession else { return [uploadFile, terminal] }
-                
-                // Check for GIT
-                var isGitRepo = false
-                for file in allFiles ?? [] {
-                    if file.filename == ".git" || file.filename == ".git/" {
-                        isGitRepo = true
-                    }
-                }
-                
-                var error: NSError?
-                
-                // Check for Aptitude
-                let resultAPT = session.channel.execute("command -v apt-get", error: &error).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n")
-                guard error == nil else {
-                    if isGitRepo {
-                        return [uploadFile, git, terminal]
-                    } else {
-                        return [uploadFile, terminal]
-                    }
-                }
-                
-                if isGitRepo {
-                    if resultAPT.isEmpty {
-                        return [uploadFile, git, terminal]
-                    } else {
-                        return [uploadFile, apt, git, terminal]
-                    }
-                } else {
-                    if resultAPT.isEmpty {
-                        return [uploadFile, terminal]
-                    } else {
-                        return [uploadFile, apt, terminal]
-                    }
-                }
-            }
-            
-            navigationItem.setRightBarButtonItems(buttons, animated: true)
-            
-            // Siri Shortcuts
-            
-            let activity = NSUserActivity(activityType: "ch.marcela.ada.Pisth.openDirectory")
-            if #available(iOS 12.0, *) {
-                activity.isEligibleForPrediction = true
-                //                    activity.suggestedInvocationPhrase = connection.name
-            }
-            activity.isEligibleForSearch = true
-            activity.keywords = [connection.name, connection.username, connection.host, directory.nsString.lastPathComponent, "ssh", "sftp"]
-            if directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
-                activity.title = connection.name
-            } else {
-                activity.title = directory.nsString.lastPathComponent
-            }
-            var userInfo = ["username":connection.username, "password":connection.password, "host":connection.host, "directory":directory, "port":connection.port] as [String : Any]
-            
-            if let pubKey = connection.publicKey {
-                userInfo["publicKey"] = pubKey
-            }
-            
-            if let privKey = connection.privateKey {
-                userInfo["privateKey"] = privKey
-            }
-            
-            activity.userInfo = userInfo
-            
-            let attributes = CSSearchableItemAttributeSet(itemContentType: "public.item")
-            if let os = connection.os?.lowercased(), directory == connection.path.replacingOccurrences(of: "~", with: homeDirectory) {
-                if let logo = UIImage(named: (os.slice(from: " id=", to: " ")?.replacingOccurrences(of: "\"", with: "") ?? os).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "")) {
-                    attributes.thumbnailData = logo.pngData()
-                }
-            } else {
-                attributes.thumbnailData = #imageLiteral(resourceName: "File icons/folder").pngData()
-            }
-            attributes.addedDate = Date()
-            attributes.contentDescription = "sftp://\(connection.username)@\(connection.host):\(connection.port)\(directory)"
-            activity.contentAttributeSet = attributes
-            
-            self.userActivity = activity
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(showErrorBannerIfItsNeeded), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -495,8 +539,10 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         ], animated: true)
         navigationController?.setToolbarHidden(false, animated: true)
         
-        // Connection errors
-        self.showErrorIfThereIsOne()
+        // Hide back button on compact views
+        if navigationController?.navigationController != nil && navigationController?.viewControllers.first == self {
+            navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)]
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -509,10 +555,15 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        (navigationController?.navigationController?.splitViewController?.viewControllers.first as! UINavigationController).navigationBar.topItem?.hidesBackButton = true
-        
         if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout, layout.itemSize != DirectoryCollectionViewController.gridLayout.itemSize {
             layout.itemSize.width = size.width
+        }
+        
+        coordinator.animate(alongsideTransition: nil) { (_) in
+            // Hide back button on compact views
+            if self.navigationController?.navigationController != nil && self.navigationController?.viewControllers.first == self {
+                self.navigationItem.leftBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)]
+            }
         }
     }
     
@@ -547,7 +598,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
         checkForConnectionError(errorHandler: {
             self.showError()
         }) {
-            if self.files == nil {
+            if self.allFiles == nil {
                 
                 self.navigationController?.popViewController(animated: true, completion: {
                     let alert = UIAlertController(title: Localizable.Browsers.errorOpeningDirectory, message: Localizable.DirectoryCollectionViewController.checkForPermssions, preferredStyle: .alert)
@@ -649,13 +700,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             return
         }
         
-        do {
-            try session.channel.write("")
-            if let handler = successHandler {
-                handler()
+        ConnectionManager.shared.queue.async {
+            do {
+                try session.channel.write("")
+                if let handler = successHandler {
+                    DispatchQueue.main.async {
+                        handler()
+                    }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    errorHandler()
+                }
             }
-        } catch {
-            errorHandler()
         }
     }
     
@@ -721,67 +778,45 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             self.showError()
         })
         
-        guard ConnectionManager.shared.filesSession != nil else { return }
-        var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
-        self.allFiles = files
-        if !UserKeys.shouldHiddenFilesBeShown.boolValue {
-            for file in files ?? [] {
-                if file.filename.hasPrefix(".") {
-                    guard let i = files?.index(of: file) else { break }
-                    files?.remove(at: i)
-                }
-            }
-        }
-        
-        if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
-            var files_ = [NMSFTPFile]()
-            var directories = [NMSFTPFile]()
-            
-            for file in files ?? [] {
-                if file.isDirectory {
-                    directories.append(file)
-                } else {
-                    files_.append(file)
-                }
-            }
-            
-            files = directories+files_
-        }
-        self.files = files
-            
-        if self.directory.removingUnnecessariesSlashes != "/" {
-            // Append parent directory
-            guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else { return }
-            self.files!.append(parent)
-        }
-        
-        // TODO: Make it compatible with SFTP only
-        // Ignore files listed in ~/.pisthignore
-        /*if let result = try? ConnectionManager.shared.filesSession!.channel.execute("cat ~/.pisthignore") {
-            for file in result.components(separatedBy: "\n") {
-                if file != "" && !file.hasSuffix("#") {
-                    
-                    if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)) {
-                        self.files?.remove(at: indexOfFile)
-                        isDir.remove(at: indexOfFile)
-                    }
-                    
-                    if let indexOfFile = self.files?.index(of: self.directory.nsString.appendingPathComponent(file)+"/") {
-                        self.files?.remove(at: indexOfFile)
-                        isDir.remove(at: indexOfFile)
-                    }
-                    
-                    if let indexOfFile = self.files?.index(of: "."+self.directory.nsString.appendingPathComponent(file)) {
-                        self.files?.remove(at: indexOfFile)
-                        isDir.remove(at: indexOfFile)
+        ConnectionManager.shared.queue.async {
+            guard ConnectionManager.shared.filesSession != nil else { return }
+            var files = ConnectionManager.shared.files(inDirectory: self.directory, showHiddenFiles: true)
+            self.allFiles = files
+            if !UserKeys.shouldHiddenFilesBeShown.boolValue {
+                for file in files ?? [] {
+                    if file.filename.hasPrefix(".") {
+                        guard let i = files?.index(of: file) else { break }
+                        files?.remove(at: i)
                     }
                 }
             }
-        }*/
-        
-        DispatchQueue.main.async {
-            self.collectionView?.reloadData()
-            self.collectionView?.refreshControl?.endRefreshing()
+            
+            if UserKeys.shouldShowFoldersAtTop.boolValue, files != nil {
+                var files_ = [NMSFTPFile]()
+                var directories = [NMSFTPFile]()
+                
+                for file in files ?? [] {
+                    if file.isDirectory {
+                        directories.append(file)
+                    } else {
+                        files_.append(file)
+                    }
+                }
+                
+                files = directories+files_
+            }
+            self.files = files
+                
+            if self.directory.removingUnnecessariesSlashes != "/" {
+                // Append parent directory
+                guard let parent = ConnectionManager.shared.filesSession!.sftp.infoForFile(atPath: self.directory.nsString.deletingLastPathComponent) else { return }
+                self.files!.append(parent)
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
         }
     }
     
@@ -859,79 +894,117 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 /// Show upload error and dismiss uploding alert.
                 func showError() {
-                    if showAlert {
-                        activityVC.dismiss(animated: true, completion: {
-                            showError_()
-                        })
-                    } else {
-                        showError_()
-                    }
-                }
-                
-                guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(filename_)) else {
-                    
-                    showError()
-                    
-                    return false
-                }
-                
-                if !result {
-                    showError()
-                    return false
-                }
-                
-                if self.closeAfterSending {
-                    /// Close this Navigation controller.
-                    func close(alert: UIViewController) {
-                        alert.dismiss(animated: true, completion: {
-                            if let handler = uploadHandler {
-                                handler()
-                            } else {
-                                AppDelegate.shared.close()
-                            }
-                        })
-                    }
-                    
-                    if result {
-                        close(alert: activityVC)
-                    } else {
-                        
-                        /// Show error and call `close(alert:)` after clicking "Ok".
-                        func showErrorAndCallClose() {
-                            let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (_) in
-                                close(alert: alert)
-                            }))
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                        
+                    DispatchQueue.main.async {
                         if showAlert {
                             activityVC.dismiss(animated: true, completion: {
-                                showErrorAndCallClose()
+                                showError_()
                             })
-                            
-                            return false
                         } else {
-                            showErrorAndCallClose()
-                            
-                            return false
+                            showError_()
                         }
+                    }
+                }
+                
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                var error: Error? {
+                    didSet {
+                        semaphore.signal()
+                    }
+                }
+                
+                var retValue: Bool? {
+                    didSet {
+                        semaphore.signal()
+                    }
+                }
+                
+                ConnectionManager.shared.queue.async {
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.writeContents(dataToSend, toFileAtPath: directory.nsString.appendingPathComponent(filename_)) else {
+                        
+                        showError()
+                        retValue = false
+                        
+                        return
                     }
                     
-                } else {
-                    if showAlert {
-                        activityVC.dismiss(animated: true, completion: {
-                            self.reload()
-                            if let handler = uploadHandler {
-                                handler()
+                    if !result {
+                        showError()
+                        retValue = false
+                        
+                        return
+                    }
+                    
+                    semaphore.signal()
+                    
+                    DispatchQueue.main.async {
+                        
+                        if self.closeAfterSending {
+                            /// Close this Navigation controller.
+                            func close(alert: UIViewController) {
+                                alert.dismiss(animated: true, completion: {
+                                    if let handler = uploadHandler {
+                                        handler()
+                                    } else {
+                                        AppDelegate.shared.close()
+                                    }
+                                })
                             }
-                        })
-                    } else {
-                        self.reload()
-                        if let handler = uploadHandler {
-                            handler()
+                            
+                            if result {
+                                close(alert: activityVC)
+                            } else {
+                                
+                                /// Show error and call `close(alert:)` after clicking "Ok".
+                                func showErrorAndCallClose() {
+                                    let alert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: Localizable.DirectoryCollectionViewController.errorUploadingMessage, preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: Localizable.ok, style: .cancel, handler: { (_) in
+                                        close(alert: alert)
+                                    }))
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+                                
+                                if showAlert {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        showErrorAndCallClose()
+                                    })
+                                    
+                                    retValue = false
+                                    return
+                                } else {
+                                    showErrorAndCallClose()
+                                    
+                                    retValue = false
+                                    return
+                                }
+                            }
+                            
+                        } else {
+                            if showAlert {
+                                activityVC.dismiss(animated: true, completion: {
+                                    self.reload()
+                                    if let handler = uploadHandler {
+                                        handler()
+                                    }
+                                })
+                            } else {
+                                self.reload()
+                                if let handler = uploadHandler {
+                                    handler()
+                                }
+                            }
                         }
                     }
+                }
+                
+                semaphore.wait()
+                
+                if let retValue = retValue {
+                    return retValue
+                }
+                
+                if let error = error {
+                    throw error
                 }
                 
             } catch let error {
@@ -1047,17 +1120,21 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     
                     guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: path) else {
                         
-                        activityVC.dismiss(animated: true, completion: {
-                            showError()
-                        })
+                        DispatchQueue.main.async {
+                            activityVC.dismiss(animated: true, completion: {
+                                showError()
+                            })
+                        }
                         
                         return false
                     }
                     
                     guard result else {
-                        activityVC.dismiss(animated: true, completion: {
-                            showError()
-                        })
+                        DispatchQueue.main.async {
+                            activityVC.dismiss(animated: true, completion: {
+                                showError()
+                            })
+                        }
                         
                         return false
                     }
@@ -1068,9 +1145,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                 
                             if !uploadFilesInDirectory(url, toPath: path.nsString.appendingPathComponent(url.lastPathComponent)) {
                                 
-                                activityVC.dismiss(animated: true, completion: {
-                                    showError()
-                                })
+                                DispatchQueue.main.async {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        showError()
+                                    })
+                                }
                                 
                                 return false
                             }
@@ -1078,24 +1157,30 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         } else {
                             if !self.sendFile(file: url, toDirectory: path, showAlert: false) {
                                 
-                                activityVC.dismiss(animated: true, completion: {
-                                    showError()
-                                })
+                                DispatchQueue.main.async {
+                                    activityVC.dismiss(animated: true, completion: {
+                                        showError()
+                                    })
+                                }
                                 
                                 return false
                             }
                         }
                     }
                     
-                    activityVC.dismiss(animated: true, completion: {
-                        self.reload()
-                    })
+                    DispatchQueue.main.async {
+                        activityVC.dismiss(animated: true, completion: {
+                            self.reload()
+                        })
+                    }
                     
                     return true
                 }
                 
                 self.present(activityVC, animated: true, completion: {
-                     _ = uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                    ConnectionManager.shared.queue.async {
+                        _ = uploadFilesInDirectory(file, toPath: self.directory.nsString.appendingPathComponent(file.lastPathComponent))
+                    }
                 })
                 
                 
@@ -1155,15 +1240,19 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 
                 let newPath = self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)
                 
-                guard let path = Bundle.main.path(forResource: "empty", ofType: nil), let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: path, toFileAtPath: newPath) else { return }
-                
-                if !result {
-                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingFile, message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                ConnectionManager.shared.queue.async {
+                    guard let path = Bundle.main.path(forResource: "empty", ofType: nil), let result = ConnectionManager.shared.filesSession?.sftp.writeFile(atPath: path, toFileAtPath: newPath) else { return }
+                    
+                    DispatchQueue.main.async {
+                        if !result {
+                            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingFile, message: nil, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                        }
+                        
+                        self.reload()
+                    }
                 }
-                
-                self.reload()
             }))
             
             self.present(chooseName, animated: true, completion: nil)
@@ -1177,15 +1266,22 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             })
             chooseName.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
             chooseName.addAction(UIAlertAction(title: Localizable.create, style: .default, handler: { (_) in
-                guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(chooseName.textFields![0].text!)) else { return }
                 
-                if !result {
-                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                    UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                let filename = chooseName.textFields![0].text!
+                
+                ConnectionManager.shared.queue.async {
+                    guard let result = ConnectionManager.shared.filesSession?.sftp.createDirectory(atPath: self.directory.nsString.appendingPathComponent(filename)) else { return }
+                    
+                    DispatchQueue.main.async {
+                        if !result {
+                            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCreatingDirectory, message: nil, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                        }
+                        
+                        self.reload()
+                    }
                 }
-                
-                self.reload()
             }))
             
             self.present(chooseName, animated: true, completion: nil)
@@ -1222,7 +1318,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 progressView.tintColor = UIApplication.shared.keyWindow?.tintColor
                 progress.view.addSubview(progressView)
                 
-                DispatchQueue.global(qos: .background).async {
+                ConnectionManager.shared.queue.async {
                     guard let result = ConnectionManager.shared.filesSession?.sftp.copyContents(ofPath: Pasteboard.local.filePath!, toFileAtPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent), progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                         
                         let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
@@ -1235,23 +1331,27 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                         
                         return continue_
                     }) else {
-                        progress.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            progress.dismiss(animated: true, completion: nil)
+                        }
                         return
                     }
                     
-                    progress.dismiss(animated: true, completion: {
-                        if !result && continue_ {
-                            let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: nil, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                            UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        progress.dismiss(animated: true, completion: {
+                            if !result && continue_ {
+                                let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: nil, preferredStyle: .alert)
+                                    errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                            }
+                        })
+                        
+                        if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
+                            dirVC.reload()
                         }
-                    })
-                    
-                    if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
-                        dirVC.reload()
+                        
+                        Pasteboard.local.filePath = nil
                     }
-                    
-                    Pasteboard.local.filePath = nil
                 }
             })
             
@@ -1272,19 +1372,23 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                 self.showError()
             })
             
-            guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
-                
-            if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
-                dirVC.reload()
+            ConnectionManager.shared.queue.async {
+                guard let result = ConnectionManager.shared.filesSession?.sftp.moveItem(atPath: Pasteboard.local.filePath!, toPath: self.directory.nsString.appendingPathComponent(Pasteboard.local.filePath!.nsString.lastPathComponent)) else { return }
+                    
+                DispatchQueue.main.async {
+                    if let dirVC = AppDelegate.shared.navigationController.visibleViewController as? DirectoryCollectionViewController {
+                        dirVC.reload()
+                    }
+                    
+                    if !result {
+                        let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
+                        errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
+                        UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
+                    }
+                        
+                    Pasteboard.local.filePath = nil
+                }
             }
-            
-            if !result {
-                let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: Localizable.ok, style: .default, handler: nil))
-                UIApplication.shared.keyWindow?.rootViewController?.present(errorAlert, animated: true, completion: nil)
-            }
-                
-            Pasteboard.local.filePath = nil
         })
     }
     
@@ -1458,7 +1562,7 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     
                     guard let session = ConnectionManager.shared.filesSession else { return }
                     
-                    DispatchQueue.global(qos: .background).async {
+                    ConnectionManager.shared.queue.async {
                         if let data = session.sftp.contents(atPath: path, progress: { (receivedBytes, bytesToBeReceived) -> Bool in
                             
                             let received = ByteCountFormatter().string(fromByteCount: Int64(receivedBytes))
@@ -1650,17 +1754,23 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     destination = directory.nsString.appendingPathComponent(file.filename)
                 }
                 
-                if sftp.moveItem(atPath: target, toPath: destination) {
-                    _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                        self.reload()
-                        if dirVC != self {
-                            dirVC.reload()
+                ConnectionManager.shared.queue.async {
+                    if sftp.moveItem(atPath: target, toPath: destination) {
+                        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+                            DispatchQueue.main.async {
+                                self.reload()
+                                if dirVC != self {
+                                    dirVC.reload()
+                                }
+                            }
+                        })
+                    } else {
+                        DispatchQueue.main.async {
+                            let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                            self.present(errorAlert, animated: true, completion: nil)
                         }
-                    })
-                } else {
-                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorMovingFile, message: nil, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
-                    present(errorAlert, animated: true, completion: nil)
+                    }
                 }
             } else if item.dragItem.itemProvider.hasItemConformingToTypeIdentifier(item.dragItem.itemProvider.registeredTypeIdentifiers[0]) {
                 

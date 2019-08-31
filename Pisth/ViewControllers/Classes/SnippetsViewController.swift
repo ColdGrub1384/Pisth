@@ -255,7 +255,9 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         dismiss(animated: true) {
             if let manager = self.connectionManager {
-                try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
+                manager.queue.async {
+                    try? manager.session?.channel.write(self.snippets[indexPath.row].content+"\n")
+                }
             } else {
                 ContentViewController.shared.presentTerminal(inDirectory: self.directory, command: self.snippets[indexPath.row].content, fromView: self.fromView)
             }
