@@ -347,7 +347,7 @@
 "menu.move" = "Mover";
 
 /* Open in new panel */
-"menu.openInNewPanel" = "Abrir En Nuevo Panel";
+"menu.openInNewPanel" = "Abrir en un Terminal";
 
 /* Rename */
 "menu.rename" = "Renombrar";

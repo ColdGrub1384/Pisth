@@ -361,7 +361,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                 dirToOpen = dir.appendingPathComponent(filename)
             }
             
-            ContentViewController.shared.presentBrowser(inDirectory: dirToOpen, from: self)
+            ContentViewController.shared.presentTerminal(inDirectory: dirToOpen, command: nil, from: nil, fromView: self)
         }
     }
     
@@ -462,7 +462,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                 self.showFileInfo(action)
             })
             
-            let newPanel = UIAction(title: Localizable.UIMenuItem.openInNewPanel, image: UIImage(systemName: "uiwindow.split.2x1"), handler: { (action) in
+            let newPanel = UIAction(title: Localizable.UIMenuItem.openInNewPanel, image: UIImage(systemName: "chevron.right"), handler: { (action) in
                 self.openInNewPanel(action)
             })
             
