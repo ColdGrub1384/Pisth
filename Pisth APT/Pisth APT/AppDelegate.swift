@@ -177,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let session = session {
             if session.isConnected && session.isAuthorized {
                 
-                guard let result = (try? session.channel.execute("echo $HOME; echo '__PisthAPT__Data__'; aptitude -F%p --disable-columns search ~U; echo '__PisthAPT__Data__'; apt-mark showmanual; echo '__PisthAPT__Data__'; apt-cache search .")) else {
+                guard let result = (try? session.channel.execute("echo $HOME; echo '__PisthAPT__Data__'; apt-get dist-upgrade --dry-run | grep ^Inst | cut -d\" \" -f2; echo '__PisthAPT__Data__'; apt-mark showmanual; echo '__PisthAPT__Data__'; apt-cache search ."))?.replacingOccurrences(of: "\n__PisthAPT__Data__\n", with: "__PisthAPT__Data__").replacingOccurrences(of: "__PisthAPT__Data__\n", with: "__PisthAPT__Data__") else {
                     return
                 }
                 
@@ -195,7 +195,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
                 self.updates = packages
-                self.updates.removeLast()
+                if self.updates.count > 0 {
+                    self.updates.removeLast()
+                }
                 
                 if TabBarController.shared != nil {
                     DispatchQueue.main.async {

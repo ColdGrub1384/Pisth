@@ -66,7 +66,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func install(_ sender: Any) {
-        launch(command: "sudo apt-get --assume-yes install '\(package ?? "")'", withTitle: "Installing \(package ?? "")...")
+        launch(command: "sudo apt-get --assume-yes --allow-unauthenticated install '\(package ?? "")'", withTitle: "Installing \(package ?? "")...")
     }
     
     /// Update package.
@@ -74,7 +74,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func update(_ sender: Any) {
-        launch(command: "sudo apt-get --assume-yes install --only-upgrade '\(package ?? "")'", withTitle: "Upgrading \(package ?? "")...")
+        launch(command: "sudo apt-get --assume-yes --allow-unauthenticated install --only-upgrade '\(package ?? "")'", withTitle: "Upgrading \(package ?? "")...")
     }
     
     /// Remove package.
@@ -82,7 +82,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
     /// - Parameters:
     ///     - sender: Sender object.
     @IBAction func remove(_ sender: Any) {
-        launch(command: "sudo apt-get --assume-yes purge --auto-remove '\(package ?? "")'", withTitle: "Removing \(package ?? "")...")
+        launch(command: "sudo apt-get --assume-yes --allow-unauthenticated purge --auto-remove '\(package ?? "")'", withTitle: "Removing \(package ?? "")...")
     }
     
     
@@ -111,7 +111,7 @@ class InstallerViewController: UIViewController, UITableViewDataSource, UITableV
             if let package = self.package {
                 if let session = AppDelegate.shared.session {
                     if session.isConnected && session.isAuthorized {
-                        if let description = try? session.channel.execute("aptitude show '\(package)'") {
+                        if let description = try? session.channel.execute("apt show '\(package)'") {
                             
                             var properties = [String]()
                             for property in description.components(separatedBy: "\n") {
