@@ -36,6 +36,22 @@ class SnippetsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     /// Snippets for the current connection.
     var snippets: [Snippet] {
+        
+        var text: String? {
+            if Thread.current.isMainThread {
+                return searchBar.text
+            } else {
+                var value: String?
+                let semaphore = DispatchSemaphore(value: 0)
+                DispatchQueue.main.async {
+                    value = self.searchBar.text
+                    semaphore.signal()
+                }
+                semaphore.wait()
+                return value
+            }
+        }
+        
         if searchBar.text == nil || searchBar.text?.isEmpty == true {
             return snippets_
         } else {
