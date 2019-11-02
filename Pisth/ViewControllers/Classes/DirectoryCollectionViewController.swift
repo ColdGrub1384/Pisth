@@ -1792,9 +1792,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     let destination = self.directory
                     
                     if let error = error {
-                        let errorAlert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: error.localizedDescription, preferredStyle: .alert)
-                        errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                        self.present(errorAlert, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            let errorAlert = UIAlertController(title: Localizable.DirectoryCollectionViewController.errorUploadingTitle, message: error.localizedDescription, preferredStyle: .alert)
+                            errorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            self.present(errorAlert, animated: true, completion: nil)
+                        }
                     }
                     
                     if let file = file {
@@ -1821,9 +1823,11 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                                     }, showAlert: false)
                                 }
                             } catch {
-                                let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: error.localizedDescription, preferredStyle: .alert)
-                                errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
-                                self.present(errorAlert, animated: true, completion: nil)
+                                DispatchQueue.main.async {
+                                    let errorAlert = UIAlertController(title: Localizable.Browsers.errorCopyingFile, message: error.localizedDescription, preferredStyle: .alert)
+                                    errorAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
+                                    self.present(errorAlert, animated: true, completion: nil)
+                                }
                             }
                         } else { // Upload file and rename it
                             DispatchQueue.main.async {
