@@ -438,7 +438,7 @@ class FileCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDele
                 self.deleteFile(action)
             })
             
-            let share = UIAction(title: Localizable.UIMenuItem.move, image: UIImage(systemName: "square.and.arrow.up.fill"), handler: { (action) in
+            let share = UIAction(title: Localizable.UIMenuItem.share, image: UIImage(systemName: "square.and.arrow.up.fill"), handler: { (action) in
                 self.shareFile(action)
             })
                         
