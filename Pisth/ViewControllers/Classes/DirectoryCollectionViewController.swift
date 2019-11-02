@@ -19,6 +19,8 @@ import MobileCoreServices
 /// Collection view controller to manage remote files.
 class DirectoryCollectionViewController: UICollectionViewController, LocalDirectoryCollectionViewControllerDelegate, DirectoryCollectionViewControllerDelegate, UIDocumentPickerDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate, SKStoreProductViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    private var apt = false
+    
     /// Directory used to list files.
     var directory: String
     
@@ -322,30 +324,15 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
                     
                     // Check for Aptitude
                     let resultAPT = session.channel.execute("command -v apt-get", error: &error).replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "\n", with: "\n")
-                    guard error == nil else {
-                        if isGitRepo {
-                            items = [uploadFile, git, terminal]
-                            semaphore.signal()
-                            return
-                        } else {
-                            items = [uploadFile, terminal]
-                            semaphore.signal()
-                            return
-                        }
-                    }
                     
                     if isGitRepo {
-                        if resultAPT.isEmpty {
-                            items = [uploadFile, terminal]
-                        } else {
-                            items = [uploadFile, apt, git, terminal]
-                        }
+                        items = [uploadFile, git, terminal]
                     } else {
-                        if resultAPT.isEmpty {
-                            items = [uploadFile, terminal]
-                        } else {
-                            items = [uploadFile, apt, terminal]
-                        }
+                        items = [uploadFile, terminal]
+                    }
+                    
+                    if error == nil && !resultAPT.isEmpty {
+                        self.apt = true
                     }
                     
                     semaphore.signal()
@@ -1297,6 +1284,12 @@ class DirectoryCollectionViewController: UICollectionViewController, LocalDirect
             
             self.present(chooseName, animated: true, completion: nil)
         }))
+        
+        if apt {
+            chooseAlert.addAction(UIAlertAction(title: "APT", style: .default, handler: { (_) in // APT
+                self.openAPTManager()
+            }))
+        }
         
         chooseAlert.addAction(UIAlertAction(title: Localizable.cancel, style: .cancel, handler: nil))
         

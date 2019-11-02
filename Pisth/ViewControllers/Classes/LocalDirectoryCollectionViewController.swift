@@ -801,6 +801,8 @@ class LocalDirectoryCollectionViewController: UICollectionViewController, UIDocu
                         })
                     }
                 }
+                
+                return
             } else if wasJustDownloaded {
                 let dirVC = LocalDirectoryCollectionViewController(directory: file.deletingLastPathComponent())
                 

@@ -190,7 +190,7 @@
 		3A5733C01FFFD9BF004F4973 /* GitRemotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitRemotesTableViewController.swift; sourceTree = "<group>"; };
 		3A5888B2205C64CB0002F9E1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3A5A60DD1FF1B4A200E94579 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
-		3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewController.swift; sourceTree = "<group>"; };
+		3A5A60E61FF1BB9F00E94579 /* DirectoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryCollectionViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3A60970B203B1F5600CB0776 /* TerminalWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalWebView.swift; sourceTree = "<group>"; };
 		3A625BEE208011F7008D647C /* Pisth_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pisth_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A72977B205D5F4A00F94BA7 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
@@ -1330,7 +1330,7 @@
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 12.0.3;
+				MARKETING_VERSION = 12.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1360,7 +1360,7 @@
 				IS_BETA = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 12.0.3;
+				MARKETING_VERSION = 12.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ch.marcela.ada.Pisth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
